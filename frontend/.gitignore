@@ -1,0 +1,22 @@
+node_modules/
+
+# built files and directories
+dist/
+dist-ssr/
+
+# editor files and directories
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# log files
+*.log
+
+# env
+.env.cypress

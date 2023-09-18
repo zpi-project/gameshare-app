@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+if git diff --cached --name-only | grep "^frontend/"; then
+    cd frontend
+    npm run lint
+    npm run format
+    # npm run cypress:run:component -- --quiet
+fi
