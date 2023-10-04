@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import Error from "@pages/Error";
 import Dashboard from "@pages/Dashboard";
+import Error from "@pages/Error";
 import App from "./App";
 import "./index.css";
 

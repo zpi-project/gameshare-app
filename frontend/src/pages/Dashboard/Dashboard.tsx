@@ -1,6 +1,5 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { Typography } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
 import { roleState } from "@state/role";
 import LoginButton from "@components/LoginButton";
