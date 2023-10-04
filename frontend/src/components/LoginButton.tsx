@@ -10,11 +10,10 @@ const LoginButton: FC = () => {
   const login = useGoogleLogin({
     onSuccess: tokenResponse => {
       setRole("user");
-      console.log(tokenResponse);
     },
   });
 
-  return <Button onClick={() => void login()}>log in with google</Button>;
+  return <Button onClick={() => void login()}>Log in</Button>;
 };
 
 export default LoginButton;
