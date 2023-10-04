@@ -27,6 +27,7 @@
       "@constants/*": ["./src/constants/*"],
       "@typeDefs/*": ["./src/types/*"],
       "@state/*": ["./src/state/*"],
+      "@api/*": ["./src/api/*"],
     }
   },
   "exclude": ["node_modules", "dist", ".npm"],

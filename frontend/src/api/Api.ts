@@ -3,7 +3,7 @@ import { VITE_API_URL } from "@constants/env";
 
 const Api = axios.create({
   baseURL: VITE_API_URL,
-  timeout: 4800,
+  timeout: 10000,
 });
 
 export default Api;
