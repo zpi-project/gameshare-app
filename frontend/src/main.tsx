@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { RecoilRoot } from "recoil";
+import Dashboard from "@pages/Dashboard";
 import Error from "@pages/Error";
-import Home from "@pages/Home";
 import App from "./App";
 import "./index.css";
 
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: <Dashboard />,
       },
     ],
   },

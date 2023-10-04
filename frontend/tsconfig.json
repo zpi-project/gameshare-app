@@ -23,7 +23,11 @@
     "paths": {
       "@public/*": ["./public/*"],
       "@components/*": ["./src/components/*"],
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@typeDefs/*": ["./src/types/*"],
+      "@state/*": ["./src/state/*"],
+      "@api/*": ["./src/api/*"]
     }
   },
   "exclude": ["node_modules", "dist", ".npm"],
