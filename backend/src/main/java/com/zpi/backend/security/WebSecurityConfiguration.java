@@ -10,17 +10,25 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.http.HttpMethod.*;
+import static org.springframework.http.HttpMethod.*;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration {
 
+    private final GoogleAuthService googleAuthService;
 
+    public WebSecurityConfiguration(GoogleAuthService googleAuthService) {
+        this.googleAuthService = googleAuthService;
+    }
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        GoogleTokenFilter googleTokenFilter = new GoogleTokenFilter(googleAuthService);
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .addFilterBefore(googleTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
                         .anyRequest().permitAll());
 

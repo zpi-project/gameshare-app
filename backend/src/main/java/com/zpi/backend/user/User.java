@@ -1,9 +1,12 @@
 package com.zpi.backend.user;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "users")
+@Data
 public class User{
 
     @Id
@@ -31,4 +34,18 @@ public class User{
     @Column(name = "locationLatitude",nullable = true)
     private float locationLatitude;
 
+    public User(String email) {
+        this.email = email;
+    }
+
+    public User() {
+
+    }
+
+
+    public static User fromGoogleTokenPayload(GoogleIdToken.Payload payload) {
+        return new User(
+                payload.getEmail()
+        );
+    }
 }
