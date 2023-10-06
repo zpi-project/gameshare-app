@@ -9,4 +9,8 @@ resource "google_sql_database_instance" "primary" {
   name                = "cloud-sql-instance"
   region              = var.region
   database_version    = "POSTGRES_15"
+  settings {
+    tier    = "db-f1-micro"
+    edition = "ENTERPRISE"
+  }
 }
