@@ -1,8 +1,7 @@
 import { FC } from "react";
-import { Typography } from "@mui/material";
 
 const Error: FC = () => {
-  return <Typography>Error</Typography>;
+  return <div>Error</div>;
 };
 
 export default Error;

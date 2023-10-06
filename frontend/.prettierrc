@@ -9,8 +9,6 @@
   "bracketSpacing": true,
   "importOrder": [
     "^react(.*)$",
-    "^@mui/?(.*)$",
-    "^@emotion/?(.*)$",
     "^@tanstack/?(.*)$",
     "<THIRD_PARTY_MODULES>",
     "^@state/?(.*)$",
