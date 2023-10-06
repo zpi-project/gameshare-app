@@ -11,6 +11,5 @@ resource "google_sql_database_instance" "primary" {
   database_version    = "POSTGRES_15"
   settings {
     tier    = "db-f1-micro"
-    edition = "ENTERPRISE"
   }
 }
