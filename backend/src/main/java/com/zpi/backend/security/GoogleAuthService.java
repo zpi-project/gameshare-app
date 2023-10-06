@@ -15,19 +15,15 @@ import java.util.Collections;
 @Service
 public class GoogleAuthService {
 
-    @Value("${client-id}")
+    @Value("${client_id}")
     private String clientId;
 
-    public GoogleIdToken validateToken(String token) throws GeneralSecurityException, IOException {
+    public GoogleIdToken validateToken(String token) throws GeneralSecurityException,ResponseStatusException, IOException {
         GoogleIdTokenVerifier verifier =
                 new GoogleIdTokenVerifier.Builder(new NetHttpTransport(),
                         new GsonFactory()).setAudience(Collections.singletonList(clientId))
                         .build();
 
-        GoogleIdToken idToken = verifier.verify(token);
-        if (idToken == null) {
-            throw new ResponseStatusException(org.springframework.http.HttpStatus.UNAUTHORIZED, "Invalid token!");
-        }
-        return idToken;
+        return verifier.verify(token);
     }
 }

@@ -27,7 +27,7 @@ public class GoogleTokenFilter extends OncePerRequestFilter {
     }
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+                                    FilterChain filterChain) throws ServletException, ResponseStatusException, IOException {
 
         String authenticationHeader = request.getHeader(AUTHENTICATION_HEADER);
 
@@ -48,14 +48,14 @@ public class GoogleTokenFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(
                             User.fromGoogleTokenPayload(token.getPayload()),
                             null, null));
-        } catch (GeneralSecurityException e) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token!");
+        } catch (NullPointerException | GeneralSecurityException ignored) {
+
         }
 
         filterChain.doFilter(request, response);
     }
 
-    private GoogleIdToken validateTokenFromHeader(String authenticationHeader) throws GeneralSecurityException,
+    private GoogleIdToken validateTokenFromHeader(String authenticationHeader) throws ResponseStatusException, GeneralSecurityException,
             IOException {
         int authenticationHeaderPrefixLength = AUTHENTICATION_HEADER_TOKEN_PREFIX.length();
         String token = authenticationHeader.substring(authenticationHeaderPrefixLength);
