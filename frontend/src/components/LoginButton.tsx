@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { Button } from "@mui/material";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import { useSetRecoilState } from "recoil";
 import { roleState } from "@state/role";
 import Api from "@api/Api";
@@ -8,21 +7,25 @@ import Api from "@api/Api";
 const LoginButton: FC = () => {
   const setRole = useSetRecoilState(roleState);
 
-  const login = useGoogleLogin({
-    onSuccess: res => {
-      setRole("user");
-      const tokenInterceptor = Api.interceptors.request.use(config => {
-        config.headers.Authorization = `Bearer ${res.access_token}`;
-        return config;
-      });
+  return (
+    <GoogleLogin
+      onSuccess={res => {
+        setRole("user");
+        console.log(res);
+        const tokenInterceptor = Api.interceptors.request.use(config => {
+          config.headers.Authorization = `Bearer ${res.credential ?? ""}`;
+          return config;
+        });
 
-      return () => {
-        Api.interceptors.request.eject(tokenInterceptor);
-      };
-    },
-  });
-
-  return <Button onClick={() => void login()}>Log in</Button>;
+        return () => {
+          Api.interceptors.request.eject(tokenInterceptor);
+        };
+      }}
+      onError={() => {
+        console.log("Login Failed");
+      }}
+    />
+  );
 };
 
 export default LoginButton;
