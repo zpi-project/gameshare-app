@@ -13,9 +13,9 @@ public class User{
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long Id;
 
-
     @Column(name = "email",length = 255,nullable = false,unique = true)
     private String email;
+
     @Column(name = "firstName",length = 255,nullable = true)
     private String firstName;
 
@@ -39,9 +39,7 @@ public class User{
     }
 
     public User() {
-
     }
-
 
     public static User fromGoogleTokenPayload(GoogleIdToken.Payload payload) {
         return new User(

@@ -1,7 +1,6 @@
 package com.zpi.backend.security;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-import com.zpi.backend.security.GoogleAuthService;
 import com.zpi.backend.user.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,10 +16,8 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 public class GoogleTokenFilter extends OncePerRequestFilter {
-
     public static final String AUTHENTICATION_HEADER = "Authorization";
     public static final String AUTHENTICATION_HEADER_TOKEN_PREFIX = "Bearer ";
-
     private static final String OPENAPI_DOCS_URL = "/v3/api-docs";
     private static final String SWAGGER_UI_URL = "/swagger-ui/";
     private final GoogleAuthService googleAuthService;
@@ -28,7 +25,6 @@ public class GoogleTokenFilter extends OncePerRequestFilter {
     public GoogleTokenFilter(GoogleAuthService googleAuthService) {
         this.googleAuthService = googleAuthService;
     }
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
@@ -57,10 +53,7 @@ public class GoogleTokenFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
-
-
     }
-
 
     private GoogleIdToken validateTokenFromHeader(String authenticationHeader) throws GeneralSecurityException,
             IOException {

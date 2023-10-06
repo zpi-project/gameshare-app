@@ -15,9 +15,10 @@ import java.util.Collections;
 @Service
 public class GoogleAuthService {
 
+    @Value("${client-id}")
+    private String clientId;
+
     public GoogleIdToken validateToken(String token) throws GeneralSecurityException, IOException {
-        // @Value("${client-id}")
-        String clientId = "1041308792303-l9dj3bgmb5pgolf52ods8uet3n6jnp7s.apps.googleusercontent.com";
         GoogleIdTokenVerifier verifier =
                 new GoogleIdTokenVerifier.Builder(new NetHttpTransport(),
                         new GsonFactory()).setAudience(Collections.singletonList(clientId))
