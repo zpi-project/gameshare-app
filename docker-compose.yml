@@ -1,0 +1,27 @@
+services:
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - client_id=${AUTH_CLIENT_ID}
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+
+  frontend:
+    container_name: rhs_orchestrator_frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    volumes:
+      - "./frontend/src/:/usr/app/src/"
+      - "./frontend/build:/usr/app/build/"
+      - "./frontend/public/:/usr/app/public/"
+      - "./frontend/cypress/:/usr/app/cypress/"
+    ports:
+      - "${FRONTEND_PORT}:5173"
+    env_file:
+      - .env
