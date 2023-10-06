@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Button } from "@mui/material";
 import { googleLogout } from "@react-oauth/google";
 import { useSetRecoilState } from "recoil";
 import { roleState } from "@state/role";
@@ -21,7 +20,7 @@ const LogoutButton: FC = () => {
     };
   };
 
-  return <Button onClick={logout}>Log out</Button>;
+  return <button onClick={logout}>Log out</button>;
 };
 
 export default LogoutButton;

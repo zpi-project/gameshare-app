@@ -1,4 +1,8 @@
 {
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
   "semi": true,
   "singleQuote": false,
   "useTabs": false,
@@ -9,13 +13,10 @@
   "bracketSpacing": true,
   "importOrder": [
     "^react(.*)$",
-    "^@mui/?(.*)$",
-    "^@emotion/?(.*)$",
-    "^@tanstack/?(.*)$",
     "<THIRD_PARTY_MODULES>",
     "^@state/?(.*)$",
     "^@constants/?(.*)$",
-    "^@typeDefs/?(.*)$",
+    "^@types/?(.*)$",
     "^@utils/?(.*)$",
     "^@api/?(.*)$",
     "^@cypress/?(.*)$",
