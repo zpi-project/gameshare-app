@@ -1,5 +1,6 @@
 services:
   backend:
+    container_name: backend
     build:
       context: backend
       dockerfile: Dockerfile
@@ -7,12 +8,12 @@ services:
     environment:
       - client_id=${AUTH_CLIENT_ID}
     ports:
-      - 8080:8080
+      - "${BACKEND_PORT}:8080"
     env_file:
       - .env
 
   frontend:
-    container_name: rhs_orchestrator_frontend
+    container_name: frontend
     build:
       context: frontend
       dockerfile: Dockerfile
