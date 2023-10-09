@@ -13,6 +13,7 @@ import static org.springframework.http.HttpMethod.*;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+
 public class WebSecurityConfiguration {
     private final GoogleAuthService googleAuthService;
     public WebSecurityConfiguration(GoogleAuthService googleAuthService) {

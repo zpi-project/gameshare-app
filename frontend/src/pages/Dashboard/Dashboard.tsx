@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Typography } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { roleState } from "@state/role";
 import LoginButton from "@components/LoginButton";
@@ -10,7 +9,7 @@ const Dashboard: FC = () => {
 
   return (
     <>
-      <Typography>{"Home page :)"}</Typography>
+      <div>{"Home page :)"}</div>
       {role === "guest" ? <LoginButton /> : <LogoutButton />}
     </>
   );

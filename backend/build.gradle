@@ -29,6 +29,8 @@ ext {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web:3.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compileOnly 'org.projectlombok:lombok:1.18.30'
+	annotationProcessor 'org.projectlombok:lombok:1.18.30'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.0'
 	compileOnly 'org.projectlombok:lombok:1.18.30'
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.1.0'
@@ -39,6 +41,8 @@ dependencies {
 	implementation 'com.google.cloud:spring-cloud-gcp-starter'
 	// https://mvnrepository.com/artifact/org.hibernate/hibernate-gradle-plugin
 	implementation group: 'org.hibernate', name: 'hibernate-gradle-plugin', version: '5.6.15.Final'
+	implementation 'com.google.http-client:google-http-client-gson:1.40.1'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 
 }
 
