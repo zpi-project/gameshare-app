@@ -31,10 +31,10 @@ public class User{
     private String locationName;
 
     @Column(name = "locationLongitude",nullable = true)
-    private float locationLongitude;
+    private double locationLongitude;
 
     @Column(name = "locationLatitude",nullable = true)
-    private float locationLatitude;
+    private double locationLatitude;
 
     public User(String email) {
         this.email = email;

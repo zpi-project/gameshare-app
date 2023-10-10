@@ -28,23 +28,27 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web:3.1.0'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.4'
+	implementation 'org.springframework.boot:spring-boot-starter-security:3.0.4'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas:3.0.7'
+
 	compileOnly 'org.projectlombok:lombok:1.18.30'
 	annotationProcessor 'org.projectlombok:lombok:1.18.30'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.0'
-	compileOnly 'org.projectlombok:lombok:1.18.30'
+	// Swagger and Redoc
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.1.0'
-	implementation 'com.h2database:h2' // H2 database (for testing, you can replace with your preferred database)
-	implementation 'com.google.api-client:google-api-client:1.32.1'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	// https://mvnrepository.com/artifact/org.postgresql/postgresql
-	implementation 'com.google.cloud:spring-cloud-gcp-starter'
-	implementation 'com.google.cloud:spring-cloud-gcp-starter-sql-postgresql'
-	// https://mvnrepository.com/artifact/org.hibernate/hibernate-gradle-plugin
-	implementation group: 'org.hibernate', name: 'hibernate-gradle-plugin', version: '5.6.15.Final'
-	implementation 'com.google.http-client:google-http-client-gson:1.40.1'
-	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
-
+	// H2 database (for testing, you can replace with your preferred database)
+	implementation 'com.h2database:h2:2.1.214'
+	// Google SSO
+	implementation 'com.google.api-client:google-api-client:2.2.0'
+//	 Google Cloud Database
+//	implementation 'com.google.cloud:spring-cloud-gcp-starter'
+//	implementation 'com.google.cloud:spring-cloud-gcp-starter-sql-postgresql'
+	// Database
+	runtimeOnly 'org.postgresql:postgresql:42.5.4'
+	//CORS
+	implementation 'com.google.http-client:google-http-client-gson:1.43.1'
+	//testing
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.0'
 }
 
 dependencyManagement {
