@@ -20,4 +20,3 @@ dist-ssr/
 
 # env
 .env.cypress
-env.ts
