@@ -39,6 +39,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	// https://mvnrepository.com/artifact/org.postgresql/postgresql
 	implementation 'com.google.cloud:spring-cloud-gcp-starter'
+	implementation 'com.google.cloud:spring-cloud-gcp-starter-sql-postgresql'
 	// https://mvnrepository.com/artifact/org.hibernate/hibernate-gradle-plugin
 	implementation group: 'org.hibernate', name: 'hibernate-gradle-plugin', version: '5.6.15.Final'
 	implementation 'com.google.http-client:google-http-client-gson:1.40.1'
