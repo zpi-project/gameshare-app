@@ -1,25 +1,15 @@
 import { FC } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useSetRecoilState } from "recoil";
-import { roleState } from "@state/role";
-import Api from "@api/Api";
+import { tokenState } from "@state/token";
 
 const LoginButton: FC = () => {
-  const setRole = useSetRecoilState(roleState);
+  const setToken = useSetRecoilState(tokenState);
 
   return (
     <GoogleLogin
       onSuccess={res => {
-        setRole("user");
-        console.log(res);
-        const tokenInterceptor = Api.interceptors.request.use(config => {
-          config.headers.Authorization = `Bearer ${res.credential ?? ""}`;
-          return config;
-        });
-
-        return () => {
-          Api.interceptors.request.eject(tokenInterceptor);
-        };
+        setToken(res.credential ?? null);
       }}
       onError={() => {
         console.log("Login Failed");
