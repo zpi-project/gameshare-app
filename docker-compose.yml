@@ -3,9 +3,9 @@ services:
     image: 'postgres:13.1'
     container_name: db
     environment:
-      - POSTGRES_DB=${db_name}
-      - POSTGRES_USER=${db_user}
-      - POSTGRES_PASSWORD=${db_password}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
 
   backend:
     container_name: backend
