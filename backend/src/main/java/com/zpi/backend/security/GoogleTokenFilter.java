@@ -48,6 +48,7 @@ public class GoogleTokenFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(
                             User.fromGoogleTokenPayload(token.getPayload()),
                             null, null));
+
         } catch (NullPointerException | GeneralSecurityException ignored) {
 
         }

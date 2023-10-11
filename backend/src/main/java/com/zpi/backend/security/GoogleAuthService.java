@@ -23,7 +23,6 @@ public class GoogleAuthService {
                 new GoogleIdTokenVerifier.Builder(new NetHttpTransport(),
                         new GsonFactory()).setAudience(Collections.singletonList(clientId))
                         .build();
-
         return verifier.verify(token);
     }
 }
