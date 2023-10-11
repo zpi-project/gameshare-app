@@ -1,6 +1,7 @@
 package com.zpi.backend.user;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.zpi.backend.role.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -34,6 +35,8 @@ public class User{
     @Column(name = "locationLatitude",nullable = true)
     private float locationLatitude;
 
+    @ManyToOne
+    private Role role;
     public User(String email) {
         this.email = email;
     }
@@ -45,5 +48,9 @@ public class User{
         return new User(
                 payload.getEmail()
         );
+    }
+
+    public boolean isRegistered() {
+        return this.firstName != null && this.lastName != null && this.phoneNumber != null && this.locationName != null;
     }
 }

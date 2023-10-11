@@ -12,28 +12,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.Authentication;
 
+import static org.springframework.web.servlet.function.ServerResponse.status;
+
 @RestController
 @AllArgsConstructor
 public class UserController {
     @Autowired
     UserService userService;
-    @GetMapping("/auth")
+
+
+    @GetMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> auth_test(Authentication authentication) {
-        System.out.println("... called auth");
-        String userId;
+    public ResponseEntity<User> getUser(Authentication authentication) {
+        System.out.println("... called user");
         User user = (User) authentication.getPrincipal();
-        return ResponseEntity.status(HttpStatus.OK).body(user.getEmail());
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
+
     @PostMapping("/register")
-    public ResponseEntity<String> register(Authentication authentication) throws UserAlreadyExistsException, InvalidTokenException {
+    public ResponseEntity<RegisteredUserDTO> register(Authentication authentication) throws UserAlreadyExistsException, InvalidTokenException {
         if (authentication == null) {
             throw new InvalidTokenException("Invalid token!");
         }
         System.out.println("... called register");
-        userService.registerUser((User) authentication.getPrincipal());
-        return ResponseEntity.status(HttpStatus.OK).body("OK");
+        RegisteredUserDTO registeredUserDTO = userService.registerUser((User) authentication.getPrincipal());
+        return ResponseEntity.status(HttpStatus.OK).body(registeredUserDTO);
     }
     @GetMapping("/test")
     public ResponseEntity<String > test() {

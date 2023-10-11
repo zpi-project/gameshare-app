@@ -1,5 +1,6 @@
 package com.zpi.backend.user;
 
+import com.zpi.backend.role.Role;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,11 +9,14 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     private  UserRepository userRepository;
-    public void registerUser(User user) throws UserAlreadyExistsException {
+    public RegisteredUserDTO registerUser(User user) {
 
-        if(this.userRepository.findByEmail(user.getEmail()) == null)
+        if(this.userRepository.findByEmail(user.getEmail()) == null) {
+            user.setRole(new Role("USER"));
             this.userRepository.save(user);
-        else
-            throw new UserAlreadyExistsException("User already exists");
+        }
+        return new RegisteredUserDTO(user.getRole(),user.isRegistered());
     }
+
+
 }
