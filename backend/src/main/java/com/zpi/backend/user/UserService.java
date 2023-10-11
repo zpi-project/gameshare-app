@@ -1,6 +1,7 @@
 package com.zpi.backend.user;
 
 import com.zpi.backend.role.Role;
+import com.zpi.backend.role.RoleService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,13 +10,18 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     private  UserRepository userRepository;
-    public RegisteredUserDTO registerUser(User user) {
+    private RoleService roleService;
+    public RegisteredUserDTO registerUser(String email) {
 
-        if(this.userRepository.findByEmail(user.getEmail()) == null) {
-            user.setRole(new Role("USER"));
+        User user = this.userRepository.findByEmail(email);
+        if(user == null) {
+            user = new User();
+            user.setEmail(email);
+            user.setRole(roleService.getRoleByName("user"));
             this.userRepository.save(user);
         }
-        return new RegisteredUserDTO(user.getRole(),user.isRegistered());
+
+        return new RegisteredUserDTO(user.getRole().getName(),user.isRegistered());
     }
 
 

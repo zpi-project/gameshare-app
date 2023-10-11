@@ -30,17 +30,18 @@ public class UserController {
     }
 
 
+
+
     @PostMapping("/register")
     public ResponseEntity<RegisteredUserDTO> register(Authentication authentication) throws UserAlreadyExistsException, InvalidTokenException {
-        if (authentication == null) {
-            throw new InvalidTokenException("Invalid token!");
-        }
         System.out.println("... called register");
-        RegisteredUserDTO registeredUserDTO = userService.registerUser((User) authentication.getPrincipal());
+        User user = (User) authentication.getPrincipal();
+        RegisteredUserDTO registeredUserDTO = userService.registerUser(user.getEmail());
         return ResponseEntity.status(HttpStatus.OK).body(registeredUserDTO);
     }
     @GetMapping("/test")
     public ResponseEntity<String > test() {
+
         return ResponseEntity.status(HttpStatus.OK).body("OK");
     }
 }
