@@ -1,4 +1,12 @@
 services:
+  db:
+    image: 'postgres:13.1'
+    container_name: db
+    environment:
+      - POSTGRES_DB=${db_name}
+      - POSTGRES_USER=${db_user}
+      - POSTGRES_PASSWORD=${db_password}
+
   backend:
     container_name: backend
     build:
@@ -11,6 +19,8 @@ services:
       - "${BACKEND_PORT}:8080"
     env_file:
       - .env
+    depends_on:
+      - db
 
   frontend:
     container_name: frontend

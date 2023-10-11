@@ -1,6 +1,6 @@
 
 
-FROM gradle:8.4.0-jdk20-alpine AS BUILD
+FROM gradle:8.4.0-jdk20 AS BUILD
 WORKDIR /usr/app/
 COPY . .
 RUN java --version
