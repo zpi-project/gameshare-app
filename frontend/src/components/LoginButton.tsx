@@ -11,7 +11,6 @@ const LoginButton: FC = () => {
   return (
     <GoogleLogin
       onSuccess={res => {
-        console.log("setting token", res.credential);
         if (res.credential) {
           setRole("user");
           setToken(res.credential);

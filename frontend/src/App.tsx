@@ -19,7 +19,6 @@ const App: FC = () => {
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
-      console.log(token, config);
       return config;
     });
 
