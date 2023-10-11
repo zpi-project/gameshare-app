@@ -2,7 +2,6 @@ package com.zpi.backend.user;
 
 import com.zpi.backend.security.InvalidTokenException;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,7 @@ import org.springframework.security.core.Authentication;
 @RestController
 @AllArgsConstructor
 public class UserController {
+
     @Autowired
     UserService userService;
     @GetMapping("/auth")

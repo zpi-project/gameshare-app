@@ -3,15 +3,17 @@ package com.zpi.backend.user;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
 @Data
+@NoArgsConstructor
 public class User{
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(name = "email",length = 255,nullable = false,unique = true)
     private String email;
@@ -29,16 +31,13 @@ public class User{
     private String locationName;
 
     @Column(name = "locationLongitude",nullable = true)
-    private float locationLongitude;
+    private double locationLongitude;
 
     @Column(name = "locationLatitude",nullable = true)
-    private float locationLatitude;
+    private double locationLatitude;
 
     public User(String email) {
         this.email = email;
-    }
-
-    public User() {
     }
 
     public static User fromGoogleTokenPayload(GoogleIdToken.Payload payload) {

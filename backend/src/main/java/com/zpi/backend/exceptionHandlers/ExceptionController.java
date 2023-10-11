@@ -2,7 +2,6 @@ package com.zpi.backend.exceptionHandlers;
 
 
 
-import com.zpi.backend.security.InvalidTokenException;
 import com.zpi.backend.user.UserAlreadyExistsException;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.mediatype.problem.Problem;
