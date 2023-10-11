@@ -16,12 +16,10 @@ const App: FC = () => {
 
   useEffect(() => {
     const tokenInterceptor = Api.interceptors.request.use(config => {
-      if (!token) {
-        setRole("guest");
-        return config;
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
       }
-      setRole("user");
-      config.headers.Authorization = `Bearer ${token}`;
+      console.log(token, config);
       return config;
     });
 
@@ -33,7 +31,7 @@ const App: FC = () => {
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_AUTH_CLIENT_ID}>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider defaultTheme="dark">
+        <ThemeProvider defaultTheme="light">
           <div className="h-full w-full">
             <Outlet />
           </div>
