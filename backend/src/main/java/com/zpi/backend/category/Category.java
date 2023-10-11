@@ -17,4 +17,11 @@ public class Category {
     public Category(String name){
         this.name = name;
     }
+    public Category(long id){
+        this.id = id;
+    }
+
+    public static Category toCategory(long id){
+        return new Category(id);
+    }
 }

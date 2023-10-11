@@ -5,7 +5,9 @@ import com.zpi.backend.validators.ValueChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -25,5 +27,17 @@ public class CategoryService {
 
     public List<Category> getCategories(){
         return categoryRepository.findAll();
+    }
+
+    public List<Category> getCategoriesByIDs(List<Long> categoriesIds) throws CategoryDoesNotExistException {
+        List<Category> categories = new ArrayList<>();
+        for (long categoryId:categoriesIds) {
+            Optional<Category> categoryOptional = categoryRepository.findById(categoryId);
+            if (categoryOptional.isPresent())
+                categories.add(categoryOptional.get());
+            else
+                throw new CategoryDoesNotExistException("Category (id="+categoryId+") does not exist.");
+        }
+        return categories;
     }
 }

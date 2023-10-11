@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NewCategoryDTO {
     private String name;
-
     public Category toCategory(){
         return new Category(name);
     }
