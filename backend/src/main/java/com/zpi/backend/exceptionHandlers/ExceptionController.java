@@ -2,6 +2,7 @@ package com.zpi.backend.exceptionHandlers;
 
 
 
+import com.zpi.backend.category.CategoryAlreadyExistsException;
 import com.zpi.backend.user.UserAlreadyExistsException;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.mediatype.problem.Problem;
@@ -43,6 +44,32 @@ public class ExceptionController {
                         .withDetail(ex.getClass().getSimpleName()));
     }
 
+    @ResponseBody
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    ResponseEntity BREHandler(BadRequestException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.BAD_REQUEST)
+                        .withTitle(HttpStatus.BAD_REQUEST.name())
+                        .withDetail(ex.getMessage()));
+    }
 
+    // Categories
+
+    @ResponseBody
+    @ExceptionHandler(CategoryAlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity CAEHandler(CategoryAlreadyExistsException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
+                        .withTitle(HttpStatus.CONFLICT.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
 
 }
