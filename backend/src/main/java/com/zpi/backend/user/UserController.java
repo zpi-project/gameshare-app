@@ -13,7 +13,7 @@ import static org.springframework.web.servlet.function.ServerResponse.status;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class UserController {
 
     @Autowired
