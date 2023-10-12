@@ -16,7 +16,6 @@ const LoginButton: FC = () => {
           setToken(res.credential);
         }
         setToken(res.credential ?? null);
-        console.log(res.credential)
       }}
       onError={() => {
         console.log("Login Failed");
