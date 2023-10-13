@@ -1,11 +1,12 @@
 package com.zpi.backend.exceptionHandlers;
 
-
 import com.zpi.backend.category.CategoryAlreadyExistsException;
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.game.GameAlreadyExistsException;
 import com.zpi.backend.game.GameDoesNotExistException;
+import com.zpi.backend.user.UndefinedUserException;
 import com.zpi.backend.user.UserAlreadyExistsException;
+import com.zpi.backend.user.UserDoesNotExistException;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.mediatype.problem.Problem;
 import org.springframework.http.HttpHeaders;
@@ -24,11 +25,11 @@ public class ExceptionController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity UAEHandler(UserAlreadyExistsException ex) {
         return ResponseEntity
-                .status(HttpStatus.I_AM_A_TEAPOT)
+                .status(HttpStatus.BAD_REQUEST)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
-                        .withStatus(HttpStatus.I_AM_A_TEAPOT)
-                        .withTitle(HttpStatus.I_AM_A_TEAPOT.name())
+                        .withStatus(HttpStatus.BAD_REQUEST)
+                        .withTitle(HttpStatus.BAD_REQUEST.name())
                         .withDetail(ex.getClass().getSimpleName()));
     }
 
@@ -58,6 +59,32 @@ public class ExceptionController {
                         .withTitle(HttpStatus.BAD_REQUEST.name())
                         .withDetail(ex.getMessage()));
     }
+
+    @ExceptionHandler(UserDoesNotExistException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity UDNEHandler(UserDoesNotExistException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(HttpStatus.NOT_FOUND.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+
+    @ResponseBody
+    @ExceptionHandler(UndefinedUserException.class)
+    @ResponseStatus(value = HttpStatus.I_AM_A_TEAPOT)
+    ResponseEntity<Problem> UUEHandler(UndefinedUserException ex) {
+       return ResponseEntity
+                .status(HttpStatus.I_AM_A_TEAPOT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.I_AM_A_TEAPOT)
+                        .withTitle(HttpStatus.I_AM_A_TEAPOT.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+
 
     // Categories
     @ResponseBody
