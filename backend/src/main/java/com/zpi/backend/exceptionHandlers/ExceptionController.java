@@ -23,11 +23,11 @@ public class ExceptionController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity UAEHandler(UserAlreadyExistsException ex) {
         return ResponseEntity
-                .status(HttpStatus.I_AM_A_TEAPOT)
+                .status(HttpStatus.BAD_REQUEST)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
-                        .withStatus(HttpStatus.I_AM_A_TEAPOT)
-                        .withTitle(HttpStatus.I_AM_A_TEAPOT.name())
+                        .withStatus(HttpStatus.BAD_REQUEST)
+                        .withTitle(HttpStatus.BAD_REQUEST.name())
                         .withDetail(ex.getClass().getSimpleName()));
     }
 

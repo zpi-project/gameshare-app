@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class User{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "email",length = 255,nullable = false,unique = true)
