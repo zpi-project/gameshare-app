@@ -1,14 +1,9 @@
 import requests
+import xmltodict
+import database_connection as db
  
 # api-endpoint
 URL = "https://boardgamegeek.com/xmlapi"
-
-# /xmlapi/geeklist/<listid>
-# Parameters
-# start: Item to start with (0 indexed) (default = 0)
-# count: Number of items to retrieve (default and max = 150)
-# comments: Retrieve comments? (default absent, set to 1 if you want comments)
-GEEKLIST_URL = URL + "/geeklist"
 
 # /xmlapi/search
 # Parameters
@@ -27,25 +22,62 @@ SEARCH_URL = URL + "/search"
 # marketplace: retrieve the current marketplace listings (set it to 1, absent by default)
 BOARDGAME_URL = URL + "/boardgame"
  
-# location given here
-location = "delhi technological university"
+# Opening file with ids
+file = open("scripts/top_100_games_ids.txt", "r")
+
+for id in file:
+    print("Game:", id)
+    sending_url = BOARDGAME_URL + "/" + id
+    r = requests.get(url = sending_url)
  
-# defining a params dict for the parameters to be sent to the API
-PARAMS = {'address':location}
- 
-# sending get request and saving the response as response object
-r = requests.get(url = URL, params = PARAMS)
- 
-# extracting data in json format
-data = r.json()
- 
- 
-# extracting latitude, longitude and formatted address
-# of the first matching location
-latitude = data['results'][0]['geometry']['location']['lat']
-longitude = data['results'][0]['geometry']['location']['lng']
-formatted_address = data['results'][0]['formatted_address']
- 
-# printing the output
-print("Latitude:%s\nLongitude:%s\nFormatted Address:%s"
-    %(latitude, longitude,formatted_address))
+    # extracting data in xml
+    data = xmltodict.parse(r.content)
+    # saving_file = open("scripts/game.json", "a")
+    # saving_file.write(str(data))
+    # saving_file.flush()
+
+    names_json = data['boardgames']['boardgame']['name']
+    name = ""
+    age = int(data['boardgames']['boardgame']['age'])
+    max_players = int(data['boardgames']['boardgame']['maxplayers'])
+    min_players = int(data['boardgames']['boardgame']['minplayers'])
+    playing_time = int(data['boardgames']['boardgame']['playingtime'])
+    description = data['boardgames']['boardgame']['description']
+    description = description.replace("'", "")
+    image = data['boardgames']['boardgame']['image']
+    categories_json = data['boardgames']['boardgame']['boardgamecategory']
+    categories = []
+
+    if type(names_json) is list:
+        for n in names_json:
+            try:
+                if n['@primary'] == 'true':
+                    name = n["#text"]
+                    break
+            except:
+                # Not primary name
+                next
+    else:
+        name = names_json["#text"]
+
+    if type(categories_json) is list:
+        for c in categories_json:   
+            categories.append(c['#text'])
+    else:
+        categories.append(categories_json['#text'])
+        
+    # print(name)
+    # print(age)
+    # print(max_players)
+    # print(min_players)
+    # print(playing_time)
+    # print(description)
+    # print(image)
+    # print(categories)
+
+    db.connect(db.insert_game, name, description, min_players, max_players, playing_time, age, image)
+    for c in categories:
+        db.connect(db.insert_category, c)
+        db.connect(db.insert_category_game, name, c)
+
+print("All data inserted.")

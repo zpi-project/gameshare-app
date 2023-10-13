@@ -14,6 +14,11 @@ INSERT INTO games
 (name, short_description, min_players, max_players, playing_time, age, image, is_accepted) 
 VALUES ('%s', '%s', %i, %i, %i, %i, '%s', true);
 """
+insert_category_game = """
+INSERT INTO games_categories (game_id, category_id) VALUES 
+((select id from games where name = '%s'), 
+(select id from categories where name = '%s'));
+"""
 
 def connect(insert, *args):
     conn = None
@@ -29,19 +34,18 @@ def connect(insert, *args):
         # creating cursor
         cur = conn.cursor()
         query = insert % args
-        print(query)
         # execute a statement
         cur.execute(query)
         conn.commit()
         
         # close the communication with the PostgreSQL
-        # cur.close()
+        cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
+        print(query)
     finally:
         if conn is not None:
             conn.close()
-            print('Database connection closed.')
     
 
 # connect(select_categories)
