@@ -27,7 +27,7 @@ public class WebSecurityConfiguration {
                 .addFilterBefore(googleTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(GET, "/auth").authenticated()
-                        .requestMatchers(POST, "/register").authenticated()
+                        .requestMatchers(GET,"/user").authenticated()
                         .anyRequest().permitAll());
 
         return http.build();

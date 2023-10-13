@@ -1,6 +1,7 @@
 package com.zpi.backend.user;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.zpi.backend.role.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,13 +37,24 @@ public class User{
     @Column(name = "locationLatitude",nullable = true)
     private double locationLatitude;
 
-    public User(String email) {
+    @Column(name = "avatarLink",length = 255,nullable = true)
+    private String avatarLink;
+
+    @ManyToOne
+    private Role role;
+    public User(String email,String avatarLink) {
         this.email = email;
+        this.avatarLink = avatarLink;
     }
 
     public static User fromGoogleTokenPayload(GoogleIdToken.Payload payload) {
         return new User(
-                payload.getEmail()
+                payload.getEmail(),
+                payload.get("picture").toString()
         );
+    }
+
+    public boolean isRegistered() {
+        return this.firstName != null || this.lastName != null || this.phoneNumber != null || this.locationName != null;
     }
 }

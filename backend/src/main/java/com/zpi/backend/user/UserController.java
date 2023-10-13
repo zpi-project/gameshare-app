@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
+
+import static org.springframework.web.servlet.function.ServerResponse.status;
 
 @RestController
 @AllArgsConstructor
@@ -19,26 +18,33 @@ public class UserController {
 
     @Autowired
     UserService userService;
-    @GetMapping("/auth")
+
+
+    @GetMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> auth_test(Authentication authentication) {
-        System.out.println("... called auth");
-        String userId;
-        User user = (User) authentication.getPrincipal();
-        return ResponseEntity.status(HttpStatus.OK).body(user.getEmail());
+    public ResponseEntity<GetUserDTO> getUser(@RequestParam String email, Authentication authentication) throws UserDoesNotExistException {
+        GetUserDTO userInfo = userService.getUserInfoByEmail(email);
+        return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
 
+    @PutMapping("/user")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<String> updateUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UserDoesNotExistException, InvalidTokenException, UndefinedUserException {
+        User user = (User) authentication.getPrincipal();
+        userService.updateUser(user,updateUserDTO);
+        return ResponseEntity.status(HttpStatus.OK).body("");
+    }
+
+
+
+
     @PostMapping("/register")
-    public ResponseEntity<String> register(Authentication authentication) throws UserAlreadyExistsException, InvalidTokenException {
-        if (authentication == null) {
-            throw new InvalidTokenException("Invalid token!");
-        }
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<RegisteredUserDTO> register(Authentication authentication) throws UserAlreadyExistsException, InvalidTokenException, UndefinedUserException {
         System.out.println("... called register");
-        userService.registerUser((User) authentication.getPrincipal());
-        return ResponseEntity.status(HttpStatus.OK).body("OK");
+        User user = (User) authentication.getPrincipal();
+        RegisteredUserDTO registeredUserDTO = userService.registerUser(user);
+        return ResponseEntity.status(HttpStatus.OK).body(registeredUserDTO);
     }
-    @GetMapping("/test")
-    public ResponseEntity<String > test() {
-        return ResponseEntity.status(HttpStatus.OK).body("OK");
-    }
+
 }
