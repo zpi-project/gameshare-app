@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { RecoilRoot } from "recoil";
+import { URLS } from "@constants/urls";
 import Dashboard from "@pages/Dashboard";
 import Error from "@pages/Error";
 import App from "./App";
@@ -16,6 +17,18 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Dashboard />,
+      },
+      {
+        path: URLS.SEARCH_GAMES,
+        element: <div>search games page</div>,
+      },
+      {
+        path: `${URLS.USER}/:id`,
+        element: <div>user page</div>,
+      },
+      {
+        path: URLS.SETTINGS,
+        element: <div>settings age</div>,
       },
     ],
   },

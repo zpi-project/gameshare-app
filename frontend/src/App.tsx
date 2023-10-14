@@ -1,5 +1,4 @@
 import { FC, useEffect } from "react";
-import { Outlet } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -31,7 +30,7 @@ const App: FC = () => {
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_AUTH_CLIENT_ID}>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider defaultTheme="light">
+        <ThemeProvider defaultTheme="dark">
             <Layout />
         </ThemeProvider>
       </QueryClientProvider>
