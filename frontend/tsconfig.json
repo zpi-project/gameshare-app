@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["cypress", "node", "vite-plugin-svgr/client"],
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     "strictNullChecks": true,
 
+    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
@@ -15,21 +16,19 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    /* Importing */
     "paths": {
-      "@public/*": ["./public/*"],
-      "@components/*": ["./src/components/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@constants/*": ["./src/constants/*"],
-      "@typeDefs/*": ["./src/types/*"],
-      "@state/*": ["./src/state/*"],
-      "@api/*": ["./src/api/*"]
+      "@/*": ["./src/*"],
+      "@cypress/*": ["./cypress/*"],
+      "@public/*": ["./public/*"]
     }
   },
-  "exclude": ["node_modules", "dist", ".npm"],
+  "include": ["src", "cypress", "src/main.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
