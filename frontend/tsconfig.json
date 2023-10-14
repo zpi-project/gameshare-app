@@ -21,13 +21,9 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "@public/*": ["./public/*"],
-      "@components/*": ["./src/components/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@constants/*": ["./src/constants/*"],
-      "@typeDefs/*": ["./src/types/*"],
-      "@state/*": ["./src/state/*"],
-      "@api/*": ["./src/api/*"]
+      "@/*": ["./src/*"],
+      "@cypress/*": ["./cypress/*"],
+      "@public/*": ["./public/*"]
     }
   },
   "exclude": ["node_modules", "dist", ".npm"],
