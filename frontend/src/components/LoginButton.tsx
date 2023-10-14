@@ -10,7 +10,6 @@ const LoginButton: FC = () => {
 
   return (
     <GoogleLogin
-      type="icon"
       onSuccess={res => {
         if (res.credential) {
           setRole("user");
