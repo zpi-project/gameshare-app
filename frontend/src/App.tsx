@@ -12,7 +12,7 @@ const App: FC = () => {
     <RecoilRoot>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_AUTH_CLIENT_ID}>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider defaultTheme="dark">
+          <ThemeProvider defaultTheme="light">
             <Layout />
           </ThemeProvider>
         </QueryClientProvider>

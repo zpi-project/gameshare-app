@@ -27,7 +27,15 @@ const router = createBrowserRouter([
       },
       {
         path: URLS.SETTINGS,
-        element: <div>settings age</div>,
+        element: <div>my settings page</div>,
+      },
+      {
+        path: URLS.RESERVATIONS,
+        element: <div>my reservations page</div>,
+      },
+      {
+        path: URLS.GAMES,
+        element: <div>my games page</div>,
       },
     ],
   },

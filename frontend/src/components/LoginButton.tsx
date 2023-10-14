@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { GoogleLogin } from "@react-oauth/google";
-import { useSetRecoilState } from "recoil";
 import { roleState } from "@/state/role";
 import { tokenState } from "@/state/token";
+import { GoogleLogin } from "@react-oauth/google";
+import { useSetRecoilState } from "recoil";
 
 const LoginButton: FC = () => {
   const setToken = useSetRecoilState(tokenState);
