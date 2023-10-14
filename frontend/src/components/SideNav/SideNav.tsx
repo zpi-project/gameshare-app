@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import { roleState } from "@/state/role";
 import { Home, CalendarDays, Search, Dices } from "lucide-react";
 import { useRecoilValue } from "recoil";
+import SideNavLink from "./SideNavLink";
 import UserItem from "./UserItem";
 
 const ALL_LINKS = [
@@ -36,27 +36,13 @@ const SideNav: FC = () => {
       <div className="flex flex-col items-center gap-3">
         <img src="logo.png" className="h-14 w-14 rounded-lg" alt="GameShare logo" />
         {ALL_LINKS.map(({ icon, path }) => (
-          <Link
-            to={path}
-            key={path}
-            className=" transtion-all flex items-center justify-center rounded-lg p-1 duration-300 hover:bg-muted"
-          >
-            {icon}
-          </Link>
+          <SideNavLink icon={icon} path={path} key={path} />
         ))}
       </div>
 
       <div className="flex flex-col items-center gap-3">
         {role !== "guest" &&
-          USER_LINKS.map(({ icon, path }) => (
-            <Link
-              to={path}
-              key={path}
-              className=" transtion-all flex items-center justify-center rounded-lg p-1 duration-300 hover:bg-muted"
-            >
-              {icon}
-            </Link>
-          ))}
+          USER_LINKS.map(({ icon, path }) => <SideNavLink icon={icon} path={path} key={path} />)}
         <UserItem />
       </div>
     </div>
