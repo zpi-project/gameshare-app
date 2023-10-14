@@ -1,9 +1,8 @@
 import { FC } from "react";
 import { googleLogout } from "@react-oauth/google";
 import { useSetRecoilState } from "recoil";
-import { tokenState } from "@state/token";
 import { roleState } from "@state/role";
-
+import { tokenState } from "@state/token";
 
 const LogoutButton: FC = () => {
   const setToken = useSetRecoilState(tokenState);

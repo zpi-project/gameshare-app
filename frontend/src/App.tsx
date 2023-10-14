@@ -7,6 +7,7 @@ import { roleState } from "@state/role";
 import { tokenState } from "@state/token";
 import Api from "@api/Api";
 import { ThemeProvider } from "@components/ThemeProvider";
+import Layout from "@components/Layout";
 
 const queryClient = new QueryClient();
 
@@ -31,9 +32,7 @@ const App: FC = () => {
     <GoogleOAuthProvider clientId={import.meta.env.VITE_AUTH_CLIENT_ID}>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider defaultTheme="light">
-          <div className="h-full w-full">
-            <Outlet />
-          </div>
+            <Layout />
         </ThemeProvider>
       </QueryClientProvider>
     </GoogleOAuthProvider>
