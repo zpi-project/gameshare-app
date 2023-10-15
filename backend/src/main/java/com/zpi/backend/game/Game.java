@@ -16,6 +16,9 @@ public class Game {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
+    private Long originalId;
+
     @Column(nullable = false, unique = true)
     private String name;
 
