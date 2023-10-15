@@ -8,16 +8,16 @@ PASSWORD = "share"
 DBNAME = "gamesharetest"
 
 select_categories = "select * from categories"
-insert_category = "INSERT INTO categories (name) VALUES ('%s');"
+insert_category = "INSERT INTO categories (name) VALUES (%s);"
 insert_game = """
 INSERT INTO games 
-(name, short_description, min_players, max_players, playing_time, age, image, is_accepted) 
-VALUES ('%s', '%s', %i, %i, %i, %i, '%s', true);
+(original_id, name, short_description, min_players, max_players, playing_time, age, image, is_accepted) 
+VALUES (%s, %s, %s, %s, %s, %s, %s, %s, true);
 """
 insert_category_game = """
 INSERT INTO games_categories (game_id, category_id) VALUES 
-((select id from games where name = '%s'), 
-(select id from categories where name = '%s'));
+((select id from games where name = %s), 
+(select id from categories where name = %s));
 """
 
 def connect(insert, *args):
@@ -33,16 +33,21 @@ def connect(insert, *args):
         
         # creating cursor
         cur = conn.cursor()
-        query = insert % args
+        # query = insert % args
         # execute a statement
-        cur.execute(query)
+        cur.execute(insert, (args))
         conn.commit()
         
         # close the communication with the PostgreSQL
         cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
+    except psycopg2.DatabaseError as db_error:
+        # If error is different than dupicate key
+        if db_error.pgcode!='23505':
+            print(db_error)
+            # print(query)
+    except Exception as error:
         print(error)
-        print(query)
+    
     finally:
         if conn is not None:
             conn.close()

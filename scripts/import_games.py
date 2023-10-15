@@ -1,33 +1,23 @@
 import requests
 import xmltodict
 import database_connection as db
+import gpt_request as gpt
  
+# file
+FILE_PATH = "scripts/top_300_games_ids.txt"
+
 # api-endpoint
 URL = "https://boardgamegeek.com/xmlapi"
-
-# /xmlapi/search
-# Parameters
-# search: String to search for (required)
-# exact: Exact name/aka search only (set it to 1, absent by default)
-SEARCH_URL = URL + "/search"
-
-# /xmlapi/boardgame/<gameid>,<gameid2>...
-# Parameters
-# comments: Show brief user comments on games (set it to 1, absent by default)
-# stats: Include game statistics (set it to 1, absent by default)
-# historical: Include historical game statistics (set it to 1, absent by default) - Use from/end parameters to set starting and ending dates. Returns all data starting from 2006-03-18.
-# from: Set the start date to include historical data (format: YYYY-MM-DD, absent by default )
-# to: Set the end date to include historical data (format: YYYY-MM-DD, absent by default )
-# pricehistory: retrieve the marketplace history for this item (set it to 1, absent by default)
-# marketplace: retrieve the current marketplace listings (set it to 1, absent by default)
 BOARDGAME_URL = URL + "/boardgame"
  
 # Opening file with ids
-file = open("scripts/top_100_games_ids.txt", "r")
+file = open(FILE_PATH, "r")
 
-for id in file:
-    print("Game:", id)
-    sending_url = BOARDGAME_URL + "/" + id
+for original_id_str in file:
+    original_id = int(original_id_str)
+
+    print("Game:", original_id_str)
+    sending_url = BOARDGAME_URL + "/" + original_id_str
     r = requests.get(url = sending_url)
  
     # extracting data in xml
@@ -43,7 +33,6 @@ for id in file:
     min_players = int(data['boardgames']['boardgame']['minplayers'])
     playing_time = int(data['boardgames']['boardgame']['playingtime'])
     description = data['boardgames']['boardgame']['description']
-    description = description.replace("'", "")
     image = data['boardgames']['boardgame']['image']
     categories_json = data['boardgames']['boardgame']['boardgamecategory']
     categories = []
@@ -75,7 +64,9 @@ for id in file:
     # print(image)
     # print(categories)
 
-    db.connect(db.insert_game, name, description, min_players, max_players, playing_time, age, image)
+    description = gpt.get_short_description(description)
+
+    db.connect(db.insert_game, original_id, name, description, min_players, max_players, playing_time, age, image)
     for c in categories:
         db.connect(db.insert_category, c)
         db.connect(db.insert_category_game, name, c)
