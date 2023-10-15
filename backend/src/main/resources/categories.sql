@@ -1,66 +1,68 @@
-INSERT INTO categories (id, name) VALUES (1, 'Economic');
-INSERT INTO categories (id, name) VALUES (2, 'Industry / Manufacturing');
-INSERT INTO categories (id, name) VALUES (3, 'Post-Napoleonic');
-INSERT INTO categories (id, name) VALUES (4, 'Trains');
-INSERT INTO categories (id, name) VALUES (5, 'Transportation');
-INSERT INTO categories (id, name) VALUES (6, 'Environmental');
-INSERT INTO categories (id, name) VALUES (7, 'Medical');
-INSERT INTO categories (id, name) VALUES (8, 'Adventure');
-INSERT INTO categories (id, name) VALUES (9, 'Exploration');
-INSERT INTO categories (id, name) VALUES (10, 'Fantasy');
-INSERT INTO categories (id, name) VALUES (11, 'Fighting');
-INSERT INTO categories (id, name) VALUES (12, 'Miniatures');
-INSERT INTO categories (id, name) VALUES (13, 'Animals');
-INSERT INTO categories (id, name) VALUES (528, 'Aviation / Flight');
-INSERT INTO categories (id, name) VALUES (16, 'Civilization');
-INSERT INTO categories (id, name) VALUES (19, 'Negotiation');
-INSERT INTO categories (id, name) VALUES (20, 'Political');
-INSERT INTO categories (id, name) VALUES (21, 'Science Fiction');
-INSERT INTO categories (id, name) VALUES (22, 'Space Exploration');
-INSERT INTO categories (id, name) VALUES (23, 'Wargame');
-INSERT INTO categories (id, name) VALUES (234, 'Racing');
-INSERT INTO categories (id, name) VALUES (235, 'Sports');
-INSERT INTO categories (id, name) VALUES (29, 'Territory Building');
-INSERT INTO categories (id, name) VALUES (30, 'Movies / TV / Radio theme');
-INSERT INTO categories (id, name) VALUES (31, 'Novel-based');
-INSERT INTO categories (id, name) VALUES (160, 'Spies/Secret Agents');
-INSERT INTO categories (id, name) VALUES (163, 'Comic Book / Strip');
-INSERT INTO categories (id, name) VALUES (914, 'Age of Reason');
-INSERT INTO categories (id, name) VALUES (45, 'Civil War');
-INSERT INTO categories (id, name) VALUES (322, 'Prehistoric');
-INSERT INTO categories (id, name) VALUES (550, 'Number');
-INSERT INTO categories (id, name) VALUES (53, 'Mythology');
-INSERT INTO categories (id, name) VALUES (328, 'Deduction');
-INSERT INTO categories (id, name) VALUES (258, 'Video Game Theme');
-INSERT INTO categories (id, name) VALUES (61, 'Card Game');
-INSERT INTO categories (id, name) VALUES (64, 'Modern Warfare');
-INSERT INTO categories (id, name) VALUES (263, 'Mature / Adult');
-INSERT INTO categories (id, name) VALUES (67, 'American West');
-INSERT INTO categories (id, name) VALUES (266, 'Bluffing');
-INSERT INTO categories (id, name) VALUES (561, 'World War II');
-INSERT INTO categories (id, name) VALUES (74, 'Dice');
-INSERT INTO categories (id, name) VALUES (75, 'Medieval');
-INSERT INTO categories (id, name) VALUES (77, 'Ancient');
-INSERT INTO categories (id, name) VALUES (79, 'City Building');
-INSERT INTO categories (id, name) VALUES (275, 'Abstract Strategy');
-INSERT INTO categories (id, name) VALUES (277, 'Renaissance');
-INSERT INTO categories (id, name) VALUES (196, 'Action / Dexterity');
-INSERT INTO categories (id, name) VALUES (648, 'Pike and Shot');
-INSERT INTO categories (id, name) VALUES (92, 'Horror');
-INSERT INTO categories (id, name) VALUES (741, 'World War I');
-INSERT INTO categories (id, name) VALUES (97, 'Nautical');
-INSERT INTO categories (id, name) VALUES (99, 'Farming');
-INSERT INTO categories (id, name) VALUES (102, 'Puzzle');
-INSERT INTO categories (id, name) VALUES (359, 'Party Game');
-INSERT INTO categories (id, name) VALUES (295, 'Arabian');
-INSERT INTO categories (id, name) VALUES (108, 'Educational');
-INSERT INTO categories (id, name) VALUES (361, 'Word Game');
-INSERT INTO categories (id, name) VALUES (218, 'Murder/Mystery');
-INSERT INTO categories (id, name) VALUES (115, 'Collectible Components');
-INSERT INTO categories (id, name) VALUES (222, 'Pirates');
-INSERT INTO categories (id, name) VALUES (122, 'Travel');
-INSERT INTO categories (id, name) VALUES (128, 'Religious');
-INSERT INTO categories (id, name) VALUES (677, 'Zombies');
-INSERT INTO categories (id, name) VALUES (775, 'Humor');
-INSERT INTO categories (id, name) VALUES (693, 'Real-time');
-INSERT INTO categories (id, name) VALUES (778, 'Print & Play');
+insert into public.categories (id, name)
+values  (1, 'Economic'),
+        (2, 'Industry / Manufacturing'),
+        (3, 'Post-Napoleonic'),
+        (4, 'Trains'),
+        (5, 'Transportation'),
+        (6, 'Environmental'),
+        (7, 'Medical'),
+        (8, 'Adventure'),
+        (9, 'Exploration'),
+        (10, 'Fantasy'),
+        (11, 'Fighting'),
+        (12, 'Miniatures'),
+        (13, 'Animals'),
+        (528, 'Aviation / Flight'),
+        (16, 'Civilization'),
+        (19, 'Negotiation'),
+        (20, 'Political'),
+        (21, 'Science Fiction'),
+        (22, 'Space Exploration'),
+        (23, 'Wargame'),
+        (234, 'Racing'),
+        (235, 'Sports'),
+        (29, 'Territory Building'),
+        (30, 'Movies / TV / Radio theme'),
+        (31, 'Novel-based'),
+        (160, 'Spies/Secret Agents'),
+        (163, 'Comic Book / Strip'),
+        (914, 'Age of Reason'),
+        (45, 'Civil War'),
+        (322, 'Prehistoric'),
+        (550, 'Number'),
+        (53, 'Mythology'),
+        (328, 'Deduction'),
+        (258, 'Video Game Theme'),
+        (61, 'Card Game'),
+        (64, 'Modern Warfare'),
+        (263, 'Mature / Adult'),
+        (67, 'American West'),
+        (266, 'Bluffing'),
+        (561, 'World War II'),
+        (74, 'Dice'),
+        (75, 'Medieval'),
+        (77, 'Ancient'),
+        (79, 'City Building'),
+        (275, 'Abstract Strategy'),
+        (277, 'Renaissance'),
+        (196, 'Action / Dexterity'),
+        (648, 'Pike and Shot'),
+        (92, 'Horror'),
+        (741, 'World War I'),
+        (97, 'Nautical'),
+        (99, 'Farming'),
+        (102, 'Puzzle'),
+        (359, 'Party Game'),
+        (295, 'Arabian'),
+        (108, 'Educational'),
+        (361, 'Word Game'),
+        (218, 'Murder/Mystery'),
+        (115, 'Collectible Components'),
+        (222, 'Pirates'),
+        (122, 'Travel'),
+        (128, 'Religious'),
+        (677, 'Zombies'),
+        (775, 'Humor'),
+        (693, 'Real-time'),
+        (778, 'Print & Play')
+        ON CONFLICT DO NOTHING;

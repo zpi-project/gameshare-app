@@ -1,988 +1,990 @@
-INSERT INTO games_categories (game_id, category_id) VALUES (1, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (1, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (1, 3);
-INSERT INTO games_categories (game_id, category_id) VALUES (1, 4);
-INSERT INTO games_categories (game_id, category_id) VALUES (1, 5);
-INSERT INTO games_categories (game_id, category_id) VALUES (2, 6);
-INSERT INTO games_categories (game_id, category_id) VALUES (2, 7);
-INSERT INTO games_categories (game_id, category_id) VALUES (3, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (3, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (3, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (3, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (3, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (4, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (4, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (4, 6);
-INSERT INTO games_categories (game_id, category_id) VALUES (5, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (5, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (5, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (5, 19);
-INSERT INTO games_categories (game_id, category_id) VALUES (5, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (5, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (5, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (5, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (6, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (6, 6);
-INSERT INTO games_categories (game_id, category_id) VALUES (6, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (6, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (6, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (6, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (7, 30);
-INSERT INTO games_categories (game_id, category_id) VALUES (7, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (7, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (7, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (8, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (8, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (8, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (8, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (8, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (9, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (9, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (9, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (9, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (9, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (9, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (10, 45);
-INSERT INTO games_categories (game_id, category_id) VALUES (10, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (10, 30);
-INSERT INTO games_categories (game_id, category_id) VALUES (10, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (10, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (10, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (11, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (11, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (11, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (11, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (12, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (12, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (12, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (12, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (12, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (12, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (13, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (13, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (13, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (14, 64);
-INSERT INTO games_categories (game_id, category_id) VALUES (14, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (14, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (15, 67);
-INSERT INTO games_categories (game_id, category_id) VALUES (15, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (15, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (16, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (16, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (16, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (16, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (17, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (17, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (17, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (18, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (18, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (18, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (18, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (18, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (19, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (19, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (19, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (19, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (19, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (20, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (20, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (20, 3);
-INSERT INTO games_categories (game_id, category_id) VALUES (20, 5);
-INSERT INTO games_categories (game_id, category_id) VALUES (21, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (21, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (21, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (21, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (22, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (22, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (22, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (23, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (23, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (23, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (23, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (23, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (24, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (24, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (24, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (25, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (25, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (25, 108);
-INSERT INTO games_categories (game_id, category_id) VALUES (26, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (26, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (26, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (26, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (27, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (27, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (27, 115);
-INSERT INTO games_categories (game_id, category_id) VALUES (27, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (27, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (27, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (28, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (28, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (28, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (28, 122);
-INSERT INTO games_categories (game_id, category_id) VALUES (29, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (29, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (29, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (29, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (30, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (30, 128);
-INSERT INTO games_categories (game_id, category_id) VALUES (30, 122);
-INSERT INTO games_categories (game_id, category_id) VALUES (31, 67);
-INSERT INTO games_categories (game_id, category_id) VALUES (31, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (31, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (32, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (32, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (32, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (32, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (33, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (33, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (33, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (33, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (34, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (34, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (35, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (35, 6);
-INSERT INTO games_categories (game_id, category_id) VALUES (35, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (36, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (36, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (36, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (37, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (37, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (37, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (37, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (38, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (38, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (39, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (39, 108);
-INSERT INTO games_categories (game_id, category_id) VALUES (39, 19);
-INSERT INTO games_categories (game_id, category_id) VALUES (39, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (39, 3);
-INSERT INTO games_categories (game_id, category_id) VALUES (39, 160);
-INSERT INTO games_categories (game_id, category_id) VALUES (40, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (40, 115);
-INSERT INTO games_categories (game_id, category_id) VALUES (40, 163);
-INSERT INTO games_categories (game_id, category_id) VALUES (40, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (41, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (41, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (41, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (42, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (42, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (42, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (42, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (42, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (42, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (43, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (43, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (43, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (43, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (44, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (44, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (44, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (44, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (45, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (45, 6);
-INSERT INTO games_categories (game_id, category_id) VALUES (45, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (46, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (46, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (47, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (47, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (47, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (48, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (48, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (48, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (48, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (48, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (48, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (49, 196);
-INSERT INTO games_categories (game_id, category_id) VALUES (50, 160);
-INSERT INTO games_categories (game_id, category_id) VALUES (51, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (51, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (51, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (51, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (51, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (52, 6);
-INSERT INTO games_categories (game_id, category_id) VALUES (52, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (52, 7);
-INSERT INTO games_categories (game_id, category_id) VALUES (52, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (53, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (53, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (53, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (53, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (54, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (54, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (55, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (55, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (55, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (55, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (55, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (55, 218);
-INSERT INTO games_categories (game_id, category_id) VALUES (55, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (56, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (56, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (56, 222);
-INSERT INTO games_categories (game_id, category_id) VALUES (57, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (57, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (57, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (57, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (58, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (58, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (58, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (58, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (58, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (59, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (59, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (60, 234);
-INSERT INTO games_categories (game_id, category_id) VALUES (60, 235);
-INSERT INTO games_categories (game_id, category_id) VALUES (61, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (62, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (62, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (63, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (63, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (63, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (64, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (64, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (64, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (64, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (65, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (66, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (66, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (66, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (66, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (66, 30);
-INSERT INTO games_categories (game_id, category_id) VALUES (66, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (66, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (67, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (68, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (68, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (68, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (68, 258);
-INSERT INTO games_categories (game_id, category_id) VALUES (69, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (70, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (70, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (70, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (70, 263);
-INSERT INTO games_categories (game_id, category_id) VALUES (70, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (70, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (71, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (71, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (71, 115);
-INSERT INTO games_categories (game_id, category_id) VALUES (71, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (72, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (72, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (72, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (72, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (72, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (73, 275);
-INSERT INTO games_categories (game_id, category_id) VALUES (73, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (73, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (74, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (74, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (74, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (75, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (75, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (75, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (75, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (75, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (76, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (76, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (76, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (76, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (77, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (77, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (77, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (77, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (77, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (78, 295);
-INSERT INTO games_categories (game_id, category_id) VALUES (78, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (78, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (79, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (79, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (80, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (80, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (81, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (81, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (81, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (82, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (83, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (83, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (84, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (84, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (85, 3);
-INSERT INTO games_categories (game_id, category_id) VALUES (86, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (86, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (86, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (86, 122);
-INSERT INTO games_categories (game_id, category_id) VALUES (87, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (87, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (87, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (87, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (87, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (88, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (88, 6);
-INSERT INTO games_categories (game_id, category_id) VALUES (88, 322);
-INSERT INTO games_categories (game_id, category_id) VALUES (89, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (89, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (89, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (89, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (89, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (90, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (90, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (91, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (91, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (91, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (91, 263);
-INSERT INTO games_categories (game_id, category_id) VALUES (91, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (91, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (91, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (91, 122);
-INSERT INTO games_categories (game_id, category_id) VALUES (92, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (92, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (92, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (92, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (93, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (93, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (94, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (94, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (95, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (95, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (95, 30);
-INSERT INTO games_categories (game_id, category_id) VALUES (95, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (95, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (95, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (95, 160);
-INSERT INTO games_categories (game_id, category_id) VALUES (96, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (96, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (96, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (96, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (96, 5);
-INSERT INTO games_categories (game_id, category_id) VALUES (97, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (97, 359);
-INSERT INTO games_categories (game_id, category_id) VALUES (97, 160);
-INSERT INTO games_categories (game_id, category_id) VALUES (97, 361);
-INSERT INTO games_categories (game_id, category_id) VALUES (98, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (98, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (98, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (98, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (98, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (99, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (99, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (99, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (100, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (100, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (101, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (102, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (102, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (103, 3);
-INSERT INTO games_categories (game_id, category_id) VALUES (104, 275);
-INSERT INTO games_categories (game_id, category_id) VALUES (104, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (104, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (104, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (105, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (105, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (105, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (106, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (107, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (107, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (107, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (107, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (107, 122);
-INSERT INTO games_categories (game_id, category_id) VALUES (108, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (108, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (108, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (108, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (108, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (109, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (109, 19);
-INSERT INTO games_categories (game_id, category_id) VALUES (109, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (109, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (109, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (109, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (110, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (110, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (111, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (111, 4);
-INSERT INTO games_categories (game_id, category_id) VALUES (112, 275);
-INSERT INTO games_categories (game_id, category_id) VALUES (112, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (112, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (113, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (113, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (114, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (114, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (114, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (114, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (114, 19);
-INSERT INTO games_categories (game_id, category_id) VALUES (114, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (115, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (115, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (115, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (116, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (116, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (117, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (117, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (117, 3);
-INSERT INTO games_categories (game_id, category_id) VALUES (118, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (118, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (118, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (118, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (119, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (119, 4);
-INSERT INTO games_categories (game_id, category_id) VALUES (119, 5);
-INSERT INTO games_categories (game_id, category_id) VALUES (120, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (120, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (121, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (122, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (122, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (122, 234);
-INSERT INTO games_categories (game_id, category_id) VALUES (123, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (124, 7);
-INSERT INTO games_categories (game_id, category_id) VALUES (124, 3);
-INSERT INTO games_categories (game_id, category_id) VALUES (124, 4);
-INSERT INTO games_categories (game_id, category_id) VALUES (125, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (125, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (125, 359);
-INSERT INTO games_categories (game_id, category_id) VALUES (125, 160);
-INSERT INTO games_categories (game_id, category_id) VALUES (125, 361);
-INSERT INTO games_categories (game_id, category_id) VALUES (126, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (127, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (127, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (127, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (127, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (127, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (128, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (128, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (128, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (128, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (128, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (128, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (129, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (130, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (130, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (130, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (130, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (130, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (131, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (131, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (131, 6);
-INSERT INTO games_categories (game_id, category_id) VALUES (131, 122);
-INSERT INTO games_categories (game_id, category_id) VALUES (132, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (132, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (133, 7);
-INSERT INTO games_categories (game_id, category_id) VALUES (134, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (134, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (135, 295);
-INSERT INTO games_categories (game_id, category_id) VALUES (135, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (136, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (136, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (137, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (137, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (137, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (137, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (138, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (138, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (138, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (138, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (139, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (139, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (140, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (140, 218);
-INSERT INTO games_categories (game_id, category_id) VALUES (140, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (140, 3);
-INSERT INTO games_categories (game_id, category_id) VALUES (140, 160);
-INSERT INTO games_categories (game_id, category_id) VALUES (141, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (141, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (141, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (142, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (142, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (142, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (143, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (143, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (143, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (143, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (144, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (144, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (144, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (145, 359);
-INSERT INTO games_categories (game_id, category_id) VALUES (145, 361);
-INSERT INTO games_categories (game_id, category_id) VALUES (146, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (146, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (147, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (147, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (147, 322);
-INSERT INTO games_categories (game_id, category_id) VALUES (148, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (148, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (148, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (148, 30);
-INSERT INTO games_categories (game_id, category_id) VALUES (148, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (149, 4);
-INSERT INTO games_categories (game_id, category_id) VALUES (150, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (150, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (151, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (151, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (151, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (152, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (152, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (152, 115);
-INSERT INTO games_categories (game_id, category_id) VALUES (152, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (152, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (153, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (154, 528);
-INSERT INTO games_categories (game_id, category_id) VALUES (154, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (154, 115);
-INSERT INTO games_categories (game_id, category_id) VALUES (154, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (154, 30);
-INSERT INTO games_categories (game_id, category_id) VALUES (154, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (154, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (155, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (155, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (155, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (155, 122);
-INSERT INTO games_categories (game_id, category_id) VALUES (156, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (157, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (157, 115);
-INSERT INTO games_categories (game_id, category_id) VALUES (157, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (157, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (158, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (158, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (158, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (158, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (159, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (160, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (160, 550);
-INSERT INTO games_categories (game_id, category_id) VALUES (161, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (162, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (162, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (162, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (162, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (162, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (162, 5);
-INSERT INTO games_categories (game_id, category_id) VALUES (163, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (163, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (164, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (164, 561);
-INSERT INTO games_categories (game_id, category_id) VALUES (165, 275);
-INSERT INTO games_categories (game_id, category_id) VALUES (165, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (165, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (166, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (166, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (166, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (167, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (167, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (167, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (167, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (167, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (168, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (168, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (168, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (168, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (168, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (168, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (169, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (169, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (169, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (170, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (170, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (170, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (170, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (170, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (171, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (171, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (172, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (172, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (172, 263);
-INSERT INTO games_categories (game_id, category_id) VALUES (172, 64);
-INSERT INTO games_categories (game_id, category_id) VALUES (172, 258);
-INSERT INTO games_categories (game_id, category_id) VALUES (173, 275);
-INSERT INTO games_categories (game_id, category_id) VALUES (173, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (174, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (174, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (174, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (175, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (175, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (175, 561);
-INSERT INTO games_categories (game_id, category_id) VALUES (176, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (176, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (176, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (176, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (176, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (177, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (177, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (177, 30);
-INSERT INTO games_categories (game_id, category_id) VALUES (178, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (178, 19);
-INSERT INTO games_categories (game_id, category_id) VALUES (178, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (178, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (179, 4);
-INSERT INTO games_categories (game_id, category_id) VALUES (179, 5);
-INSERT INTO games_categories (game_id, category_id) VALUES (179, 258);
-INSERT INTO games_categories (game_id, category_id) VALUES (180, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (180, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (180, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (180, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (180, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (180, 19);
-INSERT INTO games_categories (game_id, category_id) VALUES (180, 359);
-INSERT INTO games_categories (game_id, category_id) VALUES (180, 160);
-INSERT INTO games_categories (game_id, category_id) VALUES (181, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (181, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (181, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (181, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (181, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (181, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (181, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (181, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (181, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (182, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (182, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (182, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (182, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (182, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (183, 3);
-INSERT INTO games_categories (game_id, category_id) VALUES (183, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (184, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (184, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (185, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (185, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (185, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (185, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (186, 45);
-INSERT INTO games_categories (game_id, category_id) VALUES (186, 648);
-INSERT INTO games_categories (game_id, category_id) VALUES (186, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (187, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (187, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (188, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (188, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (188, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (188, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (188, 128);
-INSERT INTO games_categories (game_id, category_id) VALUES (188, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (189, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (189, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (189, 19);
-INSERT INTO games_categories (game_id, category_id) VALUES (189, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (189, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (189, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (189, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (190, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (190, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (190, 19);
-INSERT INTO games_categories (game_id, category_id) VALUES (190, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (190, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (190, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (191, 4);
-INSERT INTO games_categories (game_id, category_id) VALUES (192, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (192, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (193, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (193, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (193, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (193, 677);
-INSERT INTO games_categories (game_id, category_id) VALUES (194, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (194, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (195, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (195, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (196, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (196, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (196, 30);
-INSERT INTO games_categories (game_id, category_id) VALUES (196, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (196, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (197, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (197, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (197, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (198, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (198, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (198, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (198, 693);
-INSERT INTO games_categories (game_id, category_id) VALUES (199, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (199, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (199, 6);
-INSERT INTO games_categories (game_id, category_id) VALUES (200, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (200, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (200, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (201, 275);
-INSERT INTO games_categories (game_id, category_id) VALUES (202, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (202, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (202, 6);
-INSERT INTO games_categories (game_id, category_id) VALUES (203, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (203, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (203, 322);
-INSERT INTO games_categories (game_id, category_id) VALUES (204, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (204, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (204, 108);
-INSERT INTO games_categories (game_id, category_id) VALUES (205, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (205, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (205, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (206, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (207, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (207, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (208, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (208, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (208, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (209, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (209, 561);
-INSERT INTO games_categories (game_id, category_id) VALUES (210, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (210, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (210, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (211, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (211, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (212, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (212, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (213, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (213, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (214, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (214, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (215, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (215, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (215, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (216, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (216, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (216, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (217, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (217, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (218, 23);
-INSERT INTO games_categories (game_id, category_id) VALUES (218, 741);
-INSERT INTO games_categories (game_id, category_id) VALUES (219, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (219, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (219, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (219, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (220, 275);
-INSERT INTO games_categories (game_id, category_id) VALUES (221, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (222, 4);
-INSERT INTO games_categories (game_id, category_id) VALUES (223, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (223, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (223, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (223, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (223, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (223, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (223, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (224, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (225, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (225, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (225, 160);
-INSERT INTO games_categories (game_id, category_id) VALUES (225, 361);
-INSERT INTO games_categories (game_id, category_id) VALUES (226, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (226, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (227, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (227, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (227, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (227, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (227, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (227, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (228, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (228, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (228, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (229, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (229, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (229, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (229, 775);
-INSERT INTO games_categories (game_id, category_id) VALUES (229, 359);
-INSERT INTO games_categories (game_id, category_id) VALUES (229, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (229, 778);
-INSERT INTO games_categories (game_id, category_id) VALUES (229, 160);
-INSERT INTO games_categories (game_id, category_id) VALUES (230, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (230, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (231, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (231, 163);
-INSERT INTO games_categories (game_id, category_id) VALUES (232, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (232, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (232, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (233, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (233, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (233, 218);
-INSERT INTO games_categories (game_id, category_id) VALUES (233, 359);
-INSERT INTO games_categories (game_id, category_id) VALUES (234, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (234, 218);
-INSERT INTO games_categories (game_id, category_id) VALUES (235, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (235, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (235, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (236, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (236, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (236, 258);
-INSERT INTO games_categories (game_id, category_id) VALUES (237, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (237, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (237, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (237, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (237, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (237, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (237, 677);
-INSERT INTO games_categories (game_id, category_id) VALUES (238, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (238, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (239, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (239, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (240, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (240, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (241, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (241, 122);
-INSERT INTO games_categories (game_id, category_id) VALUES (242, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (242, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (243, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (243, 359);
-INSERT INTO games_categories (game_id, category_id) VALUES (244, 234);
-INSERT INTO games_categories (game_id, category_id) VALUES (244, 235);
-INSERT INTO games_categories (game_id, category_id) VALUES (245, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (245, 218);
-INSERT INTO games_categories (game_id, category_id) VALUES (246, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (246, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (246, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (246, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (246, 31);
-INSERT INTO games_categories (game_id, category_id) VALUES (247, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (247, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (248, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (248, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (248, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (248, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (249, 275);
-INSERT INTO games_categories (game_id, category_id) VALUES (249, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (249, 53);
-INSERT INTO games_categories (game_id, category_id) VALUES (250, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (250, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (250, 218);
-INSERT INTO games_categories (game_id, category_id) VALUES (251, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (251, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (252, 196);
-INSERT INTO games_categories (game_id, category_id) VALUES (252, 693);
-INSERT INTO games_categories (game_id, category_id) VALUES (253, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (253, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (253, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (253, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (254, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (254, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (254, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (255, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (255, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (255, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (256, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (256, 4);
-INSERT INTO games_categories (game_id, category_id) VALUES (256, 5);
-INSERT INTO games_categories (game_id, category_id) VALUES (257, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (257, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (257, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (257, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (257, 3);
-INSERT INTO games_categories (game_id, category_id) VALUES (258, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (258, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (258, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (259, 275);
-INSERT INTO games_categories (game_id, category_id) VALUES (259, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (260, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (260, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (260, 234);
-INSERT INTO games_categories (game_id, category_id) VALUES (261, 693);
-INSERT INTO games_categories (game_id, category_id) VALUES (261, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (261, 22);
-INSERT INTO games_categories (game_id, category_id) VALUES (261, 5);
-INSERT INTO games_categories (game_id, category_id) VALUES (262, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (263, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (263, 4);
-INSERT INTO games_categories (game_id, category_id) VALUES (263, 5);
-INSERT INTO games_categories (game_id, category_id) VALUES (264, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (264, 102);
-INSERT INTO games_categories (game_id, category_id) VALUES (264, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (265, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (265, 99);
-INSERT INTO games_categories (game_id, category_id) VALUES (266, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (266, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (267, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (267, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (267, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (267, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (267, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (268, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (268, 67);
-INSERT INTO games_categories (game_id, category_id) VALUES (268, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (269, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (270, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (270, 322);
-INSERT INTO games_categories (game_id, category_id) VALUES (270, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (271, 67);
-INSERT INTO games_categories (game_id, category_id) VALUES (271, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (272, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (272, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (272, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (272, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (272, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (273, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (274, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (274, 75);
-INSERT INTO games_categories (game_id, category_id) VALUES (274, 29);
-INSERT INTO games_categories (game_id, category_id) VALUES (275, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (275, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (275, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (275, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (275, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (276, 77);
-INSERT INTO games_categories (game_id, category_id) VALUES (276, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (277, 914);
-INSERT INTO games_categories (game_id, category_id) VALUES (277, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (278, 8);
-INSERT INTO games_categories (game_id, category_id) VALUES (278, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (278, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (278, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (278, 222);
-INSERT INTO games_categories (game_id, category_id) VALUES (278, 122);
-INSERT INTO games_categories (game_id, category_id) VALUES (279, 266);
-INSERT INTO games_categories (game_id, category_id) VALUES (279, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (279, 218);
-INSERT INTO games_categories (game_id, category_id) VALUES (279, 359);
-INSERT INTO games_categories (game_id, category_id) VALUES (280, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (280, 775);
-INSERT INTO games_categories (game_id, category_id) VALUES (280, 359);
-INSERT INTO games_categories (game_id, category_id) VALUES (281, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (281, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (282, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (282, 79);
-INSERT INTO games_categories (game_id, category_id) VALUES (282, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (282, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (282, 258);
-INSERT INTO games_categories (game_id, category_id) VALUES (283, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (284, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (284, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (284, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (284, 6);
-INSERT INTO games_categories (game_id, category_id) VALUES (284, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (285, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (285, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (285, 20);
-INSERT INTO games_categories (game_id, category_id) VALUES (286, 328);
-INSERT INTO games_categories (game_id, category_id) VALUES (287, 275);
-INSERT INTO games_categories (game_id, category_id) VALUES (287, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (288, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (288, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (289, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (289, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (289, 5);
-INSERT INTO games_categories (game_id, category_id) VALUES (290, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (290, 2);
-INSERT INTO games_categories (game_id, category_id) VALUES (291, 13);
-INSERT INTO games_categories (game_id, category_id) VALUES (291, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (291, 775);
-INSERT INTO games_categories (game_id, category_id) VALUES (292, 1);
-INSERT INTO games_categories (game_id, category_id) VALUES (292, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (292, 97);
-INSERT INTO games_categories (game_id, category_id) VALUES (292, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (293, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (293, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (293, 92);
-INSERT INTO games_categories (game_id, category_id) VALUES (293, 12);
-INSERT INTO games_categories (game_id, category_id) VALUES (294, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (294, 163);
-INSERT INTO games_categories (game_id, category_id) VALUES (294, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (295, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (295, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (295, 21);
-INSERT INTO games_categories (game_id, category_id) VALUES (296, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (296, 775);
-INSERT INTO games_categories (game_id, category_id) VALUES (296, 263);
-INSERT INTO games_categories (game_id, category_id) VALUES (296, 359);
-INSERT INTO games_categories (game_id, category_id) VALUES (296, 778);
-INSERT INTO games_categories (game_id, category_id) VALUES (297, 61);
-INSERT INTO games_categories (game_id, category_id) VALUES (297, 74);
-INSERT INTO games_categories (game_id, category_id) VALUES (297, 10);
-INSERT INTO games_categories (game_id, category_id) VALUES (297, 11);
-INSERT INTO games_categories (game_id, category_id) VALUES (298, 16);
-INSERT INTO games_categories (game_id, category_id) VALUES (298, 9);
-INSERT INTO games_categories (game_id, category_id) VALUES (298, 277);
-INSERT INTO games_categories (game_id, category_id) VALUES (298, 258);
-INSERT INTO games_categories (game_id, category_id) VALUES (299, 775);
-INSERT INTO games_categories (game_id, category_id) VALUES (299, 359);
-INSERT INTO games_categories (game_id, category_id) VALUES (299, 693);
-INSERT INTO games_categories (game_id, category_id) VALUES (300, 275);
+insert into public.games_categories (game_id, category_id)
+values  (1, 1),
+        (1, 2),
+        (1, 3),
+        (1, 4),
+        (1, 5),
+        (2, 6),
+        (2, 7),
+        (3, 8),
+        (3, 9),
+        (3, 10),
+        (3, 11),
+        (3, 12),
+        (4, 13),
+        (4, 1),
+        (4, 6),
+        (5, 16),
+        (5, 1),
+        (5, 9),
+        (5, 19),
+        (5, 20),
+        (5, 21),
+        (5, 22),
+        (5, 23),
+        (6, 1),
+        (6, 6),
+        (6, 2),
+        (6, 21),
+        (6, 22),
+        (6, 29),
+        (7, 30),
+        (7, 31),
+        (7, 20),
+        (7, 21),
+        (8, 8),
+        (8, 9),
+        (8, 10),
+        (8, 11),
+        (8, 12),
+        (9, 8),
+        (9, 10),
+        (9, 11),
+        (9, 31),
+        (9, 29),
+        (9, 23),
+        (10, 45),
+        (10, 12),
+        (10, 30),
+        (10, 21),
+        (10, 22),
+        (10, 23),
+        (11, 10),
+        (11, 11),
+        (11, 53),
+        (11, 29),
+        (12, 16),
+        (12, 1),
+        (12, 12),
+        (12, 21),
+        (12, 22),
+        (12, 29),
+        (13, 61),
+        (13, 16),
+        (13, 1),
+        (14, 64),
+        (14, 20),
+        (14, 23),
+        (15, 67),
+        (15, 13),
+        (15, 1),
+        (16, 1),
+        (16, 11),
+        (16, 21),
+        (16, 29),
+        (17, 74),
+        (17, 75),
+        (17, 29),
+        (18, 77),
+        (18, 61),
+        (18, 79),
+        (18, 16),
+        (18, 1),
+        (19, 16),
+        (19, 9),
+        (19, 21),
+        (19, 22),
+        (19, 23),
+        (20, 1),
+        (20, 2),
+        (20, 3),
+        (20, 5),
+        (21, 8),
+        (21, 92),
+        (21, 12),
+        (21, 21),
+        (22, 77),
+        (22, 1),
+        (22, 97),
+        (23, 1),
+        (23, 99),
+        (23, 2),
+        (23, 75),
+        (23, 102),
+        (24, 8),
+        (24, 10),
+        (24, 12),
+        (25, 13),
+        (25, 61),
+        (25, 108),
+        (26, 16),
+        (26, 1),
+        (26, 10),
+        (26, 29),
+        (27, 8),
+        (27, 61),
+        (27, 115),
+        (27, 9),
+        (27, 92),
+        (27, 31),
+        (28, 8),
+        (28, 77),
+        (28, 9),
+        (28, 122),
+        (29, 13),
+        (29, 10),
+        (29, 29),
+        (29, 23),
+        (30, 75),
+        (30, 128),
+        (30, 122),
+        (31, 67),
+        (31, 13),
+        (31, 1),
+        (32, 13),
+        (32, 61),
+        (32, 79),
+        (32, 10),
+        (33, 8),
+        (33, 9),
+        (33, 10),
+        (33, 11),
+        (34, 1),
+        (34, 99),
+        (35, 1),
+        (35, 6),
+        (35, 2),
+        (36, 61),
+        (36, 97),
+        (36, 21),
+        (37, 8),
+        (37, 74),
+        (37, 10),
+        (37, 11),
+        (38, 1),
+        (38, 2),
+        (39, 1),
+        (39, 108),
+        (39, 19),
+        (39, 20),
+        (39, 3),
+        (39, 160),
+        (40, 61),
+        (40, 115),
+        (40, 163),
+        (40, 11),
+        (41, 79),
+        (41, 1),
+        (41, 99),
+        (42, 61),
+        (42, 79),
+        (42, 16),
+        (42, 2),
+        (42, 97),
+        (42, 21),
+        (43, 13),
+        (43, 1),
+        (43, 10),
+        (43, 99),
+        (44, 10),
+        (44, 11),
+        (44, 12),
+        (44, 53),
+        (45, 13),
+        (45, 6),
+        (45, 102),
+        (46, 1),
+        (46, 21),
+        (47, 13),
+        (47, 1),
+        (47, 99),
+        (48, 79),
+        (48, 1),
+        (48, 9),
+        (48, 21),
+        (48, 22),
+        (48, 29),
+        (49, 196),
+        (50, 160),
+        (51, 8),
+        (51, 9),
+        (51, 10),
+        (51, 11),
+        (51, 12),
+        (52, 6),
+        (52, 9),
+        (52, 7),
+        (52, 21),
+        (53, 8),
+        (53, 9),
+        (53, 10),
+        (53, 97),
+        (54, 1),
+        (54, 2),
+        (55, 8),
+        (55, 9),
+        (55, 11),
+        (55, 92),
+        (55, 12),
+        (55, 218),
+        (55, 102),
+        (56, 1),
+        (56, 9),
+        (56, 222),
+        (57, 79),
+        (57, 1),
+        (57, 2),
+        (57, 20),
+        (58, 77),
+        (58, 16),
+        (58, 1),
+        (58, 99),
+        (58, 53),
+        (59, 1),
+        (59, 2),
+        (60, 234),
+        (60, 235),
+        (61, 75),
+        (62, 1),
+        (62, 99),
+        (63, 61),
+        (63, 21),
+        (63, 22),
+        (64, 79),
+        (64, 1),
+        (64, 2),
+        (64, 97),
+        (65, 75),
+        (66, 8),
+        (66, 9),
+        (66, 11),
+        (66, 12),
+        (66, 30),
+        (66, 21),
+        (66, 23),
+        (67, 1),
+        (68, 10),
+        (68, 11),
+        (68, 12),
+        (68, 258),
+        (69, 1),
+        (70, 8),
+        (70, 10),
+        (70, 92),
+        (70, 263),
+        (70, 12),
+        (70, 53),
+        (71, 266),
+        (71, 61),
+        (71, 115),
+        (71, 21),
+        (72, 10),
+        (72, 11),
+        (72, 92),
+        (72, 12),
+        (72, 31),
+        (73, 275),
+        (73, 102),
+        (73, 277),
+        (74, 13),
+        (74, 1),
+        (74, 99),
+        (75, 61),
+        (75, 16),
+        (75, 1),
+        (75, 21),
+        (75, 22),
+        (76, 61),
+        (76, 10),
+        (76, 11),
+        (76, 21),
+        (77, 16),
+        (77, 11),
+        (77, 21),
+        (77, 22),
+        (77, 23),
+        (78, 295),
+        (78, 10),
+        (78, 53),
+        (79, 8),
+        (79, 10),
+        (80, 16),
+        (80, 1),
+        (81, 1),
+        (81, 99),
+        (81, 2),
+        (82, 77),
+        (83, 21),
+        (83, 22),
+        (84, 79),
+        (84, 10),
+        (85, 3),
+        (86, 74),
+        (86, 1),
+        (86, 75),
+        (86, 122),
+        (87, 8),
+        (87, 9),
+        (87, 11),
+        (87, 31),
+        (87, 29),
+        (88, 13),
+        (88, 6),
+        (88, 322),
+        (89, 77),
+        (89, 61),
+        (89, 79),
+        (89, 16),
+        (89, 1),
+        (90, 328),
+        (90, 102),
+        (91, 8),
+        (91, 9),
+        (91, 10),
+        (91, 263),
+        (91, 75),
+        (91, 12),
+        (91, 53),
+        (91, 122),
+        (92, 8),
+        (92, 61),
+        (92, 9),
+        (92, 21),
+        (93, 75),
+        (93, 277),
+        (94, 79),
+        (94, 75),
+        (95, 266),
+        (95, 328),
+        (95, 30),
+        (95, 20),
+        (95, 21),
+        (95, 22),
+        (95, 160),
+        (96, 79),
+        (96, 1),
+        (96, 277),
+        (96, 29),
+        (96, 5),
+        (97, 328),
+        (97, 359),
+        (97, 160),
+        (97, 361),
+        (98, 61),
+        (98, 9),
+        (98, 75),
+        (98, 53),
+        (98, 23),
+        (99, 79),
+        (99, 1),
+        (99, 75),
+        (100, 75),
+        (100, 97),
+        (101, 1),
+        (102, 61),
+        (102, 75),
+        (103, 3),
+        (104, 275),
+        (104, 77),
+        (104, 16),
+        (104, 29),
+        (105, 74),
+        (105, 1),
+        (105, 75),
+        (106, 277),
+        (107, 8),
+        (107, 11),
+        (107, 92),
+        (107, 31),
+        (107, 122),
+        (108, 8),
+        (108, 10),
+        (108, 11),
+        (108, 12),
+        (108, 31),
+        (109, 16),
+        (109, 19),
+        (109, 20),
+        (109, 21),
+        (109, 22),
+        (109, 23),
+        (110, 77),
+        (110, 1),
+        (111, 2),
+        (111, 4),
+        (112, 275),
+        (112, 1),
+        (112, 102),
+        (113, 77),
+        (113, 20),
+        (114, 266),
+        (114, 10),
+        (114, 12),
+        (114, 53),
+        (114, 19),
+        (114, 23),
+        (115, 61),
+        (115, 10),
+        (115, 21),
+        (116, 61),
+        (116, 75),
+        (117, 1),
+        (117, 2),
+        (117, 3),
+        (118, 13),
+        (118, 10),
+        (118, 97),
+        (118, 102),
+        (119, 1),
+        (119, 4),
+        (119, 5),
+        (120, 1),
+        (120, 2),
+        (121, 21),
+        (122, 8),
+        (122, 9),
+        (122, 234),
+        (123, 75),
+        (124, 7),
+        (124, 3),
+        (124, 4),
+        (125, 61),
+        (125, 328),
+        (125, 359),
+        (125, 160),
+        (125, 361),
+        (126, 1),
+        (127, 266),
+        (127, 11),
+        (127, 12),
+        (127, 21),
+        (127, 23),
+        (128, 8),
+        (128, 74),
+        (128, 10),
+        (128, 11),
+        (128, 75),
+        (128, 53),
+        (129, 10),
+        (130, 16),
+        (130, 74),
+        (130, 1),
+        (130, 21),
+        (130, 22),
+        (131, 13),
+        (131, 1),
+        (131, 6),
+        (131, 122),
+        (132, 10),
+        (132, 29),
+        (133, 7),
+        (134, 61),
+        (134, 10),
+        (135, 295),
+        (135, 61),
+        (136, 328),
+        (136, 10),
+        (137, 74),
+        (137, 1),
+        (137, 277),
+        (137, 29),
+        (138, 77),
+        (138, 12),
+        (138, 53),
+        (138, 23),
+        (139, 61),
+        (139, 20),
+        (140, 328),
+        (140, 218),
+        (140, 31),
+        (140, 3),
+        (140, 160),
+        (141, 61),
+        (141, 11),
+        (141, 21),
+        (142, 79),
+        (142, 75),
+        (142, 102),
+        (143, 61),
+        (143, 16),
+        (143, 1),
+        (143, 21),
+        (144, 9),
+        (144, 97),
+        (144, 277),
+        (145, 359),
+        (145, 361),
+        (146, 77),
+        (146, 79),
+        (147, 74),
+        (147, 1),
+        (147, 322),
+        (148, 61),
+        (148, 11),
+        (148, 92),
+        (148, 30),
+        (148, 21),
+        (149, 4),
+        (150, 77),
+        (150, 53),
+        (151, 61),
+        (151, 21),
+        (151, 22),
+        (152, 8),
+        (152, 61),
+        (152, 115),
+        (152, 10),
+        (152, 31),
+        (153, 61),
+        (154, 528),
+        (154, 266),
+        (154, 115),
+        (154, 12),
+        (154, 30),
+        (154, 21),
+        (154, 23),
+        (155, 74),
+        (155, 1),
+        (155, 75),
+        (155, 122),
+        (156, 75),
+        (157, 61),
+        (157, 115),
+        (157, 10),
+        (157, 11),
+        (158, 79),
+        (158, 1),
+        (158, 99),
+        (158, 29),
+        (159, 1),
+        (160, 74),
+        (160, 550),
+        (161, 79),
+        (162, 8),
+        (162, 9),
+        (162, 11),
+        (162, 21),
+        (162, 22),
+        (162, 5),
+        (163, 10),
+        (163, 11),
+        (164, 23),
+        (164, 561),
+        (165, 275),
+        (165, 75),
+        (165, 23),
+        (166, 13),
+        (166, 61),
+        (166, 1),
+        (167, 10),
+        (167, 11),
+        (167, 92),
+        (167, 53),
+        (167, 23),
+        (168, 8),
+        (168, 10),
+        (168, 11),
+        (168, 31),
+        (168, 29),
+        (168, 23),
+        (169, 61),
+        (169, 11),
+        (169, 21),
+        (170, 8),
+        (170, 9),
+        (170, 10),
+        (170, 11),
+        (170, 12),
+        (171, 61),
+        (171, 75),
+        (172, 8),
+        (172, 9),
+        (172, 263),
+        (172, 64),
+        (172, 258),
+        (173, 275),
+        (173, 102),
+        (174, 61),
+        (174, 1),
+        (174, 277),
+        (175, 12),
+        (175, 23),
+        (175, 561),
+        (176, 61),
+        (176, 10),
+        (176, 11),
+        (176, 92),
+        (176, 31),
+        (177, 92),
+        (177, 12),
+        (177, 30),
+        (178, 266),
+        (178, 19),
+        (178, 21),
+        (178, 22),
+        (179, 4),
+        (179, 5),
+        (179, 258),
+        (180, 266),
+        (180, 61),
+        (180, 328),
+        (180, 10),
+        (180, 75),
+        (180, 19),
+        (180, 359),
+        (180, 160),
+        (181, 8),
+        (181, 61),
+        (181, 74),
+        (181, 9),
+        (181, 10),
+        (181, 11),
+        (181, 12),
+        (181, 53),
+        (181, 102),
+        (182, 8),
+        (182, 9),
+        (182, 92),
+        (182, 12),
+        (182, 21),
+        (183, 3),
+        (183, 102),
+        (184, 74),
+        (184, 102),
+        (185, 8),
+        (185, 74),
+        (185, 10),
+        (185, 11),
+        (186, 45),
+        (186, 648),
+        (186, 23),
+        (187, 61),
+        (187, 92),
+        (188, 79),
+        (188, 1),
+        (188, 2),
+        (188, 75),
+        (188, 128),
+        (188, 29),
+        (189, 266),
+        (189, 11),
+        (189, 19),
+        (189, 31),
+        (189, 20),
+        (189, 21),
+        (189, 23),
+        (190, 266),
+        (190, 10),
+        (190, 19),
+        (190, 31),
+        (190, 20),
+        (190, 23),
+        (191, 4),
+        (192, 74),
+        (192, 1),
+        (193, 266),
+        (193, 328),
+        (193, 92),
+        (193, 677),
+        (194, 79),
+        (194, 1),
+        (195, 77),
+        (195, 23),
+        (196, 8),
+        (196, 9),
+        (196, 30),
+        (196, 21),
+        (196, 22),
+        (197, 74),
+        (197, 21),
+        (197, 22),
+        (198, 328),
+        (198, 11),
+        (198, 97),
+        (198, 693),
+        (199, 13),
+        (199, 61),
+        (199, 6),
+        (200, 1),
+        (200, 99),
+        (200, 75),
+        (201, 275),
+        (202, 13),
+        (202, 61),
+        (202, 6),
+        (203, 61),
+        (203, 9),
+        (203, 322),
+        (204, 13),
+        (204, 1),
+        (204, 108),
+        (205, 61),
+        (205, 1),
+        (205, 277),
+        (206, 61),
+        (207, 74),
+        (207, 277),
+        (208, 79),
+        (208, 75),
+        (208, 29),
+        (209, 23),
+        (209, 561),
+        (210, 13),
+        (210, 1),
+        (210, 21),
+        (211, 61),
+        (211, 1),
+        (212, 74),
+        (212, 21),
+        (213, 79),
+        (213, 21),
+        (214, 8),
+        (214, 9),
+        (215, 61),
+        (215, 16),
+        (215, 1),
+        (216, 61),
+        (216, 10),
+        (216, 53),
+        (217, 13),
+        (217, 102),
+        (218, 23),
+        (218, 741),
+        (219, 77),
+        (219, 11),
+        (219, 12),
+        (219, 53),
+        (220, 275),
+        (221, 79),
+        (222, 4),
+        (223, 77),
+        (223, 79),
+        (223, 16),
+        (223, 11),
+        (223, 12),
+        (223, 53),
+        (223, 97),
+        (224, 10),
+        (225, 61),
+        (225, 328),
+        (225, 160),
+        (225, 361),
+        (226, 1),
+        (226, 99),
+        (227, 79),
+        (227, 2),
+        (227, 102),
+        (227, 21),
+        (227, 22),
+        (227, 29),
+        (228, 61),
+        (228, 10),
+        (228, 21),
+        (229, 266),
+        (229, 61),
+        (229, 328),
+        (229, 775),
+        (229, 359),
+        (229, 20),
+        (229, 778),
+        (229, 160),
+        (230, 16),
+        (230, 2),
+        (231, 61),
+        (231, 163),
+        (232, 61),
+        (232, 74),
+        (232, 75),
+        (233, 266),
+        (233, 328),
+        (233, 218),
+        (233, 359),
+        (234, 328),
+        (234, 218),
+        (235, 61),
+        (235, 1),
+        (235, 10),
+        (236, 61),
+        (236, 75),
+        (236, 258),
+        (237, 8),
+        (237, 10),
+        (237, 11),
+        (237, 92),
+        (237, 75),
+        (237, 12),
+        (237, 677),
+        (238, 74),
+        (238, 10),
+        (239, 8),
+        (239, 10),
+        (240, 1),
+        (240, 2),
+        (241, 9),
+        (241, 122),
+        (242, 79),
+        (242, 277),
+        (243, 61),
+        (243, 359),
+        (244, 234),
+        (244, 235),
+        (245, 328),
+        (245, 218),
+        (246, 61),
+        (246, 10),
+        (246, 11),
+        (246, 53),
+        (246, 31),
+        (247, 61),
+        (247, 10),
+        (248, 1),
+        (248, 99),
+        (248, 97),
+        (248, 277),
+        (249, 275),
+        (249, 77),
+        (249, 53),
+        (250, 8),
+        (250, 328),
+        (250, 218),
+        (251, 1),
+        (251, 29),
+        (252, 196),
+        (252, 693),
+        (253, 77),
+        (253, 61),
+        (253, 79),
+        (253, 1),
+        (254, 74),
+        (254, 21),
+        (254, 22),
+        (255, 61),
+        (255, 10),
+        (255, 11),
+        (256, 1),
+        (256, 4),
+        (256, 5),
+        (257, 13),
+        (257, 1),
+        (257, 99),
+        (257, 2),
+        (257, 3),
+        (258, 1),
+        (258, 75),
+        (258, 29),
+        (259, 275),
+        (259, 75),
+        (260, 13),
+        (260, 74),
+        (260, 234),
+        (261, 693),
+        (261, 21),
+        (261, 22),
+        (261, 5),
+        (262, 20),
+        (263, 1),
+        (263, 4),
+        (263, 5),
+        (264, 8),
+        (264, 102),
+        (264, 21),
+        (265, 1),
+        (265, 99),
+        (266, 9),
+        (266, 10),
+        (267, 77),
+        (267, 79),
+        (267, 16),
+        (267, 1),
+        (267, 29),
+        (268, 8),
+        (268, 67),
+        (268, 12),
+        (269, 16),
+        (270, 8),
+        (270, 322),
+        (270, 29),
+        (271, 67),
+        (271, 9),
+        (272, 77),
+        (272, 61),
+        (272, 79),
+        (272, 16),
+        (272, 1),
+        (273, 74),
+        (274, 79),
+        (274, 75),
+        (274, 29),
+        (275, 8),
+        (275, 9),
+        (275, 10),
+        (275, 11),
+        (275, 12),
+        (276, 77),
+        (276, 61),
+        (277, 914),
+        (277, 1),
+        (278, 8),
+        (278, 9),
+        (278, 10),
+        (278, 97),
+        (278, 222),
+        (278, 122),
+        (279, 266),
+        (279, 92),
+        (279, 218),
+        (279, 359),
+        (280, 61),
+        (280, 775),
+        (280, 359),
+        (281, 61),
+        (281, 10),
+        (282, 61),
+        (282, 79),
+        (282, 1),
+        (282, 2),
+        (282, 258),
+        (283, 10),
+        (284, 16),
+        (284, 74),
+        (284, 1),
+        (284, 6),
+        (284, 2),
+        (285, 1),
+        (285, 97),
+        (285, 20),
+        (286, 328),
+        (287, 275),
+        (287, 13),
+        (288, 13),
+        (288, 1),
+        (289, 1),
+        (289, 2),
+        (289, 5),
+        (290, 1),
+        (290, 2),
+        (291, 13),
+        (291, 10),
+        (291, 775),
+        (292, 1),
+        (292, 9),
+        (292, 97),
+        (292, 277),
+        (293, 10),
+        (293, 11),
+        (293, 92),
+        (293, 12),
+        (294, 61),
+        (294, 163),
+        (294, 11),
+        (295, 61),
+        (295, 11),
+        (295, 21),
+        (296, 61),
+        (296, 775),
+        (296, 263),
+        (296, 359),
+        (296, 778),
+        (297, 61),
+        (297, 74),
+        (297, 10),
+        (297, 11),
+        (298, 16),
+        (298, 9),
+        (298, 277),
+        (298, 258),
+        (299, 775),
+        (299, 359),
+        (299, 693),
+        (300, 275)
+        ON CONFLICT DO NOTHING;
