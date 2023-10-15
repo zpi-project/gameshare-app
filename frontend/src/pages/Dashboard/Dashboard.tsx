@@ -1,17 +1,11 @@
 import { FC } from "react";
-import { useRecoilValue } from "recoil";
-import { roleState } from "@state/role";
-import LoginButton from "@components/LoginButton";
-import LogoutButton from "@components/LogoutButton";
 
 const Dashboard: FC = () => {
-  const role = useRecoilValue(roleState);
-
   return (
-    <>
-      <div>{"Home page :)"}</div>
-      {role === "guest" ? <LoginButton /> : <LogoutButton />}
-    </>
+    <div className="flex h-full w-full flex-row gap-6">
+      <div className="flex-grow rounded-lg bg-section p-4">space for map</div>
+      <div className="w-[550px] rounded-lg bg-section p-4">space for search games</div>
+    </div>
   );
 };
 
