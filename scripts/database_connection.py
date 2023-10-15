@@ -1,11 +1,5 @@
 import psycopg2
-
-# Set db credentials
-HOST = "localhost"
-PORT = 5432
-USER = "game"
-PASSWORD = "share"
-DBNAME = "gamesharetest"
+from db_credentials import *
 
 select_categories = "select * from categories"
 insert_category = "INSERT INTO categories (name) VALUES (%s);"
