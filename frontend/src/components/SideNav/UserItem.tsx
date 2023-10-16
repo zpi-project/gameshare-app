@@ -33,24 +33,26 @@ const UserItem: FC<UserItemProps> = ({ className = "" }) => {
         />
       </PopoverTrigger>
       <PopoverContent side="right" align="end" className="flex flex-col gap-3">
+        <div className="flex flex-row items-center justify-between gap-2">
+          <div className="h-10 flex-grow rounded-lg bg-primary p-2 font-medium">{t("mode")}:</div>
+          <ModeToggle />
+        </div>
+        <div className="flex flex-row items-center justify-between gap-2">
+          <div className="h-10 flex-grow rounded-lg bg-primary p-2 font-medium">
+            {t("language")}:
+          </div>
+          <LanguageToggle />
+        </div>
         {role === "guest" ? (
           <LoginButton />
         ) : (
           <>
-            <LogoutButton />
             <Link to={URLS.SETTINGS}>
-              <Button className="w-full">{t("settings")}</Button>
+              <Button className="w-full">{t("myProfile")}</Button>
             </Link>
+            <LogoutButton />
           </>
         )}
-        <div className="flex flex-row items-center justify-between gap-2">
-          <div className="h-10 flex-grow rounded-lg bg-background p-2">{t("mode")}:</div>
-          <ModeToggle />
-        </div>
-        <div className="flex flex-row items-center justify-between gap-2">
-          <div className="h-10 flex-grow rounded-lg bg-background p-2">{t("language")}:</div>
-          <LanguageToggle />
-        </div>
       </PopoverContent>
     </Popover>
   );

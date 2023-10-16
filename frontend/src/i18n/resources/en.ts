@@ -1,5 +1,5 @@
 export default {
-  settings: "Settings",
+  myProfile: "My profile",
   login: "Log in",
   logout: "Log out",
 

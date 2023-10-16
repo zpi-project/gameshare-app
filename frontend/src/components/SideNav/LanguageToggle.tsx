@@ -22,7 +22,11 @@ const LanguageToggle: FC = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" side="right">
         {supportedLanguages.map((language, idx) => (
-          <DropdownMenuItem onClick={() => void i18n.changeLanguage(language)} key={idx}>
+          <DropdownMenuItem
+            onClick={() => void i18n.changeLanguage(language)}
+            key={idx}
+            className="text-base"
+          >
             {t(language)}
           </DropdownMenuItem>
         ))}

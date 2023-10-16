@@ -16,7 +16,11 @@ const LogoutButton: FC = () => {
     setRole("guest");
   };
 
-  return <Button onClick={logout}>{t("logout")}</Button>;
+  return (
+    <Button onClick={logout} variant="outline">
+      {t("logout")}
+    </Button>
+  );
 };
 
 export default LogoutButton;
