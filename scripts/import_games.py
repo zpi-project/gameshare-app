@@ -22,9 +22,6 @@ for original_id_str in file:
  
     # extracting data in xml
     data = xmltodict.parse(r.content)
-    # saving_file = open("scripts/game.json", "a")
-    # saving_file.write(str(data))
-    # saving_file.flush()
 
     names_json = data['boardgames']['boardgame']['name']
     name = ""
@@ -54,15 +51,6 @@ for original_id_str in file:
             categories.append(c['#text'])
     else:
         categories.append(categories_json['#text'])
-        
-    # print(name)
-    # print(age)
-    # print(max_players)
-    # print(min_players)
-    # print(playing_time)
-    # print(description)
-    # print(image)
-    # print(categories)
 
     description = gpt.get_short_description(description)
 

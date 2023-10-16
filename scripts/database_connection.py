@@ -27,8 +27,6 @@ def connect(insert, *args):
         
         # creating cursor
         cur = conn.cursor()
-        # query = insert % args
-        # execute a statement
         cur.execute(insert, (args))
         conn.commit()
         
@@ -38,7 +36,6 @@ def connect(insert, *args):
         # If error is different than dupicate key
         if db_error.pgcode!='23505':
             print(db_error)
-            # print(query)
     except Exception as error:
         print(error)
     
@@ -46,6 +43,3 @@ def connect(insert, *args):
         if conn is not None:
             conn.close()
     
-
-# connect(select_categories)
-# connect(insert_category, "RPG")
