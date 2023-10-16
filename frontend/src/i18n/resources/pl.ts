@@ -4,6 +4,7 @@ const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
   logout: "Wyloguj",
+  loading: "Ładowanie",
 
   mode: "Motyw",
   dark: "Ciemny",
