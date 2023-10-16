@@ -1,0 +1,20 @@
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  background-color: inherit;
+}
+
+.leaflet-pane {
+  z-index: 10;
+}
+
+.leaflet-left {
+  left: calc(100% - 60px);
+}
+
+.dark .leaflet-layer,
+.dark .leaflet-control-zoom-in,
+.dark .leaflet-control-zoom-out,
+.dark .leaflet-control-attribution {
+  filter: var(--leaflet-tile-filter, none);
+}
