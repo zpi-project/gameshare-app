@@ -1,15 +1,23 @@
 import { FC } from "react";
+import Avatar from "./Avatar";
+import { Button } from "./ui/button";
 
 interface Props {
-  showButton?: boolean;
   onClick?: () => void;
 }
 
-const UserDetails: FC<Props> = ({ showButton, onClick }) => {
+const UserDetails: FC<Props> = ({ onClick }) => {
   return (
-    <div>
-      <div>user details section</div>
-      {showButton ? <button onClick={onClick}>edit and open edit modal</button> : <></>}
+    <div className="w-fullgap-6 flex h-full flex-col">
+      <div className="flex w-full flex-row gap-6">
+        <Avatar></Avatar>
+        <div className="rounded-lg bg-card">Jan Kowalski</div>
+        <Button onClick={onClick}>Edit</Button>
+      </div>
+      <div className="flex w-full flex-col gap-6">
+        <div className="rounded-lg bg-card">675787780</div>
+        <div className="rounded-lg bg-card">ul.Łąkowa 4</div>
+      </div>
     </div>
   );
 };

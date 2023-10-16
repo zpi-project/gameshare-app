@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import Dashboard from "@/pages/Dashboard";
 import Error from "@/pages/Error";
+import Settings from "@/pages/Settings";
 import App from "./App";
 import "./index.css";
 
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: URLS.SETTINGS,
-        element: <div>my settings page</div>,
+        element: <Settings />,
       },
       {
         path: URLS.RESERVATIONS,
