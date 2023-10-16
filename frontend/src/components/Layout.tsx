@@ -1,9 +1,9 @@
 import { FC, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Api from "@/api/Api";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import { roleState } from "@/state/role";
 import { tokenState } from "@/state/token";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import Api from "@/api/Api";
 import SideNav from "./SideNav";
 
 const Layout: FC = () => {

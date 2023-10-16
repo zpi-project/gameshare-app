@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { roleState } from "@/state/role";
-import { tokenState } from "@/state/token";
 import { GoogleLogin } from "@react-oauth/google";
 import { useSetRecoilState } from "recoil";
+import { roleState } from "@/state/role";
+import { tokenState } from "@/state/token";
 
 const LoginButton: FC = () => {
   const setToken = useSetRecoilState(tokenState);
@@ -17,6 +17,7 @@ const LoginButton: FC = () => {
         }
         setToken(res.credential ?? null);
       }}
+      width="256px"
       onError={() => {
         console.log("Login Failed");
       }}
