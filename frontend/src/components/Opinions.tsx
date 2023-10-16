@@ -6,7 +6,7 @@ interface Props {}
 const Opinions: FC<Props> = () => {
   return (
     // probably some loop
-    <div className="flex h-full flex-grow flex-col gap-6 rounded-lg">
+    <div className="flex h-full flex-grow flex-col gap-4 rounded-lg">
       <Opinion>cerv</Opinion>
       <Opinion>dvfr</Opinion>
     </div>

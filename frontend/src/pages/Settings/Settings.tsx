@@ -7,8 +7,8 @@ const Settings: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className="flex h-full flex-row gap-6">
-      <div className="flex h-full flex-grow flex-col gap-6 rounded-lg">
-        <div className="min-h-[350px] rounded-lg bg-section p-4">
+      <div className="flex h-full max-w-2xl flex-grow flex-col gap-6 rounded-lg">
+        <div className="min-h-[30px] rounded-lg bg-section p-4">
           <UserDetails onClick={() => setIsModalOpen(true)} />
           {isModalOpen && <EditPersonalDataModal />}
         </div>
