@@ -87,9 +87,3 @@
     @apply bg-background text-foreground;
   }
 }
-/* 
-@layer utilities {
-  .dark .leaflet-tile {
-    filter: var(--leaflet-tile-filter, none);
-  }
-} */

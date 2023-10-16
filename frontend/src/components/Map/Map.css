@@ -8,10 +8,6 @@
   z-index: 10;
 }
 
-.leaflet-left {
-  left: calc(100% - 60px);
-}
-
 .dark .leaflet-layer,
 .dark .leaflet-control-zoom-in,
 .dark .leaflet-control-zoom-out,
