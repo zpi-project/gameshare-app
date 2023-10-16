@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { Avatar as UiAvatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { User as UserIcon } from "lucide-react";
 import { User } from "@/types/User";
 import { cn } from "@/utils/tailwind";
 import { hasName, getNameFirstLetters } from "@/utils/user";
-import { User as UserIcon } from "lucide-react";
+import { Avatar as UiAvatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface AvatarProps {
   user?: User;

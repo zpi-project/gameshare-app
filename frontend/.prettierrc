@@ -14,15 +14,15 @@
   "importOrder": [
     "^react(.*)$",
     "<THIRD_PARTY_MODULES>",
-    "^@state/?(.*)$",
-    "^@constants/?(.*)$",
-    "^@types/?(.*)$",
-    "^@utils/?(.*)$",
-    "^@api/?(.*)$",
-    "^@cypress/?(.*)$",
-    "^@pages/?(.*)$",
-    "^@components/?(.*)$",
-    "^@i18n/?(.*)$",
+    "^@/state/?(.*)$",
+    "^@/constants/?(.*)$",
+    "^@/types/?(.*)$",
+    "^@/utils/?(.*)$",
+    "^@/api/?(.*)$",
+    "^@/cypress/?(.*)$",
+    "^@/pages/?(.*)$",
+    "^@/components/?(.*)$",
+    "^@/i18n/?(.*)$",
     "^[./]"
   ]
 }
