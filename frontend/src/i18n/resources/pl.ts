@@ -4,10 +4,15 @@ const pl: typeof en = {
   settings: "Ustawienia",
   login: "Zaloguj",
   logout: "Wyloguj",
+
+  mode: "Motyw",
   dark: "Ciemny",
   light: "Jasny",
   system: "Systemowy",
-  theme: "Motyw",
+
+  language: "Język",
+  pl: "polski",
+  en: "angielski",
 };
 
 export default pl;

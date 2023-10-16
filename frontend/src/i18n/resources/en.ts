@@ -2,8 +2,13 @@ export default {
   settings: "Settings",
   login: "Log in",
   logout: "Log out",
+
+  mode: "Mode",
   dark: "Dark",
   light: "Light",
   system: "System",
-  theme: "Theme",
+
+  language: "Language",
+  pl: "Polish",
+  en: "English",
 };

@@ -6,11 +6,12 @@ import { roleState } from "@/state/role";
 import { URLS } from "@/constants/urls";
 import { cn } from "@/utils/tailwind";
 import Avatar from "@/components/Avatar";
-import LoginButton from "@/components/LoginButton";
-import LogoutButton from "@/components/LogoutButton";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import { ModeToggle } from "../ModeToggle";
 import { Button } from "../ui/button";
+import LanguageToggle from "./LanguageToggle";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
+import { ModeToggle } from "./ModeToggle";
 
 interface UserItemProps {
   className?: string;
@@ -43,8 +44,12 @@ const UserItem: FC<UserItemProps> = ({ className = "" }) => {
           </>
         )}
         <div className="flex flex-row items-center justify-between gap-2">
-          <div className="h-10 flex-grow rounded-lg bg-background p-2">{t("theme")}:</div>
+          <div className="h-10 flex-grow rounded-lg bg-background p-2">{t("mode")}:</div>
           <ModeToggle />
+        </div>
+        <div className="flex flex-row items-center justify-between gap-2">
+          <div className="h-10 flex-grow rounded-lg bg-background p-2">{t("language")}:</div>
+          <LanguageToggle />
         </div>
       </PopoverContent>
     </Popover>
