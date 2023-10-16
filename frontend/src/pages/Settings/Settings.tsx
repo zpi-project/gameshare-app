@@ -6,9 +6,9 @@ import EditPersonalDataModal from "./EditPersonalDataModal";
 const Settings: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
-    <div className="flex h-full w-full flex-row gap-6">
+    <div className="flex h-full flex-row gap-6">
       <div className="flex h-full flex-grow flex-col gap-6 rounded-lg">
-        <div className="h-[350px] rounded-lg bg-section p-4">
+        <div className="min-h-[350px] rounded-lg bg-section p-4">
           <UserDetails onClick={() => setIsModalOpen(true)} />
           {isModalOpen && <EditPersonalDataModal />}
         </div>
@@ -16,7 +16,7 @@ const Settings: FC = () => {
           <Opinions />
         </div>
       </div>
-      <div className="w-[750px] rounded-lg bg-section p-4">space for search games</div>
+      <div className="flex-grow rounded-lg bg-section p-4">space for search games</div>
     </div>
   );
 };
