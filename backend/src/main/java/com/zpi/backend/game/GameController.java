@@ -4,8 +4,10 @@ import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.exceptionHandlers.BadRequestException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,5 +55,19 @@ public class GameController {
         Game games = gameService.getGame(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
+    }
+
+//    TODO Add Role Admin
+    @Operation(
+            summary = "Accept a game by id",
+            description = "Change accept value of a Game identified by its id to True. Only Admin is allowed to do this operation."
+    )
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(value = "/accept/{id}", method = RequestMethod.PUT)
+    public ResponseEntity acceptGame(@PathVariable long id) throws GameDoesNotExistException, GameAlreadyAcceptedException {
+        System.out.println("... called acceptGame("+id+")");
+        gameService.acceptGame(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .build();
     }
 }

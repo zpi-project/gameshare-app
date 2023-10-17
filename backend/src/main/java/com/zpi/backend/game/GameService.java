@@ -53,4 +53,17 @@ public class GameService {
             else
                 return gameRepository.searchAllByNameContainsAndAcceptedAndCategoriesIn(search.get(), categoriesIds.get(), pageable);
     }
+
+    public void acceptGame(long id) throws GameDoesNotExistException, GameAlreadyAcceptedException {
+        Optional<Game> optionalGame = gameRepository.findById(id);
+        if (optionalGame.isEmpty())
+            throw new GameDoesNotExistException("Game (id = "+id+") does not exists");
+        Game game = optionalGame.get();
+        if (game.isAccepted())
+            throw new GameAlreadyAcceptedException("Game (id = "+id+") has been already accepted.");
+        else {
+            game.setAccepted(true);
+            gameRepository.save(game);
+        }
+    }
 }
