@@ -26,7 +26,8 @@ public class Game {
     @JoinTable(
             name = "games_categories",
             joinColumns = { @JoinColumn(name = "game_id") },
-            inverseJoinColumns = { @JoinColumn(name = "category_id") }
+            inverseJoinColumns = { @JoinColumn(name = "category_id") },
+            uniqueConstraints = @UniqueConstraint(name = "UniqueGameAndCategory", columnNames = {"game_id", "category_id"})
     )
     private List<Category> categories;
 
