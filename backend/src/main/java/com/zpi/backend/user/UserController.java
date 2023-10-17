@@ -25,24 +25,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
 
-    @PutMapping("/user")
+
+    @PostMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> updateUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UserDoesNotExistException, InvalidTokenException, UndefinedUserException {
-        User user = (User) authentication.getPrincipal();
-        userService.updateUser(user,updateUserDTO);
-        return ResponseEntity.status(HttpStatus.OK).body("");
+    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws  UserAlreadyExistsException {
+        userService.registerUser(updateUserDTO, authentication);
+        return ResponseEntity.status(HttpStatus.CREATED).body("User created");
     }
-
-
-
-
-    @PostMapping("/register")
-    @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<RegisteredUserDTO> register(Authentication authentication) throws UserAlreadyExistsException, InvalidTokenException, UndefinedUserException {
-        System.out.println("... called register");
-        User user = (User) authentication.getPrincipal();
-        RegisteredUserDTO registeredUserDTO = userService.registerUser(user);
-        return ResponseEntity.status(HttpStatus.OK).body(registeredUserDTO);
-    }
-
 }
