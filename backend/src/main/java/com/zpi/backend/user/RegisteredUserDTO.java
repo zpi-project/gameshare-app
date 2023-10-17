@@ -1,6 +1,5 @@
 package com.zpi.backend.user;
 
-import com.zpi.backend.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

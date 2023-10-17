@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("http://localhost:5173")
@@ -24,11 +25,11 @@ public class GameController {
                 .body(newGame);
     }
 
-//  TODO Paging
     @GetMapping
-    public ResponseEntity getGames() {
+    public ResponseEntity getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
+                                   @RequestParam Optional<List<Integer>> categoriesIds) {
         System.out.println("... called getGames");
-        List<Game> games = gameService.getGames();
+        List<Game> games = gameService.getGames(page, size, search, categoriesIds);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }

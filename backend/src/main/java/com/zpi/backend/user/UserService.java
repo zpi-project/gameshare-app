@@ -1,11 +1,10 @@
 package com.zpi.backend.user;
 
-import com.zpi.backend.role.Role;
 import com.zpi.backend.role.RoleService;
 import com.zpi.backend.security.InvalidTokenException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 @Service
 @AllArgsConstructor
 public class UserService {

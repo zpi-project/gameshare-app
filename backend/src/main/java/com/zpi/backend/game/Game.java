@@ -48,7 +48,7 @@ public class Game {
 
     private String image;
 
-    private boolean isAccepted;
+    private boolean accepted;
 
     public Game(String name, List<Category> categories, int minPlayers, int maxPlayers, int playingTime, int age, String shortDescription, String image){
         this.name = name;
