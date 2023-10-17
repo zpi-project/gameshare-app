@@ -1,6 +1,7 @@
 package com.zpi.backend.category;
 
 import com.zpi.backend.exceptionHandlers.BadRequestException;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,11 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
+
+    @Operation(
+            summary = "Add a new category",
+            description = "Add a new Category to database."
+    )
     @PostMapping
     public ResponseEntity addCategory(@RequestBody NewCategoryDTO newCategory) throws CategoryAlreadyExistsException, BadRequestException {
         System.out.println("... called addCategory");
@@ -22,6 +28,10 @@ public class CategoryController {
                 .body(category);
     }
 
+    @Operation(
+            summary = "Get categories",
+            description = "Returns all Categories from database."
+    )
     @GetMapping
     public ResponseEntity<List<Category>> getCategories(){
         System.out.println("... called getCategory");
