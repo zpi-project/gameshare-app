@@ -2,13 +2,11 @@ package com.zpi.backend.game;
 
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.exceptionHandlers.BadRequestException;
-import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

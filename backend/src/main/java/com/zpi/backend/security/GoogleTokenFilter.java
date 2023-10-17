@@ -2,7 +2,6 @@ package com.zpi.backend.security;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.zpi.backend.user.User;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
