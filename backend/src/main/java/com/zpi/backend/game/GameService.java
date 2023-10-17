@@ -40,11 +40,17 @@ public class GameService {
         return gameOptional.get();
     }
 
-    public List<Game> getGames(int page, int size, Optional<String> search){
+    public List<Game> getGames(int page, int size, Optional<String> search, Optional<List<Integer>> categoriesIds){
         Pageable pageable = PageRequest.of(page, size);
         if (search.isEmpty())
-            return gameRepository.getAllByAcceptedIsTrue(pageable);
+            if (categoriesIds.isEmpty())
+                return gameRepository.getAllByAcceptedIsTrue(pageable);
+            else
+                return gameRepository.getAllByAcceptedAndCategoriesIn(pageable, categoriesIds.get());
         else
-            return gameRepository.searchAllByNameContainsIgnoreCaseAndAcceptedIsTrue(search.get(), pageable);
+            if (categoriesIds.isEmpty())
+                return gameRepository.searchAllByNameContainsIgnoreCaseAndAcceptedIsTrue(search.get(), pageable);
+            else
+                return gameRepository.searchAllByNameContainsAndAcceptedAndCategoriesIn(search.get(), categoriesIds.get(), pageable);
     }
 }

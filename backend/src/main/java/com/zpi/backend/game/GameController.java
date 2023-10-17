@@ -2,11 +2,13 @@ package com.zpi.backend.game;
 
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.exceptionHandlers.BadRequestException;
+import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,11 +27,11 @@ public class GameController {
                 .body(newGame);
     }
 
-//  TODO Paging
     @GetMapping
-    public ResponseEntity getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search) {
+    public ResponseEntity getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
+                                   @RequestParam Optional<List<Integer>> categoriesIds) {
         System.out.println("... called getGames");
-        List<Game> games = gameService.getGames(page, size, search);
+        List<Game> games = gameService.getGames(page, size, search, categoriesIds);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }
