@@ -1,17 +1,19 @@
 import { FC } from "react";
 import Avatar from "./Avatar";
 import { Button } from "./ui/button";
+import { User } from "@/types/User";
 
 interface Props {
   onClick?: () => void;
+  user: User;
 }
 
-const UserDetails: FC<Props> = ({ onClick }) => {
+const UserDetails: FC<Props> = ({ onClick, user }) => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex w-full flex-row items-center gap-6">
         <Avatar user={{ firstname: "Aleksandra", lastname: "Serwicka" }} className="h-40 w-40" />
-        <div className="h-max-h flex-grow rounded-lg bg-card p-5 text-xl">Jan Kowalski</div>
+        <div className="h-max-h flex-grow rounded-lg bg-card p-5 text-xl"> {user.firstname}, {user.lastname}</div>
       </div>
       <div className="flex flex-col gap-6">
         <div className="h-max-h w-6/12 rounded-lg bg-card p-2">675787780</div>
