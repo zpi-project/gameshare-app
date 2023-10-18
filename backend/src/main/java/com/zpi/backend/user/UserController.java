@@ -1,6 +1,5 @@
 package com.zpi.backend.user;
 
-import com.zpi.backend.security.InvalidTokenException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +19,17 @@ public class UserController {
 
     @GetMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<GetUserDTO> getUser(@RequestParam String email, Authentication authentication) throws UserDoesNotExistException {
-        GetUserDTO userInfo = userService.getUserInfoByEmail(email);
+    public ResponseEntity<GetMyUserDTO> getUser(Authentication authentication) throws UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        GetMyUserDTO userInfo = new GetMyUserDTO().fromUser(user);
+        return ResponseEntity.status(HttpStatus.OK).body(userInfo);
+    }
+
+
+    @GetMapping("/user/{googleId}")
+    public ResponseEntity<GetUserDTO> getUserById(@PathVariable("googleId") String googleId) throws UserDoesNotExistException {
+        User user = userService.getUserByGoogleId(googleId);
+        GetUserDTO userInfo = new GetUserDTO().fromUser(user);
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
 
@@ -31,5 +39,12 @@ public class UserController {
     public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws  UserAlreadyExistsException {
         userService.registerUser(updateUserDTO, authentication);
         return ResponseEntity.status(HttpStatus.CREATED).body("User created");
+    }
+
+    @PutMapping("/user")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<String> updateUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UndefinedUserException, UserDoesNotExistException {
+        userService.updateUser(authentication, updateUserDTO);
+        return ResponseEntity.status(HttpStatus.OK).body("User updated");
     }
 }
