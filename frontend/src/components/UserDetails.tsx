@@ -12,7 +12,10 @@ const UserDetails: FC<Props> = ({ onClick, user }) => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex w-full flex-row items-center gap-6">
-        <Avatar user={{ firstname: "Aleksandra", lastname: "Serwicka" }} className="h-40 w-40" />
+        <Avatar
+          user={{ firstname: "Aleksandra", lastname: "Serwicka" }}
+          className="h-40 w-40  text-5xl"
+        />
         <div className="h-max-h flex-grow rounded-lg bg-card p-5 text-xl">
           {" "}
           {user.firstname}, {user.lastname}
