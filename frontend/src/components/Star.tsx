@@ -1,13 +1,17 @@
 import { FC } from "react";
-import { Star as StarIcon} from "lucide-react";
+import { Star as StarIcon } from "lucide-react";
 
 interface Props {
-    filled: boolean
+  filled: boolean;
 }
 
-const Star: FC<Props> = ({filled}) => {
+const Star: FC<Props> = ({ filled }) => {
   return (
-    <StarIcon size={24} color="hsl(var(--primary))" fill={filled ? "hsl(var(--primary))" : "hsl(var(--card))"}/>
+    <StarIcon
+      size={24}
+      color="hsl(var(--primary))"
+      fill={filled ? "hsl(var(--primary))" : "hsl(var(--card))"}
+    />
   );
 };
 

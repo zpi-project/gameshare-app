@@ -9,7 +9,10 @@ const Settings: FC = () => {
     <div className="flex h-full flex-row gap-6">
       <div className="flex h-full max-w-2xl flex-grow flex-col gap-6 rounded-lg">
         <div className="min-h-[330px] rounded-lg bg-section p-4">
-          <UserDetails onClick={() => setIsModalOpen(true)} user={{ firstname: "Aleksandra", lastname: "Serwicka" }}  />
+          <UserDetails
+            onClick={() => setIsModalOpen(true)}
+            user={{ firstname: "Aleksandra", lastname: "Serwicka" }}
+          />
           {isModalOpen && <EditPersonalDataModal />}
         </div>
         <div className="flex rounded-lg bg-section">
