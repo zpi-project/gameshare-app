@@ -26,8 +26,6 @@ public class WebSecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(googleTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers(GET, "/auth").authenticated()
-                        .requestMatchers(GET,"/user").authenticated()
                         .anyRequest().permitAll());
 
         return http.build();
