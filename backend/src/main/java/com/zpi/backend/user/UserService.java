@@ -25,12 +25,10 @@ public class UserService {
         return this.userRepository.findByGoogleId(googleId).orElseThrow(()->new UserDoesNotExistException("User not found"));
     }
 
-
     public void updateUser(Authentication authentication,UpdateUserDTO updateUserDTO) throws UserDoesNotExistException {
         User user = getUser(authentication);
         user.update(updateUserDTO);
         this.userRepository.save(user);
-
     }
 
     public void registerUser(UpdateUserDTO updateUserDTO, Authentication authentication) throws UserAlreadyExistsException {

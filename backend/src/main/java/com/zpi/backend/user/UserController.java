@@ -16,7 +16,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
     @GetMapping("/user")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<GetMyUserDTO> getUser(Authentication authentication) throws UserDoesNotExistException {
@@ -25,14 +24,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
 
-
     @GetMapping("/user/{googleId}")
     public ResponseEntity<GetUserDTO> getUserById(@PathVariable("googleId") String googleId) throws UserDoesNotExistException {
         User user = userService.getUserByGoogleId(googleId);
         GetUserDTO userInfo = new GetUserDTO(user);
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
-
 
     @PostMapping("/user")
     @PreAuthorize("isAuthenticated()")
