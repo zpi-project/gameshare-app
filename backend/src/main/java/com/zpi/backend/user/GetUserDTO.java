@@ -11,13 +11,12 @@ public class GetUserDTO {
     private double locationLongitude;
     private double locationLatitude;
 
-    public GetUserDTO fromUser(User user) {
+    public GetUserDTO(User user) {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.phoneNumber = user.getPhoneNumber();
         this.avatarLink = user.getAvatarLink();
         this.locationLongitude = user.getLocationLongitude();
         this.locationLatitude = user.getLocationLatitude();
-        return this;
     }
 }

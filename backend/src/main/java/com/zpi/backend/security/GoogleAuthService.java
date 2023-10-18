@@ -15,7 +15,7 @@ import java.util.Collections;
 @Service
 public class GoogleAuthService {
 
-    @Value("${client_id}")
+    @Value("${CLIENT_ID}")
     private String clientId;
 
     public GoogleIdToken validateToken(String token) throws GeneralSecurityException,ResponseStatusException, IOException {

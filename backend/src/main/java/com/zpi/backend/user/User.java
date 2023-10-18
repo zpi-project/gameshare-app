@@ -21,33 +21,25 @@ public class User{
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
-
-    @Column(name = "googleId",length = 255,nullable = false,unique = true)
+    @Column(nullable = false,unique = true)
     private String googleId;
 
-    @Column(name= "uuid",length = 255,nullable = false,unique = true)
+    @Column(nullable = false,unique = true)
     private String uuid = UUID.randomUUID().toString();
 
-    @Column(name = "email",length = 255,nullable = false)
+    @Column(nullable = false)
     private String email;
 
-    @Column(name = "firstName",length = 255,nullable = true)
     private String firstName;
 
-    @Column(name = "lastName",length = 255,nullable = true)
     private String lastName;
 
-    @Column(name = "phoneNumber",length = 255,nullable = true)
     private String phoneNumber;
 
-
-    @Column(name = "locationLongitude",nullable = true)
     private double locationLongitude;
 
-    @Column(name = "locationLatitude",nullable = true)
     private double locationLatitude;
 
-    @Column(name = "avatarLink",length = 255,nullable = true)
     private String avatarLink;
 
     @ManyToOne

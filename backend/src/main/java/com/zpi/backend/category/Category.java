@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "Categories")
+@Table(name = "categories")
 public class Category {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -20,7 +20,6 @@ public class Category {
     public Category(long id){
         this.id = id;
     }
-
     public static Category toCategory(long id){
         return new Category(id);
     }

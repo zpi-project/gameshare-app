@@ -34,7 +34,6 @@ public class ExceptionController {
                         .withDetail(ex.getClass().getSimpleName()));
     }
 
-
     @ResponseBody
     @ExceptionHandler(ResponseStatusException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
@@ -85,7 +84,6 @@ public class ExceptionController {
                         .withTitle(HttpStatus.I_AM_A_TEAPOT.name())
                         .withDetail(ex.getClass().getSimpleName()));
     }
-
 
     // Categories
     @ResponseBody
