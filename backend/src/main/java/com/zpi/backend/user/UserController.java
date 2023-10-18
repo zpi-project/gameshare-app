@@ -21,7 +21,7 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<GetMyUserDTO> getUser(Authentication authentication) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
-        GetMyUserDTO userInfo = new GetMyUserDTO().fromUser(user);
+        GetMyUserDTO userInfo = new GetMyUserDTO(user);
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
 
@@ -29,7 +29,7 @@ public class UserController {
     @GetMapping("/user/{googleId}")
     public ResponseEntity<GetUserDTO> getUserById(@PathVariable("googleId") String googleId) throws UserDoesNotExistException {
         User user = userService.getUserByGoogleId(googleId);
-        GetUserDTO userInfo = new GetUserDTO().fromUser(user);
+        GetUserDTO userInfo = new GetUserDTO(user);
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
 

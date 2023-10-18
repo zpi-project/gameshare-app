@@ -18,7 +18,7 @@ public class Role {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long Id;
 
-    @Column(name = "name",length = 255,nullable = false,unique = true)
+    @Column(nullable = false,unique = true)
     private String name;
 
     @Override
@@ -28,7 +28,6 @@ public class Role {
         Role role = (Role) o;
         return getId() != null && Objects.equals(getId(), role.getId());
     }
-
     public Role(String name) {
         this.name = name;
     }
