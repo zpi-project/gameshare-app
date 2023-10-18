@@ -21,18 +21,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 @ControllerAdvice
 public class ExceptionController {
-    @ResponseBody
-    @ExceptionHandler(UserAlreadyExistsException.class)
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    ResponseEntity UAEHandler(UserAlreadyExistsException ex) {
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
-                .body(Problem.create()
-                        .withStatus(HttpStatus.BAD_REQUEST)
-                        .withTitle(HttpStatus.BAD_REQUEST.name())
-                        .withDetail(ex.getClass().getSimpleName()));
-    }
 
     @ResponseBody
     @ExceptionHandler(ResponseStatusException.class)
@@ -58,6 +46,33 @@ public class ExceptionController {
                         .withStatus(HttpStatus.BAD_REQUEST)
                         .withTitle(HttpStatus.BAD_REQUEST.name())
                         .withDetail(ex.getMessage()));
+    }
+
+    @ResponseBody
+    @ExceptionHandler(IllegalAccessException.class)
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
+    ResponseEntity IAEHandler(IllegalAccessException ex) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.FORBIDDEN)
+                        .withTitle(HttpStatus.FORBIDDEN.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+
+    //    User
+    @ResponseBody
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity UAEHandler(UserAlreadyExistsException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.BAD_REQUEST)
+                        .withTitle(HttpStatus.BAD_REQUEST.name())
+                        .withDetail(ex.getClass().getSimpleName()));
     }
 
     @ExceptionHandler(UserDoesNotExistException.class)
