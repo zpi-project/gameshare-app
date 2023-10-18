@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "Games")
+@Table(name = "games")
 public class Game {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)

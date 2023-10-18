@@ -18,11 +18,6 @@ public class RoleService {
         return roleRepository.getRoleByName(name);
     }
 
-    public Role addRole(Role role) {
-        roleRepository.save(role);
-        return role;
-    }
-
     public Role getRole(Authentication authentication) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
         return user.getRole();

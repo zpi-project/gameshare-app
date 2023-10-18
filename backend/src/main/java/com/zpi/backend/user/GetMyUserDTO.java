@@ -2,9 +2,11 @@ package com.zpi.backend.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class GetMyUserDTO {
     private String firstName;
     private String lastName;
@@ -14,11 +16,7 @@ public class GetMyUserDTO {
     private String email;
     private String avatarLink;
 
-    public GetMyUserDTO() {
-
-    }
-
-    public GetMyUserDTO fromUser(User user){
+    public GetMyUserDTO(User user){
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.phoneNumber = user.getPhoneNumber();
@@ -26,6 +24,5 @@ public class GetMyUserDTO {
         this.locationLongitude = user.getLocationLongitude();
         this.email = user.getEmail();
         this.avatarLink = user.getAvatarLink();
-        return this;
     }
 }
