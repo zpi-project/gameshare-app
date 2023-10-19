@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { URLS } from "@/constants/urls";
-import { roleState } from "@/state/role";
 import { Home, CalendarDays, Search, Dices } from "lucide-react";
 import { useRecoilValue } from "recoil";
+import { roleState } from "@/state/role";
+import { URLS } from "@/constants/urls";
 import SideNavLink from "./SideNavLink";
 import UserItem from "./UserItem";
 

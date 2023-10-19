@@ -1,7 +1,9 @@
 package com.zpi.backend.exceptionHandlers;
 
-
-
+import com.zpi.backend.category.CategoryAlreadyExistsException;
+import com.zpi.backend.category.CategoryDoesNotExistException;
+import com.zpi.backend.game.GameAlreadyExistsException;
+import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.user.UndefinedUserException;
 import com.zpi.backend.user.UserAlreadyExistsException;
 import com.zpi.backend.user.UserDoesNotExistException;
@@ -31,7 +33,6 @@ public class ExceptionController {
                         .withDetail(ex.getClass().getSimpleName()));
     }
 
-
     @ResponseBody
     @ExceptionHandler(ResponseStatusException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
@@ -46,6 +47,18 @@ public class ExceptionController {
     }
 
     @ResponseBody
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    ResponseEntity BREHandler(BadRequestException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.BAD_REQUEST)
+                        .withTitle(HttpStatus.BAD_REQUEST.name())
+                        .withDetail(ex.getMessage()));
+    }
+
     @ExceptionHandler(UserDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity UDNEHandler(UserDoesNotExistException ex) {
@@ -71,6 +84,56 @@ public class ExceptionController {
                         .withDetail(ex.getClass().getSimpleName()));
     }
 
+    // Categories
+    @ResponseBody
+    @ExceptionHandler(CategoryAlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity CAEHandler(CategoryAlreadyExistsException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
+                        .withTitle(HttpStatus.CONFLICT.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
 
+    @ResponseBody
+    @ExceptionHandler(CategoryDoesNotExistException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity CDNEHandler(CategoryDoesNotExistException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(HttpStatus.NOT_FOUND.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
 
+    // Games
+    @ResponseBody
+    @ExceptionHandler(GameAlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity GAEHandler(GameAlreadyExistsException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
+                        .withTitle(HttpStatus.CONFLICT.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+    @ResponseBody
+    @ExceptionHandler(GameDoesNotExistException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity GNEHandler(GameDoesNotExistException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(HttpStatus.NOT_FOUND.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
 }

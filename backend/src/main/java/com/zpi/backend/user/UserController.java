@@ -1,6 +1,5 @@
 package com.zpi.backend.user;
 
-import com.zpi.backend.security.InvalidTokenException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
-
-import static org.springframework.web.servlet.function.ServerResponse.status;
 
 @RestController
 @AllArgsConstructor
@@ -19,32 +16,32 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
     @GetMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<GetUserDTO> getUser(@RequestParam String email, Authentication authentication) throws UserDoesNotExistException {
-        GetUserDTO userInfo = userService.getUserInfoByEmail(email);
+    public ResponseEntity<GetMyUserDTO> getUser(Authentication authentication) throws UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        GetMyUserDTO userInfo = new GetMyUserDTO(user);
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
+    }
+
+    @GetMapping("/user/{googleId}")
+    public ResponseEntity<GetUserDTO> getUserById(@PathVariable("googleId") String googleId) throws UserDoesNotExistException {
+        User user = userService.getUserByGoogleId(googleId);
+        GetUserDTO userInfo = new GetUserDTO(user);
+        return ResponseEntity.status(HttpStatus.OK).body(userInfo);
+    }
+
+    @PostMapping("/user")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws  UserAlreadyExistsException {
+        userService.registerUser(updateUserDTO, authentication);
+        return ResponseEntity.status(HttpStatus.CREATED).body("User created");
     }
 
     @PutMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> updateUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UserDoesNotExistException, InvalidTokenException, UndefinedUserException {
-        User user = (User) authentication.getPrincipal();
-        userService.updateUser(user,updateUserDTO);
-        return ResponseEntity.status(HttpStatus.OK).body("");
+    public ResponseEntity<String> updateUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UndefinedUserException, UserDoesNotExistException {
+        userService.updateUser(authentication, updateUserDTO);
+        return ResponseEntity.status(HttpStatus.OK).body("User updated");
     }
-
-
-
-
-    @PostMapping("/register")
-    @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<RegisteredUserDTO> register(Authentication authentication) throws UserAlreadyExistsException, InvalidTokenException, UndefinedUserException {
-        System.out.println("... called register");
-        User user = (User) authentication.getPrincipal();
-        RegisteredUserDTO registeredUserDTO = userService.registerUser(user);
-        return ResponseEntity.status(HttpStatus.OK).body(registeredUserDTO);
-    }
-
 }
