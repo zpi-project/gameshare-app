@@ -5,8 +5,7 @@ import Opinion from "./Opinion";
 
 const Opinions: FC = () => {
   return (
-    // probably some loop
-    <ScrollArea className="h-full">
+    <ScrollArea>
       <div className="flex flex-col gap-4 p-4">
         <Opinion
           opinion={{

@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Opinion as OpinionType } from "@/types/Opinion";
 import { getFullname } from "@/utils/user";
 import Avatar from "./Avatar";
@@ -10,9 +11,9 @@ interface Props {
 
 const Opinion: FC<Props> = ({ opinion }) => {
   const [showAll, setshowAll] = useState(false);
+  const { t } = useTranslation();
 
   const handleClick = () => {
-    // 👇️ toggle isActive state on click
     setshowAll(current => !current);
   };
 
@@ -24,15 +25,22 @@ const Opinion: FC<Props> = ({ opinion }) => {
           <div className="text-primary">{getFullname(opinion.user)}</div>
           <Stars count={opinion.stars} />
         </div>
-        <div
-          className={
-            showAll
-              ? "min-h-8 line-clamp-none h-fit pr-2 text-xs italic"
-              : "min-h-8 line-clamp-2 pr-2 text-xs italic"
-          }
-          onClick={handleClick}
-        >
-          {opinion.description}
+        <div className="min-h-8 pr-2 text-xs italic">
+          {showAll ? (
+            opinion.description
+          ) : (
+            <>
+              {opinion.description.slice(0, 200)}
+              {opinion.description.length > 200 && (
+                <>
+                  <span>... </span>
+                  <button className="inline text-xs italic text-secondary" onClick={handleClick}>
+                    {t("seeMore")}
+                  </button>
+                </>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
