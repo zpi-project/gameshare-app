@@ -1,5 +1,8 @@
 package com.zpi.backend.GameInstance;
 
+import com.zpi.backend.game.GameDoesNotExistException;
+import com.zpi.backend.user.User;
+import com.zpi.backend.user.UserDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,24 +22,43 @@ public class GameInstanceController {
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity addGameInstance(GameInstanceDTO newGameInstanceDTO){
+    public ResponseEntity addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
+            throws UserDoesNotExistException, GameDoesNotExistException {
+        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
+        GameInstance gameInstance = gameInstanceService.addGameInstance(newGameInstanceDTO, googleId);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(null);
+                .body(gameInstance);
     }
 
     @PutMapping
     @PreAuthorize("isAuthenticated()")
     @RequestMapping("/{uuid}")
-    public ResponseEntity updateGameInstance(@PathVariable String uuid, GameInstanceDTO newGameInstanceDTO,
-                                             Authentication authentication){
+    public ResponseEntity updateGameInstance(@PathVariable String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO,
+                                             Authentication authentication) throws GameInstanceDoesNotExistException {
+        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
+        GameInstance gameInstance = gameInstanceService.updateGameInstance(uuid, updatedGameInstanceDTO, googleId);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(null);
+                .body(gameInstance);
     }
 
     @DeleteMapping
     @PreAuthorize("isAuthenticated()")
     @RequestMapping("/{uuid}")
-    public ResponseEntity deleteGameInstance(@PathVariable String uuid, Authentication authentication){
+    public ResponseEntity deleteGameInstance(@PathVariable String uuid, Authentication authentication)
+            throws GameInstanceDoesNotExistException {
+        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
+        gameInstanceService.deleteGameInstance(uuid, googleId);
+        return ResponseEntity.status(HttpStatus.OK)
+                .build();
+    }
+
+    @PatchMapping
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping("/availability")
+    public ResponseEntity changeAvailability(@RequestParam String uuid, @RequestParam boolean value, Authentication authentication)
+            throws GameInstanceStatusException, GameInstanceDoesNotExistException {
+        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
+        gameInstanceService.changeAvailability(uuid, value, googleId);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
     }

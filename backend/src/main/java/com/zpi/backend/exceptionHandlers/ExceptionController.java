@@ -1,5 +1,8 @@
 package com.zpi.backend.exceptionHandlers;
 
+import com.zpi.backend.GameInstance.GameInstance;
+import com.zpi.backend.GameInstance.GameInstanceDoesNotExistException;
+import com.zpi.backend.GameInstance.GameInstanceStatusException;
 import com.zpi.backend.category.CategoryAlreadyExistsException;
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.game.GameAlreadyExistsException;
@@ -134,6 +137,34 @@ public class ExceptionController {
                 .body(Problem.create()
                         .withStatus(HttpStatus.NOT_FOUND)
                         .withTitle(HttpStatus.NOT_FOUND.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+
+    // Game Instance
+
+    @ResponseBody
+    @ExceptionHandler(GameInstanceDoesNotExistException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity GINEHandler(GameInstanceDoesNotExistException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(HttpStatus.NOT_FOUND.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+
+    @ResponseBody
+    @ExceptionHandler(GameInstanceStatusException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity GISHandler(GameInstanceStatusException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
+                        .withTitle(HttpStatus.CONFLICT.name())
                         .withDetail(ex.getClass().getSimpleName()));
     }
 }
