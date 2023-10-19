@@ -24,9 +24,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
 
-    @GetMapping("/user/{googleId}")
-    public ResponseEntity<GetUserDTO> getUserById(@PathVariable("googleId") String googleId) throws UserDoesNotExistException {
-        User user = userService.getUserByGoogleId(googleId);
+    @GetMapping("/user/{uuid}")
+    public ResponseEntity<GetUserDTO> getUserById(@PathVariable("uuid") String googleId) throws UserDoesNotExistException {
+        User user = userService.getUserByUUID(googleId);
         GetUserDTO userInfo = new GetUserDTO(user);
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
