@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Divide } from "lucide-react";
 import { User } from "@/types/User";
 import Avatar from "./Avatar";
 import { Button } from "./ui/button";
@@ -6,9 +7,10 @@ import { Button } from "./ui/button";
 interface Props {
   onClick?: () => void;
   user: User;
+  showEdit: boolean;
 }
 
-const UserDetails: FC<Props> = ({ onClick, user }) => {
+const UserDetails: FC<Props> = ({ onClick, user, showEdit }) => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex w-full flex-row items-center gap-6">
@@ -25,9 +27,13 @@ const UserDetails: FC<Props> = ({ onClick, user }) => {
         <div className="h-max-h w-6/12 rounded-lg bg-card p-2">675787780</div>
         <div className="flex w-full flex-row justify-between">
           <div className="h-max-h w-6/12 rounded-lg bg-card p-2">ul.Łąkowa 4</div>
-          <Button onClick={onClick} className="w-32">
-            Edit
-          </Button>
+          {showEdit ? (
+            <Button onClick={onClick} className="w-32">
+              Edit
+            </Button>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
     </div>

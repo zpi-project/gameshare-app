@@ -5,6 +5,7 @@ import { URLS } from "@/constants/urls";
 import Dashboard from "@/pages/Dashboard";
 import Error from "@/pages/Error";
 import Settings from "@/pages/Settings";
+import User from "@/pages/User";
 import App from "./App";
 import "./index.css";
 
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${URLS.USER}/:id`,
-        element: <div>user page</div>,
+        element: <User />,
       },
       {
         path: URLS.SETTINGS,

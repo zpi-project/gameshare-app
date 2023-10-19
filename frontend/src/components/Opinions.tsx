@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { LOREM } from "@/constants/lorem";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import Opinion from "./Opinion";
 
 const Opinions: FC = () => {

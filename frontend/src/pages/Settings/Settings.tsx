@@ -12,6 +12,7 @@ const Settings: FC = () => {
           <UserDetails
             onClick={() => setIsModalOpen(true)}
             user={{ firstname: "Aleksandra", lastname: "Serwicka" }}
+            showEdit={true}
           />
           {isModalOpen && <EditPersonalDataModal />}
         </div>
