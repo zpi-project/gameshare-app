@@ -1,4 +1,4 @@
-package com.zpi.backend.GameInstance;
+package com.zpi.backend.gameInstance;
 
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.user.User;
@@ -13,16 +13,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+
 @RestController
-@RequestMapping("game-instance")
+@RequestMapping("/game-instances")
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class GameInstanceController {
     @Autowired
     GameInstanceService gameInstanceService;
 
-    @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
+    @RequestMapping(method = POST)
+    public ResponseEntity<GameInstance> addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
             throws UserDoesNotExistException, GameDoesNotExistException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         GameInstance gameInstance = gameInstanceService.addGameInstance(newGameInstanceDTO, googleId);
@@ -30,10 +32,9 @@ public class GameInstanceController {
                 .body(gameInstance);
     }
 
-    @PutMapping
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping("/{uuid}")
-    public ResponseEntity updateGameInstance(@PathVariable String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO,
+    @RequestMapping(value = "/{uuid}", method = PUT)
+    public ResponseEntity<GameInstance> updateGameInstance(@PathVariable String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO,
                                              Authentication authentication) throws GameInstanceDoesNotExistException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         GameInstance gameInstance = gameInstanceService.updateGameInstance(uuid, updatedGameInstanceDTO, googleId);
@@ -41,9 +42,8 @@ public class GameInstanceController {
                 .body(gameInstance);
     }
 
-    @DeleteMapping
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping("/{uuid}")
+    @RequestMapping(value = "/{uuid}", method = DELETE)
     public ResponseEntity deleteGameInstance(@PathVariable String uuid, Authentication authentication)
             throws GameInstanceDoesNotExistException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
@@ -52,9 +52,8 @@ public class GameInstanceController {
                 .build();
     }
 
-    @PatchMapping
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping("/availability")
+    @RequestMapping(value = "/availability", method = PATCH)
     public ResponseEntity changeAvailability(@RequestParam String uuid, @RequestParam boolean value, Authentication authentication)
             throws GameInstanceStatusException, GameInstanceDoesNotExistException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
@@ -63,40 +62,37 @@ public class GameInstanceController {
                 .build();
     }
 
-    @GetMapping
     // TODO Is authenticated?
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping("/{uuid}")
-    public ResponseEntity getGameInstance(@PathVariable String uuid, Authentication authentication){
+    @RequestMapping(value = "/{uuid}", method = GET)
+    public ResponseEntity<GameInstance> getGameInstance(@PathVariable String uuid, Authentication authentication){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(null);
     }
 
-    @GetMapping
     // TODO Is authenticated?
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping("/{userUuid}")
-    public ResponseEntity getUserGameInstances(@PathVariable String userUuid, @RequestParam int size, @RequestParam int page,
+    @RequestMapping(value = "/{userUuid}", method = GET)
+    public ResponseEntity<List<GameInstance>> getUserGameInstances(@PathVariable String userUuid, @RequestParam int size, @RequestParam int page,
                                                Authentication authentication){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(null);
     }
 
-    @GetMapping
     // TODO Is authenticated?
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity getGameInstances(@RequestParam int size, @RequestParam int page, @RequestParam Optional<List<Long>> categoryIds,
+    @RequestMapping(method = GET)
+    public ResponseEntity<List<GameInstance>>  getGameInstances(@RequestParam int size, @RequestParam int page, @RequestParam Optional<List<Long>> categoryIds,
                                            @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber,
-                                           @RequestParam Optional<String> name, @RequestParam double latitude,
-                                           @RequestParam double longitude, Authentication authentication){
+                                           @RequestParam double latitude, @RequestParam double longitude, Authentication authentication){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(null);
     }
 
-    @GetMapping
     // TODO Is authenticated?
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity getGameInstancesByName(@RequestParam int size, @RequestParam int page, @RequestParam Optional<String> name,
+    @RequestMapping(value="/{name}",method = GET)
+    public ResponseEntity<List<GameInstance>>  getGameInstancesByName(@PathVariable String name,    @RequestParam int size, @RequestParam int page,
                                                  @RequestParam double latitude, @RequestParam double longitude,
                                                  Authentication authentication){
         return ResponseEntity.status(HttpStatus.OK)

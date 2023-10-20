@@ -1,4 +1,4 @@
-package com.zpi.backend.GameInstance;
+package com.zpi.backend.gameInstanceImage;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

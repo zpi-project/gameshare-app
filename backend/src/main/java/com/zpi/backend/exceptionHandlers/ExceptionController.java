@@ -1,8 +1,7 @@
 package com.zpi.backend.exceptionHandlers;
 
-import com.zpi.backend.GameInstance.GameInstance;
-import com.zpi.backend.GameInstance.GameInstanceDoesNotExistException;
-import com.zpi.backend.GameInstance.GameInstanceStatusException;
+import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
+import com.zpi.backend.gameInstance.GameInstanceStatusException;
 import com.zpi.backend.category.CategoryAlreadyExistsException;
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.game.GameAlreadyExistsException;

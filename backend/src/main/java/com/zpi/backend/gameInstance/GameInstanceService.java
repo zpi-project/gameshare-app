@@ -1,8 +1,9 @@
-package com.zpi.backend.GameInstance;
+package com.zpi.backend.gameInstance;
 
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.game.GameService;
+import com.zpi.backend.gameInstanceImage.GameInstanceImageRepository;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
@@ -17,6 +18,8 @@ public class GameInstanceService {
     @Autowired
     GameInstanceRepository gameInstanceRepository;
     @Autowired
+    GameInstanceImageRepository gameInstanceImageRepository;
+    @Autowired
     UserService userService;
     @Autowired
     GameService gameService;
@@ -26,6 +29,7 @@ public class GameInstanceService {
         Game game = gameService.getGame(newGameInstanceDTO.getGameId());
         GameInstance newGameInstance = new GameInstance(newGameInstanceDTO, game, user);
         gameInstanceRepository.save(newGameInstance);
+        gameInstanceImageRepository.saveAll(newGameInstance.getImages());
         return newGameInstance;
     }
 

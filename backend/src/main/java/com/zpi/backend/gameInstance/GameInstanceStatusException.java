@@ -1,4 +1,4 @@
-package com.zpi.backend.GameInstance;
+package com.zpi.backend.gameInstance;
 
 public class GameInstanceStatusException extends Exception{
     public GameInstanceStatusException(String message) {

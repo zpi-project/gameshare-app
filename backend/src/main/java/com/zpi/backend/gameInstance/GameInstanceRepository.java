@@ -1,4 +1,4 @@
-package com.zpi.backend.GameInstance;
+package com.zpi.backend.gameInstance;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
