@@ -27,11 +27,9 @@ public class UserController {
     }
 
     // TODO Add @Operation - summary and description
-// Shouldn't it me uuid not google id?
-    @GetMapping("/user/{googleId}")
-    public ResponseEntity<GetUserDTO> getUserById(@PathVariable("googleId") String googleId) throws UserDoesNotExistException {
-        System.out.println("... called getUserById");
-        User user = userService.getUserByGoogleId(googleId);
+    @GetMapping("/user/{uuid}")
+    public ResponseEntity<GetUserDTO> getUserById(@PathVariable("uuid") String googleId) throws UserDoesNotExistException {
+        User user = userService.getUserByUUID(googleId);
         GetUserDTO userInfo = new GetUserDTO(user);
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
