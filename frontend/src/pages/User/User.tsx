@@ -8,13 +8,14 @@ import AddUserOpinionModal from "./AddUserOpinionModal";
 const User: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
+
   return (
     <div className="flex h-full flex-row gap-6">
       <div className="flex max-w-2xl flex-col items-stretch gap-6 rounded-lg">
         <div className="flex-grow rounded-lg bg-section p-4">
           <UserDetails
             onClick={() => setIsModalOpen(true)}
-            user={{ firstname: "Aleksandra", lastname: "Serwicka" }}
+            user={{ firstName: "Aleksandra", lastName: "Serwicka" }}
             showEdit={false}
           />
           {isModalOpen && <AddUserOpinionModal />}

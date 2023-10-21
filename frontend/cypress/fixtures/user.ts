@@ -1,6 +1,5 @@
 import { User } from "@/types/User";
 
-
 export const user: User = {
   firstName: "Ola",
   lastName: "Serwicka",

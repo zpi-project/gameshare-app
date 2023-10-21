@@ -14,6 +14,7 @@ const LoginButton: FC = () => {
         if (res.credential) {
           setRole("user");
           setToken(res.credential);
+          console.log(res.credential);
         }
         setToken(res.credential ?? null);
       }}
