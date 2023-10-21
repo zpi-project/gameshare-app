@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import secureLocalStorage from "react-secure-storage";
 import { googleLogout } from "@react-oauth/google";
 import { useSetRecoilState } from "recoil";
 import { roleState } from "@/state/role";
@@ -14,6 +15,7 @@ const LogoutButton: FC = () => {
     googleLogout();
     setToken(null);
     setRole("guest");
+    secureLocalStorage.removeItem("token");
   };
 
   return (

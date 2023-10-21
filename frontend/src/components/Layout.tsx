@@ -1,5 +1,6 @@
 import { FC, useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { roleState } from "@/state/role";
 import { tokenState } from "@/state/token";
@@ -9,6 +10,13 @@ import SideNav from "./SideNav";
 const Layout: FC = () => {
   const setRole = useSetRecoilState(roleState);
   const token = useRecoilValue(tokenState);
+
+  useEffect(() => {
+    const value = secureLocalStorage.getItem("token");
+    console.log("layout render + token", value);
+    // get secure token,
+    // based on that - get role from backend, if no, display register form
+  }, []);
 
   useEffect(() => {
     const tokenInterceptor = Api.interceptors.request.use(config => {

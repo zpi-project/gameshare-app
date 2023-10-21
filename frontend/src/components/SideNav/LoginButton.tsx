@@ -1,4 +1,5 @@
 import { FC } from "react";
+import secureLocalStorage from "react-secure-storage";
 import { GoogleLogin } from "@react-oauth/google";
 import { useSetRecoilState } from "recoil";
 import { roleState } from "@/state/role";
@@ -14,8 +15,9 @@ const LoginButton: FC = () => {
         if (res.credential) {
           setRole("user");
           setToken(res.credential);
+          secureLocalStorage.setItem("token", res.credential);
         }
-        setToken(res.credential ?? null);
+        // setToken(res.credential ?? null);
       }}
       width="256px"
       onError={() => {
