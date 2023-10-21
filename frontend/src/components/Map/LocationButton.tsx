@@ -10,7 +10,7 @@ import { locationState } from "@/state/location";
 
 const LocationButton: FC = () => {
   const setLocation = useSetRecoilState(locationState);
-  const { coords, isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
+  const { isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
     positionOptions: {
       enableHighAccuracy: false,
     },
@@ -25,9 +25,7 @@ const LocationButton: FC = () => {
   });
 
   const onClick = () => {
-    if (coords) {
-      console.log(coords);
-    }
+    map.locate();
   };
 
   return (
