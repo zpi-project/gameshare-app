@@ -12,7 +12,6 @@ interface AvatarProps {
 }
 
 const Avatar: FC<AvatarProps> = ({ user, className = "", iconClassName = "" }) => {
-  console.log(user);
   return (
     <UiAvatar className={cn("", className)}>
       {user !== undefined ? (

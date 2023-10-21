@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { user } from "@cypress/fixtures/user";
 import Opinions from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
 import { Button } from "@/components/ui/button";
@@ -15,8 +16,9 @@ const User: FC = () => {
         <div className="flex-grow rounded-lg bg-section p-4">
           <UserDetails
             onClick={() => setIsModalOpen(true)}
-            user={{ firstName: "Aleksandra", lastName: "Serwicka" }}
+            user={user}
             showEdit={false}
+            isLoading={false}
           />
           {isModalOpen && <AddUserOpinionModal />}
         </div>

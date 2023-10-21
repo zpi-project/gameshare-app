@@ -9,13 +9,15 @@ interface Props {
   onClick?: () => void;
   user?: User;
   showEdit: boolean;
+  isLoading: boolean;
 }
 
-const UserDetails: FC<Props> = ({ onClick, user, showEdit }) => {
+const UserDetails: FC<Props> = ({ onClick, user, showEdit, isLoading }) => {
   const { t } = useTranslation();
 
   return (
     <div className="flex flex-col gap-6">
+      {isLoading && <>show loading skeletons</>}
       {user && (
         <>
           <div className="flex w-full flex-row items-center gap-6">
