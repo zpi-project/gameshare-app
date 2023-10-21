@@ -5,6 +5,7 @@ import { RecoilRoot } from "recoil";
 import Layout from "@/components/Layout";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import "@/i18n/i18n";
+import { Toaster } from "@/components/ui/toaster";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ const App: FC = () => {
         <QueryClientProvider client={queryClient}>
           <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
             <Layout />
+            <Toaster />
           </ThemeProvider>
         </QueryClientProvider>
       </GoogleOAuthProvider>
