@@ -14,6 +14,10 @@ const pl: typeof en = {
   language: "Język",
   pl: "polski",
   en: "angielski",
+
+  addOpinion: "Dodaj opinię",
+  seeMore: "Rozwiń",
+  edit: "Edytuj",
 };
 
 export default pl;
