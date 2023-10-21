@@ -13,7 +13,7 @@ const Dashboard: FC = () => {
   return (
     <div className="flex h-full w-full flex-row gap-6">
       <div className="flex-grow overflow-hidden rounded-lg bg-section">
-        <Map />
+        <Map geolocationButton={true} />
       </div>
       <div className="w-[550px] rounded-lg bg-section p-4">
         space for search games, longitude: {coords?.longitude}, latitude: {coords?.latitude}
