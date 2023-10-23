@@ -27,5 +27,4 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "where GC.category_id in :categories and accepted = true and G.name like %:name%",
             nativeQuery = true)
     List<Game>  searchAllByNameContainsAndAcceptedAndCategoriesIn(@Param("name") String name, @Param("categories") List<Integer> categoriesIds, Pageable pageable);
-
 }

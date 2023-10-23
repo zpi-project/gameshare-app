@@ -1,5 +1,6 @@
 package com.zpi.backend.user;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,10 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    // TODO Add @Operation - summary and description
+    @Operation(
+            summary = "Get user",
+            description = "Returns the user's own data"
+    )
     @GetMapping("/user")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<GetMyUserDTO> getUser(Authentication authentication) throws UserDoesNotExistException {
@@ -26,15 +30,22 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
 
-    // TODO Add @Operation - summary and description
+    @Operation(
+            summary = "Get user by UUID",
+            description = "Returns users data using UUID"
+    )
     @GetMapping("/user/{uuid}")
     public ResponseEntity<GetUserDTO> getUserById(@PathVariable("uuid") String googleId) throws UserDoesNotExistException {
+        System.out.println("... called getUserByUUID");
         User user = userService.getUserByUUID(googleId);
         GetUserDTO userInfo = new GetUserDTO(user);
         return ResponseEntity.status(HttpStatus.OK).body(userInfo);
     }
 
-    // TODO Add @Operation - summary and description
+    @Operation(
+            summary = "Register a new user",
+            description = "Creates a new user in the database using authentication data, including first name, last name, phone number, and location."
+    )
     @PostMapping("/user")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws  UserAlreadyExistsException {
@@ -43,10 +54,13 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body("User created");
     }
 
-    // TODO Add @Operation - summary and description
+    @Operation(
+            summary = "Update user's data",
+            description = "Modifies user data, including first name, last name, phone number, and location."
+    )
     @PutMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> updateUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UndefinedUserException, UserDoesNotExistException {
+    public ResponseEntity<String> updateUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UserDoesNotExistException {
         System.out.println("... called updateUser");
         userService.updateUser(authentication, updateUserDTO);
         return ResponseEntity.status(HttpStatus.OK).body("User updated");

@@ -2,8 +2,6 @@ package com.zpi.backend.game;
 
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.exceptionHandlers.BadRequestException;
-import com.zpi.backend.role.Role;
-import com.zpi.backend.role.RoleService;
 import com.zpi.backend.user.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +59,9 @@ public class GameController {
                 .body(games);
     }
 
-//    TODO Check admin role here
     @Operation(
             summary = "Accept a game by id",
-            description = "Change accept value of a Game identified by its id to True. Only Admin is allowed to do this operation."
+            description = "Changes accept value of a Game identified by its id to True. Only Admin is allowed to do this operation."
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/accept/{id}", method = RequestMethod.PUT)
