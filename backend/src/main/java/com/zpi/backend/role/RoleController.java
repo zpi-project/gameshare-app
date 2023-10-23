@@ -16,6 +16,7 @@ public class RoleController {
 
     private final RoleService roleService;
 
+    // TODO Add @Operation - summary and description
     @GetMapping("/role")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<RoleDTO> getRole(Authentication authentication) throws UserDoesNotExistException {
