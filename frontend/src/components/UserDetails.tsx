@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
+import { Skeleton } from "@/components/ui/skeleton";
 import Avatar from "./Avatar";
 import { Button } from "./ui/button";
 
@@ -16,8 +17,19 @@ const UserDetails: FC<Props> = ({ onClick, user, showEdit, isLoading }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col gap-6">
-      {isLoading && <>show loading skeletons</>}
+    <div className="flex h-full flex-col gap-6">
+      {isLoading && (
+        <>
+          <div className="flex w-full flex-row items-center gap-6">
+            <Skeleton className="h-40 w-40 rounded-full" />
+            <Skeleton className="h-max-h flex-grow rounded-lg p-5" />
+          </div>
+          <div className="flex flex-col gap-6">
+            <Skeleton className="h-10 w-6/12 rounded-lg p-2" />
+            <Skeleton className="h-10 w-6/12 rounded-lg p-2" />
+          </div>
+        </>
+      )}
       {user && (
         <>
           <div className="flex w-full flex-row items-center gap-6">
