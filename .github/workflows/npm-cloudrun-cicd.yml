@@ -17,7 +17,7 @@ jobs:
       contents: write
       checks: write
       issues: read
-      pull-request: write
+      pull-requests: write
     env:
       WORKING_DIR: ./frontend
     steps:
