@@ -12,4 +12,8 @@ export default {
   language: "Language",
   pl: "Polish",
   en: "English",
+
+  addOpinion: "Add opinion",
+  seeMore: "See more",
+  edit: "Edit",
 };
