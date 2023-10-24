@@ -7,6 +7,7 @@ import { roleState } from "@/state/role";
 import { tokenState } from "@/state/token";
 import Api from "@/api/Api";
 import SideNav from "./SideNav";
+import RegisterUserForm from "./UserForm/RegisterUserForm";
 
 const Layout: FC = () => {
   const setRole = useSetRecoilState(roleState);
@@ -51,6 +52,7 @@ const Layout: FC = () => {
     <div className=" flex h-screen w-screen flex-row gap-6 p-6">
       <SideNav />
       <div className="flex-grow">
+        <RegisterUserForm />
         <Outlet />
       </div>
     </div>
