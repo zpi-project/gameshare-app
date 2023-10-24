@@ -10,7 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetMyUserDTO {
-    private UUID uuid;
+    private String uuid;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -20,7 +20,7 @@ public class GetMyUserDTO {
     private String avatarLink;
 
     public GetMyUserDTO(User user){
-        this.uuid = UUID.fromString(user.getUuid());
+        this.uuid =user.getUuid();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.phoneNumber = user.getPhoneNumber();

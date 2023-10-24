@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Data
 public class GetUserDTO {
-    private UUID uuid;
+    private String uuid;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -15,7 +15,7 @@ public class GetUserDTO {
     private double locationLatitude;
 
     public GetUserDTO(User user) {
-        this.uuid = UUID.fromString(user.getUuid());
+        this.uuid = user.getUuid();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.phoneNumber = user.getPhoneNumber();
