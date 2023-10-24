@@ -21,6 +21,10 @@ const pl: typeof en = {
 
   locationDisabledTooltip: "Włącz opcję lokalizacji w przeglądarce i odśwież stronę.",
   locationNotAvailableTooltip: "Twoja przeglądarka internetowa nie wspiera opcji lokalizacji",
+
+  fillInPersonalData: "Podaj swoje dane osobowe",
+  markLocation: "Zaznacz swoją lokalizację na mapie",
+  submit: "Zapisz",
 };
 
 export default pl;

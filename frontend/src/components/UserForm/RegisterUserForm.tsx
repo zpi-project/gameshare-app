@@ -1,11 +1,12 @@
 import { FC } from "react";
+import UserForm from "./UserForm";
 
-const UserForm: FC = () => {
+const RegisterUserForm: FC = () => {
   return (
-    <div className="w-screen backdrop-blur-lg fixed top-0 left-0 flex h-screen items-center justify-center z-[1000] ">
-      <div className="">user form</div>
+    <div className="fixed left-0 top-0 z-[1000] flex h-screen w-screen items-center justify-center backdrop-blur-sm ">
+      <UserForm />
     </div>
   );
 };
 
-export default UserForm;
+export default RegisterUserForm;

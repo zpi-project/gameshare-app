@@ -19,4 +19,8 @@ export default {
 
   locationDisabledTooltip: "Allow localization in your browser settings and refresh page.",
   locationNotAvailableTooltip: "Your browser does not support Geolocation API.",
+
+  fillInPersonalData: "Fill in your personal data",
+  markLocation: "Mark your location on map",
+  submit: "Submit",
 };

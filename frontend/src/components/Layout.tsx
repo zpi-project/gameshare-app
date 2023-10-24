@@ -6,8 +6,8 @@ import { useSetRecoilState, useRecoilState } from "recoil";
 import { roleState } from "@/state/role";
 import { tokenState } from "@/state/token";
 import Api from "@/api/Api";
+import { RegisterUserForm } from "@/components/UserForm";
 import SideNav from "./SideNav";
-import RegisterUserForm from "./UserForm/RegisterUserForm";
 
 const Layout: FC = () => {
   const setRole = useSetRecoilState(roleState);
