@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -25,6 +26,9 @@ const pl: typeof en = {
   fillInPersonalData: "Podaj swoje dane osobowe",
   markLocation: "Zaznacz swoją lokalizację na mapie",
   submit: "Zapisz",
+  firstName: "Imię",
+  lastName: "Nazwisko",
+  phoneNumber: "Nr telefonu",
 };
 
 export default pl;

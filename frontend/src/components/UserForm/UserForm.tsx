@@ -4,20 +4,14 @@ import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-  Form,
-} from "@/components/ui/form";
+import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+
 
 const UserForm: FC = () => {
   const { t } = useTranslation();
   const formSchema = z.object({
-    username: z.string().min(2, {
+    firstName: z.string().min(2, {
       message: "Username must be at least 2 characters.",
     }),
   });
@@ -25,7 +19,7 @@ const UserForm: FC = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      firstName: "",
     },
   });
 

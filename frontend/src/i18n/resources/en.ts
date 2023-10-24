@@ -23,4 +23,7 @@ export default {
   fillInPersonalData: "Fill in your personal data",
   markLocation: "Mark your location on map",
   submit: "Submit",
+  firstName: "First name",
+  lastName: "Last name",
+  phoneNumber: "Phone number",
 };

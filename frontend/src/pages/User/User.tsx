@@ -8,6 +8,7 @@ import AddUserOpinionModal from "./AddUserOpinionModal";
 const User: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
+
   return (
     <div className="flex h-full flex-row gap-6">
       <div className="flex max-w-2xl flex-col items-stretch gap-6 rounded-lg">
