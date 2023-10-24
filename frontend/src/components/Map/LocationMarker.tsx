@@ -7,7 +7,7 @@ import { locationState } from "@/state/location";
 const LocationMarker: FC = () => {
   const [location, setLocation] = useRecoilState(locationState);
 
-  const map = useMapEvents({
+  useMapEvents({
     click(e) {
       const mapContainer = e.target._container;
       const clickedOnMap = e.originalEvent.target === mapContainer;
@@ -17,12 +17,6 @@ const LocationMarker: FC = () => {
       }
     },
   });
-
-  useEffect(() => {
-    if (location) {
-      map.flyTo(location, map.getZoom());
-    }
-  }, [location]);
 
   const pinIcon = divIcon({
     html: `
