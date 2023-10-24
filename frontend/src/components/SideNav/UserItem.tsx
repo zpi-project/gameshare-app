@@ -26,7 +26,7 @@ const UserItem: FC<UserItemProps> = ({ className = "" }) => {
       <PopoverTrigger>
         <Avatar
           className={cn(
-            "h-14 w-14 rounded-lg transition-all duration-300 hover:bg-muted",
+            "h-12 w-12 rounded-lg transition-all duration-300 hover:bg-muted",
             className,
           )}
           iconClassName={match !== null ? "bg-primary" : ""}
