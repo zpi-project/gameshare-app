@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 import Layout from "@/components/Layout";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "@/components/ui/toaster";
 import "@/i18n/i18n";
 
 const queryClient = new QueryClient();
@@ -15,6 +16,7 @@ const App: FC = () => {
         <QueryClientProvider client={queryClient}>
           <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
             <Layout />
+            <Toaster />
           </ThemeProvider>
         </QueryClientProvider>
       </GoogleOAuthProvider>

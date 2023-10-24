@@ -18,6 +18,9 @@ const pl: typeof en = {
   addOpinion: "Dodaj opinię",
   seeMore: "Rozwiń",
   edit: "Edytuj",
+
+  locationDisabledTooltip: "Włącz opcję lokalizacji w przeglądarce i odśwież stronę.",
+  locationNotAvailableTooltip: "Twoja przeglądarka internetowa nie wspiera opcji lokalizacji",
 };
 
 export default pl;
