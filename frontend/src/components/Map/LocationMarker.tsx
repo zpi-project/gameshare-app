@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { Marker, useMapEvents } from "react-leaflet";
 import { divIcon } from "leaflet";
 import { useRecoilState } from "recoil";

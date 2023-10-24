@@ -3,7 +3,7 @@ import { useGeolocated } from "react-geolocated";
 import { MapContainer, TileLayer, ZoomControl, useMapEvents } from "react-leaflet";
 import { LocationEvent } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { locationState } from "@/state/location";
 import LocationButton from "./LocationButton";
 import LocationMarker from "./LocationMarker";
