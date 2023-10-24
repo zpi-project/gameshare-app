@@ -21,7 +21,7 @@ const Settings: FC = () => {
 
   return (
     <div className="flex h-full flex-row gap-6">
-      <div className="flex h-full max-w-2xl flex-grow flex-col gap-6 rounded-lg">
+      <div className="flex h-full w-1/2 flex-grow flex-col gap-6 rounded-lg">
         <div className="h-2/5 rounded-lg bg-section p-4">
           <UserDetails
             onClick={() => setIsModalOpen(true)}
@@ -35,7 +35,7 @@ const Settings: FC = () => {
           <Opinions />
         </div>
       </div>
-      <div className="flex-grow rounded-lg bg-section p-4">space for search games</div>
+      <div className="w-1/2 flex-grow rounded-lg bg-section p-4">space for search games</div>
     </div>
   );
 };

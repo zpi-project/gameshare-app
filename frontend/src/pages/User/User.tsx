@@ -1,6 +1,8 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { user } from "@cypress/fixtures/user";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { UserApi } from "@/api/UserApi";
 import Opinions from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
 import { Button } from "@/components/ui/button";
@@ -10,15 +12,27 @@ const User: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
 
+  const { id = "" } = useParams();
+  const {
+    data: user,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => UserApi.getUserByUUID(id),
+  });
+
+  console.log(user, isLoading, isError);
+
   return (
     <div className="flex h-full flex-row gap-6">
-      <div className="flex max-w-2xl flex-col items-stretch gap-6 rounded-lg">
+      <div className="flex w-1/2 flex-col items-stretch gap-6 rounded-lg">
         <div className="flex-grow rounded-lg bg-section p-4">
           <UserDetails
             onClick={() => setIsModalOpen(true)}
             user={user}
             showEdit={false}
-            isLoading={false}
+            isLoading={isLoading}
           />
           {isModalOpen && <AddUserOpinionModal />}
         </div>
@@ -29,7 +43,7 @@ const User: FC = () => {
           </Button>
         </div>
       </div>
-      <div className="flex-grow rounded-lg bg-section p-4">space for search games</div>
+      <div className="w-1/2 flex-grow rounded-lg bg-section p-4">space for search games</div>
     </div>
   );
 };

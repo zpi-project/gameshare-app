@@ -6,4 +6,9 @@ export class UserApi {
     const { data: user } = await Api.get<User>("/user");
     return user;
   }
+
+  static async getUserByUUID(uuid: string) {
+    const { data: user } = await Api.get<User>(`/user/${uuid}`);
+    return user;
+  }
 }
