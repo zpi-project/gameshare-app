@@ -19,4 +19,10 @@ export default {
 
   locationDisabledTooltip: "Allow localization in your browser settings and refresh page.",
   locationNotAvailableTooltip: "Your browser does not support Geolocation API.",
+
+  userErrorTitle: "Error",
+  userErrorDescription: "User with given ID doesn't exists",
+
+  settingsErrorTitle: "Error",
+  settingsErrorDescription: "We couldn't load your user data",
 };

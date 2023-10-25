@@ -6,23 +6,29 @@ import { UserApi } from "@/api/UserApi";
 import Opinions from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 import AddUserOpinionModal from "./AddUserOpinionModal";
+import { URLS } from "@/constants/urls";
+import { useNavigate } from "react-router-dom";
 
 const User: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const { id = "" } = useParams();
   const {
     data: user,
     isLoading,
-    isError,
   } = useQuery({
     queryKey: ["user"],
     queryFn: () => UserApi.getUserByUUID(id),
+    onError: () => {
+      toast({ title: t("userErrorTitle"), description: t("userErrorDescription"), variant: "destructive" });
+      navigate(URLS.DASHBOARD)
+    },
   });
-
-  console.log(user, isLoading, isError);
 
   return (
     <div className="flex h-full flex-row gap-6">
