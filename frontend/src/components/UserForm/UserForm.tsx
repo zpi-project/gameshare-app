@@ -65,7 +65,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onFormSubmit)}
-        className="m-4 rounded-md bg-background p-6 before:shadow-lg md:w-[80%]"
+        className="m-4 rounded-md bg-background p-6 shadow-lg md:w-[70%]"
       >
         {type === "register" && (
           <>
@@ -74,7 +74,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
           </>
         )}
         <div className="flex min-h-[500px] w-full flex-row gap-10">
-          <section className="border-r border-primary pr-10">
+          <section className="border-r border-primary pr-10 flex-grow max-w-[500px]">
             <h2 className="text-2xl uppercase tracking-wider text-primary">
               {t("fillInPersonalData")}
             </h2>
@@ -130,7 +130,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
               />
             </div>
           </section>
-          <section>
+          <section className="flex-grow">
             <h2 className="text-2xl uppercase tracking-wider text-primary">{t("markLocation")}</h2>
             <div className="mt-10 h-[500px] w-full overflow-hidden rounded-md border">
               <Map>
