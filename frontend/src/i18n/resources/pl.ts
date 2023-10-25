@@ -32,7 +32,6 @@ const pl: typeof en = {
   fieldIsRequired: "{{field}} jest wymagane.",
   fieldIsRequired_male: "{{field}} jest wymagany.",
   fieldIsRequired_female: "{{field}} jest wymagana.",
-
 };
 
 export default pl;

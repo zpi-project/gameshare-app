@@ -18,6 +18,7 @@ import {
   Form,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import "./UserForm.css";
 
 interface UserFormProps {
   onSubmit: () => void;
@@ -107,12 +108,6 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
                   <FormControl>
                     <PhoneInput
                       country={"pl"}
-                      inputStyle={{
-                        width: "100%",
-                        backgroundColor: "hsl(var(--section))",
-                        border: "none",
-                        height: "40px",
-                      }}
                       // value={this.state.phone}
                       // onChange={phone => this.setState({ phone })}
                     />
@@ -126,7 +121,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
         </section>
         <section>
           <h2 className="text-2xl uppercase tracking-wider text-primary">{t("markLocation")}</h2>
-          <div className="mt-10 h-[500px] w-full overflow-hidden rounded-md border">
+          <div className="mt-10 h-[500px] w-[500px] w-full overflow-hidden rounded-md border">
             <Map>
               <LocationMarker />
               <LocationButton />

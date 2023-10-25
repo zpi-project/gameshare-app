@@ -1,0 +1,30 @@
+.react-tel-input .form-control {
+  width: 100%;
+  border: none;
+  background-color: hsl(var(--section));
+  color: hsl(var(--section-foreground));
+}
+
+.flag-dropdown {
+  background-color: hsl(var(--section));
+  color: hsl(var(--section-foreground));
+}
+
+.react-tel-input .flag-dropdown,
+.react-tel-input .flag-dropdown.open,
+.react-tel-input .country-list,
+.react-tel-input .flag-dropdown.open .selected-flag {
+  background-color: hsl(var(--section));
+  color: hsl(var(--section-foreground));
+  border: none;
+}
+
+.react-tel-input .country-list .country.highlight,
+.react-tel-input .selected-flag:hover,
+.react-tel-input .selected-flag:focus {
+  background-color: hsl(var(--card));
+}
+
+.react-tel-input .country-list .country:hover {
+  background-color: hsl(var(--background));
+}
