@@ -34,13 +34,13 @@ const pl: typeof en = {
   fieldIsRequired_female: "{{field}} jest wymagana.",
   phoneNumberIsInvalid: "Numer telefonu jest nieprawidłowy.",
 
-  tryRefreshing: "Spróbuj odświeżyć stronę",
+  tryRefreshing: "Spróbuj odświeżyć stronę.",
   userErrorTitle: "Błąd",
-  userErrorDescription: "Użytkownik z danym ID nie istnieje",
+  userErrorDescription: "Użytkownik z danym ID nie istnieje.",
   settingsErrorTitle: "Błąd",
-  settingsErrorDescription: "Nie udało nam się załadować Twoich danych",
-  registerErrorTitle: "Wystąpił błąd podczas zapisywania twoich danych",
-  registerSuccessDescription: "Pomyślnie zapisano twoje dane",
+  settingsErrorDescription: "Nie udało nam się załadować Twoich danych.",
+  registerErrorTitle: "Wystąpił błąd podczas zapisywania twoich danych.",
+  registerSuccessDescription: "Pomyślnie zapisano twoje dane.",
 
   welcomeHeader: "Witaj w GameShare!",
   welcomeDescription:
