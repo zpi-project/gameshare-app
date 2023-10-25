@@ -1,10 +1,12 @@
 package com.zpi.backend.gameInstanceImage;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.zpi.backend.gameInstance.GameInstance;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -14,6 +16,10 @@ public class GameInstanceImage {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private long id;
     private String image;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="game_instance_id", nullable=false)
+    private GameInstance gameInstance;
 
     public GameInstanceImage(String image) {
         this.image = image;
