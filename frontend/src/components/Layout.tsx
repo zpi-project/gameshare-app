@@ -1,17 +1,38 @@
 import { FC, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
+import { useQuery } from "@tanstack/react-query";
 import jwt_decode, { JwtPayload } from "jwt-decode";
 import { useSetRecoilState, useRecoilState } from "recoil";
+import { registerFormOpenState } from "@/state/registerForm";
 import { roleState } from "@/state/role";
 import { tokenState } from "@/state/token";
 import Api from "@/api/Api";
+import { RoleApi } from "@/api/role/RoleApi";
 import { RegisterUserForm } from "@/components/UserForm";
 import SideNav from "./SideNav";
 
 const Layout: FC = () => {
   const setRole = useSetRecoilState(roleState);
+  const setRegisterFormOpen = useSetRecoilState(registerFormOpenState);
   const [token, setToken] = useRecoilState(tokenState);
+
+  const { data: role } = useQuery({
+    queryKey: ["role"],
+    queryFn: RoleApi.getRole,
+    enabled: token !== null,
+    onSuccess: () => {
+      setRole("user");
+    },
+    onError: () => {
+      if (token) {
+        setRole("guest");
+        setRegisterFormOpen(true);
+      }
+    },
+  });
+
+  console.log(role);
 
   useEffect(() => {
     const token = secureLocalStorage.getItem("token");

@@ -4,15 +4,29 @@ import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "@/components/ui/form";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+  Form,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+interface UserFormProps {
+  onSubmit: () => void;
+}
 
-const UserForm: FC = () => {
+const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
+
   const formSchema = z.object({
-    firstName: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+    firstName: z.string().min(1, {
+      message: t("fieldIsRequired", { field: `${t("firstName")}` }),
+    }),
+    lastName: z.string().min(1, {
+      message: t("fieldIsRequired", { field: `${t("lastName")}` }),
     }),
   });
 
@@ -23,35 +37,64 @@ const UserForm: FC = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onFormSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
+    onSubmit();
   }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-row gap-10 rounded-md bg-section p-4 shadow-lg"
+        onSubmit={form.handleSubmit(onFormSubmit)}
+        className="flex flex-row gap-10 rounded-md bg-section p-6 shadow-lg min-h-[500px]"
       >
         <section className="border-r border-primary pr-10">
           <h2 className="text-2xl uppercase tracking-wider text-primary">
             {t("fillInPersonalData")}
           </h2>
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input placeholder="Username" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="flex flex-col gap-6 my-10">
+            <FormField
+              control={form.control}
+              name="firstName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("firstName")}</FormLabel>
+                  <FormControl>
+                    <Input placeholder={t("firstName")} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="lastName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("lastName")}</FormLabel>
+                  <FormControl>
+                    <Input placeholder={t("lastName")} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+             <FormField
+              control={form.control}
+              name="lastName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("lastName")}</FormLabel>
+                  <FormControl>
+                    <Input placeholder={t("lastName")} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
         </section>
         <section>
           <h2 className="text-2xl uppercase tracking-wider text-primary">{t("markLocation")}</h2>

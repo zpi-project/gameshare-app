@@ -26,4 +26,8 @@ export default {
   firstName: "First name",
   lastName: "Last name",
   phoneNumber: "Phone number",
+
+  fieldIsRequired: "{{field}} is required.",
+  fieldIsRequired_male: "{{field}} is required.",
+  fieldIsRequired_female: "{{field}} is required.",
 };
