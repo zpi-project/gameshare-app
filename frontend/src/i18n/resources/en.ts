@@ -30,6 +30,7 @@ export default {
   fieldIsRequired: "{{field}} is required.",
   fieldIsRequired_male: "{{field}} is required.",
   fieldIsRequired_female: "{{field}} is required.",
+  phoneNumberIsInvalid: "Phone number is incorrect.",
 
   userErrorTitle: "Error",
   userErrorDescription: "User with given ID doesn't exists",

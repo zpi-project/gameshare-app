@@ -32,6 +32,7 @@ const pl: typeof en = {
   fieldIsRequired: "{{field}} jest wymagane.",
   fieldIsRequired_male: "{{field}} jest wymagany.",
   fieldIsRequired_female: "{{field}} jest wymagana.",
+  phoneNumberIsInvalid: "Numer telefonu jest nieprawidłowy.",
 
   userErrorTitle: "Błąd",
   userErrorDescription: "Użytkownik z danym ID nie istnieje",

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { isValidPhoneNumber, parsePhoneNumber } from "libphonenumber-js";
 import { useRecoilValue } from "recoil";
 import { z } from "zod";
 import { locationState } from "@/state/location";
@@ -35,12 +36,17 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
     lastName: z.string().min(1, {
       message: t("fieldIsRequired", { field: `${t("lastName")}` }),
     }),
+    phoneNumber: z.string().refine(phoneNumber => isValidPhoneNumber("+" + phoneNumber), {
+      message: t("phoneNumberIsInvalid"),
+    }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
+      lastName: "",
+      phoneNumber: "",
     },
   });
 
@@ -101,17 +107,12 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
             />
             <FormField
               control={form.control}
-              name="lastName"
+              name="phoneNumber"
               render={({ field }) => (
                 <FormItem className="h-[80px]">
                   <FormLabel>{t("phoneNumber")}</FormLabel>
                   <FormControl>
-                    <PhoneInput
-                      country={"pl"}
-                      // value={this.state.phone}
-                      // onChange={phone => this.setState({ phone })}
-                    />
-                    {/* <Input placeholder={t("lastName")} {...field} autoComplete="false"  className="border-0 bg-section"/> */}
+                    <PhoneInput country={"pl"} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
