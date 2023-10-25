@@ -4,10 +4,11 @@ import { useTranslation } from "react-i18next";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { isValidPhoneNumber, parsePhoneNumber } from "libphonenumber-js";
+import { isValidPhoneNumber } from "libphonenumber-js";
 import { useRecoilValue } from "recoil";
 import { z } from "zod";
 import { locationState } from "@/state/location";
+import { NewUser } from "@/types/User";
 import { Map, LocationMarker, LocationButton } from "@/components/Map";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,12 +23,12 @@ import { Input } from "@/components/ui/input";
 import "./UserForm.css";
 
 interface UserFormProps {
-  onSubmit: () => void;
+  onSubmit: (user: NewUser) => void;
 }
 
 const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
-  const location = useRecoilValue(locationState);
+  const location = useRecoilValue(locationState) as number[];
 
   const formSchema = z.object({
     firstName: z.string().min(1, {
@@ -51,11 +52,12 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
   });
 
   function onFormSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-    console.log(location);
-    onSubmit();
+    onSubmit({
+      ...values,
+      phoneNumber: `+${values.phoneNumber}`,
+      locationLatitude: location[0],
+      locationLongitude: location[1],
+    });
   }
 
   return (
@@ -122,7 +124,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
         </section>
         <section>
           <h2 className="text-2xl uppercase tracking-wider text-primary">{t("markLocation")}</h2>
-          <div className="mt-10 h-[500px] w-[500px] w-full overflow-hidden rounded-md border">
+          <div className="mt-10 h-[500px] w-full overflow-hidden rounded-md border">
             <Map>
               <LocationMarker />
               <LocationButton />

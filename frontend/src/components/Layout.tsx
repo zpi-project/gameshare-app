@@ -8,7 +8,7 @@ import { registerFormOpenState } from "@/state/registerForm";
 import { roleState } from "@/state/role";
 import { tokenState } from "@/state/token";
 import Api from "@/api/Api";
-import { RoleApi } from "@/api/role/RoleApi";
+import { RoleApi } from "@/api/RoleApi";
 import { RegisterUserForm } from "@/components/UserForm";
 import SideNav from "./SideNav";
 
@@ -17,12 +17,12 @@ const Layout: FC = () => {
   const setRegisterFormOpen = useSetRecoilState(registerFormOpenState);
   const [token, setToken] = useRecoilState(tokenState);
 
-  const { data: role } = useQuery({
+  useQuery({
     queryKey: ["role"],
     queryFn: RoleApi.getRole,
     enabled: token !== null,
-    onSuccess: () => {
-      setRole("user");
+    onSuccess: ({ name }) => {
+      setRole(name);
     },
     onError: () => {
       if (token) {
@@ -31,8 +31,6 @@ const Layout: FC = () => {
       }
     },
   });
-
-  console.log(role);
 
   useEffect(() => {
     const token = secureLocalStorage.getItem("token");

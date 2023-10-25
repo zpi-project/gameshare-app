@@ -16,11 +16,11 @@ const User: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
-
   const { id = "" } = useParams();
+
   const { data: user, isLoading } = useQuery({
     queryKey: ["user"],
-    queryFn: () => UserApi.getUserByUUID(id),
+    queryFn: () => UserApi.getByUUID(id),
     onError: () => {
       toast({
         title: t("userErrorTitle"),
