@@ -1,13 +1,13 @@
 import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
 import Opinions from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
-import EditPersonalDataModal from "./EditPersonalDataModal";
 import { useToast } from "@/components/ui/use-toast";
-import { URLS } from "@/constants/urls";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import EditPersonalDataModal from "./EditPersonalDataModal";
 
 const Settings: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,15 +15,16 @@ const Settings: FC = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
 
-  const {
-    data: user,
-    isLoading,
-  } = useQuery({
+  const { data: user, isLoading } = useQuery({
     queryKey: ["user"],
     queryFn: UserApi.getUser,
     onError: () => {
-      toast({ title: t("settingsErrorTitle"), description: t("settingsErrorDescription"), variant: "destructive" });
-      navigate(URLS.DASHBOARD)
+      toast({
+        title: t("settingsErrorTitle"),
+        description: t("settingsErrorDescription"),
+        variant: "destructive",
+      });
+      navigate(URLS.DASHBOARD);
     },
   });
 

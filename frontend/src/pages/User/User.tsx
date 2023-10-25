@@ -1,15 +1,15 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
 import Opinions from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import AddUserOpinionModal from "./AddUserOpinionModal";
-import { URLS } from "@/constants/urls";
-import { useNavigate } from "react-router-dom";
 
 const User: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,15 +18,16 @@ const User: FC = () => {
   const { toast } = useToast();
 
   const { id = "" } = useParams();
-  const {
-    data: user,
-    isLoading,
-  } = useQuery({
+  const { data: user, isLoading } = useQuery({
     queryKey: ["user"],
     queryFn: () => UserApi.getUserByUUID(id),
     onError: () => {
-      toast({ title: t("userErrorTitle"), description: t("userErrorDescription"), variant: "destructive" });
-      navigate(URLS.DASHBOARD)
+      toast({
+        title: t("userErrorTitle"),
+        description: t("userErrorDescription"),
+        variant: "destructive",
+      });
+      navigate(URLS.DASHBOARD);
     },
   });
 
