@@ -13,7 +13,8 @@ import java.util.List;
 @Table(name = "games")
 public class Game {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @SequenceGenerator(name="games_seq", sequenceName = "GAMES_SEQ", allocationSize=1, initialValue=1000)
+    @GeneratedValue(generator = "games_seq")
     private Long id;
 
     @Column(unique = true)
