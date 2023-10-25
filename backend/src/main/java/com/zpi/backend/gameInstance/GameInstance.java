@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class GameInstance {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(nullable = false,unique = true)
     private String uuid = UUID.randomUUID().toString();
@@ -29,7 +29,7 @@ public class GameInstance {
     private String description;
     private boolean isActive;
     // TODO What about status
-    @OneToMany
+    @OneToMany(mappedBy = "gameInstance")
     private List<GameInstanceImage> images;
 
     public GameInstance(NewGameInstanceDTO newGameInstanceDTO, Game game, User owner) {
