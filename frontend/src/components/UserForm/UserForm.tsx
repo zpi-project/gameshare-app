@@ -24,9 +24,10 @@ import "./UserForm.css";
 
 interface UserFormProps {
   onSubmit: (user: NewUser) => void;
+  type: "register" | "update";
 }
 
-const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
+const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
   const { t } = useTranslation();
   const location = useRecoilValue(locationState) as number[];
 
@@ -64,76 +65,84 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onFormSubmit)}
-        className="m-4 flex min-h-[500px] flex-row gap-10 rounded-md bg-background p-6 shadow-lg"
+        className="m-4 rounded-md bg-background p-6 before:shadow-lg md:w-[80%]"
       >
-        <section className="border-r border-primary pr-10">
-          <h2 className="text-2xl uppercase tracking-wider text-primary">
-            {t("fillInPersonalData")}
-          </h2>
-          <div className="my-10 flex flex-col gap-3">
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem className="h-[80px]">
-                  <FormLabel>{t("firstName")}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={t("firstName")}
-                      {...field}
-                      className="border-0 bg-section"
-                      autoComplete="false"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem className="h-[80px]">
-                  <FormLabel>{t("lastName")}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={t("lastName")}
-                      {...field}
-                      autoComplete="false"
-                      className="border-0 bg-section"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="phoneNumber"
-              render={({ field }) => (
-                <FormItem className="h-[80px]">
-                  <FormLabel>{t("phoneNumber")}</FormLabel>
-                  <FormControl>
-                    <PhoneInput country={"pl"} {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        </section>
-        <section>
-          <h2 className="text-2xl uppercase tracking-wider text-primary">{t("markLocation")}</h2>
-          <div className="mt-10 h-[500px] w-full overflow-hidden rounded-md border">
-            <Map>
-              <LocationMarker />
-              <LocationButton />
-            </Map>
-          </div>
-          <Button type="submit" className="float-right mt-4">
-            {t("submit")}
-          </Button>
-        </section>
+        {type === "register" && (
+          <>
+            <h1 className="mb-4 text-3xl uppercase text-primary">{t("welcomeHeader")}</h1>
+            <p className="mb-8 max-w-[900px] text-xl italic">{t("welcomeDescription")}</p>
+          </>
+        )}
+        <div className="flex min-h-[500px] w-full flex-row gap-10">
+          <section className="border-r border-primary pr-10">
+            <h2 className="text-2xl uppercase tracking-wider text-primary">
+              {t("fillInPersonalData")}
+            </h2>
+            <div className="my-10 flex flex-col gap-3">
+              <FormField
+                control={form.control}
+                name="firstName"
+                render={({ field }) => (
+                  <FormItem className="h-[80px]">
+                    <FormLabel>{t("firstName")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder={t("firstName")}
+                        {...field}
+                        className="border-0 bg-section"
+                        autoComplete="false"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="lastName"
+                render={({ field }) => (
+                  <FormItem className="h-[80px]">
+                    <FormLabel>{t("lastName")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder={t("lastName")}
+                        {...field}
+                        autoComplete="false"
+                        className="border-0 bg-section"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem className="h-[80px]">
+                    <FormLabel>{t("phoneNumber")}</FormLabel>
+                    <FormControl>
+                      <PhoneInput country={"pl"} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </section>
+          <section>
+            <h2 className="text-2xl uppercase tracking-wider text-primary">{t("markLocation")}</h2>
+            <div className="mt-10 h-[500px] w-full overflow-hidden rounded-md border">
+              <Map>
+                <LocationMarker />
+                <LocationButton />
+              </Map>
+            </div>
+            <Button type="submit" className="float-right mt-4">
+              {t("submit")}
+            </Button>
+          </section>
+        </div>
       </form>
     </Form>
   );

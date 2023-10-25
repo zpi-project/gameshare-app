@@ -39,4 +39,8 @@ export default {
   settingsErrorDescription: "We couldn't load your user data",
   registerErrorTitle: "An error occured while saving your data",
   registerSuccessDescription: "Your data was saved successfully",
+
+  welcomeHeader: "Welcome to GameShare!",
+  welcomeDescription:
+    "We're thrilled to have you on board. To enhance your gaming experience, please take a moment to provide us with some essential personal information. Let's get started!",
 };

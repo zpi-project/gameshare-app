@@ -34,7 +34,7 @@ const RegisterUserForm: FC = () => {
 
   return registerFormOpen ? (
     <div className="fixed left-0 top-0 z-[100] flex h-screen w-screen items-center justify-center bg-black/20 backdrop-blur-sm">
-      <UserForm onSubmit={(user: NewUser) => mutate(user)} />
+      <UserForm onSubmit={(user: NewUser) => mutate(user)} type="register" />
       {isLoading && <Loader />}
     </div>
   ) : (

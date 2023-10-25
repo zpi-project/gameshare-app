@@ -41,6 +41,10 @@ const pl: typeof en = {
   settingsErrorDescription: "Nie udało nam się załadować Twoich danych",
   registerErrorTitle: "Wystąpił błąd podczas zapisywania twoich danych",
   registerSuccessDescription: "Pomyślnie zapisano twoje dane",
+
+  welcomeHeader: "Witaj w GameShare!",
+  welcomeDescription:
+    "Cieszymy się, że jesteś z nami. Aby usprawnić Twoje doświadczenia z grami, prosimy o chwilę Twojego czasu, aby dostarczyć nam niezbędne dane osobowe. Zacznijmy!",
 };
 
 export default pl;
