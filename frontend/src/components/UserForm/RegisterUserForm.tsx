@@ -19,7 +19,7 @@ const RegisterUserForm: FC = () => {
     onError: () => {
       toast({
         title: t("registerErrorTitle"),
-        description: t("registerErrorDescription"),
+        description: t("tryRefreshing"),
         variant: "destructive",
       });
     },
@@ -27,7 +27,6 @@ const RegisterUserForm: FC = () => {
       console.log(data);
       setRegisterFormOpen(false);
       toast({
-        title: t("registerSuccessTitle"),
         description: t("registerSuccessDescription"),
       });
     },

@@ -32,8 +32,11 @@ export default {
   fieldIsRequired_female: "{{field}} is required.",
   phoneNumberIsInvalid: "Phone number is incorrect.",
 
+  tryRefreshing: "Try refreshing this page",
   userErrorTitle: "Error",
   userErrorDescription: "User with given ID doesn't exists",
   settingsErrorTitle: "Error",
   settingsErrorDescription: "We couldn't load your user data",
+  registerErrorTitle: "An error occured while saving your data",
+  registerSuccessDescription: "Your data was saved successfully",
 };
