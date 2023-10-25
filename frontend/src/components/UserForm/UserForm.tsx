@@ -1,8 +1,13 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRecoilValue } from "recoil";
 import { z } from "zod";
+import { locationState } from "@/state/location";
+import { Map, LocationMarker, LocationButton } from "@/components/Map";
 import { Button } from "@/components/ui/button";
 import {
   FormField,
@@ -13,8 +18,6 @@ import {
   Form,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Map from "../Map";
-import LocationMarker from "../Map/LocationMarker";
 
 interface UserFormProps {
   onSubmit: () => void;
@@ -22,6 +25,7 @@ interface UserFormProps {
 
 const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
+  const location = useRecoilValue(locationState);
 
   const formSchema = z.object({
     firstName: z.string().min(1, {
@@ -43,6 +47,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
+    console.log(location);
     onSubmit();
   }
 
@@ -50,18 +55,18 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onFormSubmit)}
-        className="flex min-h-[500px] flex-row gap-10 rounded-md bg-background p-6 shadow-lg m-4"
+        className="m-4 flex min-h-[500px] flex-row gap-10 rounded-md bg-background p-6 shadow-lg"
       >
         <section className="border-r border-primary pr-10">
           <h2 className="text-2xl uppercase tracking-wider text-primary">
             {t("fillInPersonalData")}
           </h2>
-          <div className="my-10 flex flex-col gap-6">
+          <div className="my-10 flex flex-col gap-3">
             <FormField
               control={form.control}
               name="firstName"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="h-[80px]">
                   <FormLabel>{t("firstName")}</FormLabel>
                   <FormControl>
                     <Input
@@ -79,10 +84,15 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
               control={form.control}
               name="lastName"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="h-[80px]">
                   <FormLabel>{t("lastName")}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t("lastName")} {...field} autoComplete="false"/>
+                    <Input
+                      placeholder={t("lastName")}
+                      {...field}
+                      autoComplete="false"
+                      className="border-0 bg-section"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -92,10 +102,21 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
               control={form.control}
               name="lastName"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("lastName")}</FormLabel>
+                <FormItem className="h-[80px]">
+                  <FormLabel>{t("phoneNumber")}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t("lastName")} {...field} autoComplete="false"/>
+                    <PhoneInput
+                      country={"pl"}
+                      inputStyle={{
+                        width: "100%",
+                        backgroundColor: "hsl(var(--section))",
+                        border: "none",
+                        height: "40px",
+                      }}
+                      // value={this.state.phone}
+                      // onChange={phone => this.setState({ phone })}
+                    />
+                    {/* <Input placeholder={t("lastName")} {...field} autoComplete="false"  className="border-0 bg-section"/> */}
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -108,10 +129,11 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
           <div className="mt-10 h-[500px] w-full overflow-hidden rounded-md border">
             <Map>
               <LocationMarker />
+              <LocationButton />
             </Map>
           </div>
-          <Button type="submit" className="mt-4 float-right">
-            Submit
+          <Button type="submit" className="float-right mt-4">
+            {t("submit")}
           </Button>
         </section>
       </form>

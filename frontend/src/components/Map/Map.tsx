@@ -3,10 +3,9 @@ import { useGeolocated } from "react-geolocated";
 import { MapContainer, TileLayer, ZoomControl, useMapEvents } from "react-leaflet";
 import { LocationEvent } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { locationState } from "@/state/location";
-import LocationButton from "./LocationButton";
-import LocationMarker from "./LocationMarker";
+import { registerFormOpenState } from "@/state/registerForm";
 import "./Map.css";
 
 const URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -14,9 +13,8 @@ const attribution =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 interface MapProps {
-  locationButton?: boolean;
-  locationMarker?: boolean;
   children?: JSX.Element | JSX.Element[];
+  isMainMap?: boolean;
 }
 
 const Map: FC<MapProps> = props => {
@@ -45,8 +43,9 @@ const Map: FC<MapProps> = props => {
 
 export default Map;
 
-const MapContent: FC<MapProps> = ({ locationButton, locationMarker, children }) => {
+const MapContent: FC<MapProps> = ({ children, isMainMap }) => {
   const [location, setLocation] = useRecoilState(locationState);
+  const registerFormOpen = useRecoilValue(registerFormOpenState);
 
   const map = useMapEvents({
     locationfound(e: LocationEvent) {
@@ -55,15 +54,15 @@ const MapContent: FC<MapProps> = ({ locationButton, locationMarker, children }) 
   });
 
   useEffect(() => {
-    map.flyTo(location, map.getZoom());
+    if (!(isMainMap && registerFormOpen)) {
+      map.flyTo(location, map.getZoom());
+    }
   }, [location]);
 
   return (
     <>
       <TileLayer attribution={attribution} url={URL} />
       <ZoomControl position="topright" />
-      {locationButton && <LocationButton />}
-      {locationMarker && <LocationMarker />}
       {children}
     </>
   );
