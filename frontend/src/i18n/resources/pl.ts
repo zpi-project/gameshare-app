@@ -21,6 +21,12 @@ const pl: typeof en = {
 
   locationDisabledTooltip: "Włącz opcję lokalizacji w przeglądarce i odśwież stronę.",
   locationNotAvailableTooltip: "Twoja przeglądarka internetowa nie wspiera opcji lokalizacji",
+
+  userErrorTitle: "Błąd",
+  userErrorDescription: "Użytkownik z danym ID nie istnieje",
+
+  settingsErrorTitle: "Błąd",
+  settingsErrorDescription: "Nie udało nam się załadować Twoich danych",
 };
 
 export default pl;
