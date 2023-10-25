@@ -13,6 +13,8 @@ import {
   Form,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import Map from "../Map";
+import LocationMarker from "../Map/LocationMarker";
 
 interface UserFormProps {
   onSubmit: () => void;
@@ -48,13 +50,13 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onFormSubmit)}
-        className="flex flex-row gap-10 rounded-md bg-section p-6 shadow-lg min-h-[500px]"
+        className="flex min-h-[500px] flex-row gap-10 rounded-md bg-background p-6 shadow-lg m-4"
       >
         <section className="border-r border-primary pr-10">
           <h2 className="text-2xl uppercase tracking-wider text-primary">
             {t("fillInPersonalData")}
           </h2>
-          <div className="flex flex-col gap-6 my-10">
+          <div className="my-10 flex flex-col gap-6">
             <FormField
               control={form.control}
               name="firstName"
@@ -62,7 +64,12 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
                 <FormItem>
                   <FormLabel>{t("firstName")}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t("firstName")} {...field} />
+                    <Input
+                      placeholder={t("firstName")}
+                      {...field}
+                      className="border-0 bg-section"
+                      autoComplete="false"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -75,20 +82,20 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
                 <FormItem>
                   <FormLabel>{t("lastName")}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t("lastName")} {...field} />
+                    <Input placeholder={t("lastName")} {...field} autoComplete="false"/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-             <FormField
+            <FormField
               control={form.control}
               name="lastName"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t("lastName")}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t("lastName")} {...field} />
+                    <Input placeholder={t("lastName")} {...field} autoComplete="false"/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -98,7 +105,14 @@ const UserForm: FC<UserFormProps> = ({ onSubmit }) => {
         </section>
         <section>
           <h2 className="text-2xl uppercase tracking-wider text-primary">{t("markLocation")}</h2>
-          <Button type="submit">Submit</Button>
+          <div className="mt-10 h-[500px] w-full overflow-hidden rounded-md border">
+            <Map>
+              <LocationMarker />
+            </Map>
+          </div>
+          <Button type="submit" className="mt-4 float-right">
+            Submit
+          </Button>
         </section>
       </form>
     </Form>

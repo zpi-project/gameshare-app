@@ -14,8 +14,9 @@ const attribution =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 interface MapProps {
-  locationButton: boolean;
-  locationMarker: boolean;
+  locationButton?: boolean;
+  locationMarker?: boolean;
+  children?: JSX.Element | JSX.Element[];
 }
 
 const Map: FC<MapProps> = props => {
@@ -44,7 +45,7 @@ const Map: FC<MapProps> = props => {
 
 export default Map;
 
-const MapContent: FC<MapProps> = ({ locationButton, locationMarker }) => {
+const MapContent: FC<MapProps> = ({ locationButton, locationMarker, children }) => {
   const [location, setLocation] = useRecoilState(locationState);
 
   const map = useMapEvents({
@@ -63,6 +64,7 @@ const MapContent: FC<MapProps> = ({ locationButton, locationMarker }) => {
       <ZoomControl position="topright" />
       {locationButton && <LocationButton />}
       {locationMarker && <LocationMarker />}
+      {children}
     </>
   );
 };
