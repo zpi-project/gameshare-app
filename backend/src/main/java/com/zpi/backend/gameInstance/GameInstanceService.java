@@ -27,9 +27,10 @@ public class GameInstanceService {
     public GameInstance addGameInstance(NewGameInstanceDTO newGameInstanceDTO, String googleId) throws UserDoesNotExistException, GameDoesNotExistException {
         User user = userService.getUserByGoogleId(googleId);
         Game game = gameService.getGame(newGameInstanceDTO.getGameId());
+//      Saving all photos from request
         GameInstance newGameInstance = new GameInstance(newGameInstanceDTO, game, user);
         gameInstanceRepository.save(newGameInstance);
-        gameInstanceImageRepository.saveAll(newGameInstance.getImages());
+//        gameInstanceImageRepository.saveAll(newGameInstance.getImages());
         return newGameInstance;
     }
 

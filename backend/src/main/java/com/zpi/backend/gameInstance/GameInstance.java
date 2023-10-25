@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -38,7 +39,6 @@ public class GameInstance {
         this.pricePerDay = newGameInstanceDTO.getPricePerDay();
         this.description = newGameInstanceDTO.getDescription();
         this.images = new ArrayList<>();
-        for (String imageLink:newGameInstanceDTO.getImages())
-            this.images.add(new GameInstanceImage(imageLink));
+        // TODO When should I add photos to object?
     }
 }
