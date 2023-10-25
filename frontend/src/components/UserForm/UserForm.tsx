@@ -65,7 +65,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onFormSubmit)}
-        className="m-4 rounded-md bg-background p-6 shadow-lg md:w-[70%]"
+        className="m-4 rounded-md bg-background p-6 shadow-lg  xl:w-[70%]"
       >
         {type === "register" && (
           <>
@@ -74,7 +74,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
           </>
         )}
         <div className="flex min-h-[500px] w-full flex-row gap-10">
-          <section className="border-r border-primary pr-10 flex-grow max-w-[500px]">
+          <section className="max-w-[500px] flex-grow border-r border-primary pr-10">
             <h2 className="text-2xl uppercase tracking-wider text-primary">
               {t("fillInPersonalData")}
             </h2>

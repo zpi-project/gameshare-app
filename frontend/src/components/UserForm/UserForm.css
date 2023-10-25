@@ -3,6 +3,14 @@
   border: none;
   background-color: hsl(var(--section));
   color: hsl(var(--section-foreground));
+  height: 40px;
+}
+
+.react-tel-input .form-control:focus {
+  outline: 2px solid;
+  outline-color: hsl(var(--foreground));
+  border: 3px solid;
+  border-color: hsl(var(--background));
 }
 
 .flag-dropdown {
