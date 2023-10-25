@@ -4,10 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetMyUserDTO {
+    private String uuid;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -17,6 +20,7 @@ public class GetMyUserDTO {
     private String avatarLink;
 
     public GetMyUserDTO(User user){
+        this.uuid =user.getUuid();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.phoneNumber = user.getPhoneNumber();

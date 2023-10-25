@@ -4,6 +4,7 @@ import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
 import com.zpi.backend.gameInstance.GameInstanceStatusException;
 import com.zpi.backend.category.CategoryAlreadyExistsException;
 import com.zpi.backend.category.CategoryDoesNotExistException;
+import com.zpi.backend.game.GameAlreadyAcceptedException;
 import com.zpi.backend.game.GameAlreadyExistsException;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.user.UndefinedUserException;
@@ -22,18 +23,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 @ControllerAdvice
 public class ExceptionController {
-    @ResponseBody
-    @ExceptionHandler(UserAlreadyExistsException.class)
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    ResponseEntity UAEHandler(UserAlreadyExistsException ex) {
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
-                .body(Problem.create()
-                        .withStatus(HttpStatus.BAD_REQUEST)
-                        .withTitle(HttpStatus.BAD_REQUEST.name())
-                        .withDetail(ex.getClass().getSimpleName()));
-    }
 
     @ResponseBody
     @ExceptionHandler(ResponseStatusException.class)
@@ -61,6 +50,33 @@ public class ExceptionController {
                         .withDetail(ex.getMessage()));
     }
 
+    @ResponseBody
+    @ExceptionHandler(IllegalAccessException.class)
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
+    ResponseEntity IAEHandler(IllegalAccessException ex) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.FORBIDDEN)
+                        .withTitle(HttpStatus.FORBIDDEN.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+
+    //    User
+    @ResponseBody
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity UAEHandler(UserAlreadyExistsException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.BAD_REQUEST)
+                        .withTitle(HttpStatus.BAD_REQUEST.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+
     @ExceptionHandler(UserDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity UDNEHandler(UserDoesNotExistException ex) {
@@ -77,7 +93,7 @@ public class ExceptionController {
     @ExceptionHandler(UndefinedUserException.class)
     @ResponseStatus(value = HttpStatus.I_AM_A_TEAPOT)
     ResponseEntity<Problem> UUEHandler(UndefinedUserException ex) {
-       return ResponseEntity
+        return ResponseEntity
                 .status(HttpStatus.I_AM_A_TEAPOT)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
@@ -126,6 +142,7 @@ public class ExceptionController {
                         .withTitle(HttpStatus.CONFLICT.name())
                         .withDetail(ex.getClass().getSimpleName()));
     }
+
     @ResponseBody
     @ExceptionHandler(GameDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
@@ -136,6 +153,20 @@ public class ExceptionController {
                 .body(Problem.create()
                         .withStatus(HttpStatus.NOT_FOUND)
                         .withTitle(HttpStatus.NOT_FOUND.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+
+    }
+
+    @ResponseBody
+    @ExceptionHandler(GameAlreadyAcceptedException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity GAAHandler(GameAlreadyAcceptedException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
+                        .withTitle(HttpStatus.CONFLICT.name())
                         .withDetail(ex.getClass().getSimpleName()));
     }
 

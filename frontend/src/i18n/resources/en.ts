@@ -12,4 +12,11 @@ export default {
   language: "Language",
   pl: "Polish",
   en: "English",
+
+  addOpinion: "Add opinion",
+  seeMore: "See more",
+  edit: "Edit",
+
+  locationDisabledTooltip: "Allow localization in your browser settings and refresh page.",
+  locationNotAvailableTooltip: "Your browser does not support Geolocation API.",
 };
