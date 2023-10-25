@@ -66,3 +66,4 @@ values  (1, 'Economic'),
         (693, 'Real-time'),
         (778, 'Print & Play')
         ON CONFLICT DO NOTHING;
+ALTER SEQUENCE categories_seq RESTART WITH 1000;
