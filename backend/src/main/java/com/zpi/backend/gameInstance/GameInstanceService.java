@@ -8,6 +8,8 @@ import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,7 +47,7 @@ public class GameInstanceService {
         return gameInstance;
     }
 
-    // TODO Implementation of checking reservation, what about status?
+    //TODO Implementation of checking reservation, what about status?
     public void deleteGameInstance(String uuid, String googleId) throws GameInstanceDoesNotExistException {
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(uuid, googleId);
         if (gameInstanceOptional.isEmpty())
@@ -66,22 +68,29 @@ public class GameInstanceService {
         gameInstanceRepository.save(gameInstance);
     }
 
-    public GameInstance getGameInstance(String uuid){
-        return null;
+    public GameInstance getGameInstance(String uuid) throws GameInstanceDoesNotExistException {
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuid(uuid);
+        if (gameInstanceOptional.isEmpty())
+            throw new GameInstanceDoesNotExistException("The Game Instance (uuid = "+uuid+") does not exists ");
+        return gameInstanceOptional.get();
     }
 
-    public List<GameInstance> getUserGameInstances(String userUUID, int size, int page){
-        return null;
+    public List<GameInstance> getUserGameInstances(String userUUID, int size, int page) throws UserDoesNotExistException {
+        Pageable pageable = PageRequest.of(page, size);
+        userService.getUserByUUID(userUUID);
+        return gameInstanceRepository.findByOwnerUuid(userUUID, pageable);
     }
 
     public List<GameInstance> getGameInstances(int size, int page, Optional<List<Long>> categoryIds, Optional<Integer> age,
-                                               Optional<Integer> playersNumber, Optional<String> name,
-                                               double latitude, double longitude){
+                                               Optional<Integer> playersNumber, double latitude,
+                                               double longitude){
+        Pageable pageable = PageRequest.of(page, size);
         return null;
     }
 
     public List<GameInstance> getGameInstancesByName(int size, int page, Optional<String> name, double latitude,
                                                      double longitude){
+        Pageable pageable = PageRequest.of(page, size);
         return null;
     }
 }

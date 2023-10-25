@@ -65,32 +65,33 @@ public class GameInstanceController {
     // TODO Is authenticated?
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{uuid}", method = GET)
-    public ResponseEntity<GameInstance> getGameInstance(@PathVariable String uuid, Authentication authentication){
+    public ResponseEntity<GameInstance> getGameInstance(@PathVariable String uuid)
+            throws GameInstanceDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(null);
+                .body(gameInstanceService.getGameInstance(uuid));
     }
 
     // TODO Is authenticated?
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{userUuid}", method = GET)
-    public ResponseEntity<List<GameInstance>> getUserGameInstances(@PathVariable String userUuid, @RequestParam int size, @RequestParam int page,
-                                               Authentication authentication){
+    public ResponseEntity<List<GameInstance>> getUserGameInstances(@PathVariable String userUuid,
+                                                                   @RequestParam int size, @RequestParam int page) throws UserDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(null);
+                .body(gameInstanceService.getUserGameInstances(userUuid, size, page));
     }
 
     // TODO Is authenticated?
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     @RequestMapping(method = GET)
     public ResponseEntity<List<GameInstance>>  getGameInstances(@RequestParam int size, @RequestParam int page, @RequestParam Optional<List<Long>> categoryIds,
                                            @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber,
-                                           @RequestParam double latitude, @RequestParam double longitude, Authentication authentication){
+                                           @RequestParam double latitude, @RequestParam double longitude){
         return ResponseEntity.status(HttpStatus.OK)
-                .body(null);
+                .body(gameInstanceService.getGameInstances(size, page, categoryIds, age, playersNumber, latitude, longitude));
     }
 
     // TODO Is authenticated?
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value="/{name}",method = GET)
     public ResponseEntity<List<GameInstance>>  getGameInstancesByName(@PathVariable String name,    @RequestParam int size, @RequestParam int page,
                                                  @RequestParam double latitude, @RequestParam double longitude,
