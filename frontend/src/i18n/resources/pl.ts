@@ -32,6 +32,11 @@ const pl: typeof en = {
   fieldIsRequired: "{{field}} jest wymagane.",
   fieldIsRequired_male: "{{field}} jest wymagany.",
   fieldIsRequired_female: "{{field}} jest wymagana.",
+
+  userErrorTitle: "Błąd",
+  userErrorDescription: "Użytkownik z danym ID nie istnieje",
+  settingsErrorTitle: "Błąd",
+  settingsErrorDescription: "Nie udało nam się załadować Twoich danych",
 };
 
 export default pl;

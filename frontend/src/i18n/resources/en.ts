@@ -30,4 +30,9 @@ export default {
   fieldIsRequired: "{{field}} is required.",
   fieldIsRequired_male: "{{field}} is required.",
   fieldIsRequired_female: "{{field}} is required.",
+
+  userErrorTitle: "Error",
+  userErrorDescription: "User with given ID doesn't exists",
+  settingsErrorTitle: "Error",
+  settingsErrorDescription: "We couldn't load your user data",
 };
