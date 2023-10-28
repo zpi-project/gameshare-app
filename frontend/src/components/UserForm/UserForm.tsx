@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -115,7 +115,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="phoneNumber"
                 render={({ field }) => (
@@ -125,6 +125,25 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
                       <PhoneInput country={"pl"} {...field} />
                     </FormControl>
                     <FormMessage />
+                  </FormItem>
+                )}
+              /> */}
+              <Controller
+                name="phoneNumber"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem className="h-[80px]">
+                    <FormLabel
+                      className={`${
+                        form.formState.errors.phoneNumber?.message ? "text-destructive" : ""
+                      }`}
+                    >
+                      {t("phoneNumber")}
+                    </FormLabel>
+                    <FormControl>
+                      <PhoneInput country={"pl"} value={field.value} onChange={field.onChange} />
+                    </FormControl>
+                    <FormMessage>{form.formState.errors.phoneNumber?.message ?? ""}</FormMessage>
                   </FormItem>
                 )}
               />
