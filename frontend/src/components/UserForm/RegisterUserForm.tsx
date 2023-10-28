@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
 import { useRecoilState } from "recoil";
 import { registerFormOpenState } from "@/state/registerForm";
@@ -13,6 +13,7 @@ const RegisterUserForm: FC = () => {
   const [registerFormOpen, setRegisterFormOpen] = useRecoilState(registerFormOpenState);
   const { toast } = useToast();
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: (user: NewUser) => UserApi.create(user),
@@ -23,12 +24,12 @@ const RegisterUserForm: FC = () => {
         variant: "destructive",
       });
     },
-    onSuccess: data => {
-      console.log(data);
+    onSuccess: () => {
       setRegisterFormOpen(false);
       toast({
         description: t("registerSuccessDescription"),
       });
+      queryClient.invalidateQueries(["role"]);
     },
   });
 

@@ -23,8 +23,12 @@ const Layout: FC = () => {
     queryFn: RoleApi.getRole,
     enabled: token !== null,
     retry: 1,
+    refetchOnWindowFocus: false,
     onSuccess: ({ name }) => {
       setRole(name);
+      if (token) {
+        secureLocalStorage.setItem("token", token);
+      }
     },
     onError: () => {
       if (token) {
@@ -60,15 +64,6 @@ const Layout: FC = () => {
     };
   }, [token]);
 
-  console.log(isFetching);
-
-  useEffect(() => {
-    if (token) {
-      setRole("user");
-    } else {
-      setRole("guest");
-    }
-  }, [token]);
   return (
     <div className=" flex h-screen w-screen flex-row gap-6 p-6">
       <SideNav />

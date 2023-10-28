@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useMatch } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { roleState } from "@/state/role";
+import { tokenState } from "@/state/token";
 import { URLS } from "@/constants/urls";
 import { cn } from "@/utils/tailwind";
 import Avatar from "@/components/Avatar";
@@ -20,6 +21,7 @@ const UserItem: FC<UserItemProps> = ({ className = "" }) => {
   const role = useRecoilValue(roleState);
   const match = useMatch(URLS.SETTINGS);
   const { t } = useTranslation();
+  const token = useRecoilValue(tokenState);
 
   return (
     <Popover>
@@ -43,16 +45,13 @@ const UserItem: FC<UserItemProps> = ({ className = "" }) => {
           </div>
           <LanguageToggle />
         </div>
-        {role === "guest" ? (
-          <LoginButton />
-        ) : (
-          <>
-            <Link to={URLS.SETTINGS}>
-              <Button className="w-full">{t("myProfile")}</Button>
-            </Link>
-            <LogoutButton />
-          </>
+        {!token && <LoginButton />}
+        {role !== "guest" && (
+          <Link to={URLS.SETTINGS}>
+            <Button className="w-full">{t("myProfile")}</Button>
+          </Link>
         )}
+        {token && <LogoutButton />}
       </PopoverContent>
     </Popover>
   );
