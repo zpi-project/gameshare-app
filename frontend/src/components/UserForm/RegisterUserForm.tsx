@@ -9,11 +9,14 @@ import { UserApi } from "@/api/UserApi";
 import { useToast } from "../ui/use-toast";
 import UserForm from "./UserForm";
 
-const RegisterUserForm: FC = () => {
+interface RegisterUserFormProps {
+  onRegisterSuccess: () => void;
+}
+
+const RegisterUserForm: FC<RegisterUserFormProps> = ({ onRegisterSuccess }) => {
   const [registerFormOpen, setRegisterFormOpen] = useRecoilState(registerFormOpenState);
   const { toast } = useToast();
   const { t } = useTranslation();
-  const queryClient = useQueryClient();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: (user: NewUser) => UserApi.create(user),
@@ -29,7 +32,7 @@ const RegisterUserForm: FC = () => {
       toast({
         description: t("registerSuccessDescription"),
       });
-      queryClient.invalidateQueries(["role"]);
+      onRegisterSuccess();
     },
   });
 

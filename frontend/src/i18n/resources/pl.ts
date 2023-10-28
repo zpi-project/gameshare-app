@@ -44,7 +44,7 @@ const pl: typeof en = {
 
   welcomeHeader: "Witaj w GameShare!",
   welcomeDescription:
-    "Cieszymy się, że jesteś z nami. Aby usprawnić Twoje doświadczenia z grami, prosimy o chwilę Twojego czasu, aby dostarczyć nam niezbędne dane osobowe. Zacznijmy!",
+    "Cieszymy się, że jesteś z nami. Aby ułatwić twoje korzystanie z aplikacji, prosimy o chwilę Twojego czasu, aby dostarczyć nam niezbędne dane osobowe. Zacznijmy!",
 };
 
 export default pl;

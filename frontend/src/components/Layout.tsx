@@ -18,7 +18,7 @@ const Layout: FC = () => {
   const setRegisterFormOpen = useSetRecoilState(registerFormOpenState);
   const [token, setToken] = useRecoilState(tokenState);
 
-  const { isFetching } = useQuery({
+  const { isFetching, refetch } = useQuery({
     queryKey: ["role"],
     queryFn: RoleApi.getRole,
     enabled: token !== null,
@@ -68,7 +68,7 @@ const Layout: FC = () => {
     <div className=" flex h-screen w-screen flex-row gap-6 p-6">
       <SideNav />
       <div className="flex-grow">
-        <RegisterUserForm />
+        <RegisterUserForm onRegisterSuccess={() => void refetch()} />
         <Outlet />
       </div>
       {isFetching && <Spinner />}

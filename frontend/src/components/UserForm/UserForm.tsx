@@ -115,19 +115,6 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
                   </FormItem>
                 )}
               />
-              {/* <FormField
-                control={form.control}
-                name="phoneNumber"
-                render={({ field }) => (
-                  <FormItem className="h-[80px]">
-                    <FormLabel>{t("phoneNumber")}</FormLabel>
-                    <FormControl>
-                      <PhoneInput country={"pl"} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
               <Controller
                 name="phoneNumber"
                 control={form.control}
