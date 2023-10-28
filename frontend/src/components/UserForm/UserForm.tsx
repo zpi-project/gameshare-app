@@ -11,7 +11,7 @@ import { locationState } from "@/state/location";
 import { NewUser } from "@/types/User";
 import { cn } from "@/utils/tailwind";
 import { formatPhoneNumber } from "@/utils/user";
-import { Map, LocationMarker, LocationButton } from "@/components/Map";
+import { Map, LocationMarker } from "@/components/Map";
 import { Button } from "@/components/ui/button";
 import {
   FormField,
@@ -158,7 +158,6 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
                 ]}
               >
                 <LocationMarker />
-                <LocationButton />
               </Map>
             </div>
             <Button type="submit" className="float-right mt-4">
