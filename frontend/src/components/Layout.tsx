@@ -11,22 +11,23 @@ import Api from "@/api/Api";
 import { RoleApi } from "@/api/RoleApi";
 import { RegisterUserForm } from "@/components/UserForm";
 import SideNav from "./SideNav";
+import Spinner from "./ui/Spinner";
 
 const Layout: FC = () => {
   const setRole = useSetRecoilState(roleState);
   const setRegisterFormOpen = useSetRecoilState(registerFormOpenState);
   const [token, setToken] = useRecoilState(tokenState);
 
-  useQuery({
+  const { isFetching } = useQuery({
     queryKey: ["role"],
     queryFn: RoleApi.getRole,
     enabled: token !== null,
+    retry: 1,
     onSuccess: ({ name }) => {
       setRole(name);
     },
     onError: () => {
       if (token) {
-        setRole("guest");
         setRegisterFormOpen(true);
       }
     },
@@ -59,6 +60,8 @@ const Layout: FC = () => {
     };
   }, [token]);
 
+  console.log(isFetching);
+
   useEffect(() => {
     if (token) {
       setRole("user");
@@ -66,7 +69,6 @@ const Layout: FC = () => {
       setRole("guest");
     }
   }, [token]);
-
   return (
     <div className=" flex h-screen w-screen flex-row gap-6 p-6">
       <SideNav />
@@ -74,6 +76,7 @@ const Layout: FC = () => {
         <RegisterUserForm />
         <Outlet />
       </div>
+      {isFetching && <Spinner />}
     </div>
   );
 };
