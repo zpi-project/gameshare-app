@@ -10,6 +10,7 @@ import { z } from "zod";
 import { locationState } from "@/state/location";
 import { NewUser } from "@/types/User";
 import { cn } from "@/utils/tailwind";
+import { formatPhoneNumber } from "@/utils/user";
 import { Map, LocationMarker, LocationButton } from "@/components/Map";
 import { Button } from "@/components/ui/button";
 import {
@@ -41,9 +42,11 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
     lastName: z.string().min(1, {
       message: t("fieldIsRequired", { field: `${t("lastName")}` }),
     }),
-    phoneNumber: z.string().refine(phoneNumber => isValidPhoneNumber("+" + phoneNumber), {
-      message: t("phoneNumberIsInvalid"),
-    }),
+    phoneNumber: z
+      .string()
+      .refine(phoneNumber => isValidPhoneNumber(formatPhoneNumber(phoneNumber)), {
+        message: t("phoneNumberIsInvalid"),
+      }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -59,7 +62,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
     console.log(values);
     onSubmit({
       ...values,
-      phoneNumber: `+${values.phoneNumber}`,
+      phoneNumber: formatPhoneNumber(values.phoneNumber),
       locationLatitude: location[0],
       locationLongitude: location[1],
     });
