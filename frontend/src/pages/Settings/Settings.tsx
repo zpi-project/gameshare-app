@@ -33,11 +33,7 @@ const Settings: FC = () => {
     <div className="flex h-full flex-row gap-6">
       <div className="flex h-full w-1/2 flex-grow flex-col gap-6 rounded-lg">
         <div className="h-2/5 rounded-lg bg-section p-4">
-          <UserDetails
-            user={user}
-            showEdit={true}
-            isLoading={isLoading}
-          />
+          <UserDetails user={user} showEdit={true} isLoading={isLoading} />
         </div>
         <div className="flex h-3/5 rounded-lg bg-section">
           <Opinions />

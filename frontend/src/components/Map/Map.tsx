@@ -1,25 +1,27 @@
 import { FC, useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
 import { MapContainer, TileLayer, ZoomControl, useMapEvents } from "react-leaflet";
-import { LocationEvent } from "leaflet";
+import { LatLngExpression, LocationEvent } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
 import { locationState } from "@/state/location";
 import { registerFormOpenState } from "@/state/registerForm";
 import "./Map.css";
+
 
 const URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const attribution =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 interface MapProps {
+  location: LatLngExpression;
   children?: JSX.Element | JSX.Element[];
   isMainMap?: boolean;
   autolocate?: boolean;
 }
 
 const Map: FC<MapProps> = props => {
-  const [location, setLocation] = useRecoilState(locationState);
+  const setLocation = useSetRecoilState(locationState);
   const { coords, isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
     positionOptions: {
       enableHighAccuracy: false,
@@ -35,7 +37,7 @@ const Map: FC<MapProps> = props => {
 
   return (
     <>
-      <MapContainer center={location} zoom={15} scrollWheelZoom={true} zoomControl={false}>
+      <MapContainer center={props.location} zoom={15} scrollWheelZoom={true} zoomControl={false}>
         <MapContent {...props} />
       </MapContainer>
     </>
@@ -50,7 +52,7 @@ const MapContent: FC<MapProps> = ({ children, isMainMap }) => {
 
   const map = useMapEvents({
     locationfound(e: LocationEvent) {
-      setLocation(e.latlng);
+      setLocation([e.latlng.lat, e.latlng.lng]);
     },
   });
 

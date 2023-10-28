@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LatLng } from "leaflet";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { useRecoilValue } from "recoil";
 import { z } from "zod";
@@ -27,9 +28,10 @@ interface UserFormProps {
   onSubmit: (user: NewUser) => void;
   type: "register" | "update";
   formClassName?: string;
+  user?: NewUser;
 }
 
-const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName }) => {
+const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) => {
   const { t } = useTranslation();
   const location = useRecoilValue(locationState) as number[];
 
@@ -48,13 +50,14 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
+      firstName: user?.firstName ?? "",
+      lastName: user?.lastName ?? "",
+      phoneNumber: user?.phoneNumber ?? "",
     },
   });
 
   function onFormSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
     onSubmit({
       ...values,
       phoneNumber: `+${values.phoneNumber}`,
@@ -146,7 +149,12 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName }) => {
               {type === "register" ? t("markLocation") : t("editLocation")}
             </h2>
             <div className="mt-10 h-[500px] w-full overflow-hidden rounded-md border">
-              <Map>
+              <Map
+                location={[
+                  user?.locationLatitude ?? location[0],
+                  user?.locationLongitude ?? location[1],
+                ]}
+              >
                 <LocationMarker />
                 <LocationButton />
               </Map>

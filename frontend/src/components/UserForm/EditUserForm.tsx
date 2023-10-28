@@ -1,37 +1,51 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useMutation } from "@tanstack/react-query";
-import { Loader } from "lucide-react";
-import { NewUser } from "@/types/User";
+import { User, NewUser } from "@/types/User";
 import { UserApi } from "@/api/UserApi";
+import Spinner from "@/components/ui/Spinner";
 import { DialogContent } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
 import UserForm from "./UserForm";
 
-const EditUserForm: FC = () => {
+interface EditUserFormProps {
+  user: User;
+}
+
+const EditUserForm: FC<EditUserFormProps> = ({ user }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: (user: NewUser) => UserApi.create(user),
+    mutationFn: (user: NewUser) => UserApi.update(user),
     onError: () => {
       toast({
-        title: t("registerErrorTitle"),
+        title: t("updateErrorTitle"),
         description: t("tryRefreshing"),
         variant: "destructive",
       });
     },
     onSuccess: () => {
       toast({
-        description: t("registerSuccessDescription"),
+        description: t("updateSuccessDescription"),
       });
     },
   });
 
   return (
     <DialogContent className="min-h-max min-w-max">
-      <UserForm onSubmit={(user: NewUser) => mutate(user)} type="update" />
-      {isLoading && <Loader />}
+      <UserForm
+        onSubmit={(user: NewUser) => mutate(user)}
+        type="update"
+        user={{
+          firstName: user.firstName,
+          lastName: user.lastName,
+          phoneNumber: user.phoneNumber,
+          locationLatitude: user.locationLatitude,
+          locationLongitude: user.locationLongitude,
+        }}
+      />
+      {isLoading && <Spinner />}
     </DialogContent>
   );
 };

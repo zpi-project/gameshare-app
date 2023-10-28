@@ -10,13 +10,12 @@ import { EditUserForm } from "./UserForm";
 import { Button } from "./ui/button";
 
 interface Props {
-  onClick?: () => void;
   user?: User;
   showEdit: boolean;
   isLoading: boolean;
 }
 
-const UserDetails: FC<Props> = ({ onClick, user, showEdit, isLoading }) => {
+const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
   const { t } = useTranslation();
 
   return (
@@ -52,11 +51,9 @@ const UserDetails: FC<Props> = ({ onClick, user, showEdit, isLoading }) => {
               {showEdit && (
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button onClick={onClick} className="w-32">
-                      {t("edit")}
-                    </Button>
+                    <Button className="w-32">{t("edit")}</Button>
                   </DialogTrigger>
-                  <EditUserForm />
+                  <EditUserForm user={user} />
                 </Dialog>
               )}
             </div>
