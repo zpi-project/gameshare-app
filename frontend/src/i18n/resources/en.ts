@@ -21,7 +21,9 @@ export default {
   locationNotAvailableTooltip: "Your browser does not support Geolocation API.",
 
   fillInPersonalData: "Fill in your personal data",
+  editPersonalData: "Edit your personal data",
   markLocation: "Mark your location on map",
+  editLocation: "Edit your location on map",
   submit: "Submit",
   firstName: "First name",
   lastName: "Last name",

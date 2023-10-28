@@ -9,6 +9,7 @@ import { useRecoilValue } from "recoil";
 import { z } from "zod";
 import { locationState } from "@/state/location";
 import { NewUser } from "@/types/User";
+import { cn } from "@/utils/tailwind";
 import { Map, LocationMarker, LocationButton } from "@/components/Map";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,9 +26,10 @@ import "./UserForm.css";
 interface UserFormProps {
   onSubmit: (user: NewUser) => void;
   type: "register" | "update";
+  formClassName?: string;
 }
 
-const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
+const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName }) => {
   const { t } = useTranslation();
   const location = useRecoilValue(locationState) as number[];
 
@@ -65,7 +67,10 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onFormSubmit)}
-        className="m-4 rounded-md bg-background p-6 shadow-lg  xl:w-[70%]"
+        className={cn(
+          `m-4 rounded-md bg-background p-6  ${type === "register" ? "shadow-lg xl:w-[70%]" : ""}`,
+          formClassName,
+        )}
       >
         {type === "register" && (
           <>
@@ -76,7 +81,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
         <div className="flex min-h-[500px] w-full flex-row gap-10">
           <section className="max-w-[500px] flex-grow border-r border-primary pr-10">
             <h2 className="text-2xl uppercase tracking-wider text-primary">
-              {t("fillInPersonalData")}
+              {type === "register" ? t("fillInPersonalData") : t("editPersonalData")}
             </h2>
             <div className="my-10 flex flex-col gap-3">
               <FormField
@@ -137,7 +142,9 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
             </div>
           </section>
           <section className="flex-grow">
-            <h2 className="text-2xl uppercase tracking-wider text-primary">{t("markLocation")}</h2>
+            <h2 className="text-2xl uppercase tracking-wider text-primary">
+              {type === "register" ? t("markLocation") : t("editLocation")}
+            </h2>
             <div className="mt-10 h-[500px] w-full overflow-hidden rounded-md border">
               <Map>
                 <LocationMarker />

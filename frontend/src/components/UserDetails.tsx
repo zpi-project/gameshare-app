@@ -3,8 +3,10 @@ import { useTranslation } from "react-i18next";
 import { parsePhoneNumber } from "libphonenumber-js";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import Avatar from "./Avatar";
+import { EditUserForm } from "./UserForm";
 import { Button } from "./ui/button";
 
 interface Props {
@@ -48,9 +50,14 @@ const UserDetails: FC<Props> = ({ onClick, user, showEdit, isLoading }) => {
                 {user.locationLatitude}, {user.locationLongitude}
               </div>
               {showEdit && (
-                <Button onClick={onClick} className="w-32">
-                  {t("edit")}
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button onClick={onClick} className="w-32">
+                      {t("edit")}
+                    </Button>
+                  </DialogTrigger>
+                  <EditUserForm />
+                </Dialog>
               )}
             </div>
           </div>

@@ -23,7 +23,9 @@ const pl: typeof en = {
   locationNotAvailableTooltip: "Twoja przeglądarka internetowa nie wspiera opcji lokalizacji",
 
   fillInPersonalData: "Podaj swoje dane osobowe",
+  editPersonalData: "Edytuj swoje dane osobowe",
   markLocation: "Zaznacz swoją lokalizację na mapie",
+  editLocation: "Edytuj swoją lokalizację na mapie",
   submit: "Zapisz",
   firstName: "Imię",
   lastName: "Nazwisko",

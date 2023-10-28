@@ -15,6 +15,7 @@ const attribution =
 interface MapProps {
   children?: JSX.Element | JSX.Element[];
   isMainMap?: boolean;
+  autolocate?: boolean;
 }
 
 const Map: FC<MapProps> = props => {
@@ -27,7 +28,7 @@ const Map: FC<MapProps> = props => {
   });
 
   useEffect(() => {
-    if (isGeolocationAvailable && isGeolocationAvailable && coords) {
+    if (isGeolocationAvailable && isGeolocationAvailable && coords && props.autolocate) {
       setLocation([coords.latitude, coords.longitude]);
     }
   }, [isGeolocationAvailable, isGeolocationEnabled, coords]);

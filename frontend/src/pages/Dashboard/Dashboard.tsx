@@ -5,7 +5,7 @@ const Dashboard: FC = () => {
   return (
     <div className="flex h-full w-full flex-row gap-6">
       <div className="flex-grow overflow-hidden rounded-lg bg-section">
-        <Map isMainMap>
+        <Map isMainMap autolocate>
           <LocationButton />
           <LocationMarker />
         </Map>
