@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LatLng } from "leaflet";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { useRecoilValue } from "recoil";
 import { z } from "zod";
