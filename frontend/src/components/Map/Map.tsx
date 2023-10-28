@@ -8,7 +8,6 @@ import { locationState } from "@/state/location";
 import { registerFormOpenState } from "@/state/registerForm";
 import "./Map.css";
 
-
 const URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const attribution =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { parsePhoneNumber } from "libphonenumber-js";
 import { User } from "@/types/User";
@@ -17,6 +17,7 @@ interface Props {
 
 const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
   const { t } = useTranslation();
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <div className="flex h-full flex-col gap-6">
@@ -49,11 +50,11 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
                 {user.locationLatitude}, {user.locationLongitude}
               </div>
               {showEdit && (
-                <Dialog>
+                <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                   <DialogTrigger asChild>
                     <Button className="w-32">{t("edit")}</Button>
                   </DialogTrigger>
-                  <EditUserForm user={user} />
+                  <EditUserForm user={user} onSubmit={() => setDialogOpen(false)} />
                 </Dialog>
               )}
             </div>

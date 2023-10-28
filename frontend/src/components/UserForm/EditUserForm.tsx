@@ -1,8 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRecoilValue } from "recoil";
-import { tokenState } from "@/state/token";
 import { User, NewUser } from "@/types/User";
 import { UserApi } from "@/api/UserApi";
 import Spinner from "@/components/ui/Spinner";
@@ -12,9 +10,10 @@ import UserForm from "./UserForm";
 
 interface EditUserFormProps {
   user: User;
+  onSubmit: () => void;
 }
 
-const EditUserForm: FC<EditUserFormProps> = ({ user }) => {
+const EditUserForm: FC<EditUserFormProps> = ({ user, onSubmit }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const queryClient = useQueryClient();
@@ -33,6 +32,7 @@ const EditUserForm: FC<EditUserFormProps> = ({ user }) => {
         description: t("updateSuccessDescription"),
       });
       queryClient.invalidateQueries(["user"]);
+      onSubmit();
     },
   });
 
