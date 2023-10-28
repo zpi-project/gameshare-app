@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
 import { useRecoilState } from "recoil";
 import { registerFormOpenState } from "@/state/registerForm";
