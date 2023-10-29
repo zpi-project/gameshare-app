@@ -8,6 +8,11 @@
   z-index: 10;
 }
 
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 11;
+}
+
 .dark .leaflet-layer,
 .dark .leaflet-control-zoom-in,
 .dark .leaflet-control-zoom-out,

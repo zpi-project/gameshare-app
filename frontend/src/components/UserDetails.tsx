@@ -1,20 +1,23 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { parsePhoneNumber } from "libphonenumber-js";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import Avatar from "./Avatar";
+import { EditUserForm } from "./UserForm";
 import { Button } from "./ui/button";
 
 interface Props {
-  onClick?: () => void;
   user?: User;
   showEdit: boolean;
   isLoading: boolean;
 }
 
-const UserDetails: FC<Props> = ({ onClick, user, showEdit, isLoading }) => {
+const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
   const { t } = useTranslation();
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <div className="flex h-full flex-col gap-6">
@@ -39,15 +42,20 @@ const UserDetails: FC<Props> = ({ onClick, user, showEdit, isLoading }) => {
             </div>
           </div>
           <div className="flex flex-col gap-6">
-            <div className="h-max-h w-6/12 rounded-lg bg-card p-2">{user.phoneNumber}</div>
+            <div className="h-max-h w-6/12 rounded-lg bg-card p-2">
+              {parsePhoneNumber(user.phoneNumber).formatInternational()}
+            </div>
             <div className="flex w-full flex-row justify-between">
               <div className="h-max-h w-6/12 rounded-lg bg-card p-2">
                 {user.locationLatitude}, {user.locationLongitude}
               </div>
               {showEdit && (
-                <Button onClick={onClick} className="w-32">
-                  {t("edit")}
-                </Button>
+                <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="w-32">{t("edit")}</Button>
+                  </DialogTrigger>
+                  <EditUserForm user={user} onSubmit={() => setDialogOpen(false)} />
+                </Dialog>
               )}
             </div>
           </div>

@@ -9,14 +9,19 @@ interface AvatarProps {
   user?: User;
   className?: string;
   iconClassName?: string;
+  avatarImageClassName?: string;
 }
 
-const Avatar: FC<AvatarProps> = ({ user, className = "", iconClassName = "" }) => {
+const Avatar: FC<AvatarProps> = ({ user, className, iconClassName, avatarImageClassName }) => {
   return (
     <UiAvatar className={cn("", className)}>
       {user !== undefined ? (
         <>
-          <AvatarImage alt="user avatar" src={user.avatarLink} />
+          <AvatarImage
+            alt="user avatar"
+            src={user.avatarLink}
+            className={cn("", avatarImageClassName)}
+          />
           <AvatarFallback>{getNameFirstLetters(user)}</AvatarFallback>
         </>
       ) : (

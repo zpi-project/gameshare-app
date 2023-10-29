@@ -16,11 +16,11 @@ const UserProfile: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
-
   const { id = "" } = useParams();
+
   const { data: user, isLoading } = useQuery({
     queryKey: ["user"],
-    queryFn: () => UserApi.getUserByUUID(id),
+    queryFn: () => UserApi.getByUUID(id),
     onError: () => {
       toast({
         title: t("userErrorTitle"),
@@ -35,12 +35,7 @@ const UserProfile: FC = () => {
     <div className="flex h-full flex-row gap-6">
       <div className="flex w-1/2 flex-col items-stretch gap-6 rounded-lg">
         <div className="flex-grow rounded-lg bg-section p-4">
-          <UserDetails
-            onClick={() => setIsModalOpen(true)}
-            user={user}
-            showEdit={false}
-            isLoading={isLoading}
-          />
+          <UserDetails user={user} showEdit={false} isLoading={isLoading} />
           {isModalOpen && <AddUserOpinionModal />}
         </div>
         <div className="flex h-3/5 flex-col rounded-lg bg-section p-2">
