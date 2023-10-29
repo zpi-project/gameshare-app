@@ -9,7 +9,7 @@ import UserDetails from "@/components/UserDetails";
 import { useToast } from "@/components/ui/use-toast";
 import EditPersonalDataModal from "./EditPersonalDataModal";
 
-const Settings: FC = () => {
+const MyProfile: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -49,4 +49,4 @@ const Settings: FC = () => {
   );
 };
 
-export default Settings;
+export default MyProfile;

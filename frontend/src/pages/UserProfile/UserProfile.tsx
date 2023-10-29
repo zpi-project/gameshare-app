@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import AddUserOpinionModal from "./AddUserOpinionModal";
 
-const User: FC = () => {
+const UserProfile: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -55,4 +55,4 @@ const User: FC = () => {
   );
 };
 
-export default User;
+export default UserProfile;
