@@ -20,24 +20,24 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: URLS.SEARCH_GAMES,
+        path: URLS.GAMES,
         element: <div>search games page</div>,
       },
       {
-        path: `${URLS.USER}/:id`,
+        path: `${URLS.PROFILE}/:id`,
         element: <User />,
       },
       {
-        path: URLS.SETTINGS,
+        path: URLS.MY_PROFILE,
         element: <Settings />,
       },
       {
-        path: URLS.RESERVATIONS,
+        path: URLS.MY_RESERVATIONS,
         element: <div>my reservations page</div>,
       },
       {
-        path: URLS.GAMES,
-        element: <div>my games page</div>,
+        path: URLS.MY_GAMES_INSTANCES,
+        element: <div>my game instances page</div>,
       },
     ],
   },
