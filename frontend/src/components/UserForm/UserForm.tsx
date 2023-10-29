@@ -9,7 +9,9 @@ import { useRecoilValue } from "recoil";
 import { z } from "zod";
 import { locationState } from "@/state/location";
 import { NewUser } from "@/types/User";
-import { Map, LocationMarker, LocationButton } from "@/components/Map";
+import { cn } from "@/utils/tailwind";
+import { formatPhoneNumber } from "@/utils/user";
+import { Map, LocationMarker } from "@/components/Map";
 import { Button } from "@/components/ui/button";
 import {
   FormField,
@@ -25,9 +27,11 @@ import "./UserForm.css";
 interface UserFormProps {
   onSubmit: (user: NewUser) => void;
   type: "register" | "update";
+  formClassName?: string;
+  user?: NewUser;
 }
 
-const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
+const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) => {
   const { t } = useTranslation();
   const location = useRecoilValue(locationState) as number[];
 
@@ -38,24 +42,27 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
     lastName: z.string().min(1, {
       message: t("fieldIsRequired", { field: `${t("lastName")}` }),
     }),
-    phoneNumber: z.string().refine(phoneNumber => isValidPhoneNumber("+" + phoneNumber), {
-      message: t("phoneNumberIsInvalid"),
-    }),
+    phoneNumber: z
+      .string()
+      .refine(phoneNumber => isValidPhoneNumber(formatPhoneNumber(phoneNumber)), {
+        message: t("phoneNumberIsInvalid"),
+      }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
+      firstName: user?.firstName ?? "",
+      lastName: user?.lastName ?? "",
+      phoneNumber: user?.phoneNumber ?? "",
     },
   });
 
   function onFormSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
     onSubmit({
       ...values,
-      phoneNumber: `+${values.phoneNumber}`,
+      phoneNumber: formatPhoneNumber(values.phoneNumber),
       locationLatitude: location[0],
       locationLongitude: location[1],
     });
@@ -65,7 +72,10 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onFormSubmit)}
-        className="m-4 rounded-md bg-background p-6 shadow-lg  xl:w-[70%]"
+        className={cn(
+          `m-4 rounded-md bg-background p-6  ${type === "register" ? "shadow-lg xl:w-[70%]" : ""}`,
+          formClassName,
+        )}
       >
         {type === "register" && (
           <>
@@ -76,7 +86,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
         <div className="flex min-h-[500px] w-full flex-row gap-10">
           <section className="max-w-[500px] flex-grow border-r border-primary pr-10">
             <h2 className="text-2xl uppercase tracking-wider text-primary">
-              {t("fillInPersonalData")}
+              {type === "register" ? t("fillInPersonalData") : t("editPersonalData")}
             </h2>
             <div className="my-10 flex flex-col gap-3">
               <FormField
@@ -137,11 +147,17 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type }) => {
             </div>
           </section>
           <section className="flex-grow">
-            <h2 className="text-2xl uppercase tracking-wider text-primary">{t("markLocation")}</h2>
+            <h2 className="text-2xl uppercase tracking-wider text-primary">
+              {type === "register" ? t("markLocation") : t("editLocation")}
+            </h2>
             <div className="mt-10 h-[500px] w-full overflow-hidden rounded-md border">
-              <Map>
+              <Map
+                location={[
+                  user?.locationLatitude ?? location[0],
+                  user?.locationLongitude ?? location[1],
+                ]}
+              >
                 <LocationMarker />
-                <LocationButton />
               </Map>
             </div>
             <Button type="submit" className="float-right mt-4">

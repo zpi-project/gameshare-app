@@ -16,4 +16,9 @@ export class UserApi {
     const { data } = await Api.post<User>("/user", user);
     return data;
   }
+
+  static async update(user: NewUser) {
+    const { data } = await Api.put<NewUser>("/user", user);
+    return data;
+  }
 }

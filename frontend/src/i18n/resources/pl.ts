@@ -23,7 +23,9 @@ const pl: typeof en = {
   locationNotAvailableTooltip: "Twoja przeglądarka internetowa nie wspiera opcji lokalizacji",
 
   fillInPersonalData: "Podaj swoje dane osobowe",
+  editPersonalData: "Edytuj swoje dane osobowe",
   markLocation: "Zaznacz swoją lokalizację na mapie",
+  editLocation: "Edytuj swoją lokalizację na mapie",
   submit: "Zapisz",
   firstName: "Imię",
   lastName: "Nazwisko",
@@ -40,7 +42,9 @@ const pl: typeof en = {
   settingsErrorTitle: "Błąd",
   settingsErrorDescription: "Nie udało nam się załadować Twoich danych.",
   registerErrorTitle: "Wystąpił błąd podczas zapisywania twoich danych.",
+  updateErrorTitle: "Wystąpił błąd podczas zapisywania twoich nowych danych.",
   registerSuccessDescription: "Pomyślnie zapisano twoje dane.",
+  updateSuccessDescription: "Pomyślnie zapisano twoje nowe dane.",
 
   welcomeHeader: "Witaj w GameShare!",
   welcomeDescription:

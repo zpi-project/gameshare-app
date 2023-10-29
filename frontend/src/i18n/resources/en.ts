@@ -21,7 +21,9 @@ export default {
   locationNotAvailableTooltip: "Your browser does not support Geolocation API.",
 
   fillInPersonalData: "Fill in your personal data",
+  editPersonalData: "Edit your personal data",
   markLocation: "Mark your location on map",
+  editLocation: "Edit your location on map",
   submit: "Submit",
   firstName: "First name",
   lastName: "Last name",
@@ -38,7 +40,9 @@ export default {
   settingsErrorTitle: "Error",
   settingsErrorDescription: "We couldn't load your user data.",
   registerErrorTitle: "An error occured while saving your data.",
+  updateErrorTitle: "An error occured while saving your new data.",
   registerSuccessDescription: "Your data was saved successfully.",
+  updateSuccessDescription: "Your new data was saved successfully.",
 
   welcomeHeader: "Welcome to GameShare!",
   welcomeDescription:
