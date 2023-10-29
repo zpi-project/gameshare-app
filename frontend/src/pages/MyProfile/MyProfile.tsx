@@ -8,7 +8,7 @@ import Opinions from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
 import { useToast } from "@/components/ui/use-toast";
 
-const Settings: FC = () => {
+const MyProfile: FC = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -41,4 +41,4 @@ const Settings: FC = () => {
   );
 };
 
-export default Settings;
+export default MyProfile;

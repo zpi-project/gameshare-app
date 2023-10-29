@@ -1,22 +1,24 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
-import Layout from "@/components/Layout";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import "@/i18n/i18n";
+import { queryClient } from "./queryClient";
 
-const queryClient = new QueryClient();
+interface Props {
+  children: ReactNode;
+}
 
-const App: FC = () => {
+const ComponentProviders: FC<Props> = ({ children }) => {
   return (
     <RecoilRoot>
-      <GoogleOAuthProvider clientId={import.meta.env.VITE_AUTH_CLIENT_ID}>
+      <GoogleOAuthProvider clientId={""}>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider storageKey="vite-ui-theme">
-            <Layout />
+          <ThemeProvider>
             <Toaster />
+            {children}
           </ThemeProvider>
         </QueryClientProvider>
       </GoogleOAuthProvider>
@@ -24,4 +26,4 @@ const App: FC = () => {
   );
 };
 
-export default App;
+export default ComponentProviders;

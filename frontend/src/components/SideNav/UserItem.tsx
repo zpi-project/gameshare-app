@@ -21,7 +21,7 @@ interface UserItemProps {
 }
 const UserItem: FC<UserItemProps> = ({ className = "" }) => {
   const role = useRecoilValue(roleState);
-  const match = useMatch(URLS.SETTINGS);
+  const match = useMatch(URLS.MY_PROFILE);
   const { t } = useTranslation();
   const token = useRecoilValue(tokenState);
 
@@ -58,7 +58,7 @@ const UserItem: FC<UserItemProps> = ({ className = "" }) => {
         </div>
         {!token && <LoginButton />}
         {role !== "guest" && (
-          <Link to={URLS.SETTINGS}>
+          <Link to={URLS.MY_PROFILE}>
             <Button className="w-full">{t("myProfile")}</Button>
           </Link>
         )}

@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import AddUserOpinionModal from "./AddUserOpinionModal";
 
-const User: FC = () => {
+const UserProfile: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -35,12 +35,7 @@ const User: FC = () => {
     <div className="flex h-full flex-row gap-6">
       <div className="flex w-1/2 flex-col items-stretch gap-6 rounded-lg">
         <div className="flex-grow rounded-lg bg-section p-4">
-          <UserDetails
-            onClick={() => setIsModalOpen(true)}
-            user={user}
-            showEdit={false}
-            isLoading={isLoading}
-          />
+          <UserDetails user={user} showEdit={false} isLoading={isLoading} />
           {isModalOpen && <AddUserOpinionModal />}
         </div>
         <div className="flex h-3/5 flex-col rounded-lg bg-section p-2">
@@ -55,4 +50,4 @@ const User: FC = () => {
   );
 };
 
-export default User;
+export default UserProfile;
