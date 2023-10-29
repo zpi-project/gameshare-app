@@ -12,18 +12,18 @@ const ALL_LINKS = [
     icon: <Home size={40} strokeWidth={1} />,
   },
   {
-    path: URLS.SEARCH_GAMES,
+    path: URLS.GAMES,
     icon: <Search size={40} strokeWidth={1} />,
   },
 ];
 
 const USER_LINKS = [
   {
-    path: URLS.RESERVATIONS,
+    path: URLS.MY_RESERVATIONS,
     icon: <CalendarDays size={40} strokeWidth={1} />,
   },
   {
-    path: URLS.GAMES,
+    path: URLS.MY_GAMES_INSTANCES,
     icon: <Dices size={40} strokeWidth={1} />,
   },
 ];

@@ -4,9 +4,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import Dashboard from "@/pages/Dashboard";
 import Error from "@/pages/Error";
-import Settings from "@/pages/Settings";
-import User from "@/pages/User";
+import MyProfile from "@/pages/MyProfile";
+import UserProfile from "@/pages/UserProfile";
 import App from "./App";
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -20,24 +21,46 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: URLS.SEARCH_GAMES,
+        path: URLS.GAMES,
         element: <div>search games page</div>,
       },
       {
-        path: `${URLS.USER}/:id`,
-        element: <User />,
+        path: `${URLS.GAMES}/:id`,
+        element: <div>game page</div>,
       },
       {
-        path: URLS.SETTINGS,
-        element: <Settings />,
+        path: `${URLS.GAME_INSTANCE}/:id`,
+        element: <div>game instance page</div>,
       },
       {
-        path: URLS.RESERVATIONS,
-        element: <div>my reservations page</div>,
+        path: `${URLS.PROFILE}/:id`,
+        element: <UserProfile />,
       },
       {
-        path: URLS.GAMES,
-        element: <div>my games page</div>,
+        element: <ProtectedRoute allowedRoles={["user", "admin"]} />,
+        children: [
+          {
+            path: URLS.MY_PROFILE,
+            element: <MyProfile />,
+          },
+          {
+            path: URLS.MY_RESERVATIONS,
+            element: <div>my reservations page</div>,
+          },
+          {
+            path: URLS.MY_GAMES_INSTANCES,
+            element: <div>my game instances page</div>,
+          },
+        ],
+      },
+      {
+        element: <ProtectedRoute allowedRoles={["admin"]} />,
+        children: [
+          {
+            path: URLS.GAME_REQUESTS,
+            element: <div>admin game requests</div>,
+          },
+        ],
       },
     ],
   },
