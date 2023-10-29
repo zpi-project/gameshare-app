@@ -12,7 +12,7 @@ const LocationMarker: FC = () => {
       const clickedOnMap = e.originalEvent.target === mapContainer;
 
       if (clickedOnMap) {
-        setLocation([e.latlng.lat, e.latlng.lng]);
+        setLocation && setLocation([e.latlng.lat, e.latlng.lng]);
       }
     },
   });

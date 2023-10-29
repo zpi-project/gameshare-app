@@ -11,7 +11,7 @@ const attribution =
 
 interface MapContextProps {
   location: LatLngExpression;
-  setLocation: (location: LatLngExpression) => void;
+  setLocation?: (location: LatLngExpression) => void;
 }
 
 const MapContext = createContext<MapContextProps | undefined>(undefined);
@@ -26,7 +26,7 @@ export const useMapContext = () => {
 
 interface MapProps {
   location: LatLngExpression;
-  setLocation: (location: LatLngExpression) => void;
+  setLocation?: (location: LatLngExpression) => void;
   children?: JSX.Element | JSX.Element[];
   autolocate?: boolean;
 }
@@ -42,7 +42,7 @@ const Map: FC<MapProps> = props => {
 
   useEffect(() => {
     if (isGeolocationAvailable && isGeolocationAvailable && coords && autolocate) {
-      setLocation([coords.latitude, coords.longitude]);
+      setLocation && setLocation([coords.latitude, coords.longitude]);
     }
   }, [isGeolocationAvailable, isGeolocationEnabled, coords, autolocate]);
 
@@ -65,7 +65,7 @@ const MapContent: FC<MapContentProps> = ({ children }) => {
   const { location, setLocation } = useMapContext();
   const map = useMapEvents({
     locationfound(e: LocationEvent) {
-      setLocation([e.latlng.lat, e.latlng.lng]);
+      setLocation && setLocation([e.latlng.lat, e.latlng.lng]);
     },
   });
 
