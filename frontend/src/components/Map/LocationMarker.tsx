@@ -1,11 +1,10 @@
 import { FC } from "react";
 import { Marker, useMapEvents } from "react-leaflet";
 import { divIcon } from "leaflet";
-import { useRecoilState } from "recoil";
-import { locationState } from "@/state/location";
+import { useMapContext } from "./Map";
 
 const LocationMarker: FC = () => {
-  const [location, setLocation] = useRecoilState(locationState);
+  const { location, setLocation } = useMapContext();
 
   useMapEvents({
     click(e) {

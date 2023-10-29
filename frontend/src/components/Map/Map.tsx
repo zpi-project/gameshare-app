@@ -1,26 +1,38 @@
-import { FC, useEffect } from "react";
+import { FC, createContext, useContext, useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
 import { MapContainer, TileLayer, ZoomControl, useMapEvents } from "react-leaflet";
 import { LatLngExpression, LocationEvent } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
-import { locationState } from "@/state/location";
-import { registerFormOpenState } from "@/state/registerForm";
 import "./Map.css";
 
 const URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const attribution =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
+interface MapContextProps {
+  location: LatLngExpression;
+  setLocation: (location: LatLngExpression) => void;
+}
+
+const MapContext = createContext<MapContextProps | undefined>(undefined);
+
+export const useMapContext = () => {
+  const context = useContext(MapContext);
+  if (!context) {
+    throw new Error("useMapContext must be used within a MapContextProvider");
+  }
+  return context;
+};
+
 interface MapProps {
   location: LatLngExpression;
+  setLocation: (location: LatLngExpression) => void;
   children?: JSX.Element | JSX.Element[];
-  isMainMap?: boolean;
   autolocate?: boolean;
 }
 
 const Map: FC<MapProps> = props => {
-  const setLocation = useSetRecoilState(locationState);
+  const { autolocate, setLocation, location } = props;
   const { coords, isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
     positionOptions: {
       enableHighAccuracy: false,
@@ -29,26 +41,28 @@ const Map: FC<MapProps> = props => {
   });
 
   useEffect(() => {
-    if (isGeolocationAvailable && isGeolocationAvailable && coords && props.autolocate) {
+    if (isGeolocationAvailable && isGeolocationAvailable && coords && autolocate) {
       setLocation([coords.latitude, coords.longitude]);
     }
-  }, [isGeolocationAvailable, isGeolocationEnabled, coords]);
+  }, [isGeolocationAvailable, isGeolocationEnabled, coords, autolocate]);
 
   return (
-    <>
-      <MapContainer center={props.location} zoom={15} scrollWheelZoom={true} zoomControl={false}>
+    <MapContext.Provider value={{ location, setLocation }}>
+      <MapContainer center={location} zoom={15} scrollWheelZoom={true} zoomControl={false}>
         <MapContent {...props} />
       </MapContainer>
-    </>
+    </MapContext.Provider>
   );
 };
 
 export default Map;
 
-const MapContent: FC<MapProps> = ({ children, isMainMap }) => {
-  const [location, setLocation] = useRecoilState(locationState);
-  const registerFormOpen = useRecoilValue(registerFormOpenState);
+interface MapContentProps {
+  children?: JSX.Element | JSX.Element[];
+}
 
+const MapContent: FC<MapContentProps> = ({ children }) => {
+  const { location, setLocation } = useMapContext();
   const map = useMapEvents({
     locationfound(e: LocationEvent) {
       setLocation([e.latlng.lat, e.latlng.lng]);
@@ -56,9 +70,7 @@ const MapContent: FC<MapProps> = ({ children, isMainMap }) => {
   });
 
   useEffect(() => {
-    if (!(isMainMap && registerFormOpen)) {
-      map.flyTo(location, map.getZoom());
-    }
+    map.flyTo(location, map.getZoom());
   }, [location]);
 
   return (

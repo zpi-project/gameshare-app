@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LatLngExpression } from "leaflet";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { useRecoilValue } from "recoil";
 import { z } from "zod";
@@ -47,6 +48,8 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
       .refine(phoneNumber => isValidPhoneNumber(formatPhoneNumber(phoneNumber)), {
         message: t("phoneNumberIsInvalid"),
       }),
+    locationLatitude: z.number(),
+    locationLongitude: z.number(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -55,18 +58,25 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
       firstName: user?.firstName ?? "",
       lastName: user?.lastName ?? "",
       phoneNumber: user?.phoneNumber ?? "",
+      locationLatitude: user?.locationLatitude ?? location[0],
+      locationLongitude: user?.locationLongitude ?? location[1],
     },
   });
 
+  const currentLocation = form.watch(["locationLatitude", "locationLongitude"]);
+
   function onFormSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     onSubmit({
       ...values,
       phoneNumber: formatPhoneNumber(values.phoneNumber),
-      locationLatitude: location[0],
-      locationLongitude: location[1],
     });
   }
+
+  const setLocation = (location: LatLngExpression) => {
+    const [latitude, longitude] = location as [number, number];
+    form.setValue("locationLatitude", latitude);
+    form.setValue("locationLongitude", longitude);
+  };
 
   return (
     <Form {...form}>
@@ -151,12 +161,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
               {type === "register" ? t("markLocation") : t("editLocation")}
             </h2>
             <div className="mt-10 h-[500px] w-full overflow-hidden rounded-md border">
-              <Map
-                location={[
-                  user?.locationLatitude ?? location[0],
-                  user?.locationLongitude ?? location[1],
-                ]}
-              >
+              <Map location={currentLocation} setLocation={setLocation}>
                 <LocationMarker />
               </Map>
             </div>
