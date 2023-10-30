@@ -19,13 +19,13 @@ public class User{
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Long id;
+    private Long user_id;
 
     @Column(nullable = false,unique = true)
     private String googleId;
 
     @Column(nullable = false,unique = true)
-    private String uuid = UUID.randomUUID().toString();
+    private String user_uuid = UUID.randomUUID().toString();
 
     @Column(nullable = false)
     private String email;
@@ -71,7 +71,7 @@ public class User{
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         User user = (User) o;
-        return getId() != null && Objects.equals(getId(), user.getId());
+        return getUser_id() != null && Objects.equals(getUser_id(), user.getUser_id());
     }
 
     @Override

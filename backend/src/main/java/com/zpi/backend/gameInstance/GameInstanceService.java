@@ -85,7 +85,10 @@ public class GameInstanceService {
                                                Optional<Integer> playersNumber, double latitude,
                                                double longitude){
         Pageable pageable = PageRequest.of(page, size);
-        return null;
+        List<GameInstance> gameInstanceList = gameInstanceRepository.filterGameInstancesByParameters(
+                categoryIds, age, playersNumber,
+                latitude, longitude, pageable);
+        return gameInstanceList;
     }
 
     public List<GameInstance> getGameInstancesByName(int size, int page, Optional<String> name, double latitude,

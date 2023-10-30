@@ -39,7 +39,7 @@ public class GameService {
     }
 
     public Game getGame(long id) throws GameDoesNotExistException{
-        Optional<Game> gameOptional = gameRepository.findByIdAndAcceptedIsTrue(id);
+        Optional<Game> gameOptional = gameRepository.findByGame_idAndAcceptedIsTrue(id);
         if (gameOptional.isEmpty())
             throw new GameDoesNotExistException("Game (id = "+id+") does not exists");
         return gameOptional.get();

@@ -2,8 +2,6 @@ package com.zpi.backend.user;
 
 import lombok.Data;
 
-import java.util.UUID;
-
 @Data
 public class GetUserDTO {
     private String uuid;
@@ -15,7 +13,7 @@ public class GetUserDTO {
     private double locationLatitude;
 
     public GetUserDTO(User user) {
-        this.uuid = user.getUuid();
+        this.uuid = user.getUser_uuid();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.phoneNumber = user.getPhoneNumber();
