@@ -1,6 +1,8 @@
 package com.zpi.backend.game;
 
 import com.zpi.backend.category.CategoryDoesNotExistException;
+import com.zpi.backend.dto.Amount;
+import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exceptionHandlers.BadRequestException;
 import com.zpi.backend.user.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +44,7 @@ public class GameController {
     public ResponseEntity getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
                                    @RequestParam Optional<List<Integer>> categoriesIds) {
         System.out.println("... called getGames");
-        List<Game> games = gameService.getGames(page, size, search, categoriesIds);
+        ResultsDTO games = gameService.getGames(page, size, search, categoriesIds);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }
@@ -71,5 +73,17 @@ public class GameController {
         gameService.acceptGame(authentication, id);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
+    }
+
+    @Operation(
+            summary = "Get amount of games",
+            description = "Returns amount of Games in database."
+    )
+    @RequestMapping(method = RequestMethod.GET, value = "/amount")
+    public ResponseEntity getAmount(){
+        System.out.println("... called getAmountOfGames");
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new Amount(gameService.getAmount()));
     }
 }
