@@ -40,4 +40,8 @@ public class CategoryService {
         }
         return categories;
     }
+
+    public long getAmount(){
+        return categoryRepository.count();
+    }
 }
