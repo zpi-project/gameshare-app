@@ -27,12 +27,8 @@ public class GameService {
     CategoryService categoryService;
     @Autowired
     RoleService roleService;
-    ValueChecker valueChecker = new ValueChecker();
     public Game addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
-        if (valueChecker.isStringNotCorrect(newGameDTO.getName()))
-            throw new BadRequestException("Name field is empty or null");
-        if (valueChecker.isStringNotCorrect(newGameDTO.getShortDescription()))
-            throw new BadRequestException("Short description field is empty or null");
+        newGameDTO.validate();
         if (gameRepository.existsGameByNameAndAcceptedIsTrue(newGameDTO.getName()))
             throw new GameAlreadyExistsException("Game "+newGameDTO.getName()+" already exists");
         List<Category> categories = categoryService.getCategoriesByIDs(newGameDTO.getCategoriesIDs());
