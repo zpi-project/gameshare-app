@@ -44,7 +44,7 @@ public class GameController {
     public ResponseEntity getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
                                    @RequestParam Optional<List<Integer>> categoriesIds) {
         System.out.println("... called getGames");
-        ResultsDTO games = gameService.getGames(page, size, search, categoriesIds);
+        ResultsDTO<Game> games = gameService.getGames(page, size, search, categoriesIds);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }
