@@ -1,6 +1,5 @@
 import en from "./en";
 
-
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
