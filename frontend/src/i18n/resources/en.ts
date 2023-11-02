@@ -47,4 +47,7 @@ export default {
   welcomeHeader: "Welcome to GameShare!",
   welcomeDescription:
     "We're thrilled to have you on board. To enhance your gaming experience, please take a moment to provide us with some essential personal information. Let's get started!",
+  
+  popularNow: "Popular now",
+  seeAll: "See all",
 };
