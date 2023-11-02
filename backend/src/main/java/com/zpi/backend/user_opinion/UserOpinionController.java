@@ -75,9 +75,4 @@ public class UserOpinionController {
         userOpinionService.deleteOpinion(authentication,id);
         return ResponseEntity.ok().build();
     }
-
-
-
-
-
 }

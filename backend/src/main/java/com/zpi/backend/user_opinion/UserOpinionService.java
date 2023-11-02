@@ -27,7 +27,6 @@ public class UserOpinionService {
         return new ResultsDTO<>(userOpinionPage.stream().toList(), new Pagination(userOpinionPage.getTotalElements(), userOpinionPage.getTotalPages()));
     }
 
-
     public UserOpinion addOpinion(Authentication authentication, NewUserOpinionDTO newUserOpinionDTO) throws BadRequestException, UserDoesNotExistException {
         newUserOpinionDTO.validate();
         User user = userService.getUser(authentication);
@@ -46,6 +45,7 @@ public class UserOpinionService {
     public boolean checkIfNotRatingUsersOpinion(User user, UserOpinion userOpinion){
         return !userOpinion.getRatingUser().equals(user);
     }
+
     public UserOpinion updateOpinion(Authentication authentication,long id, UpdateUserOpinionDTO updateUserOpinionDTO) throws UserDoesNotExistException, EditSomeoneElseOpinionException, OpinionDoesNotExistException, BadRequestException {
         UpdateUserOpinionDTO.validate();
         UserOpinion userOpinion = userOpinionRepository.findById(id).orElseThrow(() -> new OpinionDoesNotExistException("Opinion does not exist"));
@@ -54,10 +54,8 @@ public class UserOpinionService {
             throw new EditSomeoneElseOpinionException("You can edit only your opinions");
         userOpinion.update(updateUserOpinionDTO);
 
-
         return userOpinionRepository.save(userOpinion);
     }
-
 
     public void deleteOpinion(Authentication authentication, long id) throws DeleteSomeoneElseOpinionException, UserDoesNotExistException, OpinionDoesNotExistException {
         UserOpinion userOpinion = userOpinionRepository.findById(id).orElseThrow(()->new OpinionDoesNotExistException("Opinion does not exist"));
