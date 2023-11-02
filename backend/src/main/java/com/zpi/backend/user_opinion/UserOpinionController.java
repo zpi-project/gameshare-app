@@ -2,7 +2,6 @@ package com.zpi.backend.user_opinion;
 
 
 import com.zpi.backend.exceptionHandlers.BadRequestException;
-import com.zpi.backend.role.NewUserOpinionDTO;
 import com.zpi.backend.user.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
@@ -41,6 +40,42 @@ public class UserOpinionController {
         UserOpinion userOpinion = userOpinionService.addOpinion(authentication,newUserOpinionDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(userOpinion);
     }
+
+    @Operation(
+            summary = "Get opinions about user",
+            description = "Returns all opinions that were given to the user with a given UUID"
+    )
+    @GetMapping("/userOpinion/{uuid}")
+    public ResponseEntity getOpinions(@PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+        System.out.println("... called getOpinions");
+        return ResponseEntity.ok().body(userOpinionService.getOpinions(uuid,page,size));
+    }
+
+    @Operation(
+            summary = "Update opinion",
+            description = "Updates opinion with a given id"
+    )
+    @PreAuthorize("isAuthenticated()")
+    @PutMapping("/userOpinion/{id}")
+    public ResponseEntity updateOpinion(Authentication authentication,@PathVariable long id, @RequestBody UpdateUserOpinionDTO updateUserOpinionDTO)
+            throws UserDoesNotExistException, EditSomeoneElseOpinionException, OpinionDoesNotExistException, BadRequestException {
+        System.out.println("... called updateOpinion");
+        return ResponseEntity.ok().body(userOpinionService.updateOpinion(authentication,id,updateUserOpinionDTO));
+    }
+
+    @Operation(
+            summary = "Delete opinion",
+            description = "Deletes opinion with a given id"
+    )
+    @PreAuthorize("isAuthenticated()")
+    @DeleteMapping("/userOpinion/{id}")
+    public ResponseEntity deleteOpinion(Authentication authentication,@PathVariable long id)
+            throws UserDoesNotExistException, DeleteSomeoneElseOpinionException, OpinionDoesNotExistException {
+        System.out.println("... called deleteOpinion");
+        userOpinionService.deleteOpinion(authentication,id);
+        return ResponseEntity.ok().build();
+    }
+
 
 
 

@@ -1,9 +1,8 @@
-package com.zpi.backend.role;
+package com.zpi.backend.user_opinion;
 
 import com.google.api.client.util.DateTime;
 import com.zpi.backend.exceptionHandlers.BadRequestException;
 import com.zpi.backend.user.User;
-import com.zpi.backend.user_opinion.UserOpinion;
 import com.zpi.backend.validators.ValueChecker;
 import lombok.Data;
 

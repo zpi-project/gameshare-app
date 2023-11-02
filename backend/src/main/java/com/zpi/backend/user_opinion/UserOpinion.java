@@ -1,7 +1,6 @@
 package com.zpi.backend.user_opinion;
 
 import com.google.api.client.util.DateTime;
-import com.zpi.backend.role.NewUserOpinionDTO;
 import com.zpi.backend.user.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -42,6 +41,13 @@ public class UserOpinion {
         this.description = newUserOpinionDTO.getDescription();
         this.timestamp = newUserOpinionDTO.getTimestamp();
         //this.isRatingUserOwner =; TODO add later when we have game instances
+    }
+
+    public UserOpinion update(UpdateUserOpinionDTO updateUserOpinionDTO) {
+        this.stars = updateUserOpinionDTO.getStars();
+        this.description = updateUserOpinionDTO.getDescription();
+        this.timestamp = updateUserOpinionDTO.getTimestamp();
+        return this;
     }
 
 
