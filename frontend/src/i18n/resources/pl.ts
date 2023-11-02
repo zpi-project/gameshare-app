@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -52,6 +53,7 @@ const pl: typeof en = {
 
   popularNow: "Popularne teraz",
   seeAll: "Zobacz wszystkie",
+  popularGamesErrorTitle: "Nie udało się pobrać popularnych gier.",
 };
 
 export default pl;
