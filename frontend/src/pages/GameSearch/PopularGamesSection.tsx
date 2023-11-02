@@ -44,7 +44,7 @@ const PopularGamesSection: FC = () => {
             <></>
           )}
         </div>
-        <ScrollBar orientation="horizontal" className="mt-2" />
+        <ScrollBar orientation="horizontal" className="mt-2"/>
       </ScrollArea>
     </div>
   );
