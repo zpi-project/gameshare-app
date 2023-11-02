@@ -19,7 +19,7 @@ public class UserOpinionService {
 
     UserOpinionRepository userOpinionRepository;
     UserService userService;
-    public ResultsDTO<UserOpinion> getMineOpinions(Authentication authentication, int page, int size) throws UserDoesNotExistException {
+    public ResultsDTO<UserOpinion> getMyOpinions(Authentication authentication, int page, int size) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
         Pageable pageable = PageRequest.of(page, size);
         Page<UserOpinion> userOpinionPage;
@@ -51,7 +51,7 @@ public class UserOpinionService {
         UserOpinion userOpinion = userOpinionRepository.findById(id).orElseThrow(() -> new OpinionDoesNotExistException("Opinion does not exist"));
         User user = userService.getUser(authentication);
         if(checkIfNotRatingUsersOpinion(user, userOpinion))
-            throw new EditSomeoneElseOpinionException("You can edit only your opinions");
+            throw new EditSomeoneElseOpinionException("User can edit only his own opinion");
         userOpinion.update(updateUserOpinionDTO);
 
         return userOpinionRepository.save(userOpinion);
@@ -61,7 +61,7 @@ public class UserOpinionService {
         UserOpinion userOpinion = userOpinionRepository.findById(id).orElseThrow(()->new OpinionDoesNotExistException("Opinion does not exist"));
         User user = userService.getUser(authentication);
         if(checkIfNotRatingUsersOpinion(user, userOpinion))
-            throw new DeleteSomeoneElseOpinionException("You can delete only your opinions");
+            throw new DeleteSomeoneElseOpinionException("User can delete only his own opinion");
 
         userOpinionRepository.delete(userOpinion);
     }

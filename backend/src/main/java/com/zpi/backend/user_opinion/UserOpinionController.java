@@ -24,9 +24,9 @@ public class UserOpinionController {
     )
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/userOpinion")
-    public ResponseEntity getMineOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+    public ResponseEntity getMyOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
         System.out.println("... called getMineOpinions");
-        return ResponseEntity.ok().body(userOpinionService.getMineOpinions(authentication,page,size));
+        return ResponseEntity.ok().body(userOpinionService.getMyOpinions(authentication,page,size));
     }
 
     @Operation(
