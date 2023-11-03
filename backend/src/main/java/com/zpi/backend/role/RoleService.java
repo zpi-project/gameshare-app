@@ -22,4 +22,9 @@ public class RoleService {
         User user = userService.getUser(authentication);
         return user.getRole();
     }
+
+    public boolean checkIfAdmin(Authentication authentication) throws UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        return user.getRole().getName().equals("admin");
+    }
 }

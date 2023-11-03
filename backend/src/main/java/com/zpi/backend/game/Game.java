@@ -1,6 +1,7 @@
 package com.zpi.backend.game;
 
 import com.zpi.backend.category.Category;
+import com.zpi.backend.gameStatus.GameStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,7 +50,8 @@ public class Game {
 
     private String image;
 
-    private boolean accepted;
+    @ManyToOne
+    private GameStatus gameStatus;
 
     public Game(String name, List<Category> categories, int minPlayers, int maxPlayers, int playingTime, int age, String shortDescription, String image){
         this.name = name;

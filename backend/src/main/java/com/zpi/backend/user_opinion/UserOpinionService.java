@@ -47,7 +47,7 @@ public class UserOpinionService {
     }
 
     public UserOpinion updateOpinion(Authentication authentication,long id, UpdateUserOpinionDTO updateUserOpinionDTO) throws UserDoesNotExistException, EditSomeoneElseOpinionException, OpinionDoesNotExistException, BadRequestException {
-        UpdateUserOpinionDTO.validate();
+        updateUserOpinionDTO.validate();
         UserOpinion userOpinion = userOpinionRepository.findById(id).orElseThrow(() -> new OpinionDoesNotExistException("Opinion does not exist"));
         User user = userService.getUser(authentication);
         if(checkIfNotRatingUsersOpinion(user, userOpinion))
