@@ -23,7 +23,4 @@ public class GameStatusController {
         GameStatus newGameStatus =  gameStatusService.addGameStatus(authentication,newGameStatusDTO);
         return ResponseEntity.ok(newGameStatus);
     }
-
-
-
 }

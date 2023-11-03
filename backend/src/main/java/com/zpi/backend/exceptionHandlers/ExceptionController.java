@@ -221,6 +221,4 @@ public class ExceptionController {
                         .withTitle(HttpStatus.CONFLICT.name())
                         .withDetail(ex.getClass().getSimpleName()));
     }
-
-
 }
