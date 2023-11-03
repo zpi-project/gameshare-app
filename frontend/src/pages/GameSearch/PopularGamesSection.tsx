@@ -4,7 +4,6 @@ import "@radix-ui/react-scroll-area";
 import { useQuery } from "@tanstack/react-query";
 import { GameApi } from "@/api/GameApi";
 import GameImgTitleCard from "@/components/GameImgTitleCard";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
 
