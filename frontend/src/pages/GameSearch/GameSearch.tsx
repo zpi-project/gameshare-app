@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import CategoriesSection from "./CategoriesSection";
 import GameSearchBar from "./GameSearchBar";
 import PopularGamesSection from "./PopularGamesSection";

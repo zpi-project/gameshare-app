@@ -19,12 +19,14 @@ const GameImgTitleCard: FC<GameImgTitleCardProps> = ({ game: { name, image, id }
           <Link
             to={`${URLS.GAMES}/${id}`}
             className={cn(
-              "flex w-48 flex-col gap-4 rounded-lg bg-card p-4 text-card-foreground shadow transition hover:bg-background",
+              "flex w-48 flex-col gap-4 rounded-lg bg-card p-4 text-card-foreground shadow transition duration-300 hover:bg-accent",
               className,
             )}
           >
-            <img src={image} alt={name} className="h-40 w-40 rounded-lg" />
-            <h3 className="truncate">{name}</h3>
+            <div className="h-40 w-40 overflow-hidden rounded-lg">
+              <img src={image} alt={name} className="h-full w-full object-cover" />
+            </div>
+            <h3 className="truncate text-left font-bold">{name}</h3>
           </Link>
         </TooltipTrigger>
         <TooltipContent

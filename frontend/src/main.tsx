@@ -30,6 +30,10 @@ const router = createBrowserRouter([
         element: <div>game page</div>,
       },
       {
+        path: `${URLS.CATEGORY_GAMES}/:id`,
+        element: <div>category games page</div>,
+      },
+      {
         path: `${URLS.GAME_INSTANCE}/:id`,
         element: <div>game instance page</div>,
       },
