@@ -11,7 +11,7 @@ public class UpdateUserOpinionDTO {
     private String description;
     private DateTime timestamp;
 
-    public static boolean validate() throws BadRequestException {
+    public boolean validate() throws BadRequestException {
         if (stars < 1 || stars > 5) {
             throw new BadRequestException("Stars must be between 1 and 5");
         }
