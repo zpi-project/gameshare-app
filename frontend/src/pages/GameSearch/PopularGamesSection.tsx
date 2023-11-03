@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GameApi } from "@/api/GameApi";
 import GameImgTitleCard from "@/components/GameImgTitleCard";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
 
 const POPULAR_GAMES_PAGE_SIZE = 10;
@@ -34,17 +35,23 @@ const PopularGamesSection: FC = () => {
       <h2 className="text-3xl leading-loose text-primary">{t("popularNow")}</h2>
       <ScrollArea className="min-h-[246px] w-full">
         <div className="flex w-full flex-row gap-4">
-          {games ? (
+          {isLoading && (
+            <>
+              {Array.from({ length: POPULAR_GAMES_PAGE_SIZE }).map((_, idx) => (
+                <Skeleton className="h-[232px] w-48" key={idx} />
+              ))}
+            </>
+          )}
+          {games && (
             <>
               {games.results.map(game => (
                 <GameImgTitleCard game={game} key={game.id} />
               ))}
             </>
-          ) : (
-            <></>
           )}
+          {isError && <h3>{t("popularGamesErrorTitle")}</h3>}
         </div>
-        <ScrollBar orientation="horizontal" className="mt-2"/>
+        <ScrollBar orientation="horizontal" className="mt-2" />
       </ScrollArea>
     </div>
   );
