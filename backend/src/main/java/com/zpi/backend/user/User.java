@@ -44,6 +44,7 @@ public class User{
 
     @ManyToOne
     private Role role;
+
     public User(String email,String avatarLink,String googleId) {
         this.googleId = googleId;
         this.email = email;

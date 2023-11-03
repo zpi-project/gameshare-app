@@ -1,5 +1,6 @@
 package com.zpi.backend.user;
 
+import com.zpi.backend.exceptionHandlers.BadRequestException;
 import com.zpi.backend.role.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -25,11 +26,14 @@ public class UserService {
         return this.userRepository.findByUuid(uuid).orElseThrow(()->new UserDoesNotExistException("User not found"));
     }
 
+
     public User getUserByGoogleId(String googleId) throws UserDoesNotExistException {
         return this.userRepository.findByGoogleId(googleId).orElseThrow(()->new UserDoesNotExistException("User not found"));
     }
 
-    public void updateUser(Authentication authentication,UpdateUserDTO updateUserDTO) throws UserDoesNotExistException {
+
+    public void updateUser(Authentication authentication,UpdateUserDTO updateUserDTO) throws UserDoesNotExistException, BadRequestException {
+        updateUserDTO.validate();
         User user = getUser(authentication);
         user.update(updateUserDTO);
         this.userRepository.save(user);

@@ -1,5 +1,6 @@
 package com.zpi.backend.user;
 
+import com.zpi.backend.exceptionHandlers.BadRequestException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class UserController {
     )
     @PutMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> updateUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UserDoesNotExistException {
+    public ResponseEntity<String> updateUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UserDoesNotExistException, BadRequestException {
         System.out.println("... called updateUser");
         userService.updateUser(authentication, updateUserDTO);
         return ResponseEntity.status(HttpStatus.OK).body("User updated");
