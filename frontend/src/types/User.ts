@@ -6,4 +6,5 @@ export interface User {
   locationLongitude: number;
   email: string;
   avatarLink: string;
+  uuid: string;
 }

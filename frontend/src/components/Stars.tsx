@@ -1,5 +1,7 @@
 import { FC, useState } from "react";
-import Star from "./Star"; // Import the Star component
+import Star from "./Star";
+
+// Import the Star component
 
 interface Props {
   count: number;

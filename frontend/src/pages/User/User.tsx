@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
+import AddOpinion from "@/components/AddOpinion";
 import Opinions from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
-import AddOpinion from "@/components/AddOpinion";
 import { useToast } from "@/components/ui/use-toast";
 import AddUserOpinionModal from "./AddUserOpinionModal";
 
@@ -43,9 +43,13 @@ const User: FC = () => {
           />
           {isModalOpen && <AddUserOpinionModal />}
         </div>
-        <div className="flex h-3/5 flex-col rounded-lg bg-section p-2">
+        <div className="flex h-3/5 flex-col gap-2 rounded-lg bg-section p-2">
           <Opinions />
-          <AddOpinion />
+          <AddOpinion
+            user={user}
+            isLoading={isLoading}
+            // onClick={()=>setIsModalOpen(true)}
+          />
         </div>
       </div>
       <div className="w-1/2 flex-grow rounded-lg bg-section p-4">space for search games</div>
