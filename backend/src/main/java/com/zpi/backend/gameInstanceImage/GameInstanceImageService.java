@@ -25,12 +25,12 @@ public class GameInstanceImageService {
         return linkDTO;
     }
 
-    public void deleteGameInstanceImage(String googleId, Long gameInstanceImageId) throws GameInstanceImageDoesNotExistException {
+    public void deleteGameInstanceImage(String googleId, String gameInstanceImageUUID) throws GameInstanceImageDoesNotExistException {
         Optional<GameInstanceImage> gameInstanceImageOptional = gameInstanceImageRepository
-                .findByIdAndGameInstanceOwnerGoogleId(gameInstanceImageId, googleId);
+                .findByGameInstanceUuidAndGameInstance_OwnerGoogleId(gameInstanceImageUUID, googleId);
         if (gameInstanceImageOptional.isEmpty())
-            throw new GameInstanceImageDoesNotExistException("Game Instance Image (id = "+gameInstanceImageId+") does not exists or the User is not the Owner.");
-        gameInstanceImageRepository.deleteById(gameInstanceImageId);
+            throw new GameInstanceImageDoesNotExistException("Game Instance Image (UUID = "+gameInstanceImageUUID+") does not exists or the User is not the Owner.");
+        gameInstanceImageRepository.deleteById(gameInstanceImageOptional.get().getId());
     }
 
 

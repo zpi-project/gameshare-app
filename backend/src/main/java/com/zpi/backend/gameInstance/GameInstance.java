@@ -18,7 +18,7 @@ import java.util.UUID;
 public class GameInstance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long game_instance_id;
+    private long id;
     @Column(nullable = false,unique = true)
     private String uuid = UUID.randomUUID().toString();
     @ManyToOne

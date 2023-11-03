@@ -1,5 +1,6 @@
 package com.zpi.backend.gameInstance;
 
+import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
@@ -74,30 +75,34 @@ public class GameInstanceController {
     // TODO Is authenticated?
 //    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{userUuid}", method = GET)
-    public ResponseEntity<List<GameInstance>> getUserGameInstances(@PathVariable String userUuid,
-                                                                   @RequestParam int size, @RequestParam int page) throws UserDoesNotExistException {
+    public ResponseEntity<ResultsDTO<GameInstance>> getUserGameInstances(@PathVariable String userUuid,
+                                                                         @RequestParam int size, @RequestParam int page) throws UserDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getUserGameInstances(userUuid, size, page));
     }
 
     // TODO Is authenticated?
 //    @PreAuthorize("isAuthenticated()")
+    // TODO getGameInstances with filtering
     @RequestMapping(method = GET)
-    public ResponseEntity<List<GameInstance>>  getGameInstances(@RequestParam int size, @RequestParam int page, @RequestParam Optional<List<Long>> categoryIds,
+    public ResponseEntity<ResultsDTO<GameInstance>>  getGameInstances(@RequestParam int size, @RequestParam int page, @RequestParam Optional<List<Long>> categoryIds,
                                            @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber,
                                            @RequestParam double latitude, @RequestParam double longitude){
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getGameInstances(size, page, categoryIds, age, playersNumber, latitude, longitude));
+        return ResponseEntity
+                .status(HttpStatus.NOT_IMPLEMENTED)
+                .body(null);
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(gameInstanceService.getGameInstances(size, page, categoryIds, age, playersNumber, latitude, longitude));
     }
 
     // TODO Is authenticated?
 //    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value="/{name}",method = GET)
-    public ResponseEntity<List<GameInstance>>  getGameInstancesByName(@PathVariable String name,    @RequestParam int size, @RequestParam int page,
+    public ResponseEntity<ResultsDTO<GameInstance>>  getGameInstancesByName(@PathVariable String name, @RequestParam int size, @RequestParam int page,
                                                  @RequestParam double latitude, @RequestParam double longitude,
                                                  Authentication authentication){
         return ResponseEntity.status(HttpStatus.OK)
-                .body(null);
+                .body(gameInstanceService.getGameInstancesByName(size, page, name, latitude, longitude));
     }
 
 

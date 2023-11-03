@@ -13,7 +13,7 @@ public class GetUserDTO {
     private double locationLatitude;
 
     public GetUserDTO(User user) {
-        this.uuid = user.getUser_uuid();
+        this.uuid = user.getUserUuid();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.phoneNumber = user.getPhoneNumber();

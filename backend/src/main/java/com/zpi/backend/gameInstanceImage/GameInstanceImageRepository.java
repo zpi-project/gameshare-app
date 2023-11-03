@@ -7,6 +7,7 @@ import java.util.Optional;
 
 @Repository
 public interface GameInstanceImageRepository extends JpaRepository<GameInstanceImage, Long> {
-    Optional<GameInstanceImage> findByIdAndGameInstanceOwnerGoogleId(
-            Long gameInstanceImageID, String googleId);
+    Optional<GameInstanceImage> findByGameInstanceUuidAndGameInstance_OwnerGoogleId(
+            String gameInstanceImageUUID, String googleId);
+
 }

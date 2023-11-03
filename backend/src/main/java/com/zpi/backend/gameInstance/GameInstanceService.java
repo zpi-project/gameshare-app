@@ -1,5 +1,7 @@
 package com.zpi.backend.gameInstance;
 
+import com.zpi.backend.dto.Pagination;
+import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.game.GameService;
@@ -8,6 +10,7 @@ import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,13 +29,12 @@ public class GameInstanceService {
     @Autowired
     GameService gameService;
 
+//    TODO What about saving images?
     public GameInstance addGameInstance(NewGameInstanceDTO newGameInstanceDTO, String googleId) throws UserDoesNotExistException, GameDoesNotExistException {
         User user = userService.getUserByGoogleId(googleId);
         Game game = gameService.getGame(newGameInstanceDTO.getGameId());
-//      Saving all photos from request
         GameInstance newGameInstance = new GameInstance(newGameInstanceDTO, game, user);
         gameInstanceRepository.save(newGameInstance);
-//        gameInstanceImageRepository.saveAll(newGameInstance.getImages());
         return newGameInstance;
     }
 
@@ -75,25 +77,31 @@ public class GameInstanceService {
         return gameInstanceOptional.get();
     }
 
-    public List<GameInstance> getUserGameInstances(String userUUID, int size, int page) throws UserDoesNotExistException {
+    public ResultsDTO<GameInstance> getUserGameInstances(String userUUID, int size, int page) throws UserDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         userService.getUserByUUID(userUUID);
-        return gameInstanceRepository.findByOwnerUuid(userUUID, pageable);
+        Page<GameInstance> gameInstancesPage = gameInstanceRepository.findByOwnerUserUuid(userUUID, pageable);
+        return new ResultsDTO<>(gameInstancesPage.stream().toList(),
+                new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }
 
-    public List<GameInstance> getGameInstances(int size, int page, Optional<List<Long>> categoryIds, Optional<Integer> age,
+    public ResultsDTO<GameInstance> getGameInstances(int size, int page, Optional<List<Long>> categoryIds, Optional<Integer> age,
                                                Optional<Integer> playersNumber, double latitude,
                                                double longitude){
         Pageable pageable = PageRequest.of(page, size);
-        List<GameInstance> gameInstanceList = gameInstanceRepository.filterGameInstancesByParameters(
+        Page<GameInstance> gameInstancePage = gameInstanceRepository.filterGameInstancesByParameters(
                 categoryIds, age, playersNumber,
                 latitude, longitude, pageable);
-        return gameInstanceList;
+        return new ResultsDTO<>(gameInstancePage.stream().toList(),
+                new Pagination(gameInstancePage.getTotalElements(), gameInstancePage.getTotalPages()));
     }
 
-    public List<GameInstance> getGameInstancesByName(int size, int page, Optional<String> name, double latitude,
+    public ResultsDTO<GameInstance> getGameInstancesByName(int size, int page, String name, double latitude,
                                                      double longitude){
         Pageable pageable = PageRequest.of(page, size);
-        return null;
+        Page<GameInstance> gameInstancePage = gameInstanceRepository.searchByGameNameSortByDistance(
+                name, latitude, longitude, pageable);
+        return new ResultsDTO<>(gameInstancePage.stream().toList(),
+                new Pagination(gameInstancePage.getTotalElements(), gameInstancePage.getTotalPages()));
     }
 }

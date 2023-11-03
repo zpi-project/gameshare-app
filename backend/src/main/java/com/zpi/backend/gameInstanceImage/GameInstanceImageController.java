@@ -31,9 +31,9 @@ public class GameInstanceImageController {
 
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{gameInstanceImageUUID}", method = DELETE)
-    public ResponseEntity deleteGameInstanceImage(Authentication authentication, @PathVariable Long gameInstanceImageId) throws GameInstanceImageDoesNotExistException {
+    public ResponseEntity deleteGameInstanceImage(Authentication authentication, @PathVariable String gameInstanceImageUUID) throws GameInstanceImageDoesNotExistException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
-        gameInstanceImageService.deleteGameInstanceImage(googleId, gameInstanceImageId);
+        gameInstanceImageService.deleteGameInstanceImage(googleId, gameInstanceImageUUID);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
     }

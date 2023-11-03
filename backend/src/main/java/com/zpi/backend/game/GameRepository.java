@@ -15,7 +15,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     Page<Game> searchAllByNameContainsIgnoreCaseAndAcceptedIsTrue(String name, Pageable pageable);
     Page<Game> getAllByAcceptedIsTrue(Pageable pageable);
     boolean existsGameByNameAndAcceptedIsTrue(String name);
-    Optional<Game> findByGame_idAndAcceptedIsTrue(Long id);
+    Optional<Game> findByIdAndAcceptedIsTrue(Long id);
     @Query(value = "select distinct G.id, original_id, G.name, age, min_players, max_players, playing_time, " +
             "short_description, accepted, image " +
             "from games G join games_categories GC on G.id = GC.game_id " +
