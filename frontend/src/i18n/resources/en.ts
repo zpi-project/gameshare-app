@@ -51,4 +51,5 @@ export default {
   popularNow: "Popular now",
   seeAll: "See all",
   popularGamesErrorTitle: "We couldn't load popular games.",
+  categoriesErrorTitle: "We couldn't load game categories.",
 };

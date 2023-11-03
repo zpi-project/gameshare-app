@@ -53,6 +53,7 @@ const pl: typeof en = {
   popularNow: "Popularne teraz",
   seeAll: "Zobacz wszystkie",
   popularGamesErrorTitle: "Nie udało się pobrać popularnych gier.",
+  categoriesErrorTitle: "Nie udało się pobrać kategorii gier.",
 };
 
 export default pl;

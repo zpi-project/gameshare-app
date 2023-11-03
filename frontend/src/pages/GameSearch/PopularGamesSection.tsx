@@ -33,26 +33,21 @@ const PopularGamesSection: FC = () => {
   return (
     <div className="flex w-full flex-col gap-2">
       <h2 className="text-3xl leading-loose text-primary">{t("popularNow")}</h2>
-      <ScrollArea className="min-h-[246px] w-full">
-        <div className="flex w-full flex-row gap-6">
-          {isLoading && (
-            <>
-              {Array.from({ length: POPULAR_GAMES_PAGE_SIZE }).map((_, idx) => (
-                <Skeleton className="min-h-[232px] w-48" key={idx} />
-              ))}
-            </>
-          )}
-          {games && (
-            <>
-              {games.results.map(game => (
-                <GameImgTitleCard game={game} key={game.id} />
-              ))}
-            </>
-          )}
-          {isError && <h3>{t("popularGamesErrorTitle")}</h3>}
-        </div>
-        <ScrollBar orientation="horizontal" className="mt-2" />
-      </ScrollArea>
+      <div className="flex w-full flex-row flex-wrap gap-6">
+        {isLoading ? (
+          Array.from({ length: POPULAR_GAMES_PAGE_SIZE }).map((_, idx) => (
+            <Skeleton className="min-h-[232px] w-48 rounded-lg" key={idx} />
+          ))
+        ) : isError ? (
+          <h3 className="text-xl text-destructive">{t("popularGamesErrorTitle")}</h3>
+        ) : (
+          <>
+            {games.results.map(game => (
+              <GameImgTitleCard game={game} key={game.id} />
+            ))}
+          </>
+        )}
+      </div>
     </div>
   );
 };
