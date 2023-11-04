@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
+import GameInstancesSection from "@/components/GameInstancesSection";
 import Opinions from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
 import { useToast } from "@/components/ui/use-toast";
+
 
 const MyProfile: FC = () => {
   const navigate = useNavigate();
@@ -36,7 +38,11 @@ const MyProfile: FC = () => {
           <Opinions />
         </div>
       </div>
-      <div className="w-1/2 flex-grow rounded-lg bg-section p-4">space for search games</div>
+      <div className="w-1/2 flex-grow rounded-lg bg-section p-4">
+        <div className="flex h-full rounded-lg bg-section">
+          <GameInstancesSection owner={user} isLoading={isLoading} />
+        </div>
+      </div>
     </div>
   );
 };
