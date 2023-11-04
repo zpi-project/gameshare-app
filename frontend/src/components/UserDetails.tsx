@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { parsePhoneNumber } from "libphonenumber-js";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { locationState } from "@/state/location";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
@@ -21,7 +21,10 @@ interface Props {
 const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [location, setLocation] = useRecoilState(locationState);
+  const default_location = useRecoilValue(locationState) as number[];
+  const default_latitude = user?.locationLatitude ?? default_location[0];
+  const default_longitude = user?.locationLongitude ?? default_location[1];
+  const location = [default_latitude, default_longitude];
 
   return (
     <div className="flex h-full flex-col gap-6">
@@ -39,7 +42,7 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
       )}
       {user && (
         <>
-          <div className="flex w-full flex-row items-center gap-6">
+          <div className="flex h-full w-full flex-row items-center gap-6">
             <div className="flex w-4/12 flex-col gap-6">
               <Avatar user={user} className="h-40 w-40 text-5xl" />
               <div className="rounded-lg bg-card p-2">
@@ -61,7 +64,7 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
                 <div className="rounded-lg bg-card p-3 text-xl">{getFullname(user)}</div>
               </div>
               <div className="h-3/4 min-w-[100px] flex-grow rounded-lg bg-section">
-                <Map autolocate location={location} setLocation={setLocation}>
+                <Map location={location}>
                   <LocationButton />
                   <LocationMarker />
                 </Map>
