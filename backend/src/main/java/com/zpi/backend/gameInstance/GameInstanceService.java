@@ -57,16 +57,25 @@ public class GameInstanceService {
         gameInstanceRepository.delete(gameInstanceOptional.get());
     }
 
-    public void changeAvailability(String uuid, boolean value, String googleId) throws GameInstanceDoesNotExistException, GameInstanceStatusException {
-        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(uuid, googleId);
+    public void activate(String gameInstanceUUID, String googleId) throws GameInstanceDoesNotExistException, GameInstanceStatusException {
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(gameInstanceUUID, googleId);
         if (gameInstanceOptional.isEmpty())
-            throw new GameInstanceDoesNotExistException("The Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");
+            throw new GameInstanceDoesNotExistException("The Game Instance (uuid = "+gameInstanceUUID+") does not exists or the User is not the Owner.");
         GameInstance gameInstance = gameInstanceOptional.get();
-        if (gameInstance.isActive() && value)
-            throw new GameInstanceStatusException("The Game Instance (uuid = "+uuid+") has already been activated");
-        if (!gameInstance.isActive() && !value)
-            throw new GameInstanceStatusException("The Game Instance (uuid = "+uuid+") has already been deactivated");
-        gameInstance.setActive(value);
+        if (gameInstance.isActive())
+            throw new GameInstanceStatusException("The Game Instance (uuid = "+gameInstanceUUID+") has already been activated");
+        gameInstance.setActive(true);
+        gameInstanceRepository.save(gameInstance);
+    }
+
+    public void deactivate(String gameInstanceUUID, String googleId) throws GameInstanceDoesNotExistException, GameInstanceStatusException {
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(gameInstanceUUID, googleId);
+        if (gameInstanceOptional.isEmpty())
+            throw new GameInstanceDoesNotExistException("The Game Instance (uuid = "+gameInstanceUUID+") does not exists or the User is not the Owner.");
+        GameInstance gameInstance = gameInstanceOptional.get();
+        if (!gameInstance.isActive())
+            throw new GameInstanceStatusException("The Game Instance (uuid = "+gameInstanceUUID+") has already been deactivated");
+        gameInstance.setActive(false);
         gameInstanceRepository.save(gameInstance);
     }
 

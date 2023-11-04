@@ -54,55 +54,65 @@ public class GameInstanceController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/availability", method = PATCH)
-    public ResponseEntity changeAvailability(@RequestParam String uuid, @RequestParam boolean value, Authentication authentication)
+    @RequestMapping(value = "/activate/{gameInstanceUUID}", method = PATCH)
+    public ResponseEntity activate(@PathVariable String gameInstanceUUID, Authentication authentication)
             throws GameInstanceStatusException, GameInstanceDoesNotExistException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
-        gameInstanceService.changeAvailability(uuid, value, googleId);
+        gameInstanceService.activate(gameInstanceUUID, googleId);
+        return ResponseEntity.status(HttpStatus.OK)
+                .build();
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(value = "/deactivate/{gameInstanceUUID}", method = PATCH)
+    public ResponseEntity deactivate(@PathVariable String gameInstanceUUID, Authentication authentication)
+            throws GameInstanceStatusException, GameInstanceDoesNotExistException {
+        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
+        gameInstanceService.deactivate(gameInstanceUUID, googleId);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
     }
 
     // TODO Is authenticated?
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/{uuid}", method = GET)
-    public ResponseEntity<GameInstance> getGameInstance(@PathVariable String uuid)
+    @RequestMapping(value = "/{gameInstanceUUID}", method = GET)
+    public ResponseEntity<GameInstance> getGameInstance(@PathVariable String gameInstanceUUID)
             throws GameInstanceDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getGameInstance(uuid));
+                .body(gameInstanceService.getGameInstance(gameInstanceUUID));
     }
 
     // TODO Is authenticated?
 //    @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/{userUuid}", method = GET)
-    public ResponseEntity<ResultsDTO<GameInstance>> getUserGameInstances(@PathVariable String userUuid,
+    @RequestMapping(value = "/{userUUID}", method = GET)
+    public ResponseEntity<ResultsDTO<GameInstance>> getUserGameInstances(@PathVariable String userUUID,
                                                                          @RequestParam int size, @RequestParam int page) throws UserDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getUserGameInstances(userUuid, size, page));
+                .body(gameInstanceService.getUserGameInstances(userUUID, size, page));
     }
 
     // TODO Is authenticated?
 //    @PreAuthorize("isAuthenticated()")
     // TODO getGameInstances with filtering
     @RequestMapping(method = GET)
-    public ResponseEntity<ResultsDTO<GameInstance>>  getGameInstances(@RequestParam int size, @RequestParam int page, @RequestParam Optional<List<Long>> categoryIds,
+    public ResponseEntity<ResultsDTO<GameInstance>>  getGameInstances(@RequestParam int size, @RequestParam int page, @RequestParam Optional<List<Long>> categoriesIds,
                                            @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber,
                                            @RequestParam double latitude, @RequestParam double longitude){
         return ResponseEntity
                 .status(HttpStatus.NOT_IMPLEMENTED)
                 .body(null);
 //        return ResponseEntity.status(HttpStatus.OK)
-//                .body(gameInstanceService.getGameInstances(size, page, categoryIds, age, playersNumber, latitude, longitude));
+//                .body(gameInstanceService.getGameInstances(size, page, categoriesIds, age, playersNumber, latitude, longitude));
     }
 
     // TODO Is authenticated?
 //    @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value="/{name}",method = GET)
-    public ResponseEntity<ResultsDTO<GameInstance>>  getGameInstancesByName(@PathVariable String name, @RequestParam int size, @RequestParam int page,
+    @RequestMapping(value="/{gameName}",method = GET)
+    public ResponseEntity<ResultsDTO<GameInstance>>  getGameInstancesByName(@PathVariable String gameName, @RequestParam int size, @RequestParam int page,
                                                  @RequestParam double latitude, @RequestParam double longitude,
                                                  Authentication authentication){
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getGameInstancesByName(size, page, name, latitude, longitude));
+                .body(gameInstanceService.getGameInstancesByName(size, page, gameName, latitude, longitude));
     }
 
 
