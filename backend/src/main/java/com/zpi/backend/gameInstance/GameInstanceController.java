@@ -116,7 +116,7 @@ public class GameInstanceController {
             summary = "[Not implemented] Get game instances by userUUID",
             description = "Returns the Game Instances of a User from the database, identified by user's userUUID"
     )
-    @RequestMapping(value = "/{userUUID}", method = GET)
+    @RequestMapping(value = "/user/{userUUID}", method = GET)
     public ResponseEntity<ResultsDTO<GameInstance>> getUserGameInstances(@PathVariable String userUUID,
                                                                          @RequestParam int size, @RequestParam int page) throws UserDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
@@ -129,7 +129,7 @@ public class GameInstanceController {
                     "and sorted by distance (calculated by latitude and longitude) from the database."
     )
     // TODO getGameInstances with filtering
-    @RequestMapping(method = GET)
+    @RequestMapping(method = GET, value="/search")
     public ResponseEntity<ResultsDTO<GameInstance>>  getGameInstances(@RequestParam int size, @RequestParam int page, @RequestParam Optional<List<Long>> categoriesIds,
                                            @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber,
                                            @RequestParam double latitude, @RequestParam double longitude){
