@@ -66,7 +66,7 @@ public class GameController {
             description = "Changes status value of a Game identified by its id to Accepted. Only Admin is allowed to do this operation."
     )
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/accept/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/accept/{id}", method = RequestMethod.PATCH)
     public ResponseEntity acceptGame(Authentication authentication, @PathVariable long id)
             throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
         System.out.println("... called acceptGame("+id+")");
@@ -79,9 +79,9 @@ public class GameController {
             description = "Changes status value of a Game identified by its id to Rejected. Only Admin is allowed to do this operation."
     )
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/reject/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/reject/{id}", method = RequestMethod.PATCH)
     public ResponseEntity rejectGame(Authentication authentication, @PathVariable long id)
-            throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
+            throws GameDoesNotExistException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
         System.out.println("... called acceptGame("+id+")");
         gameService.rejectGame(authentication, id);
         return ResponseEntity.status(HttpStatus.OK)
