@@ -1,8 +1,11 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { parsePhoneNumber } from "libphonenumber-js";
+import { useRecoilState } from "recoil";
+import { locationState } from "@/state/location";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
+import { Map, LocationButton, LocationMarker } from "@/components/Map";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import Avatar from "./Avatar";
@@ -18,6 +21,7 @@ interface Props {
 const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [location, setLocation] = useRecoilState(locationState);
 
   return (
     <div className="flex h-full flex-col gap-6">
@@ -36,27 +40,32 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
       {user && (
         <>
           <div className="flex w-full flex-row items-center gap-6">
-            <Avatar user={user} className="h-40 w-40 text-5xl" />
-            <div className="h-max-h flex-grow rounded-lg bg-card p-5 text-xl">
-              {getFullname(user)}
-            </div>
-          </div>
-          <div className="flex flex-col gap-6">
-            <div className="h-max-h w-6/12 rounded-lg bg-card p-2">
-              {parsePhoneNumber(user.phoneNumber).formatInternational()}
-            </div>
-            <div className="flex w-full flex-row justify-between">
-              <div className="h-max-h w-6/12 rounded-lg bg-card p-2">
-                {user.locationLatitude}, {user.locationLongitude}
+            <div className="flex w-4/12 flex-col gap-6">
+              <Avatar user={user} className="h-40 w-40 text-5xl" />
+              <div className="rounded-lg bg-card p-2">
+                {parsePhoneNumber(user.phoneNumber).formatInternational()}
               </div>
-              {showEdit && (
-                <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                  <DialogTrigger asChild>
-                    <Button className="w-32">{t("edit")}</Button>
-                  </DialogTrigger>
-                  <EditUserForm user={user} onSubmit={() => setDialogOpen(false)} />
-                </Dialog>
-              )}
+              <div className="flex w-full flex-row justify-between">
+                {showEdit && (
+                  <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                    <DialogTrigger asChild>
+                      <Button className="w-32">{t("edit")}</Button>
+                    </DialogTrigger>
+                    <EditUserForm user={user} onSubmit={() => setDialogOpen(false)} />
+                  </Dialog>
+                )}
+              </div>
+            </div>
+            <div className="h-full flex-grow flex-col justify-between gap-6">
+              <div className="h-1/4 flex-grow">
+                <div className="rounded-lg bg-card p-3 text-xl">{getFullname(user)}</div>
+              </div>
+              <div className="h-3/4 min-w-[100px] flex-grow rounded-lg bg-section">
+                <Map autolocate location={location} setLocation={setLocation}>
+                  <LocationButton />
+                  <LocationMarker />
+                </Map>
+              </div>
             </div>
           </div>
         </>
