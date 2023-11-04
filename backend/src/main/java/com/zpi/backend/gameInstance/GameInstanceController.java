@@ -125,8 +125,8 @@ public class GameInstanceController {
 
     @Operation(
             summary = "[Not implemented] Get game instances using filters",
-            description = "Returns Game Instances filtered by categories, age, players number " +
-                    "and sorted by distance (calculated by latitude and longitude) from database."
+            description = "Returns Game Instances filtered by categories, age, players number, " +
+                    "and sorted by distance (calculated by latitude and longitude) from the database."
     )
     // TODO getGameInstances with filtering
     @RequestMapping(method = GET)
@@ -143,14 +143,17 @@ public class GameInstanceController {
     @Operation(
             summary = "[Not implemented] Get game instances by game id",
             description = "Returns Game Instances of passed Game " +
-                    "and sorted by distance (calculated by latitude and longitude) from database."
+                    "and sorted by distance (calculated by latitude and longitude) from the database."
     )
     @RequestMapping(value="/{gameName}",method = GET)
     public ResponseEntity<ResultsDTO<GameInstance>>  getGameInstancesByName(@PathVariable String gameName, @RequestParam int size, @RequestParam int page,
                                                  @RequestParam double latitude, @RequestParam double longitude,
                                                  Authentication authentication){
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getGameInstancesByName(size, page, gameName, latitude, longitude));
+        return ResponseEntity
+                .status(HttpStatus.NOT_IMPLEMENTED)
+                .body(null);
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(gameInstanceService.getGameInstancesByName(size, page, gameName, latitude, longitude));
     }
 
 
