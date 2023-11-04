@@ -37,7 +37,7 @@ public class GameInstance {
         this.owner = owner;
         this.pricePerDay = newGameInstanceDTO.getPricePerDay();
         this.description = newGameInstanceDTO.getDescription();
+        this.isActive = true;
         this.images = new ArrayList<>();
-        // TODO When should I add photos to object?
     }
 }
