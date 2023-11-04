@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Avatar from "./Avatar";
 import { EditUserForm } from "./UserForm";
 import { Button } from "./ui/button";
+import { LatLngExpression } from "leaflet";
 
 interface Props {
   user?: User;
@@ -24,7 +25,7 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
   const default_location = useRecoilValue(locationState) as number[];
   const default_latitude = user?.locationLatitude ?? default_location[0];
   const default_longitude = user?.locationLongitude ?? default_location[1];
-  const location = [default_latitude, default_longitude];
+  const location = [default_latitude, default_longitude] as LatLngExpression;
 
   return (
     <div className="flex h-full flex-col gap-6">
