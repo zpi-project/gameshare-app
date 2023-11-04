@@ -2,6 +2,7 @@ package com.zpi.backend.category;
 
 import com.zpi.backend.exceptionHandlers.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class CategoryService {
     }
 
     public List<Category> getCategories(){
-        return categoryRepository.findAll();
+        return categoryRepository.findAll(Sort.by("name"));
     }
 
     public List<Category> getCategoriesByIDs(List<Long> categoriesIds) throws CategoryDoesNotExistException {
