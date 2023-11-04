@@ -7,10 +7,4 @@ import lombok.Data;
 @Data
 public class NewGameStatusDTO {
     private String status;
-
-    public boolean validate() throws BadRequestException {
-        if(ValueChecker.isStringEmpty(status))
-            throw new BadRequestException("Status cannot be empty");
-        return true;
-    }
 }

@@ -33,9 +33,4 @@ public class GameStatus {
     public int hashCode() {
         return getClass().hashCode();
     }
-
-    public GameStatus fromDTO(NewGameStatusDTO newGameStatusDTO) {
-        this.status = newGameStatusDTO.getStatus();
-        return this;
-    }
 }
