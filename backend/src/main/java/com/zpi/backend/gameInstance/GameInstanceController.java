@@ -4,6 +4,7 @@ import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,11 @@ public class GameInstanceController {
     @Autowired
     GameInstanceService gameInstanceService;
 
+    @Operation(
+            summary = "Add new game instance",
+            description = "Adds a new active Game Instance to database. " +
+                    "User that called the endpoint becomes an owner"
+    )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(method = POST)
     public ResponseEntity<GameInstance> addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
@@ -53,6 +59,11 @@ public class GameInstanceController {
                 .build();
     }
 
+    @Operation(
+            summary = "Activate a game instance by UUID",
+            description = "Changes activate value of a Game Instance identified by its UUID to True. " +
+                    "Only game instance owner is allowed to do this operation."
+    )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/activate/{gameInstanceUUID}", method = PATCH)
     public ResponseEntity activate(@PathVariable String gameInstanceUUID, Authentication authentication)
@@ -63,6 +74,11 @@ public class GameInstanceController {
                 .build();
     }
 
+    @Operation(
+            summary = "Deactivate a game instance by UUID",
+            description = "Changes activate value of a Game Instance identified by its UUID to False. " +
+                    "Only game instance owner is allowed to do this operation."
+    )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/deactivate/{gameInstanceUUID}", method = PATCH)
     public ResponseEntity deactivate(@PathVariable String gameInstanceUUID, Authentication authentication)
@@ -73,6 +89,10 @@ public class GameInstanceController {
                 .build();
     }
 
+    @Operation(
+            summary = "Get a game instance by UUID",
+            description = "Returns Game Instance from database by its UUID."
+    )
     // TODO Is authenticated?
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{gameInstanceUUID}", method = GET)
@@ -82,6 +102,10 @@ public class GameInstanceController {
                 .body(gameInstanceService.getGameInstance(gameInstanceUUID));
     }
 
+    @Operation(
+            summary = "[Not implemented] Get game instances by userUUID",
+            description = "Returns User's Game Instances from database identified by userUUID."
+    )
     // TODO Is authenticated?
 //    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{userUUID}", method = GET)
@@ -91,6 +115,11 @@ public class GameInstanceController {
                 .body(gameInstanceService.getUserGameInstances(userUUID, size, page));
     }
 
+    @Operation(
+            summary = "[Not implemented] Get game instances using filters",
+            description = "Returns Game Instances filtered by categories, age, players number " +
+                    "and sorted by distance (calculated by latitude and longitude) from database."
+    )
     // TODO Is authenticated?
 //    @PreAuthorize("isAuthenticated()")
     // TODO getGameInstances with filtering
@@ -105,6 +134,11 @@ public class GameInstanceController {
 //                .body(gameInstanceService.getGameInstances(size, page, categoriesIds, age, playersNumber, latitude, longitude));
     }
 
+    @Operation(
+            summary = "[Not implemented] Get game instances by game id",
+            description = "Returns Game Instances of passed Game " +
+                    "and sorted by distance (calculated by latitude and longitude) from database."
+    )
     // TODO Is authenticated?
 //    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value="/{gameName}",method = GET)
