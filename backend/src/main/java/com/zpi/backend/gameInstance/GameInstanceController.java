@@ -25,9 +25,9 @@ public class GameInstanceController {
     GameInstanceService gameInstanceService;
 
     @Operation(
-            summary = "Add new game instance",
-            description = "Adds a new active Game Instance to database. " +
-                    "User that called the endpoint becomes an owner"
+            summary = "Add a new game instance",
+            description = "Adds a new active Game Instance to the database. " +
+                    "The User who invokes this endpoint becomes the owner of the Game Instance."
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(method = POST)
@@ -39,6 +39,11 @@ public class GameInstanceController {
                 .body(gameInstance);
     }
 
+    @Operation(
+            summary = "Update a game instance by UUID",
+            description = "Modifies a Game Instance identified by its UUID." +
+                    "The User who invokes this endpoint must be the owner of the Game Instance"
+    )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{uuid}", method = PUT)
     public ResponseEntity<GameInstance> updateGameInstance(@PathVariable String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO,
@@ -49,6 +54,11 @@ public class GameInstanceController {
                 .body(gameInstance);
     }
 
+    @Operation(
+            summary = "Delete a game instance by UUID",
+            description = "Removes a Game Instance identified by its UUID." +
+                    "The User who invokes this endpoint must be the owner of the Game Instance"
+    )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{uuid}", method = DELETE)
     public ResponseEntity deleteGameInstance(@PathVariable String uuid, Authentication authentication)
@@ -61,8 +71,8 @@ public class GameInstanceController {
 
     @Operation(
             summary = "Activate a game instance by UUID",
-            description = "Changes activate value of a Game Instance identified by its UUID to True. " +
-                    "Only game instance owner is allowed to do this operation."
+            description = "Changes the activate value of a Game Instance identified by its UUID to True. " +
+                    "Only the owner of the Game Instance is permitted to perform this operation."
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/activate/{gameInstanceUUID}", method = PATCH)
@@ -76,8 +86,8 @@ public class GameInstanceController {
 
     @Operation(
             summary = "Deactivate a game instance by UUID",
-            description = "Changes activate value of a Game Instance identified by its UUID to False. " +
-                    "Only game instance owner is allowed to do this operation."
+            description = "Changes the activate value of a Game Instance identified by its UUID to False. " +
+                    "Only the owner of the Game Instance is permitted to perform this operation."
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/deactivate/{gameInstanceUUID}", method = PATCH)
@@ -91,7 +101,7 @@ public class GameInstanceController {
 
     @Operation(
             summary = "Get a game instance by UUID",
-            description = "Returns Game Instance from database by its UUID."
+            description = "Returns a Game Instance from the database by its UUID."
     )
     // TODO Is authenticated?
     @PreAuthorize("isAuthenticated()")
@@ -104,10 +114,8 @@ public class GameInstanceController {
 
     @Operation(
             summary = "[Not implemented] Get game instances by userUUID",
-            description = "Returns User's Game Instances from database identified by userUUID."
+            description = "Returns the Game Instances of a User from the database, identified by user's userUUID"
     )
-    // TODO Is authenticated?
-//    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{userUUID}", method = GET)
     public ResponseEntity<ResultsDTO<GameInstance>> getUserGameInstances(@PathVariable String userUUID,
                                                                          @RequestParam int size, @RequestParam int page) throws UserDoesNotExistException {
@@ -120,8 +128,6 @@ public class GameInstanceController {
             description = "Returns Game Instances filtered by categories, age, players number " +
                     "and sorted by distance (calculated by latitude and longitude) from database."
     )
-    // TODO Is authenticated?
-//    @PreAuthorize("isAuthenticated()")
     // TODO getGameInstances with filtering
     @RequestMapping(method = GET)
     public ResponseEntity<ResultsDTO<GameInstance>>  getGameInstances(@RequestParam int size, @RequestParam int page, @RequestParam Optional<List<Long>> categoriesIds,
@@ -139,8 +145,6 @@ public class GameInstanceController {
             description = "Returns Game Instances of passed Game " +
                     "and sorted by distance (calculated by latitude and longitude) from database."
     )
-    // TODO Is authenticated?
-//    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value="/{gameName}",method = GET)
     public ResponseEntity<ResultsDTO<GameInstance>>  getGameInstancesByName(@PathVariable String gameName, @RequestParam int size, @RequestParam int page,
                                                  @RequestParam double latitude, @RequestParam double longitude,
