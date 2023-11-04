@@ -9,7 +9,6 @@ import Opinions from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
 import { useToast } from "@/components/ui/use-toast";
 
-
 const MyProfile: FC = () => {
   const navigate = useNavigate();
   const { toast } = useToast();

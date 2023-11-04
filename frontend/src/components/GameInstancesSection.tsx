@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { gameInstances } from "@cypress/fixtures/gameInstances";
+import { Search } from "lucide-react";
 import { User } from "@/types/User";
 import { getName } from "@/utils/user";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import GameInstance from "./GameInstance";
-import { Search } from 'lucide-react';
 import { Button } from "./ui/button";
 
 interface Props {
