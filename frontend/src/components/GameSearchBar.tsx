@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useInView } from "react-intersection-observer";
 import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { useDebounce } from "use-debounce";
@@ -9,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import GameSearchCard from "./GameSearchCard";
 import { ScrollArea } from "./ui/scroll-area";
 import { Skeleton } from "./ui/skeleton";
+
 
 const GAME_PAGE_SIZE = 8;
 
@@ -32,7 +34,6 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick }) => {
     queryFn: () => GameApi.search(debouncedSearch, 0, GAME_PAGE_SIZE),
   });
 
-  // add empty results
   // add scroll
 
   const onBlur = () => {
