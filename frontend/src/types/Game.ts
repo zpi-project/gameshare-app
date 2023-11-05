@@ -1,6 +1,11 @@
 import { Category } from "./Category";
 
-export type GameStatus = "Accepted" | "Rejected" | "Pending";
+export type GameStatusType = "Accepted" | "Rejected" | "Pending";
+
+export interface GameStatus {
+  id: number;
+  status: GameStatusType;
+}
 
 export interface Game {
   id: number;

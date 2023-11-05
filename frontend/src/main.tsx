@@ -2,15 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { URLS } from "@/constants/urls";
+import CategoryGameSearch from "@/pages/CategoryGameSearch";
 import Dashboard from "@/pages/Dashboard";
 import Error from "@/pages/Error";
+import GameSearch from "@/pages/GameSearch";
 import MyProfile from "@/pages/MyProfile";
 import UserProfile from "@/pages/UserProfile";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import App from "./App";
-import ProtectedRoute from "./components/ProtectedRoute";
 import "./index.css";
-import CategoryGameSearch from "./pages/CategoryGameSearch";
-import GameSearch from "./pages/GameSearch";
 
 const router = createBrowserRouter([
   {
