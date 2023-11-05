@@ -31,14 +31,26 @@ public class CategoryController {
 
     @Operation(
             summary = "Get categories",
-            description = "Returns all Categories from database."
+            description = "Returns all Categories from the database."
     )
     @GetMapping
     public ResponseEntity<List<Category>> getCategories(){
-        System.out.println("... called getCategory");
+        System.out.println("... called getCategories");
         List<Category> categories = categoryService.getCategories();
         return ResponseEntity.status(HttpStatus.OK)
                 .body(categories);
+    }
+
+    @Operation(
+            summary = "Get category by id",
+            description = "Returns a category identified by its id from the database."
+    )
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Category> getCategory(@PathVariable long id) throws CategoryDoesNotExistException {
+        System.out.println("... called getCategory");
+        Category category = categoryService.getCategory(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(category);
     }
 
     @Operation(
