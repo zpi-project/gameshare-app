@@ -47,4 +47,12 @@ export default {
   welcomeHeader: "Welcome to GameShare!",
   welcomeDescription:
     "We're thrilled to have you on board. To enhance your gaming experience, please take a moment to provide us with some essential personal information. Let's get started!",
+
+  popularNow: "Popular now",
+  seeAll: "See all",
+  popularGamesErrorTitle: "We couldn't load popular games.",
+  categoriesErrorTitle: "We couldn't load game categories.",
+  searchGamePlaceholder: "What board game would you like to play?",
+  searchGamesError: "There was an error while searching games.",
+  searchGamesNoResults: "No results",
 };

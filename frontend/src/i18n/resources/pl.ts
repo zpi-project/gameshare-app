@@ -49,6 +49,14 @@ const pl: typeof en = {
   welcomeHeader: "Witaj w GameShare!",
   welcomeDescription:
     "Cieszymy się, że jesteś z nami. Aby ułatwić twoje korzystanie z aplikacji, prosimy o chwilę Twojego czasu, aby dostarczyć nam niezbędne dane osobowe. Zacznijmy!",
+
+  popularNow: "Popularne teraz",
+  seeAll: "Zobacz wszystkie",
+  popularGamesErrorTitle: "Nie udało się pobrać popularnych gier.",
+  categoriesErrorTitle: "Nie udało się pobrać kategorii gier.",
+  searchGamePlaceholder: "W jaką grę planszową chcesz zagrać?",
+  searchGamesError: "Wystąpił błąd podczas wyszukiwania gier.",
+  searchGamesNoResults: "Brak wyników",
 };
 
 export default pl;
