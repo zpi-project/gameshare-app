@@ -51,6 +51,7 @@ const pl: typeof en = {
     "Cieszymy się, że jesteś z nami. Aby ułatwić twoje korzystanie z aplikacji, prosimy o chwilę Twojego czasu, aby dostarczyć nam niezbędne dane osobowe. Zacznijmy!",
 
   userGames: "Gry użytkownika",
+  addGameInstance: "Dodaj swoją grę",
 };
 
 export default pl;

@@ -13,9 +13,10 @@ import { Button } from "./ui/button";
 interface Props {
   owner?: User;
   isLoading: boolean;
+  showButtons: boolean;
 }
 
-const GameInstancesSection: FC<Props> = ({ owner, isLoading }) => {
+const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
 
@@ -35,14 +36,15 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading }) => {
               {t("userGames")} {getName(owner)}
             </div>
             <div className="flex flex-row gap-2">
-              <Input
-                className="h-max-h flex-grow rounded-lg bg-card p-5"
-                placeholder="Type to search..."
-                onChange={event => setQuery(event.target.value)}
-              />
-              <Button>
-                <Search />
-              </Button>
+              <div className="flex h-max w-max flex-grow flex-row items-center gap-3 rounded-lg bg-card p-2">
+                <Input
+                  className="flex-grow rounded-lg bg-card"
+                  placeholder="Type to search..."
+                  onChange={event => setQuery(event.target.value)}
+                />
+                <Search className="" />
+              </div>
+              {showButtons && <Button className="w-56">{t("addGameInstance")}</Button>}
             </div>
             <div className="flex h-full">
               <ScrollArea>
