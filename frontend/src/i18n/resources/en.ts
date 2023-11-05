@@ -53,6 +53,7 @@ export default {
   popularGamesErrorTitle: "We couldn't load popular games.",
   categoriesErrorTitle: "We couldn't load game categories.",
   searchGamePlaceholder: "What board game would you like to play?",
+  searchGameWithinCategoryPlaceholder: "Search games within this category",
   searchGamesError: "There was an error while searching games.",
   searchGamesNoResults: "No results",
 };

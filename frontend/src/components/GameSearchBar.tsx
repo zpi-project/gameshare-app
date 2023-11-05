@@ -11,13 +11,15 @@ import GameSearchCard from "./GameSearchCard";
 import { ScrollArea } from "./ui/scroll-area";
 import { Skeleton } from "./ui/skeleton";
 
+
 const GAME_PAGE_SIZE = 8;
 
 interface GameSearchBarProps {
   onGameClick: (game: Game) => void;
+  placeholder: string;
 }
 
-const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick }) => {
+const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder }) => {
   const [search, setSearch] = useState("");
   const [showResults, setShowResults] = useState(false);
   const [debouncedSearch] = useDebounce(search, 500);
@@ -63,10 +65,10 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick }) => {
   };
 
   return (
-    <div className="relative max-w-[700px]">
+    <div className="relative max-w-[700px] flex-grow">
       <Search className="absolute right-4 top-2" />
       <Input
-        placeholder={t("searchGamePlaceholder")}
+        placeholder={placeholder}
         className="rounded-lg border-none bg-card"
         onChange={e => setSearch(e.target.value)}
         onFocus={onFocus}
