@@ -40,11 +40,11 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons, title 
             <div className="flex flex-row gap-2">
               <div className="relative flex-grow">
                 <Input
-                  className="flex-grow rounded-lg bg-card border-none"
+                  className="flex-grow rounded-lg border-none bg-card"
                   placeholder="Type to search..."
                   onChange={event => setQuery(event.target.value)}
                 />
-                <Search className="absolute top-2 right-4" />
+                <Search className="absolute right-4 top-2" />
               </div>
               {showButtons && <Button className="w-56">{t("addGameInstance")}</Button>}
             </div>
