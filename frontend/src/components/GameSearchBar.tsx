@@ -1,7 +1,7 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { useDebounce } from "use-debounce";
 import { Game } from "@/types/Game";
@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input";
 import GameSearchCard from "./GameSearchCard";
 import { ScrollArea } from "./ui/scroll-area";
 import { Skeleton } from "./ui/skeleton";
-
 
 const GAME_PAGE_SIZE = 8;
 
@@ -26,15 +25,27 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick }) => {
   const { t } = useTranslation();
   const {
     data: games,
-    isFetching,
+    isFetchingNextPage,
     isLoading,
     isError,
-  } = useQuery({
+    hasNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
     queryKey: ["games", { debouncedSearch }],
-    queryFn: () => GameApi.search(debouncedSearch, 0, GAME_PAGE_SIZE),
+    queryFn: ({ pageParam = 0 }) =>
+      GameApi.search(debouncedSearch, pageParam as number, GAME_PAGE_SIZE),
+    getNextPageParam: (_, pages) => {
+      const newPageParam = pages.length;
+      return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
+    },
   });
+  const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
 
-  // add scroll
+  useEffect(() => {
+    if (entry?.isIntersecting && !isLoading) {
+      void fetchNextPage();
+    }
+  }, [entry?.isIntersecting, fetchNextPage, isLoading]);
 
   const onBlur = () => {
     const timeout = setTimeout(() => {
@@ -65,23 +76,27 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick }) => {
         <div className="absolute left-0 top-12 z-10 h-[400px] w-full rounded-lg bg-background p-2 shadow">
           <ScrollArea className="h-full w-full pr-4">
             <div className="flex flex-col gap-1">
-              {isFetching || isLoading ? (
+              {isError ? (
+                <h4 className="mt-4 text-center text-xl text-destructive">
+                  {t("searchGamesError")}
+                </h4>
+              ) : games && games.pages[0].paginationInfo.totalElements > 0 ? (
+                games.pages.map(page =>
+                  page.results.map(game => (
+                    <GameSearchCard game={game} key={game.id} onClick={onGameClick} />
+                  )),
+                )
+              ) : (
+                <h4 className="ml-2 mt-2 text-xl">{t("searchGamesNoResults")}</h4>
+              )}
+              {(isFetchingNextPage || isLoading) && (
                 <>
                   {Array.from({ length: 4 }).map((_, idx) => (
                     <Skeleton className="h-20 w-full rounded-lg" key={"skeleton" + idx} />
                   ))}
                 </>
-              ) : isError ? (
-                <h4 className="mt-4 text-center text-xl text-destructive">
-                  {t("searchGamesError")}
-                </h4>
-              ) : games.paginationInfo.totalElements > 0 ? (
-                games.results.map(game => (
-                  <GameSearchCard game={game} key={game.id} onClick={onGameClick} />
-                ))
-              ) : (
-                <h4 className="ml-2 mt-2 text-xl">{t("searchGamesNoResults")}</h4>
               )}
+              {hasNextPage && <div ref={ref} data-test="scroller-trigger" />}
             </div>
           </ScrollArea>
         </div>
