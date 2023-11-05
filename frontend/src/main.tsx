@@ -9,6 +9,7 @@ import UserProfile from "@/pages/UserProfile";
 import App from "./App";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./index.css";
+import CategoryGameSearch from "./pages/CategoryGameSearch";
 import GameSearch from "./pages/GameSearch";
 
 const router = createBrowserRouter([
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${URLS.CATEGORY_GAMES}/:id`,
-        element: <div>category games page</div>,
+        element: <CategoryGameSearch />,
       },
       {
         path: `${URLS.GAME_INSTANCE}/:id`,
