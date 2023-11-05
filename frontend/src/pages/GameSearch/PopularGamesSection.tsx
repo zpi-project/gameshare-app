@@ -32,7 +32,6 @@ const PopularGamesSection: FC = () => {
 
   return (
     <div className="flex w-full flex-col gap-2">
-      {games && <GameSearchCard game={games?.results[0]} />}
       <h2 className="text-3xl leading-loose text-primary">{t("popularNow")}</h2>
       <div className="flex w-full flex-row flex-wrap gap-6">
         {isLoading ? (

@@ -8,4 +8,11 @@ export class GameApi {
     const { data: games } = await Api.get<Paginated<Game>>("/games", { params: { page, size } });
     return games;
   }
+
+  static async search(search: string, page: number, size: number) {
+    const { data: games } = await Api.get<Paginated<Game>>("/games", {
+      params: { page, size, search },
+    });
+    return games;
+  }
 }
