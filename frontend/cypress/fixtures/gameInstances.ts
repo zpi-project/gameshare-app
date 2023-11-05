@@ -12,7 +12,7 @@ export const gameInstances: GameInstance[] = [
   {
     description: LOREM,
     isActive: true,
-    title: "Game of thrones",
+    title: "Nemesis",
     category: "Strategy",
     photoLink: "https://m.media-amazon.com/images/I/91HWTK01MQL.jpg",
   },
