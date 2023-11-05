@@ -31,7 +31,7 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons }) => {
       )}
       {owner && (
         <>
-          <div className="flex h-full w-full flex-col gap-2">
+          <div className="flex h-full w-full flex-col gap-4">
             <div className="h-max w-full flex-grow rounded-lg bg-card p-5 text-2xl">
               {t("userGames")} {getName(owner)}
             </div>
@@ -48,7 +48,7 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons }) => {
             </div>
             <div className="flex h-full">
               <ScrollArea>
-                <div className="flex h-full flex-col gap-4 p-4">
+                <div className="flex h-full flex-col gap-4">
                   {gameInstances
                     .filter(post => {
                       if (query === "") {

@@ -37,7 +37,7 @@ const MyProfile: FC = () => {
           <Opinions />
         </div>
       </div>
-      <div className="w-1/2 flex-grow rounded-lg bg-section p-4">
+      <div className="h-full w-1/2 flex-grow rounded-lg bg-section p-4">
         <div className="flex h-full rounded-lg bg-section">
           <GameInstancesSection owner={user} isLoading={isLoading} showButtons={true} />
         </div>
