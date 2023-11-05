@@ -3,7 +3,7 @@ package com.zpi.backend.game;
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Amount;
 import com.zpi.backend.dto.ResultsDTO;
-import com.zpi.backend.exceptionHandlers.BadRequestException;
+import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.user.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class GameController {
     )
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity addGame(@RequestBody NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
+    public ResponseEntity<Game> addGame(@RequestBody NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
         System.out.println("... called addGame");
         Game newGame = gameService.addGame(newGameDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -41,7 +41,7 @@ public class GameController {
             description = "Returns paginated games from database. Optional filtering by name and categories."
     )
     @GetMapping
-    public ResponseEntity getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
+    public ResponseEntity<ResultsDTO<Game>> getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
                                    @RequestParam Optional<List<Integer>> categoriesIds) {
         System.out.println("... called getGames");
         ResultsDTO<Game> games = gameService.getGames(page, size, search, categoriesIds);
@@ -54,11 +54,11 @@ public class GameController {
             description = "Returns Game from database by its id."
     )
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity getGame(@PathVariable long id) throws GameDoesNotExistException {
+    public ResponseEntity<Game> getGame(@PathVariable long id) throws GameDoesNotExistException {
         System.out.println("... called getGame("+id+")");
-        Game games = gameService.getGame(id);
+        Game game = gameService.getGame(id);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(games);
+                .body(game);
     }
 
     @Operation(
@@ -66,7 +66,7 @@ public class GameController {
             description = "Changes status value of a Game identified by its id to Accepted. Only Admin is allowed to do this operation."
     )
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/accept/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/accept", method = RequestMethod.PUT)
     public ResponseEntity acceptGame(Authentication authentication, @PathVariable long id)
             throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
         System.out.println("... called acceptGame("+id+")");
@@ -79,9 +79,9 @@ public class GameController {
             description = "Changes status value of a Game identified by its id to Rejected. Only Admin is allowed to do this operation."
     )
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/reject/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "{id}/reject", method = RequestMethod.PUT)
     public ResponseEntity rejectGame(Authentication authentication, @PathVariable long id)
-            throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
+            throws GameDoesNotExistException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
         System.out.println("... called acceptGame("+id+")");
         gameService.rejectGame(authentication, id);
         return ResponseEntity.status(HttpStatus.OK)
@@ -94,7 +94,7 @@ public class GameController {
             description = "Returns amount of Games in database."
     )
     @RequestMapping(method = RequestMethod.GET, value = "/amount")
-    public ResponseEntity getAmount(){
+    public ResponseEntity<Amount> getAmount(){
         System.out.println("... called getAmountOfGames");
         return ResponseEntity
                 .status(HttpStatus.OK)

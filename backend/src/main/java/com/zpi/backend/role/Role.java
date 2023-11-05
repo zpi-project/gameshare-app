@@ -28,9 +28,6 @@ public class Role {
         Role role = (Role) o;
         return getId() != null && Objects.equals(getId(), role.getId());
     }
-    public Role(String name) {
-        this.name = name;
-    }
     @Override
     public int hashCode() {
         return getClass().hashCode();
