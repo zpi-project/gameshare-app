@@ -44,7 +44,7 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading }) => {
                 <Search />
               </Button>
             </div>
-            <div className="flex h-full gap-4 p-4">
+            <div className="flex h-full">
               <ScrollArea>
                 <div className="flex flex-col gap-4 p-4">
                   {gameInstances
