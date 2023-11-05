@@ -44,7 +44,7 @@ public class GameController {
     public ResponseEntity getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
                                    @RequestParam Optional<List<Integer>> categoriesIds) {
         System.out.println("... called getGames");
-        ResultsDTO games = gameService.getGames(page, size, search, categoriesIds);
+        ResultsDTO<Game> games = gameService.getGames(page, size, search, categoriesIds);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }
@@ -63,17 +63,31 @@ public class GameController {
 
     @Operation(
             summary = "Accept a game by id",
-            description = "Changes accept value of a Game identified by its id to True. Only Admin is allowed to do this operation."
+            description = "Changes status value of a Game identified by its id to Accepted. Only Admin is allowed to do this operation."
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/accept/{id}", method = RequestMethod.PUT)
     public ResponseEntity acceptGame(Authentication authentication, @PathVariable long id)
-            throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException {
+            throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
         System.out.println("... called acceptGame("+id+")");
         gameService.acceptGame(authentication, id);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
     }
+    @Operation(
+            summary = "Reject a game by id",
+            description = "Changes status value of a Game identified by its id to Rejected. Only Admin is allowed to do this operation."
+    )
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(value = "/reject/{id}", method = RequestMethod.PUT)
+    public ResponseEntity rejectGame(Authentication authentication, @PathVariable long id)
+            throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
+        System.out.println("... called acceptGame("+id+")");
+        gameService.rejectGame(authentication, id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .build();
+    }
+
 
     @Operation(
             summary = "Get amount of games",

@@ -4,10 +4,14 @@ import com.zpi.backend.category.CategoryAlreadyExistsException;
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.game.GameAlreadyAcceptedException;
 import com.zpi.backend.game.GameAlreadyExistsException;
+import com.zpi.backend.game.GameAlreadyRejectedException;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.user.UndefinedUserException;
 import com.zpi.backend.user.UserAlreadyExistsException;
 import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user_opinion.DeleteSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.EditSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.OpinionDoesNotExistException;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.mediatype.problem.Problem;
 import org.springframework.http.HttpHeaders;
@@ -159,6 +163,56 @@ public class ExceptionController {
     @ExceptionHandler(GameAlreadyAcceptedException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     ResponseEntity GAAHandler(GameAlreadyAcceptedException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
+                        .withTitle(HttpStatus.CONFLICT.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+    @ResponseBody
+    @ExceptionHandler(EditSomeoneElseOpinionException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    ResponseEntity ESEOHandler(EditSomeoneElseOpinionException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.BAD_REQUEST)
+                        .withTitle(HttpStatus.BAD_REQUEST.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+
+    @ResponseBody
+    @ExceptionHandler(DeleteSomeoneElseOpinionException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    ResponseEntity DSEOHandler(DeleteSomeoneElseOpinionException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.BAD_REQUEST)
+                        .withTitle(HttpStatus.BAD_REQUEST.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+
+    @ResponseBody
+    @ExceptionHandler(OpinionDoesNotExistException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity ODNEHandler(OpinionDoesNotExistException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(HttpStatus.NOT_FOUND.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+    @ResponseBody
+    @ExceptionHandler(GameAlreadyRejectedException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity GAREHandler(GameAlreadyRejectedException ex) {
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
