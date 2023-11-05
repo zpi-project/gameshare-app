@@ -14,9 +14,10 @@ interface Props {
   owner?: User;
   isLoading: boolean;
   showButtons: boolean;
+  title: string;
 }
 
-const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons }) => {
+const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons, title }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
 
@@ -33,36 +34,35 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons }) => {
         <>
           <div className="flex h-full w-full flex-col gap-4">
             <div className="h-max w-full flex-grow rounded-lg bg-card p-5 text-2xl">
-              {t("userGames")} {getName(owner)}
+              {/* {t({title})} {getName(owner)} */}
+              My Games
             </div>
             <div className="flex flex-row gap-2">
-              <div className="flex h-max w-max flex-grow flex-row items-center gap-3 rounded-lg bg-card px-2">
+              <div className="relative flex-grow">
                 <Input
-                  className="flex-grow rounded-lg bg-card"
+                  className="flex-grow rounded-lg bg-card border-none"
                   placeholder="Type to search..."
                   onChange={event => setQuery(event.target.value)}
                 />
-                <Search className="" />
+                <Search className="absolute top-2 right-4" />
               </div>
               {showButtons && <Button className="w-56">{t("addGameInstance")}</Button>}
             </div>
-            <div className="flex h-full">
-              <ScrollArea>
-                <div className="flex h-full flex-col gap-4">
-                  {gameInstances
-                    .filter(post => {
-                      if (query === "") {
-                        return post;
-                      } else if (post.title.toLowerCase().includes(query.toLowerCase())) {
-                        return post;
-                      }
-                    })
-                    .map((gameInstance, id) => (
-                      <GameInstance gameInstance={gameInstance} key={id} />
-                    ))}
-                </div>
-              </ScrollArea>
-            </div>
+            <ScrollArea className="h-[calc(100%-100px)]">
+              <div className="flex h-full flex-col gap-4">
+                {gameInstances
+                  .filter(post => {
+                    if (query === "") {
+                      return post;
+                    } else if (post.title.toLowerCase().includes(query.toLowerCase())) {
+                      return post;
+                    }
+                  })
+                  .map((gameInstance, id) => (
+                    <GameInstance gameInstance={gameInstance} key={id} />
+                  ))}
+              </div>
+            </ScrollArea>
           </div>
         </>
       )}
