@@ -14,7 +14,10 @@ const GameSearchCard: FC<GameSearchCardProps> = ({
   onClick,
 }) => {
   return (
-    <div className="flex w-full flex-row gap-2 rounded-lg bg-card p-2" onClick={onClick}>
+    <div
+      className="flex w-full cursor-pointer flex-row gap-2 rounded-lg bg-card p-2 shadow duration-200 hover:bg-accent"
+      onClick={onClick}
+    >
       <div className="h-16 w-16 overflow-hidden rounded-lg">
         <img src={image} alt={name} className="h-full w-full object-cover" />
       </div>

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface TimeBadgeProps {
@@ -6,7 +7,12 @@ interface TimeBadgeProps {
 }
 
 const TimeBadge: FC<TimeBadgeProps> = ({ time }) => {
-  return <Badge variant="secondary">AgeBadge</Badge>;
+  return (
+    <Badge variant="secondary" className="flex flex-row gap-1">
+      <Clock size={20} />
+      <span className="tracking-wider">{time}'</span>
+    </Badge>
+  );
 };
 
 export default TimeBadge;
