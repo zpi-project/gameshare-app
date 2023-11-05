@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { CategoryApi } from "@/api/CategoryApi";
@@ -26,11 +26,6 @@ const CategoriesSection: FC = () => {
     },
   });
 
-  const categoriesSorted = useMemo(
-    () => (categories ?? []).sort((a, b) => a.name.localeCompare(b.name)),
-    [categories],
-  );
-
   return (
     <div className="mt-4 flex flex-col gap-2">
       <h2 className="text-3xl leading-loose text-primary">{t("seeAll")}</h2>
@@ -45,7 +40,7 @@ const CategoriesSection: FC = () => {
           <h3 className="text-xl text-destructive">{t("categoriesErrorTitle")}</h3>
         ) : (
           <>
-            {categoriesSorted.map(category => (
+            {categories.map(category => (
               <CategoryCard category={category} key={category.id} />
             ))}
           </>
