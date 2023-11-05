@@ -6,4 +6,9 @@ export class CategoryApi {
     const { data: categories } = await Api.get<Category[]>("/categories");
     return categories;
   }
+
+  static async getOne(id: number) {
+const { data: category } = await Api.get<Category>(`/categories/${id}`);
+    return category;
+  }
 }

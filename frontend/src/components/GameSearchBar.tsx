@@ -11,7 +11,6 @@ import GameSearchCard from "./GameSearchCard";
 import { ScrollArea } from "./ui/scroll-area";
 import { Skeleton } from "./ui/skeleton";
 
-
 const GAME_PAGE_SIZE = 8;
 
 interface GameSearchBarProps {
@@ -35,7 +34,7 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder }) => 
   } = useInfiniteQuery({
     queryKey: ["games", { debouncedSearch }],
     queryFn: ({ pageParam = 0 }) =>
-      GameApi.search(debouncedSearch, pageParam as number, GAME_PAGE_SIZE),
+      GameApi.search(pageParam as number, GAME_PAGE_SIZE, debouncedSearch),
     getNextPageParam: (_, pages) => {
       const newPageParam = pages.length;
       return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
