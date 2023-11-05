@@ -11,7 +11,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Avatar from "./Avatar";
 import { EditUserForm } from "./UserForm";
 import { Button } from "./ui/button";
-import { LatLngExpression } from "leaflet";
 
 interface Props {
   user?: User;
@@ -22,10 +21,6 @@ interface Props {
 const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const default_location = useRecoilValue(locationState) as number[];
-  const default_latitude = user?.locationLatitude ?? default_location[0];
-  const default_longitude = user?.locationLongitude ?? default_location[1];
-  const location = [default_latitude, default_longitude] as LatLngExpression;
 
   return (
     <div className="flex h-full flex-col gap-6">
@@ -44,7 +39,7 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
       {user && (
         <>
           <div className="flex h-full w-full flex-row items-center gap-6">
-            <div className="flex w-3/12 flex-col gap-6 items-center">
+            <div className="flex w-3/12 flex-col items-center gap-6">
               <Avatar user={user} className="h-40 w-40 text-5xl" />
               <div className="rounded-lg bg-card p-2.5 px-6">
                 {parsePhoneNumber(user.phoneNumber).formatInternational()}
@@ -64,9 +59,8 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
               <div className="h-1/4 flex-grow">
                 <div className="rounded-lg bg-card p-3 text-xl">{getFullname(user)}</div>
               </div>
-              <div className="h-3/4 min-w-[100px] flex-grow rounded-lg bg-section">
-                <Map location={location}>
-                  <LocationButton />
+              <div className="h-3/4 min-w-[100px] flex-grow overflow-hidden rounded-lg bg-section">
+                <Map location={[user.locationLatitude, user.locationLongitude]}>
                   <LocationMarker />
                 </Map>
               </div>
