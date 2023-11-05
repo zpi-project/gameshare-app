@@ -54,6 +54,9 @@ const pl: typeof en = {
   seeAll: "Zobacz wszystkie",
   popularGamesErrorTitle: "Nie udało się pobrać popularnych gier.",
   categoriesErrorTitle: "Nie udało się pobrać kategorii gier.",
+  searchGamePlaceholder: "W jaką grę planszową chcesz zagrać?",
+  searchGamesError: "Wystąpił błąd podczas wyszukiwania gier.",
+  searchGamesNoResults: "Brak wyników",
 };
 
 export default pl;
