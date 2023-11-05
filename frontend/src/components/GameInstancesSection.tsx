@@ -36,7 +36,7 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons }) => {
               {t("userGames")} {getName(owner)}
             </div>
             <div className="flex flex-row gap-2">
-              <div className="flex h-max w-max flex-grow flex-row items-center gap-3 rounded-lg bg-card p-2">
+              <div className="flex h-max w-max flex-grow flex-row items-center gap-3 rounded-lg bg-card px-2">
                 <Input
                   className="flex-grow rounded-lg bg-card"
                   placeholder="Type to search..."
@@ -48,7 +48,7 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons }) => {
             </div>
             <div className="flex h-full">
               <ScrollArea>
-                <div className="flex flex-col gap-4 p-4">
+                <div className="flex h-full flex-col gap-4 p-4">
                   {gameInstances
                     .filter(post => {
                       if (query === "") {
