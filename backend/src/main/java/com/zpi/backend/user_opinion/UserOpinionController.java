@@ -1,6 +1,7 @@
 package com.zpi.backend.user_opinion;
 
 
+import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exceptionHandlers.BadRequestException;
 import com.zpi.backend.user.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +25,7 @@ public class UserOpinionController {
     )
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/userOpinion")
-    public ResponseEntity getMyOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+    public ResponseEntity<ResultsDTO<UserOpinion>> getMyOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
         System.out.println("... called getMineOpinions");
         return ResponseEntity.ok().body(userOpinionService.getMyOpinions(authentication,page,size));
     }
@@ -46,7 +47,7 @@ public class UserOpinionController {
             description = "Returns all opinions that were given to the user with a given UUID"
     )
     @GetMapping("/userOpinion/{uuid}")
-    public ResponseEntity getOpinions(@PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+    public ResponseEntity<ResultsDTO<UserOpinion>> getOpinions(@PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
         System.out.println("... called getOpinions");
         return ResponseEntity.ok().body(userOpinionService.getOpinions(uuid,page,size));
     }

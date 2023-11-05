@@ -29,7 +29,7 @@ public class GameController {
     )
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity addGame(@RequestBody NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
+    public ResponseEntity<Game> addGame(@RequestBody NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
         System.out.println("... called addGame");
         Game newGame = gameService.addGame(newGameDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -41,7 +41,7 @@ public class GameController {
             description = "Returns paginated games from database. Optional filtering by name and categories."
     )
     @GetMapping
-    public ResponseEntity getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
+    public ResponseEntity<ResultsDTO<Game>> getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
                                    @RequestParam Optional<List<Integer>> categoriesIds) {
         System.out.println("... called getGames");
         ResultsDTO<Game> games = gameService.getGames(page, size, search, categoriesIds);
@@ -54,7 +54,7 @@ public class GameController {
             description = "Returns Game from database by its id."
     )
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity getGame(@PathVariable long id) throws GameDoesNotExistException {
+    public ResponseEntity<Game> getGame(@PathVariable long id) throws GameDoesNotExistException {
         System.out.println("... called getGame("+id+")");
         Game games = gameService.getGame(id);
         return ResponseEntity.status(HttpStatus.OK)
@@ -94,7 +94,7 @@ public class GameController {
             description = "Returns amount of Games in database."
     )
     @RequestMapping(method = RequestMethod.GET, value = "/amount")
-    public ResponseEntity getAmount(){
+    public ResponseEntity<Amount> getAmount(){
         System.out.println("... called getAmountOfGames");
         return ResponseEntity
                 .status(HttpStatus.OK)
