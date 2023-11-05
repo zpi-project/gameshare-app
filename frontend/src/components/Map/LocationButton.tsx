@@ -24,7 +24,7 @@ const LocationButton: FC = () => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger
-          className="absolute right-3 top-20 z-[1000]"
+          className="absolute right-3 top-20 z-[11]"
           onClick={onClick}
           disabled={disabled}
         >

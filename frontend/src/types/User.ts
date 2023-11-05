@@ -1,4 +1,5 @@
 export interface User {
+  uuid: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -6,5 +7,12 @@ export interface User {
   locationLongitude: number;
   email: string;
   avatarLink: string;
-  uuid: string;
+}
+
+export interface NewUser {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  locationLatitude: number;
+  locationLongitude: number;
 }
