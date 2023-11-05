@@ -27,6 +27,12 @@ public class CategoryService {
         return categoryRepository.findAll(Sort.by("name"));
     }
 
+    public Category getCategory(long id) throws CategoryDoesNotExistException{
+        Optional<Category> categoryOptional = categoryRepository.findById(id);
+        if (categoryOptional.isEmpty()) throw new CategoryDoesNotExistException("Category (id = "+id+") does not exist.");
+        else return categoryOptional.get();
+    }
+
     public List<Category> getCategoriesByIDs(List<Long> categoriesIds) throws CategoryDoesNotExistException {
         List<Category> categories = new ArrayList<>();
         for (long categoryId:categoriesIds) {
