@@ -15,7 +15,7 @@ public class UserGameGuestDTO {
     private double locationLongitude;
 
     public UserGameGuestDTO(User user){
-        uuid = user.getUserUuid();
+        uuid = user.getUuid();
         firstName = user.getFirstName();
         lastName = user.getLastName();
         locationLatitude = user.getLocationLatitude();

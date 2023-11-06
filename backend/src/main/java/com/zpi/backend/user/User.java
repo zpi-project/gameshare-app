@@ -25,7 +25,7 @@ public class User{
     private String googleId;
 
     @Column(nullable = false,unique = true)
-    private String userUuid = UUID.randomUUID().toString();
+    private String uuid = UUID.randomUUID().toString();
 
     @Column(nullable = false)
     private String email;

@@ -18,7 +18,7 @@ public class GetMyUserDTO {
     private String avatarLink;
 
     public GetMyUserDTO(User user){
-        this.uuid =user.getUserUuid();
+        this.uuid =user.getUuid();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.phoneNumber = user.getPhoneNumber();
