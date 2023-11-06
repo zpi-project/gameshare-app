@@ -11,4 +11,6 @@ public class GameInstanceSearch {
     private Category category;
     private Integer age;
     private Integer playersNumber;
+    private Double latitude;
+    private Double longitude;
 }

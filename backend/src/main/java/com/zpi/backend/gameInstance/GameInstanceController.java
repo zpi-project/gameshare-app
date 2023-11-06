@@ -13,7 +13,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -147,6 +146,5 @@ public class GameInstanceController {
                 .status(HttpStatus.NOT_IMPLEMENTED)
                 .body(null);
     }
-
 
 }

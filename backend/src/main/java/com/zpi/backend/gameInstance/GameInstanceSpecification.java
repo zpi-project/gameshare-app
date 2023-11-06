@@ -2,6 +2,7 @@ package com.zpi.backend.gameInstance;
 
 import com.zpi.backend.category.Category;
 import com.zpi.backend.game.Game;
+import com.zpi.backend.user.User;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -24,7 +25,9 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
         Path<Integer> age = game.get("age");
         Path<String> name = game.get("name");
         Path<List<Category>> categories= game.get("categories");
-
+        Path<User> owner = root.get("owner");
+        Path<Double> latitude = owner.get("locationLatitude");
+        Path<Double> longitude = owner.get("locationLongitude");
 
         final List<Predicate> predicates = new ArrayList<>();
         if (criteria.getAge() != null) {
@@ -44,6 +47,10 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
                             "%" + criteria.getSearchName().toLowerCase() + "%")
             );
         }
+        Expression<Double> orderExpression =
+                cb.sqrt(cb.sum(cb.power(cb.diff(latitude, criteria.getLatitude()), 2),
+                        cb.power(cb.diff(longitude, criteria.getLongitude()), 2)));
+        query.orderBy(cb.asc(orderExpression));
         return cb.and(predicates.toArray(new Predicate[predicates.size()]));
     }
 }
