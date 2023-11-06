@@ -58,9 +58,9 @@ public class GameService {
             }
         } else {
             if (categoriesIds.isEmpty()) {
-                gamePage = gameRepository.searchAllByNameContains(search.get(), pageable);
+                gamePage = gameRepository.searchAllByNameContains(search.get().toLowerCase(), pageable);
             } else {
-                gamePage = gameRepository.searchAllByNameContainsAndAcceptedAndCategoriesIn(search.get(), categoriesIds.get(), pageable);
+                gamePage = gameRepository.searchAllByNameContainsAndAcceptedAndCategoriesIn(search.get().toLowerCase(), categoriesIds.get(), pageable);
             }
         }
         return new ResultsDTO<>(gamePage.stream().toList(), new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
