@@ -29,7 +29,6 @@ public class GameInstanceService {
     @Autowired
     GameService gameService;
 
-//    TODO What about saving images?
     public GameInstance addGameInstance(NewGameInstanceDTO newGameInstanceDTO, String googleId) throws UserDoesNotExistException, GameDoesNotExistException {
         User user = userService.getUserByGoogleId(googleId);
         Game game = gameService.getGame(newGameInstanceDTO.getGameId());
@@ -101,15 +100,6 @@ public class GameInstanceService {
         Page<GameInstance> gameInstancePage = gameInstanceRepository.filterGameInstancesByParameters(
                 categoryIds, age, playersNumber,
                 latitude, longitude, pageable);
-        return new ResultsDTO<>(gameInstancePage.stream().toList(),
-                new Pagination(gameInstancePage.getTotalElements(), gameInstancePage.getTotalPages()));
-    }
-
-    public ResultsDTO<GameInstance> getGameInstancesByName(int size, int page, String name, double latitude,
-                                                     double longitude){
-        Pageable pageable = PageRequest.of(page, size);
-        Page<GameInstance> gameInstancePage = gameInstanceRepository.searchByGameNameSortByDistance(
-                name, latitude, longitude, pageable);
         return new ResultsDTO<>(gameInstancePage.stream().toList(),
                 new Pagination(gameInstancePage.getTotalElements(), gameInstancePage.getTotalPages()));
     }

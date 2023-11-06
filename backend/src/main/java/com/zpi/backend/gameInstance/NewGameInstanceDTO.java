@@ -12,5 +12,4 @@ public class NewGameInstanceDTO {
     private long gameId;
     private String description;
     private double pricePerDay;
-    private List<Blob> images;
 }
