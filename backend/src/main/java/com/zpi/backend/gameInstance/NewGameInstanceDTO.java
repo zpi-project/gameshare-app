@@ -1,15 +1,12 @@
 package com.zpi.backend.gameInstance;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.sql.Blob;
-import java.util.List;
-
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class NewGameInstanceDTO {
+public class NewGameInstanceDTO extends UpdatedGameInstanceDTO{
     private long gameId;
-    private String description;
-    private double pricePerDay;
 }

@@ -5,6 +5,7 @@ import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.category.CategoryService;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
+import com.zpi.backend.exceptionHandlers.BadRequestException;
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.game.GameService;
@@ -37,7 +38,8 @@ public class GameInstanceService {
     @Autowired
     CategoryService categoryService;
 
-    public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, String googleId) throws UserDoesNotExistException, GameDoesNotExistException {
+    public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, String googleId) throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
+        newGameInstanceDTO.validate();
         User user = userService.getUserByGoogleId(googleId);
         Game game = gameService.getGame(newGameInstanceDTO.getGameId());
         GameInstance newGameInstance = new GameInstance(newGameInstanceDTO, game, user);
@@ -45,7 +47,8 @@ public class GameInstanceService {
         return new GameInstanceDTO(newGameInstance, false);
     }
 
-    public GameInstanceDTO updateGameInstance(String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO, String googleId) throws GameInstanceDoesNotExistException {
+    public GameInstanceDTO updateGameInstance(String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO, String googleId) throws GameInstanceDoesNotExistException, BadRequestException {
+        updatedGameInstanceDTO.validate();
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(uuid, googleId);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");

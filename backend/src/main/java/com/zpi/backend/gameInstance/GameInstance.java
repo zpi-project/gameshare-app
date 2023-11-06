@@ -26,6 +26,7 @@ public class GameInstance {
     @ManyToOne
     private User owner;
     private double pricePerDay;
+    @Column(length = 511)
     private String description;
     private boolean isActive;
     // TODO What about status

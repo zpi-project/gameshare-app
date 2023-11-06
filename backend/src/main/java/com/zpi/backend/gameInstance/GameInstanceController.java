@@ -2,6 +2,7 @@ package com.zpi.backend.gameInstance;
 
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.dto.ResultsDTO;
+import com.zpi.backend.exceptionHandlers.BadRequestException;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
@@ -32,7 +33,7 @@ public class GameInstanceController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(method = POST)
     public ResponseEntity<GameInstanceDTO> addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
-            throws UserDoesNotExistException, GameDoesNotExistException {
+            throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         GameInstanceDTO gameInstance = gameInstanceService.addGameInstance(newGameInstanceDTO, googleId);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -47,7 +48,7 @@ public class GameInstanceController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{uuid}", method = PUT)
     public ResponseEntity<GameInstanceDTO> updateGameInstance(@PathVariable String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO,
-                                             Authentication authentication) throws GameInstanceDoesNotExistException {
+                                             Authentication authentication) throws GameInstanceDoesNotExistException, BadRequestException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         GameInstanceDTO gameInstance = gameInstanceService.updateGameInstance(uuid, updatedGameInstanceDTO, googleId);
         return ResponseEntity.status(HttpStatus.OK)
