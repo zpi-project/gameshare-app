@@ -41,6 +41,7 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
       return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
     },
   });
+
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
 
   useEffect(() => {

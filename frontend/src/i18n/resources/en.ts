@@ -56,4 +56,6 @@ export default {
   searchGameWithinCategoryPlaceholder: "Search games within this category",
   searchGamesError: "There was an error while searching games.",
   searchGamesNoResults: "No results",
+  categoryGamesError: "There was a problem fetching games within this category.",
+  categoryError: "There was a problem fetching this category.",
 };

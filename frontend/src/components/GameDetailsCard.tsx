@@ -21,7 +21,7 @@ const GameDetailsCard: FC<GameDetailsCardProps> = ({
       </div>
       <h3 className="text-xl font-bold text-primary">{name}</h3>
       <p className="line-clamp-5 h-24 italic">{shortDescription}</p>
-      <div className="flex flex-row gap-1">
+      <div className="align-self-end ml-auto flex flex-row gap-1 self-end justify-self-end">
         <TimeBadge time={playingTime} />
         <PlayersBadge minPlayers={minPlayers} maxPlayers={maxPlayers} />
         <AgeBadge age={age} />

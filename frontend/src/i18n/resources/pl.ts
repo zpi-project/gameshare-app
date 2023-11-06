@@ -58,6 +58,8 @@ const pl: typeof en = {
   searchGameWithinCategoryPlaceholder: "Wyszukaj grę w tej kategorii...",
   searchGamesError: "Wystąpił błąd podczas wyszukiwania gier.",
   searchGamesNoResults: "Brak wyników",
+  categoryGamesError: "Nie udało się pobrać gier dla tej kategorii.",
+  categoryError: "Nie udało się pobrać tej kategorii.",
 };
 
 export default pl;

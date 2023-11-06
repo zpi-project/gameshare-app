@@ -13,6 +13,7 @@ import GameSearchBar from "@/components/GameSearchBar";
 import { useTheme } from "@/components/ThemeProvider";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/components/ui/use-toast";
 
 const GAME_PAGE_SIZE = 16;
 
@@ -20,12 +21,18 @@ const CategoryGameSearch: FC = () => {
   const { id = "" } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { toast } = useToast();
 
   const { data: category, isLoading } = useQuery({
     queryKey: ["category", { id }],
     queryFn: () => CategoryApi.getOne(parseInt(id)),
     onError: () => {
-      // handle error toast, redirect to search game page
+      toast({
+        title: t("categoryGamesError"),
+        description: t("tryRefreshing"),
+        variant: "destructive",
+      });
+      navigate(URLS.GAMES);
     },
   });
 
@@ -63,7 +70,7 @@ const CategoryGameSearch: FC = () => {
       : theme;
 
   return (
-    <div className="relative h-full w-full rounded-lg bg-section p-8">
+    <div className="relative h-full w-full rounded-lg bg-section p-8 shadow">
       <div
         className="absolute left-4 right-4 top-4 h-1/2 rounded-lg p-4 opacity-30"
         style={{
@@ -91,7 +98,7 @@ const CategoryGameSearch: FC = () => {
         )}
       </header>
       <ScrollArea className="mt-4 h-[calc(100%-30px)]">
-        <div className="mt-40 flex flex-row flex-wrap gap-4 justify-self-end">
+        <div className="mb-4 mt-40 flex flex-row flex-wrap gap-6">
           {isGamesLoading ? (
             <>
               {Array.from({ length: GAME_PAGE_SIZE }).map((_, idx) => (
@@ -99,7 +106,7 @@ const CategoryGameSearch: FC = () => {
               ))}
             </>
           ) : isGamesError ? (
-            <>handle error</>
+            <h4 className="mt-4 text-center text-xl text-destructive">{t("searchGamesError")}</h4>
           ) : (
             <>
               {games.pages.map(page =>
