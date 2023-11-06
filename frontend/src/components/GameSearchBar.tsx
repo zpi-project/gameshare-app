@@ -16,9 +16,10 @@ const GAME_PAGE_SIZE = 8;
 interface GameSearchBarProps {
   onGameClick: (game: Game) => void;
   placeholder: string;
+  categories?: number[];
 }
 
-const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder }) => {
+const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categories }) => {
   const [search, setSearch] = useState("");
   const [showResults, setShowResults] = useState(false);
   const [debouncedSearch] = useDebounce(search, 500);
@@ -34,7 +35,7 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder }) => 
   } = useInfiniteQuery({
     queryKey: ["games", { debouncedSearch }],
     queryFn: ({ pageParam = 0 }) =>
-      GameApi.search(pageParam as number, GAME_PAGE_SIZE, debouncedSearch),
+      GameApi.search(pageParam as number, GAME_PAGE_SIZE, debouncedSearch, categories),
     getNextPageParam: (_, pages) => {
       const newPageParam = pages.length;
       return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;

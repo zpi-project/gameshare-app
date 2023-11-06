@@ -69,11 +69,18 @@ const CategoryGameSearch: FC = () => {
         }}
       />
       <header className="flex w-full flex-grow flex-row justify-between">
-        {isLoading ? <Skeleton /> : category && <h1>{category.name}</h1>}
-        <GameSearchBar
-          onGameClick={(game: Game) => navigate(`${URLS.GAMES}/${game.id}`)}
-          placeholder={t("searchGameWithinCategoryPlaceholder")}
-        />
+        {isLoading ? (
+          <Skeleton className="h-10 w-1/3 rounded-lg tracking-wider" />
+        ) : (
+          category && <h1 className="text-3xl">{category.name}</h1>
+        )}
+        {id.length && (
+          <GameSearchBar
+            onGameClick={(game: Game) => navigate(`${URLS.GAMES}/${game.id}`)}
+            placeholder={t("searchGameWithinCategoryPlaceholder")}
+            categories={[parseInt(id)]}
+          />
+        )}
       </header>
       <ScrollArea></ScrollArea>
     </div>

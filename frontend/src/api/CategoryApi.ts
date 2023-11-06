@@ -8,7 +8,7 @@ export class CategoryApi {
   }
 
   static async getOne(id: number) {
-const { data: category } = await Api.get<Category>(`/categories/${id}`);
+    const { data: category } = await Api.get<Category>(`/categories/${id}`);
     return category;
   }
 }
