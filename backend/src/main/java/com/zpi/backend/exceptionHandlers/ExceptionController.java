@@ -8,7 +8,6 @@ import com.zpi.backend.game.GameAlreadyAcceptedException;
 import com.zpi.backend.game.GameAlreadyExistsException;
 import com.zpi.backend.game.GameAlreadyRejectedException;
 import com.zpi.backend.game.GameDoesNotExistException;
-import com.zpi.backend.gameInstanceImage.GameInstanceImage;
 import com.zpi.backend.gameInstanceImage.GameInstanceImageDoesNotExistException;
 import com.zpi.backend.user.UndefinedUserException;
 import com.zpi.backend.user.UserAlreadyExistsException;
@@ -176,6 +175,19 @@ public class ExceptionController {
                         .withDetail(ex.getMessage()));
     }
 
+    @ResponseBody
+    @ExceptionHandler(GameAlreadyRejectedException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity GARHandler(GameAlreadyRejectedException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
+    }
+
     // Game Instance
 
     @ResponseBody
@@ -217,6 +229,8 @@ public class ExceptionController {
                         .withTitle(ex.getClass().getSimpleName())
                         .withDetail(ex.getMessage()));
     }
+
+    // User Opinion
     @ResponseBody
     @ExceptionHandler(EditSomeoneElseOpinionException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
