@@ -2,6 +2,7 @@ package com.zpi.backend.gameInstance;
 
 import com.zpi.backend.game.GameDTO;
 import com.zpi.backend.gameInstanceImage.GameInstanceImage;
+import com.zpi.backend.user.UserGameDTO;
 import com.zpi.backend.user.UserGameGuestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,9 +17,22 @@ public class GameInstanceDTO {
     private String uuid;
     private String shortDescription;
     private double pricePerDay;
-    private List<GameInstanceImage> gameInstanceImages;
+    private List<GameInstanceImage> images;
     private GameDTO game;
-    private UserGameGuestDTO user;
+    private UserGameGuestDTO owner;
     private boolean isActive;
+
+    public GameInstanceDTO(GameInstance gameInstance, boolean isGuest){
+        uuid = gameInstance.getUuid();
+        shortDescription = gameInstance.getDescription();
+        pricePerDay = gameInstance.getPricePerDay();
+        images = gameInstance.getImages();
+        isActive = gameInstance.isActive();
+        if (isGuest)
+            owner = new UserGameGuestDTO(gameInstance.getOwner());
+        else
+            owner = new UserGameDTO(gameInstance.getOwner());
+        game = new GameDTO(gameInstance.getGame());
+    }
 
 }

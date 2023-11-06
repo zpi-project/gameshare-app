@@ -11,4 +11,10 @@ public class GameDTO {
     private long id;
     private String name;
     private String image;
+
+    public GameDTO(Game game){
+        id = game.getId();
+        name = game.getName();
+        image = game.getImage();
+    }
 }

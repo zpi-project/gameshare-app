@@ -14,10 +14,23 @@ public class GameListDTO {
     private long id;
     private String name;
     private String image;
-    private int playersNumber;
+    private int minPlayers;
+    private int maxPlayers;
     private int playingTime;
     private int age;
     private String shortDescription;
     private List<Category> categories;
+
+    public GameListDTO(Game game){
+        id = game.getId();
+        name = game.getName();
+        image = game.getImage();
+        minPlayers = game.getMinPlayers();
+        maxPlayers = game.getMaxPlayers();
+        age = game.getAge();
+        playingTime = game.getPlayingTime();
+        shortDescription = game.getShortDescription();
+        categories = game.getCategories();
+    }
 
 }

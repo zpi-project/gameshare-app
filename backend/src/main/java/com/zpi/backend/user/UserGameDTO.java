@@ -10,4 +10,8 @@ import lombok.NoArgsConstructor;
 public class UserGameDTO extends UserGameGuestDTO {
     private String phoneNumber;
 
+    public UserGameDTO(User user){
+        super(user);
+        phoneNumber = user.getPhoneNumber();
+    }
 }
