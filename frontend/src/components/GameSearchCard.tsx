@@ -1,8 +1,6 @@
 import { FC } from "react";
 import { Game } from "@/types/Game";
-import AgeBadge from "./Badge/AgeBadge";
-import PlayersBadge from "./Badge/PlayersBadge";
-import TimeBadge from "./Badge/TimeBadge";
+import { AgeBadge, PlayersBadge, TimeBadge } from "@/components/Badge";
 
 interface GameSearchCardProps {
   game: Game;

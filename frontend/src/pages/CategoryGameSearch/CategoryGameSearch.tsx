@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import { Game } from "@/types/Game";
 import { stringToHexColor } from "@/utils/stringToColor";
 import { CategoryApi } from "@/api/CategoryApi";
 import { GameApi } from "@/api/GameApi";
+import GameDetailsCard from "@/components/GameDetailsCard";
 import GameSearchBar from "@/components/GameSearchBar";
 import { useTheme } from "@/components/ThemeProvider";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -31,8 +32,8 @@ const CategoryGameSearch: FC = () => {
   const {
     data: games,
     isFetchingNextPage,
-    // isLoading,
-    isError,
+    isLoading: isGamesLoading,
+    isError: isGamesError,
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
@@ -46,6 +47,13 @@ const CategoryGameSearch: FC = () => {
     enabled: category !== undefined,
   });
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
+
+  useEffect(() => {
+    if (entry?.isIntersecting && !isLoading) {
+      void fetchNextPage();
+    }
+  }, [entry?.isIntersecting, fetchNextPage, isLoading]);
+
   const { theme } = useTheme();
   const color =
     theme === "system"
@@ -82,7 +90,33 @@ const CategoryGameSearch: FC = () => {
           />
         )}
       </header>
-      <ScrollArea></ScrollArea>
+      <ScrollArea className="mt-4 h-[calc(100%-30px)]">
+        <div className="mt-40 flex flex-row flex-wrap gap-4 justify-self-end">
+          {isGamesLoading ? (
+            <>
+              {Array.from({ length: GAME_PAGE_SIZE }).map((_, idx) => (
+                <Skeleton className="h-40 w-40 rounded-lg" key={idx} />
+              ))}
+            </>
+          ) : isGamesError ? (
+            <>handle error</>
+          ) : (
+            <>
+              {games.pages.map(page =>
+                page.results.map(game => <GameDetailsCard game={game} key={game.id} />),
+              )}
+            </>
+          )}
+          {isFetchingNextPage && (
+            <>
+              {Array.from({ length: 8 }).map((_, idx) => (
+                <Skeleton className="h-40 w-40 rounded-lg" key={idx} />
+              ))}
+            </>
+          )}
+          {hasNextPage && <div ref={ref} data-test="scroller-trigger" />}
+        </div>
+      </ScrollArea>
     </div>
   );
 };
