@@ -1,5 +1,6 @@
 package com.zpi.backend.gameInstance;
 
+import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.user.User;
@@ -123,18 +124,14 @@ public class GameInstanceController {
     }
 
     @Operation(
-            summary = "[Not implemented] Get game instances using filters",
+            summary = "Get game instances using filters",
             description = "Returns Game Instances filtered by categories, age, players number, " +
                     "and sorted by distance (calculated by latitude and longitude) from the database."
     )
-    // TODO getGameInstances with filtering
     @RequestMapping(method = GET, value="/search")
     public ResponseEntity<ResultsDTO<GameInstanceListDTO>>  getGameInstances(@RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
                                            @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber,
-                                           @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page){
-//        return ResponseEntity
-//                .status(HttpStatus.NOT_IMPLEMENTED)
-//                .body(null);
+                                           @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page) throws CategoryDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstances(size, page, searchName, categoryId, age, playersNumber, latitude, longitude));
     }

@@ -28,17 +28,21 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
 
         final List<Predicate> predicates = new ArrayList<>();
         if (criteria.getAge() != null) {
-            predicates.add(cb.greaterThan(age, criteria.getAge()));
+            predicates.add(cb.lessThanOrEqualTo(age, criteria.getAge()));
         }
         if (criteria.getPlayersNumber() != null) {
             predicates.add(cb.lessThanOrEqualTo(minPlayers, criteria.getPlayersNumber()));
             predicates.add(cb.greaterThanOrEqualTo(maxPlayers, criteria.getPlayersNumber()));
         }
-        if (criteria.getCategoryId() != null) {
-            predicates.add(cb.isMember(criteria.getCategoryId(), categories.get("id")));
+        if (criteria.getCategory() != null) {
+            predicates.add(cb.isMember(criteria.getCategory(), categories));
         }
         if (criteria.getSearchName() != null) {
-            predicates.add(cb.like(name, "%" + criteria.getSearchName() + "%"));
+            predicates.add(
+                    cb.like(
+                            cb.lower(name),
+                            "%" + criteria.getSearchName().toLowerCase() + "%")
+            );
         }
         return cb.and(predicates.toArray(new Predicate[predicates.size()]));
     }

@@ -1,5 +1,6 @@
 package com.zpi.backend.gameInstance;
 
+import com.zpi.backend.category.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -7,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class GameInstanceSearch {
     private String searchName;
-    private Long categoryId;
+    private Category category;
     private Integer age;
     private Integer playersNumber;
 }

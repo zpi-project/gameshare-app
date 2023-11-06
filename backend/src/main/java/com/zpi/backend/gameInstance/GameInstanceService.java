@@ -1,5 +1,8 @@
 package com.zpi.backend.gameInstance;
 
+import com.zpi.backend.category.Category;
+import com.zpi.backend.category.CategoryDoesNotExistException;
+import com.zpi.backend.category.CategoryService;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.game.Game;
@@ -9,10 +12,6 @@ import com.zpi.backend.gameInstanceImage.GameInstanceImageRepository;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +34,8 @@ public class GameInstanceService {
     UserService userService;
     @Autowired
     GameService gameService;
+    @Autowired
+    CategoryService categoryService;
 
     public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, String googleId) throws UserDoesNotExistException, GameDoesNotExistException {
         User user = userService.getUserByGoogleId(googleId);
@@ -111,15 +112,16 @@ public class GameInstanceService {
 
     public ResultsDTO<GameInstanceListDTO> getGameInstances(int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
                                                Optional<Integer> playersNumber, double latitude,
-                                               double longitude){
+                                               double longitude) throws CategoryDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
+        Category category = null;
+        if (categoryId.isPresent())
+            category = categoryService.getCategory(categoryId.get());
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
-                searchName.orElse(null), categoryId.orElse(null),
+                searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null)
         );
         Specification<GameInstance> spec = new GameInstanceSpecification(gameInstanceSearch);
-//        Page<GameInstanceListDTO> gameInstancesPage = gameInstanceRepository.filterGameInstancesByParameters(
-//                categoryId, age, playersNumber, latitude, longitude, pageable);
         Page<GameInstance> gameInstancesPage = gameInstanceRepository.findAll(spec, pageable);
         List<GameInstanceListDTO> resultsList = new ArrayList<>();
         gameInstancesPage.stream().toList()
