@@ -75,7 +75,7 @@ public class GameInstanceController {
                     "Only the owner of the Game Instance is permitted to perform this operation."
     )
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/activate/{gameInstanceUUID}", method = PATCH)
+    @RequestMapping(value = "/{gameInstanceUUID}/activate", method = PATCH)
     public ResponseEntity activate(@PathVariable String gameInstanceUUID, Authentication authentication)
             throws GameInstanceStatusException, GameInstanceDoesNotExistException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
@@ -90,7 +90,7 @@ public class GameInstanceController {
                     "Only the owner of the Game Instance is permitted to perform this operation."
     )
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/deactivate/{gameInstanceUUID}", method = PATCH)
+    @RequestMapping(value = "/{gameInstanceUUID}/deactivate", method = PATCH)
     public ResponseEntity deactivate(@PathVariable String gameInstanceUUID, Authentication authentication)
             throws GameInstanceStatusException, GameInstanceDoesNotExistException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
