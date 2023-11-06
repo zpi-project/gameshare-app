@@ -102,9 +102,9 @@ public class GameInstanceService {
         userService.getUserByUUID(userUUID);
         Page<GameInstance> gameInstancesPage;
         if (searchName.isEmpty())
-            gameInstancesPage = gameInstanceRepository.findByOwnerUserUuid(userUUID, pageable);
+            gameInstancesPage = gameInstanceRepository.findByOwnerUuid(userUUID, pageable);
         else
-            gameInstancesPage = gameInstanceRepository.findByOwnerUserUuidAndGameNameContainingIgnoreCase(
+            gameInstancesPage = gameInstanceRepository.findByOwnerUuidAndGameNameContainingIgnoreCase(
                     userUUID, searchName.get(), pageable);
         List<GameInstanceListDTO> resultsList = new ArrayList<>();
         gameInstancesPage.stream().toList()

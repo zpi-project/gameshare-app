@@ -23,7 +23,7 @@ public class UserService {
     }
 
     public User getUserByUUID(String uuid) throws UserDoesNotExistException {
-        return this.userRepository.findByUserUuid(uuid).orElseThrow(()->new UserDoesNotExistException("User not found"));
+        return this.userRepository.findByUuid(uuid).orElseThrow(()->new UserDoesNotExistException("User not found"));
     }
 
 

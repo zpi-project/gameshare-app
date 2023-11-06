@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface GameInstanceRepository extends JpaRepository<GameInstance, Long>, JpaSpecificationExecutor<GameInstance> {
     Optional<GameInstance> findByUuid(String uuid);
     Optional<GameInstance> findByUuidAndOwner_GoogleId(String gameUUID, String ownerGoogleId);
-    Page<GameInstance> findByOwnerUserUuid(String ownerUUID, Pageable pageable);
-    Page<GameInstance> findByOwnerUserUuidAndGameNameContainingIgnoreCase(String ownerUUID, String searchName, Pageable pageable);
+    Page<GameInstance> findByOwnerUuid(String ownerUUID, Pageable pageable);
+    Page<GameInstance> findByOwnerUuidAndGameNameContainingIgnoreCase(String ownerUUID, String searchName, Pageable pageable);
 
 }
