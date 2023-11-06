@@ -15,6 +15,7 @@ public class GameInstanceImageService {
     @Autowired
     GameInstanceRepository gameInstanceRepository;
 
+//    TODO implement addImageToGameInstance endpoint
     public LinkDTO addImageToGameInstance(String googleId, String gameInstanceUUID,
                                           NewGameInstanceImageDTO newGameInstanceDTO) throws GameInstanceDoesNotExistException {
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository
