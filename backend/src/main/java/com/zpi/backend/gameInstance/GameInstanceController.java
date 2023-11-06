@@ -103,8 +103,6 @@ public class GameInstanceController {
             summary = "Get a game instance by UUID",
             description = "Returns a Game Instance from the database by its UUID."
     )
-    // TODO Is authenticated?
-    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{gameInstanceUUID}", method = GET)
     public ResponseEntity<GameInstance> getGameInstance(@PathVariable String gameInstanceUUID)
             throws GameInstanceDoesNotExistException {
@@ -139,5 +137,18 @@ public class GameInstanceController {
 //        return ResponseEntity.status(HttpStatus.OK)
 //                .body(gameInstanceService.getGameInstances(size, page, categoriesIds, age, playersNumber, latitude, longitude));
     }
+
+    @Operation(
+            summary = "[Not implemented] Get game instances' opinions by game instance's uuid",
+            description = "Returns the Game Instances Opinions from the database, identified by Game Instance's uuid"
+    )
+    @RequestMapping(value = "/{gameInstanceUUID}/opinions", method = GET)
+    public ResponseEntity<ResultsDTO<GameInstance>> getGameInstanceOpinions(@PathVariable String gameInstanceUUID,
+                                                                         @RequestParam int size, @RequestParam int page) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_IMPLEMENTED)
+                .body(null);
+    }
+
 
 }
