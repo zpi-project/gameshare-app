@@ -70,15 +70,15 @@ const CategoryGameSearch: FC = () => {
       : theme;
 
   return (
-    <div className="relative h-full w-full rounded-lg bg-section p-8 shadow">
+    <div className="relative h-full w-full rounded-lg bg-section p-8">
       <div
-        className="absolute left-4 right-4 top-4 h-1/2 rounded-lg p-4 opacity-30"
+        className="absolute left-4 right-4 top-4 h-1/2 rounded-lg p-4 opacity-50 dark:opacity-40"
         style={{
           backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, ${
             category
               ? color === "dark"
                 ? stringToHexColor(category.name, 0.6, 0.4)
-                : stringToHexColor(category.name, 0.8, 0.7)
+                : stringToHexColor(category.name, 0.7, 0.5)
               : "#ddd"
           } 100%)`,
         }}
