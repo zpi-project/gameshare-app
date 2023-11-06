@@ -103,4 +103,5 @@ public class GameInstanceService {
         return new ResultsDTO<>(gameInstancePage.stream().toList(),
                 new Pagination(gameInstancePage.getTotalElements(), gameInstancePage.getTotalPages()));
     }
+
 }
