@@ -15,6 +15,7 @@ public interface GameInstanceRepository extends JpaRepository<GameInstance, Long
     Optional<GameInstance> findByUuid(String uuid);
     Optional<GameInstance> findByUuidAndOwner_GoogleId(String gameUUID, String ownerGoogleId);
     Page<GameInstance> findByOwnerUserUuid(String ownerUUID, Pageable pageable);
+    Page<GameInstance> findByOwnerUserUuidAndGameNameContainingIgnoreCase(String ownerUUID, String searchName, Pageable pageable);
     @Query(value="select distinct *, " +
             "sqrt(pow(U.location_latitude, 2) + pow(:latitude, 2)) " +
             "+ sqrt(pow(U.location_longitude, 2) + pow(:longitude, 2)) AS distance " +

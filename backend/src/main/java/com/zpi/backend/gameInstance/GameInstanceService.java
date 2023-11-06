@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,15 +31,15 @@ public class GameInstanceService {
     @Autowired
     GameService gameService;
 
-    public GameInstance addGameInstance(NewGameInstanceDTO newGameInstanceDTO, String googleId) throws UserDoesNotExistException, GameDoesNotExistException {
+    public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, String googleId) throws UserDoesNotExistException, GameDoesNotExistException {
         User user = userService.getUserByGoogleId(googleId);
         Game game = gameService.getGame(newGameInstanceDTO.getGameId());
         GameInstance newGameInstance = new GameInstance(newGameInstanceDTO, game, user);
         gameInstanceRepository.save(newGameInstance);
-        return newGameInstance;
+        return new GameInstanceDTO(newGameInstance, false);
     }
 
-    public GameInstance updateGameInstance(String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO, String googleId) throws GameInstanceDoesNotExistException {
+    public GameInstanceDTO updateGameInstance(String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO, String googleId) throws GameInstanceDoesNotExistException {
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(uuid, googleId);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");
@@ -45,7 +47,7 @@ public class GameInstanceService {
         gameInstance.setDescription(updatedGameInstanceDTO.getDescription());
         gameInstance.setPricePerDay(updatedGameInstanceDTO.getPricePerDay());
         gameInstanceRepository.save(gameInstance);
-        return gameInstance;
+        return new GameInstanceDTO(gameInstance, false);
     }
 
     //TODO Implementation of checking reservation, what about status?
@@ -78,30 +80,42 @@ public class GameInstanceService {
         gameInstanceRepository.save(gameInstance);
     }
 
-    public GameInstance getGameInstance(String uuid) throws GameInstanceDoesNotExistException {
+    public GameInstanceDTO getGameInstance(String uuid, Authentication authentication) throws GameInstanceDoesNotExistException {
+        boolean isGuest = authentication == null || !authentication.isAuthenticated();
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuid(uuid);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("The Game Instance (uuid = "+uuid+") does not exists ");
-        return gameInstanceOptional.get();
+        return new GameInstanceDTO(gameInstanceOptional.get(), isGuest);
     }
 
-    public ResultsDTO<GameInstance> getUserGameInstances(String userUUID, int size, int page) throws UserDoesNotExistException {
+    public ResultsDTO<GameInstanceListDTO> getUserGameInstances(String userUUID, Optional<String> searchName, int size, int page) throws UserDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         userService.getUserByUUID(userUUID);
-        Page<GameInstance> gameInstancesPage = gameInstanceRepository.findByOwnerUserUuid(userUUID, pageable);
-        return new ResultsDTO<>(gameInstancesPage.stream().toList(),
+        Page<GameInstance> gameInstancesPage;
+        if (searchName.isEmpty())
+            gameInstancesPage = gameInstanceRepository.findByOwnerUserUuid(userUUID, pageable);
+        else
+            gameInstancesPage = gameInstanceRepository.findByOwnerUserUuidAndGameNameContainingIgnoreCase(
+                    userUUID, searchName.get(), pageable);
+        List<GameInstanceListDTO> resultsList = new ArrayList<>();
+        gameInstancesPage.stream().toList()
+                .forEach(gameInstance -> resultsList.add(new GameInstanceListDTO(gameInstance)));
+        return new ResultsDTO<>(resultsList,
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }
 
-    public ResultsDTO<GameInstance> getGameInstances(int size, int page, Optional<List<Long>> categoryIds, Optional<Integer> age,
+    public ResultsDTO<GameInstanceListDTO> getGameInstances(int size, int page, Optional<String> searchName, Optional<List<Long>> categoryIds, Optional<Integer> age,
                                                Optional<Integer> playersNumber, double latitude,
                                                double longitude){
         Pageable pageable = PageRequest.of(page, size);
-        Page<GameInstance> gameInstancePage = gameInstanceRepository.filterGameInstancesByParameters(
+        Page<GameInstance> gameInstancesPage = gameInstanceRepository.filterGameInstancesByParameters(
                 categoryIds, age, playersNumber,
                 latitude, longitude, pageable);
-        return new ResultsDTO<>(gameInstancePage.stream().toList(),
-                new Pagination(gameInstancePage.getTotalElements(), gameInstancePage.getTotalPages()));
+        List<GameInstanceListDTO> resultsList = new ArrayList<>();
+        gameInstancesPage.stream().toList()
+                .forEach(gameInstance -> resultsList.add(new GameInstanceListDTO(gameInstance)));
+        return new ResultsDTO<>(resultsList,
+                new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }
 
 }
