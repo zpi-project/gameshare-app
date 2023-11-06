@@ -129,14 +129,14 @@ public class GameInstanceController {
     )
     // TODO getGameInstances with filtering
     @RequestMapping(method = GET, value="/search")
-    public ResponseEntity<ResultsDTO<GameInstanceListDTO>>  getGameInstances(@RequestParam Optional<String> searchName, @RequestParam Optional<List<Long>> categoriesIds,
+    public ResponseEntity<ResultsDTO<GameInstanceListDTO>>  getGameInstances(@RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
                                            @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber,
                                            @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page){
-        return ResponseEntity
-                .status(HttpStatus.NOT_IMPLEMENTED)
-                .body(null);
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .body(gameInstanceService.getGameInstances(size, page, categoriesIds, age, playersNumber, latitude, longitude));
+//        return ResponseEntity
+//                .status(HttpStatus.NOT_IMPLEMENTED)
+//                .body(null);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(gameInstanceService.getGameInstances(size, page, searchName, categoryId, age, playersNumber, latitude, longitude));
     }
 
     @Operation(
