@@ -15,4 +15,9 @@ export class GameApi {
     });
     return games;
   }
+
+  static async getOne(id: number) {
+    const { data: game } = await Api.get<Game>(`/games/${id}`);
+    return game;
+  }
 }
