@@ -19,7 +19,7 @@ const GameSearchCard: FC<GameSearchCardProps> = ({ game, onClick }) => {
         <img src={image} alt={name} className="h-full w-full object-cover" />
       </div>
       <h4 className="text-xl text-primary">{name}</h4>
-      <div className="absolute bottom-2 right-2 flex h-max flex-row gap-1 self-end">
+      <div className="absolute bottom-2 right-2 flex flex-row gap-1">
         <TimeBadge time={playingTime} />
         <PlayersBadge minPlayers={minPlayers} maxPlayers={maxPlayers} />
         <AgeBadge age={age} />

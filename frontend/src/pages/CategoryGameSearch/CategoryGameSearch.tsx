@@ -102,11 +102,13 @@ const CategoryGameSearch: FC = () => {
           {isGamesLoading ? (
             <>
               {Array.from({ length: GAME_PAGE_SIZE }).map((_, idx) => (
-                <Skeleton className="h-40 w-40 rounded-lg" key={idx} />
+                <Skeleton className="h-[540px] w-[300px] rounded-lg" key={idx} />
               ))}
             </>
           ) : isGamesError ? (
-            <h4 className="mt-4 text-center text-xl text-destructive">{t("searchGamesError")}</h4>
+            <div className="flex w-full rounded-lg bg-section/80 p-2">
+              <h4 className="text-xl text-destructive">{t("searchGamesError")}</h4>
+            </div>
           ) : (
             <>
               {games.pages.map(page =>
