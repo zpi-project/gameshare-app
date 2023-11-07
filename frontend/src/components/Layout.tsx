@@ -4,6 +4,7 @@ import secureLocalStorage from "react-secure-storage";
 import { useQuery } from "@tanstack/react-query";
 import jwt_decode, { JwtPayload } from "jwt-decode";
 import { useSetRecoilState, useRecoilState } from "recoil";
+import { isRoleFetchedState } from "@/state/isRoleFetched";
 import { registerFormOpenState } from "@/state/registerForm";
 import { roleState } from "@/state/role";
 import { tokenState } from "@/state/token";
@@ -15,6 +16,7 @@ import Spinner from "./ui/Spinner";
 
 const Layout: FC = () => {
   const setRole = useSetRecoilState(roleState);
+  const setIsRoleFetched = useSetRecoilState(isRoleFetchedState);
   const setRegisterFormOpen = useSetRecoilState(registerFormOpenState);
   const [token, setToken] = useRecoilState(tokenState);
 
@@ -29,10 +31,12 @@ const Layout: FC = () => {
       if (token) {
         secureLocalStorage.setItem("token", token);
       }
+      setIsRoleFetched(true);
     },
     onError: () => {
       if (token) {
         setRegisterFormOpen(true);
+        setIsRoleFetched(true);
       }
     },
   });
