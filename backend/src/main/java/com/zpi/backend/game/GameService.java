@@ -66,6 +66,13 @@ public class GameService {
         return new ResultsDTO<>(gamePage.stream().toList(), new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
     }
 
+    // TODO Getting popular games (considering reservations)
+    public ResultsDTO<Game> getPopularGames(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Game> gamePage = gameRepository.getAllAccepted(pageable);
+        return new ResultsDTO<>(gamePage.stream().toList(), new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+    }
+
     public void rejectGame(Authentication authentication, long id) throws GameAlreadyRejectedException, GameDoesNotExistException, IllegalAccessException, UserDoesNotExistException {
         if (!roleService.checkIfAdmin(authentication))
             throw new IllegalAccessException();
