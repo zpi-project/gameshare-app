@@ -1,0 +1,42 @@
+services:
+  db:
+    image: 'postgres:13.1'
+    container_name: db
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    container_name: backend
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - CLIENT_ID=${AUTH_CLIENT_ID}
+    ports:
+      - "${BACKEND_PORT}:8080"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  frontend:
+    container_name: frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    volumes:
+      - "./frontend/src/:/usr/app/src/"
+      - "./frontend/build:/usr/app/build/"
+      - "./frontend/public/:/usr/app/public/"
+      - "./frontend/cypress/:/usr/app/cypress/"
+    ports:
+      - "${FRONTEND_PORT}:5173"
+    env_file:
+      - .env
