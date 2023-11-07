@@ -1,6 +1,6 @@
 package com.zpi.backend.user;
 
-import com.zpi.backend.exceptionHandlers.BadRequestException;
+import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.validators.ValueChecker;
 import lombok.AllArgsConstructor;
 import lombok.Data;

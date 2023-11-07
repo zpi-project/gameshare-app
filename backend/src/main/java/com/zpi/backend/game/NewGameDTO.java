@@ -1,7 +1,7 @@
 package com.zpi.backend.game;
 
 import com.zpi.backend.category.Category;
-import com.zpi.backend.exceptionHandlers.BadRequestException;
+import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.validators.ValueChecker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
