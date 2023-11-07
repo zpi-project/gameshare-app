@@ -1,4 +1,4 @@
-package com.zpi.backend.exceptionHandlers;
+package com.zpi.backend.exception_handlers;
 
 import com.zpi.backend.category.CategoryAlreadyExistsException;
 import com.zpi.backend.category.CategoryDoesNotExistException;

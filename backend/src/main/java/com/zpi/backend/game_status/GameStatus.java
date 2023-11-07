@@ -1,4 +1,4 @@
-package com.zpi.backend.gameStatus;
+package com.zpi.backend.game_status;
 
 import jakarta.persistence.*;
 import lombok.*;
