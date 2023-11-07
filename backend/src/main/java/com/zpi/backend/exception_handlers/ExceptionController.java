@@ -1,11 +1,14 @@
 package com.zpi.backend.exception_handlers;
 
+import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
+import com.zpi.backend.gameInstance.GameInstanceStatusException;
 import com.zpi.backend.category.CategoryAlreadyExistsException;
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.game.GameAlreadyAcceptedException;
 import com.zpi.backend.game.GameAlreadyExistsException;
 import com.zpi.backend.game.GameAlreadyRejectedException;
 import com.zpi.backend.game.GameDoesNotExistException;
+import com.zpi.backend.gameInstanceImage.GameInstanceImageDoesNotExistException;
 import com.zpi.backend.user.UndefinedUserException;
 import com.zpi.backend.user.UserAlreadyExistsException;
 import com.zpi.backend.user.UserDoesNotExistException;
@@ -61,8 +64,8 @@ public class ExceptionController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
                         .withStatus(HttpStatus.FORBIDDEN)
-                        .withTitle(HttpStatus.FORBIDDEN.name())
-                        .withDetail(ex.getClass().getSimpleName()));
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
     }
 
     //    User
@@ -75,8 +78,8 @@ public class ExceptionController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
                         .withStatus(HttpStatus.BAD_REQUEST)
-                        .withTitle(HttpStatus.BAD_REQUEST.name())
-                        .withDetail(ex.getClass().getSimpleName()));
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
     }
 
     @ExceptionHandler(UserDoesNotExistException.class)
@@ -87,8 +90,8 @@ public class ExceptionController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
                         .withStatus(HttpStatus.NOT_FOUND)
-                        .withTitle(HttpStatus.NOT_FOUND.name())
-                        .withDetail(ex.getClass().getSimpleName()));
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
     }
 
     @ResponseBody
@@ -114,8 +117,8 @@ public class ExceptionController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
                         .withStatus(HttpStatus.CONFLICT)
-                        .withTitle(HttpStatus.CONFLICT.name())
-                        .withDetail(ex.getClass().getSimpleName()));
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
     }
 
     @ResponseBody
@@ -127,8 +130,8 @@ public class ExceptionController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
                         .withStatus(HttpStatus.NOT_FOUND)
-                        .withTitle(HttpStatus.NOT_FOUND.name())
-                        .withDetail(ex.getClass().getSimpleName()));
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
     }
 
     // Games
@@ -141,8 +144,8 @@ public class ExceptionController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
                         .withStatus(HttpStatus.CONFLICT)
-                        .withTitle(HttpStatus.CONFLICT.name())
-                        .withDetail(ex.getClass().getSimpleName()));
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
     }
 
     @ResponseBody
@@ -154,8 +157,8 @@ public class ExceptionController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
                         .withStatus(HttpStatus.NOT_FOUND)
-                        .withTitle(HttpStatus.NOT_FOUND.name())
-                        .withDetail(ex.getClass().getSimpleName()));
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
 
     }
 
@@ -168,9 +171,66 @@ public class ExceptionController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
                         .withStatus(HttpStatus.CONFLICT)
-                        .withTitle(HttpStatus.CONFLICT.name())
-                        .withDetail(ex.getClass().getSimpleName()));
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
     }
+
+    @ResponseBody
+    @ExceptionHandler(GameAlreadyRejectedException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity GARHandler(GameAlreadyRejectedException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
+    }
+
+    // Game Instance
+
+    @ResponseBody
+    @ExceptionHandler(GameInstanceDoesNotExistException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity GINEHandler(GameInstanceDoesNotExistException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
+    }
+
+    @ResponseBody
+    @ExceptionHandler(GameInstanceStatusException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity GISHandler(GameInstanceStatusException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
+    }
+
+    // Game Instance Image
+    @ResponseBody
+    @ExceptionHandler(GameInstanceImageDoesNotExistException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity GIINEHandler(GameInstanceImageDoesNotExistException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
+    }
+
+    // User Opinion
     @ResponseBody
     @ExceptionHandler(EditSomeoneElseOpinionException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
@@ -209,16 +269,5 @@ public class ExceptionController {
                         .withTitle(HttpStatus.NOT_FOUND.name())
                         .withDetail(ex.getClass().getSimpleName()));
     }
-    @ResponseBody
-    @ExceptionHandler(GameAlreadyRejectedException.class)
-    @ResponseStatus(value = HttpStatus.CONFLICT)
-    ResponseEntity GAREHandler(GameAlreadyRejectedException ex) {
-        return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
-                .body(Problem.create()
-                        .withStatus(HttpStatus.CONFLICT)
-                        .withTitle(HttpStatus.CONFLICT.name())
-                        .withDetail(ex.getClass().getSimpleName()));
-    }
+
 }

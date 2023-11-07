@@ -22,7 +22,7 @@ public class CategoryController {
             description = "Add a new Category to database."
     )
     @PostMapping
-    public ResponseEntity addCategory(@RequestBody NewCategoryDTO newCategory) throws CategoryAlreadyExistsException, BadRequestException {
+    public ResponseEntity<Category> addCategory(@RequestBody NewCategoryDTO newCategory) throws CategoryAlreadyExistsException, BadRequestException {
         System.out.println("... called addCategory");
         Category category = categoryService.addCategory(newCategory);
         return ResponseEntity.status(HttpStatus.OK)
@@ -58,7 +58,7 @@ public class CategoryController {
             description = "Returns amount of Categories in database."
     )
     @RequestMapping(method = RequestMethod.GET, value = "/amount")
-    public ResponseEntity getAmount(){
+    public ResponseEntity<Amount> getAmount(){
         System.out.println("... called getAmountOfCategories");
         return ResponseEntity
                 .status(HttpStatus.OK)

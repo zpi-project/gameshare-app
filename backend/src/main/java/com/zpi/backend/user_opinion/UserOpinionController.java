@@ -46,6 +46,7 @@ public class UserOpinionController {
             summary = "Get opinions about user",
             description = "Returns all opinions that were given to the user with a given UUID"
     )
+
     @GetMapping("/user/{uuid}/opinions")
     public ResponseEntity<ResultsDTO<UserOpinion>> getOpinions(@PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
         System.out.println("... called getOpinions");

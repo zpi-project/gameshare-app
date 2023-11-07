@@ -2,8 +2,6 @@ package com.zpi.backend.user;
 
 import lombok.Data;
 
-import java.util.UUID;
-
 @Data
 public class GetUserDTO {
     private String uuid;

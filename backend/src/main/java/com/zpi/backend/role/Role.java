@@ -16,7 +16,7 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false,unique = true)
     private String name;
