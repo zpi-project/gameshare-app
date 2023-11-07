@@ -38,17 +38,18 @@ public class GameInstanceService {
     @Autowired
     CategoryService categoryService;
 
-    public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, String googleId) throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
+    public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication) throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
         newGameInstanceDTO.validate();
-        User user = userService.getUserByGoogleId(googleId);
+        User user = userService.getUser(authentication);
         Game game = gameService.getGame(newGameInstanceDTO.getGameId());
         GameInstance newGameInstance = new GameInstance(newGameInstanceDTO, game, user);
         gameInstanceRepository.save(newGameInstance);
         return new GameInstanceDTO(newGameInstance, false);
     }
 
-    public GameInstanceDTO updateGameInstance(String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO, String googleId) throws GameInstanceDoesNotExistException, BadRequestException {
+    public GameInstanceDTO updateGameInstance(String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO, Authentication authentication) throws GameInstanceDoesNotExistException, BadRequestException {
         updatedGameInstanceDTO.validate();
+        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(uuid, googleId);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");

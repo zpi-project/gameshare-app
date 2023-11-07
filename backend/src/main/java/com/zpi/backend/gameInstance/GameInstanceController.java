@@ -34,8 +34,7 @@ public class GameInstanceController {
     @RequestMapping(method = POST)
     public ResponseEntity<GameInstanceDTO> addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
             throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
-        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
-        GameInstanceDTO gameInstance = gameInstanceService.addGameInstance(newGameInstanceDTO, googleId);
+        GameInstanceDTO gameInstance = gameInstanceService.addGameInstance(newGameInstanceDTO, authentication);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(gameInstance);
     }
@@ -49,8 +48,7 @@ public class GameInstanceController {
     @RequestMapping(value = "/{uuid}", method = PUT)
     public ResponseEntity<GameInstanceDTO> updateGameInstance(@PathVariable String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO,
                                              Authentication authentication) throws GameInstanceDoesNotExistException, BadRequestException {
-        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
-        GameInstanceDTO gameInstance = gameInstanceService.updateGameInstance(uuid, updatedGameInstanceDTO, googleId);
+        GameInstanceDTO gameInstance = gameInstanceService.updateGameInstance(uuid, updatedGameInstanceDTO, authentication);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstance);
     }
