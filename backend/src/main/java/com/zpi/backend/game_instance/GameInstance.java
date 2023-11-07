@@ -1,7 +1,7 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import com.zpi.backend.game.Game;
-import com.zpi.backend.gameInstanceImage.GameInstanceImage;
+import com.zpi.backend.game_instance_image.GameInstanceImage;
 import com.zpi.backend.user.User;
 import jakarta.persistence.*;
 import lombok.Data;

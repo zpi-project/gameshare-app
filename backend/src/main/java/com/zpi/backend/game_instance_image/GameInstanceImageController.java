@@ -1,6 +1,6 @@
-package com.zpi.backend.gameInstanceImage;
+package com.zpi.backend.game_instance_image;
 
-import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
 import com.zpi.backend.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

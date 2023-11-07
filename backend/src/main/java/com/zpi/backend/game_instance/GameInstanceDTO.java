@@ -1,7 +1,7 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import com.zpi.backend.game.GameDTO;
-import com.zpi.backend.gameInstanceImage.GameInstanceImage;
+import com.zpi.backend.game_instance_image.GameInstanceImage;
 import com.zpi.backend.user.UserGameDTO;
 import com.zpi.backend.user.UserGameGuestDTO;
 import lombok.AllArgsConstructor;

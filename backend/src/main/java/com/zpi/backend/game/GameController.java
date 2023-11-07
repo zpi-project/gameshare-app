@@ -92,7 +92,7 @@ public class GameController {
             summary = "Get popular games",
             description = "Returns paginated popular games from database. [Not implemented] Popularity is calculated considering reservations."
     )
-    @GetMapping
+    @GetMapping(value = "/popular")
     public ResponseEntity<ResultsDTO<Game>> getPopularGames(@RequestParam int page, @RequestParam int size) {
         System.out.println("... called getPopularGames");
         ResultsDTO<Game> games = gameService.getPopularGames(page, size);

@@ -1,4 +1,4 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;

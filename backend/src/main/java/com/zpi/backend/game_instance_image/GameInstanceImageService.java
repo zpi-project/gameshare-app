@@ -1,8 +1,8 @@
-package com.zpi.backend.gameInstanceImage;
+package com.zpi.backend.game_instance_image;
 
-import com.zpi.backend.gameInstance.GameInstance;
-import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
-import com.zpi.backend.gameInstance.GameInstanceRepository;
+import com.zpi.backend.game_instance.GameInstance;
+import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.GameInstanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
