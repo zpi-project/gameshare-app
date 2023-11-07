@@ -123,15 +123,15 @@ public class GameInstanceController {
 
     @Operation(
             summary = "Get game instances using filters",
-            description = "Returns Game Instances filtered by categories, age, players number, " +
+            description = "Returns Game Instances filtered by name, category, age, players number, availability" +
                     "and sorted by distance (calculated by latitude and longitude) from the database."
     )
     @RequestMapping(method = GET, value="/search")
     public ResponseEntity<ResultsDTO<GameInstanceListDTO>>  getGameInstances(@RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
-                                           @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber,
+                                           @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber, @RequestParam Optional<Boolean> isAvailable,
                                            @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page) throws CategoryDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getGameInstances(size, page, searchName, categoryId, age, playersNumber, latitude, longitude));
+                .body(gameInstanceService.getGameInstances(size, page, searchName, categoryId, age, playersNumber, isAvailable, latitude, longitude));
     }
 
     @Operation(
