@@ -11,6 +11,7 @@ import UserProfile from "@/pages/UserProfile";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import App from "./App";
 import "./index.css";
+import Game from "./pages/Game";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${URLS.GAMES}/:id`,
-        element: <div>game page</div>,
+        element: <Game />,
       },
       {
         path: `${URLS.CATEGORY_GAMES}/:id`,

@@ -58,4 +58,6 @@ export default {
   searchGamesNoResults: "No results",
   categoryGamesError: "There was a problem fetching games within this category.",
   categoryError: "There was a problem fetching this category.",
+  gameError: "There was a problem fetching this game.",
+  usersWithThisGame: "Users with this game",
 };

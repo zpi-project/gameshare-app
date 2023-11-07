@@ -60,6 +60,9 @@ const pl: typeof en = {
   searchGamesNoResults: "Brak wyników",
   categoryGamesError: "Nie udało się pobrać gier dla tej kategorii.",
   categoryError: "Nie udało się pobrać tej kategorii.",
+  gameError: "Nie udało się pobrać danych o tej grze.",
+
+  usersWithThisGame: "Użytkownicy z tą grą",
 };
 
 export default pl;
