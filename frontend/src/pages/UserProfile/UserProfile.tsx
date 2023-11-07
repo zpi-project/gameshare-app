@@ -40,11 +40,6 @@ const UserProfile: FC = () => {
         </div>
         <div className="flex h-3/5 flex-col gap-2 rounded-lg bg-section p-2">
           <Opinions />
-          <AddOpinion
-            user={user}
-            isLoading={isLoading}
-            // onClick={()=>setIsModalOpen(true)}
-          />
         </div>
       </div>
       <div className="w-1/2 flex-grow rounded-lg bg-section p-4">space for search games</div>

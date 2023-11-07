@@ -26,8 +26,6 @@ const MyProfile: FC = () => {
     },
   });
 
-  console.log({ user });
-
   return (
     <div className="flex h-full flex-row gap-6">
       <div className="flex h-full w-1/2 flex-grow flex-col gap-6 rounded-lg">
