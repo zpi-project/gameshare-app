@@ -9,9 +9,9 @@ export class GameApi {
     return games;
   }
 
-  static async search(search: string, page: number, size: number) {
+  static async search(page: number, size: number, search?: string, categoriesIds?: number[]) {
     const { data: games } = await Api.get<Paginated<Game>>("/games", {
-      params: { page, size, search },
+      params: { page, size, search, categoriesIds: categoriesIds?.join(",") },
     });
     return games;
   }

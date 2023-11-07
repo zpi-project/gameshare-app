@@ -15,9 +15,11 @@ const GAME_PAGE_SIZE = 8;
 
 interface GameSearchBarProps {
   onGameClick: (game: Game) => void;
+  placeholder: string;
+  categories?: number[];
 }
 
-const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick }) => {
+const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categories }) => {
   const [search, setSearch] = useState("");
   const [showResults, setShowResults] = useState(false);
   const [debouncedSearch] = useDebounce(search, 500);
@@ -33,12 +35,13 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick }) => {
   } = useInfiniteQuery({
     queryKey: ["games", { debouncedSearch }],
     queryFn: ({ pageParam = 0 }) =>
-      GameApi.search(debouncedSearch, pageParam as number, GAME_PAGE_SIZE),
+      GameApi.search(pageParam as number, GAME_PAGE_SIZE, debouncedSearch, categories),
     getNextPageParam: (_, pages) => {
       const newPageParam = pages.length;
       return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
     },
   });
+
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
 
   useEffect(() => {
@@ -63,10 +66,10 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick }) => {
   };
 
   return (
-    <div className="relative max-w-[700px]">
+    <div className="relative max-w-[700px] flex-grow">
       <Search className="absolute right-4 top-2" />
       <Input
-        placeholder={t("searchGamePlaceholder")}
+        placeholder={placeholder}
         className="rounded-lg border-none bg-card"
         onChange={e => setSearch(e.target.value)}
         onFocus={onFocus}

@@ -2,14 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { URLS } from "@/constants/urls";
+import CategoryGameSearch from "@/pages/CategoryGameSearch";
 import Dashboard from "@/pages/Dashboard";
 import Error from "@/pages/Error";
+import GameSearch from "@/pages/GameSearch";
 import MyProfile from "@/pages/MyProfile";
 import UserProfile from "@/pages/UserProfile";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import App from "./App";
-import ProtectedRoute from "./components/ProtectedRoute";
 import "./index.css";
-import GameSearch from "./pages/GameSearch";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${URLS.CATEGORY_GAMES}/:id`,
-        element: <div>category games page</div>,
+        element: <CategoryGameSearch />,
       },
       {
         path: `${URLS.GAME_INSTANCE}/:id`,

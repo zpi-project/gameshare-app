@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import { Category } from "@/types/Category";
-import { stringToRGBColor } from "@/utils/stringToColor";
+import { stringToHexColor } from "@/utils/stringToColor";
 import { useTheme } from "./ThemeProvider";
 
 interface CategoryCardProps {
@@ -30,8 +30,8 @@ const CategoryCard: FC<CategoryCardProps> = ({ category: { name, id } }) => {
       style={{
         backgroundColor:
           color === "dark"
-            ? stringToRGBColor(name, isHovered ? 0.5 : 0.4, isHovered ? 0.4 : 0.2)
-            : stringToRGBColor(name, isHovered ? 0.3 : 0.5, isHovered ? 0.5 : 0.7),
+            ? stringToHexColor(name, isHovered ? 0.5 : 0.4, isHovered ? 0.4 : 0.2)
+            : stringToHexColor(name, isHovered ? 0.3 : 0.5, isHovered ? 0.5 : 0.7),
       }}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
