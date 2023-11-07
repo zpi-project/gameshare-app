@@ -19,7 +19,7 @@ const LoadingGameDetailsSection: FC = () => {
       window.removeEventListener("resize", setWidthToHeight);
     };
   }, []);
-    
+
   return (
     <>
       <div ref={divRef} className="h-full w-[265px]">
@@ -27,11 +27,11 @@ const LoadingGameDetailsSection: FC = () => {
       </div>
       <div className="flex flex-grow flex-col gap-2 lg:gap-4">
         <Skeleton className="h-10 max-w-[700px] rounded-lg" />
-        <div className="flex gap-1">
-          <Skeleton className="h-8 w-[100px] rounded-full" />
-          <Skeleton className="h-8 w-[200px] rounded-full" />
-          <Skeleton className="h-8 w-[350px] rounded-full" />
-          <Skeleton className="h-8 w-[150px] rounded-full" />
+        <div className="flex flex-wrap gap-1">
+          <Skeleton className="h-8 max-w-[100px] rounded-full" />
+          <Skeleton className="h-8 max-w-[200px] rounded-full" />
+          <Skeleton className="h-8 max-w-[350px] rounded-full" />
+          <Skeleton className="h-8 max-w-[150px] rounded-full" />
         </div>
         <div className="flex flex-col gap-2">
           <Skeleton className="h-4 max-w-[900px] rounded-lg" />
@@ -39,10 +39,10 @@ const LoadingGameDetailsSection: FC = () => {
           <Skeleton className="h-4 max-w-[1200px] rounded-lg" />
           <Skeleton className="h-4 w-[800px] rounded-lg" />
         </div>
-        <div className="mt-8 flex gap-1">
-          <Skeleton className="h-8 w-[100px] rounded-full" />
-          <Skeleton className="h-8 w-[100px] rounded-full" />
-          <Skeleton className="h-8 w-[100px] rounded-full" />
+        <div className="mt-8 flex flex-wrap gap-1">
+          <Skeleton className="h-8 max-w-[100px] rounded-full" />
+          <Skeleton className="h-8 max-w-[100px] rounded-full" />
+          <Skeleton className="h-8 max-w-[100px] rounded-full" />
         </div>
       </div>
     </>

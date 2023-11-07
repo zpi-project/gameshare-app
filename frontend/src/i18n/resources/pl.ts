@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -61,6 +62,8 @@ const pl: typeof en = {
   categoryGamesError: "Nie udało się pobrać gier dla tej kategorii.",
   categoryError: "Nie udało się pobrać tej kategorii.",
   gameError: "Nie udało się pobrać danych o tej grze.",
+
+  usersWithThisGame: "Użytkownicy z tą grą",
 };
 
 export default pl;

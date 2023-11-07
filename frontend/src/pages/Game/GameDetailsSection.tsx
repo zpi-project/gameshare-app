@@ -1,10 +1,10 @@
 import { FC, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { URLS } from "@/constants/urls";
 import { Game } from "@/types/Game";
 import { TimeBadge, PlayersBadge, AgeBadge } from "@/components/Badge";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface GameDetailsSectionProps {
   game: Game;
@@ -34,7 +34,7 @@ const GameDetailsSection: FC<GameDetailsSectionProps> = ({ game }) => {
       <div className="h-full overflow-hidden rounded-lg bg-section" ref={divRef}>
         <img src={game.image} alt={game.name} className="h-full w-full object-cover object-top" />
       </div>
-      <ScrollArea>
+      <ScrollArea className="h-full">
         <div className="flex flex-col gap-2 lg:gap-4">
           <h1 className="text-xl font-bold xl:text-3xl">{game.name}</h1>
           <div className="flex flex-row flex-wrap gap-1">
