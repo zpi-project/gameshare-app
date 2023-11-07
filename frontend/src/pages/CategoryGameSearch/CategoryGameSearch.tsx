@@ -87,7 +87,7 @@ const CategoryGameSearch: FC = () => {
         {isLoading ? (
           <Skeleton className="h-10 w-1/3 rounded-lg tracking-wider" />
         ) : (
-          category && <h1 className="text-3xl mr-2">{category.name}</h1>
+          category && <h1 className="mr-2 text-3xl">{category.name}</h1>
         )}
         {id.length && (
           <GameSearchBar
