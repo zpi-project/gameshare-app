@@ -1,0 +1,67 @@
+name: IAC pipeline
+
+on: 
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - closed
+      - synchronize
+
+env:
+  TERRAFORM_DIR: ./terraform
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      # Checkout
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Authentication
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: 'google-github-actions/auth@v1'
+        with: 
+          credentials_json: ${{ secrets.IAC_CICD_SA }}
+
+      # Terraform install
+      - name: Setup Terraform
+        id: install
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.3.0
+          terraform_wrapper: false
+
+      # Terraform format
+      - name: Terraform Format
+        id: format
+        run: 'terraform -chdir=${{ env.TERRAFORM_DIR }} fmt'
+
+      # Terraform Init
+      - name: Initialize Terraform
+        id: init
+        run: 'terraform -chdir=${{ env.TERRAFORM_DIR }} init'
+
+      # Terraform Validate
+      - name: Terraform Validate
+        id: validate
+        run: 'terraform -chdir=${{ env.TERRAFORM_DIR }} validate'
+
+      # Terraform Plan
+      - name: Plan Terraform
+        id: plan
+        if: github.event.pull_request.base.ref == 'main' || (github.event_name == 'push' && github.ref_name != 'main')
+        run: terraform -chdir=${{ env.TERRAFORM_DIR }} plan -no-color -input=false
+
+      # Terraform Apply
+      - name: Apply Terraform
+        id: apply
+        if: ( github.ref == 'refs/heads/main' || github.ref == 'main' ) &&  github.event.pull_request.merged == true
+        run: terraform -chdir=${{ env.TERRAFORM_DIR }} apply -auto-approve -no-color -input=false 
