@@ -101,6 +101,21 @@ public class GameController {
     }
 
     @Operation(
+            summary = "Get popular games",
+            description = "Returns paginated popular games from database. [Not implemented] Popularity is calculated considering reservations."
+    )
+    @GetMapping(value = "/{gameId}/users")
+    public ResponseEntity<ResultsDTO<UserWithGameOpinionDTO>> getUsersAndGameInstancesWithGame(
+            @PathVariable long gameId, @RequestParam double latitude, @RequestParam double longitude,
+            @RequestParam int page, @RequestParam int size) {
+        System.out.println("... called getUsersAndGameInstancesWithGame");
+        ResultsDTO<UserWithGameOpinionDTO> userWithGames =
+                gameService.getUsersAndGameInstancesWithGame(gameId, latitude, longitude, page, size);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userWithGames);
+    }
+
+    @Operation(
             summary = "Get amount of games",
             description = "Returns amount of Games in database."
     )

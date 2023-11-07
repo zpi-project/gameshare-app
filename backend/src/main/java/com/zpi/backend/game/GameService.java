@@ -9,15 +9,20 @@ import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
 import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.UserGameGuestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GameService {
@@ -106,5 +111,34 @@ public class GameService {
 
     public long getAmount(){
         return gameRepository.count();
+    }
+
+    public ResultsDTO<UserWithGameOpinionDTO> getUsersAndGameInstancesWithGame(long gameId, double latitude, double longitude,
+                                                                               int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Object[]> objectsPage = gameRepository.getAllUsersWithGameAndRating(gameId, latitude, longitude, pageable);
+        List<UserWithGameOpinionDTO> userWithGameDTOPage =
+                objectsPage.stream()
+                        .map(this::convertToDTO)
+                        .toList();
+        return new ResultsDTO<>(userWithGameDTOPage,
+                new Pagination(objectsPage.getTotalElements(), objectsPage.getTotalPages()));
+    }
+
+    private UserWithGameOpinionDTO convertToDTO(Object[] columns) {
+        UserWithGameOpinionDTO dto = new UserWithGameOpinionDTO();
+        dto.setUser(new UserGameGuestDTO(
+                (String) columns[0],
+                (String) columns[1],
+                (String) columns[2],
+                (Double) columns[3],
+                (Double) columns[4],
+                (String) columns[5]
+        ));
+        dto.setUserRate(((BigDecimal) columns[6]).doubleValue());
+        dto.setGameInstanceUUID((String) columns[7]);
+        dto.setGameName((String) columns[8]);
+        dto.setGameInstanceRate(((BigDecimal) columns[9]).doubleValue());
+        return dto;
     }
 }
