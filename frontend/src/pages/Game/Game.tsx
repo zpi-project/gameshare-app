@@ -40,7 +40,7 @@ const Game: FC = () => {
     <div className="flex h-full w-full flex-col gap-4">
       <div className="relative flex-grow rounded-lg bg-section">
         <div
-          className="absolute bottom-4 left-4 right-4 top-4 rounded-lg opacity-50 dark:opacity-40 -z-1"
+          className="-z-1 absolute bottom-4 left-4 right-4 top-4 rounded-lg opacity-50 dark:opacity-40"
           style={{
             backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, ${
               game
@@ -51,7 +51,7 @@ const Game: FC = () => {
             } 100%)`,
           }}
         />
-        <div className="flex flex-row p-8">
+        <div className="absolute bottom-8 left-8 right-8 top-8 flex flex-row">
           {isLoading ? (
             <></>
           ) : (

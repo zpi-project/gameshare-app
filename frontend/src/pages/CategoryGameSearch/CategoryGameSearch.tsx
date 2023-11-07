@@ -83,11 +83,11 @@ const CategoryGameSearch: FC = () => {
           } 100%)`,
         }}
       />
-      <header className="flex w-full flex-grow flex-row justify-between">
+      <header className="absolute bottom-8 left-8 right-8 top-8 flex flex-row justify-between">
         {isLoading ? (
           <Skeleton className="h-10 w-1/3 rounded-lg tracking-wider" />
         ) : (
-          category && <h1 className="text-3xl">{category.name}</h1>
+          category && <h1 className="text-3xl mr-2">{category.name}</h1>
         )}
         {id.length && (
           <GameSearchBar
@@ -97,7 +97,7 @@ const CategoryGameSearch: FC = () => {
           />
         )}
       </header>
-      <ScrollArea className="mt-4 h-[calc(100%-30px)]">
+      <ScrollArea className="mt-[60px] h-[calc(100%-30px)]">
         <div className="mb-4 mt-40 flex flex-row flex-wrap gap-6">
           {isGamesLoading ? (
             <>
