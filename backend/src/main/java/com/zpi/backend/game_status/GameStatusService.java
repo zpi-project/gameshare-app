@@ -1,11 +1,7 @@
-package com.zpi.backend.gameStatus;
+package com.zpi.backend.game_status;
 
-import com.zpi.backend.exceptionHandlers.BadRequestException;
-import com.zpi.backend.game.Game;
 import com.zpi.backend.role.RoleService;
-import com.zpi.backend.user.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service

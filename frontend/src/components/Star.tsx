@@ -3,6 +3,8 @@ import { Star as StarIcon } from "lucide-react";
 
 interface Props {
   filled: boolean;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
 const Star: FC<Props> = ({ filled }) => {

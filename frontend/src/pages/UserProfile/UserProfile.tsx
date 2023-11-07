@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
+import AddOpinion from "@/components/AddOpinion";
 import Opinions from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
-import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import AddUserOpinionModal from "./AddUserOpinionModal";
 
@@ -38,11 +38,8 @@ const UserProfile: FC = () => {
           <UserDetails user={user} showEdit={false} isLoading={isLoading} />
           {isModalOpen && <AddUserOpinionModal />}
         </div>
-        <div className="flex h-3/5 flex-col rounded-lg bg-section p-2">
+        <div className="flex h-3/5 flex-col gap-2 rounded-lg bg-section p-2">
           <Opinions />
-          <Button className="m-4 ml-auto max-w-max" onClick={() => setIsModalOpen(true)}>
-            {t("addOpinion")}
-          </Button>
         </div>
       </div>
       <div className="w-1/2 flex-grow rounded-lg bg-section p-4">space for search games</div>

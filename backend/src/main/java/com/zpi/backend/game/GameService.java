@@ -5,8 +5,8 @@ import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.category.CategoryService;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
-import com.zpi.backend.exceptionHandlers.BadRequestException;
-import com.zpi.backend.gameStatus.GameStatusService;
+import com.zpi.backend.exception_handlers.BadRequestException;
+import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
 import com.zpi.backend.user.UserDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +58,9 @@ public class GameService {
             }
         } else {
             if (categoriesIds.isEmpty()) {
-                gamePage = gameRepository.searchAllByNameContains(search.get(), pageable);
+                gamePage = gameRepository.searchAllByNameContains(search.get().toLowerCase(), pageable);
             } else {
-                gamePage = gameRepository.searchAllByNameContainsAndAcceptedAndCategoriesIn(search.get(), categoriesIds.get(), pageable);
+                gamePage = gameRepository.searchAllByNameContainsAndAcceptedAndCategoriesIn(search.get().toLowerCase(), categoriesIds.get(), pageable);
             }
         }
         return new ResultsDTO<>(gamePage.stream().toList(), new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));

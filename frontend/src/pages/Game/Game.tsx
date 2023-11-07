@@ -62,7 +62,7 @@ const Game: FC = () => {
           {isLoading ? <LoadingGameDetailsSection /> : game && <GameDetailsSection game={game} />}
         </div>
       </div>
-      <div className="flex-grow rounded-lg bg-section p-4 flex flex-row gap-4">
+      <div className="flex flex-grow flex-row gap-4 rounded-lg bg-section p-4">
         <div className="h-full w-1/2 overflow-hidden rounded-lg">
           <Map autolocate location={location} setLocation={setLocation}>
             <LocationButton />
