@@ -1,9 +1,6 @@
 package com.zpi.backend.gameInstance;
 
-import com.zpi.backend.game.GameDTO;
 import com.zpi.backend.game.GameListDTO;
-import com.zpi.backend.user.UserGameDTO;
-import com.zpi.backend.user.UserGameGuestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,5 +22,4 @@ public class GameInstanceListDTO {
         isActive = gameInstance.isActive();
         game = new GameListDTO(gameInstance.getGame());
     }
-
 }

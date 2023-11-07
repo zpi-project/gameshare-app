@@ -21,11 +21,11 @@ public class UserOpinionController {
 
     @Operation(
             summary = "Get opinions about myself",
-            description = "Returns all opinions that were given to the user"
+            description = "Returns all opinions that were given to the user, Only currently logged user can use this endpoint."
     )
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/user/opinions")
-    public ResponseEntity<ResultsDTO<UserOpinion>> getMyOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+    public ResponseEntity<ResultsDTO<ReturnOpinionServiceDTO>> getMyOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
         System.out.println("... called getMyOpinions");
         return ResponseEntity.ok().body(userOpinionService.getMyOpinions(authentication,page,size));
     }
@@ -44,18 +44,19 @@ public class UserOpinionController {
 
     @Operation(
             summary = "Get opinions about user",
-            description = "Returns all opinions that were given to the user with a given UUID"
+            description = "Returns all opinions that were given to the user with a given UUID, everyone can use " +
+                    "this endpoint."
     )
 
     @GetMapping("/user/{uuid}/opinions")
-    public ResponseEntity<ResultsDTO<UserOpinion>> getOpinions(@PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+    public ResponseEntity<ResultsDTO<ReturnOpinionServiceDTO>> getOpinions(@PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
         System.out.println("... called getOpinions");
         return ResponseEntity.ok().body(userOpinionService.getOpinions(uuid,page,size));
     }
 
     @Operation(
             summary = "Update opinion",
-            description = "Updates opinion with a given id"
+            description = "Updates opinion with a given id, User that created the opinion can edit it."
     )
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/user/opinions/{id}")
@@ -67,7 +68,7 @@ public class UserOpinionController {
 
     @Operation(
             summary = "Delete opinion",
-            description = "Deletes opinion with a given id"
+            description = "Deletes opinion with a given id, Only user that created the opinion can delete it."
     )
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/user/opinions/{id}")

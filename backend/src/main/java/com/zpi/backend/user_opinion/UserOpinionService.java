@@ -8,10 +8,13 @@ import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -19,12 +22,26 @@ public class UserOpinionService {
 
     UserOpinionRepository userOpinionRepository;
     UserService userService;
-    public ResultsDTO<UserOpinion> getMyOpinions(Authentication authentication, int page, int size) throws UserDoesNotExistException {
+    public ResultsDTO<ReturnOpinionServiceDTO> getMyOpinions(Authentication authentication, int page, int size) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
         Pageable pageable = PageRequest.of(page, size);
-        Page<UserOpinion> userOpinionPage;
-        userOpinionPage = userOpinionRepository.getUserOpinionsByRatedUser(user, pageable);
-        return new ResultsDTO<>(userOpinionPage.stream().toList(), new Pagination(userOpinionPage.getTotalElements(), userOpinionPage.getTotalPages()));
+
+        Page<UserOpinion> userOpinionPage = userOpinionRepository.getUserOpinionsByRatedUser(user, pageable);
+        Page<ReturnOpinionServiceDTO> returnUserOpinionDTOpage = convertPage(userOpinionPage);
+        return new ResultsDTO<>(returnUserOpinionDTOpage.stream().toList(), new Pagination(returnUserOpinionDTOpage.getTotalElements(), returnUserOpinionDTOpage.getTotalPages()));
+    }
+
+    public Page<ReturnOpinionServiceDTO> convertPage(Page<UserOpinion> entityPage) {
+        return new PageImpl<>(
+                entityPage.getContent().stream()  // Convert each EntityObject to DTOObject
+                        .map(this::convertToDTO)
+                        .collect(Collectors.toList()),
+                entityPage.getPageable(),
+                entityPage.getTotalElements()
+        );
+    }
+    public ReturnOpinionServiceDTO convertToDTO(UserOpinion userOpinion){
+        return new ReturnOpinionServiceDTO(userOpinion);
     }
 
     public UserOpinion addOpinion(Authentication authentication, NewUserOpinionDTO newUserOpinionDTO) throws BadRequestException, UserDoesNotExistException {
@@ -35,11 +52,12 @@ public class UserOpinionService {
         return userOpinionRepository.save(userOpinion);
     }
 
-    public ResultsDTO<UserOpinion> getOpinions(String uuid, int page, int size) throws UserDoesNotExistException {
+    public ResultsDTO<ReturnOpinionServiceDTO> getOpinions(String uuid, int page, int size) throws UserDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         Page<UserOpinion> userOpinionPage;
         userOpinionPage = userOpinionRepository.getUserOpinionsByRatedUser(userService.getUserByUUID(uuid), pageable);
-        return new ResultsDTO<>(userOpinionPage.stream().toList(), new Pagination(userOpinionPage.getTotalElements(), userOpinionPage.getTotalPages()));
+        Page<ReturnOpinionServiceDTO> returnUserOpinionDTOpage = convertPage(userOpinionPage);
+        return new ResultsDTO<>(returnUserOpinionDTOpage.stream().toList(), new Pagination(returnUserOpinionDTOpage.getTotalElements(), returnUserOpinionDTOpage.getTotalPages()));
     }
 
     public boolean checkIfNotRatingUsersOpinion(User user, UserOpinion userOpinion){
@@ -62,7 +80,6 @@ public class UserOpinionService {
         User user = userService.getUser(authentication);
         if(checkIfNotRatingUsersOpinion(user, userOpinion))
             throw new DeleteSomeoneElseOpinionException("User can delete only his own opinion");
-
         userOpinionRepository.delete(userOpinion);
     }
 }
