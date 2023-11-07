@@ -44,7 +44,7 @@ const CategoryGameSearch: FC = () => {
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ["games", { id }],
+    queryKey: ["category-games", { id }],
     queryFn: ({ pageParam = 0 }) =>
       GameApi.search(pageParam as number, GAME_PAGE_SIZE, "", [parseInt(id)]),
     getNextPageParam: (_, pages) => {

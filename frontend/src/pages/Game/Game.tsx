@@ -1,11 +1,12 @@
 import { FC, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { URLS } from "@/constants/urls";
 import { stringToHexColor } from "@/utils/stringToColor";
 import { GameApi } from "@/api/GameApi";
 import { useTheme } from "@/components/ThemeProvider";
+import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -16,7 +17,7 @@ const Game: FC = () => {
   const { toast } = useToast();
 
   const { data: game, isLoading } = useQuery({
-    queryKey: ["games", { id }],
+    queryKey: ["game", { id }],
     queryFn: () => GameApi.getOne(parseInt(id)),
     onError: () => {
       toast({
@@ -67,7 +68,7 @@ const Game: FC = () => {
             } 100%)`,
           }}
         />
-        <div className="absolute bottom-8 left-8 right-8 top-8 flex flex-row">
+        <div className="absolute bottom-8 left-8 right-8 top-8 flex flex-row gap-4">
           {isLoading ? (
             <>
               <div ref={divRef} className="h-full w-[265px]">
@@ -81,7 +82,23 @@ const Game: FC = () => {
                   className="h-full w-[265px] overflow-hidden rounded-lg bg-section"
                   ref={divRef}
                 >
-                  <img src={game.image} alt={game.name} className="h-full w-full object-cover object-top" />
+                  <img
+                    src={game.image}
+                    alt={game.name}
+                    className="h-full w-full object-cover object-top"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h1 className="text-3xl font-bold">{game.name}</h1>
+                  <div className="flex flex-row flex-wrap gap-1">
+                    {game.categories.map(({ id, name }) => (
+                      <Badge key={id}>
+                        <Link to={`${URLS.CATEGORY_GAMES}/${id}`} className="text-sm">
+                          {name}
+                        </Link>
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               </>
             )
