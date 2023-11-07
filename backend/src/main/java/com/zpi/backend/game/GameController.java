@@ -101,8 +101,8 @@ public class GameController {
     }
 
     @Operation(
-            summary = "Get popular games",
-            description = "Returns paginated popular games from database. [Not implemented] Popularity is calculated considering reservations."
+            summary = "Get users' rating with game by id",
+            description = "Returns paginated user data along with their rating based on User Opinions and their Game Instance rating from database. [Note: Calculating game instance opinions is NOT IMPLEMENTED yet]."
     )
     @GetMapping(value = "/{gameId}/users")
     public ResponseEntity<ResultsDTO<UserWithGameOpinionDTO>> getUsersAndGameInstancesWithGame(
