@@ -2,12 +2,16 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useRecoilState } from "recoil";
+import { locationState } from "@/state/location";
 import { URLS } from "@/constants/urls";
 import { stringToHexColor } from "@/utils/stringToColor";
 import { GameApi } from "@/api/GameApi";
+import { Map, LocationButton, LocationMarker } from "@/components/Map";
 import { useTheme } from "@/components/ThemeProvider";
 import { useToast } from "@/components/ui/use-toast";
 import GameDetailsSection from "./GameDetailsSection";
+import GameUsersSection from "./GameUsersSection";
 import LoadingGameDetailsSection from "./LoadingGameDetailsSection";
 
 const Game: FC = () => {
@@ -15,6 +19,7 @@ const Game: FC = () => {
   const { id = "" } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [location, setLocation] = useRecoilState(locationState);
 
   const { data: game, isLoading } = useQuery({
     queryKey: ["game", { id }],
@@ -57,7 +62,17 @@ const Game: FC = () => {
           {isLoading ? <LoadingGameDetailsSection /> : game && <GameDetailsSection game={game} />}
         </div>
       </div>
-      <div className="flex-grow rounded-lg bg-section"></div>
+      <div className="flex-grow rounded-lg bg-section p-4 flex flex-row gap-4">
+        <div className="h-full w-1/2 overflow-hidden rounded-lg">
+          <Map autolocate location={location} setLocation={setLocation}>
+            <LocationButton />
+            <LocationMarker />
+          </Map>
+        </div>
+        <div>
+          <GameUsersSection />
+        </div>
+      </div>
     </div>
   );
 };
