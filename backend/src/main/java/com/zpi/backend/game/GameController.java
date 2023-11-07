@@ -3,7 +3,7 @@ package com.zpi.backend.game;
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Amount;
 import com.zpi.backend.dto.ResultsDTO;
-import com.zpi.backend.exceptionHandlers.BadRequestException;
+import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.user.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,9 +56,9 @@ public class GameController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Game> getGame(@PathVariable long id) throws GameDoesNotExistException {
         System.out.println("... called getGame("+id+")");
-        Game games = gameService.getGame(id);
+        Game game = gameService.getGame(id);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(games);
+                .body(game);
     }
 
     @Operation(
@@ -66,7 +66,7 @@ public class GameController {
             description = "Changes status value of a Game identified by its id to Accepted. Only Admin is allowed to do this operation."
     )
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/accept/{id}", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/{id}/accept", method = RequestMethod.PUT)
     public ResponseEntity acceptGame(Authentication authentication, @PathVariable long id)
             throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
         System.out.println("... called acceptGame("+id+")");
@@ -79,7 +79,7 @@ public class GameController {
             description = "Changes status value of a Game identified by its id to Rejected. Only Admin is allowed to do this operation."
     )
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/reject/{id}", method = RequestMethod.PATCH)
+    @RequestMapping(value = "{id}/reject", method = RequestMethod.PUT)
     public ResponseEntity rejectGame(Authentication authentication, @PathVariable long id)
             throws GameDoesNotExistException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
         System.out.println("... called acceptGame("+id+")");

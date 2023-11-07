@@ -2,7 +2,7 @@ package com.zpi.backend.user_opinion;
 
 
 import com.zpi.backend.dto.ResultsDTO;
-import com.zpi.backend.exceptionHandlers.BadRequestException;
+import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.user.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
@@ -24,9 +24,9 @@ public class UserOpinionController {
             description = "Returns all opinions that were given to the user"
     )
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/userOpinion")
+    @GetMapping("/user/opinions")
     public ResponseEntity<ResultsDTO<UserOpinion>> getMyOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
-        System.out.println("... called getMineOpinions");
+        System.out.println("... called getMyOpinions");
         return ResponseEntity.ok().body(userOpinionService.getMyOpinions(authentication,page,size));
     }
 
@@ -35,8 +35,8 @@ public class UserOpinionController {
             description = "Adds a new opinion about user identified with UUID to database."
     )
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/userOpinion")
-    public ResponseEntity addOpinion(Authentication authentication, @RequestBody NewUserOpinionDTO newUserOpinionDTO) throws UserDoesNotExistException, BadRequestException {
+    @PostMapping("/user/opinions")
+    public ResponseEntity<UserOpinion> addOpinion(Authentication authentication, @RequestBody NewUserOpinionDTO newUserOpinionDTO) throws UserDoesNotExistException, BadRequestException {
         System.out.println("... called addOpinion");
         UserOpinion userOpinion = userOpinionService.addOpinion(authentication,newUserOpinionDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(userOpinion);
@@ -46,7 +46,8 @@ public class UserOpinionController {
             summary = "Get opinions about user",
             description = "Returns all opinions that were given to the user with a given UUID"
     )
-    @GetMapping("/userOpinion/{uuid}")
+
+    @GetMapping("/user/{uuid}/opinions")
     public ResponseEntity<ResultsDTO<UserOpinion>> getOpinions(@PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
         System.out.println("... called getOpinions");
         return ResponseEntity.ok().body(userOpinionService.getOpinions(uuid,page,size));
@@ -57,8 +58,8 @@ public class UserOpinionController {
             description = "Updates opinion with a given id"
     )
     @PreAuthorize("isAuthenticated()")
-    @PutMapping("/userOpinion/{id}")
-    public ResponseEntity updateOpinion(Authentication authentication,@PathVariable long id, @RequestBody UpdateUserOpinionDTO updateUserOpinionDTO)
+    @PutMapping("/user/opinions/{id}")
+    public ResponseEntity<UserOpinion> updateOpinion(Authentication authentication,@PathVariable long id, @RequestBody UpdateUserOpinionDTO updateUserOpinionDTO)
             throws UserDoesNotExistException, EditSomeoneElseOpinionException, OpinionDoesNotExistException, BadRequestException {
         System.out.println("... called updateOpinion");
         return ResponseEntity.ok().body(userOpinionService.updateOpinion(authentication,id,updateUserOpinionDTO));
@@ -69,7 +70,7 @@ public class UserOpinionController {
             description = "Deletes opinion with a given id"
     )
     @PreAuthorize("isAuthenticated()")
-    @DeleteMapping("/userOpinion/{id}")
+    @DeleteMapping("/user/opinions/{id}")
     public ResponseEntity deleteOpinion(Authentication authentication,@PathVariable long id)
             throws UserDoesNotExistException, DeleteSomeoneElseOpinionException, OpinionDoesNotExistException {
         System.out.println("... called deleteOpinion");

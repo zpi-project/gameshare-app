@@ -1,4 +1,4 @@
-package com.zpi.backend.exceptionHandlers;
+package com.zpi.backend.exception_handlers;
 
 import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
 import com.zpi.backend.gameInstance.GameInstanceStatusException;

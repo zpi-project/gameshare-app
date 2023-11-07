@@ -2,7 +2,7 @@ package com.zpi.backend.gameInstance;
 
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.dto.ResultsDTO;
-import com.zpi.backend.exceptionHandlers.BadRequestException;
+import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
