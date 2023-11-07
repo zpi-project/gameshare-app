@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -6,6 +6,7 @@ import { URLS } from "@/constants/urls";
 import { stringToHexColor } from "@/utils/stringToColor";
 import { GameApi } from "@/api/GameApi";
 import { useTheme } from "@/components/ThemeProvider";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
 
 const Game: FC = () => {
@@ -26,8 +27,23 @@ const Game: FC = () => {
       navigate(URLS.GAMES);
     },
   });
-
+  const divRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
+
+  useEffect(() => {
+    const setWidthToHeight = () => {
+      if (divRef.current) {
+        const height = divRef.current.clientHeight;
+        divRef.current.style.width = `${height}px`;
+      }
+    };
+
+    setWidthToHeight();
+    window.addEventListener("resize", setWidthToHeight);
+    return () => {
+      window.removeEventListener("resize", setWidthToHeight);
+    };
+  }, []);
 
   const color =
     theme === "system"
@@ -40,7 +56,7 @@ const Game: FC = () => {
     <div className="flex h-full w-full flex-col gap-4">
       <div className="relative flex-grow rounded-lg bg-section">
         <div
-          className="-z-1 absolute bottom-4 left-4 right-4 top-4 rounded-lg opacity-50 dark:opacity-40"
+          className="absolute bottom-4 left-4 right-4 top-4 rounded-lg opacity-50 dark:opacity-40"
           style={{
             backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, ${
               game
@@ -53,12 +69,19 @@ const Game: FC = () => {
         />
         <div className="absolute bottom-8 left-8 right-8 top-8 flex flex-row">
           {isLoading ? (
-            <></>
+            <>
+              <div ref={divRef} className="h-full w-[265px]">
+                <Skeleton className="h-full w-full rounded-lg" />
+              </div>
+            </>
           ) : (
             game && (
               <>
-                <div className="h-[265px] w-[265px] overflow-hidden rounded-lg bg-section">
-                  <img src={game.image} alt={game.name} className="h-full w-full object-cover" />
+                <div
+                  className="h-full w-[265px] overflow-hidden rounded-lg bg-section"
+                  ref={divRef}
+                >
+                  <img src={game.image} alt={game.name} className="h-full w-full object-cover object-top" />
                 </div>
               </>
             )
