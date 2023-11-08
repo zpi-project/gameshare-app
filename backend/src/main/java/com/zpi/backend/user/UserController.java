@@ -1,6 +1,6 @@
 package com.zpi.backend.user;
 
-import com.zpi.backend.exceptionHandlers.BadRequestException;
+import com.zpi.backend.exception_handlers.BadRequestException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -16,7 +16,7 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false,unique = true)
     private String name;
@@ -27,9 +27,6 @@ public class Role {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Role role = (Role) o;
         return getId() != null && Objects.equals(getId(), role.getId());
-    }
-    public Role(String name) {
-        this.name = name;
     }
     @Override
     public int hashCode() {

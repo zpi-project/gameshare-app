@@ -1,7 +1,7 @@
 package com.zpi.backend.game;
 
 import com.zpi.backend.category.Category;
-import com.zpi.backend.gameStatus.GameStatus;
+import com.zpi.backend.game_status.GameStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

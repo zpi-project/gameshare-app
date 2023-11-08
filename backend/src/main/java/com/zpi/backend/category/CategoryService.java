@@ -1,6 +1,6 @@
 package com.zpi.backend.category;
 
-import com.zpi.backend.exceptionHandlers.BadRequestException;
+import com.zpi.backend.exception_handlers.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,12 @@ public class CategoryService {
 
     public List<Category> getCategories(){
         return categoryRepository.findAll(Sort.by("name"));
+    }
+
+    public Category getCategory(long id) throws CategoryDoesNotExistException{
+        Optional<Category> categoryOptional = categoryRepository.findById(id);
+        if (categoryOptional.isEmpty()) throw new CategoryDoesNotExistException("Category (id = "+id+") does not exist.");
+        else return categoryOptional.get();
     }
 
     public List<Category> getCategoriesByIDs(List<Long> categoriesIds) throws CategoryDoesNotExistException {

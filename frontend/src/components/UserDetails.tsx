@@ -1,11 +1,9 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { parsePhoneNumber } from "libphonenumber-js";
-import { useRecoilValue } from "recoil";
-import { locationState } from "@/state/location";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
-import { Map, LocationButton, LocationMarker } from "@/components/Map";
+import { Map, LocationMarker } from "@/components/Map";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import Avatar from "./Avatar";

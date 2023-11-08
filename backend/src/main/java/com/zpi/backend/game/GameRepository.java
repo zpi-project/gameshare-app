@@ -16,7 +16,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     @Query(
             value = "select  G.id, original_id, G.name, age, min_players, max_players, playing_time," +
                     "short_description, image,game_status_id from games G join game_statuses GS on G.game_status_id = GS.id" +
-                    " where G.name like %:name% and GS.status = 'Accepted'",
+                    " where lower(G.name) like %:name% and GS.status = 'Accepted'",
             nativeQuery = true
     )
     Page<Game> searchAllByNameContains(@Param("name") String name, Pageable pageable);
@@ -45,6 +45,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "join game_statuses GS on G.game_status_id = GS.id " +
             "where GC.category_id in :categories and GS.status = 'Accepted'",
     nativeQuery = true)
+
     Page<Game> getAllByAcceptedAndCategoriesIn(Pageable pageable, @Param("categories") List<Integer> categoriesIds);
     @Query(value = "select distinct G.id, original_id, G.name, age, min_players, max_players, playing_time, " +
             "short_description, image,game_status_id " +
