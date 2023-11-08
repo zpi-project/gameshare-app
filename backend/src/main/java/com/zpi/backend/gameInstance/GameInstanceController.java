@@ -116,8 +116,9 @@ public class GameInstanceController {
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(method = GET)
-    public ResponseEntity<ResultsDTO<GameInstanceListDTO>> getMyGameInstances(@RequestParam Optional<String> searchName, @RequestParam int size, @RequestParam int page,
-                                                              Authentication authentication)
+    public ResponseEntity<ResultsDTO<GameInstanceListDTO>> getMyGameInstances(@RequestParam Optional<String> searchName,
+                                                                              @RequestParam int size, @RequestParam int page,
+                                                                              Authentication authentication)
             throws UserDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getMyGameInstances(searchName, size, page, authentication));
