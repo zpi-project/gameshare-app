@@ -58,4 +58,5 @@ export default {
   searchGamePlaceholder: "What board game would you like to play?",
   searchGamesError: "There was an error while searching games.",
   searchGamesNoResults: "No results",
+  perDay: "day",
 };

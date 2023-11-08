@@ -60,6 +60,7 @@ const pl: typeof en = {
   searchGamePlaceholder: "W jaką grę planszową chcesz zagrać?",
   searchGamesError: "Wystąpił błąd podczas wyszukiwania gier.",
   searchGamesNoResults: "Brak wyników",
+  perDay: "dzień",
 };
 
 export default pl;
