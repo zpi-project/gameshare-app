@@ -134,16 +134,4 @@ public class GameInstanceController {
                 .body(gameInstanceService.getGameInstances(size, page, searchName, categoryId, age, playersNumber, latitude, longitude));
     }
 
-    @Operation(
-            summary = "[Not implemented] Get game instance's opinions by game instance's uuid",
-            description = "Returns the Game Instances Opinions from the database, identified by Game Instance's uuid"
-    )
-    @RequestMapping(value = "/{gameInstanceUUID}/opinions", method = GET)
-    public ResponseEntity getGameInstanceOpinions(@PathVariable String gameInstanceUUID,
-                                                                         @RequestParam int size, @RequestParam int page) {
-        return ResponseEntity
-                .status(HttpStatus.NOT_IMPLEMENTED)
-                .body(null);
-    }
-
 }
