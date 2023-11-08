@@ -24,7 +24,7 @@ const GameImgTitleCard: FC<GameImgTitleCardProps> = ({ game: { name, image, id }
             )}
           >
             <div className="h-40 w-40 overflow-hidden rounded-lg">
-              <img src={image} alt={name} className="h-full w-full object-cover" />
+              <img src={image} alt={name} className="h-full w-full object-cover object-top" />
             </div>
             <h3 className="truncate text-left font-bold">{name}</h3>
           </Link>

@@ -1,4 +1,4 @@
-export const stringToRGBColor = (
+export const stringToHexColor = (
   word: string,
   saturation: number = 0.5,
   lightness: number = 0.6,

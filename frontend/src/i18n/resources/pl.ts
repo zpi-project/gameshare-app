@@ -55,8 +55,14 @@ const pl: typeof en = {
   popularGamesErrorTitle: "Nie udało się pobrać popularnych gier.",
   categoriesErrorTitle: "Nie udało się pobrać kategorii gier.",
   searchGamePlaceholder: "W jaką grę planszową chcesz zagrać?",
+  searchGameWithinCategoryPlaceholder: "Wyszukaj grę w tej kategorii...",
   searchGamesError: "Wystąpił błąd podczas wyszukiwania gier.",
   searchGamesNoResults: "Brak wyników",
+  categoryGamesError: "Nie udało się pobrać gier dla tej kategorii.",
+  categoryError: "Nie udało się pobrać tej kategorii.",
+  gameError: "Nie udało się pobrać danych o tej grze.",
+
+  usersWithThisGame: "Użytkownicy z tą grą",
 };
 
 export default pl;
