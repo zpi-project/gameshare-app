@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
-import AddOpinion from "@/components/AddOpinion";
 import Opinions from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
 import { useToast } from "@/components/ui/use-toast";
 import AddUserOpinionModal from "./AddUserOpinionModal";
 
 const UserProfile: FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
