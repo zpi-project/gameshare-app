@@ -115,7 +115,7 @@ public class GameInstanceService {
     }
 
     public ResultsDTO<GameInstanceListDTO> getGameInstances(int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
-                                               Optional<Integer> playersNumber, Optional<Boolean> isAvailable, double latitude,
+                                               Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, double latitude,
                                                double longitude) throws CategoryDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
@@ -124,7 +124,7 @@ public class GameInstanceService {
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
                 searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null),
-                isAvailable.orElse(null), latitude, longitude
+                maxPricePerDay.orElse(null), latitude, longitude
         );
         Specification<GameInstance> spec = new GameInstanceSpecification(gameInstanceSearch);
         Page<GameInstance> gameInstancesPage = gameInstanceRepository.findAll(spec, pageable);

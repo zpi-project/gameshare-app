@@ -11,7 +11,7 @@ public class GameInstanceSearch {
     private Category category;
     private Integer age;
     private Integer playersNumber;
-    private Boolean isAvailable;
+    private Integer maxPricePerDay;
     private Double latitude;
     private Double longitude;
 }

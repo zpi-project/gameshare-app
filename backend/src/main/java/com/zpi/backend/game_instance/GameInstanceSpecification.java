@@ -16,11 +16,10 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
         criteria = ts;
     }
 
-    // TODO Check if game is available (reservations or isActive)?
     @Override
     public Predicate toPredicate(Root<GameInstance> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
-        Path<Boolean> isActive = root.get("isActive");
+        Path<Integer> pricePerDay = root.get("pricePerDay");
         Path<Game> game = root.get("game");
         Path<Integer> minPlayers = game.get("minPlayers");
         Path<Integer> maxPlayers = game.get("maxPlayers");
@@ -32,7 +31,6 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
         Path<Double> longitude = owner.get("locationLongitude");
 
         final List<Predicate> predicates = new ArrayList<>();
-        predicates.add(cb.equal(isActive, true));
         if (criteria.getAge() != null) {
             predicates.add(cb.lessThanOrEqualTo(age, criteria.getAge()));
         }
@@ -49,6 +47,9 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
                             cb.lower(name),
                             "%" + criteria.getSearchName().toLowerCase() + "%")
             );
+        }
+        if (criteria.getMaxPricePerDay() != null) {
+            predicates.add(cb.lessThanOrEqualTo(pricePerDay, criteria.getMaxPricePerDay()));
         }
         Expression<Double> orderExpression =
                 cb.sqrt(cb.sum(cb.power(cb.diff(latitude, criteria.getLatitude()), 2),
