@@ -43,7 +43,7 @@ const MyProfile: FC = () => {
             owner={user}
             isLoading={isLoading}
             showButtons={true}
-            title="myGames"
+            isMyPage={true}
           />
         </div>
       </div>

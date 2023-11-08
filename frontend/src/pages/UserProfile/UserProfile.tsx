@@ -41,14 +41,16 @@ const UserProfile: FC = () => {
         </div>
         <div className="flex h-3/5 flex-col rounded-lg bg-section p-2">
           <Opinions />
-          <Button className="m-4 ml-auto max-w-max" onClick={() => setIsModalOpen(true)}>
-            {t("addOpinion")}
-          </Button>
         </div>
       </div>
       <div className="w-1/2 flex-grow rounded-lg bg-section p-4">
         <div className="flex h-full rounded-lg bg-section">
-          <GameInstancesSection owner={user} isLoading={isLoading} showButtons={false} title="s" />
+          <GameInstancesSection
+            owner={user}
+            isLoading={isLoading}
+            showButtons={false}
+            isMyPage={false}
+          />
         </div>
       </div>
     </div>

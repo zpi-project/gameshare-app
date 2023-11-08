@@ -8,9 +8,10 @@ import { Button } from "./ui/button";
 
 interface Props {
   gameInstance: GameInstanceType;
+  showButtons: boolean;
 }
 
-const GameInstance: FC<Props> = ({ gameInstance }) => {
+const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
   const [showAll, setshowAll] = useState(false);
   const { t } = useTranslation();
 
@@ -43,14 +44,16 @@ const GameInstance: FC<Props> = ({ gameInstance }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-between px-2 py-2.5">
-        <Button className="h-16 w-14 bg-card">
-          <Pencil />
-        </Button>
-        <Button className="h-16 w-14 bg-card">
-          <CalendarDays />
-        </Button>
-      </div>
+      {showButtons && (
+        <div className="flex flex-col justify-between px-2 py-2.5">
+          <Button className="h-16 w-14 bg-card">
+            <Pencil />
+          </Button>
+          <Button className="h-16 w-14 bg-card">
+            <CalendarDays />
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

@@ -14,10 +14,10 @@ interface Props {
   owner?: User;
   isLoading: boolean;
   showButtons: boolean;
-  title: string;
+  isMyPage: boolean;
 }
 
-const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons, title }) => {
+const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons, isMyPage }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
 
@@ -34,8 +34,7 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons, title 
         <>
           <div className="flex h-full w-full flex-col gap-4">
             <div className="h-max w-full flex-grow rounded-lg bg-card p-5 text-2xl">
-              {/* {t({title})} {getName(owner)} */}
-              My Games
+              {isMyPage ? t("myGames") : `${t("userGames")} ${getName(owner)}`}
             </div>
             <div className="flex flex-row gap-2">
               <div className="relative flex-grow">
@@ -59,7 +58,7 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons, title 
                     }
                   })
                   .map((gameInstance, id) => (
-                    <GameInstance gameInstance={gameInstance} key={id} />
+                    <GameInstance gameInstance={gameInstance} key={id} showButtons={showButtons} />
                   ))}
               </div>
             </ScrollArea>
