@@ -11,12 +11,14 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GameInstanceOpinionDTO {
+    private long id;
     private UserGameInstanceDTO ratingUser;
     private String description;
     private int stars;
     private Date timestamp;
 
     public GameInstanceOpinionDTO(GameInstanceOpinion gameInstanceOpinion){
+        this.id = gameInstanceOpinion.getId();
         this.description = gameInstanceOpinion.getDescription();
         this.stars = gameInstanceOpinion.getStars();
         this.timestamp = gameInstanceOpinion.getTimestamp();
