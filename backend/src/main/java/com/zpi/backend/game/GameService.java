@@ -10,7 +10,7 @@ import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserGameGuestDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,15 +21,12 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class GameService {
-    @Autowired
     GameRepository gameRepository;
-    @Autowired
     CategoryService categoryService;
-    @Autowired
     RoleService roleService;
-    @Autowired
     GameStatusService gameStatusService;
     public Game addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
         newGameDTO.validate();
@@ -91,7 +88,7 @@ public class GameService {
     }
 
     public void acceptGame(Authentication authentication, long id) throws GameDoesNotExistException,
-            GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
+            GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException {
         if (!roleService.checkIfAdmin(authentication))
             throw new IllegalAccessException();
         Optional<Game> optionalGame = gameRepository.findGameById(id);

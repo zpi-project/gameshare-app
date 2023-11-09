@@ -6,7 +6,7 @@ import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.user.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,10 +17,10 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@AllArgsConstructor
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RequestMapping("/games")
 public class GameController {
-    @Autowired
     GameService gameService;
 
     @Operation(
