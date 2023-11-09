@@ -111,6 +111,20 @@ public class GameInstanceController {
     }
 
     @Operation(
+            summary = "Get logged in user's game instances",
+            description = "Returns all logged User's Game Instances from the database."
+    )
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(method = GET)
+    public ResponseEntity<ResultsDTO<GameInstanceListDTO>> getMyGameInstances(@RequestParam Optional<String> searchName,
+                                                                              @RequestParam int size, @RequestParam int page,
+                                                                              Authentication authentication)
+            throws UserDoesNotExistException {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(gameInstanceService.getMyGameInstances(searchName, size, page, authentication));
+    }
+
+    @Operation(
             summary = "Get game instances by userUUID",
             description = "Returns the Game Instances of a User from the database, identified by user's userUUID"
     )
@@ -132,18 +146,6 @@ public class GameInstanceController {
                                            @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page) throws CategoryDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstances(size, page, searchName, categoryId, age, playersNumber, latitude, longitude));
-    }
-
-    @Operation(
-            summary = "[Not implemented] Get game instance's opinions by game instance's uuid",
-            description = "Returns the Game Instances Opinions from the database, identified by Game Instance's uuid"
-    )
-    @RequestMapping(value = "/{gameInstanceUUID}/opinions", method = GET)
-    public ResponseEntity getGameInstanceOpinions(@PathVariable String gameInstanceUUID,
-                                                                         @RequestParam int size, @RequestParam int page) {
-        return ResponseEntity
-                .status(HttpStatus.NOT_IMPLEMENTED)
-                .body(null);
     }
 
 }
