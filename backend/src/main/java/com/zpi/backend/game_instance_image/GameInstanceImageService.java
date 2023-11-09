@@ -3,16 +3,15 @@ package com.zpi.backend.game_instance_image;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstanceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class GameInstanceImageService {
-    @Autowired
     GameInstanceImageRepository gameInstanceImageRepository;
-    @Autowired
     GameInstanceRepository gameInstanceRepository;
 
 //    TODO implement addImageToGameInstance endpoint
