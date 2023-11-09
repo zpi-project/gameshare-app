@@ -68,7 +68,7 @@ public class GameController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{id}/accept", method = RequestMethod.PUT)
     public ResponseEntity acceptGame(Authentication authentication, @PathVariable long id)
-            throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
+            throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException {
         System.out.println("... called acceptGame("+id+")");
         gameService.acceptGame(authentication, id);
         return ResponseEntity.status(HttpStatus.OK)
