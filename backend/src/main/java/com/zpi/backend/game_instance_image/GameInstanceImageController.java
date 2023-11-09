@@ -13,7 +13,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping("/game-instance/images")
+@RequestMapping("/game-instances/images")
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class GameInstanceImageController {
     @Autowired

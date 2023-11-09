@@ -98,6 +98,13 @@ public class GameInstanceService {
         return new GameInstanceDTO(gameInstanceOptional.get(), isGuest);
     }
 
+    public GameInstance getGameInstance(String uuid) throws GameInstanceDoesNotExistException {
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuid(uuid);
+        if (gameInstanceOptional.isEmpty())
+            throw new GameInstanceDoesNotExistException("The Game Instance (uuid = "+uuid+") does not exists ");
+        return gameInstanceOptional.get();
+    }
+
     public ResultsDTO<GameInstanceListDTO> getUserGameInstances(String userUUID, Optional<String> searchName, int size, int page) throws UserDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         userService.getUserByUUID(userUUID);
