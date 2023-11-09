@@ -1,8 +1,9 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { gameInstances } from "@cypress/fixtures/gameInstances";
+// import { gameInstances } from "@cypress/fixtures/gameInstances";
 import { Search } from "lucide-react";
 import { User } from "@/types/User";
+import { GameInstance as GameInstanceType } from "@/types/Game";
 import { getName } from "@/utils/user";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -15,9 +16,10 @@ interface Props {
   isLoading: boolean;
   showButtons: boolean;
   isMyPage: boolean;
+  gameInstances: [GameInstanceType];
 }
 
-const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons, isMyPage }) => {
+const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons, isMyPage, gameInstances }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
 
@@ -53,7 +55,7 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons, isMyPa
                   .filter(post => {
                     if (query === "") {
                       return post;
-                    } else if (post.title.toLowerCase().includes(query.toLowerCase())) {
+                    } else if (post.game.name.toLowerCase().includes(query.toLowerCase())) {
                       return post;
                     }
                   })
