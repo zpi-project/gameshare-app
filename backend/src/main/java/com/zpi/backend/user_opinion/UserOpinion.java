@@ -1,9 +1,9 @@
 package com.zpi.backend.user_opinion;
 
-import com.google.api.client.util.DateTime;
 import com.zpi.backend.user.User;
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_opinions")
@@ -25,11 +25,11 @@ public class UserOpinion {
     @Column(name = "stars")
     private int stars;
 
-    @Column(name = "description")
+    @Column(name = "description",length = 500)
     private String description;
 
     @Column(name="timestamp")
-    private DateTime timestamp;
+    private Date timestamp;
 
     @Column(name="isRatingUserOwner")
     private boolean isRatingUserOwner;
@@ -39,17 +39,14 @@ public class UserOpinion {
         this.ratedUser = ratedUser;
         this.stars = newUserOpinionDTO.getStars();
         this.description = newUserOpinionDTO.getDescription();
-        this.timestamp = newUserOpinionDTO.getTimestamp();
+        this.timestamp = new Date(System.currentTimeMillis());
         //this.isRatingUserOwner =; TODO add later when we have game instances
     }
 
     public UserOpinion update(UpdateUserOpinionDTO updateUserOpinionDTO) {
         this.stars = updateUserOpinionDTO.getStars();
         this.description = updateUserOpinionDTO.getDescription();
-        this.timestamp = updateUserOpinionDTO.getTimestamp();
+        this.timestamp = new Date(System.currentTimeMillis());
         return this;
     }
-
-
-
 }
