@@ -58,14 +58,12 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     @Query(value = "select u.uuid as uuid, u.first_name as firstName, u.last_name as lastName, " +
             "u.location_latitude as locationLatitude, u.location_longitude as locationLongitude, " +
             "u.avatar_link as avatarLink, " +
-            "COALESCE(avg(uo.stars), 0) as userRate, gi.uuid as gameInstanceUUID, " +
-            "g.name as gameName, 0.0 as gameInstanceRate," +
+            "COALESCE(u.avgRating, 0) as userRate, gi.uuid as gameInstanceUUID, " +
+            "g.name as gameName, COALESCE(gi.avgRating, 0) as gameInstanceRate," +
             "sqrt(pow(u.location_latitude - :userLatitude, 2) + pow(u.location_longitude - :userLongitude, 2)) as direction " +
             "from games g join game_instances gi on g.id = gi.game_id " +
             "join users u on gi.owner_id = u.id " +
-            "left join user_opinions uo on u.id = uo.rated_user_id " +
             "where g.id = :gameId " +
-            "group by u.uuid, firstName, lastName, u.location_latitude, u.location_longitude, avatarLink, gameName, gameInstanceUUID " +
             "order by direction;",
             nativeQuery = true)
     Page<Object[]> getAllUsersWithGameAndRating(@Param("gameId") long gameId, @Param("userLatitude") double latitude,

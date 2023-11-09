@@ -14,6 +14,8 @@ public class UserGameGuestDTO {
     private double locationLatitude;
     private double locationLongitude;
     private String avatarLink;
+    private double avgRating;
+
 
     public UserGameGuestDTO(User user){
         uuid = user.getUuid();
@@ -22,5 +24,6 @@ public class UserGameGuestDTO {
         locationLatitude = user.getLocationLatitude();
         locationLongitude = user.getLocationLongitude();
         avatarLink = user.getAvatarLink();
+        avgRating = user.getAvgRating();
     }
 }

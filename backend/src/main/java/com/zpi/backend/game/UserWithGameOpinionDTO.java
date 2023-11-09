@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserWithGameOpinionDTO {
     private UserGameGuestDTO user;
-    private double userRate;
     private String gameInstanceUUID;
     private String gameName;
     private double gameInstanceRate;

@@ -127,9 +127,9 @@ public class GameService {
                 (String) columns[2],
                 (Double) columns[3],
                 (Double) columns[4],
-                (String) columns[5]
+                (String) columns[5],
+                ((BigDecimal) columns[6]).doubleValue()
         ));
-        dto.setUserRate(((BigDecimal) columns[6]).doubleValue());
         dto.setGameInstanceUUID((String) columns[7]);
         dto.setGameName((String) columns[8]);
         dto.setGameInstanceRate(((BigDecimal) columns[9]).doubleValue());

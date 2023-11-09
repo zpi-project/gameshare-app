@@ -12,11 +12,13 @@ public class UserGameInstanceDTO {
     private String firstName;
     private String lastName;
     private String avatarLink;
+    private double avgRating;
 
     public UserGameInstanceDTO(User user){
         uuid = user.getUuid();
         firstName = user.getFirstName();
         lastName = user.getLastName();
         avatarLink = user.getAvatarLink();
+        avgRating = user.getAvgRating();
     }
 }

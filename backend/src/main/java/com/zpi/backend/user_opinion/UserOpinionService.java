@@ -32,7 +32,9 @@ public class UserOpinionService {
         User user = userService.getUser(authentication);
         User ratedUser = userService.getUserByUUID(newUserOpinionDTO.getRatedUserUUID());
         UserOpinion userOpinion = newUserOpinionDTO.toUserOpinion(user, ratedUser);
-        return userOpinionRepository.save(userOpinion);
+        userOpinionRepository.save(userOpinion);
+        userService.updateAvgRating(user.getId());
+        return userOpinion;
     }
 
     public ResultsDTO<UserOpinion> getOpinions(String uuid, int page, int size) throws UserDoesNotExistException {
@@ -53,8 +55,9 @@ public class UserOpinionService {
         if(checkIfNotRatingUsersOpinion(user, userOpinion))
             throw new EditSomeoneElseOpinionException("User can edit only his own opinion");
         userOpinion.update(updateUserOpinionDTO);
-
-        return userOpinionRepository.save(userOpinion);
+        userOpinionRepository.save(userOpinion);
+        userService.updateAvgRating(user.getId());
+        return userOpinion;
     }
 
     public void deleteOpinion(Authentication authentication, long id) throws DeleteSomeoneElseOpinionException, UserDoesNotExistException, OpinionDoesNotExistException {
@@ -62,7 +65,7 @@ public class UserOpinionService {
         User user = userService.getUser(authentication);
         if(checkIfNotRatingUsersOpinion(user, userOpinion))
             throw new DeleteSomeoneElseOpinionException("User can delete only his own opinion");
-
         userOpinionRepository.delete(userOpinion);
+        userService.updateAvgRating(user.getId());
     }
 }
