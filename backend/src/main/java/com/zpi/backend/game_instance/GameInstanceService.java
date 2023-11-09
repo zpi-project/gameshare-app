@@ -9,11 +9,10 @@ import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.game.GameService;
-import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,17 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class GameInstanceService {
-    @Autowired
     GameInstanceRepository gameInstanceRepository;
-    @Autowired
-    GameInstanceImageRepository gameInstanceImageRepository;
-    @Autowired
     UserService userService;
-    @Autowired
     GameService gameService;
-    @Autowired
     CategoryService categoryService;
 
     public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication) throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
@@ -145,5 +139,9 @@ public class GameInstanceService {
                 .forEach(gameInstance -> resultsList.add(new GameInstanceListDTO(gameInstance)));
         return new ResultsDTO<>(resultsList,
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
+    }
+
+    public void updateAvgRating(long gameInstanceId){
+        gameInstanceRepository.updateAvgRating(gameInstanceId);
     }
 }

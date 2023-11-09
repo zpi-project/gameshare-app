@@ -20,6 +20,7 @@ public class GameInstanceDTO {
     private List<GameInstanceImage> images;
     private GameDTO game;
     private UserGameGuestDTO owner;
+    private double avgRating;
     private boolean isActive;
 
     public GameInstanceDTO(GameInstance gameInstance, boolean isGuest){
@@ -33,6 +34,7 @@ public class GameInstanceDTO {
         else
             owner = new UserGameDTO(gameInstance.getOwner());
         game = new GameDTO(gameInstance.getGame());
+        avgRating = gameInstance.getAvgRating();
     }
 
 }

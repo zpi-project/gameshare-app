@@ -13,6 +13,7 @@ public class GameInstanceListDTO {
     private String shortDescription;
     private double pricePerDay;
     private GameListDTO game;
+    private double avgRating;
     private boolean isActive;
 
     public GameInstanceListDTO(GameInstance gameInstance){
@@ -21,6 +22,7 @@ public class GameInstanceListDTO {
         pricePerDay = gameInstance.getPricePerDay();
         isActive = gameInstance.isActive();
         game = new GameListDTO(gameInstance.getGame());
+        avgRating = gameInstance.getAvgRating();
     }
 
 }

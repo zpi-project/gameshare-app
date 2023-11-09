@@ -32,6 +32,7 @@ public class GameInstance {
     // TODO What about status
     @OneToMany(mappedBy = "gameInstance")
     private List<GameInstanceImage> images;
+    private double avgRating;
 
     public GameInstance(NewGameInstanceDTO newGameInstanceDTO, Game game, User owner) {
         this.game = game;
@@ -40,5 +41,6 @@ public class GameInstance {
         this.description = newGameInstanceDTO.getDescription();
         this.isActive = true;
         this.images = new ArrayList<>();
+        this.avgRating = 0;
     }
 }
