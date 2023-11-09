@@ -6,7 +6,7 @@ import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user_opinion.*;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,10 +14,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RequestMapping("/game-instances")
 public class GameInstanceOpinionController {
-    @Autowired
     private GameInstanceOpinionService gameInstanceOpinionService;
 
     @Operation(

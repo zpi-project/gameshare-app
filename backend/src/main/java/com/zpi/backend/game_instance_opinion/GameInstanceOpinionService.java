@@ -8,7 +8,7 @@ import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import com.zpi.backend.user_opinion.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,12 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class GameInstanceOpinionService {
-    @Autowired
     private GameInstanceOpinionRepository gameInstanceOpinionRepository;
-    @Autowired
     private UserService userService;
-    @Autowired
     private GameInstanceService gameInstanceService;
 
     public GameInstanceOpinionDTO addOpinion(Authentication authentication, NewGameInstanceOpinionDTO newGameInstanceOpinionDTO)
@@ -35,6 +33,7 @@ public class GameInstanceOpinionService {
         GameInstance gameInstance = gameInstanceService.getGameInstance(newGameInstanceOpinionDTO.getGameInstanceUuid());
         GameInstanceOpinion gameInstanceOpinion = new GameInstanceOpinion(user, gameInstance, newGameInstanceOpinionDTO);
         gameInstanceOpinionRepository.save(gameInstanceOpinion);
+        gameInstanceService.updateAvgRating(gameInstance.getId());
         return new GameInstanceOpinionDTO(gameInstanceOpinion);
     }
 
@@ -47,6 +46,7 @@ public class GameInstanceOpinionService {
             throw new EditSomeoneElseOpinionException("User can edit only his own opinion");
         gameInstanceOpinion.update(updatedGameInstanceOpinionDTO);
         gameInstanceOpinionRepository.save(gameInstanceOpinion);
+        gameInstanceService.updateAvgRating(gameInstanceOpinion.getGameInstance().getId());
         return new GameInstanceOpinionDTO(gameInstanceOpinion);
     }
 
@@ -55,7 +55,10 @@ public class GameInstanceOpinionService {
         User user = userService.getUser(authentication);
         if(checkIfNotRatingUsersOpinion(user, gameInstanceOpinion))
             throw new DeleteSomeoneElseOpinionException("User can delete only his own opinion");
+        long gameInstanceId = gameInstanceOpinion.getGameInstance().getId();
         gameInstanceOpinionRepository.delete(gameInstanceOpinion);
+        gameInstanceService.updateAvgRating(gameInstanceId);
+
     }
 
     public ResultsDTO<GameInstanceOpinionDTO> getOpinions(String gameInstanceUuid, int page, int size) throws GameInstanceDoesNotExistException {
