@@ -121,6 +121,11 @@ public class GameInstanceService {
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }
 
+    public ResultsDTO<GameInstanceListDTO> getMyGameInstances(Optional<String> searchName, int size, int page, Authentication authentication) throws UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        return getUserGameInstances(user.getUuid(),searchName, size, page);
+    }
+
     public ResultsDTO<GameInstanceListDTO> getGameInstances(int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
                                                Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, double latitude,
                                                double longitude) throws CategoryDoesNotExistException {

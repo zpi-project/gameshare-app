@@ -111,6 +111,20 @@ public class GameInstanceController {
     }
 
     @Operation(
+            summary = "Get logged in user's game instances",
+            description = "Returns all logged User's Game Instances from the database."
+    )
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(method = GET)
+    public ResponseEntity<ResultsDTO<GameInstanceListDTO>> getMyGameInstances(@RequestParam Optional<String> searchName,
+                                                                              @RequestParam int size, @RequestParam int page,
+                                                                              Authentication authentication)
+            throws UserDoesNotExistException {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(gameInstanceService.getMyGameInstances(searchName, size, page, authentication));
+    }
+
+    @Operation(
             summary = "Get game instances by userUUID",
             description = "Returns the Game Instances of a User from the database, identified by user's userUUID"
     )
