@@ -23,6 +23,9 @@ public class NewUserOpinionDTO {
         if (description.length()>500) {
             throw new BadRequestException("Description cannot be longer than 500 characters");
         }
+        if(ValueChecker.isStringEmpty(description)) {
+            throw new BadRequestException("Description cannot be empty");
+        }
         return true;
     }
     public UserOpinion toUserOpinion(User user, User ratedUser) {

@@ -28,8 +28,8 @@ public class UserOpinion {
     @Column(name = "description",length = 500)
     private String description;
 
-    @Column(name="date")
-    private Date date;
+    @Column(name="timestamp")
+    private Date timestamp;
 
     @Column(name="isRatingUserOwner")
     private boolean isRatingUserOwner;
@@ -39,14 +39,14 @@ public class UserOpinion {
         this.ratedUser = ratedUser;
         this.stars = newUserOpinionDTO.getStars();
         this.description = newUserOpinionDTO.getDescription();
-        this.date = new Date(System.currentTimeMillis());
+        this.timestamp = new Date(System.currentTimeMillis());
         //this.isRatingUserOwner =; TODO add later when we have game instances
     }
 
     public UserOpinion update(UpdateUserOpinionDTO updateUserOpinionDTO) {
         this.stars = updateUserOpinionDTO.getStars();
         this.description = updateUserOpinionDTO.getDescription();
-        this.date = new Date(System.currentTimeMillis());
+        this.timestamp = new Date(System.currentTimeMillis());
         return this;
     }
 }
