@@ -12,6 +12,8 @@ public class UserGameInstanceDTO {
     private String firstName;
     private String lastName;
     private String avatarLink;
+    private double locationLongitude;
+    private double locationLatitude;
     private double avgRating;
 
     public UserGameInstanceDTO(User user){
@@ -20,5 +22,7 @@ public class UserGameInstanceDTO {
         lastName = user.getLastName();
         avatarLink = user.getAvatarLink();
         avgRating = user.getAvgRating();
+        locationLatitude = user.getLocationLongitude();
+        locationLongitude = user.getLocationLongitude();
     }
 }
