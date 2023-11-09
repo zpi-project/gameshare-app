@@ -21,11 +21,11 @@ public class UserOpinionController {
 
     @Operation(
             summary = "Get opinions about myself",
-            description = "Returns all opinions that were given to the user"
+            description = "Returns all opinions that were given to the user, Only currently logged user can use this endpoint."
     )
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/user/opinions")
-    public ResponseEntity<ResultsDTO<UserOpinion>> getMyOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+    public ResponseEntity<ResultsDTO<ReturnUserOpinionDTO>> getMyOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
         System.out.println("... called getMyOpinions");
         return ResponseEntity.ok().body(userOpinionService.getMyOpinions(authentication,page,size));
     }
@@ -36,43 +36,44 @@ public class UserOpinionController {
     )
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/user/opinions")
-    public ResponseEntity<UserOpinion> addOpinion(Authentication authentication, @RequestBody NewUserOpinionDTO newUserOpinionDTO) throws UserDoesNotExistException, BadRequestException {
+    public ResponseEntity<ReturnUserOpinionDTO> addOpinion(Authentication authentication, @RequestBody NewUserOpinionDTO newUserOpinionDTO) throws UserDoesNotExistException, BadRequestException {
         System.out.println("... called addOpinion");
-        UserOpinion userOpinion = userOpinionService.addOpinion(authentication,newUserOpinionDTO);
+        ReturnUserOpinionDTO userOpinion = userOpinionService.addOpinion(authentication,newUserOpinionDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(userOpinion);
     }
 
     @Operation(
             summary = "Get opinions about user",
-            description = "Returns all opinions that were given to the user with a given UUID"
+            description = "Returns all opinions that were given to the user with a given UUID, everyone can use " +
+                    "this endpoint."
     )
 
     @GetMapping("/user/{uuid}/opinions")
-    public ResponseEntity<ResultsDTO<UserOpinion>> getOpinions(@PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+    public ResponseEntity<ResultsDTO<ReturnUserOpinionDTO>> getOpinions(@PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
         System.out.println("... called getOpinions");
         return ResponseEntity.ok().body(userOpinionService.getOpinions(uuid,page,size));
     }
 
     @Operation(
             summary = "Update opinion",
-            description = "Updates opinion with a given id"
+            description = "Updates opinion with a given id, User that created the opinion can edit it."
     )
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/user/opinions/{id}")
-    public ResponseEntity<UserOpinion> updateOpinion(Authentication authentication,@PathVariable long id, @RequestBody UpdateUserOpinionDTO updateUserOpinionDTO)
-            throws UserDoesNotExistException, EditSomeoneElseOpinionException, OpinionDoesNotExistException, BadRequestException {
+    public ResponseEntity<ReturnUserOpinionDTO> updateOpinion(Authentication authentication,@PathVariable long id, @RequestBody UpdateUserOpinionDTO updateUserOpinionDTO)
+            throws UserDoesNotExistException, EditSomeoneElseOpinionException, UserOpinionDoesNotExistException, BadRequestException {
         System.out.println("... called updateOpinion");
         return ResponseEntity.ok().body(userOpinionService.updateOpinion(authentication,id,updateUserOpinionDTO));
     }
 
     @Operation(
             summary = "Delete opinion",
-            description = "Deletes opinion with a given id"
+            description = "Deletes opinion with a given id, Only user that created the opinion can delete it."
     )
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/user/opinions/{id}")
     public ResponseEntity deleteOpinion(Authentication authentication,@PathVariable long id)
-            throws UserDoesNotExistException, DeleteSomeoneElseOpinionException, OpinionDoesNotExistException {
+            throws UserDoesNotExistException, DeleteSomeoneElseOpinionException, UserOpinionDoesNotExistException {
         System.out.println("... called deleteOpinion");
         userOpinionService.deleteOpinion(authentication,id);
         return ResponseEntity.ok().build();

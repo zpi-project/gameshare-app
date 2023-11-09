@@ -14,7 +14,7 @@ import com.zpi.backend.user.UserAlreadyExistsException;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user_opinion.DeleteSomeoneElseOpinionException;
 import com.zpi.backend.user_opinion.EditSomeoneElseOpinionException;
-import com.zpi.backend.user_opinion.OpinionDoesNotExistException;
+import com.zpi.backend.user_opinion.UserOpinionDoesNotExistException;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.mediatype.problem.Problem;
 import org.springframework.http.HttpHeaders;
@@ -258,9 +258,9 @@ public class ExceptionController {
     }
 
     @ResponseBody
-    @ExceptionHandler(OpinionDoesNotExistException.class)
+    @ExceptionHandler(UserOpinionDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    ResponseEntity ODNEHandler(OpinionDoesNotExistException ex) {
+    ResponseEntity ODNEHandler(UserOpinionDoesNotExistException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)

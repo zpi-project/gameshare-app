@@ -27,5 +27,4 @@ public class GameInstanceListDTO {
         avgRating = gameInstance.getAvgRating();
         owner = new UserGameInstanceDTO(gameInstance.getOwner());
     }
-
 }

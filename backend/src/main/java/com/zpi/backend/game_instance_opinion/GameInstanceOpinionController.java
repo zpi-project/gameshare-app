@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RequestMapping("/game-instances")
 public class GameInstanceOpinionController {
+
     private GameInstanceOpinionService gameInstanceOpinionService;
 
     @Operation(
@@ -41,7 +42,7 @@ public class GameInstanceOpinionController {
     @PutMapping("/opinions/{id}")
     public ResponseEntity<GameInstanceOpinionDTO> updateOpinion(Authentication authentication,@PathVariable long id,
                                                                 @RequestBody UpdatedGameInstanceOpinionDTO updatedGameInstanceOpinionDTO)
-            throws UserDoesNotExistException, EditSomeoneElseOpinionException, OpinionDoesNotExistException, BadRequestException {
+            throws UserDoesNotExistException, EditSomeoneElseOpinionException, GameInstanceOpinionDoesNotExistException, BadRequestException {
         System.out.println("... called updateGameInstanceOpinion");
         return ResponseEntity.ok().body(gameInstanceOpinionService.updateOpinion(authentication,id,updatedGameInstanceOpinionDTO));
     }
@@ -53,7 +54,7 @@ public class GameInstanceOpinionController {
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/opinions/{id}")
     public ResponseEntity deleteOpinion(Authentication authentication,@PathVariable long id)
-            throws UserDoesNotExistException, DeleteSomeoneElseOpinionException, OpinionDoesNotExistException {
+            throws UserDoesNotExistException, DeleteSomeoneElseOpinionException, GameInstanceOpinionDoesNotExistException {
         System.out.println("... called deleteGameInstanceOpinion");
         gameInstanceOpinionService.deleteOpinion(authentication,id);
         return ResponseEntity.ok().build();
