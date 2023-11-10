@@ -17,7 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -128,11 +127,11 @@ public class GameService {
                 (Double) columns[3],
                 (Double) columns[4],
                 (String) columns[5],
-                ((BigDecimal) columns[6]).doubleValue()
-        ));
+                (Double) columns[6])
+        );
         dto.setGameInstanceUUID((String) columns[7]);
         dto.setGameName((String) columns[8]);
-        dto.setGameInstanceRate(((BigDecimal) columns[9]).doubleValue());
+        dto.setGameInstanceRate(((Double) columns[9]));
         return dto;
     }
 }
