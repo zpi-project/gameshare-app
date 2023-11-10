@@ -19,7 +19,7 @@ public interface GameInstanceRepository extends JpaRepository<GameInstance, Long
     Page<GameInstance> findByOwnerUuidAndGameNameContainingIgnoreCase(String ownerUUID, String searchName, Pageable pageable);
     @Modifying
     @Query(value = "update game_instances " +
-            "set avgRating = " +
+            "set avg_rating = " +
             "(select avg(stars) from game_instance_opinion " +
             "where game_instance_id = :gameInstanceId)" +
             "where id = :gameInstanceId",

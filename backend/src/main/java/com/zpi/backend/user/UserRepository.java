@@ -13,10 +13,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByGoogleId(String googleId);
     Optional<User> findByUuid(String uuid);
     @Modifying
-    @Query(value = "update user " +
-            "set avgRating = " +
-            "(select avg(stars) from user_opinion " +
-            "where user_id = :userId)" +
+    @Query(value = "update users " +
+            "set avg_rating = " +
+            "(select avg(stars) from user_opinions " +
+            "where rated_user_id = :userId)" +
             "where id = :userId",
             nativeQuery = true)
     void updateAvgRating(@Param("userId") long userId);
