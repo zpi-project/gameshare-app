@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ public interface GameInstanceRepository extends JpaRepository<GameInstance, Long
     Page<GameInstance> findByOwnerUuid(String ownerUUID, Pageable pageable);
     Page<GameInstance> findByOwnerUuidAndGameNameContainingIgnoreCase(String ownerUUID, String searchName, Pageable pageable);
     @Modifying
+    @Transactional
     @Query(value = "update game_instances " +
             "set avg_rating = " +
             "(select avg(stars) from game_instance_opinion " +
