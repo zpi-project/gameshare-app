@@ -120,7 +120,7 @@ public class GameInstanceService {
         return getUserGameInstances(user.getUuid(),searchName, size, page);
     }
 
-    public ResultsDTO<GameInstanceListDTO> getGameInstances(int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
+    public ResultsDTO<UserWithGameInstancesDTO> getGameInstances(int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
                                                Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, double latitude,
                                                double longitude) throws CategoryDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
@@ -134,11 +134,25 @@ public class GameInstanceService {
         );
         Specification<GameInstance> spec = new GameInstanceSpecification(gameInstanceSearch);
         Page<GameInstance> gameInstancesPage = gameInstanceRepository.findAll(spec, pageable);
-        List<GameInstanceListDTO> resultsList = new ArrayList<>();
-        gameInstancesPage.stream().toList()
-                .forEach(gameInstance -> resultsList.add(new GameInstanceListDTO(gameInstance)));
-        return new ResultsDTO<>(resultsList,
+        return new ResultsDTO<>(convertToUserWithGameInstancesDTO(gameInstancesPage.stream().toList()),
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
+    }
+
+    private List<UserWithGameInstancesDTO> convertToUserWithGameInstancesDTO(List<GameInstance> gameInstanceList){
+        List<UserWithGameInstancesDTO> resultList = new ArrayList<>();
+        for (GameInstance g: gameInstanceList){
+            boolean isInList=false;
+            for (UserWithGameInstancesDTO u: resultList){
+                if (u.getOwner().getUuid().equals(g.getOwner().getUuid())){
+                    isInList = true;
+                    u.addGameInstance(g);
+                }
+            }
+            if (!isInList){
+                resultList.add(new UserWithGameInstancesDTO(g));
+            }
+        }
+        return resultList;
     }
 
     public void updateAvgRating(long gameInstanceId){

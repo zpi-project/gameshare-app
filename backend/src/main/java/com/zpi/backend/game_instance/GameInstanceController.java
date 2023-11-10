@@ -141,7 +141,7 @@ public class GameInstanceController {
                     "and sorted by distance (calculated by latitude and longitude) from the database."
     )
     @RequestMapping(method = GET, value="/search")
-    public ResponseEntity<ResultsDTO<GameInstanceListDTO>>  getGameInstances(@RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
+    public ResponseEntity<ResultsDTO<UserWithGameInstancesDTO>>  getGameInstances(@RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
                                            @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber, @RequestParam Optional<Integer> maxPricePerDay,
                                            @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page) throws CategoryDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
