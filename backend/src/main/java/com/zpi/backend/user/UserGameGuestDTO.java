@@ -24,6 +24,7 @@ public class UserGameGuestDTO {
         locationLatitude = user.getLocationLatitude();
         locationLongitude = user.getLocationLongitude();
         avatarLink = user.getAvatarLink();
+        // TODO Round to 2ed place avgRating everywhere
         avgRating = user.getAvgRating();
     }
 }
