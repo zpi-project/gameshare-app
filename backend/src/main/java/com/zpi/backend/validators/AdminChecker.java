@@ -6,20 +6,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class AdminChecker {
 
-    @Value("${JAKUB_EMAIL}")
-    private String jakubEmail;
+    @Value("${ADMIN1_EMAIL}")
+    private String admin1email;
 
-    @Value("${ALEKSANDRA_EMAIL}")
-    private String aleksandraEmail;
+    @Value("${ADMIN2_EMAIL}")
+    private String admin2email;
 
-    @Value("${MARIA_EMAIL}")
-    private String mariaEmail;
+    @Value("${ADMIN3_EMAIL}")
+    private String admin3email;
 
-    @Value("${PAULINA_EMAIL}")
-    private String paulinaEmail;
+    @Value("${ADMIN4_EMAIL}")
+    private String admin4email;
 
 
     public boolean isAdmin(String email){
-        return email.equals(jakubEmail) || email.equals(aleksandraEmail) || email.equals(mariaEmail) || email.equals(paulinaEmail);
+        return email.equals(admin1email) || email.equals(admin2email) || email.equals(admin3email) || email.equals(admin4email);
     }
 }
