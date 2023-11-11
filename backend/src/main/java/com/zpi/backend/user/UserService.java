@@ -2,6 +2,7 @@ package com.zpi.backend.user;
 
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.role.RoleRepository;
+import com.zpi.backend.validators.AdminChecker;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private  UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private AdminChecker adminChecker;
 
     private boolean checkIfUserExists(String googleId) {
         User user = this.userRepository.findByGoogleId(googleId).orElse(null);
@@ -27,11 +29,6 @@ public class UserService {
     }
 
 
-    public User getUserByGoogleId(String googleId) throws UserDoesNotExistException {
-        return this.userRepository.findByGoogleId(googleId).orElseThrow(()->new UserDoesNotExistException("User not found"));
-    }
-
-
     public void updateUser(Authentication authentication,UpdateUserDTO updateUserDTO) throws UserDoesNotExistException, BadRequestException {
         updateUserDTO.validate();
         User user = getUser(authentication);
@@ -43,7 +40,10 @@ public class UserService {
         User user = (User) authentication.getPrincipal();
         if(!checkIfUserExists(user.getGoogleId())) {
             user.update(updateUserDTO);
-            user.setRole(roleRepository.getRoleByName("user"));
+            if(adminChecker.isAdmin(user.getEmail()))
+                user.setRole(roleRepository.getRoleByName("admin"));
+            else
+                user.setRole(roleRepository.getRoleByName("user"));
             userRepository.save(user);
         }
         else {
