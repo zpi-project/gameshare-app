@@ -11,6 +11,7 @@ public class GetUserDTO {
     private String avatarLink;
     private double locationLongitude;
     private double locationLatitude;
+    private double avgRating;
 
     public GetUserDTO(User user) {
         this.uuid = user.getUuid();
@@ -20,5 +21,6 @@ public class GetUserDTO {
         this.avatarLink = user.getAvatarLink();
         this.locationLongitude = user.getLocationLongitude();
         this.locationLatitude = user.getLocationLatitude();
+        this.avgRating = (double) Math.round(user.getAvgRating() * 100) /100;
     }
 }

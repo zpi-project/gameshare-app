@@ -1,4 +1,4 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.validators.ValueChecker;

@@ -54,4 +54,19 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "where GC.category_id in :categories and GS.status = 'Accepted' and lower(G.name) like %:name%",
             nativeQuery = true)
     Page<Game>  searchAllByNameContainsAndAcceptedAndCategoriesIn(@Param("name") String name, @Param("categories") List<Integer> categoriesIds, Pageable pageable);
+
+    @Query(value = "select u.uuid as uuid, u.first_name as firstName, u.last_name as lastName, " +
+            "u.location_latitude as locationLatitude, u.location_longitude as locationLongitude, " +
+            "u.avatar_link as avatarLink, " +
+            "u.avg_rating as userRate, gi.uuid as gameInstanceUUID, " +
+            "g.name as gameName, gi.avg_rating as gameInstanceRate," +
+            "sqrt(pow(u.location_latitude - :userLatitude, 2) + pow(u.location_longitude - :userLongitude, 2)) as distance " +
+            "from games g join game_instances gi on g.id = gi.game_id " +
+            "join users u on gi.owner_id = u.id " +
+            "where g.id = :gameId " +
+            "order by distance;",
+            nativeQuery = true)
+    Page<Object[]> getAllUsersWithGameAndRating(@Param("gameId") long gameId, @Param("userLatitude") double latitude,
+                                                @Param("userLongitude") double longitude, Pageable pageable);
+
 }

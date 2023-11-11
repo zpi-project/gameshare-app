@@ -1,12 +1,10 @@
-package com.zpi.backend.gameInstanceImage;
+package com.zpi.backend.game_instance_image;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.zpi.backend.gameInstance.GameInstance;
+import com.zpi.backend.game_instance.GameInstance;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Data

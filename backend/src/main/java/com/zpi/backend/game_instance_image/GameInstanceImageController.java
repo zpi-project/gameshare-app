@@ -1,8 +1,8 @@
-package com.zpi.backend.gameInstanceImage;
+package com.zpi.backend.game_instance_image;
 
-import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
 import com.zpi.backend.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,10 +13,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/game-instances/images")
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class GameInstanceImageController {
-    @Autowired
     GameInstanceImageService gameInstanceImageService;
 
     @PreAuthorize("isAuthenticated()")
