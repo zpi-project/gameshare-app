@@ -16,3 +16,7 @@ export interface NewUser {
   locationLatitude: number;
   locationLongitude: number;
 }
+
+export interface RatingRatedUser {
+  
+}

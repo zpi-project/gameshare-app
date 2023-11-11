@@ -1,7 +1,17 @@
 import { User } from "./User";
 
 export interface Opinion {
-  user: User;
-  stars: number;
-  description: string;
+  id: number
+  ratedUser: User	
+  ratingUser: User
+  stars: number
+  description: string
+  timestamp: Timestamp
+  ratingUserOwner: boolean
+}
+
+export interface Timestamp {
+  value: number
+  dateOnly: boolean
+  timeZoneShift: number
 }
