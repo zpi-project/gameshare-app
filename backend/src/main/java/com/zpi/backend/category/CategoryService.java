@@ -1,21 +1,26 @@
 package com.zpi.backend.category;
 
 import com.zpi.backend.exception_handlers.BadRequestException;
+import com.zpi.backend.role.RoleService;
+import com.zpi.backend.user.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class CategoryService {
     CategoryRepository categoryRepository;
+    RoleService roleService;
 
-    public Category addCategory(NewCategoryDTO newCategoryDTO) throws CategoryAlreadyExistsException, BadRequestException {
+    public Category addCategory(Authentication authentication, NewCategoryDTO newCategoryDTO) throws CategoryAlreadyExistsException, BadRequestException, UserDoesNotExistException {
         newCategoryDTO.validate();
+        roleService.checkIfAdmin(authentication);
         if (categoryRepository.existsCategoryByName(newCategoryDTO.getName()))
             throw new CategoryAlreadyExistsException(newCategoryDTO.getName());
         Category newCategory = newCategoryDTO.toCategory();

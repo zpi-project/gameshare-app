@@ -24,7 +24,6 @@ import java.util.List;
 public class GameInstanceOpinionService {
     private GameInstanceOpinionRepository gameInstanceOpinionRepository;
     private UserService userService;
-
     private GameInstanceService gameInstanceService;
 
     public GameInstanceOpinionDTO addOpinion(Authentication authentication, NewGameInstanceOpinionDTO newGameInstanceOpinionDTO)

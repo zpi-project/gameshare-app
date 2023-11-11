@@ -23,7 +23,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/game-instances")
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class GameInstanceController {
-    GameInstanceService gameInstanceService;
+  GameInstanceService gameInstanceService;
 
     @Operation(
             summary = "Add a new game instance",
