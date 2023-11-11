@@ -1,6 +1,6 @@
-package com.zpi.backend.gameInstanceImage;
+package com.zpi.backend.game_instance_image;
 
-import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
 import com.zpi.backend.user.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +13,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/game-instances/images")
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import com.zpi.backend.category.Category;
 import lombok.AllArgsConstructor;
@@ -11,6 +11,7 @@ public class GameInstanceSearch {
     private Category category;
     private Integer age;
     private Integer playersNumber;
+    private Integer maxPricePerDay;
     private Double latitude;
     private Double longitude;
 }

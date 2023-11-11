@@ -33,27 +33,31 @@ public class GameInstanceOpinionService {
         GameInstance gameInstance = gameInstanceService.getGameInstance(newGameInstanceOpinionDTO.getGameInstanceUuid());
         GameInstanceOpinion gameInstanceOpinion = new GameInstanceOpinion(user, gameInstance, newGameInstanceOpinionDTO);
         gameInstanceOpinionRepository.save(gameInstanceOpinion);
+        gameInstanceService.updateAvgRating(gameInstance.getId());
         return new GameInstanceOpinionDTO(gameInstanceOpinion);
     }
 
     public GameInstanceOpinionDTO updateOpinion(Authentication authentication,long id, UpdatedGameInstanceOpinionDTO updatedGameInstanceOpinionDTO)
-            throws UserDoesNotExistException, EditSomeoneElseOpinionException, OpinionDoesNotExistException, BadRequestException {
+            throws UserDoesNotExistException, EditSomeoneElseOpinionException, GameInstanceOpinionDoesNotExistException, BadRequestException {
         updatedGameInstanceOpinionDTO.validate();
-        GameInstanceOpinion gameInstanceOpinion = gameInstanceOpinionRepository.findById(id).orElseThrow(() -> new OpinionDoesNotExistException("Opinion does not exist"));
+        GameInstanceOpinion gameInstanceOpinion = gameInstanceOpinionRepository.findById(id).orElseThrow(() -> new GameInstanceOpinionDoesNotExistException("Opinion does not exist"));
         User user = userService.getUser(authentication);
         if(checkIfNotRatingUsersOpinion(user, gameInstanceOpinion))
             throw new EditSomeoneElseOpinionException("User can edit only his own opinion");
         gameInstanceOpinion.update(updatedGameInstanceOpinionDTO);
         gameInstanceOpinionRepository.save(gameInstanceOpinion);
+        gameInstanceService.updateAvgRating(gameInstanceOpinion.getGameInstance().getId());
         return new GameInstanceOpinionDTO(gameInstanceOpinion);
     }
 
-    public void deleteOpinion(Authentication authentication, long id) throws DeleteSomeoneElseOpinionException, UserDoesNotExistException, OpinionDoesNotExistException {
-        GameInstanceOpinion gameInstanceOpinion = gameInstanceOpinionRepository.findById(id).orElseThrow(()->new OpinionDoesNotExistException("Opinion does not exist"));
+    public void deleteOpinion(Authentication authentication, long id) throws DeleteSomeoneElseOpinionException, UserDoesNotExistException, GameInstanceOpinionDoesNotExistException {
+        GameInstanceOpinion gameInstanceOpinion = gameInstanceOpinionRepository.findById(id).orElseThrow(()->new GameInstanceOpinionDoesNotExistException("Opinion does not exist"));
         User user = userService.getUser(authentication);
         if(checkIfNotRatingUsersOpinion(user, gameInstanceOpinion))
             throw new DeleteSomeoneElseOpinionException("User can delete only his own opinion");
+        long gameInstanceId = gameInstanceOpinion.getGameInstance().getId();
         gameInstanceOpinionRepository.delete(gameInstanceOpinion);
+        gameInstanceService.updateAvgRating(gameInstanceId);
     }
 
     public ResultsDTO<GameInstanceOpinionDTO> getOpinions(String gameInstanceUuid, int page, int size) throws GameInstanceDoesNotExistException {

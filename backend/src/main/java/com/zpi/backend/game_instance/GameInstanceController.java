@@ -1,4 +1,4 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.dto.ResultsDTO;
@@ -19,6 +19,7 @@ import java.util.Optional;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/game-instances")
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @AllArgsConstructor
@@ -32,7 +33,7 @@ public class GameInstanceController {
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(method = POST)
-    public ResponseEntity<GameInstanceDTO> addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
+    public ResponseEntity<GameInstanceDTO> addGameInstance(@RequestBody NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
             throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
         GameInstanceDTO gameInstance = gameInstanceService.addGameInstance(newGameInstanceDTO, authentication);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -46,7 +47,7 @@ public class GameInstanceController {
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{uuid}", method = PUT)
-    public ResponseEntity<GameInstanceDTO> updateGameInstance(@PathVariable String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO,
+    public ResponseEntity<GameInstanceDTO> updateGameInstance(@PathVariable String uuid,@RequestBody UpdatedGameInstanceDTO updatedGameInstanceDTO,
                                              Authentication authentication) throws GameInstanceDoesNotExistException, BadRequestException {
         GameInstanceDTO gameInstance = gameInstanceService.updateGameInstance(uuid, updatedGameInstanceDTO, authentication);
         return ResponseEntity.status(HttpStatus.OK)
@@ -137,15 +138,15 @@ public class GameInstanceController {
 
     @Operation(
             summary = "Get game instances using filters",
-            description = "Returns Game Instances filtered by categories, age, players number, " +
+            description = "Returns Game Instances filtered by name, category, age, players number, availability" +
                     "and sorted by distance (calculated by latitude and longitude) from the database."
     )
     @RequestMapping(method = GET, value="/search")
-    public ResponseEntity<ResultsDTO<GameInstanceListDTO>>  getGameInstances(@RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
-                                           @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber,
+    public ResponseEntity<ResultsDTO<UserWithGameInstancesDTO>>  getGameInstances(@RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
+                                           @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber, @RequestParam Optional<Integer> maxPricePerDay,
                                            @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page) throws CategoryDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getGameInstances(size, page, searchName, categoryId, age, playersNumber, latitude, longitude));
+                .body(gameInstanceService.getGameInstances(size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, latitude, longitude));
     }
 
 }
