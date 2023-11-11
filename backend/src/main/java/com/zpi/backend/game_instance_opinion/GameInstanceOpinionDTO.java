@@ -1,6 +1,8 @@
 package com.zpi.backend.game_instance_opinion;
 
+import com.zpi.backend.user.UserDTO;
 import com.zpi.backend.user.UserGameInstanceDTO;
+import com.zpi.backend.user.UserGuestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,16 +14,19 @@ import java.util.Date;
 @NoArgsConstructor
 public class GameInstanceOpinionDTO {
     private long id;
-    private UserGameInstanceDTO ratingUser;
+    private UserGuestDTO ratingUser;
     private String description;
     private int stars;
     private Date timestamp;
 
-    public GameInstanceOpinionDTO(GameInstanceOpinion gameInstanceOpinion){
+    public GameInstanceOpinionDTO(GameInstanceOpinion gameInstanceOpinion, boolean isGuest){
         this.id = gameInstanceOpinion.getId();
         this.description = gameInstanceOpinion.getDescription();
         this.stars = gameInstanceOpinion.getStars();
         this.timestamp = gameInstanceOpinion.getTimestamp();
-        this.ratingUser = new UserGameInstanceDTO(gameInstanceOpinion.getRatingUser());
+        if (isGuest)
+            this.ratingUser = new UserGuestDTO(gameInstanceOpinion.getRatingUser());
+        else
+            this.ratingUser = new UserDTO(gameInstanceOpinion.getRatingUser());
     }
 }

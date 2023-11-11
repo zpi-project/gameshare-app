@@ -7,17 +7,16 @@ import java.util.Date;
 @Data
 public class UserOpinionDTO {
     private Long id;
-    private Date date;
+    private Date timestamp;
     private int stars;
     private String description;
-    // TODO DO UserDTO / UserGuestDTO
     private UserGuestDTO ratingUser;
 
     //TODO: add isRatingUserOwner when we have game instances and reservations
 
     public UserOpinionDTO(UserOpinion userOpinion, boolean isGuest) {
         this.id = userOpinion.getId();
-        this.date = userOpinion.getTimestamp();
+        this.timestamp = userOpinion.getTimestamp();
         this.stars = userOpinion.getStars();
         this.description = userOpinion.getDescription();
         if (isGuest)

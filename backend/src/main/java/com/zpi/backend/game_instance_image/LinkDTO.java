@@ -9,5 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LinkDTO {
     private long id;
+    private String name;
     private String link;
+
+    public LinkDTO(GameInstanceImage gameInstanceImage) {
+        id = gameInstanceImage.getId();
+        name= gameInstanceImage.getImageName();
+        link = gameInstanceImage.getImageLink();
+    }
 }

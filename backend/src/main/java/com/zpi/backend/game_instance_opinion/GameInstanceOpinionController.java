@@ -66,12 +66,12 @@ public class GameInstanceOpinionController {
     )
 
     @GetMapping("/{gameInstanceUuid}/opinions")
-    public ResponseEntity<ResultsDTO<GameInstanceOpinionDTO>> getOpinions(@PathVariable String gameInstanceUuid,
+    public ResponseEntity<ResultsDTO<GameInstanceOpinionDTO>> getOpinions(Authentication authentication, @PathVariable String gameInstanceUuid,
                                                                           @RequestParam int page, @RequestParam int size)
             throws GameInstanceDoesNotExistException {
         System.out.println("... called getGameInstanceOpinions");
         return ResponseEntity.ok()
-                .body(gameInstanceOpinionService.getOpinions(gameInstanceUuid,page,size));
+                .body(gameInstanceOpinionService.getOpinions(authentication, gameInstanceUuid,page,size));
     }
 
 
