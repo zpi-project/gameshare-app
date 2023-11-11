@@ -1,10 +1,11 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "@tanstack/react-query";
 // import { gameInstances } from "@cypress/fixtures/gameInstances";
 import { Search } from "lucide-react";
 import { User } from "@/types/User";
-import { GameInstance as GameInstanceType } from "@/types/Game";
 import { getName } from "@/utils/user";
+import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -13,24 +14,30 @@ import { Button } from "./ui/button";
 
 interface Props {
   owner?: User;
-  isLoading: boolean;
   showButtons: boolean;
   isMyPage: boolean;
-  gameInstances: [GameInstanceType];
 }
 
-const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons, isMyPage, gameInstances }) => {
+const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
+  const {
+    data: gameInstances,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["gameInstances", { uuid: owner?.uuid }],
+    queryFn: () => GameInstanceApi.getInstancesByOwnerUUID(owner?.uuid ?? "", 0, 100),
+    enabled: owner !== undefined,
+  });
 
   return (
     <div className="flex h-full w-full flex-col gap-6">
+      {isError && <div>Is Error</div>}
       {isLoading && (
-        <>
-          <div className="flex flex-col">
-            <Skeleton className="h-max-h flex-grow rounded-lg p-5" />
-          </div>
-        </>
+        <div className="flex flex-col">
+          <Skeleton className="h-max-h flex-grow rounded-lg p-5" />
+        </div>
       )}
       {owner && (
         <>
@@ -49,19 +56,24 @@ const GameInstancesSection: FC<Props> = ({ owner, isLoading, showButtons, isMyPa
               </div>
               {showButtons && <Button className="w-56">{t("addGameInstance")}</Button>}
             </div>
-            <ScrollArea className="h-[calc(100%-100px)]">
-              <div className="flex h-full flex-col gap-4">
-                {gameInstances
-                  .filter(post => {
-                    if (query === "") {
-                      return post;
-                    } else if (post.game.name.toLowerCase().includes(query.toLowerCase())) {
-                      return post;
-                    }
-                  })
-                  .map((gameInstance, id) => (
-                    <GameInstance gameInstance={gameInstance} key={id} showButtons={showButtons} />
-                  ))}
+            <ScrollArea className="h-[calc(100%-100px)] w-full flex-grow">
+              <div className="flex h-full flex-col gap-4 pr-4">
+                {gameInstances &&
+                  gameInstances.results
+                    .filter(post => {
+                      if (query === "") {
+                        return post;
+                      } else if (post.game.name.toLowerCase().includes(query.toLowerCase())) {
+                        return post;
+                      }
+                    })
+                    .map((gameInstance, id) => (
+                      <GameInstance
+                        gameInstance={gameInstance}
+                        key={id}
+                        showButtons={showButtons}
+                      />
+                    ))}
               </div>
             </ScrollArea>
           </div>
