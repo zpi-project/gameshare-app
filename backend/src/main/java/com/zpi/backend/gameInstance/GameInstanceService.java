@@ -13,6 +13,7 @@ import com.zpi.backend.gameInstanceImage.GameInstanceImageRepository;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,16 +27,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class GameInstanceService {
-    @Autowired
     GameInstanceRepository gameInstanceRepository;
-    @Autowired
     GameInstanceImageRepository gameInstanceImageRepository;
-    @Autowired
     UserService userService;
-    @Autowired
     GameService gameService;
-    @Autowired
     CategoryService categoryService;
 
     public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication) throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {

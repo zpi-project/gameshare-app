@@ -8,6 +8,7 @@ import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import com.zpi.backend.user_opinion.*;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,12 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class GameInstanceOpinionService {
-    @Autowired
     private GameInstanceOpinionRepository gameInstanceOpinionRepository;
-    @Autowired
     private UserService userService;
-    @Autowired
     private GameInstanceService gameInstanceService;
 
     public GameInstanceOpinionDTO addOpinion(Authentication authentication, NewGameInstanceOpinionDTO newGameInstanceOpinionDTO)

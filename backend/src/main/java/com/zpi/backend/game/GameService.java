@@ -9,6 +9,7 @@ import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
 import com.zpi.backend.user.UserDoesNotExistException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,14 +21,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class GameService {
-    @Autowired
     GameRepository gameRepository;
-    @Autowired
     CategoryService categoryService;
-    @Autowired
     RoleService roleService;
-    @Autowired
     GameStatusService gameStatusService;
     public Game addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
         newGameDTO.validate();
