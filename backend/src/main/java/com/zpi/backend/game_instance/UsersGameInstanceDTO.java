@@ -21,7 +21,7 @@ public class UsersGameInstanceDTO {
         description = gameInstance.getDescription();
         pricePerDay = gameInstance.getPricePerDay();
         game = new GameListDTO(gameInstance.getGame());
-        avgRating = gameInstance.getAvgRating();
+        avgRating = (double) Math.round(gameInstance.getAvgRating() * 100) /100;
         isActive = gameInstance.isActive();
     }
 }

@@ -21,7 +21,7 @@ public class UserGameInstanceDTO {
         firstName = user.getFirstName();
         lastName = user.getLastName();
         avatarLink = user.getAvatarLink();
-        avgRating = user.getAvgRating();
+        avgRating = (double) Math.round(user.getAvgRating() * 100) /100;
         locationLatitude = user.getLocationLongitude();
         locationLongitude = user.getLocationLongitude();
     }

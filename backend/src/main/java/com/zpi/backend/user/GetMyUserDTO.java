@@ -27,6 +27,6 @@ public class GetMyUserDTO {
         this.locationLongitude = user.getLocationLongitude();
         this.email = user.getEmail();
         this.avatarLink = user.getAvatarLink();
-        this.avgRating = user.getAvgRating();
+        this.avgRating = (double) Math.round(user.getAvgRating() * 100) /100;
     }
 }
