@@ -1,7 +1,7 @@
 import { atom } from "recoil";
-import { Role } from "@/types/Role";
+import { RoleType } from "@/types/Role";
 
-export const roleState = atom<Role>({
+export const roleState = atom<RoleType>({
   key: "role",
   default: "guest",
 });
