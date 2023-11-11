@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LinkDTO {
+public class FileDTO {
     private long id;
-    private String link;
+    private String fileName;
+    private String fileURL;
 }
