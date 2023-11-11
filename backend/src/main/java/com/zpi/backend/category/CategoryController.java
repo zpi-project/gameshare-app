@@ -17,7 +17,6 @@ import java.util.List;
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RequestMapping("/categories")
 @RestController
-@AllArgsConstructor
 public class CategoryController {
     CategoryService categoryService;
 

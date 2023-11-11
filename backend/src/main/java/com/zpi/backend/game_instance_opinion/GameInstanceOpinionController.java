@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RequestMapping("/game-instances")
-@AllArgsConstructor
 public class GameInstanceOpinionController {
 
     private GameInstanceOpinionService gameInstanceOpinionService;

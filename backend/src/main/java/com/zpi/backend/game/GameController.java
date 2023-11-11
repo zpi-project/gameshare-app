@@ -20,7 +20,6 @@ import java.util.Optional;
 @AllArgsConstructor
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RequestMapping("/games")
-@AllArgsConstructor
 public class GameController {
     GameService gameService;
 

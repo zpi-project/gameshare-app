@@ -1,4 +1,4 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import com.zpi.backend.category.Category;
 import com.zpi.backend.category.CategoryDoesNotExistException;
@@ -9,6 +9,7 @@ import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.game.GameService;
+import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
