@@ -12,6 +12,6 @@ public class UserWithGameOpinionDTO {
     private UserGameGuestDTO user;
     private String gameInstanceUUID;
     private String gameName;
-    private double gameInstanceRate;
+    private double gameInstanceRating;
 
 }

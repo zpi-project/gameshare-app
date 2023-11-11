@@ -32,7 +32,7 @@ public class GameInstanceController {
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(method = POST)
-    public ResponseEntity<GameInstanceDTO> addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
+    public ResponseEntity<GameInstanceDTO> addGameInstance(@RequestBody NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
             throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
         GameInstanceDTO gameInstance = gameInstanceService.addGameInstance(newGameInstanceDTO, authentication);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -46,7 +46,7 @@ public class GameInstanceController {
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{uuid}", method = PUT)
-    public ResponseEntity<GameInstanceDTO> updateGameInstance(@PathVariable String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO,
+    public ResponseEntity<GameInstanceDTO> updateGameInstance(@PathVariable String uuid,@RequestBody UpdatedGameInstanceDTO updatedGameInstanceDTO,
                                              Authentication authentication) throws GameInstanceDoesNotExistException, BadRequestException {
         GameInstanceDTO gameInstance = gameInstanceService.updateGameInstance(uuid, updatedGameInstanceDTO, authentication);
         return ResponseEntity.status(HttpStatus.OK)

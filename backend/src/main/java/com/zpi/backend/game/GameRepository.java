@@ -60,11 +60,11 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "u.avatar_link as avatarLink, " +
             "u.avg_rating as userRate, gi.uuid as gameInstanceUUID, " +
             "g.name as gameName, gi.avg_rating as gameInstanceRate," +
-            "sqrt(pow(u.location_latitude - :userLatitude, 2) + pow(u.location_longitude - :userLongitude, 2)) as direction " +
+            "sqrt(pow(u.location_latitude - :userLatitude, 2) + pow(u.location_longitude - :userLongitude, 2)) as distance " +
             "from games g join game_instances gi on g.id = gi.game_id " +
             "join users u on gi.owner_id = u.id " +
             "where g.id = :gameId " +
-            "order by direction;",
+            "order by distance;",
             nativeQuery = true)
     Page<Object[]> getAllUsersWithGameAndRating(@Param("gameId") long gameId, @Param("userLatitude") double latitude,
                                                 @Param("userLongitude") double longitude, Pageable pageable);

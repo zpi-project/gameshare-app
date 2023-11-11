@@ -120,18 +120,19 @@ public class GameService {
 
     private UserWithGameOpinionDTO convertToDTO(Object[] columns) {
         UserWithGameOpinionDTO dto = new UserWithGameOpinionDTO();
+
         dto.setUser(new UserGameGuestDTO(
-                (String) columns[0],
-                (String) columns[1],
-                (String) columns[2],
-                (Double) columns[3],
-                (Double) columns[4],
-                (String) columns[5],
-                (Double) columns[6])
+                (String) columns[0], // uuid
+                (String) columns[1], // firstname
+                (String) columns[2], // lastname
+                (Double) columns[3], // latitude
+                (Double) columns[4], // longitude
+                (String) columns[5], // avatarLink
+                (Double) columns[6]) // avgRating
         );
-        dto.setGameInstanceUUID((String) columns[7]);
-        dto.setGameName((String) columns[8]);
-        dto.setGameInstanceRate(((Double) columns[9]));
+        dto.setGameInstanceUUID((String) columns[7]); // gameInstanceUUID
+        dto.setGameName((String) columns[8]); // gameName
+        dto.setGameInstanceRating(((Double) columns[9])); // gameInstanceRating
         return dto;
     }
 }
