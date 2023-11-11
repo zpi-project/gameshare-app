@@ -1,7 +1,7 @@
 package com.zpi.backend.game_instance_opinion;
 
 
-import com.zpi.backend.gameInstance.GameInstance;
+import com.zpi.backend.game_instance.GameInstance;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

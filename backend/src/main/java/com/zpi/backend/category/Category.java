@@ -21,7 +21,4 @@ public class Category {
     public Category(long id){
         this.id = id;
     }
-    public static Category toCategory(long id){
-        return new Category(id);
-    }
 }

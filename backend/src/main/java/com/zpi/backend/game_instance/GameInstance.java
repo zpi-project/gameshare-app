@@ -1,7 +1,7 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import com.zpi.backend.game.Game;
-import com.zpi.backend.gameInstanceImage.GameInstanceImage;
+import com.zpi.backend.game_instance_image.GameInstanceImage;
 import com.zpi.backend.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -32,6 +32,7 @@ public class GameInstance {
     // TODO What about status
     @OneToMany(mappedBy = "gameInstance")
     private List<GameInstanceImage> images;
+    private double avgRating;
 
     public GameInstance(NewGameInstanceDTO newGameInstanceDTO, Game game, User owner) {
         this.game = game;

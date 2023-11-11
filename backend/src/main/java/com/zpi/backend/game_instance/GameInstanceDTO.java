@@ -1,7 +1,7 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import com.zpi.backend.game.GameDTO;
-import com.zpi.backend.gameInstanceImage.GameInstanceImage;
+import com.zpi.backend.game_instance_image.GameInstanceImage;
 import com.zpi.backend.user.UserGameDTO;
 import com.zpi.backend.user.UserGameGuestDTO;
 import lombok.AllArgsConstructor;
@@ -20,6 +20,7 @@ public class GameInstanceDTO {
     private List<GameInstanceImage> images;
     private GameDTO game;
     private UserGameGuestDTO owner;
+    private double avgRating;
     private boolean isActive;
 
     public GameInstanceDTO(GameInstance gameInstance, boolean isGuest){
@@ -33,6 +34,7 @@ public class GameInstanceDTO {
         else
             owner = new UserGameDTO(gameInstance.getOwner());
         game = new GameDTO(gameInstance.getGame());
+        avgRating = (double) Math.round(gameInstance.getAvgRating() * 100) /100;
     }
 
 }

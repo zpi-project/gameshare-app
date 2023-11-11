@@ -50,4 +50,8 @@ public class UserService {
             throw new UserAlreadyExistsException("User already exists");
         }
     }
+    public void updateAvgRating(long userId){
+        userRepository.updateAvgRating(userId);
+    }
+
 }

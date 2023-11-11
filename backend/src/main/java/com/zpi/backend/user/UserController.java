@@ -14,8 +14,6 @@ import org.springframework.security.core.Authentication;
 @AllArgsConstructor
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class UserController {
-
-    @Autowired
     UserService userService;
 
     @Operation(
