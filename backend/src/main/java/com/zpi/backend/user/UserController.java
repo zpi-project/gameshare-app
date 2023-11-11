@@ -21,11 +21,12 @@ public class UserController {
     )
     @GetMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<GetMyUserDTO> getUser(Authentication authentication) throws UserDoesNotExistException {
+    public ResponseEntity<UserDTO> getUser(Authentication authentication) throws UserDoesNotExistException {
         System.out.println("... called getUser");
         User user = userService.getUser(authentication);
-        GetMyUserDTO userInfo = new GetMyUserDTO(user);
-        return ResponseEntity.status(HttpStatus.OK).body(userInfo);
+        UserDTO userInfo = new UserDTO(user);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userInfo);
     }
 
     @Operation(
@@ -33,11 +34,10 @@ public class UserController {
             description = "Returns users data using UUID"
     )
     @GetMapping("/user/{uuid}")
-    public ResponseEntity<GetUserDTO> getUserById(@PathVariable("uuid") String googleId) throws UserDoesNotExistException {
+    public ResponseEntity<UserGuestDTO> getUserById(@PathVariable("uuid") String uuid, Authentication authentication) throws UserDoesNotExistException {
         System.out.println("... called getUserByUUID");
-        User user = userService.getUserByUUID(googleId);
-        GetUserDTO userInfo = new GetUserDTO(user);
-        return ResponseEntity.status(HttpStatus.OK).body(userInfo);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userService.getUserByUUID(authentication, uuid));
     }
 
     @Operation(

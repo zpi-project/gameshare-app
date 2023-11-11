@@ -101,9 +101,10 @@ public class GameInstanceService {
         return gameInstanceOptional.get();
     }
 
-    public ResultsDTO<GameInstanceListDTO> getUserGameInstances(String userUUID, Optional<String> searchName, int size, int page) throws UserDoesNotExistException {
+    public ResultsDTO<GameInstanceListDTO> getUserGameInstances(Authentication authentication, String userUUID, Optional<String> searchName, int size, int page) throws UserDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         userService.getUserByUUID(userUUID);
+        boolean isGuest = authentication == null || !authentication.isAuthenticated();
         Page<GameInstance> gameInstancesPage;
         if (searchName.isEmpty())
             gameInstancesPage = gameInstanceRepository.findByOwnerUuid(userUUID, pageable);
@@ -112,21 +113,23 @@ public class GameInstanceService {
                     userUUID, searchName.get(), pageable);
         List<GameInstanceListDTO> resultsList = new ArrayList<>();
         gameInstancesPage.stream().toList()
-                .forEach(gameInstance -> resultsList.add(new GameInstanceListDTO(gameInstance)));
+                .forEach(gameInstance -> resultsList.add(new GameInstanceListDTO(gameInstance, isGuest)));
         return new ResultsDTO<>(resultsList,
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }
 
     public ResultsDTO<GameInstanceListDTO> getMyGameInstances(Optional<String> searchName, int size, int page, Authentication authentication) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
-        return getUserGameInstances(user.getUuid(),searchName, size, page);
+        return getUserGameInstances(authentication, user.getUuid(),searchName, size, page);
     }
 
-    public ResultsDTO<UserWithGameInstancesDTO> getGameInstances(int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
+    // TODO - change endpoint results
+    public ResultsDTO<UserWithGameInstancesDTO> getGameInstances(Authentication authentication, int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
                                                Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, double latitude,
                                                double longitude) throws CategoryDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
+        boolean isGuest = authentication == null || !authentication.isAuthenticated();
         if (categoryId.isPresent())
             category = categoryService.getCategory(categoryId.get());
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(

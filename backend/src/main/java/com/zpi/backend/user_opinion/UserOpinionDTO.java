@@ -1,20 +1,28 @@
 package com.zpi.backend.user_opinion;
-
-import com.zpi.backend.user.User;
+import com.zpi.backend.user.UserDTO;
+import com.zpi.backend.user.UserGuestDTO;
 import lombok.Data;
+import java.util.Date;
 
 @Data
 public class UserOpinionDTO {
-    private String uuid;
-    private String firstName;
-    private String lastName;
-    private String avatarLink;
+    private Long id;
+    private Date date;
+    private int stars;
+    private String description;
+    // TODO DO UserDTO / UserGuestDTO
+    private UserGuestDTO ratingUser;
 
-    public UserOpinionDTO(User user) {
-        this.uuid = user.getUuid();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.avatarLink = user.getAvatarLink();
+    //TODO: add isRatingUserOwner when we have game instances and reservations
+
+    public UserOpinionDTO(UserOpinion userOpinion, boolean isGuest) {
+        this.id = userOpinion.getId();
+        this.date = userOpinion.getTimestamp();
+        this.stars = userOpinion.getStars();
+        this.description = userOpinion.getDescription();
+        if (isGuest)
+            this.ratingUser = new UserGuestDTO(userOpinion.getRatingUser());
+        else
+            this.ratingUser = new UserDTO(userOpinion.getRatingUser());
     }
 }
-

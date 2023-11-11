@@ -5,7 +5,7 @@ import com.zpi.backend.validators.ValueChecker;
 import lombok.Data;
 
 @Data
-public class UpdateUserOpinionDTO {
+public class ModifiedUserOpinionDTO {
     private int stars;
     private String description;
 

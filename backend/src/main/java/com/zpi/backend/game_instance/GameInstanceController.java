@@ -129,10 +129,10 @@ public class GameInstanceController {
             description = "Returns the Game Instances of a User from the database, identified by user's userUUID"
     )
     @RequestMapping(value = "/user/{userUUID}", method = GET)
-    public ResponseEntity<ResultsDTO<GameInstanceListDTO>> getUserGameInstances(@PathVariable String userUUID, @RequestParam Optional<String> searchName,
+    public ResponseEntity<ResultsDTO<GameInstanceListDTO>> getUserGameInstances(Authentication authentication, @PathVariable String userUUID, @RequestParam Optional<String> searchName,
                                                                          @RequestParam int size, @RequestParam int page) throws UserDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getUserGameInstances(userUUID, searchName, size, page));
+                .body(gameInstanceService.getUserGameInstances(authentication, userUUID, searchName, size, page));
     }
 
     @Operation(

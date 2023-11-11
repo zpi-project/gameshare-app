@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserGameGuestDTO {
+public class UserGuestDTO {
     private String uuid;
     private String firstName;
     private String lastName;
@@ -17,7 +17,7 @@ public class UserGameGuestDTO {
     private double avgRating;
 
 
-    public UserGameGuestDTO(User user){
+    public UserGuestDTO(User user){
         uuid = user.getUuid();
         firstName = user.getFirstName();
         lastName = user.getLastName();

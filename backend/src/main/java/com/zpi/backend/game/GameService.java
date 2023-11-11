@@ -9,7 +9,7 @@ import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
 import com.zpi.backend.user.UserDoesNotExistException;
-import com.zpi.backend.user.UserGameGuestDTO;
+import com.zpi.backend.user.UserGuestDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -121,7 +121,7 @@ public class GameService {
     private UserWithGameOpinionDTO convertToDTO(Object[] columns) {
         UserWithGameOpinionDTO dto = new UserWithGameOpinionDTO();
 
-        dto.setUser(new UserGameGuestDTO(
+        dto.setUser(new UserGuestDTO(
                 (String) columns[0], // uuid
                 (String) columns[1], // firstname
                 (String) columns[2], // lastname

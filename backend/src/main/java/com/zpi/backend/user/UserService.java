@@ -26,6 +26,15 @@ public class UserService {
         return this.userRepository.findByUuid(uuid).orElseThrow(()->new UserDoesNotExistException("User not found"));
     }
 
+    public UserGuestDTO getUserByUUID(Authentication authentication, String uuid) throws UserDoesNotExistException {
+        User user = getUserByUUID(uuid);
+        if (authentication == null || !authentication.isAuthenticated())
+            return new UserGuestDTO(user);
+        else
+            return new UserDTO(user);
+
+    }
+
 
     public User getUserByGoogleId(String googleId) throws UserDoesNotExistException {
         return this.userRepository.findByGoogleId(googleId).orElseThrow(()->new UserDoesNotExistException("User not found"));
