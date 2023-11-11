@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useRecoilState } from "recoil";
 import { locationState } from "@/state/location";
 import { GameInstanceSearchParams } from "@/types/GameInstance";

@@ -32,4 +32,3 @@ export interface GameInfo {
   shortDescription: number;
   categories: Category[];
 }
-

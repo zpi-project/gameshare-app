@@ -63,6 +63,13 @@ const pl: typeof en = {
   gameError: "Nie udało się pobrać danych o tej grze.",
 
   usersWithThisGame: "Użytkownicy z tą grą",
+
+  typeToSearch: "Wyszukaj grę...",
+  category: "Kategoria",
+  all: "Wszystkie",
+  pricePerDay: "Cena na dzień",
+  players: "L. graczy",
+  age: "Wiek",
 };
 
 export default pl;

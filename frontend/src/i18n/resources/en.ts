@@ -60,4 +60,11 @@ export default {
   categoryError: "There was a problem fetching this category.",
   gameError: "There was a problem fetching this game.",
   usersWithThisGame: "Users with this game",
+
+  typeToSearch: "Type to search...",
+  category: "Category",
+  all: "All",
+  pricePerDay: "Price per day",
+  players: "Players",
+  age: "Age",
 };
