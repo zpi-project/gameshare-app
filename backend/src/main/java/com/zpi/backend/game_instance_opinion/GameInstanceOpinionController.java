@@ -7,7 +7,6 @@ import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user_opinion.*;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

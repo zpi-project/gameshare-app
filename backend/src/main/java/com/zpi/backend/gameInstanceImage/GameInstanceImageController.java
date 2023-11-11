@@ -3,7 +3,6 @@ package com.zpi.backend.gameInstanceImage;
 import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
 import com.zpi.backend.user.User;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
