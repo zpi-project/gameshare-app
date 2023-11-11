@@ -18,7 +18,11 @@ const Dashboard: FC = () => {
   console.log(location);
   const [latitude, longitude] = location as number[];
 
-  const { data: gameInstances } = useQuery({
+  const {
+    data: gameInstances,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["game-instances", searchParams],
     queryFn: () => GameInstanceApi.search(latitude, longitude, 0, 15, searchParams),
   });
@@ -33,9 +37,9 @@ const Dashboard: FC = () => {
           <LocationMarker />
         </Map>
       </div>
-      <div className="w-[600px] rounded-lg bg-section p-4">
+      <div className="flex w-[700px] flex-col gap-4 rounded-lg bg-section p-4">
         <GamesSearch onSubmit={setSearchParams} />
-        <GamesResults />
+        <GamesResults gameInstances={gameInstances} isLoading={isLoading} isError={isError} />
       </div>
     </div>
   );

@@ -67,4 +67,5 @@ export default {
   pricePerDay: "Price per day",
   players: "Players",
   age: "Age",
+  perDay: "per day",
 };

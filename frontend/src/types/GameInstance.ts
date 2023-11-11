@@ -1,4 +1,5 @@
 import { GameInfo } from "./Game";
+import { User } from "./User";
 
 export interface GameInstance {
   uuid: string;
@@ -15,4 +16,9 @@ export interface GameInstanceSearchParams {
   age?: number;
   playersNumber?: number;
   maxPricePerDay?: number;
+}
+
+export interface SearchUserGameInstances {
+  owner: User;
+  gameInstances: GameInstance[];
 }

@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -70,6 +71,7 @@ const pl: typeof en = {
   pricePerDay: "Cena na dzień",
   players: "L. graczy",
   age: "Wiek",
+  perDay: "na dzień",
 };
 
 export default pl;

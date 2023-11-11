@@ -2,10 +2,10 @@ export interface User {
   uuid: string;
   firstName: string;
   lastName: string;
-  phoneNumber: string;
+  phoneNumber?: string;
   locationLatitude: number;
   locationLongitude: number;
-  email: string;
+  email?: string;
   avatarLink: string;
 }
 
