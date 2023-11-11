@@ -19,19 +19,27 @@ public class GameInstance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(nullable = false,unique = true)
     private String uuid = UUID.randomUUID().toString();
+
     @ManyToOne
     private Game game;
+
     @ManyToOne
     private User owner;
+
     private double pricePerDay;
+
     @Column(length = 511)
     private String description;
+
     private boolean isActive;
     // TODO What about status
+
     @OneToMany(mappedBy = "gameInstance")
     private List<GameInstanceImage> images;
+
     private double avgRating;
 
     public GameInstance(NewGameInstanceDTO newGameInstanceDTO, Game game, User owner) {

@@ -4,5 +4,7 @@ values  ('Accepted by owner'),
         ('Pending'),
         ('Canceled by renter'),
         ('Canceled by owner'),
-        ('Finished')
+        ('Rented'),
+        ('Finished'),
+        ('Expired')
     ON CONFLICT DO NOTHING;
