@@ -101,26 +101,27 @@ public class GameInstanceService {
         return gameInstanceOptional.get();
     }
 
-    public ResultsDTO<SearchGameInstanceDTO> getUserGameInstances(Authentication authentication, String userUUID, Optional<String> searchName, int size, int page) throws UserDoesNotExistException {
+    public ResultsDTO<GameInstanceDTO> getUserGameInstances(String userUUID, Optional<String> searchName, int size, int page, boolean allGameInstances)
+            throws UserDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         userService.getUserByUUID(userUUID);
-        boolean isGuest = authentication == null || !authentication.isAuthenticated();
         Page<GameInstance> gameInstancesPage;
         if (searchName.isEmpty())
             gameInstancesPage = gameInstanceRepository.findByOwnerUuid(userUUID, pageable);
         else
             gameInstancesPage = gameInstanceRepository.findByOwnerUuidAndGameNameContainingIgnoreCase(
                     userUUID, searchName.get(), pageable);
-        List<SearchGameInstanceDTO> resultsList = new ArrayList<>();
+        List<GameInstanceDTO> resultsList = new ArrayList<>();
         gameInstancesPage.stream().toList()
-                .forEach(gameInstance -> resultsList.add(new SearchGameInstanceDTO(gameInstance, isGuest)));
+                .forEach(gameInstance -> resultsList.add(new GameInstanceDTO(gameInstance)));
         return new ResultsDTO<>(resultsList,
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }
 
-    public ResultsDTO<SearchGameInstanceDTO> getMyGameInstances(Optional<String> searchName, int size, int page, Authentication authentication) throws UserDoesNotExistException {
+    // TODO Return all game instances (also not active) for logged in user.
+    public ResultsDTO<GameInstanceDTO> getMyGameInstances(Optional<String> searchName, int size, int page, Authentication authentication) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
-        return getUserGameInstances(authentication, user.getUuid(),searchName, size, page);
+        return getUserGameInstances(user.getUuid(),searchName, size, page, true);
     }
 
     // TODO - change endpoint results
@@ -148,6 +149,7 @@ public class GameInstanceService {
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }
 
+    // Not used, but not removed, because who knows what is going to change xd
     private List<UserWithGameInstancesDTO> convertToUserWithGameInstancesDTO(List<GameInstance> gameInstanceList){
         List<UserWithGameInstancesDTO> resultList = new ArrayList<>();
         for (GameInstance g: gameInstanceList){

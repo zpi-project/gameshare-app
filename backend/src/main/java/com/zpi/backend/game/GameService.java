@@ -27,7 +27,7 @@ public class GameService {
     CategoryService categoryService;
     RoleService roleService;
     GameStatusService gameStatusService;
-    public Game addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
+    public GameDTO addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
         newGameDTO.validate();
         if (gameRepository.existsGameByName(newGameDTO.getName()))
             throw new GameAlreadyExistsException("Game "+newGameDTO.getName()+" already exists");
@@ -35,7 +35,7 @@ public class GameService {
         Game newGame = newGameDTO.toGame(categories);
         newGame.setGameStatus(gameStatusService.getGameStatus("Pending"));
         gameRepository.save(newGame);
-        return newGame;
+        return new GameDTO(newGame);
     }
 
     public Game getGame(long id) throws GameDoesNotExistException{
@@ -45,7 +45,11 @@ public class GameService {
         return gameOptional.get();
     }
 
-    public ResultsDTO<Game> getGames(int page, int size, Optional<String> search, Optional<List<Integer>> categoriesIds) {
+    public GameDTO getGameDTO(long id) throws GameDoesNotExistException{
+        return new GameDTO(getGame(id));
+    }
+
+    public ResultsDTO<GameDTO> getGames(int page, int size, Optional<String> search, Optional<List<Integer>> categoriesIds) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Game> gamePage;
         if (search.isEmpty()) {
@@ -61,7 +65,14 @@ public class GameService {
                 gamePage = gameRepository.searchAllByNameContainsAndAcceptedAndCategoriesIn(search.get().toLowerCase(), categoriesIds.get(), pageable);
             }
         }
-        return new ResultsDTO<>(gamePage.stream().toList(), new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+        return new ResultsDTO<>(gamePage
+                .map(this::convertToDTO)
+                .stream().toList(),
+                new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+    }
+
+    private GameDTO convertToDTO(Game game){
+        return new GameDTO(game);
     }
 
     // TODO Getting popular games (considering reservations)

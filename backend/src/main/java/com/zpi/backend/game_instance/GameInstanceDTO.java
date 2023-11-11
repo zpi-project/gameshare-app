@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class GameInstanceDTO {
     private String uuid;
-    private String shortDescription;
+    private String description;
     private double pricePerDay;
     private GameDTO game;
     private double avgRating;
@@ -23,7 +23,7 @@ public class GameInstanceDTO {
 
     public GameInstanceDTO(GameInstance gameInstance){
         uuid = gameInstance.getUuid();
-        shortDescription = gameInstance.getDescription();
+        description = gameInstance.getDescription();
         pricePerDay = gameInstance.getPricePerDay();
         isActive = gameInstance.isActive();
         game = new GameDTO(gameInstance.getGame());
