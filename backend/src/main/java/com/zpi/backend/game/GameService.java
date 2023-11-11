@@ -20,8 +20,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class GameService {
     GameRepository gameRepository;
     CategoryService categoryService;

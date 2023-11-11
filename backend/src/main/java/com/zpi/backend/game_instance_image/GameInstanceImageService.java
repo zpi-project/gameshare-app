@@ -3,13 +3,14 @@ package com.zpi.backend.game_instance_image;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstanceRepository;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class GameInstanceImageService {
     GameInstanceImageRepository gameInstanceImageRepository;
     GameInstanceRepository gameInstanceRepository;

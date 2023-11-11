@@ -9,6 +9,7 @@ import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.game.GameService;
+import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
@@ -24,10 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class GameInstanceService {
     GameInstanceRepository gameInstanceRepository;
+    GameInstanceImageRepository gameInstanceImageRepository;
     UserService userService;
     GameService gameService;
     CategoryService categoryService;
