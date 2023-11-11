@@ -1,8 +1,6 @@
 import { FC } from "react";
 import { Game } from "@/types/Game";
-import AgeBadge from "./Badge/AgeBadge";
-import PlayersBadge from "./Badge/PlayersBadge";
-import TimeBadge from "./Badge/TimeBadge";
+import { AgeBadge, PlayersBadge, TimeBadge } from "@/components/Badge";
 
 interface GameSearchCardProps {
   game: Game;
@@ -14,14 +12,14 @@ const GameSearchCard: FC<GameSearchCardProps> = ({ game, onClick }) => {
 
   return (
     <div
-      className="relative flex w-full cursor-pointer flex-row gap-2 rounded-lg bg-card p-2 shadow duration-200 hover:bg-accent"
+      className="relative flex h-[100px] w-full cursor-pointer flex-row gap-2 rounded-lg bg-card p-2 shadow duration-200 hover:bg-accent lg:h-max"
       onClick={() => onClick(game)}
     >
       <div className="h-16 w-16 overflow-hidden rounded-lg">
-        <img src={image} alt={name} className="h-full w-full object-cover" />
+        <img src={image} alt={name} className="h-full w-full object-cover object-top" />
       </div>
       <h4 className="text-xl text-primary">{name}</h4>
-      <div className="absolute bottom-2 right-2 flex h-max flex-row gap-1 self-end">
+      <div className="absolute bottom-2 right-2 flex flex-row gap-1">
         <TimeBadge time={playingTime} />
         <PlayersBadge minPlayers={minPlayers} maxPlayers={maxPlayers} />
         <AgeBadge age={age} />

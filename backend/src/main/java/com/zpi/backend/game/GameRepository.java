@@ -51,7 +51,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "short_description, image,game_status_id " +
             "from games G join games_categories GC on G.id = GC.game_id " +
             "join game_statuses GS on G.game_status_id = GS.id " +
-            "where GC.category_id in :categories and GS.status = 'Accepted' and G.name like %:name%",
+            "where GC.category_id in :categories and GS.status = 'Accepted' and lower(G.name) like %:name%",
             nativeQuery = true)
     Page<Game>  searchAllByNameContainsAndAcceptedAndCategoriesIn(@Param("name") String name, @Param("categories") List<Integer> categoriesIds, Pageable pageable);
 }

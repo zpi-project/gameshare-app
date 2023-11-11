@@ -35,7 +35,7 @@ const UserProfile: FC = () => {
         <div className="flex-grow rounded-lg bg-section p-4">
           <UserDetails user={user} showEdit={false} isLoading={isLoading} />
         </div>
-        <div className="flex h-3/5 flex-col rounded-lg bg-section p-2">
+        <div className="flex h-3/5 flex-col gap-2 rounded-lg bg-section p-2">
           <Opinions />
         </div>
       </div>
