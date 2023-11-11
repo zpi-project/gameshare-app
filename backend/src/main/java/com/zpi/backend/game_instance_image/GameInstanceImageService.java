@@ -2,11 +2,12 @@ package com.zpi.backend.game_instance_image;
 
 import com.zpi.backend.configuration.DataBucketUtil;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game_instance.GCPFileUploadException;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstanceRepository;
+import com.zpi.backend.user.User;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,17 +24,17 @@ public class GameInstanceImageService {
     DataBucketUtil dataBucketUtil;
 
 //    TODO implement addImageToGameInstance endpoint
-    public FileDTO addImageToGameInstance(String googleId, String gameInstanceUUID,
-                                          NewGameInstanceImageDTO newGameInstanceDTO) throws GameInstanceDoesNotExistException {
+    public FileDTO addImageToGameInstance(Authentication authentication, String gameInstanceUUID,
+                                          MultipartFile multipartFile) throws GameInstanceDoesNotExistException, BadRequestException {
+        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository
                 .findByUuidAndOwner_GoogleId(gameInstanceUUID, googleId);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+gameInstanceUUID+") does not exists or the User is not the Owner.");
-        FileDTO fileDTO = new FileDTO();
-        return fileDTO;
+        return new FileDTO(uploadFiles(multipartFile));
     }
 
-    public GameInstanceImage uploadFiles(MultipartFile file) throws BadRequestException {
+    private GameInstanceImage uploadFiles(MultipartFile file) throws BadRequestException {
 
         GameInstanceImage inputFile = null;
         String originalFileName = file.getOriginalFilename();
@@ -59,13 +60,13 @@ public class GameInstanceImageService {
         return inputFile;
     }
 
-    public void deleteGameInstanceImage(String googleId, String gameInstanceImageUUID) throws GameInstanceImageDoesNotExistException {
+    public void deleteGameInstanceImage(Authentication authentication, String gameInstanceImageUUID) throws GameInstanceImageDoesNotExistException {
+        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         Optional<GameInstanceImage> gameInstanceImageOptional = gameInstanceImageRepository
                 .findByGameInstanceUuidAndGameInstance_OwnerGoogleId(gameInstanceImageUUID, googleId);
         if (gameInstanceImageOptional.isEmpty())
             throw new GameInstanceImageDoesNotExistException("Game Instance Image (UUID = "+gameInstanceImageUUID+") does not exists or the User is not the Owner.");
         gameInstanceImageRepository.deleteById(gameInstanceImageOptional.get().getId());
     }
-
 
 }

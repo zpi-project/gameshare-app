@@ -1,15 +1,15 @@
 package com.zpi.backend.configuration;
 
-import com.app.exception.BadRequestException;
-import com.app.exception.FileWriteException;
-import com.app.exception.GCPFileUploadException;
-import com.app.exception.InvalidFileTypeException;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
+import com.zpi.backend.exception_handlers.BadRequestException;
+import com.zpi.backend.exception_handlers.InvalidFileTypeException;
 import com.zpi.backend.game_instance_image.FileDTO;
+import com.zpi.backend.exception_handlers.FileWriteException;
+import com.zpi.backend.game_instance_image.GCPFileUploadException;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,16 +23,16 @@ import java.util.concurrent.ThreadLocalRandom;
 @Component
 public class DataBucketUtil {
 
-    @Value("${gcp.config.file}")
+    @Value("${GCP_CONFIG_FILE}")
     private String gcpConfigFile;
 
-    @Value("${gcp.project.id}")
+    @Value("${GCP_PROJECT_ID}")
     private String gcpProjectId;
 
-    @Value("${gcp.bucket.id}")
+    @Value("${GCP_BUCKET_ID}")
     private String gcpBucketId;
 
-    @Value("${gcp.dir.name}")
+    @Value("${GCP_DIR_NAME}")
     private String gcpDirectoryName;
 
 
@@ -54,12 +54,10 @@ public class DataBucketUtil {
             Blob blob = bucket.create(gcpDirectoryName + "/" + fileName + "-" + id.nextString() + checkFileExtension(fileName), fileData, contentType);
 
             if(blob != null){
-                LOGGER.debug("File successfully uploaded to GCS");
-                return new FileDto(blob.getName(), blob.getMediaLink());
+                return new FileDTO(blob.getName(), blob.getMediaLink());
             }
 
         }catch (Exception e){
-            LOGGER.error("An error occurred while uploading data. Exception: ", e);
             throw new GCPFileUploadException("An error occurred while storing data to GCS");
         }
         throw new GCPFileUploadException("An error occurred while storing data to GCS");
@@ -75,7 +73,6 @@ public class DataBucketUtil {
             FileOutputStream outputStream = new FileOutputStream(convertedFile);
             outputStream.write(file.getBytes());
             outputStream.close();
-            LOGGER.debug("Converting multipart file : {}", convertedFile);
             return convertedFile;
         }catch (Exception e){
             throw new FileWriteException("An error has occurred while converting the file");
@@ -88,12 +85,10 @@ public class DataBucketUtil {
 
             for(String extension: extensionList) {
                 if (fileName.endsWith(extension)) {
-                    LOGGER.debug("Accepted file type : {}", extension);
                     return extension;
                 }
             }
         }
-        LOGGER.error("Not a permitted file type");
         throw new InvalidFileTypeException("Not a permitted file type");
     }
 }
