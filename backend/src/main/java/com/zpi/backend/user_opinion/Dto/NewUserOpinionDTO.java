@@ -1,7 +1,6 @@
 package com.zpi.backend.user_opinion.Dto;
 
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user_opinion.UserOpinion;
 import com.zpi.backend.validators.ValueChecker;

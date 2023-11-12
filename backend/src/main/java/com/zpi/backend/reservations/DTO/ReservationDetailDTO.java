@@ -9,4 +9,6 @@ public class ReservationDetailDTO {
     public ReservationDetailDTO(Reservation reservation) {
         this.reservation = reservation;
     }
+    public ReservationDetailDTO() {
+    }
 }
