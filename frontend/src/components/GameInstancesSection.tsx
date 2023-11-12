@@ -26,7 +26,10 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
     isError,
   } = useQuery({
     queryKey: ["gameInstances", { uuid: owner?.uuid }],
-    queryFn: () => GameInstanceApi.getAllByUUID(owner?.uuid ?? "", 0, 100),
+    queryFn: () =>
+      isMyPage
+        ? GameInstanceApi.getAll(0, 100)
+        : GameInstanceApi.getAllByUUID(owner?.uuid ?? "", 0, 100),
     enabled: owner !== undefined,
   });
 
@@ -48,7 +51,7 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
               <div className="relative flex-grow">
                 <Input
                   className="flex-grow rounded-lg border-none bg-card"
-                  placeholder="Type to search..."
+                  placeholder={t("typeToSearch")}
                   onChange={event => setQuery(event.target.value)}
                 />
                 <Search className="absolute right-4 top-2" />
