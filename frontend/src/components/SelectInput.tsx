@@ -40,7 +40,6 @@ const SelectInput: FC<SelectInputProps> = ({
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    console.log(value);
     if (value.length) {
       onChange(options.find(option => option.label.toLowerCase() == value)?.value ?? value);
     }
