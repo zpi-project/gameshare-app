@@ -1,7 +1,9 @@
 import { User } from "./User";
 
 export interface Opinion {
-  user: User;
+  id: number;
+  timestamp: string;
   stars: number;
   description: string;
+  ratingUser: User;
 }
