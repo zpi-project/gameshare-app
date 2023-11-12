@@ -9,7 +9,8 @@ import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
 import com.zpi.backend.user.UserDoesNotExistException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zpi.backend.user.UserGameGuestDTO;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,14 +21,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class GameService {
-    @Autowired
     GameRepository gameRepository;
-    @Autowired
     CategoryService categoryService;
-    @Autowired
     RoleService roleService;
-    @Autowired
     GameStatusService gameStatusService;
     public Game addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
         newGameDTO.validate();
@@ -66,6 +64,13 @@ public class GameService {
         return new ResultsDTO<>(gamePage.stream().toList(), new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
     }
 
+    // TODO Getting popular games (considering reservations)
+    public ResultsDTO<Game> getPopularGames(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Game> gamePage = gameRepository.getAllAccepted(pageable);
+        return new ResultsDTO<>(gamePage.stream().toList(), new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+    }
+
     public void rejectGame(Authentication authentication, long id) throws GameAlreadyRejectedException, GameDoesNotExistException, IllegalAccessException, UserDoesNotExistException {
         if (!roleService.checkIfAdmin(authentication))
             throw new IllegalAccessException();
@@ -82,7 +87,7 @@ public class GameService {
     }
 
     public void acceptGame(Authentication authentication, long id) throws GameDoesNotExistException,
-            GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
+            GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException {
         if (!roleService.checkIfAdmin(authentication))
             throw new IllegalAccessException();
         Optional<Game> optionalGame = gameRepository.findGameById(id);
@@ -99,5 +104,35 @@ public class GameService {
 
     public long getAmount(){
         return gameRepository.count();
+    }
+
+    public ResultsDTO<UserWithGameOpinionDTO> getUsersAndGameInstancesWithGame(long gameId, double latitude, double longitude,
+                                                                               int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Object[]> objectsPage = gameRepository.getAllUsersWithGameAndRating(gameId, latitude, longitude, pageable);
+        List<UserWithGameOpinionDTO> userWithGameDTOPage =
+                objectsPage.stream()
+                        .map(this::convertToDTO)
+                        .toList();
+        return new ResultsDTO<>(userWithGameDTOPage,
+                new Pagination(objectsPage.getTotalElements(), objectsPage.getTotalPages()));
+    }
+
+    private UserWithGameOpinionDTO convertToDTO(Object[] columns) {
+        UserWithGameOpinionDTO dto = new UserWithGameOpinionDTO();
+
+        dto.setUser(new UserGameGuestDTO(
+                (String) columns[0], // uuid
+                (String) columns[1], // firstname
+                (String) columns[2], // lastname
+                (Double) columns[3], // latitude
+                (Double) columns[4], // longitude
+                (String) columns[5], // avatarLink
+                (Double) columns[6]) // avgRating
+        );
+        dto.setGameInstanceUUID((String) columns[7]); // gameInstanceUUID
+        dto.setGameName((String) columns[8]); // gameName
+        dto.setGameInstanceRating(((Double) columns[9])); // gameInstanceRating
+        return dto;
     }
 }

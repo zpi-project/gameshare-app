@@ -1,4 +1,4 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import com.zpi.backend.category.Category;
 import com.zpi.backend.category.CategoryDoesNotExistException;
@@ -9,11 +9,11 @@ import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.game.GameService;
-import com.zpi.backend.gameInstanceImage.GameInstanceImageRepository;
+import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,16 +26,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class GameInstanceService {
-    @Autowired
     GameInstanceRepository gameInstanceRepository;
-    @Autowired
     GameInstanceImageRepository gameInstanceImageRepository;
-    @Autowired
     UserService userService;
-    @Autowired
     GameService gameService;
-    @Autowired
     CategoryService categoryService;
 
     public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication) throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
@@ -98,6 +94,13 @@ public class GameInstanceService {
         return new GameInstanceDTO(gameInstanceOptional.get(), isGuest);
     }
 
+    public GameInstance getGameInstance(String uuid) throws GameInstanceDoesNotExistException {
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuid(uuid);
+        if (gameInstanceOptional.isEmpty())
+            throw new GameInstanceDoesNotExistException("The Game Instance (uuid = "+uuid+") does not exists ");
+        return gameInstanceOptional.get();
+    }
+
     public ResultsDTO<GameInstanceListDTO> getUserGameInstances(String userUUID, Optional<String> searchName, int size, int page) throws UserDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         userService.getUserByUUID(userUUID);
@@ -114,8 +117,13 @@ public class GameInstanceService {
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }
 
-    public ResultsDTO<GameInstanceListDTO> getGameInstances(int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
-                                               Optional<Integer> playersNumber, double latitude,
+    public ResultsDTO<GameInstanceListDTO> getMyGameInstances(Optional<String> searchName, int size, int page, Authentication authentication) throws UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        return getUserGameInstances(user.getUuid(),searchName, size, page);
+    }
+
+    public ResultsDTO<UserWithGameInstancesDTO> getGameInstances(int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
+                                               Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, double latitude,
                                                double longitude) throws CategoryDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
@@ -124,14 +132,32 @@ public class GameInstanceService {
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
                 searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null),
-                latitude, longitude
+                maxPricePerDay.orElse(null), latitude, longitude
         );
         Specification<GameInstance> spec = new GameInstanceSpecification(gameInstanceSearch);
         Page<GameInstance> gameInstancesPage = gameInstanceRepository.findAll(spec, pageable);
-        List<GameInstanceListDTO> resultsList = new ArrayList<>();
-        gameInstancesPage.stream().toList()
-                .forEach(gameInstance -> resultsList.add(new GameInstanceListDTO(gameInstance)));
-        return new ResultsDTO<>(resultsList,
+        return new ResultsDTO<>(convertToUserWithGameInstancesDTO(gameInstancesPage.stream().toList()),
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
+    }
+
+    private List<UserWithGameInstancesDTO> convertToUserWithGameInstancesDTO(List<GameInstance> gameInstanceList){
+        List<UserWithGameInstancesDTO> resultList = new ArrayList<>();
+        for (GameInstance g: gameInstanceList){
+            boolean isInList=false;
+            for (UserWithGameInstancesDTO u: resultList){
+                if (u.getOwner().getUuid().equals(g.getOwner().getUuid())){
+                    isInList = true;
+                    u.addGameInstance(g);
+                }
+            }
+            if (!isInList){
+                resultList.add(new UserWithGameInstancesDTO(g));
+            }
+        }
+        return resultList;
+    }
+
+    public void updateAvgRating(long gameInstanceId){
+        gameInstanceRepository.updateAvgRating(gameInstanceId);
     }
 }

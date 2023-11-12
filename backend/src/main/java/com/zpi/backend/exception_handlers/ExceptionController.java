@@ -1,20 +1,21 @@
 package com.zpi.backend.exception_handlers;
 
-import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
-import com.zpi.backend.gameInstance.GameInstanceStatusException;
+import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.GameInstanceStatusException;
 import com.zpi.backend.category.CategoryAlreadyExistsException;
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.game.GameAlreadyAcceptedException;
 import com.zpi.backend.game.GameAlreadyExistsException;
 import com.zpi.backend.game.GameAlreadyRejectedException;
 import com.zpi.backend.game.GameDoesNotExistException;
-import com.zpi.backend.gameInstanceImage.GameInstanceImageDoesNotExistException;
+import com.zpi.backend.game_instance_image.GameInstanceImageDoesNotExistException;
+import com.zpi.backend.game_instance_opinion.GameInstanceOpinionDoesNotExistException;
 import com.zpi.backend.user.UndefinedUserException;
 import com.zpi.backend.user.UserAlreadyExistsException;
 import com.zpi.backend.user.UserDoesNotExistException;
 import com.zpi.backend.user_opinion.DeleteSomeoneElseOpinionException;
 import com.zpi.backend.user_opinion.EditSomeoneElseOpinionException;
-import com.zpi.backend.user_opinion.OpinionDoesNotExistException;
+import com.zpi.backend.user_opinion.UserOpinionDoesNotExistException;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.mediatype.problem.Problem;
 import org.springframework.http.HttpHeaders;
@@ -258,9 +259,23 @@ public class ExceptionController {
     }
 
     @ResponseBody
-    @ExceptionHandler(OpinionDoesNotExistException.class)
+    @ExceptionHandler(UserOpinionDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    ResponseEntity ODNEHandler(OpinionDoesNotExistException ex) {
+    ResponseEntity ODNEHandler(UserOpinionDoesNotExistException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(HttpStatus.NOT_FOUND.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+
+    // Game Instance Opinion
+    @ResponseBody
+    @ExceptionHandler(GameInstanceOpinionDoesNotExistException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity GIODNEHandler(GameInstanceOpinionDoesNotExistException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)

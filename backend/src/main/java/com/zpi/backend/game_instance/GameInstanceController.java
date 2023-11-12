@@ -1,4 +1,4 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import com.zpi.backend.category.CategoryDoesNotExistException;
 import com.zpi.backend.dto.ResultsDTO;
@@ -7,7 +7,7 @@ import com.zpi.backend.game.GameDoesNotExistException;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,11 +19,11 @@ import java.util.Optional;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/game-instances")
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class GameInstanceController {
-    @Autowired
-    GameInstanceService gameInstanceService;
+  GameInstanceService gameInstanceService;
 
     @Operation(
             summary = "Add a new game instance",
@@ -32,7 +32,7 @@ public class GameInstanceController {
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(method = POST)
-    public ResponseEntity<GameInstanceDTO> addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
+    public ResponseEntity<GameInstanceDTO> addGameInstance(@RequestBody NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
             throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
         GameInstanceDTO gameInstance = gameInstanceService.addGameInstance(newGameInstanceDTO, authentication);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -46,7 +46,7 @@ public class GameInstanceController {
     )
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{uuid}", method = PUT)
-    public ResponseEntity<GameInstanceDTO> updateGameInstance(@PathVariable String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO,
+    public ResponseEntity<GameInstanceDTO> updateGameInstance(@PathVariable String uuid,@RequestBody UpdatedGameInstanceDTO updatedGameInstanceDTO,
                                              Authentication authentication) throws GameInstanceDoesNotExistException, BadRequestException {
         GameInstanceDTO gameInstance = gameInstanceService.updateGameInstance(uuid, updatedGameInstanceDTO, authentication);
         return ResponseEntity.status(HttpStatus.OK)
@@ -111,6 +111,20 @@ public class GameInstanceController {
     }
 
     @Operation(
+            summary = "Get logged in user's game instances",
+            description = "Returns all logged User's Game Instances from the database."
+    )
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(method = GET)
+    public ResponseEntity<ResultsDTO<GameInstanceListDTO>> getMyGameInstances(@RequestParam Optional<String> searchName,
+                                                                              @RequestParam int size, @RequestParam int page,
+                                                                              Authentication authentication)
+            throws UserDoesNotExistException {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(gameInstanceService.getMyGameInstances(searchName, size, page, authentication));
+    }
+
+    @Operation(
             summary = "Get game instances by userUUID",
             description = "Returns the Game Instances of a User from the database, identified by user's userUUID"
     )
@@ -123,27 +137,15 @@ public class GameInstanceController {
 
     @Operation(
             summary = "Get game instances using filters",
-            description = "Returns Game Instances filtered by categories, age, players number, " +
+            description = "Returns Game Instances filtered by name, category, age, players number, availability" +
                     "and sorted by distance (calculated by latitude and longitude) from the database."
     )
     @RequestMapping(method = GET, value="/search")
-    public ResponseEntity<ResultsDTO<GameInstanceListDTO>>  getGameInstances(@RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
-                                           @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber,
+    public ResponseEntity<ResultsDTO<UserWithGameInstancesDTO>>  getGameInstances(@RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
+                                           @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber, @RequestParam Optional<Integer> maxPricePerDay,
                                            @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page) throws CategoryDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getGameInstances(size, page, searchName, categoryId, age, playersNumber, latitude, longitude));
-    }
-
-    @Operation(
-            summary = "[Not implemented] Get game instance's opinions by game instance's uuid",
-            description = "Returns the Game Instances Opinions from the database, identified by Game Instance's uuid"
-    )
-    @RequestMapping(value = "/{gameInstanceUUID}/opinions", method = GET)
-    public ResponseEntity getGameInstanceOpinions(@PathVariable String gameInstanceUUID,
-                                                                         @RequestParam int size, @RequestParam int page) {
-        return ResponseEntity
-                .status(HttpStatus.NOT_IMPLEMENTED)
-                .body(null);
+                .body(gameInstanceService.getGameInstances(size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, latitude, longitude));
     }
 
 }

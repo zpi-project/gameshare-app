@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserOpinionRepository extends JpaRepository<UserOpinion, Long> {
 
-    Page<UserOpinion> getUserOpinionsByRatedUser(User ratedUser, Pageable pageable);
+    Page<UserOpinion> getUserOpinionsByRatedUserOrderByTimestamp(User ratedUser, Pageable pageable);
 
 }
