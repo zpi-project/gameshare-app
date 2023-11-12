@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import { cn } from "@/utils/tailwind";
 import { Button } from "@/components/ui/button";
@@ -21,11 +21,30 @@ interface SelectInputProps {
   options: Option[];
   placeholder: string;
   noResultsInfo: string;
+  onChange: (value: string | number) => void;
+  search?: boolean;
+  scroll?: boolean;
+  width?: string;
 }
 
-const SelectInput: FC<SelectInputProps> = ({ options, placeholder, noResultsInfo }) => {
+const SelectInput: FC<SelectInputProps> = ({
+  options,
+  placeholder,
+  noResultsInfo,
+  onChange,
+  search,
+  scroll,
+  width,
+}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    console.log(value);
+    if (value.length) {
+      onChange(options.find(option => option.label.toLowerCase() == value)?.value ?? value);
+    }
+  }, [value]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -34,20 +53,16 @@ const SelectInput: FC<SelectInputProps> = ({ options, placeholder, noResultsInfo
           variant="ghost"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between bg-card leading-none"
+          className={cn("w-[200px] justify-between bg-card leading-none", width)}
         >
-          {value
-            ? options.find(option => {
-                return option.label.toLowerCase() == value;
-              })?.label
-            : placeholder}
+          {value ? options.find(option => option.label.toLowerCase() == value)?.label : placeholder}
           <ChevronDown className={open ? "rotate-180" : ""} />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <ScrollArea className="h-[300px]">
+      <PopoverContent className={cn("w-[200px] p-0", width)}>
+        <ScrollArea className={scroll ? "h-[300px]" : ""}>
           <Command>
-            <CommandInput placeholder="Search..." className="h-9" />
+            {search && <CommandInput placeholder="Search..." className="h-9" />}
             <CommandEmpty>{noResultsInfo}</CommandEmpty>
             <CommandGroup>
               {options.map(option => (

@@ -61,7 +61,7 @@ const pl: typeof en = {
   searchGamePlaceholder: "W jaką grę planszową chcesz zagrać?",
   searchGameWithinCategoryPlaceholder: "Wyszukaj grę w tej kategorii...",
   searchGamesError: "Wystąpił błąd podczas wyszukiwania gier.",
-  searchGamesNoResults: "Brak wyników",
+  noResults: "Brak wyników",
   categoryGamesError: "Nie udało się pobrać gier dla tej kategorii.",
   categoryError: "Nie udało się pobrać tej kategorii.",
   gameError: "Nie udało się pobrać danych o tej grze.",
@@ -75,10 +75,13 @@ const pl: typeof en = {
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",
   all: "Wszystkie",
-  pricePerDay: "Cena na dzień",
-  players: "L. graczy",
+  pricePerDay: "Cena za dzień",
+  players: "Liczba graczy",
   age: "Wiek",
   perDay: "na dzień",
+  any: "Dowolne",
+  any_male: "Dowolny",
+  any_female: "Dowolna",
 };
 
 export default pl;

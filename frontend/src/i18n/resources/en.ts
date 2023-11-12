@@ -59,7 +59,7 @@ export default {
   searchGamePlaceholder: "What board game would you like to play?",
   searchGameWithinCategoryPlaceholder: "Search games within this category",
   searchGamesError: "There was an error while searching games.",
-  searchGamesNoResults: "No results",
+  noResults: "No results",
   categoryGamesError: "There was a problem fetching games within this category.",
   categoryError: "There was a problem fetching this category.",
   gameError: "There was a problem fetching this game.",
@@ -76,4 +76,8 @@ export default {
   players: "Players",
   age: "Age",
   perDay: "day",
+
+  any: "Any",
+  any_male: "Any",
+  any_female: "Any",
 };

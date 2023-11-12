@@ -116,7 +116,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
                         placeholder={t("firstName")}
                         {...field}
                         className="border-0 bg-section"
-                        autoComplete="false"
+                        autoComplete="off"
                       />
                     </FormControl>
                     <FormMessage />
@@ -133,7 +133,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
                       <Input
                         placeholder={t("lastName")}
                         {...field}
-                        autoComplete="false"
+                        autoComplete="off"
                         className="border-0 bg-section"
                       />
                     </FormControl>
