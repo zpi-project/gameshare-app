@@ -2,9 +2,9 @@ package com.zpi.backend.reservations;
 
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.Exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.reservations.DTO.NewReservationDTO;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +51,13 @@ public class ReservationController {
         return ResponseEntity.ok().body(reservations);
     }
 
-
+    @GetMapping("/reservations/history")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity getReservationsHistory(Authentication authentication, @RequestParam Boolean asOwner
+            ,@RequestParam int page,@RequestParam int size) throws UserDoesNotExistException {
+        ResultsDTO<Reservation> reservations = reservationService.getMyReservationsHistory(authentication,asOwner,page,size);
+        return ResponseEntity.ok().body(reservations);
+    }
 
 
 }

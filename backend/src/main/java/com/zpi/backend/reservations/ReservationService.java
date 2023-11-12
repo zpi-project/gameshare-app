@@ -4,12 +4,12 @@ import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstance;
-import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.Exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstanceService;
 import com.zpi.backend.reservation_status.ReservationStatusRepository;
 import com.zpi.backend.reservations.DTO.NewReservationDTO;
 import com.zpi.backend.user.User;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -37,13 +37,13 @@ public class ReservationService {
 
     public ResultsDTO<Reservation> getMyReservationsAsOwner(User owner,int page,int size){
         Pageable pageable = PageRequest.of(page, size);
-        Page<Reservation> reservationPage = reservationRepository.getReservationsByOwner(pageable, owner.getUuid());
+        Page<Reservation> reservationPage = reservationRepository.getCurrentReservationsByOwner(pageable, owner.getUuid());
         return new ResultsDTO<>(reservationPage.stream().toList(), new Pagination(reservationPage.getTotalElements(),reservationPage.getTotalPages()));
     }
 
     public ResultsDTO<Reservation> getMyReservationsAsRenter(User renter, int page, int size){
         Pageable pageable = PageRequest.of(page, size);
-        Page<Reservation> reservationPage = reservationRepository.getReservationsByRenter(pageable, renter);
+        Page<Reservation> reservationPage = reservationRepository.getCurrentReservationsByRenter(pageable, renter.getUuid());
         return new ResultsDTO<>(reservationPage.stream().toList(), new Pagination(reservationPage.getTotalElements(),reservationPage.getTotalPages()));
     }
 
@@ -53,5 +53,27 @@ public class ReservationService {
             return getMyReservationsAsOwner(user,page,size);
         }
         return getMyReservationsAsRenter(user,page,size);
+    }
+
+
+
+    public ResultsDTO<Reservation> getMyReservationsHistoryAsOwner(User owner,int page,int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Reservation> reservationPage = reservationRepository.getReservationsHistoryByOwner(pageable, owner.getUuid());
+        return new ResultsDTO<>(reservationPage.stream().toList(), new Pagination(reservationPage.getTotalElements(),reservationPage.getTotalPages()));
+    }
+
+    public ResultsDTO<Reservation> getMyReservationsHistoryAsRenter(User renter, int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Reservation> reservationPage = reservationRepository.getReservationsHistoryByRenter(pageable, renter.getUuid());
+        return new ResultsDTO<>(reservationPage.stream().toList(), new Pagination(reservationPage.getTotalElements(),reservationPage.getTotalPages()));
+    }
+
+    public ResultsDTO<Reservation> getMyReservationsHistory(Authentication authentication, Boolean asOwner, int page, int size) throws UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        if(asOwner){
+            return getMyReservationsHistoryAsOwner(user,page,size);
+        }
+        return getMyReservationsHistoryAsRenter(user,page,size);
     }
 }
