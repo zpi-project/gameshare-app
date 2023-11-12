@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Pencil } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { URLS } from "@/constants/urls";
-import { GameInstance as GameInstanceType } from "@/types/Game";
+import { GameInstance as GameInstanceType } from "@/types/GameInstance";
 import AgeBadge from "./Badge/AgeBadge";
 import PlayersBadge from "./Badge/PlayersBadge";
 import PriceBadge from "./Badge/PriceBadge";
@@ -20,7 +20,7 @@ const GameInstance: FC<Props> = ({
   gameInstance: {
     uuid,
     game: { name, maxPlayers, minPlayers, image, playingTime, age },
-    shortDescription,
+    description,
     pricePerDay,
     active,
   },
@@ -47,7 +47,7 @@ const GameInstance: FC<Props> = ({
             </div>
           </div>
           <div className="flex w-full flex-row justify-between gap-2">
-            <p className="min-h-8 break-all text-xs italic">{shortDescription}</p>
+            <p className="min-h-8 break-all text-xs italic">{description}</p>
             <div className="flex flex-col items-end">
               <PriceBadge price={pricePerDay} />
               {!active && <div className="text-xl text-red-500">{t("deactivated")}</div>}

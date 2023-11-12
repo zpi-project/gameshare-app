@@ -20,23 +20,3 @@ export interface Game {
   image: string;
   gameStatus: GameStatus;
 }
-
-export interface GameInfo {
-  id: number;
-  name: string;
-  image: string;
-  minPlayers: number;
-  maxPlayers: number;
-  playingTime: number;
-  age: number;
-  shortDescription: string;
-  categories: Category[];
-}
-
-export interface GameInstance {
-  uuid: string;
-  shortDescription: string;
-  pricePerDay: number;
-  game: GameInfo;
-  active: boolean;
-}
