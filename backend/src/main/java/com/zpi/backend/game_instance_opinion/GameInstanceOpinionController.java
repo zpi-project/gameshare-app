@@ -2,9 +2,14 @@ package com.zpi.backend.game_instance_opinion;
 
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
-import com.zpi.backend.user.UserDoesNotExistException;
-import com.zpi.backend.user_opinion.*;
+import com.zpi.backend.game_instance.Exception.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance_opinion.Dto.GameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.Dto.NewGameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.Dto.UpdatedGameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.Exception.GameInstanceOpinionDoesNotExistException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user_opinion.Exception.DeleteSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.Exception.EditSomeoneElseOpinionException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

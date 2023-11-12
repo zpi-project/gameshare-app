@@ -4,11 +4,16 @@ import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.user.User;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
+import com.zpi.backend.user_opinion.Dto.ModifiedUserOpinionDTO;
+import com.zpi.backend.user_opinion.Dto.NewUserOpinionDTO;
+import com.zpi.backend.user_opinion.Dto.UserOpinionDTO;
+import com.zpi.backend.user_opinion.Exception.DeleteSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.Exception.EditSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.Exception.UserOpinionDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
@@ -16,7 +21,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor

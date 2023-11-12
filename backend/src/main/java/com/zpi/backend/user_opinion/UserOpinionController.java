@@ -3,7 +3,13 @@ package com.zpi.backend.user_opinion;
 
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user_opinion.Dto.ModifiedUserOpinionDTO;
+import com.zpi.backend.user_opinion.Dto.NewUserOpinionDTO;
+import com.zpi.backend.user_opinion.Dto.UserOpinionDTO;
+import com.zpi.backend.user_opinion.Exception.DeleteSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.Exception.EditSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.Exception.UserOpinionDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

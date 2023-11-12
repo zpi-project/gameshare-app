@@ -1,15 +1,22 @@
 package com.zpi.backend.game;
 
 import com.zpi.backend.category.Category;
-import com.zpi.backend.category.CategoryDoesNotExistException;
+import com.zpi.backend.category.Exception.CategoryDoesNotExistException;
 import com.zpi.backend.category.CategoryService;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
+import com.zpi.backend.game.Dto.GameDTO;
+import com.zpi.backend.game.Dto.NewGameDTO;
+import com.zpi.backend.game.Dto.UserWithGameOpinionDTO;
+import com.zpi.backend.game.Exception.GameAlreadyAcceptedException;
+import com.zpi.backend.game.Exception.GameAlreadyExistsException;
+import com.zpi.backend.game.Exception.GameAlreadyRejectedException;
+import com.zpi.backend.game.Exception.GameDoesNotExistException;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
-import com.zpi.backend.user.UserDoesNotExistException;
-import com.zpi.backend.user.UserGuestDTO;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user.Dto.UserGuestDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,7 +45,7 @@ public class GameService {
         return new GameDTO(newGame);
     }
 
-    public Game getGame(long id) throws GameDoesNotExistException{
+    public Game getGame(long id) throws GameDoesNotExistException {
         Optional<Game> gameOptional = gameRepository.findByIdAndAccepted(id);
         if (gameOptional.isEmpty() || !gameOptional.get().getGameStatus().getStatus().equals("Accepted"))
             throw new GameDoesNotExistException("Game (id = "+id+") does not exists");
