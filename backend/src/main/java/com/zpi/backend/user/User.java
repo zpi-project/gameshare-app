@@ -42,6 +42,8 @@ public class User{
 
     private String avatarLink;
 
+    private double avgRating;
+
     @ManyToOne
     private Role role;
 

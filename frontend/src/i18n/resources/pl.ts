@@ -50,6 +50,9 @@ const pl: typeof en = {
   welcomeDescription:
     "Cieszymy się, że jesteś z nami. Aby ułatwić twoje korzystanie z aplikacji, prosimy o chwilę Twojego czasu, aby dostarczyć nam niezbędne dane osobowe. Zacznijmy!",
 
+  userGames: "Gry użytkownika",
+  myGames: "Moje gry",
+  addGameInstance: "Dodaj swoją grę",
   popularNow: "Popularne teraz",
   seeAll: "Zobacz wszystkie",
   popularGamesErrorTitle: "Nie udało się pobrać popularnych gier.",
@@ -63,6 +66,17 @@ const pl: typeof en = {
   gameError: "Nie udało się pobrać danych o tej grze.",
 
   usersWithThisGame: "Użytkownicy z tą grą",
+  noGamesMyPage: "Nie posiadasz jeszcze żadnej gry",
+  noGamesUserPage: "Ten użytkownik nie posiada jeszcze żadnych gier",
+
+  typeToSearch: "Wyszukaj grę...",
+  category: "Kategoria",
+  all: "Wszystkie",
+  pricePerDay: "Cena na dzień",
+  players: "L. graczy",
+  age: "Wiek",
+  perDay: "dzień",
+  deactivated: "NIEAKTYWNA",
 };
 
 export default pl;

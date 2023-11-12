@@ -1,1 +1,5 @@
-export type Role = "guest" | "user" | "admin";
+export type RoleType = "guest" | "user" | "admin";
+
+export interface Role {
+  name: RoleType;
+}

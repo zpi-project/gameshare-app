@@ -1,4 +1,4 @@
-package com.zpi.backend.gameInstance;
+package com.zpi.backend.game_instance;
 
 import com.zpi.backend.category.Category;
 import com.zpi.backend.game.Game;
@@ -19,6 +19,7 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
     @Override
     public Predicate toPredicate(Root<GameInstance> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
+        Path<Integer> pricePerDay = root.get("pricePerDay");
         Path<Game> game = root.get("game");
         Path<Integer> minPlayers = game.get("minPlayers");
         Path<Integer> maxPlayers = game.get("maxPlayers");
@@ -46,6 +47,9 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
                             cb.lower(name),
                             "%" + criteria.getSearchName().toLowerCase() + "%")
             );
+        }
+        if (criteria.getMaxPricePerDay() != null) {
+            predicates.add(cb.lessThanOrEqualTo(pricePerDay, criteria.getMaxPricePerDay()));
         }
         Expression<Double> orderExpression =
                 cb.sqrt(cb.sum(cb.power(cb.diff(latitude, criteria.getLatitude()), 2),

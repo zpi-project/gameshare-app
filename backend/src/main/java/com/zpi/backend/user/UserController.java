@@ -3,7 +3,6 @@ package com.zpi.backend.user;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,8 +13,6 @@ import org.springframework.security.core.Authentication;
 @AllArgsConstructor
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class UserController {
-
-    @Autowired
     UserService userService;
 
     @Operation(

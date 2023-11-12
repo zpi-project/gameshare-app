@@ -6,7 +6,7 @@ import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.user.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,10 +17,10 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@AllArgsConstructor
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RequestMapping("/games")
 public class GameController {
-    @Autowired
     GameService gameService;
 
     @Operation(
@@ -68,7 +68,7 @@ public class GameController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{id}/accept", method = RequestMethod.PUT)
     public ResponseEntity acceptGame(Authentication authentication, @PathVariable long id)
-            throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
+            throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException {
         System.out.println("... called acceptGame("+id+")");
         gameService.acceptGame(authentication, id);
         return ResponseEntity.status(HttpStatus.OK)
@@ -88,6 +88,32 @@ public class GameController {
                 .build();
     }
 
+    @Operation(
+            summary = "Get popular games",
+            description = "Returns paginated popular games from database. [Not implemented] Popularity is calculated considering reservations."
+    )
+    @GetMapping(value = "/popular")
+    public ResponseEntity<ResultsDTO<Game>> getPopularGames(@RequestParam int page, @RequestParam int size) {
+        System.out.println("... called getPopularGames");
+        ResultsDTO<Game> games = gameService.getPopularGames(page, size);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(games);
+    }
+
+    @Operation(
+            summary = "Get users' rating with game by id",
+            description = "Returns paginated user data along with their rating based on User Opinions and their Game Instance rating from database. [Note: Calculating game instance opinions is NOT IMPLEMENTED yet]."
+    )
+    @GetMapping(value = "/{gameId}/users")
+    public ResponseEntity<ResultsDTO<UserWithGameOpinionDTO>> getUsersAndGameInstancesWithGame(
+            @PathVariable long gameId, @RequestParam double latitude, @RequestParam double longitude,
+            @RequestParam int page, @RequestParam int size) {
+        System.out.println("... called getUsersAndGameInstancesWithGame");
+        ResultsDTO<UserWithGameOpinionDTO> userWithGames =
+                gameService.getUsersAndGameInstancesWithGame(gameId, latitude, longitude, page, size);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userWithGames);
+    }
 
     @Operation(
             summary = "Get amount of games",
