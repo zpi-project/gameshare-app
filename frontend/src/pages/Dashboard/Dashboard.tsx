@@ -39,7 +39,7 @@ const Dashboard: FC = () => {
       </div>
       <div className="flex w-[700px] flex-col gap-4 rounded-lg bg-section p-4">
         <GamesSearch onSubmit={setSearchParams} />
-        <GamesResults gameInstances={gameInstances} isLoading={isLoading} isError={isError} />
+        {/* <GamesResults gameInstances={gameInstances} isLoading={isLoading} isError={isError} /> */}
       </div>
     </div>
   );

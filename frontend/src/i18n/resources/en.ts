@@ -65,6 +65,7 @@ export default {
   usersWithThisGame: "Users with this game",
   noGamesMyPage: "You don't have any games yet",
   noGamesUserPage: "This user doesn't have any games yet",
+  errorFetchingGames: "There was an error etching games",
 
   typeToSearch: "Type to search...",
   category: "Category",

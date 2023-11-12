@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -68,6 +69,7 @@ const pl: typeof en = {
   usersWithThisGame: "Użytkownicy z tą grą",
   noGamesMyPage: "Nie posiadasz jeszcze żadnej gry",
   noGamesUserPage: "Ten użytkownik nie posiada jeszcze żadnych gier",
+  errorFetchingGames: "Wystąpił błąd podczas pobierania gier.",
 
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",

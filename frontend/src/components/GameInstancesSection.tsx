@@ -61,25 +61,31 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
                 </div>
               ) : isError ? (
                 <h3 className="mt-2 text-center text-xl text-destructive">
-                  There was an error fetching games
+                  {t("errorFetchingGames")}
                 </h3>
               ) : (
                 <div className="flex h-full w-full flex-col gap-4 pr-4">
-                  {gameInstances.results
-                    .filter(post => {
-                      if (query === "") {
-                        return post;
-                      } else if (post.game.name.toLowerCase().includes(query.toLowerCase())) {
-                        return post;
-                      }
-                    })
-                    .map((gameInstance, id) => (
-                      <GameInstance
-                        gameInstance={gameInstance}
-                        key={id}
-                        showButtons={showButtons}
-                      />
-                    ))}
+                  {gameInstances.results.length ? (
+                    gameInstances.results
+                      .filter(post => {
+                        if (query === "") {
+                          return post;
+                        } else if (post.game.name.toLowerCase().includes(query.toLowerCase())) {
+                          return post;
+                        }
+                      })
+                      .map((gameInstance, id) => (
+                        <GameInstance
+                          gameInstance={gameInstance}
+                          key={id}
+                          showButtons={showButtons}
+                        />
+                      ))
+                  ) : (
+                    <h4 className="mt-4 text-center text-xl">
+                      {t(isMyPage ? "noGamesMyPage" : "noGamesUserPage")}
+                    </h4>
+                  )}
                 </div>
               )}
             </ScrollArea>

@@ -37,7 +37,6 @@ const GameInstance: FC<Props> = ({
         <div className="h-32 w-32 overflow-hidden rounded-lg">
           <img src={image} alt={name} className="h-full w-full object-cover object-top" />
         </div>
-        {/* img nie było kwadratem bo div nizej ma w-full */}
         <section className="flex w-[calc(100%-140px)] flex-grow flex-col items-start gap-2">
           <div className="flex w-full flex-row justify-between gap-2">
             <h3 className="text-2xl text-primary">{name}</h3>
@@ -47,7 +46,6 @@ const GameInstance: FC<Props> = ({
               <AgeBadge age={age} />
             </div>
           </div>
-          {/* zmienilam na break all */}
           <div className="flex w-full flex-row justify-between gap-2">
             <p className="min-h-8 break-all text-xs italic">{shortDescription}</p>
             <div className="flex flex-col items-end">
