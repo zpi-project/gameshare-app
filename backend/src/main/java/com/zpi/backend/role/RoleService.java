@@ -1,7 +1,7 @@
 package com.zpi.backend.role;
 
 import com.zpi.backend.user.User;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -14,9 +14,6 @@ public class RoleService {
     private final RoleRepository roleRepository;
     private final UserService userService;
 
-    public Role getRoleByName(String name) {
-        return roleRepository.getRoleByName(name);
-    }
 
     public Role getRole(Authentication authentication) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);

@@ -1,10 +1,17 @@
 package com.zpi.backend.game;
 
-import com.zpi.backend.category.CategoryDoesNotExistException;
+import com.zpi.backend.category.Exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Amount;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.game.Dto.GameDTO;
+import com.zpi.backend.game.Dto.NewGameDTO;
+import com.zpi.backend.game.Dto.UserWithGameOpinionDTO;
+import com.zpi.backend.game.Exception.GameAlreadyAcceptedException;
+import com.zpi.backend.game.Exception.GameAlreadyExistsException;
+import com.zpi.backend.game.Exception.GameAlreadyRejectedException;
+import com.zpi.backend.game.Exception.GameDoesNotExistException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,9 +36,9 @@ public class GameController {
     )
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Game> addGame(@RequestBody NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
+    public ResponseEntity<GameDTO> addGame(@RequestBody NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
         System.out.println("... called addGame");
-        Game newGame = gameService.addGame(newGameDTO);
+        GameDTO newGame = gameService.addGame(newGameDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(newGame);
     }
@@ -41,10 +48,10 @@ public class GameController {
             description = "Returns paginated games from database. Optional filtering by name and categories."
     )
     @GetMapping
-    public ResponseEntity<ResultsDTO<Game>> getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
+    public ResponseEntity<ResultsDTO<GameDTO>> getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
                                    @RequestParam Optional<List<Integer>> categoriesIds) {
         System.out.println("... called getGames");
-        ResultsDTO<Game> games = gameService.getGames(page, size, search, categoriesIds);
+        ResultsDTO<GameDTO> games = gameService.getGames(page, size, search, categoriesIds);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }
@@ -54,9 +61,9 @@ public class GameController {
             description = "Returns Game from database by its id."
     )
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Game> getGame(@PathVariable long id) throws GameDoesNotExistException {
+    public ResponseEntity<GameDTO> getGame(@PathVariable long id) throws GameDoesNotExistException {
         System.out.println("... called getGame("+id+")");
-        Game game = gameService.getGame(id);
+        GameDTO game = gameService.getGameDTO(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(game);
     }
@@ -93,9 +100,9 @@ public class GameController {
             description = "Returns paginated popular games from database. [Not implemented] Popularity is calculated considering reservations."
     )
     @GetMapping(value = "/popular")
-    public ResponseEntity<ResultsDTO<Game>> getPopularGames(@RequestParam int page, @RequestParam int size) {
+    public ResponseEntity<ResultsDTO<GameDTO>> getPopularGames(@RequestParam int page, @RequestParam int size) {
         System.out.println("... called getPopularGames");
-        ResultsDTO<Game> games = gameService.getPopularGames(page, size);
+        ResultsDTO<GameDTO> games = gameService.getGames(page, size, Optional.empty(), Optional.empty());
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }
