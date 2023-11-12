@@ -1,5 +1,6 @@
 package com.zpi.backend.user_opinion;
 
+import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user_opinion.Dto.ModifiedUserOpinionDTO;
 import com.zpi.backend.user_opinion.Dto.NewUserOpinionDTO;
@@ -35,6 +36,9 @@ public class UserOpinion {
 
     @Column(name="isRatingUserOwner")
     private boolean isRatingUserOwner;
+
+    @ManyToOne
+    private Reservation reservation;
 
     public UserOpinion(User user, User ratedUser, NewUserOpinionDTO newUserOpinionDTO) {
         this.ratingUser = user;

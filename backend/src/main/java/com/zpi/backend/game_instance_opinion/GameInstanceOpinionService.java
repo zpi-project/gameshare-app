@@ -87,4 +87,8 @@ public class GameInstanceOpinionService {
     public boolean checkIfNotRatingUsersOpinion(User user, GameInstanceOpinion gameInstanceOpinion){
         return !gameInstanceOpinion.getRatingUser().equals(user);
     }
+
+    public List<GameInstanceOpinion> getOpinionsByGameInstance(GameInstance gameInstance) {
+            return gameInstanceOpinionRepository.getGameInstanceOpinionByGameInstance(gameInstance);
+    }
 }

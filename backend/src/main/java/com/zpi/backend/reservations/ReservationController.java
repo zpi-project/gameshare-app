@@ -4,6 +4,7 @@ import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.Exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.reservations.DTO.NewReservationDTO;
+import com.zpi.backend.reservations.DTO.ReservationDetailDTO;
 import com.zpi.backend.user.Exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
@@ -64,6 +65,11 @@ public class ReservationController {
         return ResponseEntity.ok().body(reservations);
     }
 
+    @Operation(
+            summary = "Get reservations by game instance",
+            description = "Gets reservations by game instance uuid. User invoking this endpoint must be " +
+                    "the owner of the game instance."
+    )
     @GetMapping("/reservations/{gameInstanceUuid}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity getReservationsByGameInstance(@PathVariable String gameInstanceUuid,Authentication authentication,
@@ -71,6 +77,21 @@ public class ReservationController {
         ResultsDTO<Reservation> reservations = reservationService.getReservationsByGameInstance(authentication,gameInstanceUuid,page,size);
         return ResponseEntity.ok().body(reservations);
     }
+
+    @PutMapping("/reservations/{reservationUuid}/status")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity changeReservationStatus(Authentication authentication, @PathVariable String reservationUuid, @RequestParam String status) throws BadRequestException, UserDoesNotExistException {
+        Reservation reservation = reservationService.changeReservationStatus(authentication, reservationUuid, status);
+        return ResponseEntity.ok().body(reservation);
+    }
+
+    @GetMapping("/reservations/{reservationUuid}/details")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity getReservationDetails(Authentication authentication, @PathVariable String reservationUuid) throws BadRequestException, UserDoesNotExistException {
+        ReservationDetailDTO reservationDetails = reservationService.getReservationDetails(authentication, reservationUuid);
+        return ResponseEntity.ok().body(reservationDetails);
+    }
+
 
 
 

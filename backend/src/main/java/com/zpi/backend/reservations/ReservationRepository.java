@@ -78,4 +78,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     Page<Reservation> getReservationsHistoryByOwner(Pageable pageable,@Param("uuid") String ownerUuid);
 
     Page<Reservation> getReservationsByGameInstance_Uuid(Pageable pageable, String gameInstanceUuid);
+
+    Reservation getReservationByUuid(String reservationUuid);
 }

@@ -3,6 +3,8 @@ package com.zpi.backend.user_opinion;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
+import com.zpi.backend.reservations.Reservation;
+import com.zpi.backend.reservations.ReservationService;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.Exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
@@ -28,6 +30,7 @@ public class UserOpinionService {
 
     UserOpinionRepository userOpinionRepository;
     UserService userService;
+    ReservationService reservationService;
     public ResultsDTO<UserOpinionDTO> getMyOpinions(Authentication authentication, int page, int size) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
         boolean isGuest = !authentication.isAuthenticated();
@@ -43,7 +46,9 @@ public class UserOpinionService {
         newUserOpinionDTO.validate();
         User user = userService.getUser(authentication);
         User ratedUser = userService.getUserByUUID(newUserOpinionDTO.getRatedUserUUID());
+        Reservation reservation = reservationService.getReservationByUUID(newUserOpinionDTO.getReservationUUID());
         UserOpinion userOpinion = newUserOpinionDTO.toUserOpinion(user, ratedUser);
+        userOpinion.setReservation(reservation);
         boolean isGuest = !authentication.isAuthenticated();
         userOpinionRepository.save(userOpinion);
         userService.updateAvgRating(ratedUser.getId());
@@ -69,12 +74,13 @@ public class UserOpinionService {
         modifiedUserOpinionDTO.validate();
         UserOpinion userOpinion = userOpinionRepository.findById(id).orElseThrow(() -> new UserOpinionDoesNotExistException("Opinion does not exist"));
         User user = userService.getUser(authentication);
+
         if(checkIfNotRatingUsersOpinion(user, userOpinion))
             throw new EditSomeoneElseOpinionException("User can edit only his own opinion");
         boolean isGuest = !authentication.isAuthenticated();
         userOpinion.update(modifiedUserOpinionDTO);
         userOpinionRepository.save(userOpinion);
-        userService.updateAvgRating(user.getId());
+        userService.updateAvgRating(userOpinion.getRatedUser().getId());
         return new UserOpinionDTO(userOpinion, isGuest);
     }
 
@@ -85,5 +91,9 @@ public class UserOpinionService {
             throw new DeleteSomeoneElseOpinionException("User can delete only his own opinion");
         userOpinionRepository.delete(userOpinion);
         userService.updateAvgRating(user.getId());
+    }
+
+    public List<UserOpinion> getOpinionsByReservationAndUser(Reservation reservation,User user){
+        return userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation,user);
     }
 }
