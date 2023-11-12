@@ -26,6 +26,7 @@ const MyProfile: FC = () => {
       navigate(URLS.DASHBOARD);
     },
   });
+  console.log({user})
 
   return (
     <div className="flex h-full flex-row gap-6">
