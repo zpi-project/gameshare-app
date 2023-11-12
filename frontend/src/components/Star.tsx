@@ -5,14 +5,21 @@ interface Props {
   filled: boolean;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  variant?: "primary" | "secondary";
 }
 
-const Star: FC<Props> = ({ filled }) => {
+const Star: FC<Props> = ({ filled, variant = "primary" }) => {
   return (
     <StarIcon
       size={24}
-      color="hsl(var(--primary))"
-      fill={filled ? "hsl(var(--primary))" : "hsl(var(--card))"}
+      color={variant == "primary" ? "hsl(var(--primary))" : "hsl(var(--secondary))"}
+      fill={
+        filled
+          ? variant == "primary"
+            ? "hsl(var(--primary))"
+            : "hsl(var(--secondary))"
+          : "hsl(var(--card))"
+      }
     />
   );
 };

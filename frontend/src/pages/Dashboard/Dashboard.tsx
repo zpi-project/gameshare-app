@@ -15,7 +15,6 @@ const DEFAULT_SEARCH_PARAMS: GameInstanceSearchParams = {
 const Dashboard: FC = () => {
   const [location, setLocation] = useRecoilState(locationState);
   const [searchParams, setSearchParams] = useState<GameInstanceSearchParams>(DEFAULT_SEARCH_PARAMS);
-  console.log(location);
   const [latitude, longitude] = location as number[];
 
   const {
@@ -39,7 +38,7 @@ const Dashboard: FC = () => {
       </div>
       <div className="flex w-[700px] flex-col gap-4 rounded-lg bg-section p-4">
         <GamesSearch onSubmit={setSearchParams} />
-        {/* <GamesResults gameInstances={gameInstances} isLoading={isLoading} isError={isError} /> */}
+        <GamesResults gameInstances={gameInstances} isLoading={isLoading} isError={isError} />
       </div>
     </div>
   );

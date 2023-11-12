@@ -68,7 +68,7 @@ const pl: typeof en = {
   usersWithThisGame: "Użytkownicy z tą grą",
   noGamesMyPage: "Nie posiadasz jeszcze żadnej gry",
   noGamesUserPage: "Ten użytkownik nie posiada jeszcze żadnych gier",
-  errorFetchingGames: "Wystąpił błąd podczas pobierania gier.",
+  errorFetchingGames: "Wystąpił błąd podczas pobierania gier",
   deactivated: "NIEAKTYWNA",
 
   typeToSearch: "Wyszukaj grę...",
@@ -79,3 +79,5 @@ const pl: typeof en = {
   age: "Wiek",
   perDay: "na dzień",
 };
+
+export default pl;

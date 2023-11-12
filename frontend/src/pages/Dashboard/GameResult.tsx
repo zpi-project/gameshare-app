@@ -1,11 +1,13 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { URLS } from "@/constants/urls";
-import { GameInstance } from "@/types/GameInstance";
+import { SearchGameInstance } from "@/types/GameInstance";
 import { TimeBadge, PlayersBadge, AgeBadge, PriceBadge } from "@/components/Badge";
+import Stars from "@/components/Stars";
+
 
 interface GameResultProps {
-  gameInstance: GameInstance;
+  gameInstance: SearchGameInstance;
 }
 
 const GameResult: FC<GameResultProps> = ({
@@ -27,7 +29,7 @@ const GameResult: FC<GameResultProps> = ({
       <section className="flex w-[calc(100%-140px)] flex-col gap-2">
         <div className="flex flex-row justify-between">
           <h3 className="text-primary text-lg font-bold">{name}</h3>
-          <>stars</>
+          {avgRating > 0 && <Stars count={avgRating} variant="secondary"/>}
         </div>
         <div className="flex w-full flex-row justify-between">
           <PriceBadge price={pricePerDay} />

@@ -1,7 +1,8 @@
 import { GameInstance } from "@/types/GameInstance";
-import { GameInstanceSearchParams, SearchUserGameInstances } from "@/types/GameInstance";
+import { GameInstanceSearchParams, SearchGameInstance } from "@/types/GameInstance";
 import { Paginated } from "@/types/Paginated";
 import Api from "./Api";
+
 
 export class GameInstanceApi {
   static async getAllByUUID(uuid: string, page: number, size: number) {
@@ -26,7 +27,7 @@ export class GameInstanceApi {
     size: number,
     searchParams: GameInstanceSearchParams,
   ) {
-    const { data: gameInstances } = await Api.get<Paginated<SearchUserGameInstances>>(
+    const { data: gameInstances } = await Api.get<Paginated<SearchGameInstance>>(
       "/game-instances/search",
       {
         params: {

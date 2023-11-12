@@ -28,8 +28,3 @@ export interface GameInstanceSearchParams {
   playersNumber?: number;
   maxPricePerDay?: number;
 }
-
-export interface SearchUserGameInstances {
-  owner: User;
-  gameInstances: GameInstance[];
-}
