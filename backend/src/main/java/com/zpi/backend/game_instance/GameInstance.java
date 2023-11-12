@@ -1,6 +1,7 @@
 package com.zpi.backend.game_instance;
 
 import com.zpi.backend.game.Game;
+import com.zpi.backend.game_instance.Dto.NewGameInstanceDTO;
 import com.zpi.backend.game_instance_image.GameInstanceImage;
 import com.zpi.backend.user.User;
 import jakarta.persistence.*;

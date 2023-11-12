@@ -1,6 +1,11 @@
 package com.zpi.backend.user;
 
 import com.zpi.backend.exception_handlers.BadRequestException;
+import com.zpi.backend.user.Dto.UpdateUserDTO;
+import com.zpi.backend.user.Dto.UserDTO;
+import com.zpi.backend.user.Dto.UserGuestDTO;
+import com.zpi.backend.user.Exception.UserAlreadyExistsException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,11 +26,12 @@ public class UserController {
     )
     @GetMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<GetMyUserDTO> getUser(Authentication authentication) throws UserDoesNotExistException {
+    public ResponseEntity<UserDTO> getUser(Authentication authentication) throws UserDoesNotExistException {
         System.out.println("... called getUser");
         User user = userService.getUser(authentication);
-        GetMyUserDTO userInfo = new GetMyUserDTO(user);
-        return ResponseEntity.status(HttpStatus.OK).body(userInfo);
+        UserDTO userInfo = new UserDTO(user);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userInfo);
     }
 
     @Operation(
@@ -33,11 +39,10 @@ public class UserController {
             description = "Returns users data using UUID"
     )
     @GetMapping("/user/{uuid}")
-    public ResponseEntity<GetUserDTO> getUserById(@PathVariable("uuid") String googleId) throws UserDoesNotExistException {
+    public ResponseEntity<UserGuestDTO> getUserById(@PathVariable("uuid") String uuid, Authentication authentication) throws UserDoesNotExistException {
         System.out.println("... called getUserByUUID");
-        User user = userService.getUserByUUID(googleId);
-        GetUserDTO userInfo = new GetUserDTO(user);
-        return ResponseEntity.status(HttpStatus.OK).body(userInfo);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userService.getUserByUUID(authentication, uuid));
     }
 
     @Operation(
@@ -46,7 +51,7 @@ public class UserController {
     )
     @PostMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws  UserAlreadyExistsException {
+    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UserAlreadyExistsException {
         System.out.println("... called createUser");
         userService.registerUser(updateUserDTO, authentication);
         return ResponseEntity.status(HttpStatus.CREATED).body("User created");
