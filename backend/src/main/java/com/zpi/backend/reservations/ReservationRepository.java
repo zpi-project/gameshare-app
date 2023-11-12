@@ -1,6 +1,5 @@
 package com.zpi.backend.reservations;
 
-import com.zpi.backend.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -56,7 +55,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
                     "from reservations r join game_instances GI on r.game_instance_id = gi.id " +
                     "join users U on r.renter_id = U.id " +
                     "join reservation_status s on r.status_id = s.id " +
-                    "where U.uuid = :uuid and s.status = 'Expired' and s.status = 'Finished'",
+                    "where U.uuid = :uuid and (s.status = 'Expired' or s.status = 'Finished')",
             nativeQuery = true
     )
     Page<Reservation> getReservationsHistoryByRenter(Pageable pageable,@Param("uuid") String renterUuid);
@@ -73,8 +72,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
                     "from reservations r join game_instances GI on r.game_instance_id = gi.id " +
                     "join users U on GI.owner_id = U.id " +
                     "join reservation_status s on r.status_id = s.id " +
-                    "where U.uuid = :uuid and s.status = 'Expired' and s.status = 'Finished'",
+                    "where U.uuid = :uuid and (s.status = 'Expired' or s.status = 'Finished')",
             nativeQuery = true
     )
     Page<Reservation> getReservationsHistoryByOwner(Pageable pageable,@Param("uuid") String ownerUuid);
+
+    Page<Reservation> getReservationsByGameInstance_Uuid(Pageable pageable, String gameInstanceUuid);
 }

@@ -30,10 +30,17 @@ public class ReservationService {
         User renter = userService.getUser(authentication);
         newReservationDTO.validate();
         GameInstance gameInstance = gameInstanceService.getGameInstance(newReservationDTO.getGameInstanceUUID());
+        checkIfOwnerIsNotRenter(renter,gameInstance);
         Reservation reservation = new Reservation().fromDTO(newReservationDTO, renter, gameInstance);
         reservation.setStatus(reservationStatusRepository.findByStatus("Pending"));
         return reservationRepository.save(reservation);
     }
+    public void checkIfOwnerIsNotRenter(User renter,GameInstance gameInstance) throws BadRequestException {
+        if(renter.getUuid().equals(gameInstance.getOwner().getUuid()))
+            throw new BadRequestException("Owner cannot be renter");
+    }
+
+
 
     public ResultsDTO<Reservation> getMyReservationsAsOwner(User owner,int page,int size){
         Pageable pageable = PageRequest.of(page, size);
@@ -75,5 +82,19 @@ public class ReservationService {
             return getMyReservationsHistoryAsOwner(user,page,size);
         }
         return getMyReservationsHistoryAsRenter(user,page,size);
+    }
+
+    public void checkIfUserIsOwner(User user, GameInstance gameInstance) throws BadRequestException {
+        if(!user.getUuid().equals(gameInstance.getOwner().getUuid()))
+            throw new BadRequestException("User is not owner of this game instance");
+    }
+
+    public ResultsDTO<Reservation> getReservationsByGameInstance(Authentication authentication, String gameInstanceUuid, int page, int size) throws GameInstanceDoesNotExistException, UserDoesNotExistException, BadRequestException {
+        Pageable pageable = PageRequest.of(page, size);
+        GameInstance gameInstance = gameInstanceService.getGameInstance(gameInstanceUuid);
+        User user = userService.getUser(authentication);
+        checkIfUserIsOwner(user,gameInstance);
+        Page<Reservation> reservationPage = reservationRepository.getReservationsByGameInstance_Uuid(pageable, gameInstanceUuid);
+        return new ResultsDTO<>(reservationPage.stream().toList(), new Pagination(reservationPage.getTotalElements(),reservationPage.getTotalPages()));
     }
 }

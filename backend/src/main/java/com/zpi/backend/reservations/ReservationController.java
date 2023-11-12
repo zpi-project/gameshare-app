@@ -11,10 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
@@ -38,10 +35,10 @@ public class ReservationController {
     @Operation(
             summary = "Get all current user reservations",
             description = "Gets all current user reservations. " +
-                    "The User who invokes this endpoint can be either the renter or the owner of the reservation."+
-                    "If asOwner is true, the user is the owner of the reservation, otherwise the user is the renter" +
-                    " of the reservation."+
-                    "Current reservation are reservations with status not equal to 'Finished' or 'Expired'"
+                    "The User who invokes this endpoint can be either the renter or the owner of the reservations."+
+                    "If asOwner is true, the user is the owner of the reservations, otherwise the user is the renter" +
+                    " of the reservations."+
+                    "Current reservations are reservations with status not equal to 'Finished' or 'Expired'"
     )
     @GetMapping("/reservations")
     @PreAuthorize("isAuthenticated()")
@@ -51,6 +48,14 @@ public class ReservationController {
         return ResponseEntity.ok().body(reservations);
     }
 
+    @Operation(
+            summary = "Get history of user reservations",
+            description = "Gets history of user reservations. " +
+                    "The User who invokes this endpoint can be either the renter or the owner of the reservations."+
+                    "If asOwner is true, the user is the owner of the reservations, otherwise the user is the renter" +
+                    " of the reservations."+
+                    "Historical reservations are reservations with status equal to 'Finished' or 'Expired'"
+    )
     @GetMapping("/reservations/history")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity getReservationsHistory(Authentication authentication, @RequestParam Boolean asOwner
@@ -58,6 +63,16 @@ public class ReservationController {
         ResultsDTO<Reservation> reservations = reservationService.getMyReservationsHistory(authentication,asOwner,page,size);
         return ResponseEntity.ok().body(reservations);
     }
+
+    @GetMapping("/reservations/{gameInstanceUuid}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity getReservationsByGameInstance(@PathVariable String gameInstanceUuid,Authentication authentication,
+                                                        @RequestParam int page,@RequestParam int size) throws UserDoesNotExistException, GameInstanceDoesNotExistException, BadRequestException {
+        ResultsDTO<Reservation> reservations = reservationService.getReservationsByGameInstance(authentication,gameInstanceUuid,page,size);
+        return ResponseEntity.ok().body(reservations);
+    }
+
+
 
 
 }
