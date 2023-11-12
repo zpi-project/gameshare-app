@@ -35,12 +35,6 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
 
   return (
     <div className="flex h-full w-full flex-col gap-6">
-      {isError && <div>Is Error</div>}
-      {isLoading && (
-        <div className="flex flex-col">
-          <Skeleton className="h-max-h flex-grow rounded-lg p-5" />
-        </div>
-      )}
       {owner && (
         <>
           <div className="flex h-full w-full flex-col gap-4">
@@ -51,7 +45,7 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
               <div className="relative flex-grow">
                 <Input
                   className="flex-grow rounded-lg border-none bg-card"
-                  placeholder={t("typeToSearch")}
+                  placeholder="Type to search..."
                   onChange={event => setQuery(event.target.value)}
                 />
                 <Search className="absolute right-4 top-2" />
@@ -59,14 +53,19 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
               {showButtons && <Button className="w-56">{t("addGameInstance")}</Button>}
             </div>
             <ScrollArea className="h-[calc(100%-100px)] w-full flex-grow">
-              <div className="flex h-full flex-col gap-4 pr-4">
-                {gameInstances?.results.length == 0 && (
-                  <div className="flex justify-center">
-                    {isMyPage ? t("noGamesMyPage") : t("noGamesUserPage")}
-                  </div>
-                )}
-                {gameInstances &&
-                  gameInstances.results
+              {isLoading ? (
+                <div className="flex flex-col gap-4 pr-4">
+                  {Array.from({ length: 4 }).map(() => (
+                    <Skeleton className="h-[152px] rounded-lg" />
+                  ))}
+                </div>
+              ) : isError ? (
+                <h3 className="mt-2 text-center text-xl text-destructive">
+                  There was an error fetching games
+                </h3>
+              ) : (
+                <div className="flex h-full w-full flex-col gap-4 pr-4">
+                  {gameInstances.results
                     .filter(post => {
                       if (query === "") {
                         return post;
@@ -81,7 +80,8 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
                         showButtons={showButtons}
                       />
                     ))}
-              </div>
+                </div>
+              )}
             </ScrollArea>
           </div>
         </>
