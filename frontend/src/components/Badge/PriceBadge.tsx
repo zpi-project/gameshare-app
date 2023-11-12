@@ -11,7 +11,7 @@ const PriceBadge: FC<PriceBadgeProps> = ({ price }) => {
   const { t } = useTranslation();
 
   return (
-    <Badge variant="secondary" className="flex w-max flex-row gap-1 bg-primary">
+    <Badge className="flex w-max flex-row gap-1">
       <Coins size={20} />
       <span className="tracking-wider">
         {price} / {t("perDay")}

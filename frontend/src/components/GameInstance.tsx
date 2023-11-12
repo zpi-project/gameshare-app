@@ -39,7 +39,7 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
         <div className="flex w-full flex-col items-start gap-2">
           <div className="flex w-full flex-row justify-between gap-2">
             <div className="flex text-2xl text-primary">{gameInstance.game.name}</div>
-            <div className="flex flex-row flex-wrap gap-1">
+            <div className="flex flex-row items-start gap-1">
               <TimeBadge time={gameInstance.game.playingTime} />
               <PlayersBadge
                 minPlayers={gameInstance.game.minPlayers}

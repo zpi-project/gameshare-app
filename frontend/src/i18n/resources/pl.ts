@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -61,7 +62,6 @@ const pl: typeof en = {
   searchGameWithinCategoryPlaceholder: "Wyszukaj grę w tej kategorii...",
   searchGamesError: "Wystąpił błąd podczas wyszukiwania gier.",
   searchGamesNoResults: "Brak wyników",
-  perDay: "dzień",
   categoryGamesError: "Nie udało się pobrać gier dla tej kategorii.",
   categoryError: "Nie udało się pobrać tej kategorii.",
   gameError: "Nie udało się pobrać danych o tej grze.",
@@ -69,6 +69,14 @@ const pl: typeof en = {
   usersWithThisGame: "Użytkownicy z tą grą",
   noGamesMyPage: "Nie posiadasz jeszcze żadnej gry",
   noGamesUserPage: "Ten użytkownik nie posiada jeszcze żadnych gier",
+
+  typeToSearch: "Wyszukaj grę...",
+  category: "Kategoria",
+  all: "Wszystkie",
+  pricePerDay: "Cena na dzień",
+  players: "L. graczy",
+  age: "Wiek",
+  perDay: "dzień",
 };
 
 export default pl;
