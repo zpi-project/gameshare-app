@@ -1,9 +1,12 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useQuery } from "@tanstack/react-query";
+import { UserApi } from "@/api/UserApi";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Opinion from "./Opinion";
-import { UserApi } from "@/api/UserApi";
 
 const Opinions: FC = () => {
+  const { t } = useTranslation();
   const { data: user, isLoading } = useQuery({
     queryKey: ["user"],
     queryFn: UserApi.get,

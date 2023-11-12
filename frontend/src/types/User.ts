@@ -17,6 +17,4 @@ export interface NewUser {
   locationLongitude: number;
 }
 
-export interface RatingRatedUser {
-  
-}
+export interface RatingRatedUser {}
