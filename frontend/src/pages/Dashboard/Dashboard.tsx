@@ -50,6 +50,12 @@ const DEFAULT_SEARCH_PARAMS: GameInstanceSearchParams = {
   searchName: "",
 };
 
+//TODO: fetch users when endpoint added, 
+// load games on scroll
+// load more users on interval
+// filter games by user when endpoint fixed
+// remove users above
+
 const Dashboard: FC = () => {
   const [location, setLocation] = useRecoilState(locationState);
   const [searchParams, setSearchParams] = useState<GameInstanceSearchParams>(DEFAULT_SEARCH_PARAMS);

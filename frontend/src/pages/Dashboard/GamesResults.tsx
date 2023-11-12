@@ -58,6 +58,9 @@ const game = {
   active: true,
 };
 
+
+// TODO: remove game above when endpoint fixed
+
 interface GamesResultsProps {
   gameInstances: Paginated<SearchGameInstance> | undefined;
   isLoading: boolean;
