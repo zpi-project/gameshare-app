@@ -58,7 +58,9 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
             <ScrollArea className="h-[calc(100%-100px)] w-full flex-grow">
               <div className="flex h-full flex-col gap-4 pr-4">
                 {gameInstances?.results.length == 0 && (
-                  <div className="flex justify-center">{isMyPage ? t("noGamesMyPage") : t("noGamesUserPage")}</div>
+                  <div className="flex justify-center">
+                    {isMyPage ? t("noGamesMyPage") : t("noGamesUserPage")}
+                  </div>
                 )}
                 {gameInstances &&
                   gameInstances.results

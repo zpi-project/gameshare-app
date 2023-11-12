@@ -1,4 +1,3 @@
-
 import { GameInstance } from "@/types/Game";
 import { GameInstanceSearchParams, SearchUserGameInstances } from "@/types/GameInstance";
 import { Paginated } from "@/types/Paginated";
@@ -14,10 +13,9 @@ export class GameInstanceApi {
   }
 
   static async getAll(page: number, size: number) {
-    const { data: instances } = await Api.get<Paginated<GameInstance>>(
-      `game-instances`,
-      { params: { page, size } },
-    );
+    const { data: instances } = await Api.get<Paginated<GameInstance>>(`game-instances`, {
+      params: { page, size },
+    });
     return instances;
   }
 
@@ -43,5 +41,3 @@ export class GameInstanceApi {
     return gameInstances;
   }
 }
-
-  

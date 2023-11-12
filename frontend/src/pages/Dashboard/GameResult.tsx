@@ -26,7 +26,7 @@ const GameResult: FC<GameResultProps> = ({
       </div>
       <section className="flex w-[calc(100%-140px)] flex-col gap-2">
         <div className="flex flex-row justify-between">
-          <h3 className="text-primary text-lg font-bold">{name}</h3>
+          <h3 className="text-lg font-bold text-primary">{name}</h3>
           <>stars</>
         </div>
         <div className="flex w-full flex-row justify-between">

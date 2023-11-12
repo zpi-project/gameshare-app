@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Pencil } from "lucide-react";
 import { CalendarDays } from "lucide-react";
@@ -17,6 +18,7 @@ interface Props {
 
 const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { t } = useTranslation();
   const handleHover = () => {
     setIsHovered(!isHovered);
   };
@@ -52,8 +54,11 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
             <div className="min-h-8 flex break-words pr-2 text-xs italic">
               {gameInstance.shortDescription}
             </div>
-            <div className="flex w-max">
+            <div className="flex w-max flex-col items-end gap-2">
               <PriceBadge price={gameInstance.pricePerDay} />
+              {!gameInstance.active && (
+                <div className="text-xl text-red-500">{t("deactivated")}</div>
+              )}
             </div>
           </div>
         </div>

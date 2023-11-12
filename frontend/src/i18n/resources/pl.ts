@@ -1,6 +1,5 @@
 import en from "./en";
 
-
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -77,6 +76,7 @@ const pl: typeof en = {
   players: "L. graczy",
   age: "Wiek",
   perDay: "dzień",
+  deactivated: "NIEAKTYWNA",
 };
 
 export default pl;

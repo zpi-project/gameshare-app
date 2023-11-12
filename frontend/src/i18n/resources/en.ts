@@ -73,4 +73,5 @@ export default {
   players: "Players",
   age: "Age",
   perDay: "day",
+  deactivated: "DEACTIVATED",
 };
