@@ -17,6 +17,7 @@ const pl: typeof en = {
 
   addOpinion: "Dodaj opinię",
   seeMore: "Rozwiń",
+  seeLess: "Zwiń",
   edit: "Edytuj",
 
   locationDisabledTooltip: "Włącz opcję lokalizacji w przeglądarce i odśwież stronę.",

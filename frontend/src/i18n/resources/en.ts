@@ -15,6 +15,7 @@ export default {
 
   addOpinion: "Add opinion",
   seeMore: "See more",
+  seeLess: "See less",
   edit: "Edit",
 
   locationDisabledTooltip: "Allow localization in your browser settings and refresh page.",
