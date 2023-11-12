@@ -11,7 +11,7 @@ import { Map, LocationButton, LocationMarker } from "@/components/Map";
 import { useTheme } from "@/components/ThemeProvider";
 import { useToast } from "@/components/ui/use-toast";
 import GameDetailsSection from "./GameDetailsSection";
-import GameUsersSection from "./GameUsersSection";
+import GameInstancesSection from "./GameInstancesSection";
 import LoadingGameDetailsSection from "./LoadingGameDetailsSection";
 
 const Game: FC = () => {
@@ -70,7 +70,7 @@ const Game: FC = () => {
           </Map>
         </div>
         <div>
-          <GameUsersSection />
+          <GameInstancesSection />
         </div>
       </div>
     </div>

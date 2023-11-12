@@ -5,12 +5,12 @@ import { SearchGameInstance } from "@/types/GameInstance";
 import { TimeBadge, PlayersBadge, AgeBadge, PriceBadge } from "@/components/Badge";
 import Stars from "@/components/Stars";
 
-interface GameResultProps {
+interface GameInstanceSearchCardProps {
   gameInstance: SearchGameInstance;
   setActive: (uuid: string) => void;
 }
 
-const GameResult: FC<GameResultProps> = ({
+const GameInstanceSearchCard: FC<GameInstanceSearchCardProps> = ({
   gameInstance: {
     uuid,
     pricePerDay,
@@ -49,4 +49,4 @@ const GameResult: FC<GameResultProps> = ({
   );
 };
 
-export default GameResult;
+export default GameInstanceSearchCard;

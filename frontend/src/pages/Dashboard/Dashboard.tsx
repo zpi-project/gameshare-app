@@ -7,7 +7,7 @@ import { User } from "@/types/User";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { Map, LocationButton, LocationMarker } from "@/components/Map";
 import UserMarker from "@/components/Map/UserMarker";
-import GamesResults from "./GamesResults";
+import GameInstancesSearchResults from "../../components/GamesInstancesSearchResults";
 import GamesSearch from "./GamesSearch";
 import UserFilter from "./UserFilter";
 
@@ -50,7 +50,7 @@ const DEFAULT_SEARCH_PARAMS: GameInstanceSearchParams = {
   searchName: "",
 };
 
-//TODO: fetch users when endpoint added, 
+//TODO: fetch users when endpoint added,
 // load games on scroll
 // load more users on interval
 // filter games by user when endpoint fixed
@@ -81,7 +81,12 @@ const Dashboard: FC = () => {
           <LocationMarker />
           <>
             {USERS.map(user => (
-              <UserMarker user={user} key={user.uuid} onClick={setUserParam} active={user.uuid === hoveredUserUUID} />
+              <UserMarker
+                user={user}
+                key={user.uuid}
+                onClick={setUserParam}
+                active={user.uuid === hoveredUserUUID}
+              />
             ))}
           </>
         </Map>
@@ -89,7 +94,12 @@ const Dashboard: FC = () => {
       <div className="flex w-[700px] flex-col gap-4 rounded-lg bg-section p-4">
         <GamesSearch onSubmit={setSearchParams} />
         {userParam && <UserFilter user={userParam} />}
-        <GamesResults gameInstances={gameInstances} isLoading={isLoading} isError={isError} setActive={setHoveredUserUUID} />
+        <GameInstancesSearchResults
+          gameInstances={gameInstances}
+          isLoading={isLoading}
+          isError={isError}
+          setActive={setHoveredUserUUID}
+        />
       </div>
     </div>
   );

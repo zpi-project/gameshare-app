@@ -6,7 +6,7 @@ const GameUsersSection: FC = () => {
 
   return (
     <div>
-      <h3 className="text-xl font-bold text-primary">{t("usersWithThisGame")}</h3>
+      <h3 className="text-xl font-bold text-primary">{t("gameInstances")}</h3>
     </div>
   );
 };

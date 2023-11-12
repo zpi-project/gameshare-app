@@ -63,7 +63,7 @@ export default {
   categoryGamesError: "There was a problem fetching games within this category.",
   categoryError: "There was a problem fetching this category.",
   gameError: "There was a problem fetching this game.",
-  usersWithThisGame: "Users with this game",
+  gameInstances: "Copies of this game",
   noGamesMyPage: "You don't have any games yet",
   noGamesUserPage: "This user doesn't have any games yet",
   errorFetchingGames: "There was an error fetching games",

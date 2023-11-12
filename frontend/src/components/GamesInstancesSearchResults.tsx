@@ -2,9 +2,9 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { SearchGameInstance } from "@/types/GameInstance";
 import { Paginated } from "@/types/Paginated";
+import GameInstanceSearchCard from "@/components/GameInstanceSearchCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
-import GameResult from "./GameResult";
 
 const game = {
   uuid: "de80b909-055f-4a6e-a503-e578142330b2",
@@ -58,17 +58,21 @@ const game = {
   active: true,
 };
 
-
 // TODO: remove game above when endpoint fixed
 
-interface GamesResultsProps {
+interface GameInstancesSearchResultsProps {
   gameInstances: Paginated<SearchGameInstance> | undefined;
   isLoading: boolean;
   isError: boolean;
-  setActive: (uuid: string) => void; 
+  setActive: (uuid: string) => void;
 }
 
-const GamesResults: FC<GamesResultsProps> = ({ gameInstances, isLoading, isError, setActive }) => {
+const GameInstancesSearchResults: FC<GameInstancesSearchResultsProps> = ({
+  gameInstances,
+  isLoading,
+  isError,
+  setActive,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -86,7 +90,11 @@ const GamesResults: FC<GamesResultsProps> = ({ gameInstances, isLoading, isError
           <>
             {gameInstances &&
               gameInstances.results.map(gameInstance => (
-                <GameResult gameInstance={game} key={gameInstance.uuid} setActive={setActive} />
+                <GameInstanceSearchCard
+                  gameInstance={game}
+                  key={gameInstance.uuid}
+                  setActive={setActive}
+                />
               ))}
           </>
         )}
@@ -95,4 +103,4 @@ const GamesResults: FC<GamesResultsProps> = ({ gameInstances, isLoading, isError
   );
 };
 
-export default GamesResults;
+export default GameInstancesSearchResults;
