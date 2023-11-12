@@ -2,9 +2,12 @@ import { Dispatch, FC, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { z } from "zod";
 import { GameInstanceSearchParams } from "@/types/GameInstance";
+import { CategoryApi } from "@/api/CategoryApi";
+import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
 import {
   FormField,
@@ -22,6 +25,12 @@ interface GamesSearchProps {
 
 const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
+
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: CategoryApi.getAll,
+    select: data => data.map(({ name, id }) => ({ label: name, value: id })),
+  });
 
   const formSchema = z.object({
     searchName: z.string(),
@@ -76,7 +85,12 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
               <FormItem className="flex-grow">
                 <FormLabel>{t("category")}</FormLabel>
                 <FormControl>
-                  <Input {...field} className="border-0 bg-card" autoComplete="false" />
+                  <SelectInput
+                    options={categories ?? []}
+                    placeholder={t("all")}
+                    noResultsInfo="No results"
+                  />
+                  {/* <Input {...field} className="border-0 bg-card" autoComplete="false" /> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>
