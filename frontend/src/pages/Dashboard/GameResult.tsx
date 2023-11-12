@@ -5,9 +5,9 @@ import { SearchGameInstance } from "@/types/GameInstance";
 import { TimeBadge, PlayersBadge, AgeBadge, PriceBadge } from "@/components/Badge";
 import Stars from "@/components/Stars";
 
-
 interface GameResultProps {
   gameInstance: SearchGameInstance;
+  setActive: (uuid: string) => void;
 }
 
 const GameResult: FC<GameResultProps> = ({
@@ -16,20 +16,24 @@ const GameResult: FC<GameResultProps> = ({
     pricePerDay,
     game: { name, image, minPlayers, maxPlayers, age, playingTime, shortDescription },
     avgRating,
+    owner: { uuid: ownerUUID },
   },
+  setActive,
 }) => {
   return (
     <Link
       className="flex flex-row gap-2 rounded-lg bg-card p-2 hover:bg-accent"
       to={`${URLS.GAME_INSTANCE}/${uuid}}`}
+      onMouseEnter={() => setActive(ownerUUID)}
+      onMouseLeave={() => setActive("")}
     >
       <div className="h-32 w-32 overflow-hidden rounded-lg">
         <img src={image} alt={name} className="h-full w-full object-cover object-top" />
       </div>
       <section className="flex w-[calc(100%-140px)] flex-col gap-2">
         <div className="flex flex-row justify-between">
-          <h3 className="text-primary text-lg font-bold">{name}</h3>
-          {avgRating > 0 && <Stars count={avgRating} variant="secondary"/>}
+          <h3 className="text-lg font-bold text-primary">{name}</h3>
+          {avgRating > 0 && <Stars count={avgRating} variant="secondary" />}
         </div>
         <div className="flex w-full flex-row justify-between">
           <PriceBadge price={pricePerDay} />

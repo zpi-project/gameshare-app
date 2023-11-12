@@ -25,8 +25,8 @@ const USERS = [
   },
   {
     uuid: "3d5d2dea-addf-4a08-8b25-9637d70736e2",
-    firstName: "Maria",
-    lastName: "Markowiak",
+    firstName: "Ewa",
+    lastName: "Bożena",
     locationLatitude: 51.10784676531416,
     locationLongitude: 17.06464290618897,
     avatarLink:
@@ -60,8 +60,10 @@ const Dashboard: FC = () => {
   const [location, setLocation] = useRecoilState(locationState);
   const [searchParams, setSearchParams] = useState<GameInstanceSearchParams>(DEFAULT_SEARCH_PARAMS);
   const [userParam, setUserParam] = useState<User | null>(null);
+  const [hoveredUserUUID, setHoveredUserUUID] = useState("");
   const [latitude, longitude] = location as number[];
 
+  console.log(hoveredUserUUID);
   const {
     data: gameInstances,
     isLoading,
@@ -79,7 +81,7 @@ const Dashboard: FC = () => {
           <LocationMarker />
           <>
             {USERS.map(user => (
-              <UserMarker user={user} key={user.uuid} onClick={setUserParam} />
+              <UserMarker user={user} key={user.uuid} onClick={setUserParam} active={user.uuid === hoveredUserUUID} />
             ))}
           </>
         </Map>
@@ -87,7 +89,7 @@ const Dashboard: FC = () => {
       <div className="flex w-[700px] flex-col gap-4 rounded-lg bg-section p-4">
         <GamesSearch onSubmit={setSearchParams} />
         {userParam && <UserFilter user={userParam} />}
-        <GamesResults gameInstances={gameInstances} isLoading={isLoading} isError={isError} />
+        <GamesResults gameInstances={gameInstances} isLoading={isLoading} isError={isError} setActive={setHoveredUserUUID} />
       </div>
     </div>
   );

@@ -65,9 +65,10 @@ interface GamesResultsProps {
   gameInstances: Paginated<SearchGameInstance> | undefined;
   isLoading: boolean;
   isError: boolean;
+  setActive: (uuid: string) => void; 
 }
 
-const GamesResults: FC<GamesResultsProps> = ({ gameInstances, isLoading, isError }) => {
+const GamesResults: FC<GamesResultsProps> = ({ gameInstances, isLoading, isError, setActive }) => {
   const { t } = useTranslation();
 
   return (
@@ -85,7 +86,7 @@ const GamesResults: FC<GamesResultsProps> = ({ gameInstances, isLoading, isError
           <>
             {gameInstances &&
               gameInstances.results.map(gameInstance => (
-                <GameResult gameInstance={game} key={gameInstance.uuid} />
+                <GameResult gameInstance={game} key={gameInstance.uuid} setActive={setActive} />
               ))}
           </>
         )}
