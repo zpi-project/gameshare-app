@@ -67,6 +67,8 @@ const pl: typeof en = {
   gameError: "Nie udało się pobrać danych o tej grze.",
 
   usersWithThisGame: "Użytkownicy z tą grą",
+  noGamesMyPage: "Nie posiadasz jeszcze żadnej gry",
+  noGamesUserPage: "Ten użytkownik nie posiada jeszcze żadnych gier",
 };
 
 export default pl;

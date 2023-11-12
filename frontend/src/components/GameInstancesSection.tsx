@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
-// import { gameInstances } from "@cypress/fixtures/gameInstances";
 import { Search } from "lucide-react";
 import { User } from "@/types/User";
 import { getName } from "@/utils/user";
@@ -27,7 +26,7 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
     isError,
   } = useQuery({
     queryKey: ["gameInstances", { uuid: owner?.uuid }],
-    queryFn: () => GameInstanceApi.getInstancesByOwnerUUID(owner?.uuid ?? "", 0, 100),
+    queryFn: () => GameInstanceApi.getAllByUUID(owner?.uuid ?? "", 0, 100),
     enabled: owner !== undefined,
   });
 
@@ -58,6 +57,9 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
             </div>
             <ScrollArea className="h-[calc(100%-100px)] w-full flex-grow">
               <div className="flex h-full flex-col gap-4 pr-4">
+                {gameInstances?.results.length == 0 && (
+                  <div>{isMyPage ? t("noGamesMyPage") : t("noGamesUserPage")}</div>
+                )}
                 {gameInstances &&
                   gameInstances.results
                     .filter(post => {
