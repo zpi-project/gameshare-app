@@ -1,6 +1,8 @@
 import { FC, useState } from "react";
 import { Marker, Popup, useMapEvents } from "react-leaflet";
+import { Link } from "react-router-dom";
 import { divIcon } from "leaflet";
+import { URLS } from "@/constants/urls";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
 import Stars from "@/components/Stars";
@@ -24,7 +26,7 @@ const UserMarker: FC<UserMarkerProps> = ({ user, onClick }) => {
     },
   });
 
-  const { locationLatitude, locationLongitude, avatarLink, avgRating } = user;
+  const { locationLatitude, locationLongitude, avatarLink, avgRating, uuid } = user;
 
   const pinIcon = divIcon({
     html: `
@@ -54,7 +56,9 @@ const UserMarker: FC<UserMarkerProps> = ({ user, onClick }) => {
             <img src={avatarLink} alt={getFullname(user)} className="h-full w-full object-cover" />
           </div>
           <div className="flex flex-col gap-1">
-            <h4 className="text-xl font-semibold text-primary">{getFullname(user)}</h4>
+            <Link to={`${URLS.PROFILE}/${uuid}`}>
+              <h4 className="text-xl font-semibold text-primary hover:underline duration-200">{getFullname(user)}</h4>
+            </Link>
             {avgRating > 0 && <Stars count={Math.round(avgRating)} size={20} />}
           </div>
         </div>

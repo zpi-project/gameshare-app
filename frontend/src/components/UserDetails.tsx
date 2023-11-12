@@ -39,9 +39,11 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
           <div className="flex h-full w-full flex-row items-center gap-6">
             <div className="flex w-3/12 flex-col items-center gap-6">
               <Avatar user={user} className="h-40 w-40 text-5xl" />
-              <div className="rounded-lg bg-card p-2.5 px-6">
-                {parsePhoneNumber(user.phoneNumber).formatInternational()}
-              </div>
+              {user.phoneNumber && (
+                <div className="rounded-lg bg-card p-2.5 px-6">
+                  {parsePhoneNumber(user.phoneNumber).formatInternational()}
+                </div>
+              )}
               <div>
                 {showEdit && (
                   <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
