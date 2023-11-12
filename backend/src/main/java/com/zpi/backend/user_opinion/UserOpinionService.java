@@ -35,9 +35,7 @@ public class UserOpinionService {
         Page<UserOpinion> userOpinionPage = userOpinionRepository.getUserOpinionsByRatedUserOrderByTimestamp(user, pageable);
         List<UserOpinionDTO> userOpinionDTOList = new ArrayList<>();
         userOpinionPage
-                .forEach(userOpinion -> {
-                    userOpinionDTOList.add(new UserOpinionDTO(userOpinion, isGuest));
-                });
+                .forEach(userOpinion -> userOpinionDTOList.add(new UserOpinionDTO(userOpinion, isGuest)));
         return new ResultsDTO<>(userOpinionDTOList, new Pagination(userOpinionPage.getTotalElements(), userOpinionPage.getTotalPages()));
     }
 
@@ -48,7 +46,7 @@ public class UserOpinionService {
         UserOpinion userOpinion = newUserOpinionDTO.toUserOpinion(user, ratedUser);
         boolean isGuest = !authentication.isAuthenticated();
         userOpinionRepository.save(userOpinion);
-        userService.updateAvgRating(user.getId());
+        userService.updateAvgRating(ratedUser.getId());
         return new UserOpinionDTO(userOpinion, isGuest);
     }
 
@@ -59,9 +57,7 @@ public class UserOpinionService {
                 userOpinionRepository.getUserOpinionsByRatedUserOrderByTimestamp(userService.getUserByUUID(uuid), pageable);
         List<UserOpinionDTO> userOpinionDTOList = new ArrayList<>();
         userOpinionPage
-                .forEach(userOpinion -> {
-                    userOpinionDTOList.add(new UserOpinionDTO(userOpinion, isGuest));
-                });
+                .forEach(userOpinion -> userOpinionDTOList.add(new UserOpinionDTO(userOpinion, isGuest)));
         return new ResultsDTO<>(userOpinionDTOList.stream().toList(), new Pagination(userOpinionPage.getTotalElements(), userOpinionPage.getTotalPages()));
     }
 
