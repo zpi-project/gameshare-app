@@ -1,6 +1,5 @@
 import en from "./en";
 
-
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -51,6 +50,9 @@ const pl: typeof en = {
   welcomeDescription:
     "Cieszymy się, że jesteś z nami. Aby ułatwić twoje korzystanie z aplikacji, prosimy o chwilę Twojego czasu, aby dostarczyć nam niezbędne dane osobowe. Zacznijmy!",
 
+  userGames: "Gry użytkownika",
+  myGames: "Moje gry",
+  addGameInstance: "Dodaj swoją grę",
   popularNow: "Popularne teraz",
   seeAll: "Zobacz wszystkie",
   popularGamesErrorTitle: "Nie udało się pobrać popularnych gier.",
@@ -64,6 +66,10 @@ const pl: typeof en = {
   gameError: "Nie udało się pobrać danych o tej grze.",
 
   usersWithThisGame: "Użytkownicy z tą grą",
+  noGamesMyPage: "Nie posiadasz jeszcze żadnej gry",
+  noGamesUserPage: "Ten użytkownik nie posiada jeszcze żadnych gier",
+  errorFetchingGames: "Wystąpił błąd podczas pobierania gier.",
+  deactivated: "NIEAKTYWNA",
 
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",
@@ -73,5 +79,3 @@ const pl: typeof en = {
   age: "Wiek",
   perDay: "na dzień",
 };
-
-export default pl;

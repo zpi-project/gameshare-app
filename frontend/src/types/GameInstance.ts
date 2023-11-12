@@ -21,12 +21,6 @@ export interface SearchGameInstance extends GameInstance {
   owner: User;
 }
 
-// endpoint do searchu instancji
-// Paginated<SearchGameInstance> sorted by distance from location + optional filters + optional filter - userUUID
-
-//endpoint do searchu userów na mapie - piny
-// Paginated<User> sorted by distance from location + optional filters
-
 export interface GameInstanceSearchParams {
   searchName?: string;
   categoryId?: number;
