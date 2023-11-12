@@ -2,11 +2,16 @@ package com.zpi.backend.game_instance_opinion;
 
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
-import com.zpi.backend.user.UserDoesNotExistException;
-import com.zpi.backend.user_opinion.*;
+import com.zpi.backend.game_instance.Exception.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance_opinion.Dto.GameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.Dto.NewGameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.Dto.UpdatedGameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.Exception.GameInstanceOpinionDoesNotExistException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user_opinion.Exception.DeleteSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.Exception.EditSomeoneElseOpinionException;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,10 +19,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RequestMapping("/game-instances")
 public class GameInstanceOpinionController {
-    @Autowired
+
     private GameInstanceOpinionService gameInstanceOpinionService;
 
     @Operation(
@@ -41,7 +47,7 @@ public class GameInstanceOpinionController {
     @PutMapping("/opinions/{id}")
     public ResponseEntity<GameInstanceOpinionDTO> updateOpinion(Authentication authentication,@PathVariable long id,
                                                                 @RequestBody UpdatedGameInstanceOpinionDTO updatedGameInstanceOpinionDTO)
-            throws UserDoesNotExistException, EditSomeoneElseOpinionException, OpinionDoesNotExistException, BadRequestException {
+            throws UserDoesNotExistException, EditSomeoneElseOpinionException, GameInstanceOpinionDoesNotExistException, BadRequestException {
         System.out.println("... called updateGameInstanceOpinion");
         return ResponseEntity.ok().body(gameInstanceOpinionService.updateOpinion(authentication,id,updatedGameInstanceOpinionDTO));
     }
@@ -53,7 +59,7 @@ public class GameInstanceOpinionController {
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/opinions/{id}")
     public ResponseEntity deleteOpinion(Authentication authentication,@PathVariable long id)
-            throws UserDoesNotExistException, DeleteSomeoneElseOpinionException, OpinionDoesNotExistException {
+            throws UserDoesNotExistException, DeleteSomeoneElseOpinionException, GameInstanceOpinionDoesNotExistException {
         System.out.println("... called deleteGameInstanceOpinion");
         gameInstanceOpinionService.deleteOpinion(authentication,id);
         return ResponseEntity.ok().build();
@@ -65,12 +71,12 @@ public class GameInstanceOpinionController {
     )
 
     @GetMapping("/{gameInstanceUuid}/opinions")
-    public ResponseEntity<ResultsDTO<GameInstanceOpinionDTO>> getOpinions(@PathVariable String gameInstanceUuid,
+    public ResponseEntity<ResultsDTO<GameInstanceOpinionDTO>> getOpinions(Authentication authentication, @PathVariable String gameInstanceUuid,
                                                                           @RequestParam int page, @RequestParam int size)
             throws GameInstanceDoesNotExistException {
         System.out.println("... called getGameInstanceOpinions");
         return ResponseEntity.ok()
-                .body(gameInstanceOpinionService.getOpinions(gameInstanceUuid,page,size));
+                .body(gameInstanceOpinionService.getOpinions(authentication, gameInstanceUuid,page,size));
     }
 
 

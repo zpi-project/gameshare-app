@@ -1,12 +1,19 @@
 package com.zpi.backend.game;
 
-import com.zpi.backend.category.CategoryDoesNotExistException;
+import com.zpi.backend.category.Exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Amount;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.game.Dto.GameDTO;
+import com.zpi.backend.game.Dto.NewGameDTO;
+import com.zpi.backend.game.Dto.UserWithGameOpinionDTO;
+import com.zpi.backend.game.Exception.GameAlreadyAcceptedException;
+import com.zpi.backend.game.Exception.GameAlreadyExistsException;
+import com.zpi.backend.game.Exception.GameAlreadyRejectedException;
+import com.zpi.backend.game.Exception.GameDoesNotExistException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,10 +24,10 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@AllArgsConstructor
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RequestMapping("/games")
 public class GameController {
-    @Autowired
     GameService gameService;
 
     @Operation(
@@ -29,9 +36,9 @@ public class GameController {
     )
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Game> addGame(@RequestBody NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
+    public ResponseEntity<GameDTO> addGame(@RequestBody NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
         System.out.println("... called addGame");
-        Game newGame = gameService.addGame(newGameDTO);
+        GameDTO newGame = gameService.addGame(newGameDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(newGame);
     }
@@ -41,10 +48,10 @@ public class GameController {
             description = "Returns paginated games from database. Optional filtering by name and categories."
     )
     @GetMapping
-    public ResponseEntity<ResultsDTO<Game>> getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
+    public ResponseEntity<ResultsDTO<GameDTO>> getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
                                    @RequestParam Optional<List<Integer>> categoriesIds) {
         System.out.println("... called getGames");
-        ResultsDTO<Game> games = gameService.getGames(page, size, search, categoriesIds);
+        ResultsDTO<GameDTO> games = gameService.getGames(page, size, search, categoriesIds);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }
@@ -54,9 +61,9 @@ public class GameController {
             description = "Returns Game from database by its id."
     )
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Game> getGame(@PathVariable long id) throws GameDoesNotExistException {
+    public ResponseEntity<GameDTO> getGame(@PathVariable long id) throws GameDoesNotExistException {
         System.out.println("... called getGame("+id+")");
-        Game game = gameService.getGame(id);
+        GameDTO game = gameService.getGameDTO(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(game);
     }
@@ -68,7 +75,7 @@ public class GameController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{id}/accept", method = RequestMethod.PUT)
     public ResponseEntity acceptGame(Authentication authentication, @PathVariable long id)
-            throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
+            throws GameDoesNotExistException, GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException {
         System.out.println("... called acceptGame("+id+")");
         gameService.acceptGame(authentication, id);
         return ResponseEntity.status(HttpStatus.OK)
@@ -88,6 +95,32 @@ public class GameController {
                 .build();
     }
 
+    @Operation(
+            summary = "Get popular games",
+            description = "Returns paginated popular games from database. [Not implemented] Popularity is calculated considering reservations."
+    )
+    @GetMapping(value = "/popular")
+    public ResponseEntity<ResultsDTO<GameDTO>> getPopularGames(@RequestParam int page, @RequestParam int size) {
+        System.out.println("... called getPopularGames");
+        ResultsDTO<GameDTO> games = gameService.getGames(page, size, Optional.empty(), Optional.empty());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(games);
+    }
+
+    @Operation(
+            summary = "Get users' rating with game by id",
+            description = "Returns paginated user data along with their rating based on User Opinions and their Game Instance rating from database. [Note: Calculating game instance opinions is NOT IMPLEMENTED yet]."
+    )
+    @GetMapping(value = "/{gameId}/users")
+    public ResponseEntity<ResultsDTO<UserWithGameOpinionDTO>> getUsersAndGameInstancesWithGame(
+            @PathVariable long gameId, @RequestParam double latitude, @RequestParam double longitude,
+            @RequestParam int page, @RequestParam int size) {
+        System.out.println("... called getUsersAndGameInstancesWithGame");
+        ResultsDTO<UserWithGameOpinionDTO> userWithGames =
+                gameService.getUsersAndGameInstancesWithGame(gameId, latitude, longitude, page, size);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userWithGames);
+    }
 
     @Operation(
             summary = "Get amount of games",

@@ -1,30 +1,36 @@
 package com.zpi.backend.category;
 
+import com.zpi.backend.category.Exception.CategoryAlreadyExistsException;
+import com.zpi.backend.category.Exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Amount;
 import com.zpi.backend.exception_handlers.BadRequestException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RequestMapping("/categories")
 @RestController
 public class CategoryController {
-    @Autowired
     CategoryService categoryService;
 
     @Operation(
             summary = "Add a new category",
             description = "Add a new Category to database."
     )
+    @PreAuthorize("isAuthenticated()")
     @PostMapping
-    public ResponseEntity<Category> addCategory(@RequestBody NewCategoryDTO newCategory) throws CategoryAlreadyExistsException, BadRequestException {
+    public ResponseEntity<Category> addCategory(Authentication authentication ,@RequestBody NewCategoryDTO newCategory) throws CategoryAlreadyExistsException, BadRequestException, UserDoesNotExistException {
         System.out.println("... called addCategory");
-        Category category = categoryService.addCategory(newCategory);
+        Category category = categoryService.addCategory(authentication,newCategory);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(category);
     }

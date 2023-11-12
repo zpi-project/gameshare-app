@@ -1,6 +1,8 @@
 package com.zpi.backend.game_instance_opinion;
 
-import com.zpi.backend.gameInstance.GameInstance;
+import com.zpi.backend.game_instance.GameInstance;
+import com.zpi.backend.game_instance_opinion.Dto.NewGameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.Dto.UpdatedGameInstanceOpinionDTO;
 import com.zpi.backend.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

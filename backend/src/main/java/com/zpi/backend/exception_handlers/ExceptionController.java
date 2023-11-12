@@ -1,20 +1,21 @@
 package com.zpi.backend.exception_handlers;
 
-import com.zpi.backend.gameInstance.GameInstanceDoesNotExistException;
-import com.zpi.backend.gameInstance.GameInstanceStatusException;
-import com.zpi.backend.category.CategoryAlreadyExistsException;
-import com.zpi.backend.category.CategoryDoesNotExistException;
-import com.zpi.backend.game.GameAlreadyAcceptedException;
-import com.zpi.backend.game.GameAlreadyExistsException;
-import com.zpi.backend.game.GameAlreadyRejectedException;
-import com.zpi.backend.game.GameDoesNotExistException;
-import com.zpi.backend.gameInstanceImage.GameInstanceImageDoesNotExistException;
-import com.zpi.backend.user.UndefinedUserException;
-import com.zpi.backend.user.UserAlreadyExistsException;
-import com.zpi.backend.user.UserDoesNotExistException;
-import com.zpi.backend.user_opinion.DeleteSomeoneElseOpinionException;
-import com.zpi.backend.user_opinion.EditSomeoneElseOpinionException;
-import com.zpi.backend.user_opinion.UserOpinionDoesNotExistException;
+import com.zpi.backend.game_instance.Exception.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.Exception.GameInstanceStatusException;
+import com.zpi.backend.category.Exception.CategoryAlreadyExistsException;
+import com.zpi.backend.category.Exception.CategoryDoesNotExistException;
+import com.zpi.backend.game.Exception.GameAlreadyAcceptedException;
+import com.zpi.backend.game.Exception.GameAlreadyExistsException;
+import com.zpi.backend.game.Exception.GameAlreadyRejectedException;
+import com.zpi.backend.game.Exception.GameDoesNotExistException;
+import com.zpi.backend.game_instance_image.GameInstanceImageDoesNotExistException;
+import com.zpi.backend.game_instance_opinion.Exception.GameInstanceOpinionDoesNotExistException;
+import com.zpi.backend.user.Exception.UndefinedUserException;
+import com.zpi.backend.user.Exception.UserAlreadyExistsException;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user_opinion.Exception.DeleteSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.Exception.EditSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.Exception.UserOpinionDoesNotExistException;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.mediatype.problem.Problem;
 import org.springframework.http.HttpHeaders;
@@ -261,6 +262,20 @@ public class ExceptionController {
     @ExceptionHandler(UserOpinionDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity ODNEHandler(UserOpinionDoesNotExistException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(HttpStatus.NOT_FOUND.name())
+                        .withDetail(ex.getClass().getSimpleName()));
+    }
+
+    // Game Instance Opinion
+    @ResponseBody
+    @ExceptionHandler(GameInstanceOpinionDoesNotExistException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity GIODNEHandler(GameInstanceOpinionDoesNotExistException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)

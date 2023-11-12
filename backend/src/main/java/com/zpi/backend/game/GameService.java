@@ -1,15 +1,23 @@
 package com.zpi.backend.game;
 
 import com.zpi.backend.category.Category;
-import com.zpi.backend.category.CategoryDoesNotExistException;
+import com.zpi.backend.category.Exception.CategoryDoesNotExistException;
 import com.zpi.backend.category.CategoryService;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
+import com.zpi.backend.game.Dto.GameDTO;
+import com.zpi.backend.game.Dto.NewGameDTO;
+import com.zpi.backend.game.Dto.UserWithGameOpinionDTO;
+import com.zpi.backend.game.Exception.GameAlreadyAcceptedException;
+import com.zpi.backend.game.Exception.GameAlreadyExistsException;
+import com.zpi.backend.game.Exception.GameAlreadyRejectedException;
+import com.zpi.backend.game.Exception.GameDoesNotExistException;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
-import com.zpi.backend.user.UserDoesNotExistException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user.Dto.UserGuestDTO;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,16 +28,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class GameService {
-    @Autowired
     GameRepository gameRepository;
-    @Autowired
     CategoryService categoryService;
-    @Autowired
     RoleService roleService;
-    @Autowired
     GameStatusService gameStatusService;
-    public Game addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
+    public GameDTO addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
         newGameDTO.validate();
         if (gameRepository.existsGameByName(newGameDTO.getName()))
             throw new GameAlreadyExistsException("Game "+newGameDTO.getName()+" already exists");
@@ -37,17 +42,21 @@ public class GameService {
         Game newGame = newGameDTO.toGame(categories);
         newGame.setGameStatus(gameStatusService.getGameStatus("Pending"));
         gameRepository.save(newGame);
-        return newGame;
+        return new GameDTO(newGame);
     }
 
-    public Game getGame(long id) throws GameDoesNotExistException{
+    public Game getGame(long id) throws GameDoesNotExistException {
         Optional<Game> gameOptional = gameRepository.findByIdAndAccepted(id);
         if (gameOptional.isEmpty() || !gameOptional.get().getGameStatus().getStatus().equals("Accepted"))
             throw new GameDoesNotExistException("Game (id = "+id+") does not exists");
         return gameOptional.get();
     }
 
-    public ResultsDTO<Game> getGames(int page, int size, Optional<String> search, Optional<List<Integer>> categoriesIds) {
+    public GameDTO getGameDTO(long id) throws GameDoesNotExistException{
+        return new GameDTO(getGame(id));
+    }
+
+    public ResultsDTO<GameDTO> getGames(int page, int size, Optional<String> search, Optional<List<Integer>> categoriesIds) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Game> gamePage;
         if (search.isEmpty()) {
@@ -63,6 +72,20 @@ public class GameService {
                 gamePage = gameRepository.searchAllByNameContainsAndAcceptedAndCategoriesIn(search.get().toLowerCase(), categoriesIds.get(), pageable);
             }
         }
+        return new ResultsDTO<>(gamePage
+                .map(this::convertToDTO)
+                .stream().toList(),
+                new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+    }
+
+    private GameDTO convertToDTO(Game game){
+        return new GameDTO(game);
+    }
+
+    // TODO Getting popular games (considering reservations)
+    public ResultsDTO<Game> getPopularGames(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Game> gamePage = gameRepository.getAllAccepted(pageable);
         return new ResultsDTO<>(gamePage.stream().toList(), new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
     }
 
@@ -82,7 +105,7 @@ public class GameService {
     }
 
     public void acceptGame(Authentication authentication, long id) throws GameDoesNotExistException,
-            GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException, GameAlreadyRejectedException {
+            GameAlreadyAcceptedException, UserDoesNotExistException, IllegalAccessException {
         if (!roleService.checkIfAdmin(authentication))
             throw new IllegalAccessException();
         Optional<Game> optionalGame = gameRepository.findGameById(id);
@@ -99,5 +122,35 @@ public class GameService {
 
     public long getAmount(){
         return gameRepository.count();
+    }
+
+    public ResultsDTO<UserWithGameOpinionDTO> getUsersAndGameInstancesWithGame(long gameId, double latitude, double longitude,
+                                                                               int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Object[]> objectsPage = gameRepository.getAllUsersWithGameAndRating(gameId, latitude, longitude, pageable);
+        List<UserWithGameOpinionDTO> userWithGameDTOPage =
+                objectsPage.stream()
+                        .map(this::convertToDTO)
+                        .toList();
+        return new ResultsDTO<>(userWithGameDTOPage,
+                new Pagination(objectsPage.getTotalElements(), objectsPage.getTotalPages()));
+    }
+
+    private UserWithGameOpinionDTO convertToDTO(Object[] columns) {
+        UserWithGameOpinionDTO dto = new UserWithGameOpinionDTO();
+
+        dto.setUser(new UserGuestDTO(
+                (String) columns[0], // uuid
+                (String) columns[1], // firstname
+                (String) columns[2], // lastname
+                (Double) columns[3], // latitude
+                (Double) columns[4], // longitude
+                (String) columns[5], // avatarLink
+                (Double) columns[6]) // avgRating
+        );
+        dto.setGameInstanceUUID((String) columns[7]); // gameInstanceUUID
+        dto.setGameName((String) columns[8]); // gameName
+        dto.setGameInstanceRating(((Double) columns[9])); // gameInstanceRating
+        return dto;
     }
 }
