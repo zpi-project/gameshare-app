@@ -7,7 +7,7 @@ import Opinion from "./Opinion";
 
 const Opinions: FC = () => {
   const { t } = useTranslation();
-  const { data: user, isLoading } = useQuery({
+  const { data: opinions, isLoading } = useQuery({
     queryKey: ["user"],
     queryFn: UserApi.get,
     onError: () => {
