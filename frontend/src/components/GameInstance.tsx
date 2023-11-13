@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 
 interface Props {
   gameInstance: GameInstanceType;
-  showButtons: boolean;
+  showButtons?: boolean;
 }
 
 const GameInstance: FC<Props> = ({
