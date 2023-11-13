@@ -1,6 +1,8 @@
 package com.zpi.backend.user_opinion;
 
 import com.zpi.backend.user.User;
+import com.zpi.backend.user_opinion.dto.ModifiedUserOpinionDTO;
+import com.zpi.backend.user_opinion.dto.NewUserOpinionDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Date;
@@ -43,9 +45,9 @@ public class UserOpinion {
         //this.isRatingUserOwner =; TODO add later when we have game instances
     }
 
-    public UserOpinion update(UpdateUserOpinionDTO updateUserOpinionDTO) {
-        this.stars = updateUserOpinionDTO.getStars();
-        this.description = updateUserOpinionDTO.getDescription();
+    public UserOpinion update(ModifiedUserOpinionDTO modifiedUserOpinionDTO) {
+        this.stars = modifiedUserOpinionDTO.getStars();
+        this.description = modifiedUserOpinionDTO.getDescription();
         this.timestamp = new Date(System.currentTimeMillis());
         return this;
     }

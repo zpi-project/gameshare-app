@@ -2,9 +2,14 @@ package com.zpi.backend.game_instance_opinion;
 
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
-import com.zpi.backend.user.UserDoesNotExistException;
-import com.zpi.backend.user_opinion.*;
+import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance_opinion.dto.GameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.dto.NewGameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.dto.UpdatedGameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.exception.GameInstanceOpinionDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
+import com.zpi.backend.user_opinion.exception.DeleteSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.exception.EditSomeoneElseOpinionException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -66,12 +71,12 @@ public class GameInstanceOpinionController {
     )
 
     @GetMapping("/{gameInstanceUuid}/opinions")
-    public ResponseEntity<ResultsDTO<GameInstanceOpinionDTO>> getOpinions(@PathVariable String gameInstanceUuid,
+    public ResponseEntity<ResultsDTO<GameInstanceOpinionDTO>> getOpinions(Authentication authentication, @PathVariable String gameInstanceUuid,
                                                                           @RequestParam int page, @RequestParam int size)
             throws GameInstanceDoesNotExistException {
         System.out.println("... called getGameInstanceOpinions");
         return ResponseEntity.ok()
-                .body(gameInstanceOpinionService.getOpinions(gameInstanceUuid,page,size));
+                .body(gameInstanceOpinionService.getOpinions(authentication, gameInstanceUuid,page,size));
     }
 
 

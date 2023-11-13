@@ -1,11 +1,16 @@
 package com.zpi.backend.category;
 
+import com.zpi.backend.category.exception.CategoryAlreadyExistsException;
+import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Amount;
 import com.zpi.backend.exception_handlers.BadRequestException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,10 +26,11 @@ public class CategoryController {
             summary = "Add a new category",
             description = "Add a new Category to database."
     )
+    @PreAuthorize("isAuthenticated()")
     @PostMapping
-    public ResponseEntity<Category> addCategory(@RequestBody NewCategoryDTO newCategory) throws CategoryAlreadyExistsException, BadRequestException {
+    public ResponseEntity<Category> addCategory(Authentication authentication ,@RequestBody NewCategoryDTO newCategory) throws CategoryAlreadyExistsException, BadRequestException, UserDoesNotExistException {
         System.out.println("... called addCategory");
-        Category category = categoryService.addCategory(newCategory);
+        Category category = categoryService.addCategory(authentication,newCategory);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(category);
     }

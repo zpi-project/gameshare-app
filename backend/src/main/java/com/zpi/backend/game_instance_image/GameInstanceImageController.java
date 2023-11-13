@@ -1,8 +1,7 @@
 package com.zpi.backend.game_instance_image;
 
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
-import com.zpi.backend.user.User;
+import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

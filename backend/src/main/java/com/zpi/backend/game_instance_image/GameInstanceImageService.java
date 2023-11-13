@@ -3,7 +3,7 @@ package com.zpi.backend.game_instance_image;
 import com.zpi.backend.configuration.DataBucketUtil;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstance;
-import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstanceRepository;
 import com.zpi.backend.user.User;
 import lombok.AllArgsConstructor;
@@ -16,8 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class GameInstanceImageService {
     GameInstanceImageRepository gameInstanceImageRepository;
     GameInstanceRepository gameInstanceRepository;

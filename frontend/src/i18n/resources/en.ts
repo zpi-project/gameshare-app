@@ -48,6 +48,9 @@ export default {
   welcomeDescription:
     "We're thrilled to have you on board. To enhance your gaming experience, please take a moment to provide us with some essential personal information. Let's get started!",
 
+  userGames: "Games of user",
+  myGames: "My games",
+  addGameInstance: "Add your game",
   popularNow: "Popular now",
   seeAll: "See all",
   popularGamesErrorTitle: "We couldn't load popular games.",
@@ -60,4 +63,16 @@ export default {
   categoryError: "There was a problem fetching this category.",
   gameError: "There was a problem fetching this game.",
   usersWithThisGame: "Users with this game",
+  noGamesMyPage: "You don't have any games yet",
+  noGamesUserPage: "This user doesn't have any games yet",
+  errorFetchingGames: "There was an error etching games",
+
+  typeToSearch: "Type to search...",
+  category: "Category",
+  all: "All",
+  pricePerDay: "Price per day",
+  players: "Players",
+  age: "Age",
+  perDay: "day",
+  deactivated: "DEACTIVATED",
 };

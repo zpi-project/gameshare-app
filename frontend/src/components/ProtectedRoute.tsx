@@ -4,10 +4,10 @@ import { useRecoilValue } from "recoil";
 import { isRoleFetchedState } from "@/state/isRoleFetched";
 import { roleState } from "@/state/role";
 import { URLS } from "@/constants/urls";
-import { Role } from "@/types/Role";
+import { RoleType } from "@/types/Role";
 
 interface ProtectedRouteProps {
-  allowedRoles: Role[];
+  allowedRoles: RoleType[];
 }
 
 const ProtectedRoute: FC<ProtectedRouteProps> = ({ allowedRoles }) => {
