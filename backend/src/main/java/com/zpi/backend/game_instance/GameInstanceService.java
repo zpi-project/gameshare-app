@@ -129,7 +129,7 @@ public class GameInstanceService {
 
     // TODO - change endpoint results
     public ResultsDTO<SearchGameInstanceDTO> getGameInstances(Authentication authentication, int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
-                                                              Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, double latitude,
+                                                              Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, Optional<String> userUUID, double latitude,
                                                               double longitude) throws CategoryDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
@@ -139,7 +139,7 @@ public class GameInstanceService {
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
                 searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null),
-                maxPricePerDay.orElse(null), latitude, longitude
+                maxPricePerDay.orElse(null), userUUID.orElse(null), latitude, longitude
         );
         Specification<GameInstance> spec = new GameInstanceSpecification(gameInstanceSearch);
         Page<GameInstance> gameInstancesPage = gameInstanceRepository.findAll(spec, pageable);
