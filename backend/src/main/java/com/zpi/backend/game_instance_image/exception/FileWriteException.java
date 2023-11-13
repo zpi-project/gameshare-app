@@ -1,4 +1,4 @@
-package com.zpi.backend.exception_handlers;
+package com.zpi.backend.game_instance_image.exception;
 
 import lombok.Data;
 

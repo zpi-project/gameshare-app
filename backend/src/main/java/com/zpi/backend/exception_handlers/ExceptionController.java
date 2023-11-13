@@ -8,7 +8,10 @@ import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
 import com.zpi.backend.game.exception.GameAlreadyExistsException;
 import com.zpi.backend.game.exception.GameAlreadyRejectedException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
-import com.zpi.backend.game_instance_image.GameInstanceImageDoesNotExistException;
+import com.zpi.backend.game_instance_image.exception.GCPFileUploadException;
+import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
+import com.zpi.backend.game_instance_image.exception.FileWriteException;
+import com.zpi.backend.game_instance_image.exception.InvalidFileTypeException;
 import com.zpi.backend.game_instance_opinion.exception.GameInstanceOpinionDoesNotExistException;
 import com.zpi.backend.user.exception.UndefinedUserException;
 import com.zpi.backend.user.exception.UserAlreadyExistsException;
@@ -217,20 +220,6 @@ public class ExceptionController {
                         .withDetail(ex.getMessage()));
     }
 
-    // Game Instance Image
-    @ResponseBody
-    @ExceptionHandler(GameInstanceImageDoesNotExistException.class)
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    ResponseEntity GIINEHandler(GameInstanceImageDoesNotExistException ex) {
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
-                .body(Problem.create()
-                        .withStatus(HttpStatus.NOT_FOUND)
-                        .withTitle(ex.getClass().getSimpleName())
-                        .withDetail(ex.getMessage()));
-    }
-
     // User Opinion
     @ResponseBody
     @ExceptionHandler(EditSomeoneElseOpinionException.class)
@@ -283,6 +272,20 @@ public class ExceptionController {
                         .withStatus(HttpStatus.NOT_FOUND)
                         .withTitle(HttpStatus.NOT_FOUND.name())
                         .withDetail(ex.getClass().getSimpleName()));
+    }
+
+    // Game Instance Image
+    @ResponseBody
+    @ExceptionHandler(GameInstanceImageDoesNotExistException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity GIINEHandler(GameInstanceImageDoesNotExistException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
     }
 
     // Uploading photos

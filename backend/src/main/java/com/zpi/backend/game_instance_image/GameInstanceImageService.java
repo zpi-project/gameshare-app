@@ -5,6 +5,8 @@ import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstanceRepository;
+import com.zpi.backend.game_instance_image.exception.GCPFileUploadException;
+import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
 import com.zpi.backend.user.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
