@@ -2,11 +2,11 @@ package com.zpi.backend.user;
 
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.role.RoleRepository;
-import com.zpi.backend.user.Dto.UpdateUserDTO;
-import com.zpi.backend.user.Dto.UserDTO;
-import com.zpi.backend.user.Dto.UserGuestDTO;
-import com.zpi.backend.user.Exception.UserAlreadyExistsException;
-import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user.dto.UpdateUserDTO;
+import com.zpi.backend.user.dto.UserDTO;
+import com.zpi.backend.user.dto.UserGuestDTO;
+import com.zpi.backend.user.exception.UserAlreadyExistsException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;

@@ -1,14 +1,13 @@
 package com.zpi.backend.role;
 
 import com.zpi.backend.user.User;
-import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
-//TODO make it only for admin user
 @RequiredArgsConstructor
 public class RoleService {
     private final RoleRepository roleRepository;

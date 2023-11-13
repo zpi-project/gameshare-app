@@ -1,14 +1,14 @@
 package com.zpi.backend.game_instance;
 
-import com.zpi.backend.category.Exception.CategoryDoesNotExistException;
+import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game.Exception.GameDoesNotExistException;
-import com.zpi.backend.game_instance.Dto.*;
-import com.zpi.backend.game_instance.Exception.GameInstanceDoesNotExistException;
-import com.zpi.backend.game_instance.Exception.GameInstanceStatusException;
+import com.zpi.backend.game.exception.GameDoesNotExistException;
+import com.zpi.backend.game_instance.dto.*;
+import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.user.User;
-import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -146,9 +146,10 @@ public class GameInstanceController {
     @RequestMapping(method = GET, value="/search")
     public ResponseEntity<ResultsDTO<SearchGameInstanceDTO>>  getGameInstances(Authentication authentication, @RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
                                                                                @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber, @RequestParam Optional<Integer> maxPricePerDay,
-                                                                               @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page) throws CategoryDoesNotExistException {
+                                                                               @RequestParam Optional<String> userUUID, @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page)
+            throws CategoryDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getGameInstances(authentication, size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, latitude, longitude));
+                .body(gameInstanceService.getGameInstances(authentication, size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, userUUID, latitude, longitude));
     }
 
 }
