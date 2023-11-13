@@ -11,6 +11,7 @@ public class SearchGameInstanceDTO extends GameInstanceDTO {
     private UserGuestDTO owner;
 
     public SearchGameInstanceDTO(GameInstance gameInstance, boolean isGuest){
+        super(gameInstance);
         if (isGuest)
             owner = new UserGuestDTO(gameInstance.getOwner());
         else
