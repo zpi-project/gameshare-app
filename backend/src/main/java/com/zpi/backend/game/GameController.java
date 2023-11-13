@@ -11,6 +11,9 @@ import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
 import com.zpi.backend.game.exception.GameAlreadyExistsException;
 import com.zpi.backend.game.exception.GameAlreadyRejectedException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
+import com.zpi.backend.game_instance.GameInstance;
+import com.zpi.backend.game_instance.GameInstanceService;
+import com.zpi.backend.game_instance.dto.GameInstanceDetailsDTO;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
@@ -29,6 +32,7 @@ import java.util.Optional;
 @RequestMapping("/games")
 public class GameController {
     GameService gameService;
+    GameInstanceService gameInstanceService;
 
     @Operation(
             summary = "Add a new game",
@@ -112,12 +116,12 @@ public class GameController {
             description = "Returns paginated user data along with their rating based on User Opinions and their Game Instance rating from database. [Note: Calculating game instance opinions is NOT IMPLEMENTED yet]."
     )
     @GetMapping(value = "/{gameId}/users")
-    public ResponseEntity<ResultsDTO<UserWithGameOpinionDTO>> getUsersAndGameInstancesWithGame(
+    public ResponseEntity<ResultsDTO<GameInstanceDetailsDTO>> getUsersAndGameInstancesWithGame(
             @PathVariable long gameId, @RequestParam double latitude, @RequestParam double longitude,
             @RequestParam int page, @RequestParam int size) {
         System.out.println("... called getUsersAndGameInstancesWithGame");
-        ResultsDTO<UserWithGameOpinionDTO> userWithGames =
-                gameService.getUsersAndGameInstancesWithGame(gameId, latitude, longitude, page, size);
+        ResultsDTO<GameInstanceDetailsDTO> userWithGames =
+                gameInstanceService.getGameInstancesToOpinions(gameId, latitude, longitude, page, size);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userWithGames);
     }

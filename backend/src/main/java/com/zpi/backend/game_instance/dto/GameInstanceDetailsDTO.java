@@ -15,6 +15,7 @@ public class GameInstanceDetailsDTO extends GameInstanceDTO {
     private UserGuestDTO owner;
 
     public GameInstanceDetailsDTO(GameInstance gameInstance, boolean isGuest){
+        super(gameInstance);
         gameInstanceImage = gameInstance.getImages()
                 .stream().map(this::convertToLinkDTO)
                 .toList();

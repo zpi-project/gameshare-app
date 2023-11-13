@@ -173,4 +173,17 @@ public class GameInstanceService {
     public void updateAvgRating(long gameInstanceId){
         gameInstanceRepository.updateAvgRating(gameInstanceId);
     }
+
+    public ResultsDTO<GameInstanceDetailsDTO> getGameInstancesToOpinions(long gameId, double latitude, double longitude,
+                                                                               int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        GameInstanceOpinionSearch gameInstanceOpinionSearch = new GameInstanceOpinionSearch(gameId, latitude, longitude);
+        Specification<GameInstance> spec = new GameInstanceOpinionsSpecification(gameInstanceOpinionSearch);
+        Page<GameInstance> gameInstancePage = gameInstanceRepository.findAll(spec, pageable);
+        List<GameInstanceDetailsDTO> gameInstanceDetailsDTOList = new ArrayList<>();
+        gameInstancePage
+                .forEach(gameInstance -> gameInstanceDetailsDTOList.add(new GameInstanceDetailsDTO(gameInstance, true)));
+        return new ResultsDTO<>(gameInstanceDetailsDTOList,
+                new Pagination(gameInstancePage.getTotalElements(), gameInstancePage.getTotalPages()));
+    }
 }
