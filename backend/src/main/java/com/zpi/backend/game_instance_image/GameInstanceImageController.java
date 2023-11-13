@@ -23,7 +23,7 @@ public class GameInstanceImageController {
     GameInstanceImageService gameInstanceImageService;
 
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/{gameInstanceUUID}", method = POST, consumes = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    @RequestMapping(value = "/{gameInstanceUUID}", method = POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity addImageToGameInstance(Authentication authentication, @PathVariable String gameInstanceUUID,
                                                  @RequestParam("file") MultipartFile newFile) throws GameInstanceDoesNotExistException, BadRequestException {
         gameInstanceImageService.addImageToGameInstance(authentication, gameInstanceUUID, newFile);
