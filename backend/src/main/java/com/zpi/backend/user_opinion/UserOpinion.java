@@ -1,8 +1,8 @@
 package com.zpi.backend.user_opinion;
 
 import com.zpi.backend.user.User;
-import com.zpi.backend.user_opinion.Dto.ModifiedUserOpinionDTO;
-import com.zpi.backend.user_opinion.Dto.NewUserOpinionDTO;
+import com.zpi.backend.user_opinion.dto.ModifiedUserOpinionDTO;
+import com.zpi.backend.user_opinion.dto.NewUserOpinionDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Date;
