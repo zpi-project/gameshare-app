@@ -31,11 +31,7 @@ const Star: FC<StarProps> = ({ filled, variant = "primary", size }) => {
       size={size}
       color={variant == "primary" ? "hsl(var(--primary))" : "hsl(var(--secondary))"}
       fill={
-        filled
-          ? variant == "primary"
-            ? "hsl(var(--primary))"
-            : "hsl(var(--secondary))"
-          : "none"
+        filled ? (variant == "primary" ? "hsl(var(--primary))" : "hsl(var(--secondary))") : "none"
       }
       className="transition-all duration-200"
     />

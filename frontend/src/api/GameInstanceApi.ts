@@ -3,7 +3,6 @@ import { GameInstanceSearchParams, SearchGameInstance } from "@/types/GameInstan
 import { Paginated } from "@/types/Paginated";
 import Api from "./Api";
 
-
 export class GameInstanceApi {
   static async getAllByUUID(uuid: string, page: number, size: number) {
     const { data: instances } = await Api.get<Paginated<GameInstance>>(

@@ -2,7 +2,6 @@ import { Game } from "./Game";
 import { Image } from "./Image";
 import { User } from "./User";
 
-
 export interface GameInstance {
   uuid: string;
   description: string;

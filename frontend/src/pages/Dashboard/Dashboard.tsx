@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { FC, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useRecoilState } from "recoil";
 import { locationState } from "@/state/location";
 import { GameInstanceSearchParams } from "@/types/GameInstance";
@@ -7,6 +8,8 @@ import { User } from "@/types/User";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { Map, LocationButton, LocationMarker } from "@/components/Map";
 import UserMarker from "@/components/Map/UserMarker";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import GamesResults from "./GamesResults";
 import GamesSearch from "./GamesSearch";
 import UserFilter from "./UserFilter";
@@ -50,11 +53,12 @@ const DEFAULT_SEARCH_PARAMS: GameInstanceSearchParams = {
   searchName: "",
 };
 
-//TODO: fetch users when endpoint added, 
-// load games on scroll
+//TODO: fetch users when endpoint added,
 // load more users on interval
 // filter games by user when endpoint fixed
 // remove users above
+
+const GAMES_PAGE_SIZE = 4;
 
 const Dashboard: FC = () => {
   const [location, setLocation] = useRecoilState(locationState);
@@ -62,16 +66,36 @@ const Dashboard: FC = () => {
   const [userParam, setUserParam] = useState<User | null>(null);
   const [hoveredUserUUID, setHoveredUserUUID] = useState("");
   const [latitude, longitude] = location as number[];
+  const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
 
-  console.log(hoveredUserUUID);
   const {
     data: gameInstances,
     isLoading,
     isError,
-  } = useQuery({
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
     queryKey: ["game-instances", searchParams],
-    queryFn: () => GameInstanceApi.search(latitude, longitude, 0, 15, searchParams),
+    queryFn: ({ pageParam = 0 }) =>
+      GameInstanceApi.search(
+        latitude,
+        longitude,
+        pageParam as number,
+        GAMES_PAGE_SIZE,
+        searchParams,
+      ),
+    getNextPageParam: (_, pages) => {
+      const newPageParam = pages.length;
+      return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
+    },
   });
+
+  useEffect(() => {
+    if (entry?.isIntersecting && !isLoading) {
+      void fetchNextPage();
+    }
+  }, [entry?.isIntersecting, fetchNextPage, isLoading]);
 
   return (
     <div className="flex h-full w-full flex-row gap-6">
@@ -81,7 +105,12 @@ const Dashboard: FC = () => {
           <LocationMarker />
           <>
             {USERS.map(user => (
-              <UserMarker user={user} key={user.uuid} onClick={setUserParam} active={user.uuid === hoveredUserUUID} />
+              <UserMarker
+                user={user}
+                key={user.uuid}
+                onClick={setUserParam}
+                active={user.uuid === hoveredUserUUID}
+              />
             ))}
           </>
         </Map>
@@ -89,7 +118,18 @@ const Dashboard: FC = () => {
       <div className="flex w-[700px] flex-col gap-4 rounded-lg bg-section p-4">
         <GamesSearch onSubmit={setSearchParams} />
         {userParam && <UserFilter user={userParam} />}
-        <GamesResults gameInstances={gameInstances} isLoading={isLoading} isError={isError} setActive={setHoveredUserUUID} />
+        <ScrollArea>
+          <GamesResults
+            gameInstances={
+              gameInstances ? gameInstances.pages.flatMap(page => page.results) : undefined
+            }
+            isLoading={isLoading}
+            isFetchingNextPage={isFetchingNextPage}
+            isError={isError}
+            setActive={setHoveredUserUUID}
+          />
+          {hasNextPage && <div ref={ref} data-test="scroller-trigger" />}
+        </ScrollArea>
       </div>
     </div>
   );
