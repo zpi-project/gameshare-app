@@ -1,17 +1,17 @@
 package com.zpi.backend.game;
 
-import com.zpi.backend.category.Exception.CategoryDoesNotExistException;
+import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Amount;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game.Dto.GameDTO;
-import com.zpi.backend.game.Dto.NewGameDTO;
-import com.zpi.backend.game.Dto.UserWithGameOpinionDTO;
-import com.zpi.backend.game.Exception.GameAlreadyAcceptedException;
-import com.zpi.backend.game.Exception.GameAlreadyExistsException;
-import com.zpi.backend.game.Exception.GameAlreadyRejectedException;
-import com.zpi.backend.game.Exception.GameDoesNotExistException;
-import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.game.dto.GameDTO;
+import com.zpi.backend.game.dto.NewGameDTO;
+import com.zpi.backend.game.dto.UserWithGameOpinionDTO;
+import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
+import com.zpi.backend.game.exception.GameAlreadyExistsException;
+import com.zpi.backend.game.exception.GameAlreadyRejectedException;
+import com.zpi.backend.game.exception.GameDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

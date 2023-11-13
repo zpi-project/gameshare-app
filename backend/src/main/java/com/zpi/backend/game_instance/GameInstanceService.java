@@ -1,20 +1,20 @@
 package com.zpi.backend.game_instance;
 
 import com.zpi.backend.category.Category;
-import com.zpi.backend.category.Exception.CategoryDoesNotExistException;
+import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.category.CategoryService;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game.Game;
-import com.zpi.backend.game.Exception.GameDoesNotExistException;
+import com.zpi.backend.game.exception.GameDoesNotExistException;
 import com.zpi.backend.game.GameService;
-import com.zpi.backend.game_instance.Dto.*;
-import com.zpi.backend.game_instance.Exception.GameInstanceDoesNotExistException;
-import com.zpi.backend.game_instance.Exception.GameInstanceStatusException;
+import com.zpi.backend.game_instance.dto.*;
+import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
 import com.zpi.backend.user.User;
-import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
