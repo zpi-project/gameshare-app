@@ -13,8 +13,8 @@ import { Button } from "./ui/button";
 
 interface Props {
   owner?: User;
-  showButtons: boolean;
-  isMyPage: boolean;
+  showButtons?: boolean;
+  isMyPage?: boolean;
 }
 
 const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
@@ -38,14 +38,14 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
       {owner && (
         <>
           <div className="flex h-full w-full flex-col gap-4">
-            <div className="h-max w-full flex-grow rounded-lg bg-card p-5 text-2xl">
+            <div className="h-max w-full flex-grow rounded-lg bg-card p-2 xl:p-5 xl:text-2xl">
               {isMyPage ? t("myGames") : `${t("userGames")} ${getName(owner)}`}
             </div>
             <div className="flex flex-row gap-2">
               <div className="relative flex-grow">
                 <Input
                   className="flex-grow rounded-lg border-none bg-card"
-                  placeholder="Type to search..."
+                  placeholder={t("typeToSearch")}
                   onChange={event => setQuery(event.target.value)}
                 />
                 <Search className="absolute right-4 top-2" />

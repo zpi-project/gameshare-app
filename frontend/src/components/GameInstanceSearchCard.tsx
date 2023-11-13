@@ -14,7 +14,8 @@ const GameInstanceSearchCard: FC<GameInstanceSearchCardProps> = ({
   gameInstance: {
     uuid,
     pricePerDay,
-    game: { name, image, minPlayers, maxPlayers, age, playingTime, shortDescription },
+    description,
+    game: { name, image, minPlayers, maxPlayers, age, playingTime },
     avgRating,
     owner: { uuid: ownerUUID },
   },
@@ -43,7 +44,7 @@ const GameInstanceSearchCard: FC<GameInstanceSearchCardProps> = ({
             <AgeBadge age={age} />
           </div>
         </div>
-        <p className="line-clamp-2 text-sm italic">{shortDescription}</p>
+        <p className="line-clamp-2 text-sm italic">{description}</p>
       </section>
     </Link>
   );

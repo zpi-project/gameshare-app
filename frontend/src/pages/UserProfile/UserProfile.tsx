@@ -30,19 +30,17 @@ const UserProfile: FC = () => {
   });
 
   return (
-    <div className="flex h-full flex-row gap-6">
-      <div className="flex w-1/2 flex-col items-stretch gap-6 rounded-lg">
-        <div className="flex-grow rounded-lg bg-section p-4">
-          <UserDetails user={user} showEdit={false} isLoading={isLoading} />
+    <div className="flex h-full w-full flex-col gap-2 overflow-hidden xl:h-full xl:flex-row xl:gap-6">
+      <div className="flex flex-grow flex-col gap-2 rounded-lg xl:h-full xl:w-1/2 xl:gap-6">
+        <div className="h-[200px] rounded-lg bg-section p-4 xl:h-[365px]">
+          <UserDetails user={user} isLoading={isLoading} />
         </div>
-        <div className="flex h-3/5 flex-col gap-2 rounded-lg bg-section p-2">
+        <div className="flex max-h-[150px] rounded-lg  bg-section xl:h-[calc(100%-389px)] xl:max-h-[calc(100%-389px)]">
           <Opinions />
         </div>
       </div>
-      <div className="w-1/2 flex-grow rounded-lg bg-section p-4">
-        <div className="flex h-full rounded-lg bg-section">
-          <GameInstancesSection owner={user} showButtons={false} isMyPage={false} />
-        </div>
+      <div className="h-[calc(100%-350px)] flex-grow rounded-lg bg-section p-4 xl:h-full xl:w-1/2">
+        <GameInstancesSection owner={user} />
       </div>
     </div>
   );

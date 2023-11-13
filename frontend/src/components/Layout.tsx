@@ -71,7 +71,7 @@ const Layout: FC = () => {
   return (
     <div className=" flex h-screen w-screen flex-row gap-6 p-6">
       <SideNav />
-      <div className="h-[caclc(100vh-48px)] w-[calc(100vw-140px)]">
+      <div className="h-[calc(100vh-48px)] w-[calc(100vw-140px)]">
         <RegisterUserForm onRegisterSuccess={() => void refetch()} />
         <Outlet />
       </div>
