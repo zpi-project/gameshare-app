@@ -8,7 +8,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
-//TODO make it only for admin user
 @RequiredArgsConstructor
 public class RoleService {
     private final RoleRepository roleRepository;

@@ -127,7 +127,6 @@ public class GameInstanceService {
         return getUserGameInstances(user.getUuid(),searchName, size, page, true);
     }
 
-    // TODO - change endpoint results
     public ResultsDTO<SearchGameInstanceDTO> getGameInstances(Authentication authentication, int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
                                                               Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, Optional<String> userUUID, double latitude,
                                                               double longitude) throws CategoryDoesNotExistException {
@@ -152,23 +151,6 @@ public class GameInstanceService {
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }
 
-    // Not used, but not removed, because who knows what is going to change xd
-    private List<UserWithGameInstancesDTO> convertToUserWithGameInstancesDTO(List<GameInstance> gameInstanceList){
-        List<UserWithGameInstancesDTO> resultList = new ArrayList<>();
-        for (GameInstance g: gameInstanceList){
-            boolean isInList=false;
-            for (UserWithGameInstancesDTO u: resultList){
-                if (u.getOwner().getUuid().equals(g.getOwner().getUuid())){
-                    isInList = true;
-                    u.addGameInstance(g);
-                }
-            }
-            if (!isInList){
-                resultList.add(new UserWithGameInstancesDTO(g));
-            }
-        }
-        return resultList;
-    }
 
     public void updateAvgRating(long gameInstanceId){
         gameInstanceRepository.updateAvgRating(gameInstanceId);
