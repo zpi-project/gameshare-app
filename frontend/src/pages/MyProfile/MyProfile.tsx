@@ -26,7 +26,7 @@ const MyProfile: FC = () => {
       navigate(URLS.DASHBOARD);
     },
   });
-  console.log({user})
+  console.log({ user });
 
   return (
     <div className="flex h-full flex-row gap-6">
@@ -34,7 +34,7 @@ const MyProfile: FC = () => {
         <div className="h-2/5 rounded-lg bg-section p-4">
           <UserDetails user={user} showEdit={true} isLoading={isLoading} />
         </div>
-        <div className="flex h-3/5 rounded-lg bg-section">
+        <div className="flex h-3/5 w-full rounded-lg bg-section">
           <Opinions />
         </div>
       </div>
