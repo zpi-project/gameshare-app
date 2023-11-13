@@ -9,7 +9,6 @@ import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { Map, LocationButton, LocationMarker } from "@/components/Map";
 import UserMarker from "@/components/Map/UserMarker";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Skeleton } from "@/components/ui/skeleton";
 import GamesResults from "./GamesResults";
 import GamesSearch from "./GamesSearch";
 import UserFilter from "./UserFilter";
