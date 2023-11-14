@@ -1,6 +1,5 @@
 package com.zpi.backend.game_instance;
 
-import com.google.rpc.context.AttributeContext;
 import com.zpi.backend.category.Category;
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.category.CategoryService;
@@ -15,7 +14,6 @@ import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
 import com.zpi.backend.game_instance_image.GameInstanceImageService;
-import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;

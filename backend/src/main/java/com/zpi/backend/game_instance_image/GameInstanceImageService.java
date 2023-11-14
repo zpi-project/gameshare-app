@@ -33,7 +33,6 @@ public class GameInstanceImageService {
     GameInstanceRepository gameInstanceRepository;
     DataBucketUtil dataBucketUtil;
 
-//    TODO implement addImageToGameInstance endpoint
     public FileDTO addImageToGameInstance(Authentication authentication, String gameInstanceUUID,
                                           MultipartFile multipartFile) throws GameInstanceDoesNotExistException, BadRequestException, TooManyImagesException, IllegalFileTypeException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();

@@ -65,7 +65,7 @@ public class GameInstanceController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{uuid}", method = DELETE)
     public ResponseEntity deleteGameInstance(@PathVariable String uuid, Authentication authentication)
-            throws GameInstanceDoesNotExistException, GameInstanceImageDoesNotExistException {
+            throws GameInstanceDoesNotExistException {
         gameInstanceService.deleteGameInstance(uuid, authentication);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
