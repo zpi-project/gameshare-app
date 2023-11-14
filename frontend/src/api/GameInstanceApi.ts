@@ -25,6 +25,7 @@ export class GameInstanceApi {
     page: number,
     size: number,
     searchParams: GameInstanceSearchParams,
+    userUUID?: string,
   ) {
     const { data: gameInstances } = await Api.get<Paginated<SearchGameInstance>>(
       "/game-instances/search",
@@ -35,6 +36,7 @@ export class GameInstanceApi {
           page,
           size,
           ...searchParams,
+          userUUID,
         },
       },
     );

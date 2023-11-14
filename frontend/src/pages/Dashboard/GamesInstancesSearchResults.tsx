@@ -33,14 +33,17 @@ const GameInstancesSearchResults: FC<GamesResultsProps> = ({
         <h3 className="mt-2 text-center text-xl text-destructive">{t("errorFetchingGames")}</h3>
       ) : (
         <>
-          {gameInstances &&
+          {gameInstances && gameInstances.length ? (
             gameInstances.map(gameInstance => (
               <GameInstanceSearchCard
                 gameInstance={gameInstance}
                 key={gameInstance.uuid}
                 setActive={setActive}
               />
-            ))}
+            ))
+          ) : (
+            <h4 className="mt-2 text-center text-xl">{t("noGameInstances")}</h4>
+          )}
         </>
       )}
       {isFetchingNextPage && <Skeleton className="h-[152px] rounded-lg" />}
