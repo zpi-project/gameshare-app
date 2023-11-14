@@ -3,6 +3,7 @@ package com.zpi.backend.user_opinion;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
+import com.zpi.backend.interfaces.UserOpinionServiceInterface;
 import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.reservations.ReservationService;
 import com.zpi.backend.user.User;
@@ -26,11 +27,12 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserOpinionService {
+public class UserOpinionService implements UserOpinionServiceInterface {
 
     UserOpinionRepository userOpinionRepository;
     UserService userService;
     ReservationService reservationService;
+
     public ResultsDTO<UserOpinionDTO> getMyOpinions(Authentication authentication, int page, int size) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
         boolean isGuest = !authentication.isAuthenticated();
@@ -42,11 +44,16 @@ public class UserOpinionService {
         return new ResultsDTO<>(userOpinionDTOList, new Pagination(userOpinionPage.getTotalElements(), userOpinionPage.getTotalPages()));
     }
 
+    public boolean checkIfCanAddOpinion(Reservation reservation, User ratedUser){
+        return userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation,ratedUser).isEmpty();
+    }
     public UserOpinionDTO addOpinion(Authentication authentication, NewUserOpinionDTO newUserOpinionDTO) throws BadRequestException, UserDoesNotExistException {
         newUserOpinionDTO.validate();
         User user = userService.getUser(authentication);
         User ratedUser = userService.getUserByUUID(newUserOpinionDTO.getRatedUserUUID());
         Reservation reservation = reservationService.getReservationByUUID(newUserOpinionDTO.getReservationUUID());
+        if(!checkIfCanAddOpinion(reservation,ratedUser))
+            throw new BadRequestException("User already rated this reservation");
         UserOpinion userOpinion = newUserOpinionDTO.toUserOpinion(user, ratedUser);
         userOpinion.setReservation(reservation);
         boolean isGuest = !authentication.isAuthenticated();

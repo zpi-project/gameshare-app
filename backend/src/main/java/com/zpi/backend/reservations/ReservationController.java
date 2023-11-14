@@ -2,10 +2,10 @@ package com.zpi.backend.reservations;
 
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game_instance.Exception.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.reservations.DTO.NewReservationDTO;
 import com.zpi.backend.reservations.DTO.ReservationDetailDTO;
-import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -43,27 +43,13 @@ public class ReservationController {
     )
     @GetMapping("/reservations")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity getReservations(Authentication authentication, @RequestParam Boolean asOwner
+    public ResponseEntity getReservations(Authentication authentication,@RequestParam String status, @RequestParam Boolean asOwner
             ,@RequestParam int page,@RequestParam int size) throws UserDoesNotExistException {
-        ResultsDTO<Reservation> reservations = reservationService.getMyReservations(authentication,asOwner,page,size);
+        ResultsDTO<Reservation> reservations = reservationService.getMyReservations(authentication,status,asOwner,page,size);
         return ResponseEntity.ok().body(reservations);
     }
 
-    @Operation(
-            summary = "Get history of user reservations",
-            description = "Gets history of user reservations. " +
-                    "The User who invokes this endpoint can be either the renter or the owner of the reservations."+
-                    "If asOwner is true, the user is the owner of the reservations, otherwise the user is the renter" +
-                    " of the reservations."+
-                    "Historical reservations are reservations with status equal to 'Finished' or 'Expired'"
-    )
-    @GetMapping("/reservations/history")
-    @PreAuthorize("isAuthenticated()")
-    public ResponseEntity getReservationsHistory(Authentication authentication, @RequestParam Boolean asOwner
-            ,@RequestParam int page,@RequestParam int size) throws UserDoesNotExistException {
-        ResultsDTO<Reservation> reservations = reservationService.getMyReservationsHistory(authentication,asOwner,page,size);
-        return ResponseEntity.ok().body(reservations);
-    }
+
 
     @Operation(
             summary = "Get reservations by game instance",

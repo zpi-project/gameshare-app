@@ -62,6 +62,7 @@ public class GameInstanceService {
     //TODO Implementation of checking reservation, what about status?
     public void deleteGameInstance(String uuid, String googleId) throws GameInstanceDoesNotExistException {
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(uuid, googleId);
+        //TODO Check if there is no reservation with status in progress or smth
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");
         gameInstanceRepository.delete(gameInstanceOptional.get());

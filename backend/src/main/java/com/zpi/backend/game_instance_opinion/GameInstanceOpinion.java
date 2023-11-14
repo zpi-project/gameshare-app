@@ -3,6 +3,7 @@ package com.zpi.backend.game_instance_opinion;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance_opinion.dto.NewGameInstanceOpinionDTO;
 import com.zpi.backend.game_instance_opinion.dto.UpdatedGameInstanceOpinionDTO;
+import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,8 +34,8 @@ public class GameInstanceOpinion {
 
     private Date timestamp;
 
-    // TODO Add reservation
-//    private Reservation reservation;
+    @ManyToOne
+    private Reservation reservation;
 
     public GameInstanceOpinion(User user, GameInstance gameInstance, NewGameInstanceOpinionDTO newGameInstanceOpinionDTO) {
         this.ratingUser = user;

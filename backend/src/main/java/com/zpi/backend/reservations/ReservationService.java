@@ -4,14 +4,17 @@ import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstance;
-import com.zpi.backend.game_instance.Exception.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstanceService;
 import com.zpi.backend.game_instance_opinion.GameInstanceOpinionService;
+import com.zpi.backend.interfaces.UserOpinionServiceInterface;
+import com.zpi.backend.reservation_status.ReservationStatus;
 import com.zpi.backend.reservation_status.ReservationStatusRepository;
 import com.zpi.backend.reservations.DTO.*;
 import com.zpi.backend.user.User;
-import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
+import com.zpi.backend.user_opinion.UserOpinionRepository;
 import com.zpi.backend.user_opinion.UserOpinionService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,8 +30,8 @@ public class ReservationService {
     GameInstanceService gameInstanceService;
     ReservationStatusRepository reservationStatusRepository;
     ReservationRepository reservationRepository;
-    UserOpinionService userOpinionService;
     GameInstanceOpinionService gameinstanceOpinionService;
+    UserOpinionRepository userOpinionRepository;
 
 
     public Reservation addReservation(Authentication authentication, NewReservationDTO newReservationDTO) throws UserDoesNotExistException, BadRequestException, GameInstanceDoesNotExistException {
@@ -47,47 +50,28 @@ public class ReservationService {
 
 
 
-    public ResultsDTO<Reservation> getMyReservationsAsOwner(User owner,int page,int size){
+    public ResultsDTO<Reservation> getMyReservationsAsOwner(User owner, ReservationStatus status, int page, int size){
         Pageable pageable = PageRequest.of(page, size);
-        Page<Reservation> reservationPage = reservationRepository.getCurrentReservationsByOwner(pageable, owner.getUuid());
+        Page<Reservation> reservationPage = reservationRepository.getCurrentReservationsByOwner(pageable, owner.getUuid(),status.getStatus());
         return new ResultsDTO<>(reservationPage.stream().toList(), new Pagination(reservationPage.getTotalElements(),reservationPage.getTotalPages()));
     }
 
-    public ResultsDTO<Reservation> getMyReservationsAsRenter(User renter, int page, int size){
+    public ResultsDTO<Reservation> getMyReservationsAsRenter(User renter,ReservationStatus status, int page, int size){
         Pageable pageable = PageRequest.of(page, size);
-        Page<Reservation> reservationPage = reservationRepository.getCurrentReservationsByRenter(pageable, renter.getUuid());
+        Page<Reservation> reservationPage = reservationRepository.getCurrentReservationsByRenter(pageable, renter.getUuid(),status.getStatus());
         return new ResultsDTO<>(reservationPage.stream().toList(), new Pagination(reservationPage.getTotalElements(),reservationPage.getTotalPages()));
     }
 
-    public ResultsDTO<Reservation> getMyReservations(Authentication authentication, Boolean asOwner, int page, int size) throws UserDoesNotExistException {
+    public ResultsDTO<Reservation> getMyReservations(Authentication authentication, String status,Boolean asOwner, int page, int size) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
+        ReservationStatus reservationStatus = reservationStatusRepository.findByStatus(status);
         if(asOwner){
-            return getMyReservationsAsOwner(user,page,size);
+            return getMyReservationsAsOwner(user,reservationStatus,page,size);
         }
-        return getMyReservationsAsRenter(user,page,size);
+        return getMyReservationsAsRenter(user,reservationStatus,page,size);
     }
 
 
-
-    public ResultsDTO<Reservation> getMyReservationsHistoryAsOwner(User owner,int page,int size){
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Reservation> reservationPage = reservationRepository.getReservationsHistoryByOwner(pageable, owner.getUuid());
-        return new ResultsDTO<>(reservationPage.stream().toList(), new Pagination(reservationPage.getTotalElements(),reservationPage.getTotalPages()));
-    }
-
-    public ResultsDTO<Reservation> getMyReservationsHistoryAsRenter(User renter, int page, int size){
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Reservation> reservationPage = reservationRepository.getReservationsHistoryByRenter(pageable, renter.getUuid());
-        return new ResultsDTO<>(reservationPage.stream().toList(), new Pagination(reservationPage.getTotalElements(),reservationPage.getTotalPages()));
-    }
-
-    public ResultsDTO<Reservation> getMyReservationsHistory(Authentication authentication, Boolean asOwner, int page, int size) throws UserDoesNotExistException {
-        User user = userService.getUser(authentication);
-        if(asOwner){
-            return getMyReservationsHistoryAsOwner(user,page,size);
-        }
-        return getMyReservationsHistoryAsRenter(user,page,size);
-    }
 
     public Boolean checkIfUserIsOwner(User user, GameInstance gameInstance){
         return user.getUuid().equals(gameInstance.getOwner().getUuid());
@@ -116,7 +100,7 @@ public class ReservationService {
 
     public ReservationDetailOwnerDTO getReservationOwnerDetails(Reservation reservation){
         User renter = reservation.getRenter();
-        if(userOpinionService.getOpinionsByReservationAndUser(reservation,renter).size()==0) {
+        if(userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation, renter).isEmpty()) {
             return new ReservationDetailOwnerDTO(reservation, true);
         }
         return new ReservationDetailOwnerDTO(reservation, false);
@@ -129,7 +113,7 @@ public class ReservationService {
         }
         User owner = reservation.getGameInstance().getOwner();
         GameInstance gameInstance = reservation.getGameInstance();
-        boolean canAddOwnerOpinion = userOpinionService.getOpinionsByReservationAndUser(reservation, owner).isEmpty();
+        boolean canAddOwnerOpinion = userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation, owner).isEmpty();
         boolean canAddGameInstanceOpinion = gameinstanceOpinionService.getOpinionsByGameInstance(gameInstance).isEmpty();
         return new ReservationDetailRenterDTO(reservation,canAddOwnerOpinion,canAddGameInstanceOpinion);
     }
