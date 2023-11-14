@@ -7,6 +7,7 @@ import com.zpi.backend.game.exception.GameDoesNotExistException;
 import com.zpi.backend.game_instance.dto.*;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
+import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -64,9 +65,8 @@ public class GameInstanceController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{uuid}", method = DELETE)
     public ResponseEntity deleteGameInstance(@PathVariable String uuid, Authentication authentication)
-            throws GameInstanceDoesNotExistException {
-        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
-        gameInstanceService.deleteGameInstance(uuid, googleId);
+            throws GameInstanceDoesNotExistException, GameInstanceImageDoesNotExistException {
+        gameInstanceService.deleteGameInstance(uuid, authentication);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
     }

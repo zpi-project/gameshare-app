@@ -1,5 +1,6 @@
 package com.zpi.backend.game_instance;
 
+import com.google.rpc.context.AttributeContext;
 import com.zpi.backend.category.Category;
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.category.CategoryService;
@@ -13,6 +14,8 @@ import com.zpi.backend.game_instance.dto.*;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
+import com.zpi.backend.game_instance_image.GameInstanceImageService;
+import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
@@ -33,6 +36,7 @@ import java.util.Optional;
 public class GameInstanceService {
     GameInstanceRepository gameInstanceRepository;
     GameInstanceImageRepository gameInstanceImageRepository;
+    GameInstanceImageService gameInstanceImageService;
     UserService userService;
     GameService gameService;
     CategoryService categoryService;
@@ -60,10 +64,12 @@ public class GameInstanceService {
     }
 
     //TODO Implementation of checking reservation, what about status?
-    public void deleteGameInstance(String uuid, String googleId) throws GameInstanceDoesNotExistException {
+    public void deleteGameInstance(String uuid, Authentication authentication) throws GameInstanceDoesNotExistException {
+        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(uuid, googleId);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");
+        gameInstanceImageService.deleteGameInstanceImagesByGameInstance(authentication, gameInstanceOptional.get().getUuid());
         gameInstanceRepository.delete(gameInstanceOptional.get());
     }
 

@@ -62,13 +62,24 @@ public class GameInstanceImageService {
         return inputFile;
     }
 
+    // TODO Delete photos from Google Storage - needed?
     public void deleteGameInstanceImage(Authentication authentication, String gameInstanceImageUUID) throws GameInstanceImageDoesNotExistException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         Optional<GameInstanceImage> gameInstanceImageOptional = gameInstanceImageRepository
                 .findByGameInstanceUuidAndGameInstance_OwnerGoogleId(gameInstanceImageUUID, googleId);
         if (gameInstanceImageOptional.isEmpty())
             throw new GameInstanceImageDoesNotExistException("Game Instance Image (UUID = "+gameInstanceImageUUID+") does not exists or the User is not the Owner.");
-        gameInstanceImageRepository.deleteById(gameInstanceImageOptional.get().getId());
+        gameInstanceImageRepository.delete(gameInstanceImageOptional.get());
+    }
+
+    // TODO Delete photos from Google Storage - needed?
+    public void deleteGameInstanceImagesByGameInstance(Authentication authentication, String gameInstanceUUID) throws GameInstanceDoesNotExistException {
+        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository
+                .findByUuidAndOwner_GoogleId(gameInstanceUUID, googleId);
+        if (gameInstanceOptional.isEmpty())
+            throw new GameInstanceDoesNotExistException("Game Instance (UUID = "+gameInstanceOptional+") does not exists or the User is not the Owner.");
+        gameInstanceImageRepository.deleteAllByGameInstanceUuid(gameInstanceUUID);
     }
 
 }
