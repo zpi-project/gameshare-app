@@ -1,6 +1,5 @@
 package com.zpi.backend.user;
 
-import com.zpi.backend.category.Category;
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance.GameInstanceSearch;
@@ -22,45 +21,51 @@ public class UserSpecification implements Specification<User> {
 
         Join<User, GameInstance> gameInstances = root.join("gameInstances", JoinType.LEFT);
         Join<GameInstance, Game> game = gameInstances.join("game", JoinType.LEFT);
-        Path<Integer> pricePerDay = gameInstances.get("pricePerDay");
-        Path<Integer> minPlayers = game.get("minPlayers");
-        Path<Integer> maxPlayers = game.get("maxPlayers");
-        Path<Integer> age = game.get("age");
-        Path<String> name = game.get("name");
-        Path<List<Category>> categories= game.get("categories");
-        Path<String> userUUID = root.get("uuid");
-        Path<Double> latitude = root.get("locationLatitude");
-        Path<Double> longitude = root.get("locationLongitude");
-
         final List<Predicate> predicates = new ArrayList<>();
+
         if (criteria.getAge() != null) {
-            predicates.add(cb.lessThanOrEqualTo(age, criteria.getAge()));
+            predicates.add(cb.lessThanOrEqualTo(game.get("age"), criteria.getAge()));
         }
+
         if (criteria.getPlayersNumber() != null) {
-            predicates.add(cb.lessThanOrEqualTo(minPlayers, criteria.getPlayersNumber()));
-            predicates.add(cb.greaterThanOrEqualTo(maxPlayers, criteria.getPlayersNumber()));
+            predicates.add(cb.lessThanOrEqualTo(game.get("minPlayers"), criteria.getPlayersNumber()));
+            predicates.add(cb.greaterThanOrEqualTo(game.get("maxPlayers"), criteria.getPlayersNumber()));
         }
+
         if (criteria.getCategory() != null) {
-            predicates.add(cb.isMember(criteria.getCategory(), categories));
+            predicates.add(cb.isMember(criteria.getCategory(), game.get("categories")));
         }
+
         if (criteria.getSearchName() != null) {
             predicates.add(
                     cb.like(
-                            cb.lower(name),
+                            cb.lower(game.get("name")),
                             "%" + criteria.getSearchName().toLowerCase() + "%")
             );
         }
+
         if (criteria.getMaxPricePerDay() != null) {
-            predicates.add(cb.lessThanOrEqualTo(pricePerDay, criteria.getMaxPricePerDay()));
+            predicates.add(cb.lessThanOrEqualTo(gameInstances.get("pricePerDay"), criteria.getMaxPricePerDay()));
         }
+
         if (criteria.getUserUUID() != null) {
-            predicates.add(cb.equal(userUUID, criteria.getUserUUID()));
+            predicates.add(cb.equal(root.get("uuid"), criteria.getUserUUID()));
         }
-        Expression<Double> orderExpression =
-                cb.sqrt(cb.sum(cb.power(cb.diff(latitude, criteria.getLatitude()), 2),
-                        cb.power(cb.diff(longitude, criteria.getLongitude()), 2)));
-        query.orderBy(cb.asc(orderExpression));
-        return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+
+        if (criteria.getLatitude() != null && criteria.getLongitude() != null) {
+            predicates.add(cb.isNotNull(root.get("locationLatitude")));
+            predicates.add(cb.isNotNull(root.get("locationLongitude")));
+            Expression<Double> orderExpression =
+                    cb.sqrt(
+                            cb.sum(
+                                    cb.power(cb.diff(root.get("locationLatitude"), criteria.getLatitude()), 2),
+                                    cb.power(cb.diff(root.get("locationLongitude"), criteria.getLongitude()), 2)
+                            )
+                    );
+            query.orderBy(cb.asc(orderExpression));
+        }
+
+        return cb.and(predicates.toArray(new Predicate[0]));
     }
 }
 

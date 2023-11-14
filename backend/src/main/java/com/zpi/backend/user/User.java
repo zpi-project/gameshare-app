@@ -50,7 +50,7 @@ public class User{
     @ManyToOne
     private Role role;
 
-    @OneToMany
+    @OneToMany(mappedBy = "owner", orphanRemoval = true)
     private List<GameInstance> gameInstances;
 
     public User(String email,String avatarLink,String googleId) {
