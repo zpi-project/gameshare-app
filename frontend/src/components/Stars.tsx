@@ -17,8 +17,6 @@ const Stars: FC<Props> = ({ count, variant = "primary", size = 24 }) => {
   );
 };
 
-export default Stars;
-
 interface StarProps {
   filled: boolean;
   variant?: "primary" | "secondary";
@@ -37,3 +35,5 @@ const Star: FC<StarProps> = ({ filled, variant = "primary", size }) => {
     />
   );
 };
+
+export default Stars;

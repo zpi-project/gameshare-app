@@ -6,12 +6,12 @@ import { locationState } from "@/state/location";
 import { GameInstanceSearchParams } from "@/types/GameInstance";
 import { User } from "@/types/User";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
-import GameInstancesSearchResults from "@/components/GamesInstancesSearchResults";
 import { Map, LocationButton, LocationMarker } from "@/components/Map";
 import UserMarker from "@/components/Map/UserMarker";
+import UserFilter from "@/components/UserFilter";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import GameInstancesSearchResults from "./GamesInstancesSearchResults";
 import GamesSearch from "./GamesSearch";
-import UserFilter from "./UserFilter";
 
 const USERS = [
   {
@@ -57,7 +57,7 @@ const DEFAULT_SEARCH_PARAMS: GameInstanceSearchParams = {
 // filter games by user when endpoint fixed
 // remove users above
 
-const GAMES_PAGE_SIZE = 4;
+const GAMES_PAGE_SIZE = 10;
 
 const Dashboard: FC = () => {
   const [location, setLocation] = useRecoilState(locationState);
@@ -75,7 +75,7 @@ const Dashboard: FC = () => {
     fetchNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["game-instances", searchParams],
+    queryKey: ["search-game-instances", searchParams],
     queryFn: ({ pageParam = 0 }) =>
       GameInstanceApi.search(
         latitude,

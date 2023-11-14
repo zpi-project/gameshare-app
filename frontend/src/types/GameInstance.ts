@@ -12,7 +12,7 @@ export interface GameInstance {
 }
 
 export interface GameInstanceDetails extends GameInstance {
-  images: Image[];
+  gameInstanceImage: Image[];
   owner: User;
 }
 

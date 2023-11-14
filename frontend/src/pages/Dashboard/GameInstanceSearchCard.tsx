@@ -23,7 +23,7 @@ const GameInstanceSearchCard: FC<GameInstanceSearchCardProps> = ({
 }) => {
   return (
     <Link
-      className="flex flex-row gap-2 rounded-lg bg-card p-2 hover:bg-accent"
+      className="flex flex-row gap-4 rounded-lg bg-card p-3 hover:bg-accent"
       to={`${URLS.GAME_INSTANCE}/${uuid}}`}
       onMouseEnter={() => setActive(ownerUUID)}
       onMouseLeave={() => setActive("")}
@@ -44,7 +44,7 @@ const GameInstanceSearchCard: FC<GameInstanceSearchCardProps> = ({
             <AgeBadge age={age} />
           </div>
         </div>
-        <p className="line-clamp-2 text-sm italic">{description}</p>
+        <p className="line-clamp-2 break-all text-sm italic">{description}</p>
       </section>
     </Link>
   );

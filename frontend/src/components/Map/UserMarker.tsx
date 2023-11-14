@@ -14,7 +14,7 @@ interface UserMarkerProps {
 }
 const UserMarker: FC<UserMarkerProps> = ({ user, onClick, active }) => {
   const [isClicked, setIsClicked] = useState(false);
-  console.log(active);
+
   useMapEvents({
     click(e) {
       const mapContainer = e.target._container;
