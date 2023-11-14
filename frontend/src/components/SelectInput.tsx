@@ -21,7 +21,7 @@ interface SelectInputProps {
   options: Option[];
   placeholder: string;
   noResultsInfo: string;
-  onChange: (value: string | number) => void;
+  onChange: (value?: string | number) => void;
   search?: boolean;
   scroll?: boolean;
   width?: string;
@@ -42,6 +42,8 @@ const SelectInput: FC<SelectInputProps> = ({
   useEffect(() => {
     if (value.length) {
       onChange(options.find(option => option.label.toLowerCase() == value)?.value ?? value);
+    } else {
+      onChange();
     }
   }, [value]);
 

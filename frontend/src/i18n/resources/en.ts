@@ -68,6 +68,7 @@ export default {
   noGamesUserPage: "This user doesn't have any games yet",
   errorFetchingGames: "There was an error fetching games",
   deactivated: "DEACTIVATED",
+  noGameInstances: "We couldn't find any games",
 
   typeToSearch: "Type to search...",
   category: "Category",

@@ -53,9 +53,8 @@ const DEFAULT_SEARCH_PARAMS: GameInstanceSearchParams = {
 };
 
 //TODO: fetch users when endpoint added,
-// load more users on interval
-// filter games by user when endpoint fixed
-// remove users above
+// load more users on interval when endpoint added
+// remove users above when endpoint added
 
 const GAMES_PAGE_SIZE = 4;
 
@@ -75,7 +74,7 @@ const Dashboard: FC = () => {
     fetchNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["game-instances", searchParams],
+    queryKey: ["game-instances", searchParams, userParam?.uuid],
     queryFn: ({ pageParam = 0 }) =>
       GameInstanceApi.search(
         latitude,
@@ -83,6 +82,7 @@ const Dashboard: FC = () => {
         pageParam as number,
         GAMES_PAGE_SIZE,
         searchParams,
+        userParam?.uuid,
       ),
     getNextPageParam: (_, pages) => {
       const newPageParam = pages.length;
