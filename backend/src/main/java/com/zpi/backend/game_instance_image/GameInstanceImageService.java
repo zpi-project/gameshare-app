@@ -1,9 +1,11 @@
 package com.zpi.backend.game_instance_image;
 
 import com.zpi.backend.game_instance.GameInstance;
-import com.zpi.backend.game_instance.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstanceRepository;
 
+import com.zpi.backend.game_instance_image.dto.LinkDTO;
+import com.zpi.backend.game_instance_image.dto.NewGameInstanceImageDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -4,10 +4,16 @@ import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.*;
+import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance_opinion.dto.GameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.dto.NewGameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.dto.UpdatedGameInstanceOpinionDTO;
+import com.zpi.backend.game_instance_opinion.exception.GameInstanceOpinionDoesNotExistException;
 import com.zpi.backend.user.User;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
-import com.zpi.backend.user_opinion.*;
+import com.zpi.backend.user_opinion.exception.DeleteSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.exception.EditSomeoneElseOpinionException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,11 +36,12 @@ public class GameInstanceOpinionService {
             throws BadRequestException, UserDoesNotExistException, GameInstanceDoesNotExistException {
         newGameInstanceOpinionDTO.validate();
         User user = userService.getUser(authentication);
+        boolean isGuest = !authentication.isAuthenticated();
         GameInstance gameInstance = gameInstanceService.getGameInstance(newGameInstanceOpinionDTO.getGameInstanceUuid());
         GameInstanceOpinion gameInstanceOpinion = new GameInstanceOpinion(user, gameInstance, newGameInstanceOpinionDTO);
         gameInstanceOpinionRepository.save(gameInstanceOpinion);
         gameInstanceService.updateAvgRating(gameInstance.getId());
-        return new GameInstanceOpinionDTO(gameInstanceOpinion);
+        return new GameInstanceOpinionDTO(gameInstanceOpinion, isGuest);
     }
 
     public GameInstanceOpinionDTO updateOpinion(Authentication authentication,long id, UpdatedGameInstanceOpinionDTO updatedGameInstanceOpinionDTO)
@@ -42,12 +49,13 @@ public class GameInstanceOpinionService {
         updatedGameInstanceOpinionDTO.validate();
         GameInstanceOpinion gameInstanceOpinion = gameInstanceOpinionRepository.findById(id).orElseThrow(() -> new GameInstanceOpinionDoesNotExistException("Opinion does not exist"));
         User user = userService.getUser(authentication);
+        boolean isGuest = !authentication.isAuthenticated();
         if(checkIfNotRatingUsersOpinion(user, gameInstanceOpinion))
             throw new EditSomeoneElseOpinionException("User can edit only his own opinion");
         gameInstanceOpinion.update(updatedGameInstanceOpinionDTO);
         gameInstanceOpinionRepository.save(gameInstanceOpinion);
         gameInstanceService.updateAvgRating(gameInstanceOpinion.getGameInstance().getId());
-        return new GameInstanceOpinionDTO(gameInstanceOpinion);
+        return new GameInstanceOpinionDTO(gameInstanceOpinion, isGuest);
     }
 
     public void deleteOpinion(Authentication authentication, long id) throws DeleteSomeoneElseOpinionException, UserDoesNotExistException, GameInstanceOpinionDoesNotExistException {
@@ -60,9 +68,10 @@ public class GameInstanceOpinionService {
         gameInstanceService.updateAvgRating(gameInstanceId);
     }
 
-    public ResultsDTO<GameInstanceOpinionDTO> getOpinions(String gameInstanceUuid, int page, int size) throws GameInstanceDoesNotExistException {
+    public ResultsDTO<GameInstanceOpinionDTO> getOpinions(Authentication authentication, String gameInstanceUuid, int page, int size) throws GameInstanceDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size,
                 Sort.by(Sort.Direction.DESC, "timestamp"));
+        boolean isGuest = authentication == null || !authentication.isAuthenticated();
         Page<GameInstanceOpinion> gameInstanceOpinionPage;
         gameInstanceOpinionPage = gameInstanceOpinionRepository.getGameInstanceOpinionsByGameInstance(
                 gameInstanceService.getGameInstance(gameInstanceUuid), pageable);
@@ -70,7 +79,7 @@ public class GameInstanceOpinionService {
         gameInstanceOpinionPage
                 .stream().toList()
                 .forEach(gameInstanceOpinion -> resultsList.add(
-                        new GameInstanceOpinionDTO(gameInstanceOpinion)));
+                        new GameInstanceOpinionDTO(gameInstanceOpinion, isGuest)));
         return new ResultsDTO<>(resultsList,
                 new Pagination(gameInstanceOpinionPage.getTotalElements(), gameInstanceOpinionPage.getTotalPages()));
     }

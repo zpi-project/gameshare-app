@@ -3,7 +3,13 @@ package com.zpi.backend.user_opinion;
 
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
+import com.zpi.backend.user_opinion.dto.ModifiedUserOpinionDTO;
+import com.zpi.backend.user_opinion.dto.NewUserOpinionDTO;
+import com.zpi.backend.user_opinion.dto.UserOpinionDTO;
+import com.zpi.backend.user_opinion.exception.DeleteSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.exception.EditSomeoneElseOpinionException;
+import com.zpi.backend.user_opinion.exception.UserOpinionDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,7 +31,7 @@ public class UserOpinionController {
     )
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/user/opinions")
-    public ResponseEntity<ResultsDTO<ReturnUserOpinionDTO>> getMyOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+    public ResponseEntity<ResultsDTO<UserOpinionDTO>> getMyOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
         System.out.println("... called getMyOpinions");
         return ResponseEntity.ok().body(userOpinionService.getMyOpinions(authentication,page,size));
     }
@@ -36,9 +42,9 @@ public class UserOpinionController {
     )
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/user/opinions")
-    public ResponseEntity<ReturnUserOpinionDTO> addOpinion(Authentication authentication, @RequestBody NewUserOpinionDTO newUserOpinionDTO) throws UserDoesNotExistException, BadRequestException {
+    public ResponseEntity<UserOpinionDTO> addOpinion(Authentication authentication, @RequestBody NewUserOpinionDTO newUserOpinionDTO) throws UserDoesNotExistException, BadRequestException {
         System.out.println("... called addOpinion");
-        ReturnUserOpinionDTO userOpinion = userOpinionService.addOpinion(authentication,newUserOpinionDTO);
+        UserOpinionDTO userOpinion = userOpinionService.addOpinion(authentication,newUserOpinionDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(userOpinion);
     }
 
@@ -49,9 +55,9 @@ public class UserOpinionController {
     )
 
     @GetMapping("/user/{uuid}/opinions")
-    public ResponseEntity<ResultsDTO<ReturnUserOpinionDTO>> getOpinions(@PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+    public ResponseEntity<ResultsDTO<UserOpinionDTO>> getOpinions(Authentication authentication, @PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
         System.out.println("... called getOpinions");
-        return ResponseEntity.ok().body(userOpinionService.getOpinions(uuid,page,size));
+        return ResponseEntity.ok().body(userOpinionService.getOpinions(authentication, uuid,page,size));
     }
 
     @Operation(
@@ -60,10 +66,10 @@ public class UserOpinionController {
     )
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/user/opinions/{id}")
-    public ResponseEntity<ReturnUserOpinionDTO> updateOpinion(Authentication authentication,@PathVariable long id, @RequestBody UpdateUserOpinionDTO updateUserOpinionDTO)
+    public ResponseEntity<UserOpinionDTO> updateOpinion(Authentication authentication, @PathVariable long id, @RequestBody ModifiedUserOpinionDTO modifiedUserOpinionDTO)
             throws UserDoesNotExistException, EditSomeoneElseOpinionException, UserOpinionDoesNotExistException, BadRequestException {
         System.out.println("... called updateOpinion");
-        return ResponseEntity.ok().body(userOpinionService.updateOpinion(authentication,id,updateUserOpinionDTO));
+        return ResponseEntity.ok().body(userOpinionService.updateOpinion(authentication,id, modifiedUserOpinionDTO));
     }
 
     @Operation(

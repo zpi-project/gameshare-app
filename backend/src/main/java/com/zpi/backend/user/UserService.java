@@ -2,6 +2,11 @@ package com.zpi.backend.user;
 
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.role.RoleRepository;
+import com.zpi.backend.user.dto.UpdateUserDTO;
+import com.zpi.backend.user.dto.UserDTO;
+import com.zpi.backend.user.dto.UserGuestDTO;
+import com.zpi.backend.user.exception.UserAlreadyExistsException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.validators.AdminChecker;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -26,6 +31,15 @@ public class UserService {
 
     public User getUserByUUID(String uuid) throws UserDoesNotExistException {
         return this.userRepository.findByUuid(uuid).orElseThrow(()->new UserDoesNotExistException("User not found"));
+    }
+
+    public UserGuestDTO getUserByUUID(Authentication authentication, String uuid) throws UserDoesNotExistException {
+        User user = getUserByUUID(uuid);
+        if (authentication == null || !authentication.isAuthenticated())
+            return new UserGuestDTO(user);
+        else
+            return new UserDTO(user);
+
     }
 
 

@@ -27,6 +27,7 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
         Path<String> name = game.get("name");
         Path<List<Category>> categories= game.get("categories");
         Path<User> owner = root.get("owner");
+        Path<String> userUUID = owner.get("uuid");
         Path<Double> latitude = owner.get("locationLatitude");
         Path<Double> longitude = owner.get("locationLongitude");
 
@@ -50,6 +51,9 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
         }
         if (criteria.getMaxPricePerDay() != null) {
             predicates.add(cb.lessThanOrEqualTo(pricePerDay, criteria.getMaxPricePerDay()));
+        }
+        if (criteria.getUserUUID() != null) {
+            predicates.add(cb.equal(userUUID, criteria.getUserUUID()));
         }
         Expression<Double> orderExpression =
                 cb.sqrt(cb.sum(cb.power(cb.diff(latitude, criteria.getLatitude()), 2),

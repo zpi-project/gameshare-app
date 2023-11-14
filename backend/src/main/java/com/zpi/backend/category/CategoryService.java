@@ -1,8 +1,10 @@
 package com.zpi.backend.category;
 
+import com.zpi.backend.category.exception.CategoryAlreadyExistsException;
+import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.role.RoleService;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
@@ -32,7 +34,7 @@ public class CategoryService {
         return categoryRepository.findAll(Sort.by("name"));
     }
 
-    public Category getCategory(long id) throws CategoryDoesNotExistException{
+    public Category getCategory(long id) throws CategoryDoesNotExistException {
         Optional<Category> categoryOptional = categoryRepository.findById(id);
         if (categoryOptional.isEmpty()) throw new CategoryDoesNotExistException("Category (id = "+id+") does not exist.");
         else return categoryOptional.get();

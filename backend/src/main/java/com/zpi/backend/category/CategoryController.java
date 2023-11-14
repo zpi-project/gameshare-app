@@ -1,8 +1,10 @@
 package com.zpi.backend.category;
 
+import com.zpi.backend.category.exception.CategoryAlreadyExistsException;
+import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Amount;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

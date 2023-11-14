@@ -4,38 +4,24 @@ import { user } from "./user";
 
 export const opinions: Opinion[] = [
   {
+    id: 1,
+    timestamp: "wgewf",
     description: LOREM,
     stars: 1,
-    user: user,
+    ratingUser: user,
   },
   {
+    id: 2,
+    timestamp: "wgewf",
     description: LOREM,
     stars: 1,
-    user: user,
+    ratingUser: user,
   },
   {
+    id: 3,
+    timestamp: "wgewf",
     description: LOREM,
     stars: 1,
-    user: user,
-  },
-  {
-    description: LOREM,
-    stars: 1,
-    user: user,
-  },
-  {
-    description: LOREM,
-    stars: 1,
-    user: user,
-  },
-  {
-    description: LOREM,
-    stars: 1,
-    user: user,
-  },
-  {
-    description: LOREM,
-    stars: 1,
-    user: user,
+    ratingUser: user,
   },
 ];
