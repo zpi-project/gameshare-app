@@ -40,7 +40,10 @@ public class DataBucketUtil {
 
         try{
 
-            byte[] fileData = FileUtils.readFileToByteArray(convertFile(multipartFile));
+            File file = convertFile(multipartFile);
+            byte[] fileData = FileUtils.readFileToByteArray(file);
+            // Delete file that saves itself in project
+            file.delete();
 
             InputStream inputStream = new ClassPathResource(gcpConfigFile).getInputStream();
 
@@ -58,12 +61,14 @@ public class DataBucketUtil {
             } else {
                 throw new GCPFileUploadException("An error occurred while storing data to GCS");
             }
-        }catch (Exception e){
-            throw new GCPFileUploadException("[2] An error occurred while storing data to GCS - " + e.getMessage());
+        } catch (FileWriteException | InvalidFileTypeException e){
+            throw e;
+        } catch (Exception e){
+            throw new GCPFileUploadException(e.getMessage());
         }
     }
 
-    private File convertFile(MultipartFile file) {
+    private File convertFile(MultipartFile file) throws FileWriteException{
 
         try{
             if(file.getOriginalFilename() == null){
@@ -81,7 +86,7 @@ public class DataBucketUtil {
 
     private String checkFileExtension(String fileName) {
         if(fileName != null && fileName.contains(".")){
-            String[] extensionList = {".png", ".jpeg", ".pdf", ".doc", ".mp3"};
+            String[] extensionList = {".png", ".jpeg", ".jpg"};
 
             for(String extension: extensionList) {
                 if (fileName.endsWith(extension)) {

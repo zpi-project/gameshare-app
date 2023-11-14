@@ -298,19 +298,6 @@ public class ExceptionController {
                         .withDetail(ex.getMessage()));
     }
 
-    @ResponseBody
-    @ExceptionHandler(IllegalFileTypeException.class)
-    @ResponseStatus(value = HttpStatus.CONFLICT)
-    ResponseEntity IFTEHandler(IllegalFileTypeException ex) {
-        return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
-                .body(Problem.create()
-                        .withStatus(HttpStatus.CONFLICT)
-                        .withTitle(ex.getClass().getSimpleName())
-                        .withDetail(ex.getMessage()));
-    }
-
     // Uploading photos
     @ResponseBody
     @ExceptionHandler(FileWriteException.class)
@@ -334,8 +321,8 @@ public class ExceptionController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
                         .withStatus(HttpStatus.BAD_REQUEST)
-                        .withTitle(HttpStatus.BAD_REQUEST.name())
-                        .withDetail(ex.getClass().getSimpleName()));
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
     }
 
     @ResponseBody

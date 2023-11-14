@@ -5,10 +5,7 @@ import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstanceRepository;
-import com.zpi.backend.game_instance_image.exception.GCPFileUploadException;
-import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
-import com.zpi.backend.game_instance_image.exception.IllegalFileTypeException;
-import com.zpi.backend.game_instance_image.exception.TooManyImagesException;
+import com.zpi.backend.game_instance_image.exception.*;
 import com.zpi.backend.user.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -18,33 +15,24 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class GameInstanceImageService {
     private static final int MAX_GAME_INSTANCE_PHOTOS = 3;
-    private static final String PNG_CONTENT_TYPE = "image/png";
-    private static final String JPEG_CONTENT_TYPE = "image/jpeg";
-
 
     GameInstanceImageRepository gameInstanceImageRepository;
     GameInstanceRepository gameInstanceRepository;
     DataBucketUtil dataBucketUtil;
 
     public FileDTO addImageToGameInstance(Authentication authentication, String gameInstanceUUID,
-                                          MultipartFile multipartFile) throws GameInstanceDoesNotExistException, BadRequestException, TooManyImagesException, IllegalFileTypeException {
+                                          MultipartFile multipartFile) throws GameInstanceDoesNotExistException, BadRequestException, TooManyImagesException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository
                 .findByUuidAndOwner_GoogleId(gameInstanceUUID, googleId);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+gameInstanceUUID+") does not exists or the User is not the Owner.");
-        // Checking type of file
-        if (!Objects.equals(multipartFile.getContentType(), PNG_CONTENT_TYPE) &&
-                !Objects.equals(multipartFile.getContentType(), JPEG_CONTENT_TYPE))
-            throw new IllegalFileTypeException("Content type has to be image/png or image/jpeg");
-        System.out.println(multipartFile.getContentType());
         // Blocker to check if the GI has got 3 or more images
         int imagesAmount = gameInstanceRepository.howManyGameInstanceImages(gameInstanceUUID);
         if (imagesAmount >= MAX_GAME_INSTANCE_PHOTOS)
@@ -71,7 +59,8 @@ public class GameInstanceImageService {
                 inputFile = new GameInstanceImage(fileDto.getFileName(), fileDto.getFileURL(), gameInstance);
                 gameInstanceImageRepository.save(inputFile);
             }
-
+        } catch (FileWriteException | InvalidFileTypeException e){
+            throw e;
         } catch (Exception e) {
             throw new GCPFileUploadException("[1] Error occurred while uploading - "+e.getMessage());
         }
