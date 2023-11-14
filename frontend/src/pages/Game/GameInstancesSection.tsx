@@ -23,7 +23,6 @@ const GameUsersSection: FC = () => {
   const {
     data: gameInstances,
     isLoading,
-    isError,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
@@ -45,27 +44,30 @@ const GameUsersSection: FC = () => {
 
   return (
     <>
-      <div className="w-3/5 overflow-hidden rounded-lg">
-        <Map autolocate location={location} setLocation={setLocation}>
-          <LocationButton />
-          <LocationMarker />
-        </Map>
-      </div>
-      <div className="h-[calc(100%-32px)] w-2/5">
-        <h3 className="mb-1 text-xl font-bold text-primary">{t("gameInstances")}</h3>
-        <ScrollArea className="h-full">
-          <GameInstancesList
-            gameInstances={
-              gameInstances ? gameInstances.pages.flatMap(page => page.results) : undefined
-            }
-            isLoading={isLoading}
-            isFetchingNextPage={isFetchingNextPage}
-            isError={isError}
-            setActive={setHoveredUserUUID}
-          />
-          {hasNextPage && <div ref={ref} data-test="scroller-trigger" />}
-        </ScrollArea>
-      </div>
+      {gameInstances && gameInstances.pages[0].paginationInfo.totalElements > 0 && (
+        <div className="flex h-[calc(100%-400px)] flex-row gap-4 rounded-lg bg-section p-4">
+          <div className="w-3/5 overflow-hidden rounded-lg">
+            <Map autolocate location={location} setLocation={setLocation}>
+              <LocationButton />
+              <LocationMarker />
+            </Map>
+          </div>
+          <div className="h-[calc(100%-40px)] w-2/5">
+            <h3 className="mb-3 text-xl font-bold text-primary">{t("gameInstances")}</h3>
+            <ScrollArea className="h-full">
+              <GameInstancesList
+                gameInstances={
+                  gameInstances ? gameInstances.pages.flatMap(page => page.results) : undefined
+                }
+                isLoading={isLoading}
+                isFetchingNextPage={isFetchingNextPage}
+                setActive={setHoveredUserUUID}
+              />
+              {hasNextPage && <div ref={ref} data-test="scroller-trigger" />}
+            </ScrollArea>
+          </div>
+        </div>
+      )}
     </>
   );
 };

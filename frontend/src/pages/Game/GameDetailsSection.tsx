@@ -31,7 +31,7 @@ const GameDetailsSection: FC<GameDetailsSectionProps> = ({ game }) => {
 
   return (
     <>
-      <div className="h-full overflow-hidden rounded-lg bg-section" ref={divRef}>
+      <div className="h-full max-h-[320px] overflow-hidden rounded-lg bg-section" ref={divRef}>
         <img src={game.image} alt={game.name} className="h-full w-full object-cover object-top" />
       </div>
       <ScrollArea className="h-full">

@@ -69,6 +69,9 @@ export default {
   errorFetchingGames: "There was an error fetching games",
   deactivated: "DEACTIVATED",
 
+  noGameInstances: "No one has this game yet",
+  gameInstancesError: "We couldn't load copies of this game",
+
   typeToSearch: "Type to search...",
   category: "Category",
   all: "All",
