@@ -7,6 +7,7 @@ import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException
 import com.zpi.backend.game_instance.GameInstanceRepository;
 import com.zpi.backend.game_instance_image.exception.GCPFileUploadException;
 import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
+import com.zpi.backend.game_instance_image.exception.TooManyImagesException;
 import com.zpi.backend.user.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -21,18 +22,24 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class GameInstanceImageService {
+    private static final int MAX_GAME_INSTANCE_PHOTOS = 3;
+
     GameInstanceImageRepository gameInstanceImageRepository;
     GameInstanceRepository gameInstanceRepository;
     DataBucketUtil dataBucketUtil;
 
 //    TODO implement addImageToGameInstance endpoint
     public FileDTO addImageToGameInstance(Authentication authentication, String gameInstanceUUID,
-                                          MultipartFile multipartFile) throws GameInstanceDoesNotExistException, BadRequestException {
+                                          MultipartFile multipartFile) throws GameInstanceDoesNotExistException, BadRequestException, TooManyImagesException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository
                 .findByUuidAndOwner_GoogleId(gameInstanceUUID, googleId);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+gameInstanceUUID+") does not exists or the User is not the Owner.");
+        // Blocker to check if the GI has got 3 or more images
+        int imagesAmount = gameInstanceRepository.howManyGameInstanceImages(gameInstanceUUID);
+        if (imagesAmount >= MAX_GAME_INSTANCE_PHOTOS)
+            throw new TooManyImagesException("The Game Instance has already " +MAX_GAME_INSTANCE_PHOTOS +"or more images");
         return new FileDTO(uploadFiles(multipartFile));
     }
 

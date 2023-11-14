@@ -28,4 +28,8 @@ public interface GameInstanceRepository extends JpaRepository<GameInstance, Long
             nativeQuery = true)
     void updateAvgRating(@Param("gameInstanceId") long gameInstanceId);
 
+    @Query("select count(*) from GameInstanceImage gii " +
+            "where gii.gameInstance.uuid = :gameInstanceUUID")
+    int howManyGameInstanceImages(@Param("gameInstanceUUID") String gameInstanceUUID);
+
 }
