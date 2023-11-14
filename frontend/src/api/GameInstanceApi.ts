@@ -1,4 +1,4 @@
-import { GameInstance } from "@/types/Game";
+import { GameInstance } from "@/types/GameInstance";
 import { GameInstanceSearchParams, SearchUserGameInstances } from "@/types/GameInstance";
 import { Paginated } from "@/types/Paginated";
 import Api from "./Api";

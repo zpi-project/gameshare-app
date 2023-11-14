@@ -1,26 +1,31 @@
 package com.zpi.backend.game;
 
 import com.zpi.backend.category.Category;
-import com.zpi.backend.category.Exception.CategoryDoesNotExistException;
+import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.category.CategoryService;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game.Dto.GameDTO;
-import com.zpi.backend.game.Dto.NewGameDTO;
-import com.zpi.backend.game.Dto.UserWithGameOpinionDTO;
-import com.zpi.backend.game.Exception.GameAlreadyAcceptedException;
-import com.zpi.backend.game.Exception.GameAlreadyExistsException;
-import com.zpi.backend.game.Exception.GameAlreadyRejectedException;
-import com.zpi.backend.game.Exception.GameDoesNotExistException;
+import com.zpi.backend.game.dto.GameDTO;
+import com.zpi.backend.game.dto.NewGameDTO;
+import com.zpi.backend.game.dto.UserWithGameOpinionDTO;
+import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
+import com.zpi.backend.game.exception.GameAlreadyExistsException;
+import com.zpi.backend.game.exception.GameAlreadyRejectedException;
+import com.zpi.backend.game.exception.GameDoesNotExistException;
+import com.zpi.backend.game_instance.GameInstance;
+import com.zpi.backend.game_instance.GameInstanceOpinionsSpecification;
+import com.zpi.backend.game_instance.GameInstanceService;
+import com.zpi.backend.game_instance.dto.GameInstanceDetailsDTO;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
-import com.zpi.backend.user.Exception.UserDoesNotExistException;
-import com.zpi.backend.user.Dto.UserGuestDTO;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
+import com.zpi.backend.user.dto.UserGuestDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -124,17 +129,6 @@ public class GameService {
         return gameRepository.count();
     }
 
-    public ResultsDTO<UserWithGameOpinionDTO> getUsersAndGameInstancesWithGame(long gameId, double latitude, double longitude,
-                                                                               int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Object[]> objectsPage = gameRepository.getAllUsersWithGameAndRating(gameId, latitude, longitude, pageable);
-        List<UserWithGameOpinionDTO> userWithGameDTOPage =
-                objectsPage.stream()
-                        .map(this::convertToDTO)
-                        .toList();
-        return new ResultsDTO<>(userWithGameDTOPage,
-                new Pagination(objectsPage.getTotalElements(), objectsPage.getTotalPages()));
-    }
 
     private UserWithGameOpinionDTO convertToDTO(Object[] columns) {
         UserWithGameOpinionDTO dto = new UserWithGameOpinionDTO();

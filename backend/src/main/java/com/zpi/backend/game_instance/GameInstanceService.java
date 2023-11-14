@@ -1,20 +1,20 @@
 package com.zpi.backend.game_instance;
 
 import com.zpi.backend.category.Category;
-import com.zpi.backend.category.Exception.CategoryDoesNotExistException;
+import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.category.CategoryService;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game.Game;
-import com.zpi.backend.game.Exception.GameDoesNotExistException;
+import com.zpi.backend.game.exception.GameDoesNotExistException;
 import com.zpi.backend.game.GameService;
-import com.zpi.backend.game_instance.Dto.*;
-import com.zpi.backend.game_instance.Exception.GameInstanceDoesNotExistException;
-import com.zpi.backend.game_instance.Exception.GameInstanceStatusException;
+import com.zpi.backend.game_instance.dto.*;
+import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
+import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
 import com.zpi.backend.user.User;
-import com.zpi.backend.user.Exception.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -127,9 +127,8 @@ public class GameInstanceService {
         return getUserGameInstances(user.getUuid(),searchName, size, page, true);
     }
 
-    // TODO - change endpoint results
     public ResultsDTO<SearchGameInstanceDTO> getGameInstances(Authentication authentication, int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
-                                                              Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, double latitude,
+                                                              Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, Optional<String> userUUID, double latitude,
                                                               double longitude) throws CategoryDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
@@ -139,7 +138,7 @@ public class GameInstanceService {
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
                 searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null),
-                maxPricePerDay.orElse(null), latitude, longitude
+                maxPricePerDay.orElse(null), userUUID.orElse(null), latitude, longitude
         );
         Specification<GameInstance> spec = new GameInstanceSpecification(gameInstanceSearch);
         Page<GameInstance> gameInstancesPage = gameInstanceRepository.findAll(spec, pageable);
@@ -152,25 +151,21 @@ public class GameInstanceService {
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }
 
-    // Not used, but not removed, because who knows what is going to change xd
-    private List<UserWithGameInstancesDTO> convertToUserWithGameInstancesDTO(List<GameInstance> gameInstanceList){
-        List<UserWithGameInstancesDTO> resultList = new ArrayList<>();
-        for (GameInstance g: gameInstanceList){
-            boolean isInList=false;
-            for (UserWithGameInstancesDTO u: resultList){
-                if (u.getOwner().getUuid().equals(g.getOwner().getUuid())){
-                    isInList = true;
-                    u.addGameInstance(g);
-                }
-            }
-            if (!isInList){
-                resultList.add(new UserWithGameInstancesDTO(g));
-            }
-        }
-        return resultList;
-    }
 
     public void updateAvgRating(long gameInstanceId){
         gameInstanceRepository.updateAvgRating(gameInstanceId);
+    }
+
+    public ResultsDTO<GameInstanceDetailsDTO> getGameInstancesToOpinions(long gameId, double latitude, double longitude,
+                                                                               int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        GameInstanceOpinionSearch gameInstanceOpinionSearch = new GameInstanceOpinionSearch(gameId, latitude, longitude);
+        Specification<GameInstance> spec = new GameInstanceOpinionsSpecification(gameInstanceOpinionSearch);
+        Page<GameInstance> gameInstancePage = gameInstanceRepository.findAll(spec, pageable);
+        List<GameInstanceDetailsDTO> gameInstanceDetailsDTOList = new ArrayList<>();
+        gameInstancePage
+                .forEach(gameInstance -> gameInstanceDetailsDTOList.add(new GameInstanceDetailsDTO(gameInstance, true)));
+        return new ResultsDTO<>(gameInstanceDetailsDTOList,
+                new Pagination(gameInstancePage.getTotalElements(), gameInstancePage.getTotalPages()));
     }
 }

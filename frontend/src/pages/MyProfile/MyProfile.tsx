@@ -29,19 +29,17 @@ const MyProfile: FC = () => {
   console.log({ user });
 
   return (
-    <div className="flex h-full flex-row gap-6">
-      <div className="flex h-full w-1/2 flex-grow flex-col gap-6 rounded-lg">
-        <div className="h-2/5 rounded-lg bg-section p-4">
-          <UserDetails user={user} showEdit={true} isLoading={isLoading} />
+    <div className="flex h-full w-full flex-col gap-2 overflow-hidden xl:h-full xl:flex-row xl:gap-6">
+      <div className="flex flex-grow flex-col gap-2 rounded-lg xl:h-full xl:w-1/2 xl:gap-6">
+        <div className="h-[200px] rounded-lg bg-section p-4 xl:h-[365px]">
+          <UserDetails user={user} isLoading={isLoading} showEdit />
         </div>
-        <div className="flex h-3/5 w-full rounded-lg bg-section">
-          <Opinions />
+        <div className="flex max-h-[150px] rounded-lg  bg-section xl:h-[calc(100%-389px)] xl:max-h-[calc(100%-389px)]">
+          <Opinions isMyPage={true} />
         </div>
       </div>
-      <div className="h-full w-1/2 flex-grow rounded-lg bg-section p-4">
-        <div className="flex h-full rounded-lg bg-section">
-          <GameInstancesSection owner={user} showButtons={true} isMyPage={true} />
-        </div>
+      <div className="h-[calc(100%-350px)] flex-grow rounded-lg bg-section p-4 xl:h-full xl:w-1/2">
+        <GameInstancesSection owner={user} showButtons isMyPage />
       </div>
     </div>
   );

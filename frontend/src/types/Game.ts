@@ -32,11 +32,3 @@ export interface GameInfo {
   shortDescription: string;
   categories: Category[];
 }
-
-export interface GameInstance {
-  uuid: string;
-  shortDescription: string;
-  pricePerDay: number;
-  game: GameInfo;
-  active: boolean;
-}

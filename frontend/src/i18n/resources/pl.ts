@@ -68,6 +68,9 @@ const pl: typeof en = {
   usersWithThisGame: "Użytkownicy z tą grą",
   noGamesMyPage: "Nie posiadasz jeszcze żadnej gry",
   noGamesUserPage: "Ten użytkownik nie posiada jeszcze żadnych gier",
+  errorFetchingGames: "Wystąpił błąd podczas pobierania gier.",
+  noOpinionsMyPage: "Nie posiadasz jeszcze żadnych opinii",
+  noOpinionsUserPage: "Ten użytkownik nie posiada jeszcze żadnych opinii",
 
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",
