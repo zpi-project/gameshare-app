@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ### Project Configuration Files ###
-*gcp-account-file.xml
+*gcp-account-file.json
