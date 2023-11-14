@@ -59,7 +59,7 @@ public class DataBucketUtil {
                 throw new GCPFileUploadException("An error occurred while storing data to GCS");
             }
         }catch (Exception e){
-            throw new GCPFileUploadException("An error occurred while storing data to GCS\n" + e.getMessage());
+            throw new GCPFileUploadException("[2] An error occurred while storing data to GCS - " + e.getMessage());
         }
     }
 

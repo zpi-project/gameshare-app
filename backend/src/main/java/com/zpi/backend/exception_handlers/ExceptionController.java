@@ -8,10 +8,7 @@ import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
 import com.zpi.backend.game.exception.GameAlreadyExistsException;
 import com.zpi.backend.game.exception.GameAlreadyRejectedException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
-import com.zpi.backend.game_instance_image.exception.GCPFileUploadException;
-import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
-import com.zpi.backend.game_instance_image.exception.FileWriteException;
-import com.zpi.backend.game_instance_image.exception.InvalidFileTypeException;
+import com.zpi.backend.game_instance_image.exception.*;
 import com.zpi.backend.game_instance_opinion.exception.GameInstanceOpinionDoesNotExistException;
 import com.zpi.backend.user.exception.UndefinedUserException;
 import com.zpi.backend.user.exception.UserAlreadyExistsException;
@@ -284,6 +281,32 @@ public class ExceptionController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                 .body(Problem.create()
                         .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
+    }
+
+    @ResponseBody
+    @ExceptionHandler(TooManyImagesException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity TMIEHandler(TooManyImagesException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
+    }
+
+    @ResponseBody
+    @ExceptionHandler(IllegalFileTypeException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity IFTEHandler(IllegalFileTypeException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
                         .withTitle(ex.getClass().getSimpleName())
                         .withDetail(ex.getMessage()));
     }
