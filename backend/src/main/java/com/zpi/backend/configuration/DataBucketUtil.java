@@ -55,12 +55,12 @@ public class DataBucketUtil {
 
             if(blob != null){
                 return new FileDTO(blob.getName(), blob.getMediaLink());
+            } else {
+                throw new GCPFileUploadException("An error occurred while storing data to GCS");
             }
-
         }catch (Exception e){
-            throw new GCPFileUploadException("An error occurred while storing data to GCS");
+            throw new GCPFileUploadException("An error occurred while storing data to GCS\n" + e.getMessage());
         }
-        throw new GCPFileUploadException("An error occurred while storing data to GCS");
     }
 
     private File convertFile(MultipartFile file) {

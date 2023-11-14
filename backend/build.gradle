@@ -36,6 +36,7 @@ dependencies {
 	implementation 'commons-io:commons-io:2.11.0'
 	implementation 'com.google.cloud:google-cloud-storage:2.20.1'
 	implementation 'net.bytebuddy:byte-buddy:1.14.2'
+	implementation 'com.google.guava:guava:31.1-jre'
 
 	compileOnly 'org.projectlombok:lombok:1.18.30'
 	annotationProcessor 'org.projectlombok:lombok:1.18.30'
