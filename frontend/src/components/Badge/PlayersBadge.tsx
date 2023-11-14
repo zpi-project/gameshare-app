@@ -9,7 +9,7 @@ interface PlayersBadgeProps {
 
 const PlayersBadge: FC<PlayersBadgeProps> = ({ minPlayers, maxPlayers }) => {
   return (
-    <Badge variant="secondary" className="flex flex-row gap-1">
+    <Badge variant="secondary" className="flex w-max flex-row gap-1">
       <User2 size={20} />
       {minPlayers === maxPlayers ? (
         <span className="tracking-wider">{minPlayers}</span>

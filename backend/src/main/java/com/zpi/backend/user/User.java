@@ -2,7 +2,7 @@ package com.zpi.backend.user;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.zpi.backend.role.Role;
-import com.zpi.backend.user.Dto.UpdateUserDTO;
+import com.zpi.backend.user.dto.UpdateUserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
