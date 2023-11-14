@@ -1,7 +1,7 @@
 package com.zpi.backend.user;
 
 import com.zpi.backend.category.Category;
-import com.zpi.backend.category.CategoryService;
+import com.zpi.backend.category.CategoryRepository;
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
@@ -32,7 +32,7 @@ public class UserService {
     private  UserRepository userRepository;
     private final RoleRepository roleRepository;
     private AdminChecker adminChecker;
-    private final CategoryService categoryService;
+    private final CategoryRepository categoryRepository;
 
     private boolean checkIfUserExists(String googleId) {
         User user = this.userRepository.findByGoogleId(googleId).orElse(null);
@@ -89,7 +89,7 @@ public class UserService {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
         if (categoryId.isPresent())
-            category = categoryService.getCategory(categoryId.get());
+            category = categoryRepository.getReferenceById(categoryId.get());
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
                 searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null),

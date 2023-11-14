@@ -20,17 +20,17 @@ public class UserSpecification implements Specification<User> {
     @Override
     public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
-        Path<Integer> pricePerDay = root.get("pricePerDay");
-        Path<Game> game = root.get("game");
+        Join<User, GameInstance> gameInstances = root.join("gameInstances", JoinType.LEFT);
+        Join<GameInstance, Game> game = gameInstances.join("game", JoinType.LEFT);
+        Path<Integer> pricePerDay = gameInstances.get("pricePerDay");
         Path<Integer> minPlayers = game.get("minPlayers");
         Path<Integer> maxPlayers = game.get("maxPlayers");
         Path<Integer> age = game.get("age");
         Path<String> name = game.get("name");
         Path<List<Category>> categories= game.get("categories");
-        Path<User> owner = root.get("owner");
-        Path<String> userUUID = owner.get("uuid");
-        Path<Double> latitude = owner.get("locationLatitude");
-        Path<Double> longitude = owner.get("locationLongitude");
+        Path<String> userUUID = root.get("uuid");
+        Path<Double> latitude = root.get("locationLatitude");
+        Path<Double> longitude = root.get("locationLongitude");
 
         final List<Predicate> predicates = new ArrayList<>();
         if (criteria.getAge() != null) {
