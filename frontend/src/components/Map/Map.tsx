@@ -58,7 +58,6 @@ const Map: FC<MapProps> = props => {
       setLocation && setLocation([coords.latitude, coords.longitude]);
     } else {
       if (user) {
-        console.log("its here");
         setLocation && setLocation([user.locationLatitude, user.locationLongitude]);
       }
     }

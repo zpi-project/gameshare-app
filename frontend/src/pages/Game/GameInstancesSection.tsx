@@ -8,6 +8,7 @@ import { locationState } from "@/state/location";
 import { User } from "@/types/User";
 import { GameApi } from "@/api/GameApi";
 import { Map, LocationButton, LocationMarker } from "@/components/Map";
+import LoadingMap from "@/components/Map/LoadingMap";
 import UserMarker from "@/components/Map/UserMarker";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import GameInstancesList from "./GameInstancesList";
@@ -58,10 +59,15 @@ const GameUsersSection: FC = () => {
 
   return (
     <>
-      {gameInstances.length > 0 && (
+      {isError ? (
+        <h3 className="absolute bottom-[100px] mt-2 w-[calc(100%-150px)] text-center text-xl text-destructive">
+          {t("errorFetchingGameInstances")}
+        </h3>
+      ) : gameInstances.length > 0 ? (
         <div className="flex h-[calc(100%-400px)] flex-row gap-4 rounded-lg bg-section p-4">
           <div className="w-3/5 overflow-hidden rounded-lg">
             <Map autolocate location={location} setLocation={setLocation}>
+              {isLoading ? <LoadingMap /> : <></>}
               <LocationButton />
               <LocationMarker disabled />
               <>
@@ -83,7 +89,6 @@ const GameUsersSection: FC = () => {
                 gameInstances={gameInstances}
                 userFilter={clickedUser}
                 isLoading={isLoading}
-                isError={isError}
                 isFetchingNextPage={isFetchingNextPage}
                 setActive={setHoveredUserUUID}
               />
@@ -91,6 +96,12 @@ const GameUsersSection: FC = () => {
             </ScrollArea>
           </div>
         </div>
+      ) : (
+        !isLoading && (
+          <h3 className="absolute bottom-[100px] mt-2  w-[calc(100%-150px)] text-center text-xl">
+            {t("noGameUsers")}
+          </h3>
+        )
       )}
     </>
   );

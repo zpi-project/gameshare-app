@@ -2,8 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { isRoleFetchedState } from "@/state/isRoleFetched";
+import { useRecoilState } from "recoil";
 import { locationState } from "@/state/location";
 import { GameInstanceSearchParams } from "@/types/GameInstance";
 import { User } from "@/types/User";
@@ -15,8 +14,8 @@ import UserMarker from "@/components/Map/UserMarker";
 import UserFilter from "@/components/UserFilter";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/components/ui/use-toast";
-import GamesSearch from "./GamesSearch";
 import GameInstancesSearchResults from "./GamesInstancesSearchResults";
+import GamesSearch from "./GamesSearch";
 
 const DEFAULT_SEARCH_PARAMS: GameInstanceSearchParams = {
   searchName: "",
@@ -34,7 +33,6 @@ const Dashboard: FC = () => {
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
   const { toast } = useToast();
   const { t } = useTranslation();
-  const isRoleFetched = useRecoilValue(isRoleFetchedState);
 
   const {
     data: gameInstances,

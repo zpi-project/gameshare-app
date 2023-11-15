@@ -70,9 +70,8 @@ export default {
   deactivated: "DEACTIVATED",
   noGameInstances: "We couldn't find any games",
   errorFetchingUsersOnMap: "There was an error fetching users on map.",
-
-  noGameInstances: "No one has this game yet",
-  gameInstancesError: "We couldn't load copies of this game",
+  noGameUsers: "No one has this game yet",
+  errorFetchingGameInstances: "We couldn't load copies of this game",
 
   typeToSearch: "Type to search...",
   category: "Category",

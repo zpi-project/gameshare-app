@@ -8,7 +8,6 @@ import GameInstanceCard from "./GameInstanceCard";
 interface GameInstancesListProps {
   gameInstances: GameInstanceDetails[];
   isLoading: boolean;
-  isError: boolean;
   setActive: (uuid: string) => void;
   isFetchingNextPage: boolean;
   userFilter: User | null;

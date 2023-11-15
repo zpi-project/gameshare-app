@@ -74,8 +74,8 @@ const pl: typeof en = {
   noGameInstances: "Nie znaleziono żadnych gier",
   errorFetchingUsersOnMap: "Wystąpił błąd podczas pobierania użytkowników.",
 
-  noGameInstances: "Nikt jeszcze nie ma tej gry",
-  gameInstancesError: "Nie udało się pobrać egzemplarzy tej gry",
+  noGameUsers: "Nikt jeszcze nie ma tej gry",
+  errorFetchingGameInstances: "Nie udało się pobrać egzemplarzy tej gry",
 
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",
