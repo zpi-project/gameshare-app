@@ -13,5 +13,7 @@ public class ReservationDetailRenterDTO extends ReservationDetailDTO{
 
     public ReservationDetailRenterDTO(Reservation reservation, boolean canAddOwnerOpinion, boolean canAddGameInstanceOpinion) {
         super(reservation);
+        this.canAddOwnerOpinion = canAddOwnerOpinion;
+        this.canAddGameInstanceOpinion = canAddGameInstanceOpinion;
     }
 }

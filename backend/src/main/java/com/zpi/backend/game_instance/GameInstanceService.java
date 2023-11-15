@@ -13,6 +13,8 @@ import com.zpi.backend.game_instance.dto.*;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
+import com.zpi.backend.reservations.ReservationRepository;
+import com.zpi.backend.reservations.ReservationService;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
@@ -36,6 +38,7 @@ public class GameInstanceService {
     UserService userService;
     GameService gameService;
     CategoryService categoryService;
+    ReservationRepository reservationRepository;
 
     public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication) throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
         newGameInstanceDTO.validate();
@@ -168,5 +171,12 @@ public class GameInstanceService {
                 .forEach(gameInstance -> gameInstanceDetailsDTOList.add(new GameInstanceDetailsDTO(gameInstance, true)));
         return new ResultsDTO<>(gameInstanceDetailsDTOList,
                 new Pagination(gameInstancePage.getTotalElements(), gameInstancePage.getTotalPages()));
+    }
+
+    public GameInstanceAvaliabilityDTO getGameInstanceAvaliability(String uuid) {
+        GameInstance gameInstance = gameInstanceRepository.findByUuid(uuid).get();
+        reservationRepository.get
+                //TODO napisać sql do pobierania rezerwacji ze wzgledu na mieisiac rok i gameinstance
+        return new GameInstanceAvaliabilityDTO(gameInstance);
     }
 }

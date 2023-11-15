@@ -108,7 +108,7 @@ public class ReservationService {
     }
 
     public ReservationDetailRenterDTO getReservationRenterDetails(Reservation reservation) throws BadRequestException {
-        if(!(reservation.getStatus().getStatus().equals("In Progress")|| reservation.getStatus().getStatus().equals("finished"))){
+        if(!(reservation.getStatus().getStatus().equals("In Progress")|| reservation.getStatus().getStatus().equals("Finished"))){
             throw new BadRequestException("Reservation is not in progress or finished");
         }
         User owner = reservation.getGameInstance().getOwner();
@@ -132,4 +132,6 @@ public class ReservationService {
             throw new BadRequestException("User is not owner or renter of this reservation");
         }
     }
+
+
 }

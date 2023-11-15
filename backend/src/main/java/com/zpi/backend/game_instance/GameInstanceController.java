@@ -152,4 +152,10 @@ public class GameInstanceController {
                 .body(gameInstanceService.getGameInstances(authentication, size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, userUUID, latitude, longitude));
     }
 
+    @GetMapping("/${uuid}/avaliability")
+    public ResponseEntity<GameInstanceAvaliabilityDTO> getGameInstanceAvaliability(@PathVariable String uuid,@RequestParam String year,@RequestParam String month) throws GameInstanceDoesNotExistException {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(gameInstanceService.getGameInstanceAvaliability(uuid));
+    }
+
 }
