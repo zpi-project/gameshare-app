@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="${language}">
     <title th:text="${title}">Title</title>
     <style>
         body {
@@ -51,8 +52,9 @@
     <img src="https://storage.cloud.google.com/game-pictures-bucket/app-logo/gameshare_logo.jpeg" alt="GameShare Logo">
     <h1 th:text="${header}">Header</h1>
     <p th:text="${message}">Message</p>
-    <p>We look forward to having you at our gaming center. If you have any questions or need further assistance, feel free to contact us.</p>
-    <a th:href="${app_url}" class="btn">Visit GameShare App</a>
+    <p th:text="${default_message}">We look forward to having you at our gaming center.
+        If you have any questions or need further assistance, feel free to contact us.</p>
+    <a th:href="${app_url}" th:text="${button}" class="btn">Visit GameShare App</a>
 </div>
 </body>
 </html>

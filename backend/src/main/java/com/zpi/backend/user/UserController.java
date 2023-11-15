@@ -14,6 +14,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 
+import java.util.Optional;
+
 @RestController
 @AllArgsConstructor
 @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
@@ -51,9 +53,9 @@ public class UserController {
     )
     @PostMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UserAlreadyExistsException {
+    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication, Optional<String> language) throws UserAlreadyExistsException {
         System.out.println("... called createUser");
-        userService.registerUser(updateUserDTO, authentication);
+        userService.registerUser(updateUserDTO, authentication, language);
         return ResponseEntity.status(HttpStatus.CREATED).body("User created");
     }
 

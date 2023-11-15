@@ -14,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -53,7 +55,7 @@ public class UserService {
         this.userRepository.save(user);
     }
 
-    public void registerUser(UpdateUserDTO updateUserDTO, Authentication authentication) throws UserAlreadyExistsException {
+    public void registerUser(UpdateUserDTO updateUserDTO, Authentication authentication, Optional<String> languageOpt) throws UserAlreadyExistsException {
         User user = (User) authentication.getPrincipal();
         if(!checkIfUserExists(user.getGoogleId())) {
             user.update(updateUserDTO);
@@ -63,12 +65,11 @@ public class UserService {
                 user.setRole(roleRepository.getRoleByName("user"));
             userRepository.save(user);
 
-            Context context = emailService.setContextForEmailTemplate("GameShare - Registration", "Welcome to our GameShare Community",
-                    "It's a pleasure for us to welcome you in our GameShare application. " +
-                            "We hope you will enjoy every game borrowed via out app. " +
-                            "Have a nice gameplay!");
+//            Sending e-mail
+            String language = languageOpt.orElse(null);
+            Context registrationContext = emailService.getRegistrationEmailContext(language);
             emailService.sendEmailWithHtmlTemplate(user.getEmail(),"GameShare - Registration",
-                    EmailService.EMAIL_TEMPLATE, context );
+                    EmailService.EMAIL_TEMPLATE, registrationContext);
         }
         else {
             throw new UserAlreadyExistsException("User already exists");
