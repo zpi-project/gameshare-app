@@ -66,7 +66,7 @@ const Game: FC = () => {
         <div className="h-full w-1/2 overflow-hidden rounded-lg">
           <Map autolocate location={location} setLocation={setLocation}>
             <LocationButton />
-            <LocationMarker />
+            <LocationMarker disabled />
           </Map>
         </div>
         <div>

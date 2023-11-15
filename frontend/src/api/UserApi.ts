@@ -40,7 +40,6 @@ export class UserApi {
         ...searchParams,
       },
     });
-    throw new Error();
     return users;
   }
 }

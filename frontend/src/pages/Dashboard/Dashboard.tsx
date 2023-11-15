@@ -98,7 +98,7 @@ const Dashboard: FC = () => {
         <Map autolocate location={location} setLocation={setLocation}>
           {isUsersLoading || isFetchingUsersNextPage ? <LoadingMap /> : <></>}
           <LocationButton />
-          <LocationMarker />
+          <LocationMarker disabled/>
           <>
             {users &&
               users?.pages
