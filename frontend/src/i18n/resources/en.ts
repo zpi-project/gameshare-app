@@ -66,9 +66,10 @@ export default {
   usersWithThisGame: "Users with this game",
   noGamesMyPage: "You don't have any games yet",
   noGamesUserPage: "This user doesn't have any games yet",
-  errorFetchingGames: "There was an error fetching games",
+  errorFetchingGames: "There was an error fetching games.",
   deactivated: "DEACTIVATED",
   noGameInstances: "We couldn't find any games",
+  errorFetchingUsersOnMap: "There was an error fetching users on map.",
 
   typeToSearch: "Type to search...",
   category: "Category",
