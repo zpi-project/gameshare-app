@@ -31,8 +31,6 @@ const UserItem: FC<UserItemProps> = ({ className = "" }) => {
     enabled: role !== "guest",
   });
 
-  console.log(user);
-
   return (
     <Popover>
       <PopoverTrigger>

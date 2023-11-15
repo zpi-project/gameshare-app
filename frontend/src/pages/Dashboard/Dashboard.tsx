@@ -97,7 +97,7 @@ const Dashboard: FC = () => {
     <div className="flex h-full w-full flex-row gap-6">
       <div className="flex-grow overflow-hidden rounded-lg bg-section">
         <Map autolocate location={location} setLocation={setLocation}>
-          {(isUsersLoading || isFetchingUsersNextPage) && isRoleFetched ? <LoadingMap /> : <></>}
+          {isUsersLoading || isFetchingUsersNextPage ? <LoadingMap /> : <></>}
           <LocationButton />
           <LocationMarker disabled />
           <>
