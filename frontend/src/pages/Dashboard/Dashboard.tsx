@@ -2,7 +2,8 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { isRoleFetchedState } from "@/state/isRoleFetched";
 import { locationState } from "@/state/location";
 import { GameInstanceSearchParams } from "@/types/GameInstance";
 import { User } from "@/types/User";
@@ -16,7 +17,6 @@ import { useToast } from "@/components/ui/use-toast";
 import GamesResults from "./GamesResults";
 import GamesSearch from "./GamesSearch";
 import UserFilter from "./UserFilter";
-
 
 const DEFAULT_SEARCH_PARAMS: GameInstanceSearchParams = {
   searchName: "",
@@ -34,6 +34,7 @@ const Dashboard: FC = () => {
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
   const { toast } = useToast();
   const { t } = useTranslation();
+  const isRoleFetched = useRecoilValue(isRoleFetchedState);
 
   const {
     data: gameInstances,
@@ -96,9 +97,9 @@ const Dashboard: FC = () => {
     <div className="flex h-full w-full flex-row gap-6">
       <div className="flex-grow overflow-hidden rounded-lg bg-section">
         <Map autolocate location={location} setLocation={setLocation}>
-          {isUsersLoading || isFetchingUsersNextPage ? <LoadingMap /> : <></>}
+          {(isUsersLoading || isFetchingUsersNextPage) && isRoleFetched ? <LoadingMap /> : <></>}
           <LocationButton />
-          <LocationMarker disabled/>
+          <LocationMarker disabled />
           <>
             {users &&
               users?.pages
