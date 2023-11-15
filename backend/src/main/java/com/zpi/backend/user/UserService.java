@@ -1,5 +1,6 @@
 package com.zpi.backend.user;
 
+import com.zpi.backend.emails.EmailService;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.role.RoleRepository;
 import com.zpi.backend.user.dto.UpdateUserDTO;
