@@ -49,6 +49,10 @@ dependencies {
 	implementation 'com.google.http-client:google-http-client-gson:1.43.1'
 	//testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.0'
+
+	// Email sending
+	implementation 'org.springframework:spring-context-support:6.0.6'
+	implementation 'org.springframework.boot:spring-boot-starter-mail:3.0.4'
 }
 
 dependencyManagement {
