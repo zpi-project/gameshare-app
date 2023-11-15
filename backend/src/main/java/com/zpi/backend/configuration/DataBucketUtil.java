@@ -1,10 +1,7 @@
 package com.zpi.backend.configuration;
 
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.storage.Blob;
-import com.google.cloud.storage.Bucket;
-import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.StorageOptions;
+import com.google.cloud.storage.*;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance_image.exception.InvalidFileTypeException;
 import com.zpi.backend.game_instance_image.FileDTO;
@@ -47,17 +44,26 @@ public class DataBucketUtil {
 
             InputStream inputStream = new ClassPathResource(gcpConfigFile).getInputStream();
 
-            StorageOptions options = StorageOptions.newBuilder().setProjectId(gcpProjectId)
-                    .setCredentials(GoogleCredentials.fromStream(inputStream)).build();
+            StorageOptions options = StorageOptions.newBuilder()
+                    .setProjectId(gcpProjectId)
+                    .setCredentials(GoogleCredentials.fromStream(inputStream))
+                    .build();
 
             Storage storage = options.getService();
             Bucket bucket = storage.get(gcpBucketId,Storage.BucketGetOption.fields());
 
             RandomString id = new RandomString(6, ThreadLocalRandom.current());
-            Blob blob = bucket.create(gcpDirectoryName + "/" + fileName + "-" + id.nextString() + checkFileExtension(fileName), fileData, contentType);
+
+            String blobName = gcpDirectoryName + "/" + fileName + "-" + id.nextString() + checkFileExtension(fileName);
+            BlobInfo blobInfo = BlobInfo.newBuilder(bucket.getName(),blobName)
+                    .setContentType(contentType)
+                    .setContentDisposition("inline")
+                    .build();
+
+            Blob blob = storage.create(blobInfo, fileData);
 
             if(blob != null){
-                return new FileDTO(blob.getName(), blob.getMediaLink());
+                return new FileDTO(blob.getName(), blob.getSelfLink());
             } else {
                 throw new GCPFileUploadException("An error occurred while storing data to GCS");
             }

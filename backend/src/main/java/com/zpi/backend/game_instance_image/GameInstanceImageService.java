@@ -7,6 +7,8 @@ import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException
 import com.zpi.backend.game_instance.GameInstanceRepository;
 import com.zpi.backend.game_instance_image.exception.*;
 import com.zpi.backend.user.User;
+import com.zpi.backend.user.UserService;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -22,15 +24,15 @@ import java.util.Optional;
 public class GameInstanceImageService {
     private static final int MAX_GAME_INSTANCE_PHOTOS = 3;
 
-    GameInstanceImageRepository gameInstanceImageRepository;
-    GameInstanceRepository gameInstanceRepository;
-    DataBucketUtil dataBucketUtil;
+    private final GameInstanceImageRepository gameInstanceImageRepository;
+    private final GameInstanceRepository gameInstanceRepository;
+    private final DataBucketUtil dataBucketUtil;
+    private final UserService userService;
 
     public FileDTO addImageToGameInstance(Authentication authentication, String gameInstanceUUID,
-                                          MultipartFile multipartFile) throws GameInstanceDoesNotExistException, BadRequestException, TooManyImagesException {
-        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
-        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository
-                .findByUuidAndOwner_GoogleId(gameInstanceUUID, googleId);
+                                          MultipartFile multipartFile) throws GameInstanceDoesNotExistException, BadRequestException, TooManyImagesException, UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(gameInstanceUUID, user);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+gameInstanceUUID+") does not exists or the User is not the Owner.");
         // Blocker to check if the GI has got 3 or more images
@@ -78,10 +80,9 @@ public class GameInstanceImageService {
     }
 
     // TODO Delete photos from Google Storage - needed?
-    public void deleteGameInstanceImagesByGameInstance(Authentication authentication, String gameInstanceUUID) throws GameInstanceDoesNotExistException {
-        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
-        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository
-                .findByUuidAndOwner_GoogleId(gameInstanceUUID, googleId);
+    public void deleteGameInstanceImagesByGameInstance(Authentication authentication, String gameInstanceUUID) throws GameInstanceDoesNotExistException, UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(gameInstanceUUID, user);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (UUID = "+gameInstanceOptional+") does not exists or the User is not the Owner.");
         gameInstanceImageRepository.deleteAllByGameInstanceUuid(gameInstanceUUID);

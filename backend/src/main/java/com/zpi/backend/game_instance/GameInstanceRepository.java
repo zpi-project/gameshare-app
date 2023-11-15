@@ -1,5 +1,6 @@
 package com.zpi.backend.game_instance;
 
+import com.zpi.backend.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @Repository
 public interface GameInstanceRepository extends JpaRepository<GameInstance, Long>, JpaSpecificationExecutor<GameInstance> {
     Optional<GameInstance> findByUuid(String uuid);
-    Optional<GameInstance> findByUuidAndOwner_GoogleId(String gameUUID, String ownerGoogleId);
+    Optional<GameInstance> findByUuidAndOwner(String gameUUID, User owner);
     Page<GameInstance> findByOwnerUuid(String ownerUUID, Pageable pageable);
     Page<GameInstance> findByOwnerUuidAndGameNameContainingIgnoreCase(String ownerUUID, String searchName, Pageable pageable);
     @Modifying

@@ -48,10 +48,10 @@ public class GameInstanceService {
         return new GameInstanceDTO(newGameInstance);
     }
 
-    public GameInstanceDTO updateGameInstance(String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO, Authentication authentication) throws GameInstanceDoesNotExistException, BadRequestException {
+    public GameInstanceDTO updateGameInstance(String uuid, UpdatedGameInstanceDTO updatedGameInstanceDTO, Authentication authentication) throws GameInstanceDoesNotExistException, BadRequestException, UserDoesNotExistException {
         updatedGameInstanceDTO.validate();
-        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
-        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(uuid, googleId);
+        User user = userService.getUser(authentication);
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(uuid, user);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");
         GameInstance gameInstance = gameInstanceOptional.get();
@@ -62,17 +62,18 @@ public class GameInstanceService {
     }
 
     //TODO Implementation of checking reservation, what about status?
-    public void deleteGameInstance(String uuid, Authentication authentication) throws GameInstanceDoesNotExistException {
-        String googleId = ((User)authentication.getPrincipal()).getGoogleId();
-        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(uuid, googleId);
+    public void deleteGameInstance(String uuid, Authentication authentication) throws GameInstanceDoesNotExistException, UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(uuid, user);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");
         gameInstanceImageService.deleteGameInstanceImagesByGameInstance(authentication, gameInstanceOptional.get().getUuid());
         gameInstanceRepository.delete(gameInstanceOptional.get());
     }
 
-    public void activate(String gameInstanceUUID, String googleId) throws GameInstanceDoesNotExistException, GameInstanceStatusException {
-        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(gameInstanceUUID, googleId);
+    public void activate(String gameInstanceUUID, Authentication authentication) throws GameInstanceDoesNotExistException, GameInstanceStatusException, UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(gameInstanceUUID, user);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("The Game Instance (uuid = "+gameInstanceUUID+") does not exists or the User is not the Owner.");
         GameInstance gameInstance = gameInstanceOptional.get();
@@ -82,8 +83,9 @@ public class GameInstanceService {
         gameInstanceRepository.save(gameInstance);
     }
 
-    public void deactivate(String gameInstanceUUID, String googleId) throws GameInstanceDoesNotExistException, GameInstanceStatusException {
-        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner_GoogleId(gameInstanceUUID, googleId);
+    public void deactivate(String gameInstanceUUID, Authentication authentication) throws GameInstanceDoesNotExistException, GameInstanceStatusException, UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(gameInstanceUUID, user);
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("The Game Instance (uuid = "+gameInstanceUUID+") does not exists or the User is not the Owner.");
         GameInstance gameInstance = gameInstanceOptional.get();
