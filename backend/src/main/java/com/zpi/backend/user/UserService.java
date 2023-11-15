@@ -12,6 +12,7 @@ import com.zpi.backend.validators.AdminChecker;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +20,7 @@ public class UserService {
     private  UserRepository userRepository;
     private final RoleRepository roleRepository;
     private AdminChecker adminChecker;
+    private EmailService emailService;
 
     private boolean checkIfUserExists(String googleId) {
         User user = this.userRepository.findByGoogleId(googleId).orElse(null);
@@ -60,6 +62,13 @@ public class UserService {
             else
                 user.setRole(roleRepository.getRoleByName("user"));
             userRepository.save(user);
+
+            Context context = emailService.setContextForEmailTemplate("GameShare - Registration", "Welcome to our GameShare Community",
+                    "It's a pleasure for us to welcome you in our GameShare application. " +
+                            "We hope you will enjoy every game borrowed via out app. " +
+                            "Have a nice gameplay!");
+            emailService.sendEmailWithHtmlTemplate(user.getEmail(),"GameShare - Registration",
+                    EmailService.EMAIL_TEMPLATE, context );
         }
         else {
             throw new UserAlreadyExistsException("User already exists");

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Tytuł</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: hsl(0, 0%, 96%);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            max-width: 25%;
+            height: auto;
+            border-radius: 10%;
+        }
+
+        h1 {
+            color: #333333;
+        }
+
+        p {
+            color: #555555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #3498db;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="https://storage.cloud.google.com/game-pictures-bucket/app-logo/gameshare_logo.jpeg" alt="GameShare Logo">
+    <h1 th:text="${header}">Nagłówek</h1>
+    <p th:text="${message}">Wiadomość</p>
+    <p>Niezwykle cieszymy się, że jesteś członkiem społeczności GameShare.
+        Jeżeli masz jakiekolwiek pytania lub potrzebujesz pomocy, skontaktuj się z nami.
+    </p>
+    <a th:href="${app_url}" class="btn">Odwiedź aplikację GameShare</a>
+</div>
+</body>
+</html>
