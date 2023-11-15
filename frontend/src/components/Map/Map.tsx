@@ -1,8 +1,13 @@
 import { FC, createContext, useContext, useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
 import { MapContainer, TileLayer, ZoomControl, useMapEvents } from "react-leaflet";
+import { useQuery } from "@tanstack/react-query";
 import { LatLngExpression, LocationEvent } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { useRecoilValue } from "recoil";
+import { roleState } from "@/state/role";
+import { tokenState } from "@/state/token";
+import { UserApi } from "@/api/UserApi";
 import "./Map.css";
 
 const URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -39,12 +44,25 @@ const Map: FC<MapProps> = props => {
     },
     userDecisionTimeout: 5000,
   });
+  const role = useRecoilValue(roleState);
+  const token = useRecoilValue(tokenState);
+
+  const { data: user } = useQuery({
+    queryKey: ["user", { token }],
+    queryFn: UserApi.get,
+    enabled: role !== "guest",
+  });
 
   useEffect(() => {
     if (isGeolocationAvailable && isGeolocationAvailable && coords && autolocate) {
       setLocation && setLocation([coords.latitude, coords.longitude]);
+    } else {
+      if (user) {
+        console.log("its here");
+        setLocation && setLocation([user.locationLatitude, user.locationLongitude]);
+      }
     }
-  }, [isGeolocationAvailable, isGeolocationEnabled, coords, autolocate]);
+  }, [isGeolocationAvailable, isGeolocationEnabled, coords, autolocate, user]);
 
   return (
     <MapContext.Provider value={{ location, setLocation }}>

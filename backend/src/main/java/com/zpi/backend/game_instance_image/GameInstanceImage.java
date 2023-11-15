@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "game_instance_images")
 public class GameInstanceImage {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)

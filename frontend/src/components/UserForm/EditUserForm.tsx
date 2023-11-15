@@ -44,7 +44,7 @@ const EditUserForm: FC<EditUserFormProps> = ({ user, onSubmit }) => {
         user={{
           firstName: user.firstName,
           lastName: user.lastName,
-          phoneNumber: user.phoneNumber,
+          phoneNumber: user.phoneNumber ?? "",
           locationLatitude: user.locationLatitude,
           locationLongitude: user.locationLongitude,
         }}

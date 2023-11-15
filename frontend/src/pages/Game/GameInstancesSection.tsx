@@ -23,15 +23,22 @@ const GameUsersSection: FC = () => {
   const [clickedUser, setClickedUser] = useState<User | null>(null);
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
 
-  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ["game-game-instances", { id }],
-    queryFn: ({ pageParam = 0 }) =>
-      GameApi.getInstances(parseInt(id), pageParam as number, GAMES_PAGE_SIZE, latitude, longitude),
-    getNextPageParam: (_, pages) => {
-      const newPageParam = pages.length;
-      return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
-    },
-  });
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage, isError } =
+    useInfiniteQuery({
+      queryKey: ["game-game-instances", { id }],
+      queryFn: ({ pageParam = 0 }) =>
+        GameApi.getInstances(
+          parseInt(id),
+          pageParam as number,
+          GAMES_PAGE_SIZE,
+          latitude,
+          longitude,
+        ),
+      getNextPageParam: (_, pages) => {
+        const newPageParam = pages.length;
+        return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
+      },
+    });
 
   const gameInstances = useMemo(() => data?.pages.flatMap(page => page.results) ?? [], [data]);
 
@@ -56,7 +63,7 @@ const GameUsersSection: FC = () => {
           <div className="w-3/5 overflow-hidden rounded-lg">
             <Map autolocate location={location} setLocation={setLocation}>
               <LocationButton />
-              <LocationMarker />
+              <LocationMarker disabled />
               <>
                 {users.map(user => (
                   <UserMarker
@@ -76,6 +83,7 @@ const GameUsersSection: FC = () => {
                 gameInstances={gameInstances}
                 userFilter={clickedUser}
                 isLoading={isLoading}
+                isError={isError}
                 isFetchingNextPage={isFetchingNextPage}
                 setActive={setHoveredUserUUID}
               />

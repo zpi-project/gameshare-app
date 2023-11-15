@@ -1,62 +1,29 @@
 import { FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { isRoleFetchedState } from "@/state/isRoleFetched";
 import { locationState } from "@/state/location";
 import { GameInstanceSearchParams } from "@/types/GameInstance";
 import { User } from "@/types/User";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
+import { UserApi } from "@/api/UserApi";
 import { Map, LocationButton, LocationMarker } from "@/components/Map";
+import LoadingMap from "@/components/Map/LoadingMap";
 import UserMarker from "@/components/Map/UserMarker";
 import UserFilter from "@/components/UserFilter";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import GameInstancesSearchResults from "./GamesInstancesSearchResults";
+import { useToast } from "@/components/ui/use-toast";
 import GamesSearch from "./GamesSearch";
-
-const USERS = [
-  {
-    uuid: "f389934d-9aa8-4cf1-bcd5-d5d4ebaf82e1",
-    firstName: "Maria",
-    lastName: "Markowiak",
-    locationLatitude: 51.114838379988164,
-    locationLongitude: 17.03467499967268,
-    avatarLink:
-      "https://lh3.googleusercontent.com/a/ACg8ocKSMQ8I_i-Jo5qQoxYDLLnxVatv7_ffeoivIEaxodZFqQ=s96-c",
-    avgRating: 4,
-    phoneNumber: "+48581888888",
-  },
-  {
-    uuid: "3d5d2dea-addf-4a08-8b25-9637d70736e2",
-    firstName: "Ewa",
-    lastName: "Bożena",
-    locationLatitude: 51.10784676531416,
-    locationLongitude: 17.06464290618897,
-    avatarLink:
-      "https://lh3.googleusercontent.com/a/ACg8ocLq6wb1HLN-F_ZElSca-Y7H3vPv0oHPbAG9S5DAcwFO=s96-c",
-    avgRating: 3.4,
-    phoneNumber: "+48415343243",
-  },
-  {
-    uuid: "2ec80c6c-2531-473b-a16a-0cc8f42c9450",
-    firstName: "Joanna",
-    lastName: "Kotek",
-    locationLatitude: 51.11474408779064,
-    locationLongitude: 17.06807613372803,
-    avatarLink:
-      "https://lh3.googleusercontent.com/a/ACg8ocKHmJl7NEQj-dMuBYDhAoaV7fKWUcYjVHsiH1nSnEQGuxo=s96-c",
-    avgRating: 0,
-  },
-];
+import GameInstancesSearchResults from "./GamesInstancesSearchResults";
 
 const DEFAULT_SEARCH_PARAMS: GameInstanceSearchParams = {
   searchName: "",
 };
 
-//TODO: fetch users when endpoint added,
-// load more users on interval when endpoint added
-// remove users above when endpoint added
-
 const GAMES_PAGE_SIZE = 10;
+const USERS_PAGE_SIZE = 10;
 
 const Dashboard: FC = () => {
   const [location, setLocation] = useRecoilState(locationState);
@@ -65,14 +32,17 @@ const Dashboard: FC = () => {
   const [hoveredUserUUID, setHoveredUserUUID] = useState("");
   const [latitude, longitude] = location as number[];
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
+  const { toast } = useToast();
+  const { t } = useTranslation();
+  const isRoleFetched = useRecoilValue(isRoleFetchedState);
 
   const {
     data: gameInstances,
-    isLoading,
-    isError,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
+    isLoading: isGamesLoading,
+    isError: isGamesError,
+    hasNextPage: hasGamesNextPage,
+    fetchNextPage: fetchGamesNextPage,
+    isFetchingNextPage: isFetchingGamesNextPage,
   } = useInfiniteQuery({
     queryKey: ["search-game-instances", searchParams, userParam?.uuid],
     queryFn: ({ pageParam = 0 }) =>
@@ -90,27 +60,58 @@ const Dashboard: FC = () => {
     },
   });
 
+  const {
+    data: users,
+    isLoading: isUsersLoading,
+    fetchNextPage: usersFetchNextPage,
+    isFetchingNextPage: isFetchingUsersNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["user-pins", searchParams],
+    queryFn: ({ pageParam = 0 }) =>
+      UserApi.search(latitude, longitude, pageParam as number, USERS_PAGE_SIZE, searchParams),
+    getNextPageParam: (_, pages) => {
+      const newPageParam = pages.length;
+      return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
+    },
+    onSuccess: data => {
+      if (data.pages[0].paginationInfo.totalPages > data.pages.length) {
+        usersFetchNextPage();
+      }
+    },
+    onError: () => {
+      toast({
+        title: t("errorFetchingUsersOnMap"),
+        description: t("tryRefreshing"),
+        variant: "destructive",
+      });
+    },
+  });
+
   useEffect(() => {
-    if (entry?.isIntersecting && !isLoading) {
-      void fetchNextPage();
+    if (entry?.isIntersecting && !isGamesLoading) {
+      void fetchGamesNextPage();
     }
-  }, [entry?.isIntersecting, fetchNextPage, isLoading]);
+  }, [entry?.isIntersecting, fetchGamesNextPage, isGamesLoading]);
 
   return (
     <div className="flex h-full w-full flex-row gap-6">
       <div className="flex-grow overflow-hidden rounded-lg bg-section">
         <Map autolocate location={location} setLocation={setLocation}>
+          {(isUsersLoading || isFetchingUsersNextPage) && isRoleFetched ? <LoadingMap /> : <></>}
           <LocationButton />
-          <LocationMarker />
+          <LocationMarker disabled />
           <>
-            {USERS.map(user => (
-              <UserMarker
-                user={user}
-                key={user.uuid}
-                onClick={setUserParam}
-                active={user.uuid === hoveredUserUUID}
-              />
-            ))}
+            {users &&
+              users?.pages
+                .flatMap(page => page.results)
+                .map(user => (
+                  <UserMarker
+                    user={user}
+                    key={user.uuid}
+                    onClick={setUserParam}
+                    active={user.uuid === hoveredUserUUID}
+                  />
+                ))}
           </>
         </Map>
       </div>
@@ -122,12 +123,12 @@ const Dashboard: FC = () => {
             gameInstances={
               gameInstances ? gameInstances.pages.flatMap(page => page.results) : undefined
             }
-            isLoading={isLoading}
-            isFetchingNextPage={isFetchingNextPage}
-            isError={isError}
+            isLoading={isGamesLoading}
+            isFetchingNextPage={isFetchingGamesNextPage}
+            isError={isGamesError}
             setActive={setHoveredUserUUID}
           />
-          {hasNextPage && <div ref={ref} data-test="scroller-trigger" />}
+          {hasGamesNextPage && <div ref={ref} data-test="scroller-trigger" />}
         </ScrollArea>
       </div>
     </div>

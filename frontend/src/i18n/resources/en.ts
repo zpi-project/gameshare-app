@@ -66,9 +66,10 @@ export default {
   gameInstances: "Copies of this game",
   noGamesMyPage: "You don't have any games yet",
   noGamesUserPage: "This user doesn't have any games yet",
-  errorFetchingGames: "There was an error fetching games",
+  errorFetchingGames: "There was an error fetching games.",
   deactivated: "DEACTIVATED",
   noGameInstances: "We couldn't find any games",
+  errorFetchingUsersOnMap: "There was an error fetching users on map.",
 
   noGameInstances: "No one has this game yet",
   gameInstancesError: "We couldn't load copies of this game",

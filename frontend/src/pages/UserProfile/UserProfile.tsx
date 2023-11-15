@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useRecoilValue } from "recoil";
+import { roleState } from "@/state/role";
 import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
 import GameInstancesSection from "@/components/GameInstancesSection";
@@ -15,9 +17,10 @@ const UserProfile: FC = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { id = "" } = useParams();
+  const role = useRecoilValue(roleState);
 
   const { data: user, isLoading } = useQuery({
-    queryKey: ["user"],
+    queryKey: ["user", { role }],
     queryFn: () => UserApi.getByUUID(id),
     onError: () => {
       toast({
