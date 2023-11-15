@@ -20,6 +20,8 @@ import java.util.concurrent.ThreadLocalRandom;
 @Component
 public class DataBucketUtil {
 
+    private static final String URL = "https://storage.googleapis.com/";
+
     @Value("${gcp.config.file}")
     private String gcpConfigFile;
 
@@ -53,8 +55,12 @@ public class DataBucketUtil {
             Bucket bucket = storage.get(gcpBucketId,Storage.BucketGetOption.fields());
 
             RandomString id = new RandomString(6, ThreadLocalRandom.current());
+            String extension = checkFileExtension(fileName);
 
-            String blobName = gcpDirectoryName + "/" + fileName + "-" + id.nextString() + checkFileExtension(fileName);
+            String blobName = gcpDirectoryName + "/" +
+                    fileName.replaceFirst(extension, "")
+                            .replaceAll(" ", "-")
+                    + "-" + id.nextString() + extension;
             BlobInfo blobInfo = BlobInfo.newBuilder(bucket.getName(),blobName)
                     .setContentType(contentType)
                     .setContentDisposition("inline")
@@ -63,7 +69,8 @@ public class DataBucketUtil {
             Blob blob = storage.create(blobInfo, fileData);
 
             if(blob != null){
-                return new FileDTO(blob.getName(), blob.getSelfLink());
+                String image_url = URL+gcpBucketId+"/"+blobName;
+                return new FileDTO(blob.getName(), image_url);
             } else {
                 throw new GCPFileUploadException("An error occurred while storing data to GCS");
             }
