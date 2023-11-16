@@ -25,7 +25,7 @@ const Opinion: FC<Props> = ({ opinion }) => {
           <div className="text-primary">{getFullname(opinion.ratingUser)}</div>
           <Stars count={opinion.stars} />
         </div>
-        <div className="min-h-8 pr-2 text-xs italic">
+        <div className="min-h-8 break-all pr-2 text-xs italic">
           {showAll ? (
             opinion.description
           ) : (

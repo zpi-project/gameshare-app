@@ -38,7 +38,7 @@ const Opinions: FC<Props> = ({ isMyPage, user }) => {
               </div>
             ) : isError ? (
               <h3 className="mt-2 text-center text-xl text-destructive">
-                {t("errorFetchingGames")}
+                {t("errorFetchingOpinions")}
               </h3>
             ) : (
               opinions && (

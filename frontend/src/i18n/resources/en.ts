@@ -65,9 +65,10 @@ export default {
   usersWithThisGame: "Users with this game",
   noGamesMyPage: "You don't have any games yet",
   noGamesUserPage: "This user doesn't have any games yet",
-  errorFetchingGames: "There was an error etching games",
+  errorFetchingGames: "There was an error when fetching games",
   noOpinionsMyPage: "You don't have any opinions yet",
   noOpinionsUserPage: "This user doesn't have any opinions yet",
+  errorFetchingOpinions: "There was an error when fetching opinions",
 
   typeToSearch: "Type to search...",
   category: "Category",

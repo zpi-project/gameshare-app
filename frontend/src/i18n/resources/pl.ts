@@ -71,6 +71,7 @@ const pl: typeof en = {
   errorFetchingGames: "Wystąpił błąd podczas pobierania gier.",
   noOpinionsMyPage: "Nie posiadasz jeszcze żadnych opinii",
   noOpinionsUserPage: "Ten użytkownik nie posiada jeszcze żadnych opinii",
+  errorFetchingOpinions: "Wystąpił błąd podczas pobierania opinii",
 
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",

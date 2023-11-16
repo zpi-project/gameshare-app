@@ -11,7 +11,7 @@ export class OpinionApi {
   }
 
   static async getAllByUUID(uuid: string, page: number, size: number) {
-    const { data: opinions } = await Api.get<Paginated<Opinion>>(`/user/opinions${uuid}`, {
+    const { data: opinions } = await Api.get<Paginated<Opinion>>(`/user/${uuid}/opinions`, {
       params: { page, size },
     });
     return opinions;
