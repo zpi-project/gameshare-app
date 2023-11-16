@@ -5,6 +5,7 @@ import com.zpi.backend.game_instance.dto.GameInstanceUnAvailabilityDTO;
 import com.zpi.backend.reservation_status.ReservationStatus;
 import com.zpi.backend.reservations.DTO.NewReservationDTO;
 import com.zpi.backend.user.User;
+import com.zpi.backend.utils.DateUtils;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -46,6 +47,13 @@ public class Reservation {
     @Column(name="timestamp")
     private Date timestamp;
 
+    @Transient
+    private int duration;
+
+    public Reservation() {
+
+    }
+
     public Reservation fromDTO(NewReservationDTO newReservationDTO, User renter, GameInstance gameInstance) {
         this.renter = renter;
         this.gameInstance = gameInstance;
@@ -53,7 +61,19 @@ public class Reservation {
         this.endDate = newReservationDTO.getEndDate();
         this.renterComment = newReservationDTO.getRenterComment();
         this.timestamp = new Date(System.currentTimeMillis());
+        this.duration = DateUtils.getDuration(startDate,endDate);
         return this;
     }
+    public Reservation(User renter, GameInstance gameInstance, Date startDate, Date endDate, ReservationStatus status, String renterComment, Date timestamp) {
+        this.renter = renter;
+        this.gameInstance = gameInstance;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.renterComment = renterComment;
+        this.timestamp = timestamp;
+        this.duration = DateUtils.getDuration(startDate,endDate);
+    }
+
 
 }

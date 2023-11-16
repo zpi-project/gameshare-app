@@ -44,6 +44,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
                     "where U.uuid = :uuid and s.status = :status",
             nativeQuery = true
     )
+    //TODO it doesn't work
     Page<Reservation> getCurrentReservationsByOwner(Pageable pageable, @Param("uuid") String OwnerUuid, @Param("status") String status);
 
     List<Reservation> findReservationsByGameInstance_Uuid(String reservationUuid);

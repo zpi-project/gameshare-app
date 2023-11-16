@@ -15,7 +15,6 @@ import com.zpi.backend.game.exception.GameAlreadyRejectedException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance.GameInstanceOpinionsSpecification;
-import com.zpi.backend.game_instance.GameInstanceService;
 import com.zpi.backend.game_instance.dto.GameInstanceDetailsDTO;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
