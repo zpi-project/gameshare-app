@@ -90,7 +90,7 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
                   )),
                 )
               ) : (
-                <h4 className="ml-2 mt-2 text-xl">{t("searchGamesNoResults")}</h4>
+                <h4 className="ml-2 mt-2 text-xl">{t("noResults")}</h4>
               )}
               {(isFetchingNextPage || isLoading) && (
                 <>

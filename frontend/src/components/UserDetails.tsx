@@ -47,7 +47,7 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
                 }
               />
               {user.phoneNumber && (
-                <div className="w-full rounded-lg bg-card px-6 text-sm p-2.5 xl:text-base">
+                <div className="w-full rounded-lg bg-card p-2.5 px-6 text-sm xl:text-base">
                   {parsePhoneNumber(user.phoneNumber).formatInternational()}
                 </div>
               )}

@@ -15,6 +15,7 @@ export default {
 
   addOpinion: "Add opinion",
   seeMore: "See more",
+  seeLess: "See less",
   edit: "Edit",
 
   locationDisabledTooltip: "Allow localization in your browser settings and refresh page.",
@@ -58,14 +59,22 @@ export default {
   searchGamePlaceholder: "What board game would you like to play?",
   searchGameWithinCategoryPlaceholder: "Search games within this category",
   searchGamesError: "There was an error while searching games.",
-  searchGamesNoResults: "No results",
+  noResults: "No results",
   categoryGamesError: "There was a problem fetching games within this category.",
   categoryError: "There was a problem fetching this category.",
   gameError: "There was a problem fetching this game.",
-  usersWithThisGame: "Users with this game",
+  gameInstances: "Copies of this game",
   noGamesMyPage: "You don't have any games yet",
   noGamesUserPage: "This user doesn't have any games yet",
-  errorFetchingGames: "There was an error etching games",
+  noOpinionsMyPage: "You don't have any opinions yet",
+  noOpinionsUserPage: "This user doesn't have any opinions yet",
+  errorFetchingOpinions: "There was an error when fetching opinions",
+  errorFetchingGames: "There was an error fetching games.",
+  deactivated: "DEACTIVATED",
+  noGameInstances: "We couldn't find any games",
+  errorFetchingUsersOnMap: "There was an error fetching users on map.",
+  noGameUsers: "No one has this game yet",
+  errorFetchingGameInstances: "We couldn't load copies of this game",
 
   typeToSearch: "Type to search...",
   category: "Category",
@@ -74,5 +83,8 @@ export default {
   players: "Players",
   age: "Age",
   perDay: "day",
-  deactivated: "DEACTIVATED",
+
+  any: "Any",
+  any_male: "Any",
+  any_female: "Any",
 };

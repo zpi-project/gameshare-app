@@ -20,7 +20,7 @@ const Layout: FC = () => {
   const setRegisterFormOpen = useSetRecoilState(registerFormOpenState);
   const [token, setToken] = useRecoilState(tokenState);
 
-  const { isFetching, refetch } = useQuery({
+  const { refetch, isFetching } = useQuery({
     queryKey: ["role"],
     queryFn: RoleApi.getRole,
     enabled: token !== null,
