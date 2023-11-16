@@ -57,7 +57,6 @@ public class User{
         this.googleId = googleId;
         this.email = email;
         this.avatarLink = avatarLink;
-        this.avgRating = 0;
     }
 
     public static User fromGoogleTokenPayload(GoogleIdToken.Payload payload) {

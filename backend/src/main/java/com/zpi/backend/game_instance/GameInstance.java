@@ -42,6 +42,5 @@ public class GameInstance {
         this.description = newGameInstanceDTO.getDescription();
         this.isActive = true;
         this.images = new ArrayList<>();
-        this.avgRating = 0;
     }
 }
