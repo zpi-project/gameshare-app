@@ -1,23 +1,27 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { parsePhoneNumber } from "libphonenumber-js";
+import { URLS } from "@/constants/urls";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
 import Avatar from "@/components/Avatar";
-import { Map, LocationMarker } from "@/components/Map";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
   user?: User;
-  showEdit?: boolean;
   isLoading: boolean;
 }
 
-const GameInstanceUserDetailsSection: FC<Props> = ({ user, showEdit, isLoading }) => {
+const GameInstanceUserDetailsSection: FC<Props> = ({ user, isLoading }) => {
   const { t } = useTranslation();
-  const [dialogOpen, setDialogOpen] = useState(false);
+
+  let navigate = useNavigate();
+  const redirectUserPage = () => {
+    let path = `${URLS.PROFILE}/${user?.uuid}`;
+    navigate(path);
+  };
 
   return (
     <div className="flex h-full flex-col items-center gap-6">
@@ -40,7 +44,9 @@ const GameInstanceUserDetailsSection: FC<Props> = ({ user, showEdit, isLoading }
                 {parsePhoneNumber(user.phoneNumber).formatInternational()}
               </div>
             )}
-            <Button className="w-1/2">{t("seeProfile")}</Button>
+            <Button className="w-1/2" onClick={redirectUserPage}>
+              {t("seeProfile")}
+            </Button>
           </div>
         </>
       )}

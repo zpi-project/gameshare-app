@@ -1,13 +1,9 @@
-import { FC, useEffect, useRef } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { URLS } from "@/constants/urls";
-import { Game } from "@/types/Game";
 import { GameInstanceDetails } from "@/types/GameInstance";
-import { TimeBadge, PlayersBadge, AgeBadge } from "@/components/Badge";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface GameDetailsSectionProps {
   gameInstance: GameInstanceDetails;
@@ -15,23 +11,12 @@ interface GameDetailsSectionProps {
 
 const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance }) => {
   const { t } = useTranslation();
-  const divRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const setWidthToHeight = () => {
-      if (divRef.current) {
-        const height = divRef.current.clientHeight;
-        divRef.current.style.width = `${height}px`;
-        divRef.current.style.minWidth = `${height}px`;
-      }
-    };
-
-    setWidthToHeight();
-    window.addEventListener("resize", setWidthToHeight);
-    return () => {
-      window.removeEventListener("resize", setWidthToHeight);
-    };
-  }, []);
+  let navigate = useNavigate();
+  const redirectGamePage = () => {
+    let path = `${URLS.GAMES}/${gameInstance.game.id}`;
+    navigate(path);
+  };
 
   return (
     <div className="flex h-full w-full flex-col gap-3  px-4">
@@ -63,7 +48,9 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
         <h1 className="p-2 text-xl font-bold xl:text-3xl">{gameInstance.game.name}</h1>
         <p className="px-2 italic xl:text-lg 2xl:w-3/4">{gameInstance.description}</p>
       </div>
-      <Button className="absolute bottom-5 left-5 px-8">{t("seeGamePage")}</Button>
+      <Button className="absolute bottom-5 left-5 px-8" onClick={redirectGamePage}>
+        {t("seeGamePage")}
+      </Button>
       <Button className="absolute bottom-5 right-5 px-8">{t("seeAvailability")}</Button>
     </div>
   );

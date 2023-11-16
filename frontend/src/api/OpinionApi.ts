@@ -16,4 +16,14 @@ export class OpinionApi {
     });
     return opinions;
   }
+
+  static async getAllGameInstanceOpinions(uuid: string, page: number, size: number) {
+    const { data: opinions } = await Api.get<Paginated<Opinion>>(
+      `game-instances/${uuid}/opinions`,
+      {
+        params: { page, size },
+      },
+    );
+    return opinions;
+  }
 }

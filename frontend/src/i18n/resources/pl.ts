@@ -82,6 +82,7 @@ const pl: typeof en = {
 
   noGameUsers: "Nikt jeszcze nie ma tej gry",
   errorFetchingGameInstances: "Nie udało się pobrać egzemplarzy tej gry",
+  noOpinionsGameInstance: "Ten egzemplarz nie ma jeszcze żadnej opinii",
 
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",

@@ -78,6 +78,7 @@ export default {
   errorFetchingUsersOnMap: "There was an error fetching users on map.",
   noGameUsers: "No one has this game yet",
   errorFetchingGameInstances: "We couldn't load copies of this game",
+  noOpinionsGameInstance: "This game instance doesn't have any opinions yet",
 
   typeToSearch: "Type to search...",
   category: "Category",
