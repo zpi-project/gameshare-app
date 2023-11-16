@@ -66,6 +66,9 @@ export default {
   noGamesMyPage: "You don't have any games yet",
   noGamesUserPage: "This user doesn't have any games yet",
   errorFetchingGames: "There was an error etching games",
+  seeProfile: "See profile",
+  seeAvailability: "See availability",
+  seeGamePage: "See game page",
 
   typeToSearch: "Type to search...",
   category: "Category",

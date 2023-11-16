@@ -44,7 +44,7 @@ const GameInstance: FC = () => {
       : theme;
 
   return (
-    <div className="flex h-full w-full flex-row gap-4">
+    <div className="flex h-full w-full flex-row gap-6">
       {gameInstance && (
         <>
           <div className="relative w-1/3 flex-grow rounded-lg bg-section">
@@ -65,8 +65,8 @@ const GameInstance: FC = () => {
             </div>
           </div>
 
-          <div className="flex w-2/3 flex-grow flex-col gap-3">
-            <div className="flex h-[550px] w-full flex-row gap-3">
+          <div className="flex w-2/3 flex-grow flex-col gap-5">
+            <div className="flex h-[550px] w-full flex-row gap-5">
               <div className="h-full w-3/5 overflow-hidden rounded-lg">
                 <Map
                   autolocate
