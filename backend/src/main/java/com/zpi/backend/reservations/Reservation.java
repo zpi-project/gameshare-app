@@ -1,6 +1,7 @@
 package com.zpi.backend.reservations;
 
 import com.zpi.backend.game_instance.GameInstance;
+import com.zpi.backend.game_instance.dto.GameInstanceUnAvailabilityDTO;
 import com.zpi.backend.reservation_status.ReservationStatus;
 import com.zpi.backend.reservations.DTO.NewReservationDTO;
 import com.zpi.backend.user.User;
@@ -54,4 +55,5 @@ public class Reservation {
         this.timestamp = new Date(System.currentTimeMillis());
         return this;
     }
+
 }

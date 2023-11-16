@@ -13,8 +13,8 @@ import com.zpi.backend.game_instance.dto.*;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
+import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.reservations.ReservationRepository;
-import com.zpi.backend.reservations.ReservationService;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
@@ -23,12 +23,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.util.Pair;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -173,10 +172,38 @@ public class GameInstanceService {
                 new Pagination(gameInstancePage.getTotalElements(), gameInstancePage.getTotalPages()));
     }
 
-    public GameInstanceAvaliabilityDTO getGameInstanceAvaliability(String uuid) {
-        GameInstance gameInstance = gameInstanceRepository.findByUuid(uuid).get();
-        reservationRepository.get
-                //TODO napisać sql do pobierania rezerwacji ze wzgledu na mieisiac rok i gameinstance
-        return new GameInstanceAvaliabilityDTO(gameInstance);
+    public boolean matchesUnAvaliabilityCriteria(int year,int month,Reservation reservation){
+        return reservation.getStartDate().getYear()==year && reservation.getStartDate().getMonth()+1==month;
+    }
+
+// nawet nie proponuj robienia tego kwerendą
+    public List<GameInstanceUnAvailabilityDTO> getUnAvaliability(List<Reservation> reservationList,int year,int month,Boolean withReservations){
+        List<GameInstanceUnAvailabilityDTO> periods = new ArrayList<>();
+       for(Reservation reservation:reservationList){
+           if(matchesUnAvaliabilityCriteria(year,month,reservation)){
+               Date startDate = reservation.getStartDate();
+               Date endDate = reservation.getEndDate();
+               if(reservation.getEndDate().getMonth()+1!=month){
+                   Calendar calendar = Calendar.getInstance();
+                   calendar.setTime(startDate);
+                   int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                   calendar.set(Calendar.DAY_OF_MONTH, lastDay);
+                   endDate = calendar.getTime();
+               }
+               if (withReservations){
+                   periods.add(new GameInstanceUnAvailabilityReservationDTO(startDate,endDate,reservation.getUuid()));
+               }
+               else {
+                     periods.add(new GameInstanceUnAvailabilityDTO(startDate,endDate));
+               }
+           }
+       }
+       return periods;
+    }
+
+
+    public List<GameInstanceUnAvailabilityDTO> getGameInstanceAvailability(String uuid, String year, String month,Boolean withReservations) {
+        List<Reservation> reservations= reservationRepository.findReservationsByGameInstance_Uuid(uuid);
+        return getUnAvaliability(reservations,Integer.parseInt(year),Integer.parseInt(month),withReservations);
     }
 }

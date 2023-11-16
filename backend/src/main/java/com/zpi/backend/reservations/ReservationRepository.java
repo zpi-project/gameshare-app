@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
@@ -44,7 +46,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     )
     Page<Reservation> getCurrentReservationsByOwner(Pageable pageable, @Param("uuid") String OwnerUuid, @Param("status") String status);
 
-
+    List<Reservation> findReservationsByGameInstance_Uuid(String reservationUuid);
 
 
     Page<Reservation> getReservationsByGameInstance_Uuid(Pageable pageable, String gameInstanceUuid);

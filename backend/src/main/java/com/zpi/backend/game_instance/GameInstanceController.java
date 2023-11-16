@@ -153,9 +153,9 @@ public class GameInstanceController {
     }
 
     @GetMapping("/${uuid}/avaliability")
-    public ResponseEntity<GameInstanceAvaliabilityDTO> getGameInstanceAvaliability(@PathVariable String uuid,@RequestParam String year,@RequestParam String month) throws GameInstanceDoesNotExistException {
+    public ResponseEntity<GameInstanceUnAvailabilityDTO> getGameInstanceUnAvaliability(@PathVariable String uuid, @RequestParam String year, @RequestParam String month) throws GameInstanceDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getGameInstanceAvaliability(uuid));
+                .body(gameInstanceService.getGameInstanceAvailability(uuid,year,month,false));
     }
 
 }
