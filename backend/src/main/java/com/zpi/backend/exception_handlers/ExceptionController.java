@@ -16,6 +16,8 @@ import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user_opinion.exception.DeleteSomeoneElseOpinionException;
 import com.zpi.backend.user_opinion.exception.EditSomeoneElseOpinionException;
 import com.zpi.backend.user_opinion.exception.UserOpinionDoesNotExistException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.mediatype.problem.Problem;
 import org.springframework.http.HttpHeaders;
@@ -31,11 +33,13 @@ import java.io.IOException;
 
 @ControllerAdvice
 public class ExceptionController {
+    private static final Logger logger = LoggerFactory.getLogger(ExceptionController.class);
 
     @ResponseBody
     @ExceptionHandler(ResponseStatusException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     ResponseEntity ITEHandler(ResponseStatusException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -49,6 +53,7 @@ public class ExceptionController {
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     ResponseEntity BREHandler(BadRequestException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -62,6 +67,7 @@ public class ExceptionController {
     @ExceptionHandler(IllegalAccessException.class)
     @ResponseStatus(value = HttpStatus.FORBIDDEN)
     ResponseEntity IAEHandler(IllegalAccessException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.FORBIDDEN)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -76,6 +82,7 @@ public class ExceptionController {
     @ExceptionHandler(UserAlreadyExistsException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity UAEHandler(UserAlreadyExistsException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -88,6 +95,7 @@ public class ExceptionController {
     @ExceptionHandler(UserDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity UDNEHandler(UserDoesNotExistException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -101,6 +109,7 @@ public class ExceptionController {
     @ExceptionHandler(UndefinedUserException.class)
     @ResponseStatus(value = HttpStatus.I_AM_A_TEAPOT)
     ResponseEntity<Problem> UUEHandler(UndefinedUserException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.I_AM_A_TEAPOT)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -115,6 +124,7 @@ public class ExceptionController {
     @ExceptionHandler(CategoryAlreadyExistsException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     ResponseEntity CAEHandler(CategoryAlreadyExistsException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -128,6 +138,7 @@ public class ExceptionController {
     @ExceptionHandler(CategoryDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity CDNEHandler(CategoryDoesNotExistException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -142,6 +153,7 @@ public class ExceptionController {
     @ExceptionHandler(GameAlreadyExistsException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     ResponseEntity GAEHandler(GameAlreadyExistsException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -155,6 +167,7 @@ public class ExceptionController {
     @ExceptionHandler(GameDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity GNEHandler(GameDoesNotExistException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -169,6 +182,7 @@ public class ExceptionController {
     @ExceptionHandler(GameAlreadyAcceptedException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     ResponseEntity GAAHandler(GameAlreadyAcceptedException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -182,6 +196,7 @@ public class ExceptionController {
     @ExceptionHandler(GameAlreadyRejectedException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     ResponseEntity GARHandler(GameAlreadyRejectedException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -197,6 +212,7 @@ public class ExceptionController {
     @ExceptionHandler(GameInstanceDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity GINEHandler(GameInstanceDoesNotExistException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -210,6 +226,7 @@ public class ExceptionController {
     @ExceptionHandler(GameInstanceStatusException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     ResponseEntity GISHandler(GameInstanceStatusException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -224,6 +241,7 @@ public class ExceptionController {
     @ExceptionHandler(EditSomeoneElseOpinionException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     ResponseEntity ESEOHandler(EditSomeoneElseOpinionException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -237,6 +255,7 @@ public class ExceptionController {
     @ExceptionHandler(DeleteSomeoneElseOpinionException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     ResponseEntity DSEOHandler(DeleteSomeoneElseOpinionException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -250,6 +269,7 @@ public class ExceptionController {
     @ExceptionHandler(UserOpinionDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity ODNEHandler(UserOpinionDoesNotExistException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -264,6 +284,7 @@ public class ExceptionController {
     @ExceptionHandler(GameInstanceOpinionDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity GIODNEHandler(GameInstanceOpinionDoesNotExistException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -278,6 +299,7 @@ public class ExceptionController {
     @ExceptionHandler(GameInstanceImageDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity GIINEHandler(GameInstanceImageDoesNotExistException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -291,6 +313,7 @@ public class ExceptionController {
     @ExceptionHandler(TooManyImagesException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     ResponseEntity TMIEHandler(TooManyImagesException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -305,6 +328,7 @@ public class ExceptionController {
     @ExceptionHandler(FileWriteException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     ResponseEntity FWEHandler(FileWriteException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -318,6 +342,7 @@ public class ExceptionController {
     @ExceptionHandler(InvalidFileTypeException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     ResponseEntity IFTEHandler(InvalidFileTypeException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -331,6 +356,7 @@ public class ExceptionController {
     @ExceptionHandler(GCPFileUploadException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity GCPFUEHandler(GCPFileUploadException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -343,6 +369,7 @@ public class ExceptionController {
     @ExceptionHandler(IOException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity IOEHandler(IOException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
@@ -351,5 +378,4 @@ public class ExceptionController {
                         .withTitle(ex.getClass().getSimpleName())
                         .withDetail(ex.getMessage()));
     }
-
 }

@@ -16,6 +16,8 @@ import com.zpi.backend.user.exception.UserAlreadyExistsException;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.validators.AdminChecker;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,11 +31,12 @@ import java.util.Optional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     private  UserRepository userRepository;
     private final RoleRepository roleRepository;
     private AdminChecker adminChecker;
@@ -84,8 +87,13 @@ public class UserService {
 //            Sending e-mail
             String language = languageOpt.orElse(null);
             Context registrationContext = emailService.getRegistrationEmailContext(language);
-            emailService.sendEmailWithHtmlTemplate(user.getEmail(),"GameShare - Registration",
-                    EmailService.EMAIL_TEMPLATE, registrationContext);
+            try {
+                emailService.sendEmailWithHtmlTemplate(user.getEmail(), "GameShare - Registration",
+                        EmailService.EMAIL_TEMPLATE, registrationContext);
+                logger.info("Registration mail sent successfully");
+            } catch (Exception ex){
+                logger.error("Unable to send email trace" + ex.getMessage());
+            }
         }
         else {
             throw new UserAlreadyExistsException("User already exists");

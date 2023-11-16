@@ -1,18 +1,19 @@
 package com.zpi.backend.emails;
 
-import jakarta.mail.MessagingException;
+import org.springframework.core.io.Resource;
 import jakarta.mail.internet.MimeMessage;
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Base64;
 
 @Component
@@ -22,6 +23,9 @@ public class EmailService {
     private String frontend_host;
     @Value("${FRONTEND_PORT}")
     private String frontend_port;
+    @Value("classpath:images/gameshare_logo.jpeg")
+    private Resource logo_resource;
+    private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
     public static final String EMAIL_TEMPLATE = "email-template";
     private final JavaMailSender emailSender;
     private final TemplateEngine templateEngine;
@@ -49,6 +53,7 @@ public class EmailService {
         return context;
 
     }
+    @Async
     public void sendEmailWithHtmlTemplate(String to, String subject, String templateName, Context context) {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
@@ -59,14 +64,13 @@ public class EmailService {
             String htmlContent = templateEngine.process(templateName, context);
             helper.setText(htmlContent, true);
             emailSender.send(mimeMessage);
-        } catch (MessagingException e) {
-            System.out.println("Error while sending an email. "+e.getMessage());
+        } catch (Exception e) {
+            logger.error("Error while sending an email. "+e.getMessage());
         }
     }
 
     private String getEncodedLogo() throws IOException {
-        Path path = Paths.get("backend/src/main/resources/images/gameshare_logo.jpeg");
-        byte[] bytes = Files.readAllBytes(path);
+        byte[] bytes = IOUtils.toByteArray(logo_resource.getInputStream());
         Base64.Encoder encoder = Base64.getEncoder();
         String base64String = encoder.encodeToString(bytes);
         return "data:image/png;base64," + base64String;
