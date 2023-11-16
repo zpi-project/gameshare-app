@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { SearchGameInstance } from "@/types/GameInstance";
 import { Skeleton } from "@/components/ui/skeleton";
-import GameResult from "./GameResult";
+import GameInstanceSearchCard from "./GameInstanceSearchCard";
 
 interface GamesResultsProps {
   gameInstances: SearchGameInstance[] | undefined;
@@ -12,7 +12,7 @@ interface GamesResultsProps {
   isFetchingNextPage: boolean;
 }
 
-const GamesResults: FC<GamesResultsProps> = ({
+const GameInstancesSearchResults: FC<GamesResultsProps> = ({
   gameInstances,
   isLoading,
   isFetchingNextPage,
@@ -35,7 +35,7 @@ const GamesResults: FC<GamesResultsProps> = ({
         <>
           {gameInstances && gameInstances.length ? (
             gameInstances.map(gameInstance => (
-              <GameResult
+              <GameInstanceSearchCard
                 gameInstance={gameInstance}
                 key={gameInstance.uuid}
                 setActive={setActive}
@@ -51,4 +51,4 @@ const GamesResults: FC<GamesResultsProps> = ({
   );
 };
 
-export default GamesResults;
+export default GameInstancesSearchResults;

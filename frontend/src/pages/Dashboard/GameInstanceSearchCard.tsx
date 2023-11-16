@@ -5,12 +5,12 @@ import { SearchGameInstance } from "@/types/GameInstance";
 import { TimeBadge, PlayersBadge, AgeBadge, PriceBadge } from "@/components/Badge";
 import Stars from "@/components/Stars";
 
-interface GameResultProps {
+interface GameInstanceSearchCardProps {
   gameInstance: SearchGameInstance;
   setActive: (uuid: string) => void;
 }
 
-const GameResult: FC<GameResultProps> = ({
+const GameInstanceSearchCard: FC<GameInstanceSearchCardProps> = ({
   gameInstance: {
     uuid,
     pricePerDay,
@@ -23,7 +23,7 @@ const GameResult: FC<GameResultProps> = ({
 }) => {
   return (
     <Link
-      className="flex flex-row gap-2 rounded-lg bg-card p-2 hover:bg-accent"
+      className="flex flex-row gap-4 rounded-lg bg-card p-3 hover:bg-accent"
       to={`${URLS.GAME_INSTANCE}/${uuid}}`}
       onMouseEnter={() => setActive(ownerUUID)}
       onMouseLeave={() => setActive("")}
@@ -44,10 +44,10 @@ const GameResult: FC<GameResultProps> = ({
             <AgeBadge age={age} />
           </div>
         </div>
-        <p className="line-clamp-2 text-sm italic">{description}</p>
+        <p className="line-clamp-2 break-all text-sm italic">{description}</p>
       </section>
     </Link>
   );
 };
 
-export default GameResult;
+export default GameInstanceSearchCard;

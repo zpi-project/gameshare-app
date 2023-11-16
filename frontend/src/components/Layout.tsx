@@ -16,11 +16,11 @@ import Spinner from "./ui/Spinner";
 
 const Layout: FC = () => {
   const setRole = useSetRecoilState(roleState);
-  const [isRoleFetched, setIsRoleFetched] = useRecoilState(isRoleFetchedState);
+  const setIsRoleFetched = useSetRecoilState(isRoleFetchedState);
   const setRegisterFormOpen = useSetRecoilState(registerFormOpenState);
   const [token, setToken] = useRecoilState(tokenState);
 
-  const { refetch } = useQuery({
+  const { refetch, isFetching } = useQuery({
     queryKey: ["role"],
     queryFn: RoleApi.getRole,
     enabled: token !== null,
@@ -75,7 +75,7 @@ const Layout: FC = () => {
         <RegisterUserForm onRegisterSuccess={() => void refetch()} />
         <Outlet />
       </div>
-      {!isRoleFetched && <Spinner />}
+      {isFetching && <Spinner />}
     </div>
   );
 };

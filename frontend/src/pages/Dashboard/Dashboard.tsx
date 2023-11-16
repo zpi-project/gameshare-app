@@ -2,8 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { isRoleFetchedState } from "@/state/isRoleFetched";
+import { useRecoilState } from "recoil";
 import { locationState } from "@/state/location";
 import { GameInstanceSearchParams } from "@/types/GameInstance";
 import { User } from "@/types/User";
@@ -12,11 +11,11 @@ import { UserApi } from "@/api/UserApi";
 import { Map, LocationButton, LocationMarker } from "@/components/Map";
 import LoadingMap from "@/components/Map/LoadingMap";
 import UserMarker from "@/components/Map/UserMarker";
+import UserFilter from "@/components/UserFilter";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/components/ui/use-toast";
-import GamesResults from "./GamesResults";
+import GameInstancesSearchResults from "./GamesInstancesSearchResults";
 import GamesSearch from "./GamesSearch";
-import UserFilter from "./UserFilter";
 
 const DEFAULT_SEARCH_PARAMS: GameInstanceSearchParams = {
   searchName: "",
@@ -34,7 +33,6 @@ const Dashboard: FC = () => {
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
   const { toast } = useToast();
   const { t } = useTranslation();
-  const isRoleFetched = useRecoilValue(isRoleFetchedState);
 
   const {
     data: gameInstances,
@@ -44,7 +42,7 @@ const Dashboard: FC = () => {
     fetchNextPage: fetchGamesNextPage,
     isFetchingNextPage: isFetchingGamesNextPage,
   } = useInfiniteQuery({
-    queryKey: ["game-instances", searchParams, userParam?.uuid],
+    queryKey: ["search-game-instances", searchParams, userParam?.uuid],
     queryFn: ({ pageParam = 0 }) =>
       GameInstanceApi.search(
         latitude,
@@ -97,7 +95,7 @@ const Dashboard: FC = () => {
     <div className="flex h-full w-full flex-row gap-6">
       <div className="flex-grow overflow-hidden rounded-lg bg-section">
         <Map autolocate location={location} setLocation={setLocation}>
-          {(isUsersLoading || isFetchingUsersNextPage) && isRoleFetched ? <LoadingMap /> : <></>}
+          {isUsersLoading || isFetchingUsersNextPage ? <LoadingMap /> : <></>}
           <LocationButton />
           <LocationMarker disabled />
           <>
@@ -119,7 +117,7 @@ const Dashboard: FC = () => {
         <GamesSearch onSubmit={setSearchParams} />
         {userParam && <UserFilter user={userParam} />}
         <ScrollArea>
-          <GamesResults
+          <GameInstancesSearchResults
             gameInstances={
               gameInstances ? gameInstances.pages.flatMap(page => page.results) : undefined
             }

@@ -66,13 +66,16 @@ const pl: typeof en = {
   categoryError: "Nie udało się pobrać tej kategorii.",
   gameError: "Nie udało się pobrać danych o tej grze.",
 
-  usersWithThisGame: "Użytkownicy z tą grą",
+  gameInstances: "Egzemplarze tej gry",
   noGamesMyPage: "Nie posiadasz jeszcze żadnej gry",
   noGamesUserPage: "Ten użytkownik nie posiada jeszcze żadnych gier",
   errorFetchingGames: "Wystąpił błąd podczas pobierania gier.",
   deactivated: "NIEAKTYWNA",
   noGameInstances: "Nie znaleziono żadnych gier",
   errorFetchingUsersOnMap: "Wystąpił błąd podczas pobierania użytkowników.",
+
+  noGameUsers: "Nikt jeszcze nie ma tej gry",
+  errorFetchingGameInstances: "Nie udało się pobrać egzemplarzy tej gry",
 
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",
