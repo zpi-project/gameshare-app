@@ -23,7 +23,7 @@ public interface GameInstanceRepository extends JpaRepository<GameInstance, Long
     @Transactional
     @Query(value = "update game_instances " +
             "set avg_rating = " +
-            "(select avg(stars) from game_instance_opinion " +
+            "(select avg(stars) from game_instance_opinions " +
             "where game_instance_id = :gameInstanceId)" +
             "where id = :gameInstanceId",
             nativeQuery = true)
