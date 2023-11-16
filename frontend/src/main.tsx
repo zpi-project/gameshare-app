@@ -8,6 +8,7 @@ import Error from "@/pages/Error";
 import GameSearch from "@/pages/GameSearch";
 import MyProfile from "@/pages/MyProfile";
 import UserProfile from "@/pages/UserProfile";
+import GameInstance from "@/pages/GameInstance";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import App from "./App";
 import "./index.css";
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${URLS.GAME_INSTANCE}/:id`,
-        element: <div>game instance page</div>,
+        element: <GameInstance />,
       },
       {
         path: `${URLS.PROFILE}/:id`,
