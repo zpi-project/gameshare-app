@@ -18,12 +18,12 @@ const Opinion: FC<Props> = ({ opinion }) => {
   return (
     <div className="flex w-full flex-row items-center gap-3 rounded-lg bg-card p-4">
       <Avatar user={opinion.ratingUser} className="h-16 w-16" />
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-row justify-between">
+      <div className="flex w-full flex-col gap-4">
+        <div className="flex w-full flex-row justify-between">
           <div className="text-primary">{getFullname(opinion.ratingUser)}</div>
           <Stars count={opinion.stars} />
         </div>
-        <div className="min-h-8 pr-2 text-xs italic">
+        <div className="min-h-8 break-all pr-2 text-xs italic">
           {showAll ? (
             opinion.description
           ) : (
