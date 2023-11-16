@@ -9,4 +9,11 @@ export class OpinionApi {
     });
     return opinions;
   }
+
+  static async getAllByUUID(uuid: string, page: number, size: number) {
+    const { data: opinions } = await Api.get<Paginated<Opinion>>(`/user/opinions${uuid}`, {
+      params: { page, size },
+    });
+    return opinions;
+  }
 }
