@@ -10,4 +10,5 @@ public interface GameInstanceImageRepository extends JpaRepository<GameInstanceI
     Optional<GameInstanceImage> findByGameInstanceUuidAndGameInstance_OwnerGoogleId(
             String gameInstanceImageUUID, String googleId);
 
+    void deleteAllByGameInstanceUuid(String gameInstanceUUID);
 }
