@@ -13,10 +13,6 @@ import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
 import com.zpi.backend.game.exception.GameAlreadyExistsException;
 import com.zpi.backend.game.exception.GameAlreadyRejectedException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
-import com.zpi.backend.game_instance.GameInstance;
-import com.zpi.backend.game_instance.GameInstanceOpinionsSpecification;
-import com.zpi.backend.game_instance.GameInstanceService;
-import com.zpi.backend.game_instance.dto.GameInstanceDetailsDTO;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
@@ -25,7 +21,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 

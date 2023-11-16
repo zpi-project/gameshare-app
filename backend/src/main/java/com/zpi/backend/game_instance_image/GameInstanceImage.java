@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "game_instance_images")
 public class GameInstanceImage {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -20,12 +21,9 @@ public class GameInstanceImage {
     @JoinColumn(name="game_instance_id", nullable=false)
     private GameInstance gameInstance;
 
-    public GameInstanceImage(String name, String image) {
+    public GameInstanceImage(String name, String image, GameInstance gameInstance) {
         this.imageName = name;
         this.imageLink = image;
-    }
-
-    public GameInstanceImage(String imageLink) {
-        this.imageLink = imageLink;
+        this.gameInstance = gameInstance;
     }
 }
