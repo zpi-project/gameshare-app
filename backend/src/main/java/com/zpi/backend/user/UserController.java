@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 
 
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -56,7 +57,8 @@ public class UserController {
     )
     @PostMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication, Optional<String> language) throws UserAlreadyExistsException {
+    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication, Optional<String> language)
+            throws UserAlreadyExistsException, IOException {
         System.out.println("... called createUser");
         userService.registerUser(updateUserDTO, authentication, language);
         return ResponseEntity.status(HttpStatus.CREATED).body("User created");

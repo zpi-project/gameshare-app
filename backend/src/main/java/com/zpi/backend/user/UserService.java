@@ -24,6 +24,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class UserService {
         this.userRepository.save(user);
     }
 
-    public void registerUser(UpdateUserDTO updateUserDTO, Authentication authentication, Optional<String> languageOpt) throws UserAlreadyExistsException {
+    public void registerUser(UpdateUserDTO updateUserDTO, Authentication authentication, Optional<String> languageOpt) throws UserAlreadyExistsException, IOException {
         User user = (User) authentication.getPrincipal();
         if(!checkIfUserExists(user.getGoogleId())) {
             user.update(updateUserDTO);

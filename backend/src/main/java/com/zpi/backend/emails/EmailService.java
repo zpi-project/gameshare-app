@@ -9,6 +9,12 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
+
 @Component
 public class EmailService {
 
@@ -27,7 +33,7 @@ public class EmailService {
         this.translationService = emailTranslationService;
     }
 
-    public Context setContextForEmailTemplate(String title, String header, String message, String languageCode){
+    public Context setContextForEmailTemplate(String title, String header, String message, String languageCode) throws IOException {
         Context context = new Context();
         context.setVariable("title", title);
         context.setVariable("header", header);
@@ -38,6 +44,7 @@ public class EmailService {
         context.setVariable("button",
                 translationService.getMessage("email.button", languageCode));
         context.setVariable("language", languageCode);
+        context.setVariable("logo_image", getEncodedLogo());
 
         return context;
 
@@ -57,8 +64,16 @@ public class EmailService {
         }
     }
 
+    private String getEncodedLogo() throws IOException {
+        Path path = Paths.get("backend/src/main/resources/images/gameshare_logo.jpeg");
+        byte[] bytes = Files.readAllBytes(path);
+        Base64.Encoder encoder = Base64.getEncoder();
+        String base64String = encoder.encodeToString(bytes);
+        return "data:image/png;base64," + base64String;
+    }
+
     // Particular emails
-    public Context getRegistrationEmailContext(String languageCode) {
+    public Context getRegistrationEmailContext(String languageCode) throws IOException {
         String title = translationService.getMessage("email.registration.title", languageCode);
         String header = translationService.getMessage("email.registration.header", languageCode);
         String message = translationService.getMessage("email.registration.message", languageCode);

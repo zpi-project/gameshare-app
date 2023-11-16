@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
+
 @ControllerAdvice
 public class ExceptionController {
 
@@ -329,6 +331,18 @@ public class ExceptionController {
     @ExceptionHandler(GCPFileUploadException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity GCPFUEHandler(GCPFileUploadException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
+    }
+    @ResponseBody
+    @ExceptionHandler(IOException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity IOEHandler(IOException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
