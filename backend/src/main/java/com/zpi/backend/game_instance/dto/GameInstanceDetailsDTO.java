@@ -11,12 +11,12 @@ import java.util.List;
 
 @Data
 public class GameInstanceDetailsDTO extends GameInstanceDTO {
-    private List<LinkDTO> gameInstanceImage;
+    private List<LinkDTO> images;
     private UserGuestDTO owner;
 
     public GameInstanceDetailsDTO(GameInstance gameInstance, boolean isGuest){
         super(gameInstance);
-        gameInstanceImage = gameInstance.getImages()
+        images = gameInstance.getImages()
                 .stream().map(this::convertToLinkDTO)
                 .toList();
         if (isGuest)
