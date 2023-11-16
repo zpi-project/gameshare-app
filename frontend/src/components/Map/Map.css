@@ -19,3 +19,41 @@
 .dark .leaflet-control-attribution {
   filter: var(--leaflet-tile-filter, none);
 }
+
+.leaflet-popup-tip-container,
+.leaflet-popup-close-button {
+  display: none;
+}
+
+.leaflet-popup-content-wrapper {
+  padding: 1px;
+  border-radius: 8px;
+  margin: 0;
+  bottom: -40px !important;
+  background-color: hsl(var(--background));
+  cursor: pointer;
+}
+
+.leaflet-popup {
+  bottom: -120px !important;
+}
+
+.location-marker svg {
+  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+}
+
+.location-marker.active svg path {
+  transition-duration: 200ms;
+  transition: all;
+  fill: rgb(0, 108, 209);
+}
+
+@keyframes jump {
+  30% {
+    margin-top: -64px;
+  }
+}
+
+.location-marker.active {
+  animation: jump 0.5s ease 1;
+}

@@ -17,6 +17,7 @@ const pl: typeof en = {
 
   addOpinion: "Dodaj opinię",
   seeMore: "Rozwiń",
+  seeLess: "Zwiń",
   edit: "Edytuj",
 
   locationDisabledTooltip: "Włącz opcję lokalizacji w przeglądarce i odśwież stronę.",
@@ -60,27 +61,38 @@ const pl: typeof en = {
   searchGamePlaceholder: "W jaką grę planszową chcesz zagrać?",
   searchGameWithinCategoryPlaceholder: "Wyszukaj grę w tej kategorii...",
   searchGamesError: "Wystąpił błąd podczas wyszukiwania gier.",
-  searchGamesNoResults: "Brak wyników",
+  noResults: "Brak wyników",
   categoryGamesError: "Nie udało się pobrać gier dla tej kategorii.",
   categoryError: "Nie udało się pobrać tej kategorii.",
   gameError: "Nie udało się pobrać danych o tej grze.",
 
-  usersWithThisGame: "Użytkownicy z tą grą",
+  gameInstances: "Egzemplarze tej gry",
   noGamesMyPage: "Nie posiadasz jeszcze żadnej gry",
   noGamesUserPage: "Ten użytkownik nie posiada jeszcze żadnych gier",
   errorFetchingGames: "Wystąpił błąd podczas pobierania gier.",
   seeProfile: "Zobacz profil",
   seeAvailability: "Zobacz dostępność",
   seeGamePage: "Zobacz stronę gry",
+  noOpinionsMyPage: "Nie posiadasz jeszcze żadnych opinii",
+  noOpinionsUserPage: "Ten użytkownik nie posiada jeszcze żadnych opinii",
+  errorFetchingOpinions: "Wystąpił błąd podczas pobierania opinii",
+  deactivated: "NIEAKTYWNA",
+  noGameInstances: "Nie znaleziono żadnych gier",
+  errorFetchingUsersOnMap: "Wystąpił błąd podczas pobierania użytkowników.",
+
+  noGameUsers: "Nikt jeszcze nie ma tej gry",
+  errorFetchingGameInstances: "Nie udało się pobrać egzemplarzy tej gry",
 
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",
   all: "Wszystkie",
-  pricePerDay: "Cena na dzień",
-  players: "L. graczy",
+  pricePerDay: "Cena za dzień",
+  players: "Liczba graczy",
   age: "Wiek",
-  perDay: "dzień",
-  deactivated: "NIEAKTYWNA",
+  perDay: "na dzień",
+  any: "Dowolne",
+  any_male: "Dowolny",
+  any_female: "Dowolna",
 };
 
 export default pl;

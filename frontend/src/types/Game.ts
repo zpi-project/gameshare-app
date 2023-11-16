@@ -9,7 +9,7 @@ export interface GameStatus {
 
 export interface Game {
   id: number;
-  originalId: number;
+  originalId?: number;
   name: string;
   categories: Category[];
   minPlayers: number;
@@ -18,5 +18,17 @@ export interface Game {
   age: number;
   shortDescription: string;
   image: string;
-  gameStatus: GameStatus;
+  gameStatus?: GameStatus;
+}
+
+export interface GameInfo {
+  id: number;
+  name: string;
+  image: string;
+  minPlayers: number;
+  maxPlayers: number;
+  playingTime: number;
+  age: number;
+  shortDescription: string;
+  categories: Category[];
 }

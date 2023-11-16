@@ -3,16 +3,22 @@ import { Marker, useMapEvents } from "react-leaflet";
 import { divIcon } from "leaflet";
 import { useMapContext } from "./Map";
 
-const LocationMarker: FC = () => {
+interface LocationMarkerProps {
+  disabled?: boolean;
+}
+
+const LocationMarker: FC<LocationMarkerProps> = ({ disabled }) => {
   const { location, setLocation } = useMapContext();
 
   useMapEvents({
     click(e) {
-      const mapContainer = e.target._container;
-      const clickedOnMap = e.originalEvent.target === mapContainer;
+      if (!disabled) {
+        const mapContainer = e.target._container;
+        const clickedOnMap = e.originalEvent.target === mapContainer;
 
-      if (clickedOnMap) {
-        setLocation && setLocation([e.latlng.lat, e.latlng.lng]);
+        if (clickedOnMap) {
+          setLocation && setLocation([e.latlng.lat, e.latlng.lng]);
+        }
       }
     },
   });

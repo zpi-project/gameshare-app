@@ -55,8 +55,8 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
             <ScrollArea className="h-[calc(100%-100px)] w-full flex-grow">
               {isLoading ? (
                 <div className="flex flex-col gap-4 pr-4">
-                  {Array.from({ length: 4 }).map(() => (
-                    <Skeleton className="h-[152px] rounded-lg" />
+                  {Array.from({ length: 4 }).map((_, id) => (
+                    <Skeleton className="h-[152px] rounded-lg" key={id} />
                   ))}
                 </div>
               ) : isError ? (

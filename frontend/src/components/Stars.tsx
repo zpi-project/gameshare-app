@@ -1,28 +1,38 @@
-import { FC, useState } from "react";
-import Star from "./Star";
-
-// Import the Star component
+import { FC } from "react";
+import { StarIcon } from "lucide-react";
 
 interface Props {
   count: number;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
+  variant?: "primary" | "secondary";
+  size?: number;
 }
 
-const Stars: FC<Props> = ({ count, onMouseEnter, onMouseLeave }) => {
-  const [hoveredCount, setHoveredCount] = useState<number | null>(null);
-
+const Stars: FC<Props> = ({ count, variant = "primary", size = 24 }) => {
   return (
     <div className="flex gap-1">
       {Array.from({ length: 5 }).map((_, idx) => (
-        <Star
-          key={idx}
-          filled={idx < (hoveredCount ?? count)} // Determine whether the star should be filled based on the hovered count
-          onMouseEnter={() => setHoveredCount(idx + 1)} // Set the hovered count when the mouse enters a star
-          onMouseLeave={() => setHoveredCount(null)} // Reset the hovered count when the mouse leaves a star
-        />
+        <Star variant={variant} key={idx} filled={idx < count} size={size} />
       ))}
     </div>
+  );
+};
+
+interface StarProps {
+  filled: boolean;
+  variant?: "primary" | "secondary";
+  size: number;
+}
+
+const Star: FC<StarProps> = ({ filled, variant = "primary", size }) => {
+  return (
+    <StarIcon
+      size={size}
+      color={variant == "primary" ? "hsl(var(--primary))" : "hsl(var(--secondary))"}
+      fill={
+        filled ? (variant == "primary" ? "hsl(var(--primary))" : "hsl(var(--secondary))") : "none"
+      }
+      className="transition-all duration-200"
+    />
   );
 };
 
