@@ -2,9 +2,12 @@ import { Dispatch, FC, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { z } from "zod";
 import { GameInstanceSearchParams } from "@/types/GameInstance";
+import { CategoryApi } from "@/api/CategoryApi";
+import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
 import {
   FormField,
@@ -15,6 +18,7 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { AGE_OPTIONS, PLAYERS_OPTIONS, PRICE_PER_DAY_OPTIONS } from "./options";
 
 interface GamesSearchProps {
   onSubmit: Dispatch<SetStateAction<GameInstanceSearchParams>>;
@@ -23,8 +27,14 @@ interface GamesSearchProps {
 const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
 
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: CategoryApi.getAll,
+    select: data => data.map(({ name, id }) => ({ label: name, value: id })),
+  });
+
   const formSchema = z.object({
-    searchName: z.string(),
+    searchName: z.string().optional(),
     categoryId: z.number().optional(),
     maxPricePerDay: z.number().optional(),
     playersNumber: z.number().optional(),
@@ -33,19 +43,11 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
 
   const form = useForm<GameInstanceSearchParams>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      searchName: "",
-    },
   });
-
-  function onFormSubmit(values: GameInstanceSearchParams) {
-    console.log(values);
-    onSubmit(values);
-  }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onFormSubmit)} className="flex flex-col gap-3">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
         <div className="flex w-full flex-row gap-3">
           <FormField
             control={form.control}
@@ -57,7 +59,7 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
                     placeholder={t("typeToSearch")}
                     {...field}
                     className="border-0 bg-card"
-                    autoComplete="false"
+                    autoComplete="off"
                   />
                 </FormControl>
                 <FormMessage />
@@ -76,7 +78,14 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
               <FormItem className="flex-grow">
                 <FormLabel>{t("category")}</FormLabel>
                 <FormControl>
-                  <Input {...field} className="border-0 bg-card" autoComplete="false" />
+                  <SelectInput
+                    options={categories ?? []}
+                    placeholder={t("all")}
+                    noResultsInfo={t("noResults")}
+                    onChange={field.onChange}
+                    scroll
+                    search
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -89,7 +98,13 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
               <FormItem className="flex-grow">
                 <FormLabel>{t("pricePerDay")}</FormLabel>
                 <FormControl>
-                  <Input {...field} className="border-0 bg-card" autoComplete="false" />
+                  <SelectInput
+                    options={PRICE_PER_DAY_OPTIONS}
+                    placeholder={t("any", { context: "female" })}
+                    noResultsInfo={t("noResults")}
+                    onChange={field.onChange}
+                    width="w-[150px]"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -101,9 +116,14 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
             render={({ field }) => (
               <FormItem className="flex-grow">
                 <FormLabel>{t("players")}</FormLabel>
-
                 <FormControl>
-                  <Input {...field} className="border-0 bg-card" autoComplete="false" />
+                  <SelectInput
+                    options={PLAYERS_OPTIONS}
+                    placeholder={t("any", { context: "female" })}
+                    noResultsInfo={t("noResults")}
+                    onChange={field.onChange}
+                    width="w-[150px]"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -114,10 +134,15 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
             name="age"
             render={({ field }) => (
               <FormItem className="flex-grow">
-                <FormLabel>{t("category")}</FormLabel>
-
+                <FormLabel>{t("age")}</FormLabel>
                 <FormControl>
-                  <Input {...field} className="border-0 bg-card" autoComplete="false" />
+                  <SelectInput
+                    options={AGE_OPTIONS}
+                    placeholder={t("any", { context: "male" })}
+                    noResultsInfo={t("noResults")}
+                    onChange={field.onChange}
+                    width="w-[130px]"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
