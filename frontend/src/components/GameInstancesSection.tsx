@@ -5,10 +5,12 @@ import { Search } from "lucide-react";
 import { User } from "@/types/User";
 import { getName } from "@/utils/user";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import GameInstance from "./GameInstance";
+import { GameInstanceForm } from "./GameInstanceAddForm";
 import { Button } from "./ui/button";
 
 interface Props {
@@ -20,6 +22,7 @@ interface Props {
 const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
+  const [dialogOpen, setDialogOpen] = useState(false);
   const {
     data: gameInstances,
     isLoading,
@@ -50,7 +53,14 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
                 />
                 <Search className="absolute right-4 top-2" />
               </div>
-              {showButtons && <Button className="w-56">{t("addGameInstance")}</Button>}
+              {showButtons && (
+                <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="w-56">{t("addGameInstance")}</Button>
+                  </DialogTrigger>
+                  <GameInstanceForm />
+                </Dialog>
+              )}
             </div>
             <ScrollArea className="h-[calc(100%-100px)] w-full flex-grow">
               {isLoading ? (
