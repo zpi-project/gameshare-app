@@ -14,11 +14,11 @@ const ReservationsList: FC<ReservationsListProps> = ({
   noReservationsMessage,
 }) => {
   return (
-    <div className="flex flex-grow flex-col gap-4 rounded-lg bg-section p-4">
+    <div className="flex flex-col gap-4">
       {isLoading ? (
         <>
           {Array.from({ length: 4 }).map((_, idx) => (
-            <Skeleton key={idx} className="rounded-lg" />
+            <Skeleton key={idx} className="h-[192px] rounded-lg" />
           ))}
         </>
       ) : reservations && reservations.length ? (
