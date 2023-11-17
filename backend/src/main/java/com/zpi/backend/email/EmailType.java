@@ -1,4 +1,4 @@
-package com.zpi.backend.emails;
+package com.zpi.backend.email;
 
 public enum EmailType {
     REGISTRATION, RESERVATION_ACCEPTED, RESERVATION_REJECTED, RESERVATION_PENDING,

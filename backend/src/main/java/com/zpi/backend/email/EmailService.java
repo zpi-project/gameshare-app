@@ -1,9 +1,8 @@
-package com.zpi.backend.emails;
+package com.zpi.backend.email;
 
-import com.zpi.backend.email_logs.EmailLog;
-import com.zpi.backend.email_logs.EmailLogRepository;
+import com.zpi.backend.email_log.EmailLog;
+import com.zpi.backend.email_log.EmailLogRepository;
 import com.zpi.backend.user.User;
-import com.zpi.backend.user.UserService;
 import org.springframework.core.io.Resource;
 import jakarta.mail.internet.MimeMessage;
 import org.apache.commons.io.IOUtils;
@@ -13,12 +12,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 @Component
 public class EmailService {
@@ -58,7 +59,6 @@ public class EmailService {
         context.setVariable("logo_image", getEncodedLogo());
 
         return context;
-
     }
 
 
@@ -96,9 +96,21 @@ public class EmailService {
 
     // TODO Check if any email hasn't been
 
-//    public void sendLeftEmails(){
-//
-//    }
+    @Scheduled(cron = "0 8 * * *", zone = "Europe/Warsaw")
+    public void sendUnsentEmails(){
+        List<EmailLog> unsentEmails = emailLogRepository.findAllBySentIsFalse();
+        if (unsentEmails.size() > 0){
+            for(EmailLog log: unsentEmails) {
+
+//                sendEmailWithHtmlTemplate(
+//                        log.getReceiver(),
+//                        log.getTitle(),
+//                        log.getContent(),
+//                        log.getType()
+//                );
+            }
+        }
+    }
 
     // Particular emails
     public Context getRegistrationEmailContext(String languageCode) throws IOException {

@@ -1,6 +1,6 @@
-package com.zpi.backend.email_logs;
+package com.zpi.backend.email_log;
 
-import com.zpi.backend.emails.EmailType;
+import com.zpi.backend.email.EmailType;
 import com.zpi.backend.user.User;
 import jakarta.persistence.*;
 import lombok.Data;

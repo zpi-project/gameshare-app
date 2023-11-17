@@ -1,12 +1,12 @@
 package com.zpi.backend.user;
 
-import com.zpi.backend.emails.EmailService;
+import com.zpi.backend.email.EmailService;
 import com.zpi.backend.category.Category;
 import com.zpi.backend.category.CategoryRepository;
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
-import com.zpi.backend.emails.EmailType;
+import com.zpi.backend.email.EmailType;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstanceSearch;
 import com.zpi.backend.role.RoleRepository;
@@ -17,8 +17,6 @@ import com.zpi.backend.user.exception.UserAlreadyExistsException;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.validators.AdminChecker;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

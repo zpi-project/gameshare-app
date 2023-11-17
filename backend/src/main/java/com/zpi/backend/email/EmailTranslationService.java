@@ -1,4 +1,4 @@
-package com.zpi.backend.emails;
+package com.zpi.backend.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
