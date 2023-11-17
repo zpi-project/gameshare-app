@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import { GameInstanceDetails } from "@/types/GameInstance";
+import PriceBadge from "@/components/Badge/PriceBadge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -83,7 +84,13 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
         )}
       </Tabs>
       <div className="flex flex-col gap-2  lg:gap-4">
-        <h1 className="p-2 text-xl font-bold xl:text-3xl">{gameInstance.game.name}</h1>
+        <div className="flex w-full flex-row justify-between">
+          <h1 className="p-2 text-xl font-bold xl:text-3xl">{gameInstance.game.name}</h1>
+          <div className="flex flex-col items-end p-3">
+            <PriceBadge price={gameInstance.pricePerDay} />
+            {!gameInstance.active && <div className="text-xl text-red-500">{t("deactivated")}</div>}
+          </div>
+        </div>
         <p className="px-2 italic xl:text-lg 2xl:w-3/4">{gameInstance.description}</p>
       </div>
       <Button className="absolute bottom-5 left-5 px-8" onClick={redirectGamePage}>
