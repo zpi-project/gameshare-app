@@ -22,3 +22,8 @@ export interface Reservation {
   timestamp: string;
   duration: number;
 }
+
+export interface ReservationQueryParams {
+  status?: ReservationStatusType;
+  asOwner: boolean;
+}

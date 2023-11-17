@@ -1,17 +1,28 @@
-import { FC, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { RESERVATION_STATUSES } from "@/constants/reservationStatuses";
-import { ReservationStatusType } from "@/types/Reservation";
+import { ReservationQueryParams, ReservationStatusType } from "@/types/Reservation";
 import { Button } from "@/components/ui/button";
 
 const RESERVATION_TYPES = ["owner", "renter"];
 
-const ReservationsSideBar: FC = () => {
+interface ReservationsSideBarProps {
+  setQueryParams: Dispatch<SetStateAction<ReservationQueryParams>>;
+}
+
+const ReservationsSideBar: FC<ReservationsSideBarProps> = ({ setQueryParams }) => {
   const { t } = useTranslation();
   const [reservationType, setResevationType] =
     useState<(typeof RESERVATION_TYPES)[number]>("owner");
-  const [reservationStatus, setResevationStatus] = useState<ReservationStatusType | "all">("all");
+  const [reservationStatus, setResevationStatus] = useState<ReservationStatusType | "ALL">("ALL");
 
+  useEffect(() => {
+    setQueryParams({
+      asOwner: reservationType === "owner",
+      status: reservationStatus === "ALL" ? undefined : reservationStatus,
+    });
+  }, [reservationStatus, reservationType]);
+    
   return (
     <div className="h-full rounded-lg bg-section p-4">
       <div className="flex h-full min-w-[280px] flex-col gap-8 rounded-lg bg-card p-4">
@@ -34,7 +45,7 @@ const ReservationsSideBar: FC = () => {
         <section className="flex flex-col gap-4">
           <h3 className="text-lg uppercase">{t("reservationStatus")}</h3>
           <div className="flex flex-col gap-2">
-            {["all", ...RESERVATION_STATUSES].map(status => (
+            {["ALL", ...RESERVATION_STATUSES].map(status => (
               <Button
                 variant={status === reservationStatus ? "secondary" : "outline-secondary"}
                 className="h-max w-max text-left uppercase"

@@ -1,1 +1,10 @@
-export const RESERVATION_STATUSES = ["AcceptedByOwner", "RejectedByOwner", "Pending", "CanceledByRenter", "CanceledByOwner", "Rented", "Finished", "Expired"];
+export const RESERVATION_STATUSES = [
+  "ACCEPTED_BY_OWNER",
+  "REJECTED_BY_OWNER",
+  "PENDING",
+  "CANCELED_BY_OWNER",
+  "CANCELED_BY_RENTER",
+  "RENTED",
+  "FINISHED",
+  "EXPIRED",
+];

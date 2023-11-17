@@ -5,6 +5,7 @@ import { GameInstanceDetails } from "@/types/GameInstance";
 import { PriceBadge } from "@/components/Badge";
 import Stars from "@/components/Stars";
 
+
 interface GameInstanceCardProps {
   gameInstance: GameInstanceDetails;
   setActive: (uuid: string) => void;
@@ -14,7 +15,7 @@ const GameInstanceCard: FC<GameInstanceCardProps> = ({
   gameInstance: {
     uuid,
     pricePerDay,
-    gameInstanceImage,
+    images,
     description,
     game: { name, image },
     avgRating,
@@ -22,7 +23,7 @@ const GameInstanceCard: FC<GameInstanceCardProps> = ({
   },
   setActive,
 }) => {
-  const instanceImage = gameInstanceImage[0]?.link ?? image;
+  const instanceImage = images[0]?.link ?? image;
 
   return (
     <Link
@@ -47,8 +48,3 @@ const GameInstanceCard: FC<GameInstanceCardProps> = ({
 };
 
 export default GameInstanceCard;
-
-// backend pytania
-// czy zwracane nieaktywne gry?
-// images czy gameInstanceImage ?
-// czy moje instancje tej gry tez maja byc zwracane
