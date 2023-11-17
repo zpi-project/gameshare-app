@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface GameDetailsSectionProps {
   gameInstance: GameInstanceDetails;
+  color: string;
 }
 
 const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance }) => {
@@ -20,30 +22,66 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
 
   return (
     <div className="flex h-full w-full flex-col gap-3  px-4">
-      <div className="flex flex-row gap-6">
-        <div className="flex flex-col gap-3 pt-6">
-          <img
-            src={gameInstance.game.image}
-            alt={gameInstance.game.name}
-            className=" h-24 w-24 overflow-hidden rounded-lg object-cover"
-          />
-          <img
-            src={gameInstance.game.image}
-            alt={gameInstance.game.name}
-            className=" h-24 w-24 overflow-hidden rounded-lg object-cover"
-          />
-          <img
-            src={gameInstance.game.image}
-            alt={gameInstance.game.name}
-            className=" h-24 w-24 overflow-hidden rounded-lg object-cover"
-          />
-        </div>
-        <img
-          src={gameInstance.game.image}
-          alt={gameInstance.game.name}
-          className="h-96 w-96 overflow-hidden rounded-lg object-cover pb-5"
-        />
-      </div>
+      <Tabs defaultValue="default" className="flex w-full flex-row gap-3 pt-6">
+        <TabsList className="flex h-full flex-col justify-center rounded-lg bg-transparent focus:outline-none">
+          {gameInstance.images.length ? (
+            <>
+              <TabsTrigger value="default" className="bg-transparent focus:outline-none">
+                <img
+                  src={gameInstance.game.image}
+                  alt={gameInstance.game.name}
+                  className=" h-24 w-24 overflow-hidden rounded-lg object-cover"
+                />
+              </TabsTrigger>
+              {gameInstance.images.map(image => (
+                <TabsTrigger value={image.link} className="bg-transparent focus:outline-none">
+                  <img
+                    src={image.link}
+                    alt={image.name}
+                    className=" h-24 w-24 overflow-hidden rounded-lg object-cover"
+                  />
+                </TabsTrigger>
+              ))}
+            </>
+          ) : (
+            <TabsTrigger value="default" className="bg-transparent focus:outline-none">
+              <img
+                src={gameInstance.game.image}
+                alt={gameInstance.game.name}
+                className=" h-24 w-24 overflow-hidden rounded-lg object-cover"
+              />
+            </TabsTrigger>
+          )}
+        </TabsList>
+        {gameInstance.images.length ? (
+          <>
+            <TabsContent value="default">
+              <img
+                src={gameInstance.game.image}
+                alt={gameInstance.game.name}
+                className="h-96 w-96 overflow-hidden rounded-lg object-cover pb-5"
+              />
+            </TabsContent>
+            {gameInstance.images.map(image => (
+              <TabsContent value={image.link} className="bg-transparent focus:outline-none">
+                <img
+                  src={image.link}
+                  alt={image.name}
+                  className="h-96 w-96 overflow-hidden rounded-lg object-cover pb-5"
+                />
+              </TabsContent>
+            ))}
+          </>
+        ) : (
+          <TabsContent value="default">
+            <img
+              src={gameInstance.game.image}
+              alt={gameInstance.game.name}
+              className="h-96 w-96 overflow-hidden rounded-lg object-cover pb-5"
+            />
+          </TabsContent>
+        )}
+      </Tabs>
       <div className="flex flex-col gap-2  lg:gap-4">
         <h1 className="p-2 text-xl font-bold xl:text-3xl">{gameInstance.game.name}</h1>
         <p className="px-2 italic xl:text-lg 2xl:w-3/4">{gameInstance.description}</p>

@@ -58,7 +58,9 @@ const GameInstance: FC = () => {
               }}
             />
             <div className="absolute bottom-5 left-5 right-5 top-5 flex flex-row">
-              {gameInstance && <GameInstanceDetailsSection gameInstance={gameInstance} />}
+              {gameInstance && (
+                <GameInstanceDetailsSection gameInstance={gameInstance} color={color} />
+              )}
             </div>
           </div>
 
