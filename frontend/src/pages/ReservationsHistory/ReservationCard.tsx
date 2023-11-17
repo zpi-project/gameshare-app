@@ -39,7 +39,7 @@ const ReservationCard: FC<ReservationCardProps> = ({
       className="flex flex-row gap-4 rounded-lg bg-card p-4 duration-200 hover:bg-accent"
       to={`${URLS.MY_RESERVATIONS}/${reservationId}`}
     >
-      <div className="h-40 w-20 overflow-hidden rounded-lg xl:w-40">
+      <div className="h-40 w-20 overflow-hidden rounded-lg md:w-32 2xl:w-40">
         <img
           src={images[0]?.link ?? image}
           alt={`${name} image`}
@@ -64,7 +64,7 @@ const ReservationCard: FC<ReservationCardProps> = ({
                 className="h-full w-full object-cover"
               />
             </div>
-            <div className="hidden h-full flex-col gap-1 xl:flex ">
+            <div className="hidden h-full flex-col gap-1 2xl:flex ">
               <h4 className="text-xl">{getFullname(asOwner ? renter : owner)}</h4>
               {<Stars count={Math.round(asOwner ? renterRating : ownerRating)} size={24} />}
             </div>
