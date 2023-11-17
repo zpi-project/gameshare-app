@@ -95,6 +95,9 @@ const pl: typeof en = {
   myReservations: "Moje rezerwacje",
   reservationStatus: "Status rezerwacji",
   reservationType: "Typ rezerwacji",
+  errorFetchingReservations: "Wystąpił błąd podczas pobierania twoich rezerwacji.",
+  noReservations: "Nie masz żadnych rezerwacji",
+  noReservationsStatus: "Nie masz żadnych rezerwacji o takim statusie",
 
   reservationTypes: {
     owner: "Jako właściciel",

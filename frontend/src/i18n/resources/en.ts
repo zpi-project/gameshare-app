@@ -91,6 +91,9 @@ export default {
   myReservations: "My reservations",
   reservationStatus: "Reservation status",
   reservationType: "Reservation type",
+  errorFetchingReservations: "We couldn't load your reservations.",
+  noReservations: "You don't have any reservations yet.",
+  noReservationsStatus: "You don't have any reservations with this status.",
 
   reservationTypes: {
     owner: "As game owner",
