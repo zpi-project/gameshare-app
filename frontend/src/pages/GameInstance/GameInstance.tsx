@@ -57,7 +57,7 @@ const GameInstance: FC = () => {
                 } 100%)`,
               }}
             />
-            <div className="absolute bottom-5 left-5 right-5 top-5 flex flex-row">
+            <div className="h-400 absolute bottom-5 left-5 right-5 top-5 flex flex-row">
               {gameInstance && (
                 <GameInstanceDetailsSection gameInstance={gameInstance} color={color} />
               )}
@@ -82,7 +82,7 @@ const GameInstance: FC = () => {
                 <GameInstanceUserDetailsSection user={gameInstance.owner} isLoading={isLoading} />
               </div>
             </div>
-            <div className="flex h-full rounded-lg bg-section">
+            <div className="flex h-[calc(100%-100px)] rounded-lg bg-section">
               <GameInstanceOpinions gameInstance={gameInstance} />
             </div>
           </div>
