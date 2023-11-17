@@ -64,8 +64,8 @@ const GameInstance: FC = () => {
             </div>
           </div>
 
-          <div className="flex w-2/3 flex-grow flex-col gap-5">
-            <div className="flex h-[550px] w-full flex-row gap-5">
+          <div className="flex h-full w-2/3 flex-grow flex-col gap-5">
+            <div className="flex h-[400px] w-full flex-row gap-5">
               <div className="h-full w-3/5 overflow-hidden rounded-lg">
                 <Map
                   autolocate
@@ -82,7 +82,7 @@ const GameInstance: FC = () => {
                 <GameInstanceUserDetailsSection user={gameInstance.owner} isLoading={isLoading} />
               </div>
             </div>
-            <div className="flex h-[calc(100%-100px)] rounded-lg bg-section">
+            <div className="flex h-[calc(100%-400px)] rounded-lg bg-section">
               <GameInstanceOpinions gameInstance={gameInstance} />
             </div>
           </div>
