@@ -6,6 +6,7 @@ import ReservationCard from "./ReservationCard";
 interface ReservationsListProps {
   reservations?: Reservation[];
   isLoading: boolean;
+  isFetchingNextPage: boolean;
   noReservationsMessage: string;
   asOwner: boolean;
 }
@@ -13,6 +14,7 @@ const ReservationsList: FC<ReservationsListProps> = ({
   reservations,
   isLoading,
   noReservationsMessage,
+  isFetchingNextPage,
   asOwner,
 }) => {
   return (
@@ -32,6 +34,7 @@ const ReservationsList: FC<ReservationsListProps> = ({
       ) : (
         <h3 className="mt-4 text-center text-xl">{noReservationsMessage}</h3>
       )}
+      {isFetchingNextPage && <Skeleton className="h-[192px] rounded-lg" />}
     </div>
   );
 };

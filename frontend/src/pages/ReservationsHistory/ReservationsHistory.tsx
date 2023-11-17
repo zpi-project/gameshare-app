@@ -1,7 +1,8 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { URLS } from "@/constants/urls";
 import { ReservationQueryParams } from "@/types/Reservation";
 import { ReservationsApi } from "@/api/ReservationsApi";
@@ -9,6 +10,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/components/ui/use-toast";
 import ReservationsList from "./ReservationsList";
 import ReservationsSideBar from "./ReservationsSideBar";
+
+const RESERVATIONS_PAGE_SIZE = 10;
 
 const ReservationsHistory: FC = () => {
   const [queryParams, setQueryParams] = useState<ReservationQueryParams>({
@@ -18,10 +21,16 @@ const ReservationsHistory: FC = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
 
-  const { data: reservations, isLoading } = useQuery({
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ["reservations", queryParams],
-    queryFn: () => ReservationsApi.getAll(0, 10, queryParams),
+    queryFn: ({ pageParam = 0 }) =>
+      ReservationsApi.getAll(pageParam, RESERVATIONS_PAGE_SIZE, queryParams),
+    getNextPageParam: (_, pages) => {
+      const newPageParam = pages.length;
+      return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
+    },
     onError: () => {
       toast({
         title: t("errorFetchingReservations"),
@@ -32,18 +41,26 @@ const ReservationsHistory: FC = () => {
     },
   });
 
+  useEffect(() => {
+    if (entry?.isIntersecting && !isLoading) {
+      void fetchNextPage();
+    }
+  }, [entry?.isIntersecting, fetchNextPage, isLoading]);
+
   return (
     <div className="flex h-full flex-row gap-6">
       <ReservationsSideBar setQueryParams={setQueryParams} />
       <ScrollArea className="h-full flex-grow rounded-lg bg-section p-4">
         <ReservationsList
           asOwner={queryParams.asOwner}
-          reservations={reservations?.results}
+          reservations={data?.pages.flatMap(page => page.results) ?? []}
           isLoading={isLoading}
+          isFetchingNextPage={isFetchingNextPage}
           noReservationsMessage={
             queryParams.status ? t("noReservationsStatus") : t("noReservations")
           }
         />
+        {hasNextPage && <div ref={ref} data-test="scroller-trigger" />}
       </ScrollArea>
     </div>
   );
