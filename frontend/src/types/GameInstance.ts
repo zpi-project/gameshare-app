@@ -12,7 +12,7 @@ export interface GameInstance {
 }
 
 export interface GameInstanceDetails extends GameInstance {
-  images: Image[];
+  gameInstanceImage: Image[];
   owner: User;
 }
 
@@ -26,9 +26,4 @@ export interface GameInstanceSearchParams {
   age?: number;
   playersNumber?: number;
   maxPricePerDay?: number;
-}
-
-export interface SearchUserGameInstances {
-  owner: User;
-  gameInstances: GameInstance[];
 }

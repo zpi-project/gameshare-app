@@ -1,4 +1,5 @@
 import { Game } from "@/types/Game";
+import { GameInstanceDetails } from "@/types/GameInstance";
 import { Paginated } from "@/types/Paginated";
 import Api from "./Api";
 
@@ -19,5 +20,19 @@ export class GameApi {
   static async getOne(id: number) {
     const { data: game } = await Api.get<Game>(`/games/${id}`);
     return game;
+  }
+
+  static async getInstances(
+    id: number,
+    page: number,
+    size: number,
+    latitude: number,
+    longitude: number,
+  ) {
+    const { data: gameInstances } = await Api.get<Paginated<GameInstanceDetails>>(
+      `/games/${id}/users`,
+      { params: { page, size, latitude, longitude } },
+    );
+    return gameInstances;
   }
 }

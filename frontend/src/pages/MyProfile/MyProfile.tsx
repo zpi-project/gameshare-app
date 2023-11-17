@@ -26,6 +26,7 @@ const MyProfile: FC = () => {
       navigate(URLS.DASHBOARD);
     },
   });
+  console.log({ user });
 
   return (
     <div className="flex h-full w-full flex-col gap-2 overflow-hidden xl:h-full xl:flex-row xl:gap-6">
@@ -34,7 +35,7 @@ const MyProfile: FC = () => {
           <UserDetails user={user} isLoading={isLoading} showEdit />
         </div>
         <div className="flex max-h-[150px] rounded-lg  bg-section xl:h-[calc(100%-389px)] xl:max-h-[calc(100%-389px)]">
-          <Opinions />
+          <Opinions isMyPage={true} user={user} />
         </div>
       </div>
       <div className="h-[calc(100%-350px)] flex-grow rounded-lg bg-section p-4 xl:h-full xl:w-1/2">

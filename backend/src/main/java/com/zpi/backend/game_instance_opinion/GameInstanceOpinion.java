@@ -16,6 +16,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "game_instance_opinions")
 public class GameInstanceOpinion {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)

@@ -22,7 +22,7 @@ const LoadingGameDetailsSection: FC = () => {
 
   return (
     <>
-      <div ref={divRef} className="h-full w-[265px]">
+      <div ref={divRef} className="h-full max-h-[320px] w-[265px]">
         <Skeleton className="h-full w-full rounded-lg" />
       </div>
       <div className="flex flex-grow flex-col gap-2 lg:gap-4">
