@@ -1,10 +1,10 @@
 insert into public.reservation_status (status)
-values  ('Accepted by owner'),
-        ('Rejected by owner'),
-        ('Pending'),
-        ('Canceled by renter'),
-        ('Canceled by owner'),
-        ('Rented'),
-        ('Finished'),
-        ('Expired')
+values  ('ACCEPTED_BY_OWNER'),
+        ('REJECTED_BY_OWNER'),
+        ('PENDING'),
+        ('CANCELED_BY_RENTER'),
+        ('CANCELED_BY_OWNER'),
+        ('RENTED'),
+        ('FINISHED'),
+        ('EXPIRED')
     ON CONFLICT DO NOTHING;

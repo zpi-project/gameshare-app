@@ -6,16 +6,16 @@ import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstanceService;
+import com.zpi.backend.game_instance_opinion.GameInstanceOpinion;
 import com.zpi.backend.game_instance_opinion.GameInstanceOpinionService;
-import com.zpi.backend.interfaces.UserOpinionServiceInterface;
 import com.zpi.backend.reservation_status.ReservationStatus;
 import com.zpi.backend.reservation_status.ReservationStatusRepository;
 import com.zpi.backend.reservations.DTO.*;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
+import com.zpi.backend.user_opinion.UserOpinion;
 import com.zpi.backend.user_opinion.UserOpinionRepository;
-import com.zpi.backend.user_opinion.UserOpinionService;
 import com.zpi.backend.utils.DateUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -116,31 +116,40 @@ public class ReservationService {
         return new ResultsDTO<>(reservationPage.stream().toList(), new Pagination(reservationPage.getTotalElements(),reservationPage.getTotalPages()));
     }
 
-    public Reservation changeReservationStatus(Authentication  authentication, String reservationUuid, String status) {
-        //TODO some checking like owner can't set status to cancelled by renter
+    public Reservation changeReservationStatus(Authentication  authentication, String reservationUuid, String status) throws UserDoesNotExistException, BadRequestException {
         Reservation reservation = reservationRepository.getReservationByReservationId(reservationUuid);
+        if(!canChangeStatus(authentication,reservation))
+            throw new BadRequestException("User is not owner or renter of this reservation");
         reservation.setStatus(reservationStatusRepository.findByStatus(status));
         return reservationRepository.save(reservation);
     }
 
-    public ReservationDetailOwnerDTO getReservationOwnerDetails(Reservation reservation){
-        User renter = reservation.getRenter();
-        if(userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation, renter).isEmpty()) {
-            return new ReservationDetailOwnerDTO(reservation, true);
+    public boolean canChangeStatus(Authentication authentication,Reservation reservation) throws UserDoesNotExistException {
+        User user = userService.getUser(authentication);
+        if(user.getUuid().equals(reservation.getGameInstance().getOwner().getUuid())){
+            return true;
         }
-        return new ReservationDetailOwnerDTO(reservation, false);
-
+        else return user.getUuid().equals(reservation.getRenter().getUuid());
     }
 
-    public ReservationDetailRenterDTO getReservationRenterDetails(Reservation reservation) throws BadRequestException {
+    public ReservationDetailDTO getReservationOwnerDetails(Reservation reservation){
+        User renter = reservation.getRenter();
+        UserOpinion renterOpinion = userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation, renter).stream().findFirst().orElse(null);
+        boolean canAddRenterOpinion = renterOpinion == null;
+        return new ReservationDetailDTO(reservation,canAddRenterOpinion,false,false,null,renterOpinion,null);
+    }
+
+    public ReservationDetailDTO getReservationRenterDetails(Reservation reservation) throws BadRequestException {
         if(!(reservation.getStatus().getStatus().equals("In Progress")|| reservation.getStatus().getStatus().equals("Finished"))){
             throw new BadRequestException("Reservation is not in progress or finished");
         }
         User owner = reservation.getGameInstance().getOwner();
         GameInstance gameInstance = reservation.getGameInstance();
-        boolean canAddOwnerOpinion = userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation, owner).isEmpty();
-        boolean canAddGameInstanceOpinion = gameinstanceOpinionService.getOpinionsByGameInstance(gameInstance).isEmpty();
-        return new ReservationDetailRenterDTO(reservation,canAddOwnerOpinion,canAddGameInstanceOpinion);
+        UserOpinion ownerOpinion = userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation, owner).stream().findFirst().orElse(null);
+        GameInstanceOpinion gameInstanceOpinion = gameinstanceOpinionService.getOpinionsByGameInstance(gameInstance).stream().findFirst().orElse(null);
+        boolean canAddOwnerOpinion = ownerOpinion == null;
+        boolean canAddGameInstanceOpinion = gameInstanceOpinion == null;
+        return new ReservationDetailDTO(reservation,false,canAddOwnerOpinion,canAddGameInstanceOpinion,ownerOpinion,null,gameInstanceOpinion);
     }
 
     public ReservationDetailDTO getReservationDetails(Authentication authentication, String reservationUuid) throws UserDoesNotExistException, BadRequestException {
