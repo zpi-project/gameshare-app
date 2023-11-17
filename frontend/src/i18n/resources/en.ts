@@ -89,13 +89,17 @@ export default {
   any_female: "Any",
 
   myReservations: "My reservations",
-  asGameOwner: "As game owner",
-  asGameRenter: "As game renter",
   reservationStatus: "Reservation status",
   reservationType: "Reservation type",
 
+  reservationTypes: {
+    owner: "As game owner",
+    renter: "As game renter",
+  },
+
   reservationStatuses: {
     owner: {
+      all: "All",
       Pending: "Pending approval",
       AcceptedByOwner: "Accepted by me",
       RejectedByOwner: "Rejected by me",
@@ -106,6 +110,7 @@ export default {
       Expired: "Expired",
     },
     renter: {
+      all: "All",
       Pending: "Pending approval",
       AcceptedByOwner: "Accepted by owner",
       RejectedByOwner: "Rejected by owner",

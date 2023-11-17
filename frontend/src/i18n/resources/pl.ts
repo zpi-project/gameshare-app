@@ -93,13 +93,17 @@ const pl: typeof en = {
   any_female: "Dowolna",
 
   myReservations: "Moje rezerwacje",
-  asGameOwner: "Jako właściciel",
-  asGameRenter: "Jako wypożyczający",
   reservationStatus: "Status rezerwacji",
   reservationType: "Typ rezerwacji",
 
+  reservationTypes: {
+    owner: "Jako właściciel",
+    renter: "Jako wypożyczający",
+  },
+
   reservationStatuses: {
     owner: {
+      all: "Wszystkie",
       Pending: "Oczekujące na akceptację",
       AcceptedByOwner: "Zaakceptowane przeze mnie",
       RejectedByOwner: "Odrzucone przeze mnie",
@@ -110,6 +114,7 @@ const pl: typeof en = {
       Expired: "Po terminie",
     },
     renter: {
+      all: "Wszystkie",
       Pending: "Oczekujące na akceptację",
       AcceptedByOwner: "Zaakceptowane przez właściciela",
       RejectedByOwner: "Odrzucone przez właściciela",
