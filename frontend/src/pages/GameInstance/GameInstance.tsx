@@ -19,7 +19,7 @@ const GameInstance: FC = () => {
   const { toast } = useToast();
 
   const { data: gameInstance, isLoading } = useQuery({
-    queryKey: ["gameInstance"],
+    queryKey: ["gameInstance", { id }],
     queryFn: () => GameInstanceApi.getByUUID(id),
     onError: () => {
       toast({
