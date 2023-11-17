@@ -11,7 +11,8 @@ import UserProfile from "@/pages/UserProfile";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import App from "./App";
 import "./index.css";
-import Game from "./pages/Game";
+import Game from "@/pages/Game";
+import ReservationsHistory from "@/pages/ReservationsHistory";
 
 const router = createBrowserRouter([
   {
@@ -52,11 +53,7 @@ const router = createBrowserRouter([
           },
           {
             path: URLS.MY_RESERVATIONS,
-            element: <div>my reservations page</div>,
-          },
-          {
-            path: URLS.MY_GAMES_INSTANCES,
-            element: <div>my game instances page</div>,
+            element: <ReservationsHistory />,
           },
         ],
       },
