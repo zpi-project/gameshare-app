@@ -4,7 +4,7 @@ import ReservationsSideBar from "./ReservationsSideBar";
 
 const ReservationsHistory: FC = () => {
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-row gap-6 h-full">
       <ReservationsSideBar />
       <ReservationsList />
     </div>

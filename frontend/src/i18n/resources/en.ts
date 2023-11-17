@@ -87,4 +87,33 @@ export default {
   any: "Any",
   any_male: "Any",
   any_female: "Any",
+
+  myReservations: "My reservations",
+  asGameOwner: "As game owner",
+  asGameRenter: "As game renter",
+  reservationStatus: "Reservation status",
+  reservationType: "Reservation type",
+
+  reservationStatuses: {
+    owner: {
+      Pending: "Pending approval",
+      AcceptedByOwner: "Accepted by me",
+      RejectedByOwner: "Rejected by me",
+      CanceledByOwner: "Canceled by me",
+      CanceledByRenter: "Canceled by render",
+      Rented: "Rented",
+      Finished: "Finished",
+      Expired: "Expired",
+    },
+    renter: {
+      Pending: "Pending approval",
+      AcceptedByOwner: "Accepted by owner",
+      RejectedByOwner: "Rejected by owner",
+      CanceledByOwner: "Canceled by owner",
+      CanceledByRenter: "Canceled by me",
+      Rented: "Rented",
+      Finished: "Finished",
+      Expired: "Expired",
+    },
+  },
 };

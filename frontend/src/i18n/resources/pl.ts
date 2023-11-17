@@ -87,9 +87,39 @@ const pl: typeof en = {
   players: "Liczba graczy",
   age: "Wiek",
   perDay: "na dzień",
+
   any: "Dowolne",
   any_male: "Dowolny",
   any_female: "Dowolna",
+
+  myReservations: "Moje rezerwacje",
+  asGameOwner: "Jako właściciel",
+  asGameRenter: "Jako wypożyczający",
+  reservationStatus: "Status rezerwacji",
+  reservationType: "Typ rezerwacji",
+
+  reservationStatuses: {
+    owner: {
+      Pending: "Oczekujące na akceptację",
+      AcceptedByOwner: "Zaakceptowane przeze mnie",
+      RejectedByOwner: "Odrzucone przeze mnie",
+      CanceledByOwner: "Anulowane przeze mnie",
+      CanceledByRenter: "Anulowane przez wypożyczającego",
+      Rented: "Wypożyczone",
+      Finished: "Zrealizowane",
+      Expired: "Po terminie",
+    },
+    renter: {
+      Pending: "Oczekujące na akceptację",
+      AcceptedByOwner: "Zaakceptowane przez właściciela",
+      RejectedByOwner: "Odrzucone przez właściciela",
+      CanceledByOwner: "Anulowane przez właściciela",
+      CanceledByRenter: "Anulowane przeze mnie",
+      Rented: "Wypożyczone",
+      Finished: "Zrealizowane",
+      Expired: "Po terminie",
+    },
+  },
 };
 
 export default pl;
