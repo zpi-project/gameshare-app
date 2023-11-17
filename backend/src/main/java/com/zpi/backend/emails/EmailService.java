@@ -94,7 +94,11 @@ public class EmailService {
         return "data:image/png;base64," + base64String;
     }
 
-    // TODO Check if any email hasn't been sent
+    // TODO Check if any email hasn't been
+
+    public void sendLeftEmails(){
+
+    }
 
     // Particular emails
     public Context getRegistrationEmailContext(String languageCode) throws IOException {

@@ -22,7 +22,7 @@ public class EmailLog {
     @Column(length = 2000)
     private String content;
     private Date sendingTime;
-    private boolean isSent;
+    private boolean sent;
     private Date timestamp;
 
     public EmailLog(User receiver, EmailType type, String title, String content) {
@@ -31,11 +31,11 @@ public class EmailLog {
         this.content = content;
         this.title = title;
         this.timestamp = new Date(System.currentTimeMillis());
-        this.isSent = false;
+        this.sent = false;
     }
 
     public void sent(){
-        isSent = true;
+        sent = true;
         sendingTime = new Date(System.currentTimeMillis());
     }
 }
