@@ -7,7 +7,6 @@ import com.zpi.backend.reservations.DTO.NewReservationDTO;
 import com.zpi.backend.reservations.DTO.ReservationDetailDTO;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -75,6 +74,11 @@ public class ReservationController {
         return ResponseEntity.ok().body(reservations);
     }
 
+    @Operation(
+            summary = "Change reservation status",
+            description = "Changes reservation status " +
+                    "User invoking this endpoint must be involved in the reservation (either renter or owner)"
+    )
     @PutMapping("/reservations/{reservationUuid}/status")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity changeReservationStatus(Authentication authentication, @PathVariable String reservationUuid, @RequestParam String status) throws BadRequestException, UserDoesNotExistException {
@@ -82,6 +86,11 @@ public class ReservationController {
         return ResponseEntity.ok().body(reservation);
     }
 
+    @Operation(
+            summary = "Get reservation details",
+            description = "Gets reservation details " +
+                    "User invoking this endpoint must be involved in the reservation (either renter or owner)"
+    )
     @GetMapping("/reservations/{reservationUuid}/details")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity getReservationDetails(Authentication authentication, @PathVariable String reservationUuid) throws BadRequestException, UserDoesNotExistException {
