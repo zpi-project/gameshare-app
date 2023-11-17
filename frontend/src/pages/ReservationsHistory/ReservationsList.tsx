@@ -7,11 +7,13 @@ interface ReservationsListProps {
   reservations?: Reservation[];
   isLoading: boolean;
   noReservationsMessage: string;
+  asOwner: boolean;
 }
 const ReservationsList: FC<ReservationsListProps> = ({
   reservations,
   isLoading,
   noReservationsMessage,
+  asOwner,
 }) => {
   return (
     <div className="flex flex-col gap-4">
@@ -24,7 +26,7 @@ const ReservationsList: FC<ReservationsListProps> = ({
       ) : reservations && reservations.length ? (
         <>
           {reservations.map((reservation, id) => (
-            <ReservationCard reservation={reservation} key={id} />
+            <ReservationCard reservation={reservation} key={id} asOwner={asOwner} />
           ))}
         </>
       ) : (

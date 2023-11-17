@@ -29,7 +29,7 @@ export const reservation: Reservation = {
     owner: {
       uuid: "d5f4e9f7-3c80-43fd-a5e9-cccff4c3445c",
       firstName: "Maria",
-      lastName: "Markowiak",
+      lastName: "Owner",
       locationLatitude: 51.1087347,
       locationLongitude: 17.0570206,
       avatarLink:
@@ -50,15 +50,15 @@ export const reservation: Reservation = {
       "https://lh3.googleusercontent.com/a/ACg8ocKHmJl7NEQj-dMuBYDhAoaV7fKWUcYjVHsiH1nSnEQGuxo=s96-c",
     avgRating: 2,
   },
-  startDate: "2023-11-21T12:30:00.000+00:00",
-  endDate: "2023-11-24T12:30:00.000+00:00",
+  startDate: "2023-12-22T12:30:00.000+00:00",
+  endDate: "2023-12-24T12:30:00.000+00:00",
   status: {
     id: 7,
-    status: "FINISHED",
+    status: "ACCEPTED_BY_OWNER",
   },
   renterComment: "I would really appreciate borrowing this game :)",
-  timestamp: "2023-11-16T22:16:39.798+00:00",
-  duration: 4,
+  timestamp: "2023-12-16T22:16:39.798+00:00",
+  duration: 3,
 };
 
 export const reservations: Reservation[] = Array.from({ length: 30 }, () => reservation);

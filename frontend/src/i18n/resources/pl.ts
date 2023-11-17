@@ -13,7 +13,7 @@ const pl: typeof en = {
 
   language: "Język",
   pl: "polski",
-  en: "angielski",
+  enUS: "angielski",
 
   addOpinion: "Dodaj opinię",
   seeMore: "Rozwiń",
@@ -98,6 +98,11 @@ const pl: typeof en = {
   errorFetchingReservations: "Wystąpił błąd podczas pobierania twoich rezerwacji.",
   noReservations: "Nie masz żadnych rezerwacji",
   noReservationsStatus: "Nie masz żadnych rezerwacji o takim statusie",
+  reservationNumber: "Numer rezerwacji:",
+  startDate: "Od:",
+  endDate: "Do:",
+  days: "Dni:",
+  dateFormat: "{{date, d MMM. yyyy}}",
 
   reservationTypes: {
     owner: "Jako właściciel",

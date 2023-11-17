@@ -16,7 +16,7 @@ const LanguageToggle: FC = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <div className="uppercase">{i18n.language}</div>
+          <div className="uppercase">{i18n.language === "enUS" ? "en" : i18n.language}</div>
           <span className="sr-only">Toggle language</span>
         </Button>
       </DropdownMenuTrigger>

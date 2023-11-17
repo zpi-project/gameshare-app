@@ -37,6 +37,7 @@ const ReservationsHistory: FC = () => {
       <ReservationsSideBar setQueryParams={setQueryParams} />
       <ScrollArea className="h-full flex-grow rounded-lg bg-section p-4">
         <ReservationsList
+          asOwner={queryParams.asOwner}
           reservations={reservations?.results}
           isLoading={isLoading}
           noReservationsMessage={

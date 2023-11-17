@@ -11,7 +11,7 @@ export default {
 
   language: "Language",
   pl: "Polish",
-  en: "English",
+  enUS: "English",
 
   addOpinion: "Add opinion",
   seeMore: "See more",
@@ -94,6 +94,11 @@ export default {
   errorFetchingReservations: "We couldn't load your reservations.",
   noReservations: "You don't have any reservations yet.",
   noReservationsStatus: "You don't have any reservations with this status.",
+  reservationNumber: "Reservation number:",
+  startDate: "Start date:",
+  endDate: "End date:",
+  days: "Days:",
+  dateFormat: "{{date, MMM. d, yyyy}}",
 
   reservationTypes: {
     owner: "As game owner",
