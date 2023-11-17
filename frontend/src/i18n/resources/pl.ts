@@ -70,6 +70,9 @@ const pl: typeof en = {
   noGamesMyPage: "Nie posiadasz jeszcze żadnej gry",
   noGamesUserPage: "Ten użytkownik nie posiada jeszcze żadnych gier",
   errorFetchingGames: "Wystąpił błąd podczas pobierania gier.",
+  seeProfile: "Zobacz profil",
+  seeAvailability: "Zobacz dostępność",
+  seeGamePage: "Zobacz stronę gry",
   noOpinionsMyPage: "Nie posiadasz jeszcze żadnych opinii",
   noOpinionsUserPage: "Ten użytkownik nie posiada jeszcze żadnych opinii",
   errorFetchingOpinions: "Wystąpił błąd podczas pobierania opinii",
@@ -79,6 +82,7 @@ const pl: typeof en = {
 
   noGameUsers: "Nikt jeszcze nie ma tej gry",
   errorFetchingGameInstances: "Nie udało się pobrać egzemplarzy tej gry",
+  noOpinionsGameInstance: "Ten egzemplarz nie ma jeszcze żadnej opinii",
 
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",

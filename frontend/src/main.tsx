@@ -5,6 +5,7 @@ import { URLS } from "@/constants/urls";
 import CategoryGameSearch from "@/pages/CategoryGameSearch";
 import Dashboard from "@/pages/Dashboard";
 import Error from "@/pages/Error";
+import GameInstance from "@/pages/GameInstance";
 import GameSearch from "@/pages/GameSearch";
 import MyProfile from "@/pages/MyProfile";
 import UserProfile from "@/pages/UserProfile";
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${URLS.GAME_INSTANCE}/:id`,
-        element: <div>game instance page</div>,
+        element: <GameInstance />,
       },
       {
         path: `${URLS.PROFILE}/:id`,

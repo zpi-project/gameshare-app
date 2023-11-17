@@ -1,5 +1,10 @@
 import { GameInstance } from "@/types/GameInstance";
-import { GameInstanceSearchParams, SearchGameInstance } from "@/types/GameInstance";
+import {
+  GameInstanceSearchParams,
+  GameInstanceDetails,
+  SearchGameInstance,
+} from "@/types/GameInstance";
+import { Opinion } from "@/types/Opinion";
 import { Paginated } from "@/types/Paginated";
 import Api from "./Api";
 
@@ -10,6 +15,11 @@ export class GameInstanceApi {
       { params: { page, size } },
     );
     return instances;
+  }
+
+  static async getByUUID(uuid: string) {
+    const { data: instance } = await Api.get<GameInstanceDetails>(`game-instances/${uuid}`);
+    return instance;
   }
 
   static async getAll(page: number, size: number) {
@@ -41,5 +51,15 @@ export class GameInstanceApi {
       },
     );
     return gameInstances;
+  }
+
+  static async getAllGameInstanceOpinions(uuid: string, page: number, size: number) {
+    const { data: opinions } = await Api.get<Paginated<Opinion>>(
+      `game-instances/${uuid}/opinions`,
+      {
+        params: { page, size },
+      },
+    );
+    return opinions;
   }
 }
