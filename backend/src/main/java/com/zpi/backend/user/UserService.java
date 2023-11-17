@@ -36,7 +36,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserService {
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private  UserRepository userRepository;
     private final RoleRepository roleRepository;

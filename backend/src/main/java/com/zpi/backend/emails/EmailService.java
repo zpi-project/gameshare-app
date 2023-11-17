@@ -96,9 +96,9 @@ public class EmailService {
 
     // TODO Check if any email hasn't been
 
-    public void sendLeftEmails(){
-
-    }
+//    public void sendLeftEmails(){
+//
+//    }
 
     // Particular emails
     public Context getRegistrationEmailContext(String languageCode) throws IOException {

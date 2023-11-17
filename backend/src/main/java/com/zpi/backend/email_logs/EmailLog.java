@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+@Table(name="email_logs")
 @Data
 @Entity
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class EmailLog {
     private User receiver;
     private EmailType type;
     private String title;
-    @Column(length = 2000)
+    @Column(length = 40000)
     private String content;
     private Date sendingTime;
     private boolean sent;
@@ -37,5 +38,7 @@ public class EmailLog {
     public void sent(){
         sent = true;
         sendingTime = new Date(System.currentTimeMillis());
+        // We set the content for sent emails to null, because it has over 35 000 characters.
+        content = null;
     }
 }
