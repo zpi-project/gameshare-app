@@ -7,6 +7,7 @@ import com.zpi.backend.reservations.DTO.NewReservationDTO;
 import com.zpi.backend.reservations.DTO.ReservationDetailDTO;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,8 +15,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @AllArgsConstructor
+
 public class ReservationController {
 
     private ReservationService reservationService;
@@ -43,9 +47,16 @@ public class ReservationController {
     )
     @GetMapping("/reservations")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity getReservations(Authentication authentication,@RequestParam String status, @RequestParam Boolean asOwner
-            ,@RequestParam int page,@RequestParam int size) throws UserDoesNotExistException {
-        ResultsDTO<Reservation> reservations = reservationService.getMyReservations(authentication,status,asOwner,page,size);
+    public ResponseEntity getReservations(Authentication authentication, @RequestParam Optional<String> status, @RequestParam Boolean asOwner
+            , @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+        ResultsDTO<Reservation> reservations;
+        if (status.isPresent())
+        {
+            reservations = reservationService.getMyReservations(authentication,status.get(),asOwner,page,size);
+        }
+        else
+            reservations = reservationService.getMyReservations(authentication,asOwner,page,size);
+
         return ResponseEntity.ok().body(reservations);
     }
 

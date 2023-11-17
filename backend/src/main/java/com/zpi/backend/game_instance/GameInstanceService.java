@@ -193,7 +193,7 @@ public class GameInstanceService {
                    endDate = calendar.getTime();
                }
                if (withReservations){
-                   periods.add(new GameInstanceUnAvailabilityReservationDTO(startDate,endDate,reservation.getUuid()));
+                   periods.add(new GameInstanceUnAvailabilityReservationDTO(startDate,endDate,reservation.getReservationId()));
                }
                else {
                      periods.add(new GameInstanceUnAvailabilityDTO(startDate,endDate));

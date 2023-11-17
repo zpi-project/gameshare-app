@@ -1,7 +1,6 @@
 package com.zpi.backend.reservations;
 
 import com.zpi.backend.game_instance.GameInstance;
-import com.zpi.backend.game_instance.dto.GameInstanceUnAvailabilityDTO;
 import com.zpi.backend.reservation_status.ReservationStatus;
 import com.zpi.backend.reservations.DTO.NewReservationDTO;
 import com.zpi.backend.user.User;
@@ -21,8 +20,9 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "uuid",nullable = false,unique = true)
-    private String uuid = UUID.randomUUID().toString();
+
+    @Column(name = "reservation_id",nullable = true,unique = true)
+    private String reservationId;
 
 
     @ManyToOne
@@ -50,11 +50,15 @@ public class Reservation {
     @Transient
     private int duration;
 
+
+
+
     public Reservation() {
 
     }
 
     public Reservation fromDTO(NewReservationDTO newReservationDTO, User renter, GameInstance gameInstance) {
+
         this.renter = renter;
         this.gameInstance = gameInstance;
         this.startDate = newReservationDTO.getStartDate();
@@ -62,6 +66,7 @@ public class Reservation {
         this.renterComment = newReservationDTO.getRenterComment();
         this.timestamp = new Date(System.currentTimeMillis());
         this.duration = DateUtils.getDuration(startDate,endDate);
+        this.reservationId = UUID.randomUUID().toString();
         return this;
     }
     public Reservation(User renter, GameInstance gameInstance, Date startDate, Date endDate, ReservationStatus status, String renterComment, Date timestamp) {
@@ -73,6 +78,7 @@ public class Reservation {
         this.renterComment = renterComment;
         this.timestamp = timestamp;
         this.duration = DateUtils.getDuration(startDate,endDate);
+        this.reservationId = UUID.randomUUID().toString();
     }
 
 
