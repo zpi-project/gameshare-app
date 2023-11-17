@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { GameInstanceDetails } from "@/types/GameInstance";
-import { OpinionApi } from "@/api/OpinionApi";
+import { GameInstanceApi } from "@/api/GameInstanceApi";
 import Opinion from "@/components/Opinion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -19,7 +19,7 @@ const GameInstanceOpinions: FC<Props> = ({ gameInstance }) => {
     isError,
   } = useQuery({
     queryKey: ["opinions", { uuid: gameInstance?.uuid }],
-    queryFn: () => OpinionApi.getAllGameInstanceOpinions(gameInstance?.uuid ?? "", 0, 100),
+    queryFn: () => GameInstanceApi.getAllGameInstanceOpinions(gameInstance?.uuid ?? "", 0, 100),
     enabled: gameInstance !== undefined,
   });
 

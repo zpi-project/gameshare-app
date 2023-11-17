@@ -56,29 +56,29 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
         </TabsList>
         {gameInstance.images.length ? (
           <>
-            <TabsContent value="default">
+            <TabsContent value="default" className="h-96 w-96 overflow-hidden rounded-lg">
               <img
                 src={gameInstance.game.image}
                 alt={gameInstance.game.name}
-                className="h-96 w-96 overflow-hidden rounded-lg object-cover pb-5"
+                className="h-full w-full object-cover object-top"
               />
             </TabsContent>
             {gameInstance.images.map(image => (
-              <TabsContent value={image.link} className="bg-transparent focus:outline-none">
+              <TabsContent value={image.link} className="h-96 w-96 overflow-hidden rounded-lg">
                 <img
                   src={image.link}
                   alt={image.name}
-                  className="h-96 w-96 overflow-hidden rounded-lg object-cover pb-5"
+                  className="h-full w-full object-cover object-top"
                 />
               </TabsContent>
             ))}
           </>
         ) : (
-          <TabsContent value="default">
+          <TabsContent value="default" className="h-96 w-96 overflow-hidden rounded-lg">
             <img
               src={gameInstance.game.image}
               alt={gameInstance.game.name}
-              className="h-96 w-96 overflow-hidden rounded-lg object-cover pb-5"
+              className="h-full w-full object-cover object-top"
             />
           </TabsContent>
         )}

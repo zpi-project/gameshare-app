@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "@/types/User";
-import { OpinionApi } from "@/api/OpinionApi";
+import { UserApi } from "@/api/UserApi";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import Opinion from "./Opinion";
@@ -21,7 +21,9 @@ const Opinions: FC<Props> = ({ isMyPage, user }) => {
   } = useQuery({
     queryKey: ["opinions", { uuid: user?.uuid }],
     queryFn: () =>
-      isMyPage ? OpinionApi.getAll(0, 100) : OpinionApi.getAllByUUID(user?.uuid ?? "", 0, 100),
+      isMyPage
+        ? UserApi.getMyOpinions(0, 100)
+        : UserApi.getAllOpinionsByUUID(user?.uuid ?? "", 0, 100),
     enabled: user !== undefined,
   });
 
