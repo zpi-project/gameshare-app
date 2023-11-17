@@ -6,6 +6,7 @@ import com.zpi.backend.category.CategoryRepository;
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
+import com.zpi.backend.emails.EmailType;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstanceSearch;
 import com.zpi.backend.role.RoleRepository;
@@ -87,13 +88,8 @@ public class UserService {
 //            Sending e-mail
             String language = languageOpt.orElse(null);
             Context registrationContext = emailService.getRegistrationEmailContext(language);
-            try {
-                emailService.sendEmailWithHtmlTemplate(user.getEmail(), "GameShare - Registration",
-                        EmailService.EMAIL_TEMPLATE, registrationContext);
-                logger.info("Registration mail sent successfully");
-            } catch (Exception ex){
-                logger.error("Unable to send email trace" + ex.getMessage());
-            }
+                emailService.sendEmailWithHtmlTemplate(user, "GameShare - Registration",
+                        EmailService.EMAIL_TEMPLATE, registrationContext, EmailType.REGISTRATION);
         }
         else {
             throw new UserAlreadyExistsException("User already exists");

@@ -1,5 +1,9 @@
 package com.zpi.backend.emails;
 
+import com.zpi.backend.email_logs.EmailLog;
+import com.zpi.backend.email_logs.EmailLogRepository;
+import com.zpi.backend.user.User;
+import com.zpi.backend.user.UserService;
 import org.springframework.core.io.Resource;
 import jakarta.mail.internet.MimeMessage;
 import org.apache.commons.io.IOUtils;
@@ -30,11 +34,14 @@ public class EmailService {
     private final JavaMailSender emailSender;
     private final TemplateEngine templateEngine;
     private final EmailTranslationService translationService;
+    private final EmailLogRepository emailLogRepository;
 
-    public EmailService(JavaMailSender emailSender, TemplateEngine templateEngine, EmailTranslationService emailTranslationService) {
+    public EmailService(JavaMailSender emailSender, TemplateEngine templateEngine,
+                        EmailTranslationService emailTranslationService, EmailLogRepository emailLogRepository) {
         this.emailSender = emailSender;
         this.templateEngine = templateEngine;
         this.translationService = emailTranslationService;
+        this.emailLogRepository = emailLogRepository;
     }
 
     public Context setContextForEmailTemplate(String title, String header, String message, String languageCode) throws IOException {
@@ -53,17 +60,28 @@ public class EmailService {
         return context;
 
     }
+
+
     @Async
-    public void sendEmailWithHtmlTemplate(String to, String subject, String templateName, Context context) {
+    public void sendEmailWithHtmlTemplate(User user, String subject, String templateName, Context context, EmailType emailType) {
+        EmailLog log;
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
 
         try {
-            helper.setTo(to);
+            helper.setTo(user.getEmail());
             helper.setSubject(subject);
             String htmlContent = templateEngine.process(templateName, context);
             helper.setText(htmlContent, true);
+            log = new EmailLog(user,emailType, subject, htmlContent);
+            // Saving log
+            emailLogRepository.save(log);
+            // Sending mail
             emailSender.send(mimeMessage);
+            // Updating log
+            log.sent();
+            emailLogRepository.save(log);
+            logger.info(emailType.name() + " MAIL sent successfully");
         } catch (Exception e) {
             logger.error("Error while sending an email. "+e.getMessage());
         }
@@ -75,6 +93,8 @@ public class EmailService {
         String base64String = encoder.encodeToString(bytes);
         return "data:image/png;base64," + base64String;
     }
+
+    // TODO Check if any email hasn't been sent
 
     // Particular emails
     public Context getRegistrationEmailContext(String languageCode) throws IOException {
