@@ -1,35 +1,31 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
-import { User } from "@/types/User";
-import { UserApi } from "@/api/UserApi";
+import { GameInstanceDetails } from "@/types/GameInstance";
+import { GameInstanceApi } from "@/api/GameInstanceApi";
+import Opinion from "@/components/Opinion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
-import Opinion from "./Opinion";
 
 interface Props {
-  isMyPage?: boolean;
-  user?: User;
+  gameInstance: GameInstanceDetails;
 }
 
-const Opinions: FC<Props> = ({ isMyPage, user }) => {
+const GameInstanceOpinions: FC<Props> = ({ gameInstance }) => {
   const { t } = useTranslation();
   const {
     data: opinions,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["opinions", { uuid: user?.uuid }],
-    queryFn: () =>
-      isMyPage
-        ? UserApi.getMyOpinions(0, 100)
-        : UserApi.getAllOpinionsByUUID(user?.uuid ?? "", 0, 100),
-    enabled: user !== undefined,
+    queryKey: ["opinions", { uuid: gameInstance?.uuid }],
+    queryFn: () => GameInstanceApi.getAllGameInstanceOpinions(gameInstance?.uuid ?? "", 0, 100),
+    enabled: gameInstance !== undefined,
   });
 
   return (
     <ScrollArea className="w-full">
-      {user && (
+      {gameInstance && (
         <>
           <div className="flex h-full w-full flex-col gap-4 p-4">
             {isLoading ? (
@@ -48,9 +44,7 @@ const Opinions: FC<Props> = ({ isMyPage, user }) => {
                   {opinions.results.length ? (
                     opinions?.results.map((opinion, id) => <Opinion opinion={opinion} key={id} />)
                   ) : (
-                    <h4 className="mt-4 text-center text-xl">
-                      {t(isMyPage ? "noOpinionsMyPage" : "noOpinionsUserPage")}
-                    </h4>
+                    <h4 className="mt-4 text-center text-xl">{t("noOpinionsGameInstance")}</h4>
                   )}
                 </>
               )
@@ -62,4 +56,4 @@ const Opinions: FC<Props> = ({ isMyPage, user }) => {
   );
 };
 
-export default Opinions;
+export default GameInstanceOpinions;

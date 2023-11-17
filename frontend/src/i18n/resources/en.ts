@@ -66,6 +66,9 @@ export default {
   gameInstances: "Copies of this game",
   noGamesMyPage: "You don't have any games yet",
   noGamesUserPage: "This user doesn't have any games yet",
+  seeProfile: "See profile",
+  seeAvailability: "See availability",
+  seeGamePage: "See game page",
   noOpinionsMyPage: "You don't have any opinions yet",
   noOpinionsUserPage: "This user doesn't have any opinions yet",
   errorFetchingOpinions: "There was an error when fetching opinions",
@@ -75,6 +78,7 @@ export default {
   errorFetchingUsersOnMap: "There was an error fetching users on map.",
   noGameUsers: "No one has this game yet",
   errorFetchingGameInstances: "We couldn't load copies of this game",
+  noOpinionsGameInstance: "This game instance doesn't have any opinions yet",
 
   typeToSearch: "Type to search...",
   category: "Category",

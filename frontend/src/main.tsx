@@ -6,6 +6,7 @@ import CategoryGameSearch from "@/pages/CategoryGameSearch";
 import Dashboard from "@/pages/Dashboard";
 import Error from "@/pages/Error";
 import Game from "@/pages/Game";
+import GameInstance from "@/pages/GameInstance";
 import GameSearch from "@/pages/GameSearch";
 import MyProfile from "@/pages/MyProfile";
 import ReservationsHistory from "@/pages/ReservationsHistory";
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${URLS.GAME_INSTANCE}/:id`,
-        element: <div>game instance page</div>,
+        element: <GameInstance />,
       },
       {
         path: `${URLS.PROFILE}/:id`,
