@@ -5,14 +5,14 @@ import { URLS } from "@/constants/urls";
 import CategoryGameSearch from "@/pages/CategoryGameSearch";
 import Dashboard from "@/pages/Dashboard";
 import Error from "@/pages/Error";
+import Game from "@/pages/Game";
 import GameSearch from "@/pages/GameSearch";
 import MyProfile from "@/pages/MyProfile";
+import ReservationsHistory from "@/pages/ReservationsHistory";
 import UserProfile from "@/pages/UserProfile";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import App from "./App";
 import "./index.css";
-import Game from "@/pages/Game";
-import ReservationsHistory from "@/pages/ReservationsHistory";
 
 const router = createBrowserRouter([
   {

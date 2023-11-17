@@ -22,7 +22,7 @@ const ReservationsSideBar: FC<ReservationsSideBarProps> = ({ setQueryParams }) =
       status: reservationStatus === "ALL" ? undefined : reservationStatus,
     });
   }, [reservationStatus, reservationType]);
-    
+
   return (
     <div className="h-full rounded-lg bg-section p-4">
       <div className="flex h-full min-w-[280px] flex-col gap-8 rounded-lg bg-card p-4">

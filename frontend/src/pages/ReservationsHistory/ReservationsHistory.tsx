@@ -9,7 +9,6 @@ const ReservationsHistory: FC = () => {
     status: undefined,
   });
 
-
   return (
     <div className="flex h-full flex-row gap-6">
       <ReservationsSideBar setQueryParams={setQueryParams} />
