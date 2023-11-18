@@ -63,9 +63,24 @@ export const reservation: Reservation = {
 
 export const reservationTimeframes: ReservationTimeframe[] = [
   {
-    startDate: "",
-    endDate: "",
-    reservationId: "",
+    startDate: "2023-11-10T12:00:00.000+00:00",
+    endDate: "2023-11-12T00:00:00.000+00:00",
+    reservationId: "2023-12-12",
+  },
+  {
+    startDate: "2023-11-14T00:00:00.000+00:00",
+    endDate: "2023-11-18T00:00:00.000+00:00",
+    reservationId: "2023-12-123",
+  },
+  {
+    startDate: "2023-11-20T00:00:00.000+00:00",
+    endDate: "2023-11-20T00:00:00.000+00:00",
+    reservationId: "2023-12-124",
+  },
+  {
+    startDate: "2023-11-25T00:00:00.000+00:00",
+    endDate: "2023-11-29T00:00:00.000+00:00",
+    reservationId: "2023-12-317",
   },
 ];
 

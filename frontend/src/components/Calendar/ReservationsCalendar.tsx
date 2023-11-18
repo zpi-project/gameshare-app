@@ -1,8 +1,12 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getDaysInMonth } from "date-fns";
+import { URLS } from "@/constants/urls";
 import { getFirstDayOfLastMonth, getFirstDayOfMonth, getFirstDayOfNextMonth } from "@/utils/date";
+import { stringToHexColor } from "@/utils/stringToColor";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
+import { useTheme } from "@/components/ThemeProvider";
 import { Calendar, CalendarDay } from "./Calendar";
 
 interface ReservationsCalendarProps {
@@ -10,9 +14,20 @@ interface ReservationsCalendarProps {
 }
 
 const ReservationsCalendar: FC<ReservationsCalendarProps> = ({ gameInstanceUUID }) => {
-  const [startDate, setStartDate] = useState(getFirstDayOfMonth(new Date()));
+  const [startDate, setStartDate] = useState(
+    getFirstDayOfMonth(new Date(new Date().setHours(0, 0, 0, 0))),
+  );
   const [month, setMonth] = useState(startDate.getMonth() + 1);
   const [year, setYear] = useState(startDate.getFullYear());
+  const navigate = useNavigate();
+
+  const { theme } = useTheme();
+  const color =
+    theme === "system"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+      : theme;
 
   useEffect(() => {
     setMonth(startDate.getMonth() + 1);
@@ -27,6 +42,27 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({ gameInstanceUUID 
     queryKey: ["reservations-calendar", { uuid: gameInstanceUUID, month, year }],
     queryFn: () => GameInstanceApi.getReservations(gameInstanceUUID, month, year),
   });
+
+  const daysWithReservations = useMemo(() => {
+    const daysInMonth = getDaysInMonth(startDate);
+    const startDateCopy = new Date(startDate);
+
+    return Array.from({ length: daysInMonth }).map((_, idx) => {
+      const currDate = new Date(startDateCopy);
+      currDate.setDate(startDateCopy.getDate() + idx);
+
+      const matchingReservation = (reservations || []).find(reservation => {
+        const reservationStartDate = new Date(new Date(reservation.startDate).setHours(0, 0, 0, 0));
+        const reservationEndDate = new Date(new Date(reservation.endDate).setHours(0, 0, 0, 0));
+
+        return reservationStartDate <= currDate && currDate <= reservationEndDate;
+      });
+
+      return matchingReservation ? matchingReservation.reservationId : null;
+    });
+  }, [reservations, startDate]);
+
+  console.log(daysWithReservations);
 
   return (
     <Calendar
@@ -49,9 +85,29 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({ gameInstanceUUID 
             </>
           ) : (
             <>
-              {Array.from({ length: getDaysInMonth(startDate) }).map((_, idx) => (
-                <CalendarDay key={idx} variant="filled" day={idx + 1} />
-              ))}
+              {daysWithReservations.map((reservationId, idx) => {
+                let id = reservationId ? reservationId.split("-").pop() : "";
+                id = id && id.length > 3 ? id : id + "111";
+
+                return (
+                  <CalendarDay
+                    key={idx}
+                    variant={reservationId ? "filled" : "outlined"}
+                    disabled={reservationId === null}
+                    style={{
+                      backgroundColor: reservationId
+                        ? color === "dark"
+                          ? stringToHexColor(id, 0.4, 0.2)
+                          : stringToHexColor(id, 0.5, 0.7)
+                        : "transparent",
+                    }}
+                    day={idx + 1}
+                    onClick={() =>
+                      reservationId && navigate(`${URLS.MY_RESERVATIONS}/${reservationId}`)
+                    }
+                  />
+                );
+              })}
             </>
           )}
         </div>

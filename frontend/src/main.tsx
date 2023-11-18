@@ -56,6 +56,10 @@ const router = createBrowserRouter([
             path: URLS.MY_RESERVATIONS,
             element: <ReservationsHistory />,
           },
+          {
+            path: `${URLS.MY_RESERVATIONS}/:id`,
+            element: <div>reservation details page</div>,
+          },
         ],
       },
       {
