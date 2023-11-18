@@ -11,7 +11,7 @@ export default {
 
   language: "Language",
   pl: "Polish",
-  en: "English",
+  enUS: "English",
 
   addOpinion: "Add opinion",
   seeMore: "See more",
@@ -91,4 +91,46 @@ export default {
   any: "Any",
   any_male: "Any",
   any_female: "Any",
+
+  myReservations: "My reservations",
+  reservationStatus: "Reservation status",
+  reservationType: "Reservation type",
+  errorFetchingReservations: "We couldn't load your reservations.",
+  noReservations: "You don't have any reservations yet.",
+  noReservationsStatus: "You don't have any reservations with this status.",
+  reservationNumber: "Reservation number:",
+  startDate: "Start date:",
+  endDate: "End date:",
+  days: "Days:",
+  dateFormat: "{{date, MMM. d, yyyy}}",
+
+  reservationTypes: {
+    owner: "As game owner",
+    renter: "As game renter",
+  },
+
+  reservationStatuses: {
+    owner: {
+      ALL: "All",
+      PENDING: "Pending approval",
+      ACCEPTED_BY_OWNER: "Accepted by me",
+      REJECTED_BY_OWNER: "Rejected by me",
+      CANCELED_BY_OWNER: "Canceled by me",
+      CANCELED_BY_RENTER: "Canceled by renter",
+      RENTED: "Rented",
+      FINISHED: "Finished",
+      EXPIRED: "Expired",
+    },
+    renter: {
+      ALL: "All",
+      PENDING: "Pending approval",
+      ACCEPTED_BY_OWNER: "Accepted by owner",
+      REJECTED_BY_OWNER: "Rejected by owner",
+      CANCELED_BY_OWNER: "Canceled by owner",
+      CANCELED_BY_RENTER: "Canceled by me",
+      RENTED: "Rented",
+      FINISHED: "Finished",
+      EXPIRED: "Expired",
+    },
+  },
 };

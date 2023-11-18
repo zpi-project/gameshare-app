@@ -13,7 +13,7 @@ const pl: typeof en = {
 
   language: "Język",
   pl: "polski",
-  en: "angielski",
+  enUS: "angielski",
 
   addOpinion: "Dodaj opinię",
   seeMore: "Rozwiń",
@@ -91,9 +91,52 @@ const pl: typeof en = {
   players: "Liczba graczy",
   age: "Wiek",
   perDay: "na dzień",
+
   any: "Dowolne",
   any_male: "Dowolny",
   any_female: "Dowolna",
+
+  myReservations: "Moje rezerwacje",
+  reservationStatus: "Status rezerwacji",
+  reservationType: "Typ rezerwacji",
+  errorFetchingReservations: "Wystąpił błąd podczas pobierania twoich rezerwacji.",
+  noReservations: "Nie masz żadnych rezerwacji",
+  noReservationsStatus: "Nie masz żadnych rezerwacji o takim statusie",
+  reservationNumber: "Numer rezerwacji:",
+  startDate: "Od:",
+  endDate: "Do:",
+  days: "Dni:",
+  dateFormat: "{{date, d MMM. yyyy}}",
+
+  reservationTypes: {
+    owner: "Jako właściciel",
+    renter: "Jako wypożyczający",
+  },
+
+  reservationStatuses: {
+    owner: {
+      ALL: "Wszystkie",
+      PENDING: "Oczekujące na akceptację",
+      ACCEPTED_BY_OWNER: "Zaakceptowane przeze mnie",
+      REJECTED_BY_OWNER: "Odrzucone przeze mnie",
+      CANCELED_BY_OWNER: "Anulowane przeze mnie",
+      CANCELED_BY_RENTER: "Anulowane przez wypożyczającego",
+      RENTED: "Wypożyczone",
+      FINISHED: "Zrealizowane",
+      EXPIRED: "Po terminie",
+    },
+    renter: {
+      ALL: "Wszystkie",
+      PENDING: "Oczekujące na akceptację",
+      ACCEPTED_BY_OWNER: "Zaakceptowane przez właściciela",
+      REJECTED_BY_OWNER: "Odrzucone przez właściciela",
+      CANCELED_BY_OWNER: "Anulowane przez właściciela",
+      CANCELED_BY_RENTER: "Anulowane przeze mnie",
+      RENTED: "Wypożyczone",
+      FINISHED: "Zrealizowane",
+      EXPIRED: "Po terminie",
+    },
+  },
 };
 
 export default pl;

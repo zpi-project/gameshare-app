@@ -47,8 +47,3 @@ const GameInstanceCard: FC<GameInstanceCardProps> = ({
 };
 
 export default GameInstanceCard;
-
-// backend pytania
-// czy zwracane nieaktywne gry?
-// images czy gameInstanceImage ?
-// czy moje instancje tej gry tez maja byc zwracane
