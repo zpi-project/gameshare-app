@@ -2,8 +2,8 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Opinion as OpinionType } from "@/types/Opinion";
 import { getFullname } from "@/utils/user";
-import Avatar from "./Avatar";
-import Stars from "./Stars";
+import Avatar from "@/components/Avatar";
+import { Stars } from "@/components/Stars";
 
 interface Props {
   opinion: OpinionType;

@@ -1,15 +1,14 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import { Pencil } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { URLS } from "@/constants/urls";
 import { GameInstance as GameInstanceType } from "@/types/GameInstance";
-import AgeBadge from "./Badge/AgeBadge";
-import PlayersBadge from "./Badge/PlayersBadge";
-import PriceBadge from "./Badge/PriceBadge";
-import TimeBadge from "./Badge/TimeBadge";
-import { Button } from "./ui/button";
+import { PlayersBadge, PriceBadge, TimeBadge } from "@/components/Badge";
+import AgeBadge from "@/components/Badge/AgeBadge";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   gameInstance: GameInstanceType;
@@ -56,11 +55,14 @@ const GameInstance: FC<Props> = ({
         </section>
       </Link>
       {showButtons && (
-        // tak jak w designie, że buttony do dołu i do góry równo
         <div className="ml-4 flex flex-col justify-between gap-4">
-          <Button className="h-16 w-14 flex-grow bg-card">
-            <Pencil />
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="h-16 w-14 flex-grow bg-card">
+                <Pencil />
+              </Button>
+            </DialogTrigger>
+          </Dialog>
           <Button className="h-16 w-14 flex-grow bg-card">
             <CalendarDays />
           </Button>

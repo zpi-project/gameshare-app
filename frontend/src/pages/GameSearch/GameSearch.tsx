@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import { Game } from "@/types/Game";
-import GameSearchBar from "@/components/GameSearchBar";
+import { GameSearchBar } from "@/components/GameSearch";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import CategoriesSection from "./CategoriesSection";
 import PopularGamesSection from "./PopularGamesSection";

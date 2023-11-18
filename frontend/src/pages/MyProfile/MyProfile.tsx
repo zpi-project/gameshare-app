@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
-import GameInstancesSection from "@/components/GameInstancesSection";
-import Opinions from "@/components/Opinions";
+import { Opinions } from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
+import GameInstancesSection from "@/components/UserGameInstances";
 import { useToast } from "@/components/ui/use-toast";
 
 const MyProfile: FC = () => {
@@ -41,7 +41,7 @@ const MyProfile: FC = () => {
         </div>
       </div>
       <div className="h-[calc(100%-350px)] flex-grow rounded-lg bg-section p-4 xl:h-full xl:w-1/2">
-        <GameInstancesSection owner={user} showButtons isMyPage />
+        <GameInstancesSection owner={user} isMyPage />
       </div>
     </div>
   );

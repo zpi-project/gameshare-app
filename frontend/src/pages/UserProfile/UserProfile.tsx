@@ -7,9 +7,9 @@ import { useRecoilValue } from "recoil";
 import { roleState } from "@/state/role";
 import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
-import GameInstancesSection from "@/components/GameInstancesSection";
-import Opinions from "@/components/Opinions";
+import { Opinions } from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
+import GameInstancesSection from "@/components/UserGameInstances";
 import { useToast } from "@/components/ui/use-toast";
 
 const UserProfile: FC = () => {

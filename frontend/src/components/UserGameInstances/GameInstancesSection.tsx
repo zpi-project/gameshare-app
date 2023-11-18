@@ -8,16 +8,15 @@ import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "../ui/button";
 import GameInstance from "./GameInstance";
-import { Button } from "./ui/button";
 
 interface Props {
   owner?: User;
-  showButtons?: boolean;
   isMyPage?: boolean;
 }
 
-const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
+const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
   const {
@@ -50,7 +49,7 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
                 />
                 <Search className="absolute right-4 top-2" />
               </div>
-              {showButtons && <Button className="w-56">{t("addGameInstance")}</Button>}
+              {isMyPage && <Button className="w-56">{t("addGameInstance")}</Button>}
             </div>
             <ScrollArea className="h-[calc(100%-100px)] w-full flex-grow">
               {isLoading ? (
@@ -75,11 +74,7 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
                         }
                       })
                       .map((gameInstance, id) => (
-                        <GameInstance
-                          gameInstance={gameInstance}
-                          key={id}
-                          showButtons={showButtons}
-                        />
+                        <GameInstance gameInstance={gameInstance} key={id} showButtons={isMyPage} />
                       ))
                   ) : (
                     <h4 className="mt-4 text-center text-xl">

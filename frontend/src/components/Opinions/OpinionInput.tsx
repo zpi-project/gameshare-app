@@ -4,9 +4,9 @@ import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Textarea } from "@/components/ui/textarea";
-import Avatar from "./Avatar";
-import Stars from "./Stars";
-import { Button } from "./ui/button";
+import Avatar from "../Avatar";
+import Stars from "../Stars/Stars";
+import { Button } from "../ui/button";
 
 interface Props {
   // onClick?: () => void;
@@ -14,7 +14,7 @@ interface Props {
   isLoading: boolean;
 }
 
-const AddOpinion: FC<Props> = ({ user, isLoading }) => {
+const OpinionInput: FC<Props> = ({ user, isLoading }) => {
   return (
     <div className="flex w-full flex-row items-center gap-3 rounded-lg bg-card p-2">
       {isLoading && (
@@ -56,4 +56,4 @@ const AddOpinion: FC<Props> = ({ user, isLoading }) => {
   );
 };
 
-export default AddOpinion;
+export default OpinionInput;

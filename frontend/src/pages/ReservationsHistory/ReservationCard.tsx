@@ -5,7 +5,7 @@ import { URLS } from "@/constants/urls";
 import { Reservation } from "@/types/Reservation";
 import { getFullname } from "@/utils/user";
 import { PriceBadge } from "@/components/Badge";
-import Stars from "@/components/Stars";
+import { Stars } from "@/components/Stars";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 

@@ -7,9 +7,9 @@ import { useDebounce } from "use-debounce";
 import { Game } from "@/types/Game";
 import { GameApi } from "@/api/GameApi";
 import { Input } from "@/components/ui/input";
+import { ScrollArea } from "../ui/scroll-area";
+import { Skeleton } from "../ui/skeleton";
 import GameSearchCard from "./GameSearchCard";
-import { ScrollArea } from "./ui/scroll-area";
-import { Skeleton } from "./ui/skeleton";
 
 const GAME_PAGE_SIZE = 8;
 
