@@ -89,7 +89,7 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
           <div className="flex flex-col items-end p-3">
             <PriceBadge price={gameInstance.pricePerDay} />
             {!gameInstance.active && (
-              <div className="text-destructive text-xl uppercase">{t("deactivated")}</div>
+              <div className="text-xl uppercase text-destructive">{t("deactivated")}</div>
             )}
           </div>
         </div>

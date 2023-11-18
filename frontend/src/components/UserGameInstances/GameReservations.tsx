@@ -17,12 +17,12 @@ const GameReservations: FC<GameReservationsDialogProps> = ({ gameInstance }) => 
   const { t } = useTranslation();
 
   return (
-    <DialogContent className="min-h-[800px] min-w-[1000px] p-10">
+    <DialogContent className="min-h-[800px] p-10 lg:min-w-[1000px]">
       <div className="flex flex-row gap-4">
-        <div>
+        <div className="hidden lg:flex">
           <GameInstanceDetailsCard gameInstance={gameInstance} />
         </div>
-        <Separator orientation="vertical" />
+        <Separator orientation="vertical" className="hidden lg:flex" />
         <div className="flex-grow">
           <div className="flex flex-row justify-between">
             <h2 className="text-2xl uppercase text-secondary">{t("reservationsCalendar")}</h2>

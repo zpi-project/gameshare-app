@@ -27,7 +27,7 @@ const GameInstanceCard: FC<GameInstanceCardProps> = ({
   return (
     <Link
       className="flex w-full flex-row gap-4 rounded-lg bg-card p-3 hover:bg-accent"
-      to={`${URLS.GAME_INSTANCE}/${uuid}}`}
+      to={`${URLS.GAME_INSTANCE}/${uuid}`}
       onMouseEnter={() => setActive(ownerUUID)}
       onMouseLeave={() => setActive("")}
     >

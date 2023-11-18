@@ -6,7 +6,6 @@ import { Game } from "@/types/Game";
 import { cn } from "@/utils/tailwind";
 import { TooltipTrigger, Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
-
 interface PopularGameProps {
   game: Game;
   className?: string;
