@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import { Pencil } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { URLS } from "@/constants/urls";
@@ -9,6 +8,8 @@ import { GameInstance as GameInstanceType } from "@/types/GameInstance";
 import { PlayersBadge, PriceBadge, TimeBadge } from "@/components/Badge";
 import AgeBadge from "@/components/Badge/AgeBadge";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import GameReservations from "./GameReservations";
 
 interface Props {
   gameInstance: GameInstanceType;
@@ -56,16 +57,17 @@ const GameInstance: FC<Props> = ({
       </Link>
       {showButtons && (
         <div className="ml-4 flex flex-col justify-between gap-4">
+          <Button className="h-16 w-14 flex-grow bg-card">
+            <Pencil />
+          </Button>
           <Dialog>
             <DialogTrigger asChild>
               <Button className="h-16 w-14 flex-grow bg-card">
-                <Pencil />
+                <CalendarDays />
               </Button>
             </DialogTrigger>
+            <GameReservations />
           </Dialog>
-          <Button className="h-16 w-14 flex-grow bg-card">
-            <CalendarDays />
-          </Button>
         </div>
       )}
     </div>
