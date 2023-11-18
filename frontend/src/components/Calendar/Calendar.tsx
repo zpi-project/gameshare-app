@@ -86,7 +86,7 @@ const CalendarDay: FC<CalendarDayProps> = ({
         "flex h-[70px] w-[70px] items-center justify-center rounded-lg text-xl",
         variant === "filled" && "bg-secondary text-foreground",
         variant === "outlined" && "border border-secondary bg-transparent text-secondary",
-        !disabled && "cursor-pointer",
+        !disabled && "cursor-pointer duration-200 hover:!bg-accent",
         className,
       )}
       style={style}
