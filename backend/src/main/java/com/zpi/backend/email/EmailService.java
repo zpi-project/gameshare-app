@@ -97,7 +97,7 @@ public class EmailService {
         return "data:image/png;base64," + base64String;
     }
 
-    @Scheduled(cron = "0 */5 * * *", zone = "Europe/Warsaw")
+    @Scheduled(cron = "0 */5 * ? * *", zone = "Europe/Warsaw")
     public void sendUnsentEmails() {
         List<EmailLog> unsentEmails = emailLogRepository.findAllBySentIsFalse();
         logger.info("Checking e-mails to send.");
@@ -117,6 +117,16 @@ public class EmailService {
                 }
             }
         }
+    }
+
+    @Scheduled(cron = "0 0 8 ? * *", zone = "Europe/Warsaw")
+    public void sendRemaindersAboutReservation2DaysBefore() {
+        logger.info("DRAFT: Sending reservation reminders 2 days before.");
+    }
+
+    @Scheduled(cron = "0 0 8 ? * *", zone = "Europe/Warsaw")
+    public void sendRemaindersAboutReservationOnDay() {
+        logger.info("DRAFT: Sending reservation reminders on reservation day.");
     }
 
     // Particular emails
