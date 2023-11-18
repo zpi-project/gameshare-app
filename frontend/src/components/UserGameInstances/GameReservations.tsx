@@ -1,8 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { useQuery } from "@tanstack/react-query";
 import { GameInstance } from "@/types/GameInstance";
-import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { ReservationsCalendar } from "@/components/Calendar";
 import GameInstanceDetailsCard from "@/components/GameInstanceDetailsCard";
 import { Button } from "@/components/ui/button";

@@ -1,5 +1,5 @@
 import { Paginated } from "@/types/Paginated";
-import { Reservation } from "@/types/Reservation";
+import { Reservation, ReservationTimeframe } from "@/types/Reservation";
 
 export const reservation: Reservation = {
   gameInstance: {
@@ -60,6 +60,14 @@ export const reservation: Reservation = {
   timestamp: "2023-12-16T22:16:39.798+00:00",
   duration: 3,
 };
+
+export const reservationTimeframes: ReservationTimeframe[] = [
+  {
+    startDate: "",
+    endDate: "",
+    reservationId: "",
+  },
+];
 
 export const reservations: Reservation[] = Array.from({ length: 30 }, () => reservation);
 
