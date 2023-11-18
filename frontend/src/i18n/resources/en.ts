@@ -103,6 +103,7 @@ export default {
   endDate: "End date:",
   days: "Days:",
   dateFormat: "{{date, MMM. d, yyyy}}",
+  monthYearFormat: "{{date, MMMM yyyy}}",
 
   reservationTypes: {
     owner: "As game owner",
@@ -132,6 +133,16 @@ export default {
       FINISHED: "Finished",
       EXPIRED: "Expired",
     },
+  },
+
+  weekdays: {
+    0: "mon",
+    1: "tue",
+    2: "wed",
+    3: "thu",
+    4: "fri",
+    5: "sat",
+    6: "sun",
   },
 
   reservationsCalendar: "Reservations calendar",

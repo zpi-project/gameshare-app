@@ -6,6 +6,7 @@ import {
 } from "@/types/GameInstance";
 import { Opinion } from "@/types/Opinion";
 import { Paginated } from "@/types/Paginated";
+import { ReservationTimeframe, Timeframe } from "@/types/Reservation";
 import Api from "./Api";
 
 export class GameInstanceApi {
@@ -61,5 +62,15 @@ export class GameInstanceApi {
       },
     );
     return opinions;
+  }
+
+  static async getReservations(uuid: string, month: number, year: number) {
+    await new Promise(resolve => setTimeout(resolve, 600));
+    return [] as ReservationTimeframe[];
+  }
+
+  static async getNonAvailability(uuid: string, month: number, year: number) {
+    await new Promise(resolve => setTimeout(resolve, 600));
+    return [] as Timeframe[];
   }
 }

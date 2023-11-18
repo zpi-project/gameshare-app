@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -107,6 +108,7 @@ const pl: typeof en = {
   endDate: "Do:",
   days: "Dni:",
   dateFormat: "{{date, d MMM. yyyy}}",
+  monthYearFormat: "{{date, MMM. yyyy}}",
 
   reservationTypes: {
     owner: "Jako właściciel",
@@ -136,6 +138,16 @@ const pl: typeof en = {
       FINISHED: "Zrealizowane",
       EXPIRED: "Po terminie",
     },
+  },
+
+  weekdays: {
+    0: "pon",
+    1: "wt",
+    2: "śr",
+    3: "czw",
+    4: "pt",
+    5: "so",
+    6: "nie",
   },
 
   reservationsCalendar: "Kalendarz rezerwacji",

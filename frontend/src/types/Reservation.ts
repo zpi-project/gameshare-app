@@ -27,3 +27,12 @@ export interface ReservationQueryParams {
   status?: ReservationStatusType;
   asOwner: boolean;
 }
+
+export interface Timeframe {
+  startDate: string;
+  endDate: string;
+}
+
+export interface ReservationTimeframe extends Timeframe {
+  reservationId: string;
+}
