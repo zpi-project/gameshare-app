@@ -5,13 +5,15 @@ import { URLS } from "@/constants/urls";
 import CategoryGameSearch from "@/pages/CategoryGameSearch";
 import Dashboard from "@/pages/Dashboard";
 import Error from "@/pages/Error";
+import Game from "@/pages/Game";
+import GameInstance from "@/pages/GameInstance";
 import GameSearch from "@/pages/GameSearch";
 import MyProfile from "@/pages/MyProfile";
+import ReservationsHistory from "@/pages/ReservationsHistory";
 import UserProfile from "@/pages/UserProfile";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import App from "./App";
 import "./index.css";
-import Game from "./pages/Game";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${URLS.GAME_INSTANCE}/:id`,
-        element: <div>game instance page</div>,
+        element: <GameInstance />,
       },
       {
         path: `${URLS.PROFILE}/:id`,
@@ -52,11 +54,7 @@ const router = createBrowserRouter([
           },
           {
             path: URLS.MY_RESERVATIONS,
-            element: <div>my reservations page</div>,
-          },
-          {
-            path: URLS.MY_GAMES_INSTANCES,
-            element: <div>my game instances page</div>,
+            element: <ReservationsHistory />,
           },
         ],
       },

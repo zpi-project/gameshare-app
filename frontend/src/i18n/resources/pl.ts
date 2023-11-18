@@ -13,7 +13,7 @@ const pl: typeof en = {
 
   language: "Język",
   pl: "polski",
-  en: "angielski",
+  enUS: "angielski",
 
   addOpinion: "Dodaj opinię",
   seeMore: "Rozwiń",
@@ -70,6 +70,9 @@ const pl: typeof en = {
   noGamesMyPage: "Nie posiadasz jeszcze żadnej gry",
   noGamesUserPage: "Ten użytkownik nie posiada jeszcze żadnych gier",
   errorFetchingGames: "Wystąpił błąd podczas pobierania gier.",
+  seeProfile: "Zobacz profil",
+  seeAvailability: "Zobacz dostępność",
+  seeGamePage: "Zobacz stronę gry",
   noOpinionsMyPage: "Nie posiadasz jeszcze żadnych opinii",
   noOpinionsUserPage: "Ten użytkownik nie posiada jeszcze żadnych opinii",
   errorFetchingOpinions: "Wystąpił błąd podczas pobierania opinii",
@@ -79,6 +82,7 @@ const pl: typeof en = {
 
   noGameUsers: "Nikt jeszcze nie ma tej gry",
   errorFetchingGameInstances: "Nie udało się pobrać egzemplarzy tej gry",
+  noOpinionsGameInstance: "Ten egzemplarz nie ma jeszcze żadnej opinii",
 
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",
@@ -87,9 +91,52 @@ const pl: typeof en = {
   players: "Liczba graczy",
   age: "Wiek",
   perDay: "na dzień",
+
   any: "Dowolne",
   any_male: "Dowolny",
   any_female: "Dowolna",
+
+  myReservations: "Moje rezerwacje",
+  reservationStatus: "Status rezerwacji",
+  reservationType: "Typ rezerwacji",
+  errorFetchingReservations: "Wystąpił błąd podczas pobierania twoich rezerwacji.",
+  noReservations: "Nie masz żadnych rezerwacji",
+  noReservationsStatus: "Nie masz żadnych rezerwacji o takim statusie",
+  reservationNumber: "Numer rezerwacji:",
+  startDate: "Od:",
+  endDate: "Do:",
+  days: "Dni:",
+  dateFormat: "{{date, d MMM. yyyy}}",
+
+  reservationTypes: {
+    owner: "Jako właściciel",
+    renter: "Jako wypożyczający",
+  },
+
+  reservationStatuses: {
+    owner: {
+      ALL: "Wszystkie",
+      PENDING: "Oczekujące na akceptację",
+      ACCEPTED_BY_OWNER: "Zaakceptowane przeze mnie",
+      REJECTED_BY_OWNER: "Odrzucone przeze mnie",
+      CANCELED_BY_OWNER: "Anulowane przeze mnie",
+      CANCELED_BY_RENTER: "Anulowane przez wypożyczającego",
+      RENTED: "Wypożyczone",
+      FINISHED: "Zrealizowane",
+      EXPIRED: "Po terminie",
+    },
+    renter: {
+      ALL: "Wszystkie",
+      PENDING: "Oczekujące na akceptację",
+      ACCEPTED_BY_OWNER: "Zaakceptowane przez właściciela",
+      REJECTED_BY_OWNER: "Odrzucone przez właściciela",
+      CANCELED_BY_OWNER: "Anulowane przez właściciela",
+      CANCELED_BY_RENTER: "Anulowane przeze mnie",
+      RENTED: "Wypożyczone",
+      FINISHED: "Zrealizowane",
+      EXPIRED: "Po terminie",
+    },
+  },
 };
 
 export default pl;
