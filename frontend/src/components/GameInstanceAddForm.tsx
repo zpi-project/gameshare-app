@@ -1,23 +1,13 @@
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import z from "zod";
 import { Game } from "@/types/Game";
 import { NewGameInstance } from "@/types/GameInstance";
 import { Button } from "@/components/ui/button";
 import { DialogContent } from "@/components/ui/dialog";
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-  Form,
-  FormDescription,
-} from "@/components/ui/form";
+import { FormField, FormItem, FormControl, FormMessage, Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import GameSearchBar from "./GameSearchBar";
 import GameSearchCard from "./GameSearchCard";
@@ -35,7 +25,9 @@ const formSchema = z.object({
       message: "Description must be at least 2 characters.",
     })
     .max(500, { message: "Description must be less then 500 characters." }),
-  pricePerDay: z.number(),
+  pricePerDay: z.coerce.number().refine(value => value >= 0, {
+    message: "Price per day must be at least 0.",
+  }),
 });
 
 const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
@@ -64,31 +56,28 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <GameSearchBar
-                        onGameClick={(game: Game) => {
-                          field.onChange(game.id), setGame(game);
-                        }}
-                        placeholder="Search game title..."
-                      />
+                      <>
+                        <GameSearchBar
+                          onGameClick={(game: Game) => {
+                            field.onChange(game.id);
+                            setGame(game);
+                          }}
+                          placeholder="Search game title..."
+                        />
+                        {game && <GameSearchCard game={game}></GameSearchCard>}
+                      </>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              {game && <GameSearchCard game={game}></GameSearchCard>}
               <FormField
                 control={form.control}
                 name="pricePerDay"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input
-                        {...field}
-                        onChange={e => {
-                          const value = parseFloat(e.target.value); // Convert the string to a floating-point number
-                          field.onChange(isNaN(value) ? "" : value); // Check for NaN and update the field value accordingly
-                        }}
-                      />
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

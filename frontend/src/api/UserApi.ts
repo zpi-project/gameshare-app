@@ -20,7 +20,7 @@ export class UserApi {
   }
 
   static async update(user: NewUser) {
-    const { data } = await Api.put<NewUser>("/user", user);
+    const { data } = await Api.put<User>("/user", user);
     return data;
   }
 

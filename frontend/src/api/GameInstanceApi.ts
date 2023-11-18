@@ -13,16 +13,15 @@ export class GameInstanceApi {
   }
 
   static async getAll(page: number, size: number) {
-    const { data: instances } = await Api.get<Paginated<GameInstance>>(`game-instances`, {
+    const { data: instances } = await Api.get<Paginated<GameInstance>>("game-instances", {
       params: { page, size },
     });
     return instances;
   }
 
-  static async addGameInstance(gameId: number, description: string, pricePerDay: number) {
-    const { data } = await Api.post<NewGameInstance>(`game-instances`, {
-      params: { gameId, description, pricePerDay },
-    });
+  static async create(gameInstance: NewGameInstance) {
+    console.log(gameInstance);
+    const { data } = await Api.post<GameInstance>("game-instances", gameInstance);
     return data;
   }
 
