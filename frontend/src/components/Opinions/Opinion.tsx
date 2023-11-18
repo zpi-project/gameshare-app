@@ -12,8 +12,7 @@ interface Props {
 const Opinion: FC<Props> = ({ opinion }) => {
   const [showAll, setshowAll] = useState(false);
   const { t } = useTranslation();
-
-  const handleClick = () => setshowAll(showAll => !showAll);
+  const handleClick = () => setshowAll(!showAll);
 
   return (
     <div className="flex w-full flex-row items-center gap-3 rounded-lg bg-card p-4">
@@ -25,7 +24,12 @@ const Opinion: FC<Props> = ({ opinion }) => {
         </div>
         <div className="min-h-8 break-all pr-2 text-xs italic">
           {showAll ? (
-            opinion.description
+            <>
+              {opinion.description}
+              <button className="mx-2 inline text-xs italic text-secondary" onClick={handleClick}>
+                {t("seeLess")}
+              </button>
+            </>
           ) : (
             <>
               {opinion.description.slice(0, 200)}
@@ -36,7 +40,7 @@ const Opinion: FC<Props> = ({ opinion }) => {
                     className="mx-2 inline text-xs italic text-secondary"
                     onClick={handleClick}
                   >
-                    {showAll ? t("seeLess") : t("seeMore")}
+                    {t("seeMore")}
                   </button>
                 </>
               )}
