@@ -12,6 +12,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import GameInstance from "./GameInstance";
 import GameInstanceForm from "./GameInstanceAddForm";
 import { Button } from "./ui/button";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { NewGameInstance } from "@/types/GameInstance";
 
 interface Props {
   owner?: User;
@@ -36,6 +38,24 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
     enabled: owner !== undefined,
   });
 
+  const { mutate } = useMutation({
+    mutationFn: (gameInstace: NewGameInstance) => GameInstanceApi.addGameInstance(gameInstace.gameId, gameInstace.description, gameInstace.pricePerDay),
+    // onError: () => {
+    //   toast({
+    //     title: t("updateErrorTitle"),
+    //     description: t("tryRefreshing"),
+    //     variant: "destructive",
+    //   });
+    // },
+    // onSuccess: () => {
+    //   toast({
+    //     description: t("updateSuccessDescription"),
+    //   });
+    //   queryClient.invalidateQueries(["user"]);
+    //   onSubmit();
+    // },
+  });
+
   return (
     <div className="flex h-full w-full flex-col gap-6">
       {owner && (
@@ -58,7 +78,7 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
                   <DialogTrigger asChild>
                     <Button className="w-56">{t("addGameInstance")}</Button>
                   </DialogTrigger>
-                  <GameInstanceForm onSubmit={() => GameInstanceApi.addGameInstance} />
+                  <GameInstanceForm onSubmit={(gameInstace: NewGameInstance) => mutate(gameInstace)} />
                 </Dialog>
               )}
             </div>
