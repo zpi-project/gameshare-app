@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import GameInstance from "./GameInstance";
-import { GameInstanceForm } from "./GameInstanceAddForm";
+import GameInstanceForm from "./GameInstanceAddForm";
 import { Button } from "./ui/button";
 
 interface Props {
@@ -58,7 +58,7 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
                   <DialogTrigger asChild>
                     <Button className="w-56">{t("addGameInstance")}</Button>
                   </DialogTrigger>
-                  <GameInstanceForm />
+                  <GameInstanceForm onSubmit={() => GameInstanceApi.addGameInstance} />
                 </Dialog>
               )}
             </div>

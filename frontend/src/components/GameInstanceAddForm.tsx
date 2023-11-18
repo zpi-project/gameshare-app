@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Game } from "@/types/Game";
-import { GameInstance } from "@/types/GameInstance";
+import { NewGameInstance } from "@/types/GameInstance";
 import { Button } from "@/components/ui/button";
 import { DialogContent } from "@/components/ui/dialog";
 import {
@@ -23,35 +23,30 @@ import GameSearchBar from "./GameSearchBar";
 import GameSearchCard from "./GameSearchCard";
 import { Textarea } from "./ui/textarea";
 
-// interface GameInstanceFormProps {
-//   onSubmit: (gameInstance: GameInstance) => void;
-// }
+interface GameInstanceFormProps {
+  onSubmit: (gameInstance: NewGameInstance) => void;
+}
 
 const formSchema = z.object({
-  gameTitle: z.string().min(2),
-  description: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  gameId: z.number(),
+  description: z
+    .string()
+    .min(2, {
+      message: "Description must be at least 2 characters.",
+    })
+    .max(500, { message: "Description must be less then 500 characters." }),
+  pricePerDay: z.number(),
 });
 
-export function GameInstanceForm() {
-  // 1. Define your form.
+const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      gameTitle: "",
       description: "",
     },
   });
 
   const [game, setGame] = useState<Game | null>(null);
-
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
 
   return (
     <DialogContent className="flex max-w-7xl">
@@ -60,20 +55,20 @@ export function GameInstanceForm() {
           onSubmit={form.handleSubmit(onSubmit)}
           className="m-4 w-full rounded-md bg-background p-3 shadow-lg"
         >
-          <div className="flex w-full flex-row gap-4">
+          <div className="flex h-full w-full flex-row gap-4">
             <div className="flex w-1/2 flex-col gap-2">
               <h1 className="w-full text-center text-2xl">YOUR GAME DETAILS</h1>
               <FormField
                 control={form.control}
-                name="gameTitle"
+                name="gameId"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
                       <GameSearchBar
                         onGameClick={(game: Game) => {
-                          field.onChange(game.name), setGame(game);
+                          field.onChange(game.id), setGame(game);
                         }}
-                        placeholder="searchGamePlaceholder"
+                        placeholder="Search game title..."
                       />
                     </FormControl>
                     <FormMessage />
@@ -81,7 +76,24 @@ export function GameInstanceForm() {
                 )}
               />
               {game && <GameSearchCard game={game}></GameSearchCard>}
-
+              <FormField
+                control={form.control}
+                name="pricePerDay"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        onChange={e => {
+                          const value = parseFloat(e.target.value); // Convert the string to a floating-point number
+                          field.onChange(isNaN(value) ? "" : value); // Check for NaN and update the field value accordingly
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="description"
@@ -103,8 +115,8 @@ export function GameInstanceForm() {
                 )}
               />
             </div>
-            <Separator orientation="vertical" className="h-full w-2 bg-card" />
-            <div className="flex w-full flex-col justify-between">
+            <Separator orientation="vertical" className="h-full w-1.5 rounded-lg bg-card" />
+            <div className="flex w-1/2 flex-col justify-between">
               <h1 className="w-full text-center text-2xl">UPLOAD YOUR GAME PHOTOS</h1>
               <div className="h-4/5">Place to upload images</div>
               <Button type="submit" className="w-1/5 place-self-end">
@@ -116,4 +128,6 @@ export function GameInstanceForm() {
       </Form>
     </DialogContent>
   );
-}
+};
+
+export default GameInstanceForm;

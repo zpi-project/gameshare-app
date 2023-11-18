@@ -1,4 +1,4 @@
-import { GameInstance } from "@/types/GameInstance";
+import { GameInstance, NewGameInstance } from "@/types/GameInstance";
 import { GameInstanceSearchParams, SearchGameInstance } from "@/types/GameInstance";
 import { Paginated } from "@/types/Paginated";
 import Api from "./Api";
@@ -17,6 +17,13 @@ export class GameInstanceApi {
       params: { page, size },
     });
     return instances;
+  }
+
+  static async addGameInstance(gameId: number, description: string, pricePerDay: number) {
+    const { data } = await Api.post<NewGameInstance>(`game-instances`, {
+      params: { gameId, description, pricePerDay },
+    });
+    return data;
   }
 
   static async search(
