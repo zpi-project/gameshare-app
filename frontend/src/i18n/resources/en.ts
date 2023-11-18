@@ -73,7 +73,7 @@ export default {
   noOpinionsUserPage: "This user doesn't have any opinions yet",
   errorFetchingOpinions: "There was an error when fetching opinions",
   errorFetchingGames: "There was an error fetching games.",
-  deactivated: "DEACTIVATED",
+  deactivated: "deactivated",
   noGameInstances: "We couldn't find any games",
   errorFetchingUsersOnMap: "There was an error fetching users on map.",
   noGameUsers: "No one has this game yet",
@@ -133,4 +133,7 @@ export default {
       EXPIRED: "Expired",
     },
   },
+
+  reservationsCalendar: "Reservations calendar",
+  deactivate: "Deactivate",
 };

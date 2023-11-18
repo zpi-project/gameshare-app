@@ -16,17 +16,15 @@ interface Props {
   showButtons?: boolean;
 }
 
-const GameInstance: FC<Props> = ({
-  gameInstance: {
+const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
+  const { t } = useTranslation();
+  const {
     uuid,
     game: { name, maxPlayers, minPlayers, image, playingTime, age },
     description,
     pricePerDay,
     active,
-  },
-  showButtons,
-}) => {
-  const { t } = useTranslation();
+  } = gameInstance;
 
   return (
     <div className="flex w-full flex-row">
@@ -66,7 +64,7 @@ const GameInstance: FC<Props> = ({
                 <CalendarDays />
               </Button>
             </DialogTrigger>
-            <GameReservations />
+            <GameReservations gameInstance={gameInstance} />
           </Dialog>
         </div>
       )}

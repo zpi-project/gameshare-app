@@ -76,7 +76,7 @@ const pl: typeof en = {
   noOpinionsMyPage: "Nie posiadasz jeszcze żadnych opinii",
   noOpinionsUserPage: "Ten użytkownik nie posiada jeszcze żadnych opinii",
   errorFetchingOpinions: "Wystąpił błąd podczas pobierania opinii",
-  deactivated: "NIEAKTYWNA",
+  deactivated: "nieaktywna",
   noGameInstances: "Nie znaleziono żadnych gier",
   errorFetchingUsersOnMap: "Wystąpił błąd podczas pobierania użytkowników.",
 
@@ -137,6 +137,9 @@ const pl: typeof en = {
       EXPIRED: "Po terminie",
     },
   },
+
+  reservationsCalendar: "Kalendarz rezerwacji",
+  deactivate: "Dezaktywuj",
 };
 
 export default pl;
