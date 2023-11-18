@@ -3,6 +3,7 @@ package com.zpi.backend.email;
 import com.zpi.backend.email_log.EmailLog;
 import com.zpi.backend.email_log.EmailLogRepository;
 import com.zpi.backend.user.User;
+import jakarta.mail.MessagingException;
 import org.springframework.core.io.Resource;
 import jakarta.mail.internet.MimeMessage;
 import org.apache.commons.io.IOUtils;
@@ -64,20 +65,13 @@ public class EmailService {
 
     @Async
     public void sendEmailWithHtmlTemplate(User user, String subject, String templateName, Context context, EmailType emailType) {
-        EmailLog log;
-        MimeMessage mimeMessage = emailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
-
         try {
-            helper.setTo(user.getEmail());
-            helper.setSubject(subject);
             String htmlContent = templateEngine.process(templateName, context);
-            helper.setText(htmlContent, true);
-            log = new EmailLog(user,emailType, subject, htmlContent);
+            EmailLog log = new EmailLog(user,emailType, subject, htmlContent);
             // Saving log
             emailLogRepository.save(log);
             // Sending mail
-            emailSender.send(mimeMessage);
+            sendHTMLEmail(user.getEmail(), subject, htmlContent);
             // Updating log
             log.sent();
             emailLogRepository.save(log);
@@ -87,6 +81,15 @@ public class EmailService {
         }
     }
 
+    private void sendHTMLEmail(String to, String subject, String htmlContent) throws MessagingException {
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(htmlContent, true);
+        emailSender.send(mimeMessage);
+    }
+
     private String getEncodedLogo() throws IOException {
         byte[] bytes = IOUtils.toByteArray(logo_resource.getInputStream());
         Base64.Encoder encoder = Base64.getEncoder();
@@ -94,20 +97,24 @@ public class EmailService {
         return "data:image/png;base64," + base64String;
     }
 
-    // TODO Check if any email hasn't been
-
-    @Scheduled(cron = "0 8 * * *", zone = "Europe/Warsaw")
-    public void sendUnsentEmails(){
+    @Scheduled(cron = "0 */5 * * *", zone = "Europe/Warsaw")
+    public void sendUnsentEmails() {
         List<EmailLog> unsentEmails = emailLogRepository.findAllBySentIsFalse();
-        if (unsentEmails.size() > 0){
-            for(EmailLog log: unsentEmails) {
-
-//                sendEmailWithHtmlTemplate(
-//                        log.getReceiver(),
-//                        log.getTitle(),
-//                        log.getContent(),
-//                        log.getType()
-//                );
+        logger.info("Checking e-mails to send.");
+        if (unsentEmails.size() > 0) {
+            for (EmailLog log : unsentEmails) {
+                try {
+                    sendHTMLEmail(
+                            log.getReceiver().getEmail(),
+                            log.getTitle(),
+                            log.getContent()
+                    );
+                    log.sent();
+                    emailLogRepository.save(log);
+                    logger.info("[LOG-"+log.getId()+"] "+log.getType().name() + " MAIL sent successfully");
+                } catch (Exception e) {
+                    logger.error("Error while sending an email. " + e.getMessage());
+                }
             }
         }
     }
