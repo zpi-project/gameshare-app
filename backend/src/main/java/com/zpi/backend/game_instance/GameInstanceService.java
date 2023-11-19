@@ -66,13 +66,13 @@ public class GameInstanceService {
     }
 
     //TODO Implementation of checking reservation, what about status?
-    public void deleteGameInstance(String uuid, Authentication authentication) throws GameInstanceDoesNotExistException, UserDoesNotExistException, GameInstanceImageDoesNotExistException {
+    public void deleteGameInstance(String uuid, Authentication authentication) throws GameInstanceDoesNotExistException, UserDoesNotExistException {
         User user = userService.getUser(authentication);
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(uuid, user);
         //TODO Check if there is no reservation with status in progress or smth
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");
-        gameInstanceImageService.deleteGameInstanceImage(authentication, gameInstanceOptional.get().getUuid());
+        gameInstanceImageService.deleteGameInstanceImagesByGameInstance(authentication, gameInstanceOptional.get().getUuid());
         gameInstanceRepository.delete(gameInstanceOptional.get());
     }
 
@@ -155,9 +155,7 @@ public class GameInstanceService {
         Page<GameInstance> gameInstancesPage = gameInstanceRepository.findAll(spec, pageable);
         List<SearchGameInstanceDTO> resultList = new ArrayList<>();
         gameInstancesPage
-                .forEach(gameInstance -> {
-                    resultList.add(new SearchGameInstanceDTO(gameInstance, isGuest));
-                });
+                .forEach(gameInstance -> resultList.add(new SearchGameInstanceDTO(gameInstance, isGuest)));
         return new ResultsDTO<>(resultList,
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }

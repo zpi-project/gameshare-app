@@ -4,10 +4,12 @@ import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.reservations.DTO.NewReservationDTO;
+import com.zpi.backend.reservations.DTO.ReservationDTO;
 import com.zpi.backend.reservations.DTO.ReservationDetailDTO;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -30,9 +32,9 @@ public class ReservationController {
     )
     @PostMapping("/reservations")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity addReservation(Authentication authentication, @RequestBody NewReservationDTO newReservationDTO) throws BadRequestException, GameInstanceDoesNotExistException, UserDoesNotExistException {
-        Reservation reservation = reservationService.addReservation(authentication, newReservationDTO);
-        return ResponseEntity.ok().body(reservation);
+    public ResponseEntity<ReservationDTO> addReservation(Authentication authentication, @RequestBody NewReservationDTO newReservationDTO) throws BadRequestException, GameInstanceDoesNotExistException, UserDoesNotExistException {
+        ReservationDTO reservationDTO = reservationService.addReservation(authentication, newReservationDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(reservationDTO);
     }
 
 
@@ -46,9 +48,9 @@ public class ReservationController {
     )
     @GetMapping("/reservations")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity getReservations(Authentication authentication, @RequestParam Optional<String> status, @RequestParam Boolean asOwner
+    public ResponseEntity<ResultsDTO<ReservationDTO>> getReservations(Authentication authentication, @RequestParam Optional<String> status, @RequestParam Boolean asOwner
             , @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
-        ResultsDTO<Reservation> reservations;
+        ResultsDTO<ReservationDTO> reservations;
         if (status.isPresent())
         {
             reservations = reservationService.getMyReservations(authentication,status.get(),asOwner,page,size);
@@ -68,9 +70,9 @@ public class ReservationController {
     )
     @GetMapping("/reservations/{gameInstanceUuid}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity getReservationsByGameInstance(@PathVariable String gameInstanceUuid,Authentication authentication,
+    public ResponseEntity<ResultsDTO<ReservationDTO>> getReservationsByGameInstance(@PathVariable String gameInstanceUuid,Authentication authentication,
                                                         @RequestParam int page,@RequestParam int size) throws UserDoesNotExistException, GameInstanceDoesNotExistException, BadRequestException {
-        ResultsDTO<Reservation> reservations = reservationService.getReservationsByGameInstance(authentication,gameInstanceUuid,page,size);
+        ResultsDTO<ReservationDTO> reservations = reservationService.getReservationsByGameInstance(authentication,gameInstanceUuid,page,size);
         return ResponseEntity.ok().body(reservations);
     }
 
@@ -81,9 +83,9 @@ public class ReservationController {
     )
     @PutMapping("/reservations/{reservationUuid}/status")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity changeReservationStatus(Authentication authentication, @PathVariable String reservationUuid, @RequestParam String status) throws BadRequestException, UserDoesNotExistException {
-        Reservation reservation = reservationService.changeReservationStatus(authentication, reservationUuid, status);
-        return ResponseEntity.ok().body(reservation);
+    public ResponseEntity<ReservationDTO> changeReservationStatus(Authentication authentication, @PathVariable String reservationUuid, @RequestParam String status) throws BadRequestException, UserDoesNotExistException {
+        ReservationDTO reservationDTO = new ReservationDTO(reservationService.changeReservationStatus(authentication, reservationUuid, status));
+        return ResponseEntity.ok().body(reservationDTO);
     }
 
     @Operation(
@@ -93,7 +95,7 @@ public class ReservationController {
     )
     @GetMapping("/reservations/{reservationUuid}/details")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity getReservationDetails(Authentication authentication, @PathVariable String reservationUuid) throws BadRequestException, UserDoesNotExistException {
+    public ResponseEntity<ReservationDetailDTO> getReservationDetails(Authentication authentication, @PathVariable String reservationUuid) throws BadRequestException, UserDoesNotExistException {
         ReservationDetailDTO reservationDetails = reservationService.getReservationDetails(authentication, reservationUuid);
         return ResponseEntity.ok().body(reservationDetails);
     }

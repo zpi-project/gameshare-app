@@ -19,8 +19,6 @@ public class NewReservationDTO {
             throw new BadRequestException("Start date is before current date");
         if(endDate.before(startDate))
             throw new BadRequestException("End date is before start date");
-        if(ValueChecker.isStringEmpty(renterComment))
-            throw new BadRequestException("Comment is empty");
         if(renterComment.length() > 500)
             throw new BadRequestException("Comment is too long");
         if (ValueChecker.isStringEmpty(gameInstanceUUID))

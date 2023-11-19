@@ -3,7 +3,6 @@ package com.zpi.backend.user_opinion;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.interfaces.UserOpinionServiceInterface;
 import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.reservations.ReservationService;
 import com.zpi.backend.user.User;
@@ -27,7 +26,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserOpinionService implements UserOpinionServiceInterface {
+public class UserOpinionService {
 
     UserOpinionRepository userOpinionRepository;
     UserService userService;
@@ -98,9 +97,5 @@ public class UserOpinionService implements UserOpinionServiceInterface {
             throw new DeleteSomeoneElseOpinionException("User can delete only his own opinion");
         userOpinionRepository.delete(userOpinion);
         userService.updateAvgRating(user.getId());
-    }
-
-    public List<UserOpinion> getOpinionsByReservationAndUser(Reservation reservation,User user){
-        return userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation,user);
     }
 }

@@ -7,6 +7,7 @@ import com.zpi.backend.user.User;
 import com.zpi.backend.utils.DateUtils;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name = "reservations")
+@NoArgsConstructor
 public class Reservation {
 
     @Id
@@ -50,12 +52,6 @@ public class Reservation {
     @Transient
     private int duration;
 
-
-
-
-    public Reservation() {
-
-    }
 
     public Reservation fromDTO(NewReservationDTO newReservationDTO, User renter, GameInstance gameInstance) {
 
