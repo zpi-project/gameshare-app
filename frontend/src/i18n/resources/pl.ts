@@ -151,6 +151,7 @@ const pl: typeof en = {
 
   reservationsCalendar: "Kalendarz rezerwacji",
   deactivate: "Dezaktywuj",
+  errorFetchingReservationsCalendar: "Nie udało się pobrać rezerwacji na ten miesiąc.",
 };
 
 export default pl;

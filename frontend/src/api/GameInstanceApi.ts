@@ -70,6 +70,7 @@ export class GameInstanceApi {
     if (month == 11 && year == 2023) {
       return reservationTimeframes;
     }
+
     return [] as ReservationTimeframe[];
   }
 

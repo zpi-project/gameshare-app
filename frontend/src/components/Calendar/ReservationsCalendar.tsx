@@ -1,4 +1,5 @@
 import { FC, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getDaysInMonth } from "date-fns";
@@ -20,6 +21,7 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({ gameInstanceUUID 
   const [month, setMonth] = useState(startDate.getMonth() + 1);
   const [year, setYear] = useState(startDate.getFullYear());
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { theme } = useTheme();
   const color =
@@ -71,7 +73,9 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({ gameInstanceUUID 
       date={startDate}
     >
       {isError ? (
-        <>error fetching calendar</>
+        <h3 className="mt-4 text-center text-xl text-destructive">
+          {t("errorFetchingReservationsCalendar")}
+        </h3>
       ) : (
         <div className="flex flex-row flex-wrap gap-2">
           {Array.from({ length: (7 + startDate.getDay() - 1) % 7 }).map((_, idx) => (
@@ -86,8 +90,7 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({ gameInstanceUUID 
           ) : (
             <>
               {daysWithReservations.map((reservationId, idx) => {
-                let id = reservationId ? reservationId.split("-").pop() : "";
-                id = id && id.length > 3 ? id : id + "111";
+                const id = (reservationId ? reservationId.slice(-3) : "") + "salt";
 
                 return (
                   <CalendarDay

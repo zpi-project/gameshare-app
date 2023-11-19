@@ -7,8 +7,6 @@ import { Button } from "@/components/ui/button";
 import { DialogContent } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 
-// add game deactivate
-
 interface GameReservationsDialogProps {
   gameInstance: GameInstance;
 }
