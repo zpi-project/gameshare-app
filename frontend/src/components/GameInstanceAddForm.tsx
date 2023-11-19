@@ -28,20 +28,22 @@ interface GameInstanceFormProps {
   onSubmit: (gameInstance: NewGameInstance) => void;
 }
 
-const formSchema = z.object({
-  gameId: z.number(),
-  description: z
-    .string()
-    .min(2, {
-      message: t("gameInstaneDescriptionMin"),
-    })
-    .max(500, { message: t("gameInstanceDescriptionMax") }),
-  pricePerDay: z.coerce.number().refine(value => value >= 0, {
-    message: t("gameInstancePriceValue"),
-  }),
-});
-
 const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
+  const { t } = useTranslation();
+
+  const formSchema = z.object({
+    gameId: z.number(),
+    description: z
+      .string()
+      .min(2, {
+        message: t("gameInstaneDescriptionMin"),
+      })
+      .max(500, { message: t("gameInstanceDescriptionMax") }),
+    pricePerDay: z.coerce.number().refine(value => value >= 0, {
+      message: t("gameInstancePriceValue"),
+    }),
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -71,8 +73,8 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                 name="gameId"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel>{t("chooseGameTitle")}</FormLabel>
                     <FormControl>
-                      <h1 className="text-primary">{t("chooseGameTitle")}</h1>
                       <GameSearchBar
                         onGameClick={(game: Game) => {
                           field.onChange(game.id);
@@ -91,8 +93,8 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                 name="pricePerDay"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel>{t("provideGamePrice")}</FormLabel>
                     <FormControl>
-                      <h1 className="text-primary">{t("provideGamePrice")}</h1>
                       <Input
                         {...field}
                         onChange={e => {
@@ -111,9 +113,9 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel>{t("addGameDesc")}</FormLabel>
                     <FormControl>
                       <div className="grid h-[370px] w-full gap-2.5 rounded-lg bg-card p-4">
-                        <h1 className="text-primary">{t("addGameDesc")}</h1>
                         <Textarea
                           placeholder={t("typeHere")}
                           id="message-2"
