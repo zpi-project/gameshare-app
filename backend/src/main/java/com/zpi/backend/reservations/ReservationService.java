@@ -49,7 +49,7 @@ public class ReservationService {
         checkIfOwnerIsNotRenter(renter,gameInstance);
 
         Reservation reservation = new Reservation().fromDTO(newReservationDTO, renter, gameInstance);
-        reservation.setStatus(reservationStatusRepository.findByStatus("PENDING"));
+        reservation.setStatus(reservationStatusRepository.findByStatus("PENDING").orElseThrow(()->new BadRequestException("Status does not exist")));
         reservation=  reservationRepository.save(reservation);
         reservation = reservationRepository.findById(reservation.getId()).get();
         reservation.setReservationId(DateUtils.getYear(reservation.getStartDate()) + "-" + DateUtils.getMonth(reservation.getStartDate())+'-'+reservation.getId());
@@ -90,9 +90,9 @@ public class ReservationService {
         return new ResultsDTO<>(reservationDTOPage.stream().toList(), new Pagination(reservationDTOPage.getTotalElements(),reservationDTOPage.getTotalPages()));
     }
 
-    public ResultsDTO<ReservationDTO> getMyReservations(Authentication authentication, String status,Boolean asOwner, int page, int size) throws UserDoesNotExistException {
+    public ResultsDTO<ReservationDTO> getMyReservations(Authentication authentication, String status,Boolean asOwner, int page, int size) throws UserDoesNotExistException, BadRequestException {
         User user = userService.getUser(authentication);
-        ReservationStatus reservationStatus = reservationStatusRepository.findByStatus(status);
+        ReservationStatus reservationStatus = reservationStatusRepository.findByStatus(status).orElseThrow(()->new BadRequestException("Status does not exist"));
         if(asOwner){
             return getMyReservationsAsOwner(user,reservationStatus,page,size);
         }
@@ -143,7 +143,10 @@ public class ReservationService {
         Reservation reservation = reservationRepository.getReservationByReservationId(reservationId).orElseThrow(()->new BadRequestException("Reservation does not exist"));
         if(!canChangeStatus(authentication,reservation))
             throw new BadRequestException("User is not owner or renter of this reservation");
-        reservation.setStatus(reservationStatusRepository.findByStatus(status));
+        List<String> possibleStatuses = getReservationStatuses(authentication,reservationId);
+        if(possibleStatuses == null || !possibleStatuses.contains(status))
+            throw new BadRequestException("Status cannot be changed to "+status +" from "+reservation.getStatus().getStatus());
+        reservation.setStatus(reservationStatusRepository.findByStatus(status).orElseThrow(()->new BadRequestException("Status does not exist")));
         return reservationRepository.save(reservation);
     }
 

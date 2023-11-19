@@ -50,7 +50,7 @@ public class ReservationController {
     @GetMapping("/reservations")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ResultsDTO<ReservationDTO>> getReservations(Authentication authentication, @RequestParam Optional<String> status, @RequestParam Boolean asOwner
-            , @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+            , @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException, BadRequestException {
         ResultsDTO<ReservationDTO> reservations;
         if (status.isPresent())
         {
