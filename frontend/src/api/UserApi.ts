@@ -1,4 +1,5 @@
 import { GameInstanceSearchParams } from "@/types/GameInstance";
+import { Opinion } from "@/types/Opinion";
 import { Paginated } from "@/types/Paginated";
 import { NewUser, User } from "@/types/User";
 import Api from "./Api";
@@ -41,5 +42,19 @@ export class UserApi {
       },
     });
     return users;
+  }
+
+  static async getMyOpinions(page: number, size: number) {
+    const { data: opinions } = await Api.get<Paginated<Opinion>>("/user/opinions", {
+      params: { page, size },
+    });
+    return opinions;
+  }
+
+  static async getAllOpinionsByUUID(uuid: string, page: number, size: number) {
+    const { data: opinions } = await Api.get<Paginated<Opinion>>(`/user/${uuid}/opinions`, {
+      params: { page, size },
+    });
+    return opinions;
   }
 }

@@ -1,3 +1,3 @@
-export const supportedLanguages = ["en", "pl"] as const;
+export const supportedLanguages = ["enUS", "pl"] as const;
 
-export const fallbackLanguage = "en" as const;
+export const fallbackLanguage = "enUS" as const;
