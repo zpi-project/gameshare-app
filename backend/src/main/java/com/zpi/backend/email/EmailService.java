@@ -4,7 +4,6 @@ import com.zpi.backend.email_log.EmailLog;
 import com.zpi.backend.email_log.EmailLogRepository;
 import com.zpi.backend.user.User;
 import jakarta.mail.MessagingException;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.core.io.Resource;
 import jakarta.mail.internet.MimeMessage;
 import org.apache.commons.io.IOUtils;

@@ -83,11 +83,6 @@ public class UserService {
             Context registrationContext = emailService.getRegistrationEmailContext();
                 emailService.sendEmailWithHtmlTemplate(user, "GameShare - Registration",
                         EmailService.EMAIL_TEMPLATE, registrationContext, EmailType.REGISTRATION);
-//            Sending e-mail
-            Context pendingReservationContext = emailService.getPendingEmailContext("2023-11-362",
-                    "Monopoly", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()));
-            emailService.sendEmailWithHtmlTemplate(user, "GameShare - Pending reservation",
-                    EmailService.EMAIL_TEMPLATE, pendingReservationContext, EmailType.RESERVATION_PENDING);
         }
         else {
             throw new UserAlreadyExistsException("User already exists");
