@@ -8,10 +8,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class GameInstanceUnAvailabilityReservationDTO extends GameInstanceUnAvailabilityDTO {
-    private String reservationUuid;
+    private String reservationId;
 
-    public GameInstanceUnAvailabilityReservationDTO(Date startDate, Date endDate, String uuid) {
+    public GameInstanceUnAvailabilityReservationDTO(Date startDate, Date endDate, String id) {
         super(startDate, endDate);
-        this.reservationUuid = uuid;
+        this.reservationId = id;
     }
 }

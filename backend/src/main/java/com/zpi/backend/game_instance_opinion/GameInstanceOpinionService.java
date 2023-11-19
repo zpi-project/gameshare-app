@@ -11,7 +11,6 @@ import com.zpi.backend.game_instance_opinion.dto.UpdatedGameInstanceOpinionDTO;
 import com.zpi.backend.game_instance_opinion.exception.GameInstanceOpinionDoesNotExistException;
 import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.reservations.ReservationRepository;
-import com.zpi.backend.reservations.ReservationService;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
@@ -42,7 +41,7 @@ public class GameInstanceOpinionService {
         User user = userService.getUser(authentication);
         boolean isGuest = !authentication.isAuthenticated();
         GameInstance gameInstance = gameInstanceService.getGameInstance(newGameInstanceOpinionDTO.getGameInstanceUuid());
-        Reservation reservation = reservationRepository.getReservationByReservationId(newGameInstanceOpinionDTO.getReservationUuid());
+        Reservation reservation = reservationRepository.getReservationByReservationId(newGameInstanceOpinionDTO.getReservationId());
         if (!checkIfCanAddOpinion(reservation))
             throw new BadRequestException("User already rated this reservation");
 

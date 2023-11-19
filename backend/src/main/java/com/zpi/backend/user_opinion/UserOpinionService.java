@@ -50,7 +50,7 @@ public class UserOpinionService {
         newUserOpinionDTO.validate();
         User user = userService.getUser(authentication);
         User ratedUser = userService.getUserByUUID(newUserOpinionDTO.getRatedUserUUID());
-        Reservation reservation = reservationService.getReservationByUUID(newUserOpinionDTO.getReservationUUID());
+        Reservation reservation = reservationService.getReservationByUUID(newUserOpinionDTO.getReservationId());
         if(!checkIfCanAddOpinion(reservation,ratedUser))
             throw new BadRequestException("User already rated this reservation");
         UserOpinion userOpinion = newUserOpinionDTO.toUserOpinion(user, ratedUser);

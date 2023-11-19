@@ -5,7 +5,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,12 +23,12 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     )
     Page<Reservation> getCurrentReservationsByOwnerAndStatus(Pageable pageable, @Param("uuid") String OwnerUuid, @Param("status") String status);
 
-    List<Reservation> findReservationsByGameInstance_Uuid(String reservationUuid);
+    List<Reservation> findReservationsByGameInstance_Uuid(String gameInstanceUuid);
 
 
     Page<Reservation> getReservationsByGameInstance_Uuid(Pageable pageable, String gameInstanceUuid);
 
-    Reservation getReservationByReservationId(String reservationUuid);
+    Reservation getReservationByReservationId(String reservationId);
 
 
     @Query(

@@ -81,10 +81,10 @@ public class ReservationController {
             description = "Changes reservation status " +
                     "User invoking this endpoint must be involved in the reservation (either renter or owner)"
     )
-    @PutMapping("/reservations/{reservationUuid}/status")
+    @PutMapping("/reservations/{reservationId}/status")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<ReservationDTO> changeReservationStatus(Authentication authentication, @PathVariable String reservationUuid, @RequestParam String status) throws BadRequestException, UserDoesNotExistException {
-        ReservationDTO reservationDTO = new ReservationDTO(reservationService.changeReservationStatus(authentication, reservationUuid, status));
+    public ResponseEntity<ReservationDTO> changeReservationStatus(Authentication authentication, @PathVariable String reservationId, @RequestParam String status) throws BadRequestException, UserDoesNotExistException {
+        ReservationDTO reservationDTO = new ReservationDTO(reservationService.changeReservationStatus(authentication, reservationId, status));
         return ResponseEntity.ok().body(reservationDTO);
     }
 
@@ -93,10 +93,10 @@ public class ReservationController {
             description = "Gets reservation details " +
                     "User invoking this endpoint must be involved in the reservation (either renter or owner)"
     )
-    @GetMapping("/reservations/{reservationUuid}/details")
+    @GetMapping("/reservations/{reservationId}/details")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<ReservationDetailDTO> getReservationDetails(Authentication authentication, @PathVariable String reservationUuid) throws BadRequestException, UserDoesNotExistException {
-        ReservationDetailDTO reservationDetails = reservationService.getReservationDetails(authentication, reservationUuid);
+    public ResponseEntity<ReservationDetailDTO> getReservationDetails(Authentication authentication, @PathVariable String reservationId) throws BadRequestException, UserDoesNotExistException {
+        ReservationDetailDTO reservationDetails = reservationService.getReservationDetails(authentication, reservationId);
         return ResponseEntity.ok().body(reservationDetails);
     }
 

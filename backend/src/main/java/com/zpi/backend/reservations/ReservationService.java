@@ -136,8 +136,8 @@ public class ReservationService {
         return new ResultsDTO<>(reservationDTOPage.stream().toList(), new Pagination(reservationDTOPage.getTotalElements(),reservationDTOPage.getTotalPages()));
     }
 
-    public Reservation changeReservationStatus(Authentication  authentication, String reservationUuid, String status) throws UserDoesNotExistException, BadRequestException {
-        Reservation reservation = reservationRepository.getReservationByReservationId(reservationUuid);
+    public Reservation changeReservationStatus(Authentication  authentication, String reservationId, String status) throws UserDoesNotExistException, BadRequestException {
+        Reservation reservation = reservationRepository.getReservationByReservationId(reservationId);
         if(!canChangeStatus(authentication,reservation))
             throw new BadRequestException("User is not owner or renter of this reservation");
         reservation.setStatus(reservationStatusRepository.findByStatus(status));
@@ -172,8 +172,8 @@ public class ReservationService {
         return new ReservationDetailDTO(new ReservationDTO(reservation),false,canAddOwnerOpinion,canAddGameInstanceOpinion,ownerOpinion,null,gameInstanceOpinion);
     }
 
-    public ReservationDetailDTO getReservationDetails(Authentication authentication, String reservationUuid) throws UserDoesNotExistException, BadRequestException {
-        Reservation reservation = reservationRepository.getReservationByReservationId(reservationUuid);
+    public ReservationDetailDTO getReservationDetails(Authentication authentication, String reservationId) throws UserDoesNotExistException, BadRequestException {
+        Reservation reservation = reservationRepository.getReservationByReservationId(reservationId);
         User user = userService.getUser(authentication);
         if(checkIfUserIsOwner(user,reservation.getGameInstance())){
             return getReservationOwnerDetails(reservation);

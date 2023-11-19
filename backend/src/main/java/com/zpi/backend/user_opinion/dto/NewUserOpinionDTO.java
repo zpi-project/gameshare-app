@@ -12,7 +12,7 @@ public class NewUserOpinionDTO {
     private String ratedUserUUID;
     private int stars;
     private String description;
-    private String reservationUUID;
+    private String reservationId;
 
 
     public boolean validate() throws BadRequestException {
@@ -28,7 +28,7 @@ public class NewUserOpinionDTO {
         if(ValueChecker.isStringEmpty(description)) {
             throw new BadRequestException("Description cannot be empty");
         }
-        if(ValueChecker.isStringEmpty(reservationUUID)) {
+        if(ValueChecker.isStringEmpty(reservationId)) {
             throw new BadRequestException("Invalid reservation UUID");
         }
         return true;

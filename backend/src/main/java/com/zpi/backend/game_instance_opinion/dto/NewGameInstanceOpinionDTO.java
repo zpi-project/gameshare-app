@@ -13,7 +13,7 @@ public class NewGameInstanceOpinionDTO {
     private String gameInstanceUuid;
     private int stars;
     private String description;
-    private String reservationUuid;
+    private String reservationId;
 
     public boolean validate() throws BadRequestException {
         if (ValueChecker.isStringEmpty(gameInstanceUuid))
@@ -24,7 +24,7 @@ public class NewGameInstanceOpinionDTO {
             throw new BadRequestException("Description cannot be empty");
         if (description.length() > 500)
             throw new BadRequestException("Description cannot have more than 500 characters.");
-        if (ValueChecker.isStringEmpty(reservationUuid))
+        if (ValueChecker.isStringEmpty(reservationId))
             throw new BadRequestException("Invalid reservation UUID");
         return true;
     }

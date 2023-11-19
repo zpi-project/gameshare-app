@@ -1,12 +1,13 @@
 package com.zpi.backend.game_instance.dto;
 
 import lombok.Data;
-import org.springframework.data.util.Pair;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
+@NoArgsConstructor
+
 public class GameInstanceUnAvailabilityDTO {
     Date startDate;
     Date endDate;
