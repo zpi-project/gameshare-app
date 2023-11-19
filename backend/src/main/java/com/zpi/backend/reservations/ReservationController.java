@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -86,6 +87,13 @@ public class ReservationController {
     public ResponseEntity<ReservationDTO> changeReservationStatus(Authentication authentication, @PathVariable String reservationId, @RequestParam String status) throws BadRequestException, UserDoesNotExistException {
         ReservationDTO reservationDTO = new ReservationDTO(reservationService.changeReservationStatus(authentication, reservationId, status));
         return ResponseEntity.ok().body(reservationDTO);
+    }
+
+    @GetMapping("/reservations/{reservationId}/statuses")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<List<String>> getReservationStatuses(Authentication authentication, @PathVariable String reservationId) throws BadRequestException, UserDoesNotExistException {
+        List<String> reservationStatuses = reservationService.getReservationStatuses(authentication, reservationId);
+        return ResponseEntity.ok().body(reservationStatuses);
     }
 
     @Operation(

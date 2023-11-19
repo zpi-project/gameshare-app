@@ -1,7 +1,7 @@
 package com.zpi.backend.reservations.DTO;
 
-import com.zpi.backend.game_instance_opinion.GameInstanceOpinion;
-import com.zpi.backend.user_opinion.UserOpinion;
+import com.zpi.backend.game_instance_opinion.dto.GameInstanceOpinionDTO;
+import com.zpi.backend.user_opinion.dto.UserOpinionDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,8 +13,8 @@ public class ReservationDetailDTO {
     boolean canAddOwnerOpinion;
     boolean canAddGameInstanceOpinion;
 
-    UserOpinion ownerOpinion;
-    UserOpinion renterOpinion;
-    GameInstanceOpinion gameInstanceOpinion;
+    UserOpinionDTO ownerOpinion;
+    UserOpinionDTO renterOpinion;
+    GameInstanceOpinionDTO gameInstanceOpinion;
 
 }

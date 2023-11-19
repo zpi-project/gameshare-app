@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
@@ -28,7 +29,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     Page<Reservation> getReservationsByGameInstance_Uuid(Pageable pageable, String gameInstanceUuid);
 
-    Reservation getReservationByReservationId(String reservationId);
+    Optional<Reservation> getReservationByReservationId(String reservationId);
 
 
     @Query(

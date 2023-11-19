@@ -41,7 +41,7 @@ public class GameInstanceOpinionService {
         User user = userService.getUser(authentication);
         boolean isGuest = !authentication.isAuthenticated();
         GameInstance gameInstance = gameInstanceService.getGameInstance(newGameInstanceOpinionDTO.getGameInstanceUuid());
-        Reservation reservation = reservationRepository.getReservationByReservationId(newGameInstanceOpinionDTO.getReservationId());
+        Reservation reservation = reservationRepository.getReservationByReservationId(newGameInstanceOpinionDTO.getReservationId()).orElseThrow(()->new BadRequestException("Reservation does not exist"));
         if (!checkIfCanAddOpinion(reservation))
             throw new BadRequestException("User already rated this reservation");
 
