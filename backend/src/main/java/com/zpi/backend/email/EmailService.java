@@ -4,6 +4,7 @@ import com.zpi.backend.email_log.EmailLog;
 import com.zpi.backend.email_log.EmailLogRepository;
 import com.zpi.backend.user.User;
 import jakarta.mail.MessagingException;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.core.io.Resource;
 import jakarta.mail.internet.MimeMessage;
 import org.apache.commons.io.IOUtils;
@@ -49,13 +50,20 @@ public class EmailService {
         this.emailLogRepository = emailLogRepository;
     }
 
-    public Context setContextForEmailTemplate(Context context, String title_pl, String header_pl,
-                                              String title_en, String header_en) throws IOException {
+    public Context setContextForEmailTemplate(String title_pl, String header_pl,
+                                              String title_en, String header_en, String message1_en, String message1_pl,
+                                              String message2_en, String message2_pl) throws IOException {
+        Context context = new Context();
         context.setVariable("pl_title", title_pl);
         context.setVariable("pl_header", header_pl);
 
         context.setVariable("en_title", title_en);
         context.setVariable("en_header", header_en);
+
+        context.setVariable("en_message_1", message1_en);
+        context.setVariable("pl_message_1", message1_pl);
+        context.setVariable("en_message_2", message2_en);
+        context.setVariable("pl_message_2", message2_pl);
 
         context.setVariable("pl_default_message",
                 translationService.getMessage("email.default-message", "pl", null));
@@ -142,7 +150,6 @@ public class EmailService {
 
     // Particular emails
     public Context getRegistrationEmailContext() throws IOException {
-        Context context = new Context();
         String title_pl = translationService.getMessage("email.registration.title", "pl", null);
         String header_pl = translationService.getMessage("email.registration.header", "pl", null);
         String message1_pl = translationService.getMessage("email.registration.message.1", "pl", null);
@@ -152,16 +159,11 @@ public class EmailService {
         String message1_en = translationService.getMessage("email.registration.message.1", "en", null);
         String message2_en = translationService.getMessage("email.registration.message.2", "en", null);
 
-        context.setVariable("en_message_1", message1_en);
-        context.setVariable("pl_message_1", message1_pl);
-        context.setVariable("en_message_2", message2_en);
-        context.setVariable("pl_message_2", message2_pl);
-
-        return setContextForEmailTemplate(context, title_pl, header_pl, title_en, header_en);
+        return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
+                message1_en, message1_pl, message2_en, message2_pl);
     }
 
     public Context getPendingEmailContext(String reservationID, String gameName, Date startDate, Date endDate) throws IOException {
-        Context context = new Context();
         SimpleDateFormat simpleDateFormatPL = new SimpleDateFormat("dd MMMM yyyy", Locale.forLanguageTag("pl"));
         SimpleDateFormat simpleDateFormatEN = new SimpleDateFormat("dd MMMM yyyy", Locale.forLanguageTag("en"));
         String[] argumentsPL = {reservationID, gameName, simpleDateFormatPL.format(startDate), simpleDateFormatPL.format(endDate)};
@@ -176,11 +178,118 @@ public class EmailService {
         String message1_en = translationService.getMessage("email.reservation.pending.message.1", "en", argumentsEN);
         String message2_en = translationService.getMessage("email.reservation.pending.message.2", "en", null);
 
-        context.setVariable("en_message_1", message1_en);
-        context.setVariable("pl_message_1", message1_pl);
-        context.setVariable("en_message_2", message2_en);
-        context.setVariable("pl_message_2", message2_pl);
-
-        return setContextForEmailTemplate(context, title_pl, header_pl, title_en, header_en);
+        return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
+                message1_en, message1_pl, message2_en, message2_pl);
     }
+
+    public Context getAcceptingEmailContext(String reservationID, String gameName) throws IOException {
+        String[] arguments = {reservationID, gameName};
+
+        String title_pl = translationService.getMessage("email.reservation.accepting.title", "pl", null);
+        String header_pl = translationService.getMessage("email.reservation.accepting.header", "pl", null);
+        String message1_pl = translationService.getMessage("email.reservation.accepting.message.1", "pl", arguments);
+        String message2_pl = translationService.getMessage("email.reservation.accepting.message.2", "pl", null);
+        String title_en = translationService.getMessage("email.reservation.accepting.title", "en", null);
+        String header_en = translationService.getMessage("email.reservation.accepting.header", "en", null);
+        String message1_en = translationService.getMessage("email.reservation.accepting.message.1", "en", arguments);
+        String message2_en = translationService.getMessage("email.reservation.accepting.message.2", "en", null);
+
+        return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
+                message1_en, message1_pl, message2_en, message2_pl);
+    }
+
+    private Context getCancelingEmailContext(String message1_en, String message1_pl,
+                                             String message2_en, String message2_pl) throws IOException {
+        String title_pl = translationService.getMessage("email.reservation.canceling.title", "pl", null);
+        String header_pl = translationService.getMessage("email.reservation.canceling.header", "pl", null);
+        String title_en = translationService.getMessage("email.reservation.canceling.title", "en", null);
+        String header_en = translationService.getMessage("email.reservation.canceling.header", "en", null);
+
+        return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
+                message1_en, message1_pl, message2_en, message2_pl);
+    }
+
+    public Context getCancelingByOwnerEmailContext(String reservationID, String gameName) throws IOException {
+        String[] arguments1 = {gameName, reservationID};
+        String[] arguments2 = {gameName};
+
+        String message1_pl = translationService.getMessage("email.reservation.canceling.owner.message.1", "pl", arguments1);
+        String message2_pl = translationService.getMessage("email.reservation.canceling.owner.message.2", "pl", arguments2);
+        String message1_en = translationService.getMessage("email.reservation.canceling.owner.message.1", "en", arguments1);
+        String message2_en = translationService.getMessage("email.reservation.canceling.owner.message.2", "en", arguments2);
+
+        return getCancelingEmailContext(message1_en, message1_pl, message2_en, message2_pl);
+
+    }
+
+    public Context getCancelingByRenterEmailContext(String reservationID, String gameName) throws IOException {
+        String[] arguments1 = {gameName, reservationID};
+        String[] arguments2 = {gameName};
+
+        String message1_pl = translationService.getMessage("email.reservation.canceling.renter.message.1", "pl", arguments1);
+        String message2_pl = translationService.getMessage("email.reservation.canceling.renter.message.2", "pl", arguments2);
+        String message1_en = translationService.getMessage("email.reservation.canceling.renter.message.1", "en", arguments1);
+        String message2_en = translationService.getMessage("email.reservation.canceling.renter.message.2", "en", arguments2);
+
+        return getCancelingEmailContext(message1_en, message1_pl, message2_en, message2_pl);
+    }
+
+    public Context getRejectingEmailContext(String reservationID, String gameName) throws IOException {
+        String[] arguments = {reservationID, gameName};
+
+        String title_pl = translationService.getMessage("email.reservation.rejecting.title", "pl", null);
+        String header_pl = translationService.getMessage("email.reservation.rejecting.header", "pl", null);
+        String message1_pl = translationService.getMessage("email.reservation.rejecting.message.1", "pl", arguments);
+        String message2_pl = translationService.getMessage("email.reservation.rejecting.message.2", "pl", null);
+        String title_en = translationService.getMessage("email.reservation.rejecting.title", "en", null);
+        String header_en = translationService.getMessage("email.reservation.rejecting.header", "en", null);
+        String message1_en = translationService.getMessage("email.reservation.rejecting.message.1", "en", arguments);
+        String message2_en = translationService.getMessage("email.reservation.rejecting.message.2", "en", null);
+
+        return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
+                message1_en, message1_pl, message2_en, message2_pl);
+    }
+
+    public Context getRemindingIn2DaysEmailContext() throws IOException {
+        String title_pl = translationService.getMessage("email.reservation.in-to-days.title", "pl", null);
+        String header_pl = translationService.getMessage("email.reservation.in-to-days.header", "pl", null);
+        String message1_pl = translationService.getMessage("email.reservation.in-to-days.message.1", "pl", null);
+        String message2_pl = translationService.getMessage("email.reservation.in-to-days.message.2", "pl", null);
+        String title_en = translationService.getMessage("email.reservation.in-to-days.title", "en", null);
+        String header_en = translationService.getMessage("email.reservation.in-to-days.header", "en", null);
+        String message1_en = translationService.getMessage("email.reservation.in-to-days.message.1", "en", null);
+        String message2_en = translationService.getMessage("email.reservation.in-to-days.message.2", "en", null);
+
+        return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
+                message1_en, message1_pl, message2_en, message2_pl);
+    }
+
+    public Context getRemindingTodayEmailContext() throws IOException {
+        String title_pl = translationService.getMessage("email.reservation.today.title", "pl", null);
+        String header_pl = translationService.getMessage("email.reservation.today.header", "pl", null);
+        String message1_pl = translationService.getMessage("email.reservation.today.message.1", "pl", null);
+        String message2_pl = translationService.getMessage("email.reservation.today.message.2", "pl", null);
+        String title_en = translationService.getMessage("email.reservation.today.title", "en", null);
+        String header_en = translationService.getMessage("email.reservation.today.header", "en", null);
+        String message1_en = translationService.getMessage("email.reservation.today.message.1", "en", null);
+        String message2_en = translationService.getMessage("email.reservation.today.message.2", "en", null);
+
+        return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
+                message1_en, message1_pl, message2_en, message2_pl);
+    }
+
+    public Context getFinishingEmailContext() throws IOException {
+        String title_pl = translationService.getMessage("email.reservation.finished.title", "pl", null);
+        String header_pl = translationService.getMessage("email.reservation.finished.header", "pl", null);
+        String message1_pl = translationService.getMessage("email.reservation.finished.message.1", "pl", null);
+        String message2_pl = translationService.getMessage("email.reservation.finished.message.2", "pl", null);
+        String title_en = translationService.getMessage("email.reservation.finished.title", "en", null);
+        String header_en = translationService.getMessage("email.reservation.finished.header", "en", null);
+        String message1_en = translationService.getMessage("email.reservation.finished.message.1", "en", null);
+        String message2_en = translationService.getMessage("email.reservation.finished.message.2", "en", null);
+
+        return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
+                message1_en, message1_pl, message2_en, message2_pl);
+    }
+
 }
