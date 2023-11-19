@@ -89,6 +89,12 @@ public class ReservationController {
         return ResponseEntity.ok().body(reservationDTO);
     }
 
+    @Operation(
+            summary = "Get possible reservation statuses",
+            description = "Gets possible reservation statuses " +
+                    "User invoking this endpoint must be involved in the reservation (either renter or owner)" +
+                    "Possible statuses depend on the current status of the reservation"
+    )
     @GetMapping("/reservations/{reservationId}/statuses")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<String>> getReservationStatuses(Authentication authentication, @PathVariable String reservationId) throws BadRequestException, UserDoesNotExistException {
