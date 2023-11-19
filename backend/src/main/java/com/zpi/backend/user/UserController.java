@@ -57,10 +57,10 @@ public class UserController {
     )
     @PostMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication, Optional<String> language)
+    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication)
             throws UserAlreadyExistsException, IOException {
         System.out.println("... called createUser");
-        userService.registerUser(updateUserDTO, authentication, language);
+        userService.registerUser(updateUserDTO, authentication);
         return ResponseEntity.status(HttpStatus.CREATED).body("User created");
     }
 

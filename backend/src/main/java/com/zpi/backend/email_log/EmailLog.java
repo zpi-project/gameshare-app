@@ -20,7 +20,7 @@ public class EmailLog {
     private User receiver;
     private EmailType type;
     private String title;
-    @Column(length = 40000)
+    @Column(length = 50000)
     private String content;
     private Date sendingTime;
     private boolean sent;

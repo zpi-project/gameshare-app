@@ -17,14 +17,14 @@ public class EmailTranslationService {
         this.messageSource = messageSource;
     }
 
-    public String getMessage(String code, String languageCode) {
+    public String getMessage(String code, String languageCode, String[] args) {
         Locale locale;
         try {
             locale = new Locale.Builder().setLanguage(languageCode).build();
         } catch (IllformedLocaleException ex){
             locale = Locale.ENGLISH;
         }
-        return messageSource.getMessage(code, null, locale);
+        return messageSource.getMessage(code, args, locale);
     }
 
 }

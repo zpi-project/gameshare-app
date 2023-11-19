@@ -19,8 +19,11 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Component
 public class EmailService {
@@ -46,17 +49,25 @@ public class EmailService {
         this.emailLogRepository = emailLogRepository;
     }
 
-    public Context setContextForEmailTemplate(String title, String header, String message, String languageCode) throws IOException {
-        Context context = new Context();
-        context.setVariable("title", title);
-        context.setVariable("header", header);
-        context.setVariable("message", message);
+    public Context setContextForEmailTemplate(Context context, String title_pl, String header_pl,
+                                              String title_en, String header_en) throws IOException {
+        context.setVariable("pl_title", title_pl);
+        context.setVariable("pl_header", header_pl);
+
+        context.setVariable("en_title", title_en);
+        context.setVariable("en_header", header_en);
+
+        context.setVariable("pl_default_message",
+                translationService.getMessage("email.default-message", "pl", null));
+        context.setVariable("pl_button",
+                translationService.getMessage("email.button", "pl", null));
+        context.setVariable("en_default_message",
+                translationService.getMessage("email.default-message", "en", null));
+        context.setVariable("en_button",
+                translationService.getMessage("email.button", "en", null));
+
+        context.setVariable("language", "pl");
         context.setVariable("app_url", frontend_host + ":"+frontend_port);
-        context.setVariable("default_message",
-                translationService.getMessage("email.default-message", languageCode));
-        context.setVariable("button",
-                translationService.getMessage("email.button", languageCode));
-        context.setVariable("language", languageCode);
         context.setVariable("logo_image", getEncodedLogo());
 
         return context;
@@ -130,10 +141,46 @@ public class EmailService {
     }
 
     // Particular emails
-    public Context getRegistrationEmailContext(String languageCode) throws IOException {
-        String title = translationService.getMessage("email.registration.title", languageCode);
-        String header = translationService.getMessage("email.registration.header", languageCode);
-        String message = translationService.getMessage("email.registration.message", languageCode);
-        return setContextForEmailTemplate(title, header, message, languageCode);
+    public Context getRegistrationEmailContext() throws IOException {
+        Context context = new Context();
+        String title_pl = translationService.getMessage("email.registration.title", "pl", null);
+        String header_pl = translationService.getMessage("email.registration.header", "pl", null);
+        String message1_pl = translationService.getMessage("email.registration.message.1", "pl", null);
+        String message2_pl = translationService.getMessage("email.registration.message.2", "pl", null);
+        String title_en = translationService.getMessage("email.registration.title", "en", null);
+        String header_en = translationService.getMessage("email.registration.header", "en", null);
+        String message1_en = translationService.getMessage("email.registration.message.1", "en", null);
+        String message2_en = translationService.getMessage("email.registration.message.2", "en", null);
+
+        context.setVariable("en_message_1", message1_en);
+        context.setVariable("pl_message_1", message1_pl);
+        context.setVariable("en_message_2", message2_en);
+        context.setVariable("pl_message_2", message2_pl);
+
+        return setContextForEmailTemplate(context, title_pl, header_pl, title_en, header_en);
+    }
+
+    public Context getPendingEmailContext(String reservationID, String gameName, Date startDate, Date endDate) throws IOException {
+        Context context = new Context();
+        SimpleDateFormat simpleDateFormatPL = new SimpleDateFormat("dd MMMM yyyy", Locale.forLanguageTag("pl"));
+        SimpleDateFormat simpleDateFormatEN = new SimpleDateFormat("dd MMMM yyyy", Locale.forLanguageTag("en"));
+        String[] argumentsPL = {reservationID, gameName, simpleDateFormatPL.format(startDate), simpleDateFormatPL.format(endDate)};
+        String[] argumentsEN = {reservationID, gameName, simpleDateFormatEN.format(startDate), simpleDateFormatEN.format(endDate)};
+
+        String title_pl = translationService.getMessage("email.reservation.pending.title", "pl", null);
+        String header_pl = translationService.getMessage("email.reservation.pending.header", "pl", null);
+        String message1_pl = translationService.getMessage("email.reservation.pending.message.1", "pl", argumentsPL);
+        String message2_pl = translationService.getMessage("email.reservation.pending.message.2", "pl", null);
+        String title_en = translationService.getMessage("email.reservation.pending.title", "en", null);
+        String header_en = translationService.getMessage("email.reservation.pending.header", "en", null);
+        String message1_en = translationService.getMessage("email.reservation.pending.message.1", "en", argumentsEN);
+        String message2_en = translationService.getMessage("email.reservation.pending.message.2", "en", null);
+
+        context.setVariable("en_message_1", message1_en);
+        context.setVariable("pl_message_1", message1_pl);
+        context.setVariable("en_message_2", message2_en);
+        context.setVariable("pl_message_2", message2_pl);
+
+        return setContextForEmailTemplate(context, title_pl, header_pl, title_en, header_en);
     }
 }

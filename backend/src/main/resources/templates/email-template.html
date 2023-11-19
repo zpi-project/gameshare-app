@@ -34,6 +34,8 @@
 
         p {
             color: #555555;
+            text-align: justify;
+            font-size: 15px;
         }
 
         .btn {
@@ -45,16 +47,33 @@
             color: #ffffff;
             border-radius: 5px;
         }
+        .translations {
+            margin-top: 20px;
+        }
+
+        .translation {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <img th:src="${logo_image}" alt="GameShare Logo">
-    <h1 th:text="${header}">Header</h1>
-    <p th:text="${message}">Message</p>
-    <p th:text="${default_message}">We look forward to having you at our gaming center.
+    <img th:src=${logo_image} alt="GameShare Logo">
+    <h1 th:text=${pl_header}>Header</h1>
+    <p th:utext=${pl_message_1}>Message1</p>
+    <p th:utext=${pl_message_2}>Message2</p>
+    <p th:text=${pl_default_message}>We look forward to having you at our gaming center.
         If you have any questions or need further assistance, feel free to contact us.</p>
-    <a th:href="${app_url}" th:text="${button}" class="btn">Visit GameShare App</a>
+    <a th:href=${app_url} th:text=${pl_button} class="btn">Visit GameShare App</a>
+    <div class="translations">
+        <p class="translation"><i>For English users:</i></p>
+        <h1 th:text=${en_header}>Header</h1>
+        <p th:utext=${en_message_1}>Message1</p>
+        <p th:utext=${en_message_2}>Message2</p>
+        <p th:text=${en_default_message}>We look forward to having you at our gaming center.
+            If you have any questions or need further assistance, feel free to contact us.</p>
+        <a th:href=${app_url} th:text=${en_button} class="btn">Visit GameShare App</a>
+    </div>
 </div>
 </body>
 </html>

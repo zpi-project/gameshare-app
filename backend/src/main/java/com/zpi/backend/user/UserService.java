@@ -26,10 +26,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 
 import java.io.IOException;
-import java.util.Optional;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -72,7 +69,7 @@ public class UserService {
         this.userRepository.save(user);
     }
 
-    public void registerUser(UpdateUserDTO updateUserDTO, Authentication authentication, Optional<String> languageOpt) throws UserAlreadyExistsException, IOException {
+    public void registerUser(UpdateUserDTO updateUserDTO, Authentication authentication) throws UserAlreadyExistsException, IOException {
         User user = (User) authentication.getPrincipal();
         if(!checkIfUserExists(user.getGoogleId())) {
             user.update(updateUserDTO);
@@ -83,10 +80,14 @@ public class UserService {
             userRepository.save(user);
 
 //            Sending e-mail
-            String language = languageOpt.orElse(null);
-            Context registrationContext = emailService.getRegistrationEmailContext(language);
+            Context registrationContext = emailService.getRegistrationEmailContext();
                 emailService.sendEmailWithHtmlTemplate(user, "GameShare - Registration",
                         EmailService.EMAIL_TEMPLATE, registrationContext, EmailType.REGISTRATION);
+//            Sending e-mail
+            Context pendingReservationContext = emailService.getPendingEmailContext("2023-11-362",
+                    "Monopoly", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()));
+            emailService.sendEmailWithHtmlTemplate(user, "GameShare - Pending reservation",
+                    EmailService.EMAIL_TEMPLATE, pendingReservationContext, EmailType.RESERVATION_PENDING);
         }
         else {
             throw new UserAlreadyExistsException("User already exists");
