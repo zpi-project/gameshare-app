@@ -1,7 +1,9 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Search } from "lucide-react";
+import { NewGameInstance } from "@/types/GameInstance";
 import { User } from "@/types/User";
 import { getName } from "@/utils/user";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
@@ -12,8 +14,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import GameInstance from "./GameInstance";
 import GameInstanceForm from "./GameInstanceAddForm";
 import { Button } from "./ui/button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { NewGameInstance } from "@/types/GameInstance";
+import { useToast } from "./ui/use-toast";
 
 interface Props {
   owner?: User;
@@ -25,6 +26,7 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const { toast } = useToast();
   const {
     data: gameInstances,
     isLoading,
@@ -38,22 +40,24 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
     enabled: owner !== undefined,
   });
 
-  const { mutate } = useMutation({
-    mutationFn: (gameInstace: NewGameInstance) => GameInstanceApi.addGameInstance(gameInstace.gameId, gameInstace.description, gameInstace.pricePerDay),
-    // onError: () => {
-    //   toast({
-    //     title: t("updateErrorTitle"),
-    //     description: t("tryRefreshing"),
-    //     variant: "destructive",
-    //   });
-    // },
-    // onSuccess: () => {
-    //   toast({
-    //     description: t("updateSuccessDescription"),
-    //   });
-    //   queryClient.invalidateQueries(["user"]);
-    //   onSubmit();
-    // },
+  const queryClient = useQueryClient();
+
+  const { mutate: addGameInstance } = useMutation({
+    mutationFn: (gameInstance: NewGameInstance) => GameInstanceApi.create(gameInstance),
+    onError: () => {
+      toast({
+        title: "error adding game",
+        description: t("tryAgain"),
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      toast({
+        description: t("gameInstanceAdded"),
+      });
+      setDialogOpen(false);
+      queryClient.invalidateQueries(["gameInstances", { uuid: owner?.uuid }]);
+    },
   });
 
   return (
@@ -78,7 +82,7 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
                   <DialogTrigger asChild>
                     <Button className="w-56">{t("addGameInstance")}</Button>
                   </DialogTrigger>
-                  <GameInstanceForm onSubmit={(gameInstace: NewGameInstance) => mutate(gameInstace)} />
+                  <GameInstanceForm onSubmit={(game: NewGameInstance) => addGameInstance(game)} />
                 </Dialog>
               )}
             </div>

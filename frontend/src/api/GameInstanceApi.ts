@@ -19,10 +19,8 @@ export class GameInstanceApi {
     return instances;
   }
 
-  static async addGameInstance(gameId: number, description: string, pricePerDay: number) {
-    const { data } = await Api.post<NewGameInstance>(`game-instances`, {
-      params: { gameId, description, pricePerDay },
-    });
+  static async create(gameInstance: NewGameInstance) {
+    const { data } = await Api.post<GameInstance>(`game-instances`, gameInstance);
     return data;
   }
 
