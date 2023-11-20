@@ -161,6 +161,11 @@ const pl: typeof en = {
   pickDate: "Wybierz datę",
   startDateNotPast: "Data początkowa nie może być przeszła.",
   endDateAtLeastStartDate: "Data do musi być późniejsza niż data od.",
+  createReservationSuccess: "Gra została pomyślnie zarezerwowana!",
+  createReservationSuccessDescription:
+    "Wysłaliśmy maila do właściciela gry o twojej rezerwacji. Powiadomimy Cię o dalszym statusie rezerwacji.",
+  createReservationError: "There was an error booking this game.",
+  seeReservation: "Zobacz szczegóły rezerwacji",
 };
 
 export default pl;

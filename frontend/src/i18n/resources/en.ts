@@ -157,4 +157,9 @@ export default {
   pickDate: "Pick a date",
   startDateNotPast: "Start date cannot be a past date.",
   endDateAtLeastStartDate: "End date cannot be earlier than start date.",
+  createReservationSuccess: "Game has been booked successfully!",
+  createReservationSuccessDescription:
+    "We've sent an email to the game owner and we will notify you when he reacts to your reservation.",
+  createReservationError: "There was an error booking this game.",
+  seeReservation: "See reservation details",
 };

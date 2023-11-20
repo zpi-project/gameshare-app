@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,7 +53,8 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      gameInstanceUUID: gameInstance.uuid,
+        gameInstanceUUID: gameInstance.uuid,
+        renterComment: "",
     },
   });
 
