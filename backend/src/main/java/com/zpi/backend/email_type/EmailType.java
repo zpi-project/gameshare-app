@@ -11,5 +11,5 @@ public class EmailType {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private long id;
     @Column(nullable = false,unique = true)
-    private String status;
+    private String type;
 }

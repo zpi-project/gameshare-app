@@ -1,4 +1,4 @@
-insert into public.email_types (status)
+insert into public.email_types (type)
 values ('REGISTRATION'),
        ('RESERVATION_ACCEPTED'),
        ('RESERVATION_REJECTED'),

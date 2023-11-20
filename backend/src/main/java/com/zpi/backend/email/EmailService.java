@@ -105,7 +105,7 @@ public class EmailService {
             // Updating log
             log.sent();
             emailLogRepository.save(log);
-            logger.info(emailType.getStatus() + " MAIL sent successfully");
+            logger.info(emailType.getType() + " MAIL sent successfully");
         } catch (Exception e) {
             logger.error("Error while sending an email. "+e.getMessage());
         }
@@ -157,7 +157,7 @@ public class EmailService {
                     );
                     log.sent();
                     emailLogRepository.save(log);
-                    logger.info("[LOG-"+log.getId()+"] "+log.getType().getStatus() + " MAIL sent successfully");
+                    logger.info("[LOG-"+log.getId()+"] "+log.getType().getType() + " MAIL sent successfully");
                 } catch (Exception e) {
                     logger.error("Error while sending an email. " + e.getMessage());
                 }
