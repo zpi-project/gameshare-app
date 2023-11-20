@@ -1,5 +1,6 @@
 package com.zpi.backend.reservations;
 
+import com.zpi.backend.reservation_status.ReservationStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,7 +25,11 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     )
     Page<Reservation> getCurrentReservationsByOwnerAndStatus(Pageable pageable, @Param("uuid") String OwnerUuid, @Param("status") String status);
 
-    List<Reservation> findReservationsByGameInstance_Uuid(String gameInstanceUuid);
+
+    @Query(
+            "From Reservation r where r.gameInstance.uuid= :gameInstanceUuid and (r.status.status = 'ACCEPTED' or r.status.status = 'RENTED')"
+    )
+    List<Reservation> findAcceptedOrRentedReservationsByGameInstance(@Param("gameInstanceUuid") String gameInstanceUuid);
 
 
     Page<Reservation> getReservationsByGameInstance_Uuid(Pageable pageable, String gameInstanceUuid);

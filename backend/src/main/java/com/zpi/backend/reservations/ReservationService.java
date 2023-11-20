@@ -217,30 +217,28 @@ public class ReservationService {
         boolean is_renter = checkIfUserIsRenter(userService.getUser(authentication),reservation);
         if(!is_owner && !is_renter)
             throw new BadRequestException("User is not owner or renter of this reservation");
-        if(is_owner){
-            if(Objects.equals(reservation.getStatus().getStatus(), "PENDING")){
-                return List.of("ACCEPTED_BY_OWNER","REJECTED_BY_OWNER","EXPIRED");
+        else if(is_owner) {
+            switch (reservation.getStatus().getStatus()) {
+                case "PENDING" -> {
+                    return List.of("ACCEPTED_BY_OWNER", "REJECTED_BY_OWNER");
+                }
+                case "ACCEPTED_BY_OWNER" -> {
+                    return List.of("CANCELLED_BY_OWNER", "RENTED");
+                }
+                case "RENTED" -> {
+                    return List.of("FINISHED");
+                }
             }
-        }else {
-            if(Objects.equals(reservation.getStatus().getStatus(), "PENDING")){
-                return null;
+
+        }
+        else {
+            if (reservation.getStatus().getStatus().equals("PENDING")) {
+                return List.of("CANCELLED_BY_RENTER");
+            }
+            else if (reservation.getStatus().getStatus().equals("ACCEPTED_BY_OWNER")) {
+                return List.of("CANCELLED_BY_RENTER");
             }
         }
-        if(Objects.equals(reservation.getStatus().getStatus(), "ACCEPTED_BY_OWNER")){
-            return List.of("RENTED","CANCELED_BY_OWNER","CANCELLED_BY_RENTER","EXPIRED");
-        }
-        if(Objects.equals(reservation.getStatus().getStatus(), "REJECTED_BY_OWNER")){
-            return null;
-        }
-        if(Objects.equals(reservation.getStatus().getStatus(), "CANCELLED_BY_RENTER")){
-            return null;
-        }
-        if(Objects.equals(reservation.getStatus().getStatus(), "CANCELED_BY_OWNER")){
-            return null;
-        }
-        if(Objects.equals(reservation.getStatus().getStatus(), "RENTED")){
-            return List.of("FINISHED");
-        }
-        return null;
+        return List.of();
     }
 }

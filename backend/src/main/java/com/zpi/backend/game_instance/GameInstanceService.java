@@ -211,7 +211,7 @@ public class GameInstanceService {
 
 
     public List<GameInstanceUnAvailabilityDTO> getGameInstanceAvailability(String uuid, String year, String month,Boolean withReservations) {
-        List<Reservation> reservations= reservationRepository.findReservationsByGameInstance_Uuid(uuid);
+        List<Reservation> reservations= reservationRepository.findAcceptedOrRentedReservationsByGameInstance(uuid);
         return getUnAvaliability(reservations,Integer.parseInt(year),Integer.parseInt(month),withReservations);
     }
 
@@ -219,7 +219,7 @@ public class GameInstanceService {
         return gameInstance.getOwner().equals(user);
     }
     public List<GameInstanceUnAvailabilityDTO> getGameInstanceAvailabilityReservation(Authentication authentication, String uuid, String year, String month) throws UserDoesNotExistException, GameInstanceDoesNotExistException {
-        List<Reservation> reservations= reservationRepository.findReservationsByGameInstance_Uuid(uuid);
+        List<Reservation> reservations= reservationRepository.findAcceptedOrRentedReservationsByGameInstance(uuid);
         User user = userService.getUser(authentication);
         GameInstance gameinstance =gameInstanceRepository.findByUuid(uuid).orElseThrow(()->new GameInstanceDoesNotExistException("Game instance with uuid "+uuid+" does not exist"));
 
