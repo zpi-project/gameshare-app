@@ -366,6 +366,7 @@ public class ExceptionController {
                         .withTitle(ex.getClass().getSimpleName())
                         .withDetail(ex.getMessage()));
     }
+
     @ResponseBody
     @ExceptionHandler(IOException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
@@ -394,4 +395,5 @@ public class ExceptionController {
                         .withTitle(ex.getClass().getSimpleName())
                         .withDetail(ex.getMessage()));
     }
+
 }
