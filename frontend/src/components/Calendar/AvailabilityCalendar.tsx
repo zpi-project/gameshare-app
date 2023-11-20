@@ -8,6 +8,8 @@ import { Calendar, CalendarDay } from "./Calendar";
 
 interface AvailabilityCalendarProps {
   gameInstanceUUID: string;
+  startDate?: string;
+  endDate?: string;
 }
 
 const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID }) => {
@@ -51,6 +53,9 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
     });
   }, [reservations, startDate]);
 
+  // disable back click
+  // not show prev days
+  
   return (
     <Calendar
       onNextClick={() => setStartDate(getFirstDayOfNextMonth(startDate))}

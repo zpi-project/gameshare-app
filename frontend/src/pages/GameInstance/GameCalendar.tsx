@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { GameInstanceDetails } from "@/types/GameInstance";
+import { NewReservation } from "@/types/Reservation";
 import { cn } from "@/utils/tailwind";
 import { AvailabilityCalendar } from "@/components/Calendar";
 import GameInstanceDetailsCard from "@/components/GameInstanceDetailsCard";
@@ -17,6 +18,7 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
   const { t } = useTranslation();
   const { uuid } = gameInstance;
   const [showForm, setShowForm] = useState(false);
+  const [formValues, setFormValues] = useState<NewReservation | undefined>();
 
   return (
     <DialogContent
@@ -27,7 +29,7 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
     >
       <div className="flex flex-row gap-6">
         {showForm ? (
-          <ReservationForm gameInstance={gameInstance} />
+          <ReservationForm gameInstance={gameInstance} onSubmit={setFormValues} />
         ) : (
           <div className="hidden lg:flex">
             <GameInstanceDetailsCard gameInstance={gameInstance} />
@@ -46,7 +48,11 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
               </Button>
             )}
           </div>
-          <AvailabilityCalendar gameInstanceUUID={uuid} />
+          <AvailabilityCalendar
+            gameInstanceUUID={uuid}
+            startDate={formValues?.startDate}
+            endDate={formValues?.endDate}
+          />
         </div>
       </div>
     </DialogContent>
