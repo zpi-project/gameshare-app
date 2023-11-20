@@ -64,8 +64,6 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({ gameInstanceUUID 
     });
   }, [reservations, startDate]);
 
-  console.log(daysWithReservations);
-
   return (
     <Calendar
       onNextClick={() => setStartDate(getFirstDayOfNextMonth(startDate))}

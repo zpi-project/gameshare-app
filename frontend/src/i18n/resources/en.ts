@@ -146,6 +146,9 @@ export default {
   },
 
   reservationsCalendar: "Reservations calendar",
+  availabilityCalendar: "Availability calendar",
+  reservationForm: "Reservation form",
+  bookItNow: "Book it now",
   deactivate: "Deactivate",
   errorFetchingReservationsCalendar: "We couldn't fetch reservations for this month.",
 };

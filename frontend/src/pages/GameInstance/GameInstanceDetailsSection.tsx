@@ -98,12 +98,14 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
         <p className="px-2 italic xl:text-lg 2xl:w-3/4">{gameInstance.description}</p>
       </div>
       <div className="mt-auto flex flex-row flex-wrap justify-between gap-2">
-        <Button onClick={redirectGamePage} className="flex-grow">{t("seeGamePage")}</Button>
+        <Button onClick={redirectGamePage} className="flex-grow">
+          {t("seeGamePage")}
+        </Button>
         <Dialog>
           <DialogTrigger asChild className="flex-grow">
             <Button>{t("seeAvailability")}</Button>
           </DialogTrigger>
-          <GameCalendar />
+          <GameCalendar gameInstance={gameInstance} />
         </Dialog>
       </div>
     </div>

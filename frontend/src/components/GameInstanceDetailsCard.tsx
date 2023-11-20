@@ -1,12 +1,12 @@
 import { FC } from "react";
-import { GameInstance } from "@/types/GameInstance";
+import { GameInstance, GameInstanceDetails } from "@/types/GameInstance";
 import { stringToHexColor } from "@/utils/stringToColor";
 import { PriceBadge } from "./Badge";
 import { Stars } from "./Stars";
 import { useTheme } from "./ThemeProvider";
 
 interface GameInstanceDetailsCardProps {
-  gameInstance: GameInstance;
+  gameInstance: GameInstance | GameInstanceDetails;
 }
 
 const GameInstanceDetailsCard: FC<GameInstanceDetailsCardProps> = ({

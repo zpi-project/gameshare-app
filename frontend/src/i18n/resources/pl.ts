@@ -150,7 +150,10 @@ const pl: typeof en = {
   },
 
   reservationsCalendar: "Kalendarz rezerwacji",
+  availabilityCalendar: "Kalendarz dostępności",
+  reservationForm: "Formularz rezerwacji",
   deactivate: "Dezaktywuj",
+  bookItNow: "Rezerwuj",
   errorFetchingReservationsCalendar: "Nie udało się pobrać rezerwacji na ten miesiąc.",
 };
 
