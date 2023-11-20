@@ -14,9 +14,14 @@ import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
 import com.zpi.backend.game_instance_image.GameInstanceImageService;
+import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
+import com.zpi.backend.reservations.Reservation;
+import com.zpi.backend.reservations.ReservationRepository;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
+
+import com.zpi.backend.utils.DateUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,9 +30,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -38,6 +41,7 @@ public class GameInstanceService {
     UserService userService;
     GameService gameService;
     CategoryService categoryService;
+    ReservationRepository reservationRepository;
 
     public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication) throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
         newGameInstanceDTO.validate();
@@ -65,6 +69,7 @@ public class GameInstanceService {
     public void deleteGameInstance(String uuid, Authentication authentication) throws GameInstanceDoesNotExistException, UserDoesNotExistException {
         User user = userService.getUser(authentication);
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(uuid, user);
+        //TODO Check if there is no reservation with status in progress or smth
         if (gameInstanceOptional.isEmpty())
             throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");
         gameInstanceImageService.deleteGameInstanceImagesByGameInstance(authentication, gameInstanceOptional.get().getUuid());
@@ -150,9 +155,7 @@ public class GameInstanceService {
         Page<GameInstance> gameInstancesPage = gameInstanceRepository.findAll(spec, pageable);
         List<SearchGameInstanceDTO> resultList = new ArrayList<>();
         gameInstancesPage
-                .forEach(gameInstance -> {
-                    resultList.add(new SearchGameInstanceDTO(gameInstance, isGuest));
-                });
+                .forEach(gameInstance -> resultList.add(new SearchGameInstanceDTO(gameInstance, isGuest)));
         return new ResultsDTO<>(resultList,
                 new Pagination(gameInstancesPage.getTotalElements(), gameInstancesPage.getTotalPages()));
     }
@@ -173,5 +176,55 @@ public class GameInstanceService {
                 .forEach(gameInstance -> gameInstanceDetailsDTOList.add(new GameInstanceDetailsDTO(gameInstance, true)));
         return new ResultsDTO<>(gameInstanceDetailsDTOList,
                 new Pagination(gameInstancePage.getTotalElements(), gameInstancePage.getTotalPages()));
+    }
+
+    public boolean matchesUnAvaliabilityCriteria(int year,int month,Reservation reservation){
+        return DateUtils.getYear(reservation.getStartDate())==year && DateUtils.getMonth(reservation.getStartDate())==month;
+    }
+
+
+
+// nawet nie proponuj robienia tego kwerendą
+    public List<GameInstanceUnAvailabilityDTO> getUnAvaliability(List<Reservation> reservationList,int year,int month,Boolean withReservations){
+        List<GameInstanceUnAvailabilityDTO> periods = new ArrayList<>();
+       for(Reservation reservation:reservationList){
+           if(matchesUnAvaliabilityCriteria(year,month,reservation)){
+               Date startDate = reservation.getStartDate();
+               Date endDate = reservation.getEndDate();
+               if(reservation.getEndDate().getMonth()+1!=month){
+                   Calendar calendar = Calendar.getInstance();
+                   calendar.setTime(startDate);
+                   int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                   calendar.set(Calendar.DAY_OF_MONTH, lastDay);
+                   endDate = calendar.getTime();
+               }
+               if (withReservations){
+                   periods.add(new GameInstanceUnAvailabilityReservationDTO(startDate,endDate,reservation.getReservationId()));
+               }
+               else {
+                     periods.add(new GameInstanceUnAvailabilityDTO(startDate,endDate));
+               }
+           }
+       }
+       return periods;
+    }
+
+
+    public List<GameInstanceUnAvailabilityDTO> getGameInstanceAvailability(String uuid, String year, String month,Boolean withReservations) {
+        List<Reservation> reservations= reservationRepository.findReservationsByGameInstance_Uuid(uuid);
+        return getUnAvaliability(reservations,Integer.parseInt(year),Integer.parseInt(month),withReservations);
+    }
+
+    public boolean isOwner(User user,GameInstance gameInstance){
+        return gameInstance.getOwner().equals(user);
+    }
+    public List<GameInstanceUnAvailabilityDTO> getGameInstanceAvailabilityReservation(Authentication authentication, String uuid, String year, String month) throws UserDoesNotExistException, GameInstanceDoesNotExistException {
+        List<Reservation> reservations= reservationRepository.findReservationsByGameInstance_Uuid(uuid);
+        User user = userService.getUser(authentication);
+        GameInstance gameinstance =gameInstanceRepository.findByUuid(uuid).orElseThrow(()->new GameInstanceDoesNotExistException("Game instance with uuid "+uuid+" does not exist"));
+
+        if(!isOwner(user,gameinstance))
+            throw new UserDoesNotExistException("User with googleId "+user.getGoogleId()+" is not owner of game instance with uuid "+uuid);
+        return  getUnAvaliability(reservations,Integer.parseInt(year),Integer.parseInt(month),true);
     }
 }
