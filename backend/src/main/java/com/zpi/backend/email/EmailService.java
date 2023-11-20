@@ -140,16 +140,6 @@ public class EmailService {
         }
     }
 
-    @Scheduled(cron = "0 0 8 ? * *", zone = "Europe/Warsaw")
-    public void sendRemaindersAboutReservation2DaysBefore() {
-        logger.info("DRAFT: Sending reservation reminders 2 days before.");
-    }
-
-    @Scheduled(cron = "0 0 8 ? * *", zone = "Europe/Warsaw")
-    public void sendRemaindersAboutReservationOnDay() {
-        logger.info("DRAFT: Sending reservation reminders on reservation day.");
-    }
-
     // Particular emails
     public Context getRegistrationEmailContext() throws IOException {
         String title_pl = translationService.getMessage("email.registration.title", "pl", null);

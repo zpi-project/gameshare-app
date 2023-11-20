@@ -22,10 +22,13 @@ import com.zpi.backend.user_opinion.UserOpinionRepository;
 import com.zpi.backend.user_opinion.dto.UserOpinionDTO;
 import com.zpi.backend.utils.DateUtils;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
@@ -45,6 +48,7 @@ public class ReservationService {
     GameInstanceOpinionService gameinstanceOpinionService;
     UserOpinionRepository userOpinionRepository;
     EmailService emailService;
+    private static final Logger logger = LoggerFactory.getLogger(ReservationService.class);
 
     public ReservationDTO addReservation(Authentication authentication, NewReservationDTO newReservationDTO) throws UserDoesNotExistException, BadRequestException, GameInstanceDoesNotExistException, IOException {
         User renter = userService.getUser(authentication);
@@ -168,12 +172,12 @@ public class ReservationService {
                 emailService.sendEmailWithHtmlTemplate(reservation.getRenter(), context.getVariable("pl_title").toString(),
                         EmailService.EMAIL_TEMPLATE, context, EmailType.RESERVATION_REJECTED);
             }
-            case "CANCELLED_BY_OWNER" ->{
+            case "CANCELED_BY_OWNER" ->{
                 context = emailService.getCancelingByOwnerEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
                 emailService.sendEmailWithHtmlTemplate(reservation.getRenter(), context.getVariable("pl_title").toString(),
                         EmailService.EMAIL_TEMPLATE, context, EmailType.RESERVATION_CANCELED_BY_OWNER);
             }
-            case "CANCELLED_BY_RENTER" ->{
+            case "CANCELED_BY_RENTER" ->{
                 context = emailService.getCancelingByRenterEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
                 emailService.sendEmailWithHtmlTemplate(reservation.getGameInstance().getOwner(), context.getVariable("pl_title").toString(),
                         EmailService.EMAIL_TEMPLATE, context, EmailType.RESERVATION_CANCELED_BY_RENTER);
@@ -279,5 +283,41 @@ public class ReservationService {
             return List.of("FINISHED");
         }
         return null;
+    }
+
+    // Scheduling tasks
+
+    @Scheduled(cron = "0 0 8 ? * *", zone = "Europe/Warsaw")
+    public void sendRemaindersAboutReservation2DaysBefore() throws IOException {
+        logger.info("Sending reservation reminders 2 days before.");
+        List<Reservation> reservationsSoon = reservationRepository.getReservationsStartingInTwoDays();
+        for (Reservation r: reservationsSoon){
+            Context context = emailService.getRemindingIn2DaysEmailContext(
+                    r.getReservationId(), r.getGameInstance().getGame().getName()
+            );
+            emailService.sendEmailWithHtmlTemplate(
+                    r.getRenter(),
+                    context.getVariable("pl_title").toString(),
+                    EmailService.EMAIL_TEMPLATE,
+                    context,
+                    EmailType.RESERVATION_COMING_SOON);
+        }
+    }
+
+    @Scheduled(cron = "0 0 8 ? * *", zone = "Europe/Warsaw")
+    public void sendRemaindersAboutReservationOnDay() throws IOException {
+        logger.info("Sending reservation reminders on reservation day.");
+        List<Reservation> reservationsToday = reservationRepository.getReservationsStartingToday();
+        for (Reservation r: reservationsToday){
+            Context context = emailService.getRemindingTodayEmailContext(
+                    r.getReservationId(), r.getGameInstance().getGame().getName()
+            );
+            emailService.sendEmailWithHtmlTemplate(
+                    r.getRenter(),
+                    context.getVariable("pl_title").toString(),
+                    EmailService.EMAIL_TEMPLATE,
+                    context,
+                    EmailType.RESERVATION_TODAY);
+        }
     }
 }

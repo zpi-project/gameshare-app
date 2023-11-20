@@ -43,5 +43,12 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     Page<Reservation>getReservationsByRenter(Pageable pageable, String uuid);
 
-
+    @Query(
+            value = "SELECT * FROM reservations WHERE date(start_date) = CURRENT_DATE + INTERVAL '2 days' and status_id = 1", nativeQuery = true
+    )
+    List<Reservation> getReservationsStartingInTwoDays();
+    @Query(
+            value = "SELECT * FROM reservations WHERE date(start_date) = CURRENT_DATE and status_id = 1", nativeQuery = true
+    )
+    List<Reservation> getReservationsStartingToday();
 }
