@@ -40,7 +40,7 @@ public class GameService {
             throw new GameAlreadyExistsException("Game "+newGameDTO.getName()+" already exists");
         List<Category> categories = categoryService.getCategoriesByIDs(newGameDTO.getCategoriesIDs());
         Game newGame = newGameDTO.toGame(categories);
-        newGame.setGameStatus(gameStatusService.getGameStatus("Pending"));
+        newGame.setGameStatus(gameStatusService.getGameStatus("PENDING"));
         gameRepository.save(newGame);
         return new GameDTO(newGame);
     }
@@ -125,21 +125,4 @@ public class GameService {
     }
 
 
-    private UserWithGameOpinionDTO convertToDTO(Object[] columns) {
-        UserWithGameOpinionDTO dto = new UserWithGameOpinionDTO();
-
-        dto.setUser(new UserGuestDTO(
-                (String) columns[0], // uuid
-                (String) columns[1], // firstname
-                (String) columns[2], // lastname
-                (Double) columns[3], // latitude
-                (Double) columns[4], // longitude
-                (String) columns[5], // avatarLink
-                (Double) columns[6]) // avgRating
-        );
-        dto.setGameInstanceUUID((String) columns[7]); // gameInstanceUUID
-        dto.setGameName((String) columns[8]); // gameName
-        dto.setGameInstanceRating(((Double) columns[9])); // gameInstanceRating
-        return dto;
-    }
 }

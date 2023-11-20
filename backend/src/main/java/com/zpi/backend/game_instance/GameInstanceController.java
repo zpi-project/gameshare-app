@@ -8,7 +8,6 @@ import com.zpi.backend.game_instance.dto.*;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
-import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
@@ -18,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -65,7 +65,7 @@ public class GameInstanceController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{uuid}", method = DELETE)
     public ResponseEntity deleteGameInstance(@PathVariable String uuid, Authentication authentication)
-            throws GameInstanceDoesNotExistException, UserDoesNotExistException {
+            throws GameInstanceDoesNotExistException, UserDoesNotExistException, GameInstanceImageDoesNotExistException {
         gameInstanceService.deleteGameInstance(uuid, authentication);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
@@ -148,6 +148,29 @@ public class GameInstanceController {
             throws CategoryDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstances(authentication, size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, userUUID, latitude, longitude));
+    }
+
+    @Operation(
+            summary ="Gets game instance unavailability periods",
+            description = "Returns game instance unavailability periods " +
+                    "can be called by anyone"
+    )
+    @GetMapping(value="/{uuid}/avaliability")
+    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceUnAvaliability(@PathVariable String uuid, @RequestParam String year, @RequestParam String month) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(gameInstanceService.getGameInstanceAvailability(uuid,year,month,false));
+    }
+
+    @Operation(
+            summary ="Gets game instance unavailability periods",
+            description = "Returns game instance unavailability periods and reservation uuid " +
+                    "can be called by owner of the game instance"
+    )
+    @GetMapping(value="/{uuid}/reservations")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceReservations(@PathVariable String uuid, @RequestParam String year, @RequestParam String month, Authentication authentication) throws GameInstanceDoesNotExistException, UserDoesNotExistException {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(gameInstanceService.getGameInstanceAvailabilityReservation(authentication,uuid,year,month));
     }
 
 }
