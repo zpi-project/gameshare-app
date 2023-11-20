@@ -1,4 +1,5 @@
 package com.zpi.backend.user_opinion.dto;
+import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.user.dto.UserDTO;
 import com.zpi.backend.user.dto.UserGuestDTO;
 import com.zpi.backend.user_opinion.UserOpinion;
@@ -12,8 +13,7 @@ public class UserOpinionDTO {
     private int stars;
     private String description;
     private UserGuestDTO ratingUser;
-
-    //TODO: add isRatingUserOwner when we have game instances and reservations
+    private Reservation reservation;
 
     public UserOpinionDTO(UserOpinion userOpinion, boolean isGuest) {
         this.id = userOpinion.getId();
@@ -24,5 +24,6 @@ public class UserOpinionDTO {
             this.ratingUser = new UserGuestDTO(userOpinion.getRatingUser());
         else
             this.ratingUser = new UserDTO(userOpinion.getRatingUser());
+        this.reservation = userOpinion.getReservation();
     }
 }
