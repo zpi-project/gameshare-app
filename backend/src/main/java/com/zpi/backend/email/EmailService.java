@@ -4,6 +4,7 @@ import com.zpi.backend.email_type.EmailType;
 import com.zpi.backend.email_log.EmailLog;
 import com.zpi.backend.email_log.EmailLogRepository;
 import com.zpi.backend.user.User;
+import com.zpi.backend.user.UserRepository;
 import jakarta.mail.MessagingException;
 import org.springframework.core.io.Resource;
 import jakarta.mail.internet.MimeMessage;
@@ -21,14 +22,19 @@ import org.thymeleaf.context.Context;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Component
 public class EmailService {
 
+    @Value("${ADMIN1_EMAIL}")
+    private String admin1_mail;
+    @Value("${ADMIN2_EMAIL}")
+    private String admin2_mail;
+    @Value("${ADMIN3_EMAIL}")
+    private String admin3_mail;
+    @Value("${ADMIN4_EMAIL}")
+    private String admin4_mail;
     @Value("${EMAIL_USERNAME}")
     private String from;
     @Value("${FRONTEND_HOST}")
@@ -43,13 +49,16 @@ public class EmailService {
     private final TemplateEngine templateEngine;
     private final EmailTranslationService translationService;
     private final EmailLogRepository emailLogRepository;
+    private final UserRepository userRepository;
 
     public EmailService(JavaMailSender emailSender, TemplateEngine templateEngine,
-                        EmailTranslationService emailTranslationService, EmailLogRepository emailLogRepository) {
+                        EmailTranslationService emailTranslationService, EmailLogRepository emailLogRepository,
+                        UserRepository userRepository) {
         this.emailSender = emailSender;
         this.templateEngine = templateEngine;
         this.translationService = emailTranslationService;
         this.emailLogRepository = emailLogRepository;
+        this.userRepository = userRepository;
     }
 
     public Context setContextForEmailTemplate(String title_pl, String header_pl,
@@ -101,6 +110,21 @@ public class EmailService {
             logger.error("Error while sending an email. "+e.getMessage());
         }
     }
+
+    public void sendEmailToAdminsWithHtmlTemplate(String subject, String templateName, Context context, EmailType emailType) {
+        List<Optional<User>> admins = Arrays.asList(
+                userRepository.findByEmail(admin1_mail),
+                userRepository.findByEmail(admin2_mail),
+                userRepository.findByEmail(admin3_mail),
+                userRepository.findByEmail(admin4_mail)
+        );
+
+        for (Optional<User> admin: admins) {
+            admin.ifPresent(user -> sendEmailWithHtmlTemplate(user, subject, templateName, context, emailType));
+        }
+    }
+
+
 
     private void sendHTMLEmail(String to, String subject, String htmlContent) throws MessagingException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
@@ -301,6 +325,22 @@ public class EmailService {
         String header_en = translationService.getMessage("email.reservation.expired.header", "en", null);
         String message1_en = translationService.getMessage("email.reservation.expired.message.1", "en", arguments);
         String message2_en = translationService.getMessage("email.reservation.expired.message.2", "en", null);
+
+        return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
+                message1_en, message1_pl, message2_en, message2_pl);
+    }
+
+    public Context getNewGameEmailContext(String gameName) throws IOException {
+        String[] arguments = {gameName};
+
+        String title_pl = translationService.getMessage("email.new-game.title", "pl", null);
+        String header_pl = translationService.getMessage("email.new-game.header", "pl", null);
+        String message1_pl = translationService.getMessage("email.new-game.message.1", "pl", arguments);
+        String message2_pl = translationService.getMessage("email.new-game.message.2", "pl", arguments);
+        String title_en = translationService.getMessage("email.new-game.title", "en", null);
+        String header_en = translationService.getMessage("email.new-game.header", "en", null);
+        String message1_en = translationService.getMessage("email.new-game.message.1", "en", arguments);
+        String message2_en = translationService.getMessage("email.new-game.message.2", "en", arguments);
 
         return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
                 message1_en, message1_pl, message2_en, message2_pl);

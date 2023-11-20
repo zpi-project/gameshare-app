@@ -5,10 +5,12 @@ import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.category.CategoryService;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
+import com.zpi.backend.email.EmailService;
+import com.zpi.backend.email_type.EmailTypeService;
+import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game.dto.GameDTO;
 import com.zpi.backend.game.dto.NewGameDTO;
-import com.zpi.backend.game.dto.UserWithGameOpinionDTO;
 import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
 import com.zpi.backend.game.exception.GameAlreadyExistsException;
 import com.zpi.backend.game.exception.GameAlreadyRejectedException;
@@ -16,25 +18,29 @@ import com.zpi.backend.game.exception.GameDoesNotExistException;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
-import com.zpi.backend.user.dto.UserGuestDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class GameService {
-    GameRepository gameRepository;
-    CategoryService categoryService;
-    RoleService roleService;
-    GameStatusService gameStatusService;
-    public GameDTO addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
+    private final GameRepository gameRepository;
+    private final CategoryService categoryService;
+    private final RoleService roleService;
+    private final GameStatusService gameStatusService;
+    private final EmailService emailService;
+    private final EmailTypeService emailTypeService;
+
+    public GameDTO addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException, IOException, EmailTypeDoesNotExists {
         newGameDTO.validate();
         if (gameRepository.existsGameByName(newGameDTO.getName()))
             throw new GameAlreadyExistsException("Game "+newGameDTO.getName()+" already exists");
@@ -42,6 +48,14 @@ public class GameService {
         Game newGame = newGameDTO.toGame(categories);
         newGame.setGameStatus(gameStatusService.getGameStatus("PENDING"));
         gameRepository.save(newGame);
+//        Sending emails do admins
+        Context context = emailService.getNewGameEmailContext(newGame.getName());
+        emailService.sendEmailToAdminsWithHtmlTemplate(
+                context.getVariable("pl_title").toString(),
+                EmailService.EMAIL_TEMPLATE,
+                context,
+                emailTypeService.findEmailTypeByStatus("NEW_GAME")
+        );
         return new GameDTO(newGame);
     }
 
