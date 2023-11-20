@@ -6,7 +6,10 @@ import com.zpi.backend.category.CategoryRepository;
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
-import com.zpi.backend.email.EmailType;
+import com.zpi.backend.email_type.EmailType;
+import com.zpi.backend.email_type.EmailTypeRepository;
+import com.zpi.backend.email_type.EmailTypeService;
+import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstanceSearch;
 import com.zpi.backend.role.RoleRepository;
@@ -37,6 +40,7 @@ public class UserService {
     private AdminChecker adminChecker;
     private EmailService emailService;
     private final CategoryRepository categoryRepository;
+    private final EmailTypeService emailTypeService;
 
     private boolean checkIfUserExists(String googleId) {
         User user = this.userRepository.findByGoogleId(googleId).orElse(null);
@@ -69,7 +73,7 @@ public class UserService {
         this.userRepository.save(user);
     }
 
-    public void registerUser(UpdateUserDTO updateUserDTO, Authentication authentication) throws UserAlreadyExistsException, IOException {
+    public void registerUser(UpdateUserDTO updateUserDTO, Authentication authentication) throws UserAlreadyExistsException, IOException, EmailTypeDoesNotExists {
         User user = (User) authentication.getPrincipal();
         if(!checkIfUserExists(user.getGoogleId())) {
             user.update(updateUserDTO);
@@ -81,8 +85,8 @@ public class UserService {
 
 //            Sending e-mail
             Context registrationContext = emailService.getRegistrationEmailContext();
-                emailService.sendEmailWithHtmlTemplate(user, "GameShare - Registration",
-                        EmailService.EMAIL_TEMPLATE, registrationContext, EmailType.REGISTRATION);
+                emailService.sendEmailWithHtmlTemplate(user, registrationContext.getVariable("pl_title").toString(),
+                        EmailService.EMAIL_TEMPLATE, registrationContext, emailTypeService.findEmailTypeByStatus("REGISTRATION"));
         }
         else {
             throw new UserAlreadyExistsException("User already exists");

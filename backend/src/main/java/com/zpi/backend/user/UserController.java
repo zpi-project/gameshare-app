@@ -2,6 +2,7 @@ package com.zpi.backend.user;
 
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.ResultsDTO;
+import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.user.dto.UpdateUserDTO;
 import com.zpi.backend.user.dto.UserDTO;
@@ -58,7 +59,7 @@ public class UserController {
     @PostMapping("/user")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication)
-            throws UserAlreadyExistsException, IOException {
+            throws UserAlreadyExistsException, IOException, EmailTypeDoesNotExists {
         System.out.println("... called createUser");
         userService.registerUser(updateUserDTO, authentication);
         return ResponseEntity.status(HttpStatus.CREATED).body("User created");

@@ -1,5 +1,6 @@
 package com.zpi.backend.email;
 
+import com.zpi.backend.email_type.EmailType;
 import com.zpi.backend.email_log.EmailLog;
 import com.zpi.backend.email_log.EmailLogRepository;
 import com.zpi.backend.user.User;
@@ -95,7 +96,7 @@ public class EmailService {
             // Updating log
             log.sent();
             emailLogRepository.save(log);
-            logger.info(emailType.name() + " MAIL sent successfully");
+            logger.info(emailType.getStatus() + " MAIL sent successfully");
         } catch (Exception e) {
             logger.error("Error while sending an email. "+e.getMessage());
         }
@@ -132,7 +133,7 @@ public class EmailService {
                     );
                     log.sent();
                     emailLogRepository.save(log);
-                    logger.info("[LOG-"+log.getId()+"] "+log.getType().name() + " MAIL sent successfully");
+                    logger.info("[LOG-"+log.getId()+"] "+log.getType().getStatus() + " MAIL sent successfully");
                 } catch (Exception e) {
                     logger.error("Error while sending an email. " + e.getMessage());
                 }

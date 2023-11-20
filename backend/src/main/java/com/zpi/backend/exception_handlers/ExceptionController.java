@@ -1,5 +1,6 @@
 package com.zpi.backend.exception_handlers;
 
+import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.category.exception.CategoryAlreadyExistsException;
@@ -369,6 +370,21 @@ public class ExceptionController {
     @ExceptionHandler(IOException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     ResponseEntity IOEHandler(IOException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.NOT_FOUND)
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
+    }
+
+    // Emails
+    @ResponseBody
+    @ExceptionHandler(EmailTypeDoesNotExists.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    ResponseEntity ETDNEHandler(EmailTypeDoesNotExists ex) {
         logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
