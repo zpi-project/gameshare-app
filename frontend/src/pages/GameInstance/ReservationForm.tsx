@@ -53,8 +53,8 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-        gameInstanceUUID: gameInstance.uuid,
-        renterComment: "",
+      gameInstanceUUID: gameInstance.uuid,
+      renterComment: "",
     },
   });
 
