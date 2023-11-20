@@ -1,4 +1,3 @@
-import { reservationTimeframes } from "@cypress/fixtures/reservations";
 import { GameInstance } from "@/types/GameInstance";
 import {
   GameInstanceSearchParams,
