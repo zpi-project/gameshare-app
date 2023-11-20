@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import { NewReservation } from "@/types/Reservation";
@@ -20,9 +20,13 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
   const [showForm, setShowForm] = useState(false);
   const [formValues, setFormValues] = useState<NewReservation | undefined>();
 
+  useEffect(() => {
+    console.log(formValues);
+  }, [formValues]);
+
   return (
     <DialogContent
-      className="min-h-[724px] min-w-[620px] p-10 lg:min-w-[1042px]"
+      className="min-h-[724px] min-w-[1042px] p-10"
       onCloseAutoFocus={() => {
         setShowForm(false);
       }}

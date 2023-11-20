@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,17 +28,33 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
   const { t } = useTranslation();
   const TODAY = new Date(new Date().setHours(0, 0, 0, 0));
 
-  const formSchema = z.object({
-    startDate: z
-      .date({ required_error: "it is required", invalid_type_error: "wrong type" })
-      .min(TODAY, { message: "its min date" }),
-    endDate: z.date({ required_error: "it is required", invalid_type_error: "wrong type" }),
-    renterComment: z.string().trim().optional(),
-    gameInstanceUUID: z.string(),
-  });
+  const formSchema = z
+    .object({
+      startDate: z
+        .date({
+          required_error: t("fieldIsRequired", {
+            field: `${t("formStartDate")}`,
+            context: "female",
+          }),
+        })
+        .min(TODAY, { message: t("startDateNotPast") }),
+
+      endDate: z.date({
+        required_error: t("fieldIsRequired", { field: `${t("formEndDate")}`, context: "female" }),
+      }),
+      renterComment: z.string().trim().optional(),
+      gameInstanceUUID: z.string(),
+    })
+    .refine(data => data.endDate >= data.startDate, {
+      message: t("endDateAtLeastStartDate"),
+      path: ["endDate"],
+    });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      gameInstanceUUID: gameInstance.uuid,
+    },
   });
 
   return (

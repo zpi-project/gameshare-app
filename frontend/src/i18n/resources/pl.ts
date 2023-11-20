@@ -159,6 +159,8 @@ const pl: typeof en = {
   formStartDate: "Data początkowa",
   formEndDate: "Data końcowa",
   pickDate: "Wybierz datę",
+  startDateNotPast: "Data początkowa nie może być przeszła.",
+  endDateAtLeastStartDate: "Data do musi być późniejsza niż data od.",
 };
 
 export default pl;

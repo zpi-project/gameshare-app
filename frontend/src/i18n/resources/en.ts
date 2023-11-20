@@ -155,5 +155,6 @@ export default {
   formStartDate: "Start date",
   formEndDate: "End date",
   pickDate: "Pick a date",
-  renterComment: "",
+  startDateNotPast: "Start date cannot be a past date.",
+  endDateAtLeastStartDate: "End date cannot be earlier than start date.",
 };
