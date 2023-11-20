@@ -137,6 +137,22 @@ const pl: typeof en = {
       EXPIRED: "Po terminie",
     },
   },
+
+  errorStatus: {
+    "400": "Nieprawidłowe zapytanie",
+    "401": "Nieautoryzowany dostęp",
+    "403": "Zabroniony",
+    "404": "Szukana strona nie istnieje",
+    "500": "Wewnętrzny błąd serwera",
+    "501": "Nie zaimplementowano",
+    "503": "Usługa niedostępna",
+    "504": "Przekroczono czas oczekiwania",
+  },
+
+  unexpectedError: "Wystąpił niespodziewany błąd.",
+  ooops: "Ooops!",
+  backToHome: "Wróć na stronę główną",
+  error: "Błąd",
 };
 
 export default pl;

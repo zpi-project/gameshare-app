@@ -133,4 +133,19 @@ export default {
       EXPIRED: "Expired",
     },
   },
+
+  errorStatus: {
+    "400": "Bad Request",
+    "401": "Unauthorized Access",
+    "403": "Forbidden",
+    "404": "Page Not Found",
+    "500": "Internal Server Error",
+    "501": "Not Implemented",
+    "503": "Service Unavailable",
+    "504": "Gateway Timeout",
+  },
+  unexpectedError: "There was an unexpected error.",
+  ooops: "Ooops!",
+  backToHome: "Back to home",
+  error: "Error",
 };
