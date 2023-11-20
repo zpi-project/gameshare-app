@@ -32,7 +32,7 @@ const DatePicker: FC<DatePickerProps> = ({ onSelect, placeholder }) => {
           {date ? t("dateFormat", { date }) : <span>{placeholder}</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
+      <PopoverContent className="w-auto p-0" align="center">
         <Calendar
           mode="single"
           selected={date}

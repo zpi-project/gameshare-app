@@ -33,12 +33,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
       .date({ required_error: "it is required", invalid_type_error: "wrong type" })
       .min(TODAY, { message: "its min date" }),
     endDate: z.date({ required_error: "it is required", invalid_type_error: "wrong type" }),
-    renterComment: z
-      .string()
-      .trim()
-      .min(1, {
-        message: t("fieldIsRequired", { field: `${t("renterComment")}` }),
-      }),
+    renterComment: z.string().trim().optional(),
     gameInstanceUUID: z.string(),
   });
 
@@ -49,10 +44,10 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
   return (
     <div className="flex w-[364px] min-w-[364px] flex-grow flex-col gap-4">
       <h2 className="text-2xl uppercase text-secondary">{t("reservationForm")}</h2>
-      <div className="flex-grow rounded-lg bg-section p-4">
+      <div className="flex flex-grow flex-col gap-8 rounded-lg bg-section p-4">
         <GameInstanceSummary gameInstance={gameInstance} />
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-grow flex-col gap-4">
             <FormField
               control={form.control}
               name="startDate"
@@ -83,15 +78,20 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
               control={form.control}
               name="renterComment"
               render={({ field }) => (
-                <FormItem className="h-[80px]">
+                <FormItem>
                   <FormControl>
-                    <Textarea placeholder="leaveMessage" className="resize-none" {...field} />
+                    <Textarea
+                      placeholder={t("leaveMessage")}
+                      className="h-[180px] resize-none bg-card p-4"
+                      {...field}
+                      spellCheck={false}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" variant="secondary" className="float-right mt-4">
+            <Button type="submit" variant="secondary" className="ml-auto mt-auto w-max px-8">
               {t("submit")}
             </Button>
           </form>

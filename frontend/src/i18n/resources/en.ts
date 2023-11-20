@@ -151,8 +151,9 @@ export default {
   bookItNow: "Book it now",
   deactivate: "Deactivate",
   errorFetchingReservationsCalendar: "We couldn't fetch reservations for this month.",
-  leaveMessage: "Leave a message for the game owner",
+  leaveMessage: "Leave a message for the game owner...",
   formStartDate: "Start date",
   formEndDate: "End date",
   pickDate: "Pick a date",
+  renterComment: "",
 };
