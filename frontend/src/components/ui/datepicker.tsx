@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { FC } from "react";
-import { format } from "date-fns";
+import { useTranslation } from "react-i18next";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/utils/tailwind";
 import { Button } from "@/components/ui/button";
@@ -16,19 +16,20 @@ interface DatePickerProps {
 
 const DatePicker: FC<DatePickerProps> = ({ onSelect, placeholder }) => {
   const [date, setDate] = React.useState<Date>();
+  const { t } = useTranslation();
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
-          variant={"outline"}
+          variant="ghost"
           className={cn(
-            "w-[240px] justify-start text-left font-normal",
+            "w-full justify-start bg-card text-left font-normal",
             !date && "text-muted-foreground",
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span>{placeholder}</span>}
+          {date ? t("dateFormat", { date }) : <span>{placeholder}</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">

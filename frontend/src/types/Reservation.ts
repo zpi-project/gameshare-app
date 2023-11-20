@@ -38,8 +38,8 @@ export interface ReservationTimeframe extends Timeframe {
 }
 
 export interface NewReservation {
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   renterComment: string;
   gameInstanceUUID: string;
 }

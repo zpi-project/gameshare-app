@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -155,6 +156,10 @@ const pl: typeof en = {
   deactivate: "Dezaktywuj",
   bookItNow: "Rezerwuj",
   errorFetchingReservationsCalendar: "Nie udało się pobrać rezerwacji na ten miesiąc.",
+  leaveMessage: "Zostaw wiadomość dla właściciela gry",
+  formStartDate: "Data początkowa",
+  formEndDate: "Data końcowa",
+  pickDate: "Wybierz datę",
 };
 
 export default pl;

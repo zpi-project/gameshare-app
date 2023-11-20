@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import { NewReservation } from "@/types/Reservation";
