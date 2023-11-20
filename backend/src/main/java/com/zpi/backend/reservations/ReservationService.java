@@ -320,4 +320,25 @@ public class ReservationService {
                     EmailType.RESERVATION_TODAY);
         }
     }
+
+    @Scheduled(cron = "0 0 8 ? * *", zone = "Europe/Warsaw")
+    public void setExpiredStatus() throws IOException {
+        logger.info("Setting reservation status to expired.");
+        List<Reservation> expiredReservations = reservationRepository.getExpiringReservations();
+        if (expiredReservations.size() > 0) {
+            reservationRepository.setExpiredStatus();
+//          Sending emails
+            for (Reservation r : expiredReservations) {
+                Context context = emailService.getExpiringEmailContext(
+                        r.getReservationId(), r.getGameInstance().getGame().getName()
+                );
+                emailService.sendEmailWithHtmlTemplate(
+                        r.getRenter(),
+                        context.getVariable("pl_title").toString(),
+                        EmailService.EMAIL_TEMPLATE,
+                        context,
+                        EmailType.RESERVATION_EXPIRED);
+            }
+        }
+    }
 }

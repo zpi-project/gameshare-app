@@ -289,4 +289,20 @@ public class EmailService {
                 message1_en, message1_pl, message2_en, message2_pl);
     }
 
+    public Context getExpiringEmailContext(String reservationID, String gameName) throws IOException {
+        String[] arguments = {reservationID, gameName};
+
+        String title_pl = translationService.getMessage("email.reservation.expired.title", "pl", null);
+        String header_pl = translationService.getMessage("email.reservation.expired.header", "pl", null);
+        String message1_pl = translationService.getMessage("email.reservation.expired.message.1", "pl", arguments);
+        String message2_pl = translationService.getMessage("email.reservation.expired.message.2", "pl", null);
+        String title_en = translationService.getMessage("email.reservation.expired.title", "en", null);
+        String header_en = translationService.getMessage("email.reservation.expired.header", "en", null);
+        String message1_en = translationService.getMessage("email.reservation.expired.message.1", "en", arguments);
+        String message2_en = translationService.getMessage("email.reservation.expired.message.2", "en", null);
+
+        return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
+                message1_en, message1_pl, message2_en, message2_pl);
+    }
+
 }
