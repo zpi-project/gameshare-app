@@ -18,6 +18,7 @@ public class EmailLog {
     private long id;
     @ManyToOne
     private User receiver;
+    @ManyToOne
     private EmailType type;
     private String title;
     @Column(length = 50000)
