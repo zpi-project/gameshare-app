@@ -66,7 +66,7 @@ export class GameInstanceApi {
   }
 
   static async getReservations(uuid: string, month: number, year: number) {
-    const { data: reservations } = await Api.get<Paginated<ReservationTimeframe>>(
+    const { data: reservations } = await Api.get<ReservationTimeframe[]>(
       `/game-instances/${uuid}/reservations`,
       { params: { year, month } },
     );
