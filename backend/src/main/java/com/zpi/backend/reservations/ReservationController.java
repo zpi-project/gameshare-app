@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class ReservationController {
     )
     @PostMapping("/reservations")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<ReservationDTO> addReservation(Authentication authentication, @RequestBody NewReservationDTO newReservationDTO) throws BadRequestException, GameInstanceDoesNotExistException, UserDoesNotExistException {
+    public ResponseEntity<ReservationDTO> addReservation(Authentication authentication, @RequestBody NewReservationDTO newReservationDTO) throws BadRequestException, GameInstanceDoesNotExistException, UserDoesNotExistException, IOException {
         ReservationDTO reservationDTO = reservationService.addReservation(authentication, newReservationDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(reservationDTO);
     }
@@ -84,7 +85,7 @@ public class ReservationController {
     )
     @PutMapping("/reservations/{reservationId}/status")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<ReservationDTO> changeReservationStatus(Authentication authentication, @PathVariable String reservationId, @RequestParam String status) throws BadRequestException, UserDoesNotExistException {
+    public ResponseEntity<ReservationDTO> changeReservationStatus(Authentication authentication, @PathVariable String reservationId, @RequestParam String status) throws BadRequestException, UserDoesNotExistException, IOException {
         ReservationDTO reservationDTO = new ReservationDTO(reservationService.changeReservationStatus(authentication, reservationId, status));
         return ResponseEntity.ok().body(reservationDTO);
     }
