@@ -166,6 +166,7 @@ const pl: typeof en = {
     "Wysłaliśmy maila do właściciela gry o twojej rezerwacji. Powiadomimy Cię o dalszym statusie rezerwacji.",
   createReservationError: "There was an error booking this game.",
   seeReservation: "Zobacz szczegóły rezerwacji",
+  submitReservation: "Zarezerwuj"
 };
 
 export default pl;

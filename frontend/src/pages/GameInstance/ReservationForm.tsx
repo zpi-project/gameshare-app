@@ -109,7 +109,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
               )}
             />
             <Button type="submit" variant="secondary" className="ml-auto mt-auto w-max px-8">
-              {t("submit")}
+              {t("submitReservation")}
             </Button>
           </form>
         </Form>
