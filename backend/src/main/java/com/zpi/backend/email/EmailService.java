@@ -28,6 +28,8 @@ import java.util.Locale;
 @Component
 public class EmailService {
 
+    @Value("${EMAIL_USERNAME}")
+    private String from;
     @Value("${FRONTEND_HOST}")
     private String frontend_host;
     @Value("${FRONTEND_PORT}")
@@ -103,6 +105,7 @@ public class EmailService {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
         helper.setTo(to);
+        helper.setFrom(from);
         helper.setSubject(subject);
         helper.setText(htmlContent, true);
         emailSender.send(mimeMessage);
