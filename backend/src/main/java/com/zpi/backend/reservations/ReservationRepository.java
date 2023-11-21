@@ -15,7 +15,6 @@ import java.util.Optional;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-
     @Query(
            "From Reservation r where r.renter.uuid = :uuid and r.status.status = :status"
     )
@@ -25,14 +24,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
            "From Reservation r where r.gameInstance.owner.uuid = :uuid and r.status.status = :status"
     )
     Page<Reservation> getCurrentReservationsByOwnerAndStatus(Pageable pageable, @Param("uuid") String OwnerUuid, @Param("status") String status);
-
     List<Reservation> findReservationsByGameInstance_Uuid(String gameInstanceUuid);
-
-
     Page<Reservation> getReservationsByGameInstance_Uuid(Pageable pageable, String gameInstanceUuid);
-
     Optional<Reservation> getReservationByReservationId(String reservationId);
-
 
     @Query(
               "From Reservation r where r.gameInstance.owner.uuid = :uuid"
@@ -42,7 +36,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query(
             "from Reservation r where r.renter.uuid = :uuid"
     )
-
     Page<Reservation>getReservationsByRenter(Pageable pageable, String uuid);
 
     @Query(
@@ -51,6 +44,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
                     "WHERE date(start_date) = CURRENT_DATE + INTERVAL '2 days' and rs.status = 'ACCEPTED_BY_OWNER'", nativeQuery = true
     )
     List<Reservation> getReservationsStartingInTwoDays();
+
     @Query(
             value = "SELECT * FROM reservations r " +
                     "join reservation_status rs on r.status_id = rs.id " +
