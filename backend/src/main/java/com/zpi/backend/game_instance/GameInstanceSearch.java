@@ -15,5 +15,4 @@ public class GameInstanceSearch {
     private String userUUID;
     private Double latitude;
     private Double longitude;
-    private String loggedUserUUID;
 }

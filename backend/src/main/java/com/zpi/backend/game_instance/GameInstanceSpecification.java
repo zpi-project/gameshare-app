@@ -55,9 +55,6 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
         if (criteria.getUserUUID() != null) {
             predicates.add(cb.equal(userUUID, criteria.getUserUUID()));
         }
-        if (criteria.getLoggedUserUUID() != null) {
-            predicates.add(cb.notEqual(userUUID, criteria.getLoggedUserUUID()));
-        }
 
         Expression<Double> orderExpression =
                 cb.sqrt(cb.sum(cb.power(cb.diff(latitude, criteria.getLatitude()), 2),
