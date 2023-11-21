@@ -58,20 +58,6 @@ public class GameInstanceController {
     }
 
     @Operation(
-            summary = "Delete a game instance by UUID",
-            description = "Removes a Game Instance identified by its UUID." +
-                    "The User who invokes this endpoint must be the owner of the Game Instance"
-    )
-    @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/{uuid}", method = DELETE)
-    public ResponseEntity deleteGameInstance(@PathVariable String uuid, Authentication authentication)
-            throws GameInstanceDoesNotExistException, UserDoesNotExistException, GameInstanceImageDoesNotExistException {
-        gameInstanceService.deleteGameInstance(uuid, authentication);
-        return ResponseEntity.status(HttpStatus.OK)
-                .build();
-    }
-
-    @Operation(
             summary = "Activate a game instance by UUID",
             description = "Changes the activate value of a Game Instance identified by its UUID to True. " +
                     "Only the owner of the Game Instance is permitted to perform this operation."

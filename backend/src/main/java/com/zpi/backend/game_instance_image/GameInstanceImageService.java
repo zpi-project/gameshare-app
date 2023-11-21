@@ -79,13 +79,4 @@ public class GameInstanceImageService {
         gameInstanceImageRepository.delete(gameInstanceImageOptional.get());
     }
 
-    // TODO Delete photos from Google Storage - needed?
-    public void deleteGameInstanceImagesByGameInstance(Authentication authentication, String gameInstanceUUID) throws GameInstanceDoesNotExistException, UserDoesNotExistException {
-        User user = userService.getUser(authentication);
-        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(gameInstanceUUID, user);
-        if (gameInstanceOptional.isEmpty())
-            throw new GameInstanceDoesNotExistException("Game Instance (UUID = "+gameInstanceOptional+") does not exists or the User is not the Owner.");
-        gameInstanceImageRepository.deleteAllByGameInstanceUuid(gameInstanceUUID);
-    }
-
 }

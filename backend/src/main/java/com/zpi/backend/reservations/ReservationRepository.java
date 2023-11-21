@@ -1,5 +1,6 @@
 package com.zpi.backend.reservations;
 
+import com.zpi.backend.game_instance.GameInstance;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,10 +48,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> getReservationsStartingInTwoDays();
 
     @Query(
-            value = "SELECT * FROM reservations r " +
-                    "join reservation_status rs on r.status_id = rs.id " +
-                    "WHERE date(start_date) = CURRENT_DATE and rs.status = 'ACCEPTED_BY_OWNER'",
-            nativeQuery = true
+            value = "from Reservation WHERE date(startDate) = CURRENT_DATE and status.status = 'ACCEPTED_BY_OWNER'"
     )
     List<Reservation> getReservationsStartingToday();
 
@@ -64,4 +63,15 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query(value = "from Reservation where date(startDate) = CURRENT_DATE and status.status = 'PENDING'")
     List<Reservation> getExpiringReservations();
+
+    @Query(value = "from Reservation where (" +
+            "(date(startDate) <= :acceptedStartDate and :acceptedStartDate <= date(endDate)) or " +
+            "(date(startDate) <= :acceptedEndDate and :acceptedEndDate <= date(endDate)) or " +
+            "(:acceptedStartDate <= date(startDate) and date(endDate) <= :acceptedEndDate)) " +
+            "and status.status = 'PENDING'" +
+            "and gameInstance = :gameInstance")
+    List<Reservation> getReservationToReject(@Param("gameInstance") GameInstance gameInstance,
+                                             @Param("acceptedStartDate") Date acceptedStartDate,
+                                             @Param("acceptedEndDate") Date acceptedEndDate);
+
 }

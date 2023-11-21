@@ -36,7 +36,6 @@ public class GameInstance {
     private String description;
 
     private boolean isActive;
-    // TODO What about status
 
     @OneToMany(mappedBy = "gameInstance")
     private List<GameInstanceImage> images;
