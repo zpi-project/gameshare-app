@@ -11,6 +11,7 @@ import java.util.Date;
 public class ReservationDTO {
     private String reservationId;
     private UserDTO renter;
+    private UserDTO owner;
     private Date startDate;
     private Date endDate;
     private String status;
@@ -29,6 +30,7 @@ public class ReservationDTO {
         this.renterComment = reservation.getRenterComment();
         this.timestamp = reservation.getTimestamp();
         this.duration = reservation.getDuration();
+        this.owner = new UserDTO(reservation.getGameInstance().getOwner());
     }
 
 }
