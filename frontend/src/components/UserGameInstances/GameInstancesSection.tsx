@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import { useQuery } from "@tanstack/react-query";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Search } from "lucide-react";
@@ -7,22 +8,20 @@ import { NewGameInstance } from "@/types/GameInstance";
 import { User } from "@/types/User";
 import { getName } from "@/utils/user";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/components/ui/use-toast";
+import { Button } from "../ui/button";
 import GameInstance from "./GameInstance";
 import GameInstanceForm from "./GameInstanceAddForm";
-import { Button } from "./ui/button";
-import { useToast } from "./ui/use-toast";
 
 interface Props {
   owner?: User;
-  showButtons?: boolean;
   isMyPage?: boolean;
 }
 
-const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
+const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -77,7 +76,7 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
                 />
                 <Search className="absolute right-4 top-2" />
               </div>
-              {showButtons && (
+              {isMyPage && (
                 <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                   <DialogTrigger asChild>
                     <Button className="w-56">{t("addGameInstance")}</Button>
@@ -109,11 +108,7 @@ const GameInstancesSection: FC<Props> = ({ owner, showButtons, isMyPage }) => {
                         }
                       })
                       .map((gameInstance, id) => (
-                        <GameInstance
-                          gameInstance={gameInstance}
-                          key={id}
-                          showButtons={showButtons}
-                        />
+                        <GameInstance gameInstance={gameInstance} key={id} showButtons={isMyPage} />
                       ))
                   ) : (
                     <h4 className="mt-4 text-center text-xl">

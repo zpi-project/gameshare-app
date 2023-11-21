@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useRecoilValue } from "recoil";
+import { tokenState } from "@/state/token";
 import { URLS } from "@/constants/urls";
 import { ReservationQueryParams } from "@/types/Reservation";
 import { ReservationsApi } from "@/api/ReservationsApi";
@@ -22,9 +24,10 @@ const ReservationsHistory: FC = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
+  const token = useRecoilValue(tokenState);
 
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ["reservations", queryParams],
+    queryKey: ["reservations", queryParams, token],
     queryFn: ({ pageParam = 0 }) =>
       ReservationsApi.getAll(pageParam, RESERVATIONS_PAGE_SIZE, queryParams),
     getNextPageParam: (_, pages) => {

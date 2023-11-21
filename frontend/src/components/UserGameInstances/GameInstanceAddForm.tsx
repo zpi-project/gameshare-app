@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { t } from "i18next";
 import z from "zod";
 import { Game } from "@/types/Game";
 import { NewGameInstance } from "@/types/GameInstance";
@@ -15,14 +14,11 @@ import {
   FormControl,
   FormMessage,
   Form,
-  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import GameSearchBar from "./GameSearchBar";
-import GameSearchCard from "./GameSearchCard";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
+import { GameSearchBar, GameSearchCard } from "../GameSearch";
 
 interface GameInstanceFormProps {
   onSubmit: (gameInstance: NewGameInstance) => void;

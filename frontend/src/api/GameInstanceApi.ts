@@ -1,3 +1,4 @@
+import { timeframes } from "@cypress/fixtures/reservations";
 import { GameInstance } from "@/types/GameInstance";
 import {
   GameInstanceSearchParams,
@@ -7,6 +8,7 @@ import {
 } from "@/types/GameInstance";
 import { Opinion } from "@/types/Opinion";
 import { Paginated } from "@/types/Paginated";
+import { ReservationTimeframe, Timeframe } from "@/types/Reservation";
 import Api from "./Api";
 
 export class GameInstanceApi {
@@ -67,5 +69,22 @@ export class GameInstanceApi {
       },
     );
     return opinions;
+  }
+
+  static async getReservations(uuid: string, month: number, year: number) {
+    const { data: reservations } = await Api.get<ReservationTimeframe[]>(
+      `/game-instances/${uuid}/reservations`,
+      { params: { year, month } },
+    );
+    return reservations;
+  }
+
+  static async getNonAvailability(uuid: string, month: number, year: number) {
+    // const { data: timeframes } = await Api.get<Timeframe[]>(
+    //   `/game-instances/${uuid}/availability`,
+    //   { params: { year, month } },
+    // );
+
+    return timeframes;
   }
 }

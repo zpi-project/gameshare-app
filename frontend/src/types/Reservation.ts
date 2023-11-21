@@ -16,7 +16,7 @@ export interface Reservation {
   renter: User;
   startDate: string;
   endDate: string;
-  status: ReservationStatus;
+  status: ReservationStatusType;
   gameInstance: GameInstanceDetails;
   renterComment: string;
   timestamp: string;
@@ -26,4 +26,20 @@ export interface Reservation {
 export interface ReservationQueryParams {
   status?: ReservationStatusType;
   asOwner: boolean;
+}
+
+export interface Timeframe {
+  startDate: string;
+  endDate: string;
+}
+
+export interface ReservationTimeframe extends Timeframe {
+  reservationId: string;
+}
+
+export interface NewReservation {
+  startDate: Date;
+  endDate: Date;
+  renterComment?: string;
+  gameInstanceUUID: string;
 }
