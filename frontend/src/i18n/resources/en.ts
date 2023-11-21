@@ -138,7 +138,7 @@ export default {
     "400": "Bad Request",
     "401": "Unauthorized Access",
     "403": "Forbidden",
-    "404": "Page Not Found",
+    "404": "We couldn't find the page you are looking for",
     "500": "Internal Server Error",
     "501": "Not Implemented",
     "503": "Service Unavailable",
