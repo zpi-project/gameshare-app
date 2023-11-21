@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
-import Stars from "@/components/Stars";
+import { Stars } from "@/components/Stars";
 
 interface UserFilterProps {
   user: User;

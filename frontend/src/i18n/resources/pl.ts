@@ -76,12 +76,23 @@ const pl: typeof en = {
   noOpinionsMyPage: "Nie posiadasz jeszcze żadnych opinii",
   noOpinionsUserPage: "Ten użytkownik nie posiada jeszcze żadnych opinii",
   errorFetchingOpinions: "Wystąpił błąd podczas pobierania opinii",
-  deactivated: "NIEAKTYWNA",
+  deactivated: "nieaktywna",
   noGameInstances: "Nie znaleziono żadnych gier",
   errorFetchingUsersOnMap: "Wystąpił błąd podczas pobierania użytkowników.",
 
   noGameUsers: "Nikt jeszcze nie ma tej gry",
   errorFetchingGameInstances: "Nie udało się pobrać egzemplarzy tej gry",
+  tryAgain: "Nie udało się dodać gry. Proszę spróbuj ponownie",
+  gameInstanceAdded: "Egzemplarz gry został dodany.",
+  gameInstanceDescriptionMin: "Opis musi mieć przynajmniej 2 znaki.",
+  gameInstanceDescriptionMax: "Opis musi mieć maksymalnie 500 znaków",
+  gameInstancePriceValue: "Cena musi być przynajmniej 0",
+  yourGameDetails: "INFORMACJE O TWOJEJ GRZE",
+  provideGamePrice: "Podaj cenę swojego egzemplarza gry",
+  typeHere: "Wpisz tutaj...",
+  addGameDesc: "Dodaj opis swojej gry",
+  chooseGameTitle: "Wybierz tytuł gry",
+  uploadGamePhotos: "DODAJ ZDJĘCIA SWOJEJ GRY",
   noOpinionsGameInstance: "Ten egzemplarz nie ma jeszcze żadnej opinii",
 
   typeToSearch: "Wyszukaj grę...",
@@ -107,6 +118,7 @@ const pl: typeof en = {
   endDate: "Do:",
   days: "Dni:",
   dateFormat: "{{date, d MMM. yyyy}}",
+  monthYearFormat: "{{date, MMM. yyyy}}",
 
   reservationTypes: {
     owner: "Jako właściciel",
@@ -137,6 +149,50 @@ const pl: typeof en = {
       EXPIRED: "Po terminie",
     },
   },
+
+  weekdays: {
+    0: "pon",
+    1: "wt",
+    2: "śr",
+    3: "czw",
+    4: "pt",
+    5: "so",
+    6: "nie",
+  },
+
+  reservationsCalendar: "Kalendarz rezerwacji",
+  availabilityCalendar: "Kalendarz dostępności",
+  reservationForm: "Formularz rezerwacji",
+  deactivate: "Dezaktywuj",
+  bookItNow: "Rezerwuj",
+  errorFetchingReservationsCalendar: "Nie udało się pobrać rezerwacji na ten miesiąc.",
+  errorStatus: {
+    "400": "Nieprawidłowe zapytanie",
+    "401": "Nieautoryzowany dostęp",
+    "403": "Zabroniony",
+    "404": "Szukana strona nie istnieje",
+    "500": "Wewnętrzny błąd serwera",
+    "501": "Nie zaimplementowano",
+    "503": "Usługa niedostępna",
+    "504": "Przekroczono czas oczekiwania",
+  },
+
+  unexpectedError: "Wystąpił niespodziewany błąd.",
+  ooops: "Ooops!",
+  backToHome: "Wróć na stronę główną",
+  error: "Błąd",
+  leaveMessage: "Zostaw wiadomość dla właściciela gry...",
+  formStartDate: "Data początkowa",
+  formEndDate: "Data końcowa",
+  pickDate: "Wybierz datę",
+  startDateNotPast: "Data początkowa nie może być przeszła.",
+  endDateAtLeastStartDate: "Data do musi być późniejsza niż data od.",
+  createReservationSuccess: "Gra została pomyślnie zarezerwowana!",
+  createReservationSuccessDescription:
+    "Wysłaliśmy maila do właściciela gry o twojej rezerwacji. Powiadomimy Cię o dalszym statusie rezerwacji.",
+  createReservationError: "There was an error booking this game.",
+  seeReservation: "Zobacz szczegóły rezerwacji",
+  submitReservation: "Zarezerwuj",
 };
 
 export default pl;

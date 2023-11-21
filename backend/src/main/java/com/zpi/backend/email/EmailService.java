@@ -23,6 +23,10 @@ import org.thymeleaf.context.Context;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Base64;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 @Component
 public class EmailService {
@@ -123,8 +127,6 @@ public class EmailService {
             admin.ifPresent(user -> sendEmailWithHtmlTemplate(user, subject, templateName, context, emailType));
         }
     }
-
-
 
     private void sendHTMLEmail(String to, String subject, String htmlContent) throws MessagingException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
@@ -345,5 +347,4 @@ public class EmailService {
         return setContextForEmailTemplate(title_pl, header_pl, title_en, header_en,
                 message1_en, message1_pl, message2_en, message2_pl);
     }
-
 }
