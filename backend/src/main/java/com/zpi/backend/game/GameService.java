@@ -83,10 +83,13 @@ public class GameService {
     }
 
     // TODO Getting popular games (considering reservations)
-    public ResultsDTO<Game> getPopularGames(int page, int size){
+    public ResultsDTO<GameDTO> getPopularGames(int page, int size){
         Pageable pageable = PageRequest.of(page, size);
-        Page<Game> gamePage = gameRepository.getAllAccepted(pageable);
-        return new ResultsDTO<>(gamePage.stream().toList(), new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+        Page<Game> gamePage = gameRepository.getPopularAcceptedGames(pageable);
+        return new ResultsDTO<>(gamePage
+                .map(this::convertToDTO)
+                .stream().toList(),
+                new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
     }
 
     public void rejectGame(Authentication authentication, long id) throws GameAlreadyRejectedException, GameDoesNotExistException, IllegalAccessException, UserDoesNotExistException {

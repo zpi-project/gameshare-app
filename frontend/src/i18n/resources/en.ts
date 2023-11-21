@@ -159,4 +159,18 @@ export default {
   reservationsCalendar: "Reservations calendar",
   deactivate: "Deactivate",
   errorFetchingReservationsCalendar: "We couldn't fetch reservations for this month.",
+  errorStatus: {
+    "400": "Bad Request",
+    "401": "Unauthorized Access",
+    "403": "Forbidden",
+    "404": "We couldn't find the page you are looking for",
+    "500": "Internal Server Error",
+    "501": "Not Implemented",
+    "503": "Service Unavailable",
+    "504": "Gateway Timeout",
+  },
+  unexpectedError: "There was an unexpected error.",
+  ooops: "Ooops!",
+  backToHome: "Back to home",
+  error: "Error",
 };

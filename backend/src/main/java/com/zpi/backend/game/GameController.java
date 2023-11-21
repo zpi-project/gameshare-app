@@ -104,7 +104,7 @@ public class GameController {
     @GetMapping(value = "/popular")
     public ResponseEntity<ResultsDTO<GameDTO>> getPopularGames(@RequestParam int page, @RequestParam int size) {
         System.out.println("... called getPopularGames");
-        ResultsDTO<GameDTO> games = gameService.getGames(page, size, Optional.empty(), Optional.empty());
+        ResultsDTO<GameDTO> games = gameService.getPopularGames(page, size);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }
