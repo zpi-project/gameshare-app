@@ -82,6 +82,17 @@ const pl: typeof en = {
 
   noGameUsers: "Nikt jeszcze nie ma tej gry",
   errorFetchingGameInstances: "Nie udało się pobrać egzemplarzy tej gry",
+  tryAgain: "Nie udało się dodać gry. Proszę spróbuj ponownie",
+  gameInstanceAdded: "Egzemplarz gry został dodany.",
+  gameInstanceDescriptionMin: "Opis musi mieć przynajmniej 2 znaki.",
+  gameInstanceDescriptionMax: "Opis musi mieć maksymalnie 500 znaków",
+  gameInstancePriceValue: "Cena musi być przynajmniej 0",
+  yourGameDetails: "INFORMACJE O TWOJEJ GRZE",
+  provideGamePrice: "Podaj cenę swojego egzemplarza gry",
+  typeHere: "Wpisz tutaj...",
+  addGameDesc: "Dodaj opis swojej gry",
+  chooseGameTitle: "Wybierz tytuł gry",
+  uploadGamePhotos: "DODAJ ZDJĘCIA SWOJEJ GRY",
   noOpinionsGameInstance: "Ten egzemplarz nie ma jeszcze żadnej opinii",
 
   typeToSearch: "Wyszukaj grę...",
