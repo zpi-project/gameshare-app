@@ -1,5 +1,5 @@
 import { Paginated } from "@/types/Paginated";
-import { Reservation, ReservationQueryParams } from "@/types/Reservation";
+import { NewReservation, Reservation, ReservationQueryParams } from "@/types/Reservation";
 import Api from "./Api";
 
 export class ReservationsApi {
@@ -9,5 +9,10 @@ export class ReservationsApi {
     });
     console.log(reservations);
     return reservations;
+  }
+
+  static async create(newReservation: NewReservation) {
+    const { data: reservation } = await Api.post<Reservation>("/reservations", newReservation);
+    return reservation;
   }
 }
