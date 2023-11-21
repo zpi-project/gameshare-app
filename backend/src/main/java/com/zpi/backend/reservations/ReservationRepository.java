@@ -61,7 +61,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Modifying
     @Transactional
-    @Query(value = "update reservations set status_id = 8 where date(start_date) = CURRENT_DATE " +
+    @Query(value = "update reservations set status_id = " +
+            "(select id from reservation_status where status = 'EXPIRED') " +
+            "where date(start_date) >= CURRENT_DATE " +
             "and status_id = (select id from reservation_status where status = 'PENDING')",
             nativeQuery = true)
     void setExpiredStatus();
