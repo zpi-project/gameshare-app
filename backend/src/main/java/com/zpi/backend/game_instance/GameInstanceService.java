@@ -65,17 +65,6 @@ public class GameInstanceService {
         return new GameInstanceDTO(gameInstance);
     }
 
-    //TODO Implementation of checking reservation, what about status?
-    public void deleteGameInstance(String uuid, Authentication authentication) throws GameInstanceDoesNotExistException, UserDoesNotExistException {
-        User user = userService.getUser(authentication);
-        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(uuid, user);
-        //TODO Check if there is no reservation with status in progress or smth
-        if (gameInstanceOptional.isEmpty())
-            throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");
-        gameInstanceImageService.deleteGameInstanceImagesByGameInstance(authentication, gameInstanceOptional.get().getUuid());
-        gameInstanceRepository.delete(gameInstanceOptional.get());
-    }
-
     public void activate(String gameInstanceUUID, Authentication authentication) throws GameInstanceDoesNotExistException, GameInstanceStatusException, UserDoesNotExistException {
         User user = userService.getUser(authentication);
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(gameInstanceUUID, user);
@@ -88,6 +77,7 @@ public class GameInstanceService {
         gameInstanceRepository.save(gameInstance);
     }
 
+    // TODO Implementation of checking reservation, what about status?
     public void deactivate(String gameInstanceUUID, Authentication authentication) throws GameInstanceDoesNotExistException, GameInstanceStatusException, UserDoesNotExistException {
         User user = userService.getUser(authentication);
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(gameInstanceUUID, user);

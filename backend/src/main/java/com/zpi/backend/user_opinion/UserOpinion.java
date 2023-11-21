@@ -46,7 +46,6 @@ public class UserOpinion {
         this.stars = newUserOpinionDTO.getStars();
         this.description = newUserOpinionDTO.getDescription();
         this.timestamp = new Date(System.currentTimeMillis());
-        //this.isRatingUserOwner =; TODO add later when we have game instances
     }
 
     public UserOpinion update(ModifiedUserOpinionDTO modifiedUserOpinionDTO) {
