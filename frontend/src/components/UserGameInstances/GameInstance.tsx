@@ -5,28 +5,26 @@ import { Pencil } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { URLS } from "@/constants/urls";
 import { GameInstance as GameInstanceType } from "@/types/GameInstance";
-import AgeBadge from "./Badge/AgeBadge";
-import PlayersBadge from "./Badge/PlayersBadge";
-import PriceBadge from "./Badge/PriceBadge";
-import TimeBadge from "./Badge/TimeBadge";
-import { Button } from "./ui/button";
+import { PlayersBadge, PriceBadge, TimeBadge } from "@/components/Badge";
+import AgeBadge from "@/components/Badge/AgeBadge";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import GameReservations from "./GameReservations";
 
 interface Props {
   gameInstance: GameInstanceType;
   showButtons?: boolean;
 }
 
-const GameInstance: FC<Props> = ({
-  gameInstance: {
+const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
+  const { t } = useTranslation();
+  const {
     uuid,
     game: { name, maxPlayers, minPlayers, image, playingTime, age },
     description,
     pricePerDay,
     active,
-  },
-  showButtons,
-}) => {
-  const { t } = useTranslation();
+  } = gameInstance;
 
   return (
     <div className="flex w-full flex-row">
@@ -56,14 +54,18 @@ const GameInstance: FC<Props> = ({
         </section>
       </Link>
       {showButtons && (
-        // tak jak w designie, że buttony do dołu i do góry równo
         <div className="ml-4 flex flex-col justify-between gap-4">
           <Button className="h-16 w-14 flex-grow bg-card">
             <Pencil />
           </Button>
-          <Button className="h-16 w-14 flex-grow bg-card">
-            <CalendarDays />
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="h-16 w-14 flex-grow bg-card">
+                <CalendarDays />
+              </Button>
+            </DialogTrigger>
+            <GameReservations gameInstance={gameInstance} />
+          </Dialog>
         </div>
       )}
     </div>

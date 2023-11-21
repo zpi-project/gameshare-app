@@ -6,12 +6,12 @@ import { Game } from "@/types/Game";
 import { cn } from "@/utils/tailwind";
 import { TooltipTrigger, Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
-interface GameImgTitleCardProps {
+interface PopularGameProps {
   game: Game;
   className?: string;
 }
 
-const GameImgTitleCard: FC<GameImgTitleCardProps> = ({ game: { name, image, id }, className }) => {
+const PopularGame: FC<PopularGameProps> = ({ game: { name, image, id }, className }) => {
   return (
     <TooltipProvider>
       <Tooltip>
@@ -41,4 +41,4 @@ const GameImgTitleCard: FC<GameImgTitleCardProps> = ({ game: { name, image, id }
   );
 };
 
-export default GameImgTitleCard;
+export default PopularGame;

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
-import Opinion from "@/components/Opinion";
+import { Opinion } from "@/components/Opinions";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 

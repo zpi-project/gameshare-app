@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
-
+@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class ReservationController {
 
     private ReservationService reservationService;

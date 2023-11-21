@@ -4,7 +4,7 @@ import { AgeBadge, PlayersBadge, TimeBadge } from "@/components/Badge";
 
 interface GameSearchCardProps {
   game: Game;
-  onClick: (game: Game) => void;
+  onClick?: (game: Game) => void;
 }
 
 const GameSearchCard: FC<GameSearchCardProps> = ({ game, onClick }) => {
@@ -13,7 +13,7 @@ const GameSearchCard: FC<GameSearchCardProps> = ({ game, onClick }) => {
   return (
     <div
       className="relative flex h-[100px] w-full cursor-pointer flex-row gap-2 rounded-lg bg-card p-2 shadow duration-200 hover:bg-accent lg:h-max"
-      onClick={() => onClick(game)}
+      onClick={() => onClick && onClick(game)}
     >
       <div className="h-16 w-16 overflow-hidden rounded-lg">
         <img src={image} alt={name} className="h-full w-full object-cover object-top" />

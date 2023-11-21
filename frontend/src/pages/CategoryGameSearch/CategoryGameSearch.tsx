@@ -9,7 +9,7 @@ import { stringToHexColor } from "@/utils/stringToColor";
 import { CategoryApi } from "@/api/CategoryApi";
 import { GameApi } from "@/api/GameApi";
 import GameDetailsCard from "@/components/GameDetailsCard";
-import GameSearchBar from "@/components/GameSearchBar";
+import { GameSearchBar } from "@/components/GameSearch";
 import { useTheme } from "@/components/ThemeProvider";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";

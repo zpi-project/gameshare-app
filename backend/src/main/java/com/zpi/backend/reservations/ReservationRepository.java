@@ -48,7 +48,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     Page<Reservation>getReservationsByRenter(Pageable pageable, String uuid);
 
     @Query(
-            value = "SELECT * FROM reservations WHERE date(start_date) = CURRENT_DATE + INTERVAL '2 days' and status_id = 1", nativeQuery = true
+            value = "SELECT * FROM reservations r " +
+                    "join reservation_status rs on r.status_id = rs.id " +
+                    "WHERE date(start_date) = CURRENT_DATE + INTERVAL '2 days' and rs.status = 'ACCEPTED_BY_OWNER'", nativeQuery = true
     )
     List<Reservation> getReservationsStartingInTwoDays();
     @Query(
@@ -58,7 +60,11 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Modifying
     @Transactional
-    @Query(value = "update reservations set status_id = 8 where date(start_date) = CURRENT_DATE and status_id = 3", nativeQuery = true)
+    @Query(value = "update reservations set status_id = " +
+            "(select id from reservation_status where status = 'EXPIRED') " +
+            "where date(start_date) >= CURRENT_DATE " +
+            "and status_id = (select id from reservation_status where status = 'PENDING')",
+            nativeQuery = true)
     void setExpiredStatus();
 
     @Query(value = "from Reservation where date(startDate) = CURRENT_DATE and status.status = 'PENDING'")
@@ -73,4 +79,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> getReservationToRejecting(@Param("gameInstance") GameInstance gameInstance,
                                                 @Param("acceptedStartDate") Date acceptedStartDate,
                                                 @Param("acceptedEndDate") Date acceptedEndDate);
+
 }
