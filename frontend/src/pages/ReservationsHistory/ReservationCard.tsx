@@ -33,7 +33,7 @@ const ReservationCard: FC<ReservationCardProps> = ({
   const { t } = useTranslation();
   const { avatarLink: ownerAvatar, avgRating: ownerRating } = owner;
   const { avatarLink: renterAvatar, avgRating: renterRating } = renter;
-  console.log(renter, owner);
+
   return (
     <Link
       className="flex flex-row gap-4 rounded-lg bg-card p-4 duration-200 hover:bg-accent"
