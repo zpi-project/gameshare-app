@@ -11,6 +11,12 @@ export interface GameInstance {
   active: boolean;
 }
 
+export interface NewGameInstance {
+  description: string;
+  pricePerDay: number;
+  gameId: number;
+}
+
 export interface GameInstanceDetails extends GameInstance {
   images: Image[];
   owner: User;

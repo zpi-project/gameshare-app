@@ -1,7 +1,9 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Search } from "lucide-react";
+import { NewGameInstance } from "@/types/GameInstance";
 import { User } from "@/types/User";
 import { getName } from "@/utils/user";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
@@ -10,6 +12,9 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "../ui/button";
 import GameInstance from "./GameInstance";
+import { useToast } from "@/components/ui/use-toast";
+import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
+import GameInstanceForm from "./GameInstanceAddForm";
 
 interface Props {
   owner?: User;
@@ -19,6 +24,8 @@ interface Props {
 const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const { toast } = useToast();
   const {
     data: gameInstances,
     isLoading,
@@ -30,6 +37,26 @@ const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
         ? GameInstanceApi.getAll(0, 100)
         : GameInstanceApi.getAllByUUID(owner?.uuid ?? "", 0, 100),
     enabled: owner !== undefined,
+  });
+
+  const queryClient = useQueryClient();
+
+  const { mutate: addGameInstance } = useMutation({
+    mutationFn: (gameInstance: NewGameInstance) => GameInstanceApi.create(gameInstance),
+    onError: () => {
+      toast({
+        title: "error adding game",
+        description: t("tryAgain"),
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      toast({
+        description: t("gameInstanceAdded"),
+      });
+      setDialogOpen(false);
+      queryClient.invalidateQueries(["gameInstances", { uuid: owner?.uuid }]);
+    },
   });
 
   return (
@@ -49,7 +76,14 @@ const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
                 />
                 <Search className="absolute right-4 top-2" />
               </div>
-              {isMyPage && <Button className="w-56">{t("addGameInstance")}</Button>}
+              {isMyPage && (
+                <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="w-56">{t("addGameInstance")}</Button>
+                  </DialogTrigger>
+                  <GameInstanceForm onSubmit={(game: NewGameInstance) => addGameInstance(game)} />
+                </Dialog>
+              )}
             </div>
             <ScrollArea className="h-[calc(100%-100px)] w-full flex-grow">
               {isLoading ? (
