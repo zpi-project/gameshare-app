@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Home, CalendarDays, Search, Dices } from "lucide-react";
+import { Home, CalendarDays, Search } from "lucide-react";
 import { useRecoilValue } from "recoil";
 import { roleState } from "@/state/role";
 import { URLS } from "@/constants/urls";
@@ -21,10 +21,6 @@ const USER_LINKS = [
   {
     path: URLS.MY_RESERVATIONS,
     icon: <CalendarDays size={40} strokeWidth={1} />,
-  },
-  {
-    path: URLS.MY_GAMES_INSTANCES,
-    icon: <Dices size={40} strokeWidth={1} />,
   },
 ];
 

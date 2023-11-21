@@ -11,7 +11,7 @@ export default {
 
   language: "Language",
   pl: "Polish",
-  en: "English",
+  enUS: "English",
 
   addOpinion: "Add opinion",
   seeMore: "See more",
@@ -66,6 +66,9 @@ export default {
   gameInstances: "Copies of this game",
   noGamesMyPage: "You don't have any games yet",
   noGamesUserPage: "This user doesn't have any games yet",
+  seeProfile: "See profile",
+  seeAvailability: "See availability",
+  seeGamePage: "See game page",
   noOpinionsMyPage: "You don't have any opinions yet",
   noOpinionsUserPage: "This user doesn't have any opinions yet",
   errorFetchingOpinions: "There was an error when fetching opinions",
@@ -75,6 +78,7 @@ export default {
   errorFetchingUsersOnMap: "There was an error fetching users on map.",
   noGameUsers: "No one has this game yet",
   errorFetchingGameInstances: "We couldn't load copies of this game",
+  noOpinionsGameInstance: "This game instance doesn't have any opinions yet",
 
   typeToSearch: "Type to search...",
   category: "Category",
@@ -98,4 +102,46 @@ export default {
   any: "Any",
   any_male: "Any",
   any_female: "Any",
+
+  myReservations: "My reservations",
+  reservationStatus: "Reservation status",
+  reservationType: "Reservation type",
+  errorFetchingReservations: "We couldn't load your reservations.",
+  noReservations: "You don't have any reservations yet.",
+  noReservationsStatus: "You don't have any reservations with this status.",
+  reservationNumber: "Reservation number:",
+  startDate: "Start date:",
+  endDate: "End date:",
+  days: "Days:",
+  dateFormat: "{{date, MMM. d, yyyy}}",
+
+  reservationTypes: {
+    owner: "As game owner",
+    renter: "As game renter",
+  },
+
+  reservationStatuses: {
+    owner: {
+      ALL: "All",
+      PENDING: "Pending approval",
+      ACCEPTED_BY_OWNER: "Accepted by me",
+      REJECTED_BY_OWNER: "Rejected by me",
+      CANCELED_BY_OWNER: "Canceled by me",
+      CANCELED_BY_RENTER: "Canceled by renter",
+      RENTED: "Rented",
+      FINISHED: "Finished",
+      EXPIRED: "Expired",
+    },
+    renter: {
+      ALL: "All",
+      PENDING: "Pending approval",
+      ACCEPTED_BY_OWNER: "Accepted by owner",
+      REJECTED_BY_OWNER: "Rejected by owner",
+      CANCELED_BY_OWNER: "Canceled by owner",
+      CANCELED_BY_RENTER: "Canceled by me",
+      RENTED: "Rented",
+      FINISHED: "Finished",
+      EXPIRED: "Expired",
+    },
+  },
 };

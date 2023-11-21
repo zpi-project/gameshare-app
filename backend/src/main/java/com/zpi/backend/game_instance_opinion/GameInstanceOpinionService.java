@@ -9,6 +9,8 @@ import com.zpi.backend.game_instance_opinion.dto.GameInstanceOpinionDTO;
 import com.zpi.backend.game_instance_opinion.dto.NewGameInstanceOpinionDTO;
 import com.zpi.backend.game_instance_opinion.dto.UpdatedGameInstanceOpinionDTO;
 import com.zpi.backend.game_instance_opinion.exception.GameInstanceOpinionDoesNotExistException;
+import com.zpi.backend.reservations.Reservation;
+import com.zpi.backend.reservations.ReservationRepository;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
@@ -31,6 +33,7 @@ public class GameInstanceOpinionService {
     private GameInstanceOpinionRepository gameInstanceOpinionRepository;
     private UserService userService;
     private GameInstanceService gameInstanceService;
+    private ReservationRepository reservationRepository;
 
     public GameInstanceOpinionDTO addOpinion(Authentication authentication, NewGameInstanceOpinionDTO newGameInstanceOpinionDTO)
             throws BadRequestException, UserDoesNotExistException, GameInstanceDoesNotExistException {
@@ -38,12 +41,19 @@ public class GameInstanceOpinionService {
         User user = userService.getUser(authentication);
         boolean isGuest = !authentication.isAuthenticated();
         GameInstance gameInstance = gameInstanceService.getGameInstance(newGameInstanceOpinionDTO.getGameInstanceUuid());
+        Reservation reservation = reservationRepository.getReservationByReservationId(newGameInstanceOpinionDTO.getReservationId()).orElseThrow(()->new BadRequestException("Reservation does not exist"));
+        if (!checkIfCanAddOpinion(reservation))
+            throw new BadRequestException("User already rated this reservation");
+
         GameInstanceOpinion gameInstanceOpinion = new GameInstanceOpinion(user, gameInstance, newGameInstanceOpinionDTO);
         gameInstanceOpinionRepository.save(gameInstanceOpinion);
         gameInstanceService.updateAvgRating(gameInstance.getId());
         return new GameInstanceOpinionDTO(gameInstanceOpinion, isGuest);
     }
 
+    public boolean checkIfCanAddOpinion(Reservation reservation){
+        return gameInstanceOpinionRepository.getGameInstanceOpinionByReservation(reservation) == null;
+    }
     public GameInstanceOpinionDTO updateOpinion(Authentication authentication,long id, UpdatedGameInstanceOpinionDTO updatedGameInstanceOpinionDTO)
             throws UserDoesNotExistException, EditSomeoneElseOpinionException, GameInstanceOpinionDoesNotExistException, BadRequestException {
         updatedGameInstanceOpinionDTO.validate();
@@ -86,5 +96,9 @@ public class GameInstanceOpinionService {
 
     public boolean checkIfNotRatingUsersOpinion(User user, GameInstanceOpinion gameInstanceOpinion){
         return !gameInstanceOpinion.getRatingUser().equals(user);
+    }
+
+    public List<GameInstanceOpinion> getOpinionsByGameInstance(GameInstance gameInstance) {
+            return gameInstanceOpinionRepository.getGameInstanceOpinionByGameInstance(gameInstance);
     }
 }

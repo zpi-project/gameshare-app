@@ -32,13 +32,16 @@ const Opinion: FC<Props> = ({ opinion }) => {
               {opinion.description.length > 200 && (
                 <>
                   <span>... </span>
+                  <button
+                    className="mx-2 inline text-xs italic text-secondary"
+                    onClick={handleClick}
+                  >
+                    {showAll ? t("seeLess") : t("seeMore")}
+                  </button>
                 </>
               )}
             </>
           )}
-          <button className="mx-2 inline text-xs italic text-secondary" onClick={handleClick}>
-            {showAll ? t("seeLess") : t("seeMore")}
-          </button>
         </div>
       </div>
     </div>
