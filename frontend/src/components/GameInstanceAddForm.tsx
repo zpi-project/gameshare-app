@@ -54,6 +54,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
   const handleFormSubmit = (data: NewGameInstance) => {
     onSubmit(data);
     form.reset();
+    setGame(null);
   };
 
   const [game, setGame] = useState<Game | null>(null);
