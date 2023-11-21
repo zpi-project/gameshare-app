@@ -16,7 +16,7 @@ interface ReservationCardProps {
 const ReservationCard: FC<ReservationCardProps> = ({
   reservation: {
     reservationId,
-    status: { status },
+    status,
     startDate,
     endDate,
     duration,
@@ -33,7 +33,7 @@ const ReservationCard: FC<ReservationCardProps> = ({
   const { t } = useTranslation();
   const { avatarLink: ownerAvatar, avgRating: ownerRating } = owner;
   const { avatarLink: renterAvatar, avgRating: renterRating } = renter;
-
+  console.log(renter, owner);
   return (
     <Link
       className="flex flex-row gap-4 rounded-lg bg-card p-4 duration-200 hover:bg-accent"
@@ -66,7 +66,11 @@ const ReservationCard: FC<ReservationCardProps> = ({
             </div>
             <div className="hidden h-full flex-col gap-1 2xl:flex ">
               <h4 className="text-xl">{getFullname(asOwner ? renter : owner)}</h4>
-              {<Stars count={Math.round(asOwner ? renterRating : ownerRating)} size={24} />}
+              {asOwner ? (
+                renterRating > 0 && <Stars count={Math.round(renterRating)} size={24} />
+              ) : (
+                <Stars count={ownerRating} size={24} />
+              )}
             </div>
           </div>
           <div className="w-full lg:w-max lg:min-w-[300px]">

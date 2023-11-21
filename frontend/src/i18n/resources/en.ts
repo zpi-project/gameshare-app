@@ -160,4 +160,3 @@ export default {
   deactivate: "Deactivate",
   errorFetchingReservationsCalendar: "We couldn't fetch reservations for this month.",
 };
-  

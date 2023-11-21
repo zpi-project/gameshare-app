@@ -16,7 +16,7 @@ export interface Reservation {
   renter: User;
   startDate: string;
   endDate: string;
-  status: ReservationStatus;
+  status: ReservationStatusType;
   gameInstance: GameInstanceDetails;
   renterComment: string;
   timestamp: string;

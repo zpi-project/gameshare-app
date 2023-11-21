@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import { useQuery } from "@tanstack/react-query";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Search } from "lucide-react";
@@ -10,10 +11,9 @@ import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/components/ui/use-toast";
 import { Button } from "../ui/button";
 import GameInstance from "./GameInstance";
-import { useToast } from "@/components/ui/use-toast";
-import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import GameInstanceForm from "./GameInstanceAddForm";
 
 interface Props {
