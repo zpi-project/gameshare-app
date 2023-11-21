@@ -2,6 +2,10 @@ package com.zpi.backend.reservations;
 
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
+import com.zpi.backend.email.EmailService;
+import com.zpi.backend.email_type.EmailType;
+import com.zpi.backend.email_type.EmailTypeService;
+import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
@@ -20,13 +24,18 @@ import com.zpi.backend.user_opinion.UserOpinionRepository;
 import com.zpi.backend.user_opinion.dto.UserOpinionDTO;
 import com.zpi.backend.utils.DateUtils;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -34,15 +43,17 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class ReservationService {
-    UserService userService;
-    GameInstanceService gameInstanceService;
-    ReservationStatusRepository reservationStatusRepository;
-    ReservationRepository reservationRepository;
-    GameInstanceOpinionService gameinstanceOpinionService;
-    UserOpinionRepository userOpinionRepository;
+    private final UserService userService;
+    private final GameInstanceService gameInstanceService;
+    private final ReservationStatusRepository reservationStatusRepository;
+    private final ReservationRepository reservationRepository;
+    private final GameInstanceOpinionService gameinstanceOpinionService;
+    private final UserOpinionRepository userOpinionRepository;
+    private final EmailService emailService;
+    private final EmailTypeService emailTypeService;
+    private static final Logger logger = LoggerFactory.getLogger(ReservationService.class);
 
-
-    public ReservationDTO addReservation(Authentication authentication, NewReservationDTO newReservationDTO) throws UserDoesNotExistException, BadRequestException, GameInstanceDoesNotExistException {
+    public ReservationDTO addReservation(Authentication authentication, NewReservationDTO newReservationDTO) throws UserDoesNotExistException, BadRequestException, GameInstanceDoesNotExistException, IOException, EmailTypeDoesNotExists {
         User renter = userService.getUser(authentication);
         newReservationDTO.validate();
         GameInstance gameInstance = gameInstanceService.getGameInstance(newReservationDTO.getGameInstanceUUID());
@@ -53,14 +64,20 @@ public class ReservationService {
         reservation=  reservationRepository.save(reservation);
         reservation = reservationRepository.findById(reservation.getId()).get();
         reservation.setReservationId(DateUtils.getYear(reservation.getStartDate()) + "-" + DateUtils.getMonth(reservation.getStartDate())+'-'+reservation.getId());
-        return new ReservationDTO(reservationRepository.save(reservation));
+        ReservationDTO reservationDTO = new ReservationDTO(reservationRepository.save(reservation));
+//        Sending email
+        Context context = emailService.getPendingEmailContext(reservation.getReservationId(),
+                reservation.getGameInstance().getGame().getName(), reservation.getStartDate(), reservation.getEndDate());
+        emailService.sendEmailWithHtmlTemplate(reservation.getGameInstance().getOwner(), context.getVariable("pl_title").toString(),
+                EmailService.EMAIL_TEMPLATE, context,
+                emailTypeService.findEmailTypeByStatus("RESERVATION_PENDING")
+        );
+        return reservationDTO;
     }
     public void checkIfOwnerIsNotRenter(User renter,GameInstance gameInstance) throws BadRequestException {
         if(renter.getUuid().equals(gameInstance.getOwner().getUuid()))
             throw new BadRequestException("Owner cannot be renter");
     }
-
-
 
     public ResultsDTO<ReservationDTO> getMyReservationsAsOwner(User owner, ReservationStatus status, int page, int size){
         Pageable pageable = PageRequest.of(page, size);
@@ -139,7 +156,7 @@ public class ReservationService {
         return new ResultsDTO<>(reservationDTOPage.stream().toList(), new Pagination(reservationDTOPage.getTotalElements(),reservationDTOPage.getTotalPages()));
     }
 
-    public Reservation changeReservationStatus(Authentication  authentication, String reservationId, String status) throws UserDoesNotExistException, BadRequestException {
+    public Reservation changeReservationStatus(Authentication  authentication, String reservationId, String status) throws UserDoesNotExistException, BadRequestException, IOException, EmailTypeDoesNotExists {
         Reservation reservation = reservationRepository.getReservationByReservationId(reservationId).orElseThrow(()->new BadRequestException("Reservation does not exist"));
         if(!canChangeStatus(authentication,reservation))
             throw new BadRequestException("User is not owner or renter of this reservation");
@@ -147,6 +164,45 @@ public class ReservationService {
         if(possibleStatuses == null || !possibleStatuses.contains(status))
             throw new BadRequestException("Status cannot be changed to "+status +" from "+reservation.getStatus().getStatus());
         reservation.setStatus(reservationStatusRepository.findByStatus(status).orElseThrow(()->new BadRequestException("Status does not exist")));
+        // sending emails
+        Context context;
+        switch (status){
+            case "ACCEPTED_BY_OWNER" ->{
+                context = emailService.getAcceptingEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
+                emailService.sendEmailWithHtmlTemplate(reservation.getRenter(), context.getVariable("pl_title").toString(),
+                        EmailService.EMAIL_TEMPLATE, context,
+                        emailTypeService.findEmailTypeByStatus("RESERVATION_ACCEPTED")
+                );
+            }
+            case "REJECTED_BY_OWNER" ->{
+                context = emailService.getRejectingEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
+                emailService.sendEmailWithHtmlTemplate(reservation.getRenter(), context.getVariable("pl_title").toString(),
+                        EmailService.EMAIL_TEMPLATE, context,
+                        emailTypeService.findEmailTypeByStatus("RESERVATION_REJECTED")
+                );
+            }
+            case "CANCELED_BY_OWNER" ->{
+                context = emailService.getCancelingByOwnerEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
+                emailService.sendEmailWithHtmlTemplate(reservation.getRenter(), context.getVariable("pl_title").toString(),
+                        EmailService.EMAIL_TEMPLATE, context,
+                        emailTypeService.findEmailTypeByStatus("RESERVATION_CANCELED_BY_OWNER")
+                );
+            }
+            case "CANCELED_BY_RENTER" ->{
+                context = emailService.getCancelingByRenterEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
+                emailService.sendEmailWithHtmlTemplate(reservation.getGameInstance().getOwner(), context.getVariable("pl_title").toString(),
+                        EmailService.EMAIL_TEMPLATE, context,
+                        emailTypeService.findEmailTypeByStatus("RESERVATION_CANCELED_BY_RENTER")
+                );
+            }
+            case "FINISHED" ->{
+                context = emailService.getFinishingEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
+                emailService.sendEmailWithHtmlTemplate(reservation.getGameInstance().getOwner(), context.getVariable("pl_title").toString(),
+                        EmailService.EMAIL_TEMPLATE, context,
+                        emailTypeService.findEmailTypeByStatus("RESERVATION_FINISHED")
+                );
+            }
+        }
         return reservationRepository.save(reservation);
     }
 
@@ -242,5 +298,65 @@ public class ReservationService {
             return List.of("FINISHED");
         }
         return null;
+    }
+
+    // Scheduling tasks
+
+    @Scheduled(cron = "0 0 8 ? * *", zone = "Europe/Warsaw")
+    public void sendRemaindersAboutReservation2DaysBefore() throws IOException, EmailTypeDoesNotExists {
+        logger.info("Sending reservation reminders 2 days before.");
+        List<Reservation> reservationsSoon = reservationRepository.getReservationsStartingInTwoDays();
+        for (Reservation r: reservationsSoon){
+            Context context = emailService.getRemindingIn2DaysEmailContext(
+                    r.getReservationId(), r.getGameInstance().getGame().getName()
+            );
+            emailService.sendEmailWithHtmlTemplate(
+                    r.getRenter(),
+                    context.getVariable("pl_title").toString(),
+                    EmailService.EMAIL_TEMPLATE,
+                    context,
+                    emailTypeService.findEmailTypeByStatus("RESERVATION_COMING_SOON")
+            );
+        }
+    }
+
+    @Scheduled(cron = "0 5 8 ? * *", zone = "Europe/Warsaw")
+    public void sendRemaindersAboutReservationOnDay() throws IOException, EmailTypeDoesNotExists {
+        logger.info("Sending reservation reminders on reservation day.");
+        List<Reservation> reservationsToday = reservationRepository.getReservationsStartingToday();
+        for (Reservation r: reservationsToday){
+            Context context = emailService.getRemindingTodayEmailContext(
+                    r.getReservationId(), r.getGameInstance().getGame().getName()
+            );
+            emailService.sendEmailWithHtmlTemplate(
+                    r.getRenter(),
+                    context.getVariable("pl_title").toString(),
+                    EmailService.EMAIL_TEMPLATE,
+                    context,
+                    emailTypeService.findEmailTypeByStatus("RESERVATION_TODAY")
+            );
+        }
+    }
+
+    @Scheduled(cron = "0 10 8 ? * *", zone = "Europe/Warsaw")
+    public void setExpiredStatus() throws IOException, EmailTypeDoesNotExists {
+        logger.info("Setting reservation status to expired.");
+        List<Reservation> expiredReservations = reservationRepository.getExpiringReservations();
+        if (expiredReservations.size() > 0) {
+            reservationRepository.setExpiredStatus();
+//          Sending emails
+            for (Reservation r : expiredReservations) {
+                Context context = emailService.getExpiringEmailContext(
+                        r.getReservationId(), r.getGameInstance().getGame().getName()
+                );
+                emailService.sendEmailWithHtmlTemplate(
+                        r.getRenter(),
+                        context.getVariable("pl_title").toString(),
+                        EmailService.EMAIL_TEMPLATE,
+                        context,
+                        emailTypeService.findEmailTypeByStatus("RESERVATION_EXPIRED")
+                );
+            }
+        }
     }
 }

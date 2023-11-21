@@ -2,6 +2,7 @@ package com.zpi.backend.user;
 
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.ResultsDTO;
+import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.user.dto.UpdateUserDTO;
 import com.zpi.backend.user.dto.UserDTO;
@@ -16,7 +17,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 
-import java.util.List;
+
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -56,7 +58,8 @@ public class UserController {
     )
     @PostMapping("/user")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) throws UserAlreadyExistsException {
+    public ResponseEntity<String> createUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication)
+            throws UserAlreadyExistsException, IOException, EmailTypeDoesNotExists {
         System.out.println("... called createUser");
         userService.registerUser(updateUserDTO, authentication);
         return ResponseEntity.status(HttpStatus.CREATED).body("User created");

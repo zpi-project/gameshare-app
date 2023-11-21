@@ -15,6 +15,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
     Optional<User> findByGoogleId(String googleId);
     Optional<User> findByUuid(String uuid);
+    Optional<User> findByEmail(String email);
     @Modifying
     @Transactional
     @Query(value = "update users " +
