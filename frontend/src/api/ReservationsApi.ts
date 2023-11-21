@@ -1,15 +1,14 @@
-import { getPaginatedReservations } from "@cypress/fixtures/reservations";
 import { NewReservation, Reservation, ReservationQueryParams } from "@/types/Reservation";
 import Api from "./Api";
+import { Paginated } from "@/types/Paginated";
 
 export class ReservationsApi {
   static async getAll(page: number, size: number, queryParams: ReservationQueryParams) {
-    //     const { data: reservations } = await Api.get("/reservations", {
-    //   params: { page, size, ...queryParams },
-    // });
-    // return reservations;
-    await new Promise(resolve => setTimeout(resolve, 600));
-    return getPaginatedReservations(page, size);
+        const { data: reservations } = await Api.get<Paginated<Reservation>>("/reservations", {
+      params: { page, size, ...queryParams },
+        });
+    console.log(reservations);
+    return reservations;
   }
 
   static async create(newReservation: NewReservation) {

@@ -164,3 +164,4 @@ export default {
   seeReservation: "See reservation details",
   submitReservation: "Submit",
 };
+  
