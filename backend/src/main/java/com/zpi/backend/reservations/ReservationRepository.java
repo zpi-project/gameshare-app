@@ -70,8 +70,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             "(:acceptedStartDate <= date(startDate) and date(endDate) <= :acceptedEndDate)) " +
             "and status.status = 'PENDING'" +
             "and gameInstance = :gameInstance")
-    List<Reservation> getReservationToRejecting(@Param("gameInstance") GameInstance gameInstance,
-                                                @Param("acceptedStartDate") Date acceptedStartDate,
-                                                @Param("acceptedEndDate") Date acceptedEndDate);
+    List<Reservation> getReservationToReject(@Param("gameInstance") GameInstance gameInstance,
+                                             @Param("acceptedStartDate") Date acceptedStartDate,
+                                             @Param("acceptedEndDate") Date acceptedEndDate);
 
 }

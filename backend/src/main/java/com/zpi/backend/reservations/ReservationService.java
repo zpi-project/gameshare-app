@@ -3,7 +3,6 @@ package com.zpi.backend.reservations;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.email.EmailService;
-import com.zpi.backend.email_type.EmailType;
 import com.zpi.backend.email_type.EmailTypeService;
 import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
@@ -163,9 +162,10 @@ public class ReservationService {
         List<String> possibleStatuses = getReservationStatuses(authentication,reservationId);
         if(possibleStatuses == null || !possibleStatuses.contains(status))
             throw new BadRequestException("Status cannot be changed to "+status +" from "+reservation.getStatus().getStatus());
-        Reservation acceptedReservation = changeStatus(reservation, status);
-        rejectReservationsAtTheTime(acceptedReservation);
-        return acceptedReservation;
+        Reservation changedReservation = changeStatus(reservation, status);
+        if (status.equals("ACCEPTED_BY_OWNER"))
+            rejectReservationsAtTheTime(changedReservation);
+        return changedReservation;
     }
 
     private Reservation changeStatus(Reservation reservation, String status) throws BadRequestException, IOException, EmailTypeDoesNotExists {
@@ -215,7 +215,7 @@ public class ReservationService {
 
     private void rejectReservationsAtTheTime(Reservation acceptedReservation) throws BadRequestException, EmailTypeDoesNotExists, IOException {
         List<Reservation> reservationsToReject = reservationRepository
-                .getReservationToRejecting(
+                .getReservationToReject(
                         acceptedReservation.getGameInstance(),
                         acceptedReservation.getStartDate(),
                         acceptedReservation.getEndDate()
