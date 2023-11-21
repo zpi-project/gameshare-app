@@ -5,7 +5,9 @@ import { URLS } from "@/constants/urls";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import PriceBadge from "@/components/Badge/PriceBadge";
 import { Button } from "@/components/ui/button";
+import { DialogTrigger, Dialog } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import GameCalendar from "./GameCalendar";
 
 interface GameDetailsSectionProps {
   gameInstance: GameInstanceDetails;
@@ -95,10 +97,17 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
         </div>
         <p className="px-2 italic xl:text-lg 2xl:w-3/4">{gameInstance.description}</p>
       </div>
-      <Button className="absolute bottom-5 left-5 px-8" onClick={redirectGamePage}>
-        {t("seeGamePage")}
-      </Button>
-      <Button className="absolute bottom-5 right-5 px-8">{t("seeAvailability")}</Button>
+      <div className="mt-auto flex flex-row flex-wrap justify-between gap-2">
+        <Button onClick={redirectGamePage} className="flex-grow">
+          {t("seeGamePage")}
+        </Button>
+        <Dialog>
+          <DialogTrigger asChild className="flex-grow">
+            <Button>{t("seeAvailability")}</Button>
+          </DialogTrigger>
+          <GameCalendar gameInstance={gameInstance} />
+        </Dialog>
+      </div>
     </div>
   );
 };

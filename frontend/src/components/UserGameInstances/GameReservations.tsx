@@ -7,21 +7,21 @@ import { Button } from "@/components/ui/button";
 import { DialogContent } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 
-interface GameReservationsDialogProps {
+interface GameReservationsProps {
   gameInstance: GameInstance;
 }
 
-const GameReservations: FC<GameReservationsDialogProps> = ({ gameInstance }) => {
+const GameReservations: FC<GameReservationsProps> = ({ gameInstance }) => {
   const { t } = useTranslation();
   const { uuid } = gameInstance;
 
   return (
-    <DialogContent className="min-h-[724px] p-10 lg:min-w-[1042px]">
+    <DialogContent className="min-h-[724px] min-w-[620px] p-10 lg:min-w-[1042px]">
       <div className="flex flex-row gap-6">
         <div className="hidden lg:flex">
           <GameInstanceDetailsCard gameInstance={gameInstance} />
         </div>
-        <Separator orientation="vertical" className="mr-2 hidden lg:flex" />
+        <Separator orientation="vertical" className="mr-2 hidden bg-secondary lg:flex" />
         <div className="flex flex-grow flex-col gap-8">
           <div className="flex flex-row justify-between">
             <h2 className="text-2xl uppercase text-secondary">{t("reservationsCalendar")}</h2>

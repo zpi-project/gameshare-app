@@ -157,6 +157,9 @@ export default {
   },
 
   reservationsCalendar: "Reservations calendar",
+  availabilityCalendar: "Availability calendar",
+  reservationForm: "Reservation form",
+  bookItNow: "Book it now",
   deactivate: "Deactivate",
   errorFetchingReservationsCalendar: "We couldn't fetch reservations for this month.",
   errorStatus: {
@@ -173,4 +176,16 @@ export default {
   ooops: "Ooops!",
   backToHome: "Back to home",
   error: "Error",
+  leaveMessage: "Leave a message for the game owner...",
+  formStartDate: "Start date",
+  formEndDate: "End date",
+  pickDate: "Pick a date",
+  startDateNotPast: "Start date cannot be a past date.",
+  endDateAtLeastStartDate: "End date cannot be earlier than start date.",
+  createReservationSuccess: "Game has been booked successfully!",
+  createReservationSuccessDescription:
+    "We've sent an email to the game owner and we will notify you when he reacts to your reservation.",
+  createReservationError: "There was an error booking this game.",
+  seeReservation: "See reservation details",
+  submitReservation: "Submit",
 };

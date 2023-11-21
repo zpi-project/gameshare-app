@@ -161,7 +161,10 @@ const pl: typeof en = {
   },
 
   reservationsCalendar: "Kalendarz rezerwacji",
+  availabilityCalendar: "Kalendarz dostępności",
+  reservationForm: "Formularz rezerwacji",
   deactivate: "Dezaktywuj",
+  bookItNow: "Rezerwuj",
   errorFetchingReservationsCalendar: "Nie udało się pobrać rezerwacji na ten miesiąc.",
   errorStatus: {
     "400": "Nieprawidłowe zapytanie",
@@ -178,6 +181,18 @@ const pl: typeof en = {
   ooops: "Ooops!",
   backToHome: "Wróć na stronę główną",
   error: "Błąd",
+  leaveMessage: "Zostaw wiadomość dla właściciela gry...",
+  formStartDate: "Data początkowa",
+  formEndDate: "Data końcowa",
+  pickDate: "Wybierz datę",
+  startDateNotPast: "Data początkowa nie może być przeszła.",
+  endDateAtLeastStartDate: "Data do musi być późniejsza niż data od.",
+  createReservationSuccess: "Gra została pomyślnie zarezerwowana!",
+  createReservationSuccessDescription:
+    "Wysłaliśmy maila do właściciela gry o twojej rezerwacji. Powiadomimy Cię o dalszym statusie rezerwacji.",
+  createReservationError: "There was an error booking this game.",
+  seeReservation: "Zobacz szczegóły rezerwacji",
+  submitReservation: "Zarezerwuj",
 };
 
 export default pl;

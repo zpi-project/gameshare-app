@@ -1,5 +1,5 @@
 import { Paginated } from "@/types/Paginated";
-import { Reservation, ReservationTimeframe } from "@/types/Reservation";
+import { Reservation, ReservationTimeframe, Timeframe } from "@/types/Reservation";
 
 export const reservation: Reservation = {
   gameInstance: {
@@ -81,6 +81,25 @@ export const reservationTimeframes: ReservationTimeframe[] = [
     startDate: "2023-11-25T00:00:00.000+00:00",
     endDate: "2023-11-29T00:00:00.000+00:00",
     reservationId: "2023-12-317",
+  },
+];
+
+export const timeframes: Timeframe[] = [
+  {
+    startDate: "2023-11-10T12:00:00.000+00:00",
+    endDate: "2023-11-12T00:00:00.000+00:00",
+  },
+  {
+    startDate: "2023-11-14T00:00:00.000+00:00",
+    endDate: "2023-11-18T00:00:00.000+00:00",
+  },
+  {
+    startDate: "2023-11-20T00:00:00.000+00:00",
+    endDate: "2023-11-20T00:00:00.000+00:00",
+  },
+  {
+    startDate: "2023-11-25T00:00:00.000+00:00",
+    endDate: "2023-11-29T00:00:00.000+00:00",
   },
 ];
 

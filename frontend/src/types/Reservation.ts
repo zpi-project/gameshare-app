@@ -36,3 +36,10 @@ export interface Timeframe {
 export interface ReservationTimeframe extends Timeframe {
   reservationId: string;
 }
+
+export interface NewReservation {
+  startDate: Date;
+  endDate: Date;
+  renterComment?: string;
+  gameInstanceUUID: string;
+}
