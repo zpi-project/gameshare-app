@@ -1,5 +1,6 @@
 import { RESERVATION_STATUSES } from "@/constants/reservationStatuses";
 import { GameInstanceDetails } from "./GameInstance";
+import { Opinion } from "./Opinion";
 import { User } from "./User";
 
 export type ReservationStatusType = (typeof RESERVATION_STATUSES)[number];
@@ -26,9 +27,9 @@ export interface ReservationDetails {
   canAddRenterOpinion: boolean;
   canAddOwnerOpinion: boolean;
   canAddGameInstanceOpinion: boolean;
-  ownerOpinion: string | null;
-  renterOpinion: string | null;
-  gameInstanceOpinion: string | null;
+  ownerOpinion: Opinion | null;
+  renterOpinion: Opinion | null;
+  gameInstanceOpinion: Opinion | null;
 }
 
 export interface ReservationQueryParams {

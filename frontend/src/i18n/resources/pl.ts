@@ -199,13 +199,14 @@ const pl: typeof en = {
   renterMessage: "Wiadomość od wypożyczającego:",
   renterNoMessage: "Wypożyczający nie zostawił żadnego wiadomości.",
   rentersOpinion: "Opinia wypożyczającego o tobie",
-  rentersNoOpinion: "Wypożyczający nie zostawił opinii o tobie.",
+  rentersNoOpinion: "Wypożyczający nie dodał opinii o tobie.",
   rentersGameOpinion: "Opinia wypożyczającego o twojej grze",
   rentersNoGameOpinion: "Wypożyczający nie dodał opinii o twojej grze.",
   renterDetails: "Wypożyczający - szczegóły",
   yourOpinionAboutRenter: "Twoja opinia o wypożyczającym",
   gameDetails: "Gra - szczegóły",
   gameReservationsCalendar: "Kalendarz rezerwacji gry",
+  noOpinions: "Użytkownik nie ma jeszcze żadnej opinii",
 };
 
 export default pl;

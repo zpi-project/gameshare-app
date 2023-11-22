@@ -6,7 +6,6 @@ import { URLS } from "@/constants/urls";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Separator } from "@/components/ui/separator";
 
-
 const errorStatuses = [400, 401, 403, 404, 500, 501, 503, 504];
 
 const Error: FC = () => {

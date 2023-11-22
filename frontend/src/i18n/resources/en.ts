@@ -201,4 +201,5 @@ export default {
   yourOpinionAboutRenter: "Your opinion about renter",
   gameDetails: "Game - details",
   gameReservationsCalendar: "Game reservations calendar",
+  noOpinions: "This user has no opinions yet",
 };

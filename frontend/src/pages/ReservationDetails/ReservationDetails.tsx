@@ -10,7 +10,6 @@ import { useToast } from "@/components/ui/use-toast";
 import ReservationDetailsOwner from "./ReservationDetailsOwner";
 import ReservationDetailsRenter from "./ReservationDetailsRenter";
 
-
 const ReservationDetails: FC = () => {
   const { id = "" } = useParams();
   const navigate = useNavigate();
@@ -57,7 +56,7 @@ const ReservationDetails: FC = () => {
       navigate(URLS.MY_RESERVATIONS);
     }
   }, [isUserError, isError]);
-console.log(reservation);
+  console.log(reservation);
   return isLoading || isUserLoading ? (
     <ReservationDetailsLoading />
   ) : (
