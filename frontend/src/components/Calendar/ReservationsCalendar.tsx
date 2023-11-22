@@ -12,9 +12,13 @@ import { Calendar, CalendarDay } from "./Calendar";
 
 interface ReservationsCalendarProps {
   gameInstanceUUID: string;
+  tileClassName?: string;
 }
 
-const ReservationsCalendar: FC<ReservationsCalendarProps> = ({ gameInstanceUUID }) => {
+const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
+  gameInstanceUUID,
+  tileClassName,
+}) => {
   const [startDate, setStartDate] = useState(
     getFirstDayOfMonth(new Date(new Date().setHours(0, 0, 0, 0))),
   );
@@ -69,6 +73,7 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({ gameInstanceUUID 
       onNextClick={() => setStartDate(getFirstDayOfNextMonth(startDate))}
       onPrevClick={() => setStartDate(getFirstDayOfLastMonth(startDate))}
       date={startDate}
+      tileClassName={tileClassName}
     >
       {isError ? (
         <h3 className="mt-4 text-center text-xl text-destructive">
@@ -77,12 +82,12 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({ gameInstanceUUID 
       ) : (
         <div className="flex flex-row flex-wrap gap-2">
           {Array.from({ length: (7 + startDate.getDay() - 1) % 7 }).map((_, idx) => (
-            <CalendarDay key={idx + "hidden"} variant="hidden" />
+            <CalendarDay key={idx + "hidden"} variant="hidden" className={tileClassName} />
           ))}
           {isLoading ? (
             <>
               {Array.from({ length: getDaysInMonth(startDate) }).map((_, idx) => (
-                <CalendarDay key={idx + "loading"} variant="loading" />
+                <CalendarDay key={idx + "loading"} variant="loading" className={tileClassName}/>
               ))}
             </>
           ) : (
@@ -93,6 +98,7 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({ gameInstanceUUID 
                 return (
                   <CalendarDay
                     key={idx}
+                    className={tileClassName}
                     variant={reservationId ? "filled" : "outlined"}
                     disabled={reservationId === null}
                     style={{

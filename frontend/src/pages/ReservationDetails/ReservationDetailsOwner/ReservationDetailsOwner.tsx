@@ -1,9 +1,10 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Opinion } from "@/types/Opinion";
 import { ReservationDetails } from "@/types/Reservation";
-import { Stars } from "@/components/Stars";
+import { ReservationsCalendar } from "@/components/Calendar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import GameInstanceDetails from "../GameInstanceDetails";
 import OpinionSection from "../OpinionSection";
 import ReservationDetailsStatus from "../ReservationDetailsStatus";
 import ReservationDetailsTable from "../ReservationDetailsTable";
@@ -16,7 +17,15 @@ interface ReservationDetailsOwnerProps {
 
 const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
   reservation: {
-    reservation: { reservationId, startDate, endDate, duration, renterComment, renter },
+    reservation: {
+      reservationId,
+      startDate,
+      endDate,
+      duration,
+      renterComment,
+      renter,
+      gameInstance,
+    },
     ownerOpinion,
     renterOpinion,
     gameInstanceOpinion,
@@ -83,8 +92,23 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
             canAddRenterOpinion={canAddRenterOpinion}
           />
         </div>
-        <div className="relative flex flex-grow flex-col gap-4 rounded-lg bg-section p-4 xl:h-full">
-          game + game calendar
+        <div className="relative flex flex-col gap-4 rounded-lg bg-section p-4 xl:h-full">
+          <div
+            className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
+            style={{
+              backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
+            }}
+          />
+          <div className="relative flex flex-grow flex-col justify-between gap-4 p-8">
+            <GameInstanceDetails gameInstance={gameInstance} />
+            <Separator className="bg-secondary" />
+            <div className="w-[408px]">
+              <ReservationsCalendar
+                gameInstanceUUID={gameInstance.uuid}
+                tileClassName="w-[60px] h-[60px]"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </ScrollArea>
