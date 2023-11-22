@@ -25,7 +25,7 @@ public interface GameInstanceRepository extends JpaRepository<GameInstance, Long
             "set avg_rating = " +
             "(select avg(stars) from game_instance_opinions " +
             "where game_instance_id = :gameInstanceId), " +
-            "opinionsAmount = (select count(*) from game_instance_opinions " +
+            "opinions_amount = (select count(*) from game_instance_opinions " +
             "where game_instance_id = :gameInstanceId)" +
             "where id = :gameInstanceId",
             nativeQuery = true)

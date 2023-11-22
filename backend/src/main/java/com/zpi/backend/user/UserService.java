@@ -49,6 +49,15 @@ public class UserService {
         return this.userRepository.findByGoogleId(googleId).orElseThrow(()->new UserDoesNotExistException("User not found"));
     }
 
+    public User getLoggedInUser(Authentication authentication){
+        if (authentication != null && authentication.isAuthenticated()) {
+            String googleId = ((User) authentication.getPrincipal()).getGoogleId();
+            return this.userRepository.findByGoogleId(googleId).orElse(null);
+        } else {
+            return null;
+        }
+    }
+
     public User getUserByUUID(String uuid) throws UserDoesNotExistException {
         return this.userRepository.findByUuid(uuid).orElseThrow(()->new UserDoesNotExistException("User not found"));
     }
@@ -95,14 +104,16 @@ public class UserService {
 
     public ResultsDTO<UserGuestDTO> getUsersSearch(Authentication authentication, int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
                                                               Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, Optional<String> userUUID, double latitude,
-                                                              double longitude) throws UserDoesNotExistException {
+                                                              double longitude) {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
         if (categoryId.isPresent())
             category = categoryRepository.getReferenceById(categoryId.get());
         String loggedInUserUUID = null;
-        if (authentication != null && authentication.isAuthenticated())
-            loggedInUserUUID = this.getUser(authentication).getUuid();
+        User loggedInUser = getLoggedInUser(authentication);
+        if (loggedInUser != null)
+            loggedInUserUUID = loggedInUser.getUuid();
+
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
                 searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null),

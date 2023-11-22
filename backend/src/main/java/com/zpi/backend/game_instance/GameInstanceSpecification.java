@@ -55,7 +55,7 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
         if (criteria.getUserUUID() != null) {
             predicates.add(cb.equal(userUUID, criteria.getUserUUID()));
         }
-        if (criteria.getUserUUID() != null) {
+        if (criteria.getLoggedInUser() != null) {
             predicates.add(cb.notEqual(userUUID, criteria.getLoggedInUser()));
         }
 

@@ -51,7 +51,7 @@ public class UserSpecification implements Specification<User> {
         if (criteria.getUserUUID() != null) {
             predicates.add(cb.equal(root.get("uuid"), criteria.getUserUUID()));
         }
-        if (criteria.getUserUUID() != null) {
+        if (criteria.getLoggedInUser() != null) {
             predicates.add(cb.notEqual(root.get("uuid"), criteria.getLoggedInUser()));
         }
 

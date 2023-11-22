@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
             "set avg_rating = " +
             "(select avg(stars) from user_opinions " +
             "where rated_user_id = :userId), " +
-            "opinionsAmount = " +
+            "opinions_amount = " +
             "(select count(*) from user_opinions " +
             "where rated_user_id = :userId)" +
             "where id = :userId",
