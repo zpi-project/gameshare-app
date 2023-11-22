@@ -1,11 +1,12 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { parsePhoneNumber } from "libphonenumber-js";
+import { URLS } from "@/constants/urls";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
 import Avatar from "@/components/Avatar";
 import { Stars } from "@/components/Stars";
-import { Button } from "@/components/ui/button";
 
 interface UserDetailsSectionProps {
   user: User;
@@ -30,7 +31,12 @@ const UserDetailsSection: FC<UserDetailsSectionProps> = ({ user, title, btnText 
           <p className="flex w-full rounded-lg bg-background p-2 px-4 text-lg xl:justify-center">
             {user.avgRating > 0 ? <Stars count={Math.round(user.avgRating)} /> : t("noOpinions")}
           </p>
-          <Button className="ml-auto px-8">{btnText}</Button>
+          <Link
+            className="ml-auto rounded-lg bg-primary px-8 py-2 duration-200 hover:bg-accent"
+            to={`${URLS.PROFILE}/${user.uuid}`}
+          >
+            {btnText}
+          </Link>
         </div>
       </div>
     </div>
