@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getDaysInMonth } from "date-fns";
-import { string } from "zod";
 import { URLS } from "@/constants/urls";
 import { getFirstDayOfLastMonth, getFirstDayOfMonth, getFirstDayOfNextMonth } from "@/utils/date";
 import { stringToHexColor } from "@/utils/stringToColor";

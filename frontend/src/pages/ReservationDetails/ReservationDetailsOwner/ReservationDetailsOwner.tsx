@@ -25,6 +25,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
       renterComment,
       renter,
       gameInstance,
+      status,
     },
     ownerOpinion,
     renterOpinion,
@@ -54,7 +55,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
                   endDate={endDate}
                   duration={duration}
                 />
-                <ReservationDetailsStatus reservationId={reservationId} />
+                <ReservationDetailsStatus reservationId={reservationId} status={status} />
                 <div className="flex flex-grow flex-col gap-2">
                   <h3 className="text-xl">{t("renterMessage")}</h3>
                   <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
