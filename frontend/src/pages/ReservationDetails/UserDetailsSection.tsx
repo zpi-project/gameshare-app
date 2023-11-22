@@ -18,16 +18,20 @@ const UserDetailsSection: FC<UserDetailsSectionProps> = ({ user, title, btnText 
   return (
     <div className="relative flex h-full flex-col gap-4">
       <h3 className="text-xl uppercase">{title}</h3>
-      <div className="flex flex-col items-center gap-4 px-4">
-        <Avatar user={user} className="h-[148px] w-[148px]" />
-        <p className="w-full rounded-lg bg-card p-2 text-center text-lg">{getFullname(user)}</p>
-        <p className="w-full rounded-lg bg-card p-2 text-center text-lg">
-          {user.phoneNumber && parsePhoneNumber(user.phoneNumber).formatInternational()}
-        </p>
-        <p className="w-full rounded-lg bg-card p-2 text-center text-lg">
-          {user.avgRating > 0 ? <Stars count={Math.round(user.avgRating)} /> : t("noOpinions")}
-        </p>
-        <Button className="ml-auto px-8">{btnText}</Button>
+      <div className="flex gap-6 px-4 xl:flex-col xl:items-center">
+        <Avatar user={user} className="h-20 w-20 lg:h-[148px] lg:w-[148px]" />
+        <div className="flex w-full flex-grow flex-col gap-4 xl:gap-6">
+          <p className="w-full rounded-lg bg-background p-2 px-4 text-lg xl:text-center">
+            {getFullname(user)}
+          </p>
+          <p className="w-full rounded-lg bg-background p-2 px-4 text-lg xl:text-center">
+            {user.phoneNumber && parsePhoneNumber(user.phoneNumber).formatInternational()}
+          </p>
+          <p className="flex w-full rounded-lg bg-background p-2 px-4 text-lg xl:justify-center">
+            {user.avgRating > 0 ? <Stars count={Math.round(user.avgRating)} /> : t("noOpinions")}
+          </p>
+          <Button className="ml-auto px-8">{btnText}</Button>
+        </div>
       </div>
     </div>
   );

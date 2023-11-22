@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { ReservationDetails } from "@/types/Reservation";
+import { Stars } from "@/components/Stars";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ReservationDetailsStatus from "./ReservationDetailsStatus";
 import ReservationDetailsTable from "./ReservationDetailsTable";
@@ -14,6 +15,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
   reservation: {
     reservation: { reservationId, startDate, endDate, duration, renterComment, renter },
     ownerOpinion,
+    renterOpinion,
     gameInstanceOpinion,
   },
 }) => {
@@ -41,22 +43,30 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
               <ReservationDetailsStatus reservationId={reservationId} />
               <div className="flex flex-grow flex-col gap-2">
                 <h3 className="text-xl">{t("renterMessage")}</h3>
-                <p className="flex-grow rounded-lg bg-card p-4 italic">
-                  {renterComment ?? t("renterNoMessage")}
+                <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
+                  {renterComment.length ? renterComment : t("renterNoMessage")}
                 </p>
               </div>
             </div>
           </div>
           <div className="flex flex-grow flex-col gap-4 rounded-lg bg-section p-8">
-            <h3 className="text-xl uppercase">{t("rentersOpinion")}</h3>
-            <p className="flex-grow rounded-lg bg-card p-4 italic">
-              {ownerOpinion ? <div>opinion</div> : t("rentersNoOpinion")}
+            <div className="flex flex-row flex-wrap justify-between gap-4">
+              <h3 className="text-xl uppercase">{t("rentersOpinion")}</h3>
+              {ownerOpinion && ownerOpinion.stars > 0 && <Stars count={ownerOpinion.stars} />}
+            </div>
+            <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
+              {ownerOpinion ? ownerOpinion.description : t("rentersNoOpinion")}
             </p>
           </div>
           <div className="flex flex-grow flex-col gap-4 rounded-lg bg-section p-8">
-            <h3 className="text-xl uppercase">{t("rentersGameOpinion")}</h3>
-            <p className="flex-grow rounded-lg bg-card p-4 italic">
-              {gameInstanceOpinion ? <div>opinion</div> : t("rentersNoGameOpinion")}
+            <div className="flex flex-row flex-wrap justify-between gap-4">
+              <h3 className="text-xl uppercase">{t("rentersGameOpinion")}</h3>
+              {gameInstanceOpinion && gameInstanceOpinion.stars > 0 && (
+                <Stars count={gameInstanceOpinion.stars} variant="secondary" />
+              )}
+            </div>
+            <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
+              {gameInstanceOpinion ? gameInstanceOpinion.description : t("rentersNoGameOpinion")}
             </p>
           </div>
         </div>
