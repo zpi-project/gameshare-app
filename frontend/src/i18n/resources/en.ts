@@ -205,4 +205,5 @@ export default {
   cannotAddOpinionAboutOwner: "You cannot add opinion about the owner yet.",
   cannotAddOpinionAboutRenter: "You cannot add opinion about this renter yet.",
   cannotAddOpinionAboutGame: "You cannot add opinion about the game yet.",
+  gameNoOpinions: "No opinions",
 };

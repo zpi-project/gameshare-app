@@ -210,6 +210,7 @@ const pl: typeof en = {
   cannotAddOpinionAboutOwner: "Nie możesz dodać jeszcze opinii o właścicielu gry.",
   cannotAddOpinionAboutRenter: "Nie możesz dodać jeszcze opinii o wypożyczającym.",
   cannotAddOpinionAboutGame: "Nie możesz dodać jeszcze opinii o tej grze.",
+  gameNoOpinions: "Brak opinii",
 };
 
 export default pl;

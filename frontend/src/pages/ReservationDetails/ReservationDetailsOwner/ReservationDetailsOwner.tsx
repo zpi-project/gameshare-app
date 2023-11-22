@@ -38,7 +38,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
     <ScrollArea className="h-full w-full xl:h-max">
       <div className="flex h-full w-full flex-col gap-4 xl:h-[calc(100vh-48px)] xl:flex-row">
         <ScrollArea className="h-full flex-grow">
-          <div className="flex flex-grow flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
+          <div className="flex flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
             <div className="relative flex-grow rounded-lg bg-section p-8">
               <div
                 className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
@@ -76,7 +76,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
           </div>
         </ScrollArea>
         <ScrollArea className="h-full flex-grow">
-          <div className="flex flex-grow flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
+          <div className="flex flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
             <div className="relative flex-grow rounded-lg bg-section p-8">
               <div
                 className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
@@ -96,22 +96,23 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
             />
           </div>
         </ScrollArea>
-        <ScrollArea className="h-full">
-          <div className="relative flex flex-col gap-4 rounded-lg bg-section p-4 xl:min-h-[calc(100vh-48px)]">
+        <ScrollArea className="h-full  xl:w-[472px] xl:min-w-[472px]">
+          <div className="relative flex flex-grow flex-col gap-4 rounded-lg bg-section p-4 xl:min-h-[calc(100vh-48px)]">
             <div
               className="absolute left-4 right-4 top-4 h-1/3 rounded-lg opacity-50 dark:opacity-40"
               style={{
                 backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
               }}
             />
-            <div className="relative flex flex-grow flex-col justify-between gap-4 p-8 pb-4">
+            <div className="relative flex flex-grow flex-col items-center justify-between gap-4 p-4">
               <GameInstanceDetails gameInstance={gameInstance} />
               <Separator className="bg-secondary" />
-              <div className="w-[408px]">
+              <div className="flex w-[408px] flex-col gap-2">
+                <h3 className="text-xl uppercase">{t("gameReservationsCalendar")}</h3>
                 <ReservationsCalendar
                   className="gap-2"
                   gameInstanceUUID={gameInstance.uuid}
-                  tileClassName="w-[60px] h-[60px]"
+                  tileClassName="w-[50px] h-[50px]"
                 />
               </div>
             </div>
