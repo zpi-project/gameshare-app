@@ -49,15 +49,6 @@ public class UserService {
         return this.userRepository.findByGoogleId(googleId).orElseThrow(()->new UserDoesNotExistException("User not found"));
     }
 
-    public User getLoggedInUser(Authentication authentication){
-        if (authentication != null && authentication.isAuthenticated()) {
-            String googleId = ((User) authentication.getPrincipal()).getGoogleId();
-            return this.userRepository.findByGoogleId(googleId).orElse(null);
-        } else {
-            return null;
-        }
-    }
-
     public User getUserByUUID(String uuid) throws UserDoesNotExistException {
         return this.userRepository.findByUuid(uuid).orElseThrow(()->new UserDoesNotExistException("User not found"));
     }
@@ -110,10 +101,14 @@ public class UserService {
         if (categoryId.isPresent())
             category = categoryRepository.getReferenceById(categoryId.get());
         String loggedInUserUUID = null;
-        User loggedInUser = getLoggedInUser(authentication);
-        if (loggedInUser != null)
-            loggedInUserUUID = loggedInUser.getUuid();
-
+        try {
+            if (authentication != null) {
+                User loggedInUser = getUser(authentication);
+                loggedInUserUUID = loggedInUser.getUuid();
+            }
+        } catch (UserDoesNotExistException ex){
+            // ignore
+        }
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
                 searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null),

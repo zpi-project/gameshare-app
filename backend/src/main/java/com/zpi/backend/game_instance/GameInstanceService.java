@@ -134,9 +134,14 @@ public class GameInstanceService {
         Category category = null;
         boolean isGuest = authentication == null || !authentication.isAuthenticated();
         String loggedInUserUUID = null;
-        User loggedInUser = userService.getLoggedInUser(authentication);
-        if (loggedInUser != null)
-            loggedInUserUUID = loggedInUser.getUuid();
+        try {
+            if (authentication != null) {
+                User loggedInUser = userService.getUser(authentication);
+                loggedInUserUUID = loggedInUser.getUuid();
+            }
+        } catch (UserDoesNotExistException ex){
+            // ignore
+        }
         if (categoryId.isPresent())
             category = categoryService.getCategory(categoryId.get());
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
