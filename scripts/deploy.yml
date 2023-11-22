@@ -6,7 +6,7 @@ deploys:
   - name: my-app-deploy
     region: us-east4
     project: zpi-test-1
-    startup_script: ./startup.sh
+    startup_script: ./scripts/startup.sh
     instance_group: instance-group-1
     instance_template_base: instance-template-1
     instance_template: template-${{ GITHUB_RUN_NUMBER }}-${{ GITHUB_SHA }}
