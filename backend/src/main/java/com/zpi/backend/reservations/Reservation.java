@@ -66,6 +66,10 @@ public class Reservation {
         this.reservationId = UUID.randomUUID().toString();
         return this;
     }
+
+    public int getDuration() {
+        return DateUtils.getDuration(startDate,endDate);
+    }
     public Reservation(User renter, GameInstance gameInstance, Date startDate, Date endDate, ReservationStatus status, String renterComment, Date timestamp) {
         this.renter = renter;
         this.gameInstance = gameInstance;
