@@ -1,6 +1,11 @@
+import { ReservationDetails } from "@/types/Reservation";
 import { FC } from "react";
 
-const ReservationDetailsRenter: FC = () => {
+interface ReservationDetailsRenterProps {
+  reservation: ReservationDetails;
+}
+
+const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({reservation}) => {
   return <div>renter ReservationDetails</div>;
 };
 

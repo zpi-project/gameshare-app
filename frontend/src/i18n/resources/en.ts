@@ -188,4 +188,17 @@ export default {
   createReservationError: "There was an error booking this game.",
   seeReservation: "See reservation details",
   submitReservation: "Submit",
+
+  reservationHeader: "reservation - {{reservationId}} - details",
+  status: "Status:",
+  renterMessage: "Message left by renter:",
+  renterNoMessage: "Renter hasn't left any message for you.",
+  rentersOpinion: "Renter's opinion about you",
+  rentersNoOpinion: "Renter hasn't added an opinion about you yet.",
+  rentersGameOpinion: "Renter's opinion about your game",
+  rentersNoGameOpinion: "Renter hasn't added an opinion about your game yet.",
+  renterDetails: "Renter - details",
+  yourOpinionAboutRenter: "Your opinion about renter",
+  gameDetails: "Game - details",
+  gameReservationsCalendar: "Game reservations calendar",
 };

@@ -193,6 +193,19 @@ const pl: typeof en = {
   createReservationError: "There was an error booking this game.",
   seeReservation: "Zobacz szczegóły rezerwacji",
   submitReservation: "Zarezerwuj",
+
+  reservationHeader: "rezerwacja - {{reservationId}} - szczegóły",
+  status: "Status:",
+  renterMessage: "Wiadomość od wypożyczającego:",
+  renterNoMessage: "Wypożyczający nie zostawił żadnego wiadomości.",
+  rentersOpinion: "Opinia wypożyczającego o tobie",
+  rentersNoOpinion: "Wypożyczający nie zostawił opinii o tobie.",
+  rentersGameOpinion: "Opinia wypożyczającego o twojej grze",
+  rentersNoGameOpinion: "Wypożyczający nie dodał opinii o twojej grze.",
+  renterDetails: "Wypożyczający - szczegóły",
+  yourOpinionAboutRenter: "Twoja opinia o wypożyczającym",
+  gameDetails: "Gra - szczegóły",
+  gameReservationsCalendar: "Kalendarz rezerwacji gry",
 };
 
 export default pl;

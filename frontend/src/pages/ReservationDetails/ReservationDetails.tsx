@@ -62,8 +62,8 @@ const ReservationDetails: FC = () => {
   ) : (
     !(isUserError || isError) && (
       <>
-        {userType === "owner" && <ReservationDetailsOwner />}
-        {userType === "renter" && <ReservationDetailsRenter />}
+        {userType === "owner" && <ReservationDetailsOwner reservation={reservation} />}
+        {userType === "renter" && <ReservationDetailsRenter reservation={reservation} />}
       </>
     )
   );
