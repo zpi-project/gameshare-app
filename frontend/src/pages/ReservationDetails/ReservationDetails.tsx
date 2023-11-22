@@ -7,7 +7,7 @@ import { URLS } from "@/constants/urls";
 import { ReservationsApi } from "@/api/ReservationsApi";
 import { UserApi } from "@/api/UserApi";
 import { useToast } from "@/components/ui/use-toast";
-import ReservationDetailsOwner from "./ReservationDetailsOwner";
+import ReservationDetailsOwner from "./ReservationDetailsOwner/ReservationDetailsOwner";
 import ReservationDetailsRenter from "./ReservationDetailsRenter";
 
 const ReservationDetails: FC = () => {

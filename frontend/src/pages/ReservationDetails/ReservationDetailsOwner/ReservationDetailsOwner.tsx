@@ -1,11 +1,14 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { Opinion } from "@/types/Opinion";
 import { ReservationDetails } from "@/types/Reservation";
 import { Stars } from "@/components/Stars";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import ReservationDetailsStatus from "./ReservationDetailsStatus";
-import ReservationDetailsTable from "./ReservationDetailsTable";
-import UserDetailsSection from "./UserDetailsSection";
+import OpinionSection from "../OpinionSection";
+import ReservationDetailsStatus from "../ReservationDetailsStatus";
+import ReservationDetailsTable from "../ReservationDetailsTable";
+import UserDetailsSection from "../UserDetailsSection";
+import OpinionAboutRenter from "./OpinionAboutRenter";
 
 interface ReservationDetailsOwnerProps {
   reservation: ReservationDetails;
@@ -50,26 +53,16 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
               </div>
             </div>
           </div>
-          <div className="flex flex-grow flex-col gap-4 rounded-lg bg-section p-8">
-            <div className="flex flex-row flex-wrap justify-between gap-4">
-              <h3 className="text-xl uppercase">{t("rentersOpinion")}</h3>
-              {ownerOpinion && ownerOpinion.stars > 0 && <Stars count={ownerOpinion.stars} />}
-            </div>
-            <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
-              {ownerOpinion ? ownerOpinion.description : t("rentersNoOpinion")}
-            </p>
-          </div>
-          <div className="flex flex-grow flex-col gap-4 rounded-lg bg-section p-8">
-            <div className="flex flex-row flex-wrap justify-between gap-4">
-              <h3 className="text-xl uppercase">{t("rentersGameOpinion")}</h3>
-              {gameInstanceOpinion && gameInstanceOpinion.stars > 0 && (
-                <Stars count={gameInstanceOpinion.stars} variant="secondary" />
-              )}
-            </div>
-            <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
-              {gameInstanceOpinion ? gameInstanceOpinion.description : t("rentersNoGameOpinion")}
-            </p>
-          </div>
+          <OpinionSection
+            opinion={ownerOpinion}
+            opinionHeader={t("rentersOpinion")}
+            noOpinionMessage={t("rentersNoOpinion")}
+          />
+          <OpinionSection
+            opinion={gameInstanceOpinion}
+            opinionHeader={t("rentersGameOpinion")}
+            noOpinionMessage={t("rentersNoGameOpinion")}
+          />
         </div>
         <div className="flex flex-grow flex-col gap-4">
           <div className="relative flex-grow rounded-lg bg-section p-8">
@@ -85,28 +78,10 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
               btnText={t("seeProfile")}
             />
           </div>
-          <div className="flex flex-grow flex-col gap-4 rounded-lg bg-section p-4">
-            {renterOpinion ? (
-              <>
-                <div className="flex flex-row flex-wrap justify-between gap-4">
-                  <h3 className="text-xl uppercase">{t("yourOpinionAboutRenter")}</h3>
-                  <Stars count={renterOpinion.stars} />
-                </div>
-                <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
-                  {renterOpinion.description}
-                </p>
-              </>
-            ) : canAddRenterOpinion ? (
-              <div>you can add opinion about this user here</div>
-            ) : (
-              <>
-                <h3 className="text-xl uppercase">{t("yourOpinionAboutRenter")}</h3>
-                <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
-                  {t("cannotAddOpinionAboutRenter")}
-                </p>
-              </>
-            )}
-          </div>
+          <OpinionAboutRenter
+            renterOpinion={renterOpinion}
+            canAddRenterOpinion={canAddRenterOpinion}
+          />
         </div>
         <div className="relative flex flex-grow flex-col gap-4 rounded-lg bg-section p-4 xl:h-full">
           game + game calendar
