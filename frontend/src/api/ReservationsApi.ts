@@ -1,5 +1,10 @@
 import { Paginated } from "@/types/Paginated";
-import { NewReservation, Reservation, ReservationQueryParams } from "@/types/Reservation";
+import {
+  NewReservation,
+  Reservation,
+  ReservationDetails,
+  ReservationQueryParams,
+} from "@/types/Reservation";
 import Api from "./Api";
 
 export class ReservationsApi {
@@ -7,8 +12,14 @@ export class ReservationsApi {
     const { data: reservations } = await Api.get<Paginated<Reservation>>("/reservations", {
       params: { page, size, ...queryParams },
     });
-    console.log(reservations);
     return reservations;
+  }
+
+  static async getDetails(reservationId: string) {
+    const { data: reservationDetails } = await Api.get<ReservationDetails>(
+      `reservations/${reservationId}/details`,
+    );
+    return reservationDetails;
   }
 
   static async create(newReservation: NewReservation) {

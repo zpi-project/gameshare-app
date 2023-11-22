@@ -9,9 +9,7 @@ export interface ReservationStatus {
   status: ReservationStatusType;
 }
 
-// will probably change when backend implemented
 export interface Reservation {
-  id: number;
   reservationId: string;
   renter: User;
   startDate: string;
@@ -21,6 +19,16 @@ export interface Reservation {
   renterComment: string;
   timestamp: string;
   duration: number;
+}
+
+export interface ReservationDetails {
+  reservation: Reservation;
+  canAddRenterOpinion: boolean;
+  canAddOwnerOpinion: boolean;
+  canAddGameInstanceOpinion: boolean;
+  ownerOpinion: string | null;
+  renterOpinion: string | null;
+  gameInstanceOpinion: string | null;
 }
 
 export interface ReservationQueryParams {
