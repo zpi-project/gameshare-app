@@ -129,7 +129,7 @@ public class GameInstanceService {
 
     public ResultsDTO<SearchGameInstanceDTO> getGameInstances(Authentication authentication, int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
                                                               Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, Optional<String> userUUID, double latitude,
-                                                              double longitude) throws CategoryDoesNotExistException, UserDoesNotExistException {
+                                                              double longitude) throws CategoryDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
         boolean isGuest = authentication == null || !authentication.isAuthenticated();

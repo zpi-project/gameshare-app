@@ -124,9 +124,7 @@ public class UserService {
         Page<User> usersPage = userRepository.findAll(spec, pageable);
         List<UserGuestDTO> resultList = new ArrayList<>();
         usersPage
-                .forEach(user -> {
-                    resultList.add(new UserGuestDTO(user));
-                });
+                .forEach(user -> resultList.add(new UserGuestDTO(user)));
         return new ResultsDTO<>(resultList,
                 new Pagination(usersPage.getTotalElements(), usersPage.getTotalPages()));
     }

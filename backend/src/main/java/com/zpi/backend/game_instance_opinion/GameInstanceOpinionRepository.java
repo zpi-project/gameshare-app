@@ -1,7 +1,6 @@
 package com.zpi.backend.game_instance_opinion;
 
 
-import com.zpi.backend.game.Game;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.reservations.Reservation;
 import org.springframework.data.domain.Page;

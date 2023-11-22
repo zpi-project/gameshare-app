@@ -1,7 +1,5 @@
 package com.zpi.backend.user;
 
-import com.google.rpc.context.AttributeContext;
-import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
@@ -88,8 +86,7 @@ public class UserController {
                                                              @RequestParam Optional<Long> categoryId, @RequestParam Optional<Integer> age,
                                                              @RequestParam Optional<Integer> playersNumber, @RequestParam Optional<Integer> maxPricePerDay,
                                                              @RequestParam Optional<String> userUUID, @RequestParam double latitude,
-                                                             @RequestParam double longitude, @RequestParam int size, @RequestParam int page)
-            throws UserDoesNotExistException {
+                                                             @RequestParam double longitude, @RequestParam int size, @RequestParam int page) {
         System.out.println("... called getUsersSearch");
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.getUsersSearch(authentication, size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, userUUID, latitude, longitude));

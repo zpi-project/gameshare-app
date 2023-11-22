@@ -61,7 +61,6 @@ public class ReservationService {
         Reservation reservation = new Reservation().fromDTO(newReservationDTO, renter, gameInstance);
         reservation.setStatus(reservationStatusRepository.findByStatus("PENDING").orElseThrow(()->new BadRequestException("Status does not exist")));
         reservation=  reservationRepository.save(reservation);
-        reservation = reservationRepository.findById(reservation.getId()).get();
         reservation.setReservationId(DateUtils.getYear(reservation.getStartDate()) + "-" + DateUtils.getMonth(reservation.getStartDate())+'-'+reservation.getId());
         ReservationDTO reservationDTO = new ReservationDTO(reservationRepository.save(reservation));
 //        Sending email
@@ -361,7 +360,7 @@ public class ReservationService {
     public void setExpiredStatus() throws IOException, EmailTypeDoesNotExists {
         logger.info("Setting reservation status to expired.");
         List<Reservation> expiredReservations = reservationRepository.getExpiringReservations();
-        if (expiredReservations.size() > 0) {
+        if (!expiredReservations.isEmpty()) {
             reservationRepository.setExpiredStatus();
 //          Sending emails
             for (Reservation r : expiredReservations) {

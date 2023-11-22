@@ -7,7 +7,6 @@ import com.zpi.backend.game.exception.GameDoesNotExistException;
 import com.zpi.backend.game_instance.dto.*;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
-import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
@@ -131,7 +130,7 @@ public class GameInstanceController {
     public ResponseEntity<ResultsDTO<SearchGameInstanceDTO>>  getGameInstances(Authentication authentication, @RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
                                                                                @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber, @RequestParam Optional<Integer> maxPricePerDay,
                                                                                @RequestParam Optional<String> userUUID, @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page)
-            throws CategoryDoesNotExistException, UserDoesNotExistException {
+            throws CategoryDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstances(authentication, size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, userUUID, latitude, longitude));
     }
@@ -154,7 +153,8 @@ public class GameInstanceController {
     )
     @GetMapping(value="/{uuid}/reservations")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceReservations(@PathVariable String uuid, @RequestParam String year, @RequestParam String month, Authentication authentication) throws GameInstanceDoesNotExistException, UserDoesNotExistException {
+    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceReservations(@PathVariable String uuid, @RequestParam String year, @RequestParam String month, Authentication authentication)
+            throws GameInstanceDoesNotExistException, UserDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstanceAvailabilityReservation(authentication,uuid,year,month));
     }
