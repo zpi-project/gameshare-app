@@ -8,7 +8,7 @@ deploys:
     project: zpi-test-1
     startup_script: ./scripts/startup.sh
     instance_group: instance-group-1
-    instance_template_base: instance-template-1
+    instance_template_base: instance-template-2
     instance_template: template-${{ GITHUB_RUN_NUMBER }}-${{ GITHUB_SHA }}
     cloud_init: cloud-init.yml # see example dir
     labels: # will also have gitsha from common section
