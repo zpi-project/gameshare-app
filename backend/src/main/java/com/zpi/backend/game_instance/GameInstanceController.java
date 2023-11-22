@@ -141,8 +141,8 @@ public class GameInstanceController {
             description = "Returns game instance unavailability periods " +
                     "can be called by anyone"
     )
-    @GetMapping(value="/{uuid}/avaliability")
-    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceUnAvaliability(@PathVariable String uuid, @RequestParam String year, @RequestParam String month) {
+    @GetMapping(value="/{uuid}/availability")
+    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceUnAvailability(@PathVariable String uuid, @RequestParam String year, @RequestParam String month) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstanceAvailability(uuid,year,month,false));
     }
