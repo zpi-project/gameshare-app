@@ -51,6 +51,9 @@ public class UserSpecification implements Specification<User> {
         if (criteria.getUserUUID() != null) {
             predicates.add(cb.equal(root.get("uuid"), criteria.getUserUUID()));
         }
+        if (criteria.getUserUUID() != null) {
+            predicates.add(cb.notEqual(root.get("uuid"), criteria.getLoggedInUser()));
+        }
 
         if (criteria.getLatitude() != null && criteria.getLongitude() != null) {
             predicates.add(cb.isNotNull(root.get("locationLatitude")));

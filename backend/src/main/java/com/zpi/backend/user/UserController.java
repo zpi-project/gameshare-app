@@ -1,5 +1,6 @@
 package com.zpi.backend.user;
 
+import com.google.rpc.context.AttributeContext;
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
@@ -83,13 +84,14 @@ public class UserController {
                     "and sorted by distance (calculated by latitude and longitude) from the database."
     )
     @GetMapping("/user/search")
-    public ResponseEntity<ResultsDTO<UserGuestDTO>> getUsers(@RequestParam Optional<String> searchName,
+    public ResponseEntity<ResultsDTO<UserGuestDTO>> getUsers(Authentication authentication, @RequestParam Optional<String> searchName,
                                                              @RequestParam Optional<Long> categoryId, @RequestParam Optional<Integer> age,
                                                              @RequestParam Optional<Integer> playersNumber, @RequestParam Optional<Integer> maxPricePerDay,
                                                              @RequestParam Optional<String> userUUID, @RequestParam double latitude,
-                                                             @RequestParam double longitude, @RequestParam int size, @RequestParam int page) throws CategoryDoesNotExistException {
+                                                             @RequestParam double longitude, @RequestParam int size, @RequestParam int page)
+            throws UserDoesNotExistException {
         System.out.println("... called getUsersSearch");
         return ResponseEntity.status(HttpStatus.OK)
-                .body(userService.getUsersSearch(size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, userUUID, latitude, longitude));
+                .body(userService.getUsersSearch(authentication, size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, userUUID, latitude, longitude));
     }
 }

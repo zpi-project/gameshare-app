@@ -130,16 +130,20 @@ public class GameInstanceService {
 
     public ResultsDTO<SearchGameInstanceDTO> getGameInstances(Authentication authentication, int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
                                                               Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, Optional<String> userUUID, double latitude,
-                                                              double longitude) throws CategoryDoesNotExistException {
+                                                              double longitude) throws CategoryDoesNotExistException, UserDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
         boolean isGuest = authentication == null || !authentication.isAuthenticated();
+        String loggedInUserUUID = null;
+        if (authentication != null && authentication.isAuthenticated())
+            loggedInUserUUID = userService.getUser(authentication).getUuid();
         if (categoryId.isPresent())
             category = categoryService.getCategory(categoryId.get());
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
                 searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null),
-                maxPricePerDay.orElse(null), userUUID.orElse(null), latitude, longitude
+                maxPricePerDay.orElse(null), userUUID.orElse(null), latitude, longitude,
+                loggedInUserUUID
         );
         Specification<GameInstance> spec = new GameInstanceSpecification(gameInstanceSearch);
         Page<GameInstance> gameInstancesPage = gameInstanceRepository.findAll(spec, pageable);

@@ -96,17 +96,21 @@ public class UserService {
         userRepository.updateAvgRating(userId);
     }
 
-    public ResultsDTO<UserGuestDTO> getUsersSearch(int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
+    public ResultsDTO<UserGuestDTO> getUsersSearch(Authentication authentication, int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
                                                               Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, Optional<String> userUUID, double latitude,
-                                                              double longitude) throws CategoryDoesNotExistException {
+                                                              double longitude) throws UserDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
         if (categoryId.isPresent())
             category = categoryRepository.getReferenceById(categoryId.get());
+        String loggedInUserUUID = null;
+        if (authentication != null && authentication.isAuthenticated())
+            loggedInUserUUID = this.getUser(authentication).getUuid();
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
                 searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null),
-                maxPricePerDay.orElse(null), userUUID.orElse(null), latitude, longitude
+                maxPricePerDay.orElse(null), userUUID.orElse(null), latitude, longitude,
+                loggedInUserUUID
         );
         Specification<User> spec = new UserSpecification(gameInstanceSearch);
         Page<User> usersPage = userRepository.findAll(spec, pageable);

@@ -131,7 +131,7 @@ public class GameInstanceController {
     public ResponseEntity<ResultsDTO<SearchGameInstanceDTO>>  getGameInstances(Authentication authentication, @RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
                                                                                @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber, @RequestParam Optional<Integer> maxPricePerDay,
                                                                                @RequestParam Optional<String> userUUID, @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page)
-            throws CategoryDoesNotExistException {
+            throws CategoryDoesNotExistException, UserDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstances(authentication, size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, userUUID, latitude, longitude));
     }
