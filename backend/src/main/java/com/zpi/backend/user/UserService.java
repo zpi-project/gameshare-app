@@ -3,11 +3,8 @@ package com.zpi.backend.user;
 import com.zpi.backend.email.EmailService;
 import com.zpi.backend.category.Category;
 import com.zpi.backend.category.CategoryRepository;
-import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
-import com.zpi.backend.email_type.EmailType;
-import com.zpi.backend.email_type.EmailTypeRepository;
 import com.zpi.backend.email_type.EmailTypeService;
 import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
@@ -92,8 +89,8 @@ public class UserService {
             throw new UserAlreadyExistsException("User already exists");
         }
     }
-    public void updateAvgRating(long userId){
-        userRepository.updateAvgRating(userId);
+    public void updateAvgRatingAndOpinionsAmount(long userId){
+        userRepository.updateAvgRatingAndOpinionsAmount(userId);
     }
 
     public ResultsDTO<UserGuestDTO> getUsersSearch(Authentication authentication, int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,

@@ -47,7 +47,7 @@ public class GameInstanceOpinionService {
 
         GameInstanceOpinion gameInstanceOpinion = new GameInstanceOpinion(user, gameInstance, newGameInstanceOpinionDTO);
         gameInstanceOpinionRepository.save(gameInstanceOpinion);
-        gameInstanceService.updateAvgRating(gameInstance.getId());
+        gameInstanceService.updateAvgRatingAndOpinionsAmount(gameInstance.getId());
         return new GameInstanceOpinionDTO(gameInstanceOpinion, isGuest);
     }
 
@@ -64,7 +64,7 @@ public class GameInstanceOpinionService {
             throw new EditSomeoneElseOpinionException("User can edit only his own opinion");
         gameInstanceOpinion.update(updatedGameInstanceOpinionDTO);
         gameInstanceOpinionRepository.save(gameInstanceOpinion);
-        gameInstanceService.updateAvgRating(gameInstanceOpinion.getGameInstance().getId());
+        gameInstanceService.updateAvgRatingAndOpinionsAmount(gameInstanceOpinion.getGameInstance().getId());
         return new GameInstanceOpinionDTO(gameInstanceOpinion, isGuest);
     }
 
@@ -75,7 +75,7 @@ public class GameInstanceOpinionService {
             throw new DeleteSomeoneElseOpinionException("User can delete only his own opinion");
         long gameInstanceId = gameInstanceOpinion.getGameInstance().getId();
         gameInstanceOpinionRepository.delete(gameInstanceOpinion);
-        gameInstanceService.updateAvgRating(gameInstanceId);
+        gameInstanceService.updateAvgRatingAndOpinionsAmount(gameInstanceId);
     }
 
     public ResultsDTO<GameInstanceOpinionDTO> getOpinions(Authentication authentication, String gameInstanceUuid, int page, int size) throws GameInstanceDoesNotExistException {

@@ -47,6 +47,8 @@ public class User{
 
     private double avgRating;
 
+    private int opinionsAmount;
+
     @ManyToOne
     private Role role;
 

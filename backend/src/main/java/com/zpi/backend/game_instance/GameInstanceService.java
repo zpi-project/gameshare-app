@@ -14,7 +14,6 @@ import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
 import com.zpi.backend.game_instance_image.GameInstanceImageService;
-import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
 import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.reservations.ReservationRepository;
 import com.zpi.backend.user.User;
@@ -155,8 +154,8 @@ public class GameInstanceService {
     }
 
 
-    public void updateAvgRating(long gameInstanceId){
-        gameInstanceRepository.updateAvgRating(gameInstanceId);
+    public void updateAvgRatingAndOpinionsAmount(long gameInstanceId){
+        gameInstanceRepository.updateAvgRatingAndOpinionsAmount(gameInstanceId);
     }
 
     public ResultsDTO<GameInstanceDetailsDTO> getGameInstancesToOpinions(long gameId, double latitude, double longitude,
