@@ -22,7 +22,7 @@ const ReservationDetails: FC = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["resesrvation", { id }],
+    queryKey: ["reservation", { id }],
     queryFn: () => ReservationsApi.getDetails(id),
   });
 
@@ -37,17 +37,14 @@ const ReservationDetails: FC = () => {
 
   useEffect(() => {
     if (user && reservation) {
-      console.log("found");
       if (reservation.reservation.renter.uuid === user.uuid) {
         setUserType("renter");
-        console.log("renter");
       }
       if (reservation.reservation.gameInstance.owner.uuid === user.uuid) {
         setUserType("owner");
-        console.log("owner");
       }
     }
-  }, []);
+  }, [user, reservation]);
 
   useEffect(() => {
     if (isUserError || isError) {
@@ -59,8 +56,6 @@ const ReservationDetails: FC = () => {
       navigate(URLS.MY_RESERVATIONS);
     }
   }, [isUserError, isError]);
-
-  console.log(reservation);
 
   return isLoading || isUserLoading ? (
     <ReservationDetailsLoading />
