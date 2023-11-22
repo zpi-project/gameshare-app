@@ -207,6 +207,9 @@ const pl: typeof en = {
   gameDetails: "Gra - szczegóły",
   gameReservationsCalendar: "Kalendarz rezerwacji gry",
   noOpinions: "Użytkownik nie ma jeszcze żadnej opinii",
+  cannotAddOpinionAboutOwner: "Nie możesz dodać jeszcze opinii o właścicielu gry.",
+  cannotAddOpinionAboutRenter: "Nie możesz dodać jeszcze opinii o wypożyczającym.",
+  cannotAddOpinionAboutGame: "Nie możesz dodać jeszcze opinii o tej grze.",
 };
 
 export default pl;

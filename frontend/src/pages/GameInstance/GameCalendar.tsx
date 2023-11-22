@@ -16,7 +16,6 @@ import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 import ReservationForm from "./ReservationForm";
 
-
 interface GameCalendarProps {
   gameInstance: GameInstanceDetails;
 }

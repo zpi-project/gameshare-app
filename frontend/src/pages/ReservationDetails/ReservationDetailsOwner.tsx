@@ -17,6 +17,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
     ownerOpinion,
     renterOpinion,
     gameInstanceOpinion,
+    canAddRenterOpinion,
   },
 }) => {
   const { t } = useTranslation();
@@ -84,7 +85,28 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
               btnText={t("seeProfile")}
             />
           </div>
-          <div className="flex-grow rounded-lg bg-section p-4">your opinion about renter</div>
+          <div className="flex flex-grow flex-col gap-4 rounded-lg bg-section p-4">
+            {renterOpinion ? (
+              <>
+                <div className="flex flex-row flex-wrap justify-between gap-4">
+                  <h3 className="text-xl uppercase">{t("yourOpinionAboutRenter")}</h3>
+                  <Stars count={renterOpinion.stars} />
+                </div>
+                <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
+                  {renterOpinion.description}
+                </p>
+              </>
+            ) : canAddRenterOpinion ? (
+              <div>you can add opinion about this user here</div>
+            ) : (
+              <>
+                <h3 className="text-xl uppercase">{t("yourOpinionAboutRenter")}</h3>
+                <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
+                  {t("cannotAddOpinionAboutRenter")}
+                </p>
+              </>
+            )}
+          </div>
         </div>
         <div className="relative flex flex-grow flex-col gap-4 rounded-lg bg-section p-4 xl:h-full">
           game + game calendar

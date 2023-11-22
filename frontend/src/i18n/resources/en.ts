@@ -202,4 +202,7 @@ export default {
   gameDetails: "Game - details",
   gameReservationsCalendar: "Game reservations calendar",
   noOpinions: "This user has no opinions yet",
+  cannotAddOpinionAboutOwner: "You cannot add opinion about the owner yet.",
+  cannotAddOpinionAboutRenter: "You cannot add opinion about this renter yet.",
+  cannotAddOpinionAboutGame: "You cannot add opinion about the game yet.",
 };
