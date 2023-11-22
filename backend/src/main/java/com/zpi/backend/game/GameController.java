@@ -3,6 +3,7 @@ package com.zpi.backend.game;
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Amount;
 import com.zpi.backend.dto.ResultsDTO;
+import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game.dto.GameDTO;
 import com.zpi.backend.game.dto.NewGameDTO;
@@ -21,6 +22,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +40,7 @@ public class GameController {
     )
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<GameDTO> addGame(@RequestBody NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException {
+    public ResponseEntity<GameDTO> addGame(@RequestBody NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException, IOException, EmailTypeDoesNotExists {
         System.out.println("... called addGame");
         GameDTO newGame = gameService.addGame(newGameDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -104,7 +106,7 @@ public class GameController {
     @GetMapping(value = "/popular")
     public ResponseEntity<ResultsDTO<GameDTO>> getPopularGames(@RequestParam int page, @RequestParam int size) {
         System.out.println("... called getPopularGames");
-        ResultsDTO<GameDTO> games = gameService.getGames(page, size, Optional.empty(), Optional.empty());
+        ResultsDTO<GameDTO> games = gameService.getPopularGames(page, size);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }

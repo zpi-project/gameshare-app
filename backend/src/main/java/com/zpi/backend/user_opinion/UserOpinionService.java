@@ -62,7 +62,7 @@ public class UserOpinionService {
         userOpinion.setReservation(reservation);
         boolean isGuest = !authentication.isAuthenticated();
         userOpinionRepository.save(userOpinion);
-        userService.updateAvgRating(ratedUser.getId());
+        userService.updateAvgRatingAndOpinionsAmount(ratedUser.getId());
         return new UserOpinionDTO(userOpinion, isGuest);
     }
 
@@ -91,7 +91,7 @@ public class UserOpinionService {
         boolean isGuest = !authentication.isAuthenticated();
         userOpinion.update(modifiedUserOpinionDTO);
         userOpinionRepository.save(userOpinion);
-        userService.updateAvgRating(userOpinion.getRatedUser().getId());
+        userService.updateAvgRatingAndOpinionsAmount(userOpinion.getRatedUser().getId());
         return new UserOpinionDTO(userOpinion, isGuest);
     }
 
@@ -101,6 +101,6 @@ public class UserOpinionService {
         if(checkIfNotRatingUsersOpinion(user, userOpinion))
             throw new DeleteSomeoneElseOpinionException("User can delete only his own opinion");
         userOpinionRepository.delete(userOpinion);
-        userService.updateAvgRating(user.getId());
+        userService.updateAvgRatingAndOpinionsAmount(user.getId());
     }
 }

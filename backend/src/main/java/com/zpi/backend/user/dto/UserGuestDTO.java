@@ -16,7 +16,7 @@ public class UserGuestDTO {
     private double locationLongitude;
     private String avatarLink;
     private double avgRating;
-
+    private int opinionsAmount;
 
     public UserGuestDTO(User user){
         uuid = user.getUuid();
@@ -26,5 +26,6 @@ public class UserGuestDTO {
         locationLongitude = user.getLocationLongitude();
         avatarLink = user.getAvatarLink();
         avgRating = (double) Math.round(user.getAvgRating() * 100) /100;
+        opinionsAmount = user.getOpinionsAmount();
     }
 }

@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import "@radix-ui/react-scroll-area";
 import { useQuery } from "@tanstack/react-query";
 import { GameApi } from "@/api/GameApi";
-import GameImgTitleCard from "@/components/GameImgTitleCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
+import PopularGame from "./PopularGame";
 
 const POPULAR_GAMES_PAGE_SIZE = 8;
 
@@ -42,7 +42,7 @@ const PopularGamesSection: FC = () => {
         ) : (
           <>
             {games.results.map(game => (
-              <GameImgTitleCard game={game} key={game.id} />
+              <PopularGame game={game} key={game.id} />
             ))}
           </>
         )}

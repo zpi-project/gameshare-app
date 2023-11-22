@@ -34,7 +34,7 @@ public class UserOpinion {
     @Column(name="timestamp")
     private Date timestamp;
 
-    @Column(name="isRatingUserOwner")
+    @Column(name="is_rating_user_owner")
     private boolean isRatingUserOwner;
 
     @ManyToOne
@@ -46,7 +46,6 @@ public class UserOpinion {
         this.stars = newUserOpinionDTO.getStars();
         this.description = newUserOpinionDTO.getDescription();
         this.timestamp = new Date(System.currentTimeMillis());
-        //this.isRatingUserOwner =; TODO add later when we have game instances
     }
 
     public UserOpinion update(ModifiedUserOpinionDTO modifiedUserOpinionDTO) {

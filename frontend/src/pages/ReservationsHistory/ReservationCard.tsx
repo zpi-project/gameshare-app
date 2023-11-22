@@ -5,7 +5,7 @@ import { URLS } from "@/constants/urls";
 import { Reservation } from "@/types/Reservation";
 import { getFullname } from "@/utils/user";
 import { PriceBadge } from "@/components/Badge";
-import Stars from "@/components/Stars";
+import { Stars } from "@/components/Stars";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
@@ -16,7 +16,7 @@ interface ReservationCardProps {
 const ReservationCard: FC<ReservationCardProps> = ({
   reservation: {
     reservationId,
-    status: { status },
+    status,
     startDate,
     endDate,
     duration,
@@ -66,7 +66,11 @@ const ReservationCard: FC<ReservationCardProps> = ({
             </div>
             <div className="hidden h-full flex-col gap-1 2xl:flex ">
               <h4 className="text-xl">{getFullname(asOwner ? renter : owner)}</h4>
-              {<Stars count={Math.round(asOwner ? renterRating : ownerRating)} size={24} />}
+              {asOwner ? (
+                renterRating > 0 && <Stars count={Math.round(renterRating)} size={24} />
+              ) : (
+                <Stars count={ownerRating} size={24} />
+              )}
             </div>
           </div>
           <div className="w-full lg:w-max lg:min-w-[300px]">

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import { SearchGameInstance } from "@/types/GameInstance";
 import { TimeBadge, PlayersBadge, AgeBadge, PriceBadge } from "@/components/Badge";
-import Stars from "@/components/Stars";
+import { Stars } from "@/components/Stars";
 
 interface GameInstanceSearchCardProps {
   gameInstance: SearchGameInstance;

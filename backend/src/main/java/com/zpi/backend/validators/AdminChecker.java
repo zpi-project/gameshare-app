@@ -18,7 +18,6 @@ public class AdminChecker {
     @Value("${ADMIN4_EMAIL}")
     private String admin4email;
 
-
     public boolean isAdmin(String email){
         return email.equals(admin1email) || email.equals(admin2email) || email.equals(admin3email) || email.equals(admin4email);
     }

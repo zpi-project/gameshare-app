@@ -14,7 +14,6 @@ import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.game_instance_image.GameInstanceImageRepository;
 import com.zpi.backend.game_instance_image.GameInstanceImageService;
-import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
 import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.reservations.ReservationRepository;
 import com.zpi.backend.user.User;
@@ -65,17 +64,6 @@ public class GameInstanceService {
         return new GameInstanceDTO(gameInstance);
     }
 
-    //TODO Implementation of checking reservation, what about status?
-    public void deleteGameInstance(String uuid, Authentication authentication) throws GameInstanceDoesNotExistException, UserDoesNotExistException {
-        User user = userService.getUser(authentication);
-        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(uuid, user);
-        //TODO Check if there is no reservation with status in progress or smth
-        if (gameInstanceOptional.isEmpty())
-            throw new GameInstanceDoesNotExistException("Game Instance (uuid = "+uuid+") does not exists or the User is not the Owner.");
-        gameInstanceImageService.deleteGameInstanceImagesByGameInstance(authentication, gameInstanceOptional.get().getUuid());
-        gameInstanceRepository.delete(gameInstanceOptional.get());
-    }
-
     public void activate(String gameInstanceUUID, Authentication authentication) throws GameInstanceDoesNotExistException, GameInstanceStatusException, UserDoesNotExistException {
         User user = userService.getUser(authentication);
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(gameInstanceUUID, user);
@@ -88,6 +76,7 @@ public class GameInstanceService {
         gameInstanceRepository.save(gameInstance);
     }
 
+    // TODO Implementation of checking reservation, what about status?
     public void deactivate(String gameInstanceUUID, Authentication authentication) throws GameInstanceDoesNotExistException, GameInstanceStatusException, UserDoesNotExistException {
         User user = userService.getUser(authentication);
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(gameInstanceUUID, user);
@@ -144,12 +133,22 @@ public class GameInstanceService {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
         boolean isGuest = authentication == null || !authentication.isAuthenticated();
+        String loggedInUserUUID = null;
+        try {
+            if (authentication != null) {
+                User loggedInUser = userService.getUser(authentication);
+                loggedInUserUUID = loggedInUser.getUuid();
+            }
+        } catch (UserDoesNotExistException ex){
+            // ignore
+        }
         if (categoryId.isPresent())
             category = categoryService.getCategory(categoryId.get());
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
                 searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null),
-                maxPricePerDay.orElse(null), userUUID.orElse(null), latitude, longitude
+                maxPricePerDay.orElse(null), userUUID.orElse(null), latitude, longitude,
+                loggedInUserUUID
         );
         Specification<GameInstance> spec = new GameInstanceSpecification(gameInstanceSearch);
         Page<GameInstance> gameInstancesPage = gameInstanceRepository.findAll(spec, pageable);
@@ -161,8 +160,8 @@ public class GameInstanceService {
     }
 
 
-    public void updateAvgRating(long gameInstanceId){
-        gameInstanceRepository.updateAvgRating(gameInstanceId);
+    public void updateAvgRatingAndOpinionsAmount(long gameInstanceId){
+        gameInstanceRepository.updateAvgRatingAndOpinionsAmount(gameInstanceId);
     }
 
     public ResultsDTO<GameInstanceDetailsDTO> getGameInstancesToOpinions(long gameId, double latitude, double longitude,

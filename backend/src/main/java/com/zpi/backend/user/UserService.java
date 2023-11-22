@@ -1,10 +1,12 @@
 package com.zpi.backend.user;
 
+import com.zpi.backend.email.EmailService;
 import com.zpi.backend.category.Category;
 import com.zpi.backend.category.CategoryRepository;
-import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
+import com.zpi.backend.email_type.EmailTypeService;
+import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstanceSearch;
 import com.zpi.backend.role.RoleRepository;
@@ -21,18 +23,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
 public class UserService {
+
     private  UserRepository userRepository;
     private final RoleRepository roleRepository;
     private AdminChecker adminChecker;
+    private EmailService emailService;
     private final CategoryRepository categoryRepository;
+    private final EmailTypeService emailTypeService;
 
     private boolean checkIfUserExists(String googleId) {
         User user = this.userRepository.findByGoogleId(googleId).orElse(null);
@@ -65,7 +70,7 @@ public class UserService {
         this.userRepository.save(user);
     }
 
-    public void registerUser(UpdateUserDTO updateUserDTO, Authentication authentication) throws UserAlreadyExistsException {
+    public void registerUser(UpdateUserDTO updateUserDTO, Authentication authentication) throws UserAlreadyExistsException, IOException, EmailTypeDoesNotExists {
         User user = (User) authentication.getPrincipal();
         if(!checkIfUserExists(user.getGoogleId())) {
             user.update(updateUserDTO);
@@ -74,34 +79,47 @@ public class UserService {
             else
                 user.setRole(roleRepository.getRoleByName("user"));
             userRepository.save(user);
+
+//            Sending e-mail
+            Context registrationContext = emailService.getRegistrationEmailContext();
+                emailService.sendEmailWithHtmlTemplate(user, registrationContext.getVariable("pl_title").toString(),
+                        EmailService.EMAIL_TEMPLATE, registrationContext, emailTypeService.findEmailTypeByStatus("REGISTRATION"));
         }
         else {
             throw new UserAlreadyExistsException("User already exists");
         }
     }
-    public void updateAvgRating(long userId){
-        userRepository.updateAvgRating(userId);
+    public void updateAvgRatingAndOpinionsAmount(long userId){
+        userRepository.updateAvgRatingAndOpinionsAmount(userId);
     }
 
-    public ResultsDTO<UserGuestDTO> getUsersSearch(int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
+    public ResultsDTO<UserGuestDTO> getUsersSearch(Authentication authentication, int size, int page, Optional<String> searchName, Optional<Long> categoryId, Optional<Integer> age,
                                                               Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, Optional<String> userUUID, double latitude,
-                                                              double longitude) throws CategoryDoesNotExistException {
+                                                              double longitude) {
         Pageable pageable = PageRequest.of(page, size);
         Category category = null;
         if (categoryId.isPresent())
             category = categoryRepository.getReferenceById(categoryId.get());
+        String loggedInUserUUID = null;
+        try {
+            if (authentication != null) {
+                User loggedInUser = getUser(authentication);
+                loggedInUserUUID = loggedInUser.getUuid();
+            }
+        } catch (UserDoesNotExistException ex){
+            // ignore
+        }
         GameInstanceSearch gameInstanceSearch = new GameInstanceSearch(
                 searchName.orElse(null), category,
                 age.orElse(null), playersNumber.orElse(null),
-                maxPricePerDay.orElse(null), userUUID.orElse(null), latitude, longitude
+                maxPricePerDay.orElse(null), userUUID.orElse(null), latitude, longitude,
+                loggedInUserUUID
         );
         Specification<User> spec = new UserSpecification(gameInstanceSearch);
         Page<User> usersPage = userRepository.findAll(spec, pageable);
         List<UserGuestDTO> resultList = new ArrayList<>();
         usersPage
-                .forEach(user -> {
-                    resultList.add(new UserGuestDTO(user));
-                });
+                .forEach(user -> resultList.add(new UserGuestDTO(user)));
         return new ResultsDTO<>(resultList,
                 new Pagination(usersPage.getTotalElements(), usersPage.getTotalPages()));
     }
