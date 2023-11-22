@@ -76,7 +76,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
             />
           </div>
         </ScrollArea>
-        <ScrollArea className="h-full flex-grow">
+        <ScrollArea className="h-full max-w-[30%] flex-grow">
           <div className="flex flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
             <div className="relative flex-grow rounded-lg bg-section p-8">
               <div
