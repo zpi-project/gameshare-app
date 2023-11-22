@@ -52,8 +52,12 @@ public class UserOpinionService {
         User user = userService.getUser(authentication);
         User ratedUser = userService.getUserByUUID(newUserOpinionDTO.getRatedUserUUID());
         Reservation reservation = reservationService.getReservationByUUID(newUserOpinionDTO.getReservationId());
+
         if(!checkIfCanAddOpinion(reservation,ratedUser))
             throw new BadRequestException("User already rated this reservation");
+        if(!(reservation.getStatus().getStatus().equals("RENTED")|| reservation.getStatus().getStatus().equals("FINISHED"))&&reservation.getRenter().equals(user))
+            throw new BadRequestException("Renter can rate only finished or rented reservations");
+
         UserOpinion userOpinion = newUserOpinionDTO.toUserOpinion(user, ratedUser);
         userOpinion.setReservation(reservation);
         boolean isGuest = !authentication.isAuthenticated();
