@@ -37,79 +37,86 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
   return (
     <ScrollArea className="h-full w-full xl:h-max">
       <div className="flex h-full w-full flex-col gap-4 xl:h-[calc(100vh-48px)] xl:flex-row">
-        <div className="flex min-h-[100%] flex-grow flex-col gap-4">
-          <div className="relative flex-grow rounded-lg bg-section p-8">
+        <ScrollArea className="h-full flex-grow">
+          <div className="flex flex-grow flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
+            <div className="relative flex-grow rounded-lg bg-section p-8">
+              <div
+                className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
+                style={{
+                  backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
+                }}
+              />
+              <div className="relative flex h-full flex-col gap-8">
+                <h1 className="text-xl uppercase">{t("reservationHeader", { reservationId })}</h1>
+                <ReservationDetailsTable
+                  reservationId={reservationId}
+                  startDate={startDate}
+                  endDate={endDate}
+                  duration={duration}
+                />
+                <ReservationDetailsStatus reservationId={reservationId} />
+                <div className="flex flex-grow flex-col gap-2">
+                  <h3 className="text-xl">{t("renterMessage")}</h3>
+                  <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
+                    {renterComment.length ? renterComment : t("renterNoMessage")}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <OpinionSection
+              opinion={ownerOpinion}
+              opinionHeader={t("rentersOpinion")}
+              noOpinionMessage={t("rentersNoOpinion")}
+            />
+            <OpinionSection
+              opinion={gameInstanceOpinion}
+              opinionHeader={t("rentersGameOpinion")}
+              noOpinionMessage={t("rentersNoGameOpinion")}
+            />
+          </div>
+        </ScrollArea>
+        <ScrollArea className="h-full flex-grow">
+          <div className="flex flex-grow flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
+            <div className="relative flex-grow rounded-lg bg-section p-8">
+              <div
+                className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
+                style={{
+                  backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
+                }}
+              />
+              <UserDetailsSection
+                user={renter}
+                title={t("renterDetails")}
+                btnText={t("seeProfile")}
+              />
+            </div>
+            <OpinionAboutRenter
+              renterOpinion={renterOpinion}
+              canAddRenterOpinion={canAddRenterOpinion}
+            />
+          </div>
+        </ScrollArea>
+        <ScrollArea className="h-full">
+          <div className="relative flex flex-col gap-4 rounded-lg bg-section p-4 xl:min-h-[calc(100vh-48px)]">
             <div
-              className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
+              className="absolute left-4 right-4 top-4 h-1/3 rounded-lg opacity-50 dark:opacity-40"
               style={{
                 backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
               }}
             />
-            <div className="relative flex h-full flex-col gap-8">
-              <h1 className="text-xl uppercase">{t("reservationHeader", { reservationId })}</h1>
-              <ReservationDetailsTable
-                reservationId={reservationId}
-                startDate={startDate}
-                endDate={endDate}
-                duration={duration}
-              />
-              <ReservationDetailsStatus reservationId={reservationId} />
-              <div className="flex flex-grow flex-col gap-2">
-                <h3 className="text-xl">{t("renterMessage")}</h3>
-                <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
-                  {renterComment.length ? renterComment : t("renterNoMessage")}
-                </p>
+            <div className="relative flex flex-grow flex-col justify-between gap-4 p-8 pb-4">
+              <GameInstanceDetails gameInstance={gameInstance} />
+              <Separator className="bg-secondary" />
+              <div className="w-[408px]">
+                <ReservationsCalendar
+                  className="gap-2"
+                  gameInstanceUUID={gameInstance.uuid}
+                  tileClassName="w-[60px] h-[60px]"
+                />
               </div>
             </div>
           </div>
-          <OpinionSection
-            opinion={ownerOpinion}
-            opinionHeader={t("rentersOpinion")}
-            noOpinionMessage={t("rentersNoOpinion")}
-          />
-          <OpinionSection
-            opinion={gameInstanceOpinion}
-            opinionHeader={t("rentersGameOpinion")}
-            noOpinionMessage={t("rentersNoGameOpinion")}
-          />
-        </div>
-        <div className="flex flex-grow flex-col gap-4">
-          <div className="relative flex-grow rounded-lg bg-section p-8">
-            <div
-              className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
-              style={{
-                backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
-              }}
-            />
-            <UserDetailsSection
-              user={renter}
-              title={t("renterDetails")}
-              btnText={t("seeProfile")}
-            />
-          </div>
-          <OpinionAboutRenter
-            renterOpinion={renterOpinion}
-            canAddRenterOpinion={canAddRenterOpinion}
-          />
-        </div>
-        <div className="relative flex flex-col gap-4 rounded-lg bg-section p-4 xl:h-full">
-          <div
-            className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
-            style={{
-              backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
-            }}
-          />
-          <div className="relative flex flex-grow flex-col justify-between gap-4 p-8">
-            <GameInstanceDetails gameInstance={gameInstance} />
-            <Separator className="bg-secondary" />
-            <div className="w-[408px]">
-              <ReservationsCalendar
-                gameInstanceUUID={gameInstance.uuid}
-                tileClassName="w-[60px] h-[60px]"
-              />
-            </div>
-          </div>
-        </div>
+        </ScrollArea>
       </div>
     </ScrollArea>
   );

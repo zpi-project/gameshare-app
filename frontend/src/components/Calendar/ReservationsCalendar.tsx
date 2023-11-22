@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getDaysInMonth } from "date-fns";
+import { string } from "zod";
 import { URLS } from "@/constants/urls";
 import { getFirstDayOfLastMonth, getFirstDayOfMonth, getFirstDayOfNextMonth } from "@/utils/date";
 import { stringToHexColor } from "@/utils/stringToColor";
@@ -13,11 +14,13 @@ import { Calendar, CalendarDay } from "./Calendar";
 interface ReservationsCalendarProps {
   gameInstanceUUID: string;
   tileClassName?: string;
+  className?: string;
 }
 
 const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
   gameInstanceUUID,
   tileClassName,
+  className,
 }) => {
   const [startDate, setStartDate] = useState(
     getFirstDayOfMonth(new Date(new Date().setHours(0, 0, 0, 0))),
@@ -74,6 +77,7 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
       onPrevClick={() => setStartDate(getFirstDayOfLastMonth(startDate))}
       date={startDate}
       tileClassName={tileClassName}
+      className={className}
     >
       {isError ? (
         <h3 className="mt-4 text-center text-xl text-destructive">
@@ -87,7 +91,7 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
           {isLoading ? (
             <>
               {Array.from({ length: getDaysInMonth(startDate) }).map((_, idx) => (
-                <CalendarDay key={idx + "loading"} variant="loading" className={tileClassName}/>
+                <CalendarDay key={idx + "loading"} variant="loading" className={tileClassName} />
               ))}
             </>
           ) : (
