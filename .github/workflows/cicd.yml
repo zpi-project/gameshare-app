@@ -1,0 +1,36 @@
+name: CICD
+
+on:
+  pull_request:
+    branches:
+      - develop
+    types: 
+      - opened
+      - closed
+      - synchronize
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+      checks: write
+      issues: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: 'google-github-actions/auth@v1'
+        with: 
+          credentials_json: ${{ secrets.IAC_CICD_SA }}
+      
+      - name: Deploy GCE
+        uses: mattes/gce-deploy-action@v5
+        with:
+          creds: ${{ secrets.IAC_CICD_SA }}
+          config: ./scripts/deploy.yml

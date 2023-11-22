@@ -1,0 +1,21 @@
+common:
+  labels:
+    gitsha: ${{ GITHUB_SHA }}
+
+deploys:
+  - name: my-app-deploy
+    region: us-east4
+    project: zpi-test-1
+    startup_script: ./startup.sh
+    instance_group: instance-group-1
+    instance_template_base: instance-template-1
+    instance_template: template-${{ GITHUB_RUN_NUMBER }}-${{ GITHUB_SHA }}
+    cloud_init: cloud-init.yml # see example dir
+    labels: # will also have gitsha from common section
+      version: ${{APP_VERSION}}
+    tags:
+      - my-tag123
+    update_policy:
+      min_ready_sec: 30
+
+delete_instance_templates_after: false
