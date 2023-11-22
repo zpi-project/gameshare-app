@@ -23,10 +23,6 @@ import org.thymeleaf.context.Context;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 @Component
 public class EmailService {
@@ -149,7 +145,7 @@ public class EmailService {
     public void sendUnsentEmails() {
         List<EmailLog> unsentEmails = emailLogRepository.findAllBySentIsFalse();
         logger.info("Checking e-mails to send.");
-        if (unsentEmails.size() > 0) {
+        if (!unsentEmails.isEmpty()) {
             for (EmailLog log : unsentEmails) {
                 try {
                     sendHTMLEmail(

@@ -4,8 +4,10 @@ import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.user.dto.UserDTO;
 import com.zpi.backend.user.dto.UserGuestDTO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class SearchGameInstanceDTO extends GameInstanceDTO {
     private UserGuestDTO owner;

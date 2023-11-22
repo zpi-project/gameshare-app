@@ -15,6 +15,7 @@ public class GameInstanceDTO {
     private double pricePerDay;
     private GameDTO game;
     private double avgRating;
+    private int opinionsAmount;
     private boolean isActive;
 
     public GameInstanceDTO(GameInstance gameInstance){
@@ -24,6 +25,7 @@ public class GameInstanceDTO {
         isActive = gameInstance.isActive();
         game = new GameDTO(gameInstance.getGame());
         avgRating = (double) Math.round(gameInstance.getAvgRating() * 100) /100;
+        opinionsAmount = gameInstance.getOpinionsAmount();
     }
 
 }

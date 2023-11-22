@@ -42,6 +42,8 @@ public class GameInstance {
 
     private double avgRating;
 
+    private int opinionsAmount;
+
     public GameInstance(NewGameInstanceDTO newGameInstanceDTO, Game game, User owner) {
         this.game = game;
         this.owner = owner;

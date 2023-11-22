@@ -32,6 +32,6 @@ public class GameInstanceOpinionsSpecification implements Specification<GameInst
                 cb.sqrt(cb.sum(cb.power(cb.diff(latitude, criteria.getLatitude()), 2),
                         cb.power(cb.diff(longitude, criteria.getLongitude()), 2)));
         query.orderBy(cb.asc(orderExpression));
-        return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+        return cb.and(predicates.toArray(new Predicate[0]));
     }
 }

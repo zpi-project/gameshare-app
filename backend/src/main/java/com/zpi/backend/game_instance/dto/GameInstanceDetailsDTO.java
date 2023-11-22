@@ -6,9 +6,11 @@ import com.zpi.backend.game_instance_image.dto.LinkDTO;
 import com.zpi.backend.user.dto.UserDTO;
 import com.zpi.backend.user.dto.UserGuestDTO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class GameInstanceDetailsDTO extends GameInstanceDTO {
     private List<LinkDTO> images;

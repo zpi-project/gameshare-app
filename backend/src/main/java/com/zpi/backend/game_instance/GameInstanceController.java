@@ -7,7 +7,6 @@ import com.zpi.backend.game.exception.GameDoesNotExistException;
 import com.zpi.backend.game_instance.dto.*;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
-import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
@@ -141,8 +140,8 @@ public class GameInstanceController {
             description = "Returns game instance unavailability periods " +
                     "can be called by anyone"
     )
-    @GetMapping(value="/{uuid}/avaliability")
-    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceUnAvaliability(@PathVariable String uuid, @RequestParam String year, @RequestParam String month) {
+    @GetMapping(value="/{uuid}/availability")
+    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceUnAvailability(@PathVariable String uuid, @RequestParam String year, @RequestParam String month) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstanceAvailability(uuid,year,month,false));
     }
@@ -154,7 +153,8 @@ public class GameInstanceController {
     )
     @GetMapping(value="/{uuid}/reservations")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceReservations(@PathVariable String uuid, @RequestParam String year, @RequestParam String month, Authentication authentication) throws GameInstanceDoesNotExistException, UserDoesNotExistException {
+    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceReservations(@PathVariable String uuid, @RequestParam String year, @RequestParam String month, Authentication authentication)
+            throws GameInstanceDoesNotExistException, UserDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstanceAvailabilityReservation(authentication,uuid,year,month));
     }

@@ -34,7 +34,7 @@ public class UserOpinion {
     @Column(name="timestamp")
     private Date timestamp;
 
-    @Column(name="isRatingUserOwner")
+    @Column(name="is_rating_user_owner")
     private boolean isRatingUserOwner;
 
     @ManyToOne
