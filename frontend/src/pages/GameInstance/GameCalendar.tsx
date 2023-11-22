@@ -54,7 +54,7 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
     >
       {isLoading && <Spinner />}
       <div className="flex flex-row gap-6">
-        {isSuccess ? (
+        {newReservationId.length ? (
           <div className="flex w-[364px] min-w-[364px] flex-grow flex-col items-center justify-center gap-8 rounded-lg bg-section p-8">
             <p className="text-center text-xl">{t("createReservationSuccessDescription")}</p>
             <Link
