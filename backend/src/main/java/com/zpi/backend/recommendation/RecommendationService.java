@@ -1,12 +1,9 @@
 package com.zpi.backend.recommendation;
 
-import com.zpi.backend.reservations.DTO.ReservationDTO;
-import com.zpi.backend.user.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -32,5 +29,15 @@ public class RecommendationService {
         }
 
         return usersTransactions.values().stream().toList();
+    }
+
+    public List<AssociationRule> getAllAssociationRules(){
+        return recommendationRepository.findAll();
+    }
+
+    public void runAprioriAlgorithm(){
+        AprioriAlgorithm aprioriAlgorithm =
+                new AprioriAlgorithm(2, 0.5, prepareTransactions());
+        aprioriAlgorithm.run();
     }
 }
