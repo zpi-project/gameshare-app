@@ -1,11 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { t } from "i18next";
 import { useRecoilValue } from "recoil";
 import { tokenState } from "@/state/token";
 import { URLS } from "@/constants/urls";
 import { ReservationsApi } from "@/api/ReservationsApi";
 import { UserApi } from "@/api/UserApi";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
 import ReservationDetailsOwner from "./ReservationDetailsOwner/ReservationDetailsOwner";
 import ReservationDetailsRenter from "./ReservationDetailsRenter";
@@ -49,8 +51,8 @@ const ReservationDetails: FC = () => {
   useEffect(() => {
     if (isUserError || isError) {
       toast({
-        title: "e",
-        description: "",
+        title: t("tryRefreshing"),
+        description: t("errorFetchingDetails", { reservationId: id }),
         variant: "destructive",
       });
       navigate(URLS.MY_RESERVATIONS);
@@ -58,7 +60,7 @@ const ReservationDetails: FC = () => {
   }, [isUserError, isError]);
 
   return isLoading || isUserLoading ? (
-    <ReservationDetailsLoading />
+    <Skeleton className="h-full w-full rounded-lg" />
   ) : (
     !(isUserError || isError) && (
       <>
@@ -70,7 +72,3 @@ const ReservationDetails: FC = () => {
 };
 
 export default ReservationDetails;
-
-const ReservationDetailsLoading: FC = () => {
-  return <>loading</>;
-};

@@ -213,4 +213,5 @@ export default {
   errorChangingStatusDescription: "Status has not been changed.",
   renter: "Renter",
   owner: "Game owner",
+  errorFetchingDetails: "There was an error fetching details about reservation {{reservationId}}",
 };
