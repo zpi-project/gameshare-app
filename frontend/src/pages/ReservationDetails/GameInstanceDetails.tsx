@@ -24,10 +24,10 @@ const GameInstanceDetails: FC<GameInstanceDetailsProps> = ({
     <div className="flex flex-col gap-4">
       <h3 className="text-xl uppercase">{t("gameDetails")}</h3>
       <div className="flex flex-col gap-4">
-        <p className="flex flex-row flex-wrap justify-between">
-          <h4 className="text-lg font-semibold">{name}</h4>
+        <div className="flex flex-row flex-wrap justify-between">
+          <p className="text-lg font-semibold">{name}</p>
           <PriceBadge price={pricePerDay} />
-        </p>
+        </div>
         <div className="flex flex-row gap-4">
           <div className="h-[190px] w-[190px] min-w-[190px] flex-grow overflow-hidden rounded-lg bg-section">
             <img

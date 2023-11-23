@@ -55,7 +55,11 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
                   endDate={endDate}
                   duration={duration}
                 />
-                <ReservationDetailsStatus reservationId={reservationId} status={status} />
+                <ReservationDetailsStatus
+                  reservationId={reservationId}
+                  status={status}
+                  user="owner"
+                />
                 <div className="flex flex-grow flex-col gap-2">
                   <h3 className="text-xl">{t("renterMessage")}</h3>
                   <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
@@ -76,7 +80,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
             />
           </div>
         </ScrollArea>
-        <ScrollArea className="h-full max-w-[30%] flex-grow">
+        <ScrollArea className="h-full xl:max-w-[30%] flex-grow">
           <div className="flex flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
             <div className="relative flex-grow rounded-lg bg-section p-8">
               <div

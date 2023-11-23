@@ -56,7 +56,7 @@ const ReservationDetails: FC = () => {
       navigate(URLS.MY_RESERVATIONS);
     }
   }, [isUserError, isError]);
-  console.log(reservation);
+
   return isLoading || isUserLoading ? (
     <ReservationDetailsLoading />
   ) : (
