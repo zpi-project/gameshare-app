@@ -208,7 +208,9 @@ export default {
   gameNoOpinions: "No opinions",
   successChangingStatus: "Status was changed successfully",
   successChangingStatusDescription:
-    "Current status is {{status}}. An email was sent with new status change confirmation.",
+    "Current status is - {{status}}. {{user}} has received an email with new status change confirmation.",
   errorChangingStatus: "There was an error changing status.",
   errorChangingStatusDescription: "Status has not been changed.",
+  renter: "Renter",
+  owner: "Game owner",
 };

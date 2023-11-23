@@ -213,9 +213,11 @@ const pl: typeof en = {
   gameNoOpinions: "Brak opinii",
   successChangingStatus: "Status zmieniony pomyślnie",
   successChangingStatusDescription:
-    "Aktualny status to {{status}}. Wysłaliśmy maila z potwierdzeniem zmiany statusu.",
+    "Aktualny status to - {{status}}. {{user}} otrzymał maila z potwierdzeniem zmiany statusu rezerwacji.",
   errorChangingStatus: "Wystąpił błąd podczas zmiany statusu.",
   errorChangingStatusDescription: "Nie zmieniono statusu.",
+  owner: "Właściciel gry",
+  renter: "Wypożyczający",
 };
 
 export default pl;

@@ -32,9 +32,6 @@ const ReservationDetailsStatus: FC<ReservationDetailsStatusProps> = ({
         : [],
   });
 
-  console.log(statuses);
-  console.log(status);
-
   const { mutate, isLoading } = useMutation({
     mutationFn: (status: ReservationStatusType) =>
       ReservationsApi.changeStatus(reservationId, status),
@@ -42,7 +39,10 @@ const ReservationDetailsStatus: FC<ReservationDetailsStatusProps> = ({
       queryClient.invalidateQueries(["reservation", { id: reservationId }]);
       toast({
         title: t("successChangingStatus"),
-        description: t("successChangingStatusDescription", { status: data.status }),
+        description: t("successChangingStatusDescription", {
+          status: t(`reservationStatuses.${user}.${data.status}`),
+          user: t(user === "owner" ? "renter" : "owner"),
+        }),
       });
     },
     onError: () => {
