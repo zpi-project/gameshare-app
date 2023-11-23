@@ -160,6 +160,11 @@ public class GameInstanceController {
                 .body(gameInstanceService.getGameInstanceAvailabilityReservation(authentication,uuid,year,month));
     }
 
+    @Operation(
+            summary ="Checks if game instance can be reserved",
+            description = "Returns true if game instance can be reserved in given time frame " +
+                    "can be called by anyone"
+    )
     @RequestMapping(method= GET,value = "/{uuid}/timeframes/avaliable")
     public ResponseEntity<Boolean> canMakeReservation(@PathVariable String uuid, @RequestParam Date startDate, @RequestParam Date endDate)  {
         return ResponseEntity.status(HttpStatus.OK)

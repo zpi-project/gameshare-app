@@ -258,7 +258,7 @@ public class GameInstanceService {
         GameInstance gameinstance =gameInstanceRepository.findByUuid(uuid).orElseThrow(()->new GameInstanceDoesNotExistException("Game instance with uuid "+uuid+" does not exist"));
 
         if(!isOwner(user,gameinstance))
-            throw new UserDoesNotExistException("User with googleId "+user.getGoogleId()+" is not owner of game instance with uuid "+uuid);
+            throw new UserDoesNotExistException("User is not an owner of game instance with uuid "+uuid);
         return  getUnAvaliability(reservations,Integer.parseInt(year),Integer.parseInt(month),true);
     }
 
