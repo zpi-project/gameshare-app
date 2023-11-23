@@ -40,10 +40,17 @@ const ReservationDetailsStatus: FC<ReservationDetailsStatusProps> = ({
       ReservationsApi.changeStatus(reservationId, status),
     onSuccess: data => {
       queryClient.invalidateQueries(["reservation", { id: reservationId }]);
-      toast({});
+      toast({
+        title: t("successChangingStatus"),
+        description: t("successChangingStatusDescription", { status: data.status }),
+      });
     },
     onError: () => {
-      console.log("error");
+      toast({
+        title: t("errorChangingStatus"),
+        description: t("errorChangingStatusDescription"),
+        variant: "destructive",
+      });
     },
   });
 

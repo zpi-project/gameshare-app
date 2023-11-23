@@ -211,6 +211,11 @@ const pl: typeof en = {
   cannotAddOpinionAboutRenter: "Nie możesz dodać jeszcze opinii o wypożyczającym.",
   cannotAddOpinionAboutGame: "Nie możesz dodać jeszcze opinii o tej grze.",
   gameNoOpinions: "Brak opinii",
+  successChangingStatus: "Status zmieniony pomyślnie",
+  successChangingStatusDescription:
+    "Aktualny status to {{status}}. Wysłaliśmy maila z potwierdzeniem zmiany statusu.",
+  errorChangingStatus: "Wystąpił błąd podczas zmiany statusu.",
+  errorChangingStatusDescription: "Nie zmieniono statusu.",
 };
 
 export default pl;
