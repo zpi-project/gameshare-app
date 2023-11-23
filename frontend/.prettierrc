@@ -8,7 +8,6 @@
   "arrowParens": "avoid",
   "trailingComma": "all",
   "bracketSpacing": true,
-  "sortImports": true,
   "importOrder": [
     "^react(.*)$",
     "<THIRD_PARTY_MODULES>",
