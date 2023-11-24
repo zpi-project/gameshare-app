@@ -7,28 +7,32 @@ import com.zpi.backend.game.dto.GameDTO;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserService;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Component
 @Service
-@AllArgsConstructor
 public class RecommendationService {
 
-    @Value("${APRIORI_MIN_SUPPORT}")
-    private static int APRIORI_MIN_SUPPORT;
-    @Value("${APRIORI_MIN_CONFIDENCE}")
-    private static double APRIORI_MIN_CONFIDENCE;
-
+    @Value(value = "${APRIORI_MIN_SUPPORT}")
+    private int APRIORI_MIN_SUPPORT;
+    @Value(value = "${APRIORI_MIN_CONFIDENCE}")
+    private double APRIORI_MIN_CONFIDENCE;
     private final RecommendationRepository recommendationRepository;
     private final UserService userService;
+
+    public RecommendationService(RecommendationRepository recommendationRepository, UserService userService) {
+        this.recommendationRepository = recommendationRepository;
+        this.userService = userService;
+    }
 
     public ResultsDTO<GameDTO> getRecommendedGames(Authentication authentication, int page, int size) throws UserDoesNotExistException {
         Pageable pageable = PageRequest.of(page, size);
