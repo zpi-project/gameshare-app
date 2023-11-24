@@ -1,5 +1,6 @@
 package com.zpi.backend.recommendation;
 
+import com.google.api.client.util.Value;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.game.Game;
@@ -20,6 +21,12 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class RecommendationService {
+
+    @Value("${APRIORI_MIN_SUPPORT}")
+    private static int APRIORI_MIN_SUPPORT;
+    @Value("${APRIORI_MIN_CONFIDENCE}")
+    private static int APRIORI_MIN_CONFIDENCE;
+
     private final RecommendationRepository recommendationRepository;
     private final UserService userService;
 
@@ -91,7 +98,7 @@ public class RecommendationService {
 
     public void runAprioriAlgorithm(){
         AprioriAlgorithm aprioriAlgorithm =
-                new AprioriAlgorithm(2, 0.5, prepareTransactions());
+                new AprioriAlgorithm(APRIORI_MIN_SUPPORT, APRIORI_MIN_CONFIDENCE, prepareTransactions());
         List<AssociationRule> associationRuleDBS = aprioriAlgorithm.run();
         recommendationRepository.deleteAll();
         recommendationRepository.saveAll(
