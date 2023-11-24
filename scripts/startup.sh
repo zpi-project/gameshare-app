@@ -10,5 +10,6 @@ echo \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get -y update
+cp -r $GITHUB_WORKSPACE /.
 cd gameshare-app
 sudo docker compose-up
