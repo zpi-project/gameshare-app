@@ -126,7 +126,7 @@ public class AprioriAlgorithm {
                     double confidence = calculateConfidence(itemset, antecedent);
 
                     if (support >= minSupport && confidence >= minConfidence) {
-                        rules.add(AssociationRule.generateAssociationRule(antecedent, consequent,
+                        rules.add(new AssociationRule(antecedent, consequent,
                                 support, confidence));
                     }
                 }

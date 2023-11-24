@@ -1,4 +1,4 @@
-package com.zpi.backend.recommendation.DTO;
+package com.zpi.backend.recommendation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
