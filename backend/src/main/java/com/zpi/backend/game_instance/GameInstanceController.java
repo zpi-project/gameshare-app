@@ -16,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -151,12 +152,23 @@ public class GameInstanceController {
             description = "Returns game instance unavailability periods and reservation uuid " +
                     "can be called by owner of the game instance"
     )
-    @GetMapping(value="/{uuid}/reservations")
+    @RequestMapping(method = GET,value="/{uuid}/reservations")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceReservations(@PathVariable String uuid, @RequestParam String year, @RequestParam String month, Authentication authentication)
             throws GameInstanceDoesNotExistException, UserDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstanceAvailabilityReservation(authentication,uuid,year,month));
+    }
+
+    @Operation(
+            summary ="Checks if game instance can be reserved",
+            description = "Returns true if game instance can be reserved in given time frame " +
+                    "can be called by anyone"
+    )
+    @RequestMapping(method= GET,value = "/{uuid}/timeframes/avaliable")
+    public ResponseEntity<Boolean> canMakeReservation(@PathVariable String uuid, @RequestParam Date startDate, @RequestParam Date endDate)  {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(gameInstanceService.canMakeReservation(uuid,startDate,endDate));
     }
 
 }

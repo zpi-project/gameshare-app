@@ -59,11 +59,16 @@ public class Reservation {
         this.gameInstance = gameInstance;
         this.startDate = newReservationDTO.getStartDate();
         this.endDate = newReservationDTO.getEndDate();
-        this.renterComment = newReservationDTO.getRenterComment();
+        if(this.renterComment !=null)
+            this.renterComment = newReservationDTO.getRenterComment().orElse(null);
         this.timestamp = new Date(System.currentTimeMillis());
         this.duration = DateUtils.getDuration(startDate,endDate);
         this.reservationId = UUID.randomUUID().toString();
         return this;
+    }
+
+    public int getDuration() {
+        return DateUtils.getDuration(startDate,endDate);
     }
     public Reservation(User renter, GameInstance gameInstance, Date startDate, Date endDate, ReservationStatus status, String renterComment, Date timestamp) {
         this.renter = renter;

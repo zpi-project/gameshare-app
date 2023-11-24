@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,7 @@ public class UserOpinionService {
     public ResultsDTO<UserOpinionDTO> getMyOpinions(Authentication authentication, int page, int size) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
         boolean isGuest = !authentication.isAuthenticated();
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size, Sort.by( "timestamp").descending());
         Page<UserOpinion> userOpinionPage = userOpinionRepository.getUserOpinionsByRatedUserOrderByTimestamp(user, pageable);
         List<UserOpinionDTO> userOpinionDTOList = new ArrayList<>();
         userOpinionPage
@@ -51,8 +52,12 @@ public class UserOpinionService {
         User user = userService.getUser(authentication);
         User ratedUser = userService.getUserByUUID(newUserOpinionDTO.getRatedUserUUID());
         Reservation reservation = reservationService.getReservationByUUID(newUserOpinionDTO.getReservationId());
+
         if(!checkIfCanAddOpinion(reservation,ratedUser))
             throw new BadRequestException("User already rated this reservation");
+        if(!(reservation.getStatus().getStatus().equals("RENTED")|| reservation.getStatus().getStatus().equals("FINISHED"))&&reservation.getRenter().equals(user))
+            throw new BadRequestException("Renter can rate only finished or rented reservations");
+
         UserOpinion userOpinion = newUserOpinionDTO.toUserOpinion(user, ratedUser);
         userOpinion.setReservation(reservation);
         boolean isGuest = !authentication.isAuthenticated();
