@@ -38,6 +38,8 @@ public class RecommendationService {
     public void runAprioriAlgorithm(){
         AprioriAlgorithm aprioriAlgorithm =
                 new AprioriAlgorithm(2, 0.5, prepareTransactions());
-        aprioriAlgorithm.run();
+        List<AssociationRule> associationRules = aprioriAlgorithm.run();
+        recommendationRepository.deleteAll();
+        recommendationRepository.saveAll(associationRules);
     }
 }
