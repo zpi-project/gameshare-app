@@ -37,9 +37,11 @@ public class RecommendationService {
         Set<Long> recommendedGameIds = associationRules.stream()
                 .filter(rule -> ruleContainsPlayedGames(rule, gameIds))
                 .sorted((rule1, rule2) -> Double.compare(rule2.getConfidence(), rule1.getConfidence()))
-                .map(AssociationRule::getConsequent)
-                .findFirst()
-                .orElse(Set.of());;
+                .flatMap(ar -> ar.getConsequent().stream())
+                .collect(Collectors.toSet());
+
+        // Removing games that user already played
+        recommendedGameIds.removeAll(gameIds);
 
         Page<Game> recommendedGames = recommendationRepository.getRecommendedGames(recommendedGameIds, pageable);
 
