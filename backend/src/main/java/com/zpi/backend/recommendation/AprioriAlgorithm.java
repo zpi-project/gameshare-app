@@ -23,6 +23,7 @@ public class AprioriAlgorithm {
     public void run(){
         createItemSet();
         printInfo();
+        aprioriStart();
     }
 
     private void createItemSet(){
@@ -41,7 +42,7 @@ public class AprioriAlgorithm {
         System.out.println("---------------------------------------------");
     }
 
-    private void addItemsToMapOverMinSupport(Set<Set<Long>> setsToVerify) {
+    private void addItemsToMapOverMinSupport(List<Set<Long>> setsToVerify) {
         for(Set<Long> item: setsToVerify) {
             int countItemOccurrence=0;
             for(Set<Long> transaction: transactions)
@@ -55,7 +56,8 @@ public class AprioriAlgorithm {
     }
 
     private void aprioriStart() {
-        Set<Set<Long>> combinations = itemsSupport.keySet();
+        addItemsToMapOverMinSupport(itemSet);
+        List<Set<Long>> combinations = itemsSupport.keySet().stream().toList();
 
         while(combinations.size()>1) {
             combinations = generateCombinations(combinations);
@@ -79,14 +81,14 @@ public class AprioriAlgorithm {
         }
     }
 
-    private Set<Set<Long>> generateCombinations(Set<Set<Long>> combinations){
+    private List<Set<Long>> generateCombinations(List<Set<Long>> combinations){
         List<Set<Long>> newCombinations = new ArrayList<>();
-        int combinationLength = combinations.iterator().next().size();
+        int combinationLength = combinations.get(0).size() + 1;
         Set<Long> allInOneSet = new HashSet<>();
         for (Set<Long> c : combinations)
             allInOneSet.addAll(c);
         generateCombinationsHelper(allInOneSet.stream().toList(), combinationLength, 0, new ArrayList<>(), newCombinations);
-        return new HashSet<>(newCombinations);
+        return newCombinations;
     }
 
 }
