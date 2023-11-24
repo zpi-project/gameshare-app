@@ -1,6 +1,5 @@
 package com.zpi.backend.recommendation;
 
-import com.google.api.client.util.Value;
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.game.Game;
@@ -9,6 +8,7 @@ import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserService;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +25,7 @@ public class RecommendationService {
     @Value("${APRIORI_MIN_SUPPORT}")
     private static int APRIORI_MIN_SUPPORT;
     @Value("${APRIORI_MIN_CONFIDENCE}")
-    private static int APRIORI_MIN_CONFIDENCE;
+    private static double APRIORI_MIN_CONFIDENCE;
 
     private final RecommendationRepository recommendationRepository;
     private final UserService userService;
