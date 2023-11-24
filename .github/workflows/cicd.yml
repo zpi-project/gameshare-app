@@ -9,6 +9,9 @@ on:
       - closed
       - synchronize
 
+env:
+  ENV: ${{ secrets.ENV }}
+
 jobs:
   cd:
     runs-on: ubuntu-latest
