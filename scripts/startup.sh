@@ -15,4 +15,4 @@ sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plug
 sudo apt-get -y install git
 git clone https://github.com/zpi-project/gameshare-app.git
 cd gameshare-app
-sudo docker compose-up
+sudo docker compose up
