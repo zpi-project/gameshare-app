@@ -36,7 +36,7 @@ public class RecommendationController {
             description = "Retrieves suggested game recommendations for the logged-in user based on " +
                     "their own previous reservations and those of others."
     )
-    @RequestMapping(method = RequestMethod.GET, value = "/user")
+    @RequestMapping(method = RequestMethod.GET)
     @PreAuthorize("isAuthenticated()")
     @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
     public ResponseEntity<ResultsDTO<GameDTO>> getRecommendations(Authentication authentication,
