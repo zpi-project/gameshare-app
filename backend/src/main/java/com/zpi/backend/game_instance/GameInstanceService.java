@@ -20,7 +20,7 @@ import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 
-import com.zpi.backend.utils.DateUtils;
+
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -178,8 +178,13 @@ public class GameInstanceService {
     }
 
     public boolean matchesUnAvaliabilityCriteria(int year,int month,Reservation reservation){
-        return DateUtils.getYear(reservation.getStartDate())==year && DateUtils.getMonth(reservation.getStartDate())==month;
+        if (reservation.getStartDate().getYear()+1900 > year || reservation.getEndDate().getYear()+1900 < year)
+            return false;
+        if( reservation.getStartDate().getMonth() + 1 > month && reservation.getEndDate().getMonth() + 1< month)
+            return true;
+        return reservation.getStatus().getStatus().equals("ACCEPTED_BY_OWNER") || reservation.getStatus().getStatus().equals("RENTED");
     }
+
 
 
 
@@ -190,12 +195,42 @@ public class GameInstanceService {
            if(matchesUnAvaliabilityCriteria(year,month,reservation)){
                Date startDate = reservation.getStartDate();
                Date endDate = reservation.getEndDate();
-               if(reservation.getEndDate().getMonth()+1!=month){
-                   Calendar calendar = Calendar.getInstance();
-                   calendar.setTime(startDate);
-                   int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-                   calendar.set(Calendar.DAY_OF_MONTH, lastDay);
-                   endDate = calendar.getTime();
+
+               if(reservation.getEndDate().getMonth()+1!=month|| reservation.getStartDate().getMonth()+1 !=month){
+                   if(reservation.getEndDate().getMonth()+1!=month&& reservation.getStartDate().getMonth()+1 ==month){
+                       Calendar calendar = Calendar.getInstance();
+                       calendar.setTime(startDate);
+                       int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                       calendar.set(Calendar.DAY_OF_MONTH, lastDay);
+                       endDate = calendar.getTime();
+                   }
+                   else if(reservation.getEndDate().getMonth()+1!=month&& reservation.getStartDate().getMonth()+1 !=month){
+                       Date today = new Date();
+                       Calendar calendar = Calendar.getInstance();
+                       calendar.setTime(today);
+
+                       calendar.set(Calendar.MONTH, month-1);
+
+                       calendar.set(Calendar.DAY_OF_MONTH, 1);
+                       Date firstDayOfMonth = calendar.getTime();
+
+                       calendar.add(Calendar.MONTH, 1);
+                       calendar.add(Calendar.DAY_OF_MONTH, -1);
+                       Date lastDayOfMonth = calendar.getTime();
+
+                       startDate = firstDayOfMonth;
+                       endDate = lastDayOfMonth;
+                   }
+                   else {
+                       Date today = new Date();
+                       Calendar calendar = Calendar.getInstance();
+                       calendar.setTime(today);
+
+                       calendar.set(Calendar.MONTH, month-1);
+
+                       calendar.set(Calendar.DAY_OF_MONTH, 1);
+                       startDate = calendar.getTime();
+                   }
                }
                if (withReservations){
                    periods.add(new GameInstanceUnAvailabilityReservationDTO(startDate,endDate,reservation.getReservationId()));
@@ -210,7 +245,7 @@ public class GameInstanceService {
 
 
     public List<GameInstanceUnAvailabilityDTO> getGameInstanceAvailability(String uuid, String year, String month,Boolean withReservations) {
-        List<Reservation> reservations= reservationRepository.findReservationsByGameInstance_Uuid(uuid);
+        List<Reservation> reservations= reservationRepository.findAcceptedOrRentedReservationsByGameInstance(uuid);
         return getUnAvaliability(reservations,Integer.parseInt(year),Integer.parseInt(month),withReservations);
     }
 
@@ -218,12 +253,21 @@ public class GameInstanceService {
         return gameInstance.getOwner().equals(user);
     }
     public List<GameInstanceUnAvailabilityDTO> getGameInstanceAvailabilityReservation(Authentication authentication, String uuid, String year, String month) throws UserDoesNotExistException, GameInstanceDoesNotExistException {
-        List<Reservation> reservations= reservationRepository.findReservationsByGameInstance_Uuid(uuid);
+        List<Reservation> reservations= reservationRepository.findAcceptedOrRentedReservationsByGameInstance(uuid);
         User user = userService.getUser(authentication);
         GameInstance gameinstance =gameInstanceRepository.findByUuid(uuid).orElseThrow(()->new GameInstanceDoesNotExistException("Game instance with uuid "+uuid+" does not exist"));
 
         if(!isOwner(user,gameinstance))
-            throw new UserDoesNotExistException("User with googleId "+user.getGoogleId()+" is not owner of game instance with uuid "+uuid);
+            throw new UserDoesNotExistException("User is not an owner of game instance with uuid "+uuid);
         return  getUnAvaliability(reservations,Integer.parseInt(year),Integer.parseInt(month),true);
+    }
+
+    public Boolean canMakeReservation(String uuid, Date startDate, Date endDate) {
+        List<Reservation> reservations = reservationRepository.findAcceptedOrRentedReservationsByGameInstance(uuid);
+        for (Reservation reservation : reservations) {
+            if (reservation.getStartDate().before(endDate) && reservation.getEndDate().after(startDate))
+                return false;
+        }
+        return true;
     }
 }

@@ -19,10 +19,12 @@ import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import com.zpi.backend.user_opinion.UserOpinion;
+import com.zpi.backend.game_instance.GameInstanceService;
 import com.zpi.backend.user_opinion.UserOpinionRepository;
 import com.zpi.backend.user_opinion.dto.UserOpinionDTO;
 import com.zpi.backend.utils.DateUtils;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -36,7 +38,6 @@ import org.thymeleaf.context.Context;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -77,29 +78,31 @@ public class ReservationService {
             throw new BadRequestException("Owner cannot be renter");
     }
 
+
+
     public ResultsDTO<ReservationDTO> getMyReservationsAsOwner(User owner, ReservationStatus status, int page, int size){
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size,Sort.by( "timestamp").descending());
         Page<Reservation> reservationPage = reservationRepository.getCurrentReservationsByOwnerAndStatus(pageable, owner.getUuid(),status.getStatus());
         Page<ReservationDTO > reservationDTOPage = convertPage(reservationPage);
         return new ResultsDTO<>(reservationDTOPage.stream().toList(), new Pagination(reservationDTOPage.getTotalElements(),reservationDTOPage.getTotalPages()));
     }
 
     public ResultsDTO<ReservationDTO> getMyReservationsAsOwner(User owner, int page, int size){
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size,Sort.by( "timestamp").descending());
         Page<Reservation> reservationPage = reservationRepository.getReservationsByOwner(pageable, owner.getUuid());
         Page<ReservationDTO > reservationDTOPage = convertPage(reservationPage);
         return new ResultsDTO<>(reservationDTOPage.stream().toList(), new Pagination(reservationDTOPage.getTotalElements(),reservationDTOPage.getTotalPages()));
     }
 
     public ResultsDTO<ReservationDTO> getMyReservationsAsRenter(User renter,ReservationStatus status, int page, int size){
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size,Sort.by( "timestamp").descending());
         Page<Reservation> reservationPage = reservationRepository.getReservationsByRenterAndStatus(pageable, renter.getUuid(),status.getStatus());
         Page<ReservationDTO > reservationDTOPage = convertPage(reservationPage);
         return new ResultsDTO<>(reservationDTOPage.stream().toList(), new Pagination(reservationDTOPage.getTotalElements(),reservationDTOPage.getTotalPages()));
     }
 
     public ResultsDTO<ReservationDTO> getMyReservationsAsRenter(User renter, int page, int size){
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size, Sort.by( "timestamp").descending());
         Page<Reservation> reservationPage = reservationRepository.getReservationsByRenter(pageable, renter.getUuid());
         Page<ReservationDTO > reservationDTOPage = convertPage(reservationPage);
         return new ResultsDTO<>(reservationDTOPage.stream().toList(), new Pagination(reservationDTOPage.getTotalElements(),reservationDTOPage.getTotalPages()));
@@ -142,8 +145,8 @@ public class ReservationService {
         return new PageImpl<>(reservationDTOList, reservationPage.getPageable(), reservationPage.getTotalElements());
     }
 
-    public ResultsDTO<ReservationDTO> getReservationsByGameInstance(Authentication authentication, String gameInstanceUuid, int page, int size) throws GameInstanceDoesNotExistException, UserDoesNotExistException, BadRequestException {
-        Pageable pageable = PageRequest.of(page, size);
+    public ResultsDTO<ReservationDTO> getReservationsByGameInstance(Authentication authentication, String gameInstanceUuid, int page, int size) throws GameInstanceDoesNotExistException,UserDoesNotExistException, BadRequestException {
+        Pageable pageable = PageRequest.of(page, size,Sort.by( "timestamp").descending());
         GameInstance gameInstance = gameInstanceService.getGameInstance(gameInstanceUuid);
         User user = userService.getUser(authentication);
         if(!checkIfUserIsOwner(user,gameInstance))
@@ -159,6 +162,12 @@ public class ReservationService {
         if(!canChangeStatus(authentication,reservation))
             throw new BadRequestException("User is not owner or renter of this reservation");
         List<String> possibleStatuses = getReservationStatuses(authentication,reservationId);
+
+        User user = userService.getUser(authentication);
+        String user_type = "Owner";
+        if (checkIfUserIsRenter(user, reservation))
+             user_type = "Renter";
+
         if(possibleStatuses == null || !possibleStatuses.contains(status))
             throw new BadRequestException("Status cannot be changed to "+status +" from "+reservation.getStatus().getStatus());
         Reservation changedReservation = changeStatus(reservation, status);
@@ -242,10 +251,7 @@ public class ReservationService {
         return new ReservationDetailDTO(new ReservationDTO(reservation),canAddRenterOpinion,false,false,null,renterOpinionDTO,null);
     }
 
-    public ReservationDetailDTO getReservationRenterDetails(Reservation reservation) throws BadRequestException {
-        if(!(reservation.getStatus().getStatus().equals("RENTED")|| reservation.getStatus().getStatus().equals("FINISHED"))){
-            throw new BadRequestException("Reservation is not in progress or finished");
-        }
+    public ReservationDetailDTO getReservationRenterDetails(Reservation reservation)  {
         User owner = reservation.getGameInstance().getOwner();
         GameInstance gameInstance = reservation.getGameInstance();
 
@@ -262,6 +268,10 @@ public class ReservationService {
 
         boolean canAddOwnerOpinion = ownerOpinion == null;
         boolean canAddGameInstanceOpinion = gameInstanceOpinion == null;
+        if(!(reservation.getStatus().getStatus().equals("RENTED")|| reservation.getStatus().getStatus().equals("FINISHED"))){
+            canAddOwnerOpinion = false;
+            canAddGameInstanceOpinion = false;
+        }
         return new ReservationDetailDTO(new ReservationDTO(reservation),false,canAddOwnerOpinion,canAddGameInstanceOpinion,ownerOpinionDTO,null,gameInstanceOpinionDTO);
     }
 
@@ -291,31 +301,29 @@ public class ReservationService {
         boolean is_renter = checkIfUserIsRenter(userService.getUser(authentication),reservation);
         if(!is_owner && !is_renter)
             throw new BadRequestException("User is not owner or renter of this reservation");
-        if(is_owner){
-            if(Objects.equals(reservation.getStatus().getStatus(), "PENDING")){
-                return List.of("ACCEPTED_BY_OWNER","REJECTED_BY_OWNER","EXPIRED");
+        else if(is_owner) {
+            switch (reservation.getStatus().getStatus()) {
+                case "PENDING" -> {
+                    return List.of("ACCEPTED_BY_OWNER", "REJECTED_BY_OWNER");
+                }
+                case "ACCEPTED_BY_OWNER" -> {
+                    return List.of("CANCELLED_BY_OWNER", "RENTED");
+                }
+                case "RENTED" -> {
+                    return List.of("FINISHED");
+                }
             }
-        }else {
-            if(Objects.equals(reservation.getStatus().getStatus(), "PENDING")){
-                return null;
+
+        }
+        else {
+            if (reservation.getStatus().getStatus().equals("PENDING")) {
+                return List.of("CANCELLED_BY_RENTER");
+            }
+            else if (reservation.getStatus().getStatus().equals("ACCEPTED_BY_OWNER")) {
+                return List.of("CANCELLED_BY_RENTER");
             }
         }
-        if(Objects.equals(reservation.getStatus().getStatus(), "ACCEPTED_BY_OWNER")){
-            return List.of("RENTED","CANCELED_BY_OWNER","CANCELLED_BY_RENTER","EXPIRED");
-        }
-        if(Objects.equals(reservation.getStatus().getStatus(), "REJECTED_BY_OWNER")){
-            return null;
-        }
-        if(Objects.equals(reservation.getStatus().getStatus(), "CANCELLED_BY_RENTER")){
-            return null;
-        }
-        if(Objects.equals(reservation.getStatus().getStatus(), "CANCELED_BY_OWNER")){
-            return null;
-        }
-        if(Objects.equals(reservation.getStatus().getStatus(), "RENTED")){
-            return List.of("FINISHED");
-        }
-        return null;
+        return List.of();
     }
 
     // Scheduling tasks
