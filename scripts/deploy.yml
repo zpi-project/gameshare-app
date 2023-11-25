@@ -10,5 +10,10 @@ deploys:
     instance_group: instance-group-1
     instance_template_base: instance-template-1
     instance_template: template-${{ GITHUB_RUN_NUMBER }}-${{ GITHUB_SHA }}
+    cloud_init: ./scripts/cloud-init.yml # see example dir
+    labels: # will also have gitsha from common section
+      version: ${{APP_VERSION}}
+    tags:
+      - my-tag123
 
-delete_instance_templates_after: true
+delete_instance_templates_after: false
