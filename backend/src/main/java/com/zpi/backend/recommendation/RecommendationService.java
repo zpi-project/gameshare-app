@@ -38,21 +38,21 @@ public class RecommendationService {
         Pageable pageable = PageRequest.of(page, size);
         User loggedInUser = userService.getUser(authentication);
 
-        Set<Long> gameIds = new HashSet<>(recommendationRepository
+        Set<Long> playedGamesIds = new HashSet<>(recommendationRepository
                 .getAllGamesInUserReservations(loggedInUser.getId()));
         List<AssociationRule> associationRules = getAllAssociationRules();
 
-        if (gameIds.isEmpty() || associationRules.isEmpty())
+        if (playedGamesIds.isEmpty() || associationRules.isEmpty())
             return new ResultsDTO<>(List.of(), new Pagination(0,0));
 
         Set<Long> recommendedGameIds = associationRules.stream()
-                .filter(rule -> ruleContainsPlayedGames(rule, gameIds))
+                .filter(rule -> ruleContainsPlayedGames(rule, playedGamesIds))
                 .sorted((rule1, rule2) -> Double.compare(rule2.getConfidence(), rule1.getConfidence()))
                 .flatMap(ar -> ar.getConsequent().stream())
                 .collect(Collectors.toSet());
 
         // Removing games that user already played
-        recommendedGameIds.removeAll(gameIds);
+        recommendedGameIds.removeAll(playedGamesIds);
 
         Page<Game> recommendedGames = recommendationRepository.getRecommendedGames(recommendedGameIds, pageable);
 

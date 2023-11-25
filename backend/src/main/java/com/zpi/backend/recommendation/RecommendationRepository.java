@@ -23,7 +23,8 @@ public interface RecommendationRepository extends JpaRepository<AssociationRuleD
     @Query("select gi.game.id as gameId " +
             "from GameInstance gi " +
             "join Reservation r on gi = r.gameInstance " +
-            "where r.renter.id = :userId")
+            "where r.renter.id = :userId " +
+            "and r.status.status in ('RENTED', 'FINISHED')")
     List<Long> getAllGamesInUserReservations(@Param("userId") long userId);
 
     @Query("select g from Game g where g.id in :gamesIds")
