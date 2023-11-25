@@ -53,7 +53,7 @@ public class ReservationController {
     @GetMapping("/reservations")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ResultsDTO<ReservationDTO>> getReservations(Authentication authentication, @RequestParam Optional<String> status, @RequestParam Boolean asOwner
-            , @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException, BadRequestException {
+            , @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) throws UserDoesNotExistException, BadRequestException {
         ResultsDTO<ReservationDTO> reservations;
         if (status.isPresent())
         {
@@ -75,7 +75,8 @@ public class ReservationController {
     @GetMapping("/reservations/{gameInstanceUuid}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ResultsDTO<ReservationDTO>> getReservationsByGameInstance(@PathVariable String gameInstanceUuid,Authentication authentication,
-                                                        @RequestParam int page,@RequestParam int size) throws UserDoesNotExistException, GameInstanceDoesNotExistException, BadRequestException {
+                                                                                    @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size)
+            throws UserDoesNotExistException, GameInstanceDoesNotExistException, BadRequestException {
         ResultsDTO<ReservationDTO> reservations = reservationService.getReservationsByGameInstance(authentication,gameInstanceUuid,page,size);
         return ResponseEntity.ok().body(reservations);
     }
