@@ -15,37 +15,35 @@ sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plug
 sudo apt-get -y install git
 git clone https://github.com/zpi-project/gameshare-app.git
 touch gameshare-app/.env
-echo "BACKEND_HOST=http://localhost
-BACKEND_PORT=8080
+touch gameshare-app/backend/src/main/resources/gcp-account-file.json
 
-FRONTEND_HOST=http://localhost
-FRONTEND_PORT=5173
-AUTH_CLIENT_ID=854677688562-ese1riu3pmijrrd0ibundp381t7a4jrg.apps.googleusercontent.com
-CLIENT_ID=854677688562-ese1riu3pmijrrd0ibundp381t7a4jrg.apps.googleusercontent.com
+echo $IAC_CICD_SA > gameshare-app/backend/src/main/resources/gcp-account-file.json
 
-SECURE_LOCAL_STORAGE_HASH_KEY=7a70d92672cb3d56e7efb591749e4e98c9a75d048bc66bcb428c6be1e8a2a
-SECURE_LOCAL_STORAGE_PREFIX=gshare
+echo $ADMIN1_EMAIL >> gameshare-app/.env
+echo $ADMIN2_EMAIL >> gameshare-app/.env
+echo $ADMIN3_EMAIL >> gameshare-app/.env
+echo $ADMIN4_EMAIL >> gameshare-app/.env
+echo $AUTH_CLIENT_ID >> gameshare-app/.env
+echo $BACKEND_HOST >> gameshare-app/.env
+echo $BACKEND_PORT >> gameshare-app/.env
+echo $CLIENT_ID >> gameshare-app/.env
+echo $DB_HOST >> gameshare-app/.env
+echo $DB_NAME >> gameshare-app/.env
+echo $DB_PASSWORD >> gameshare-app/.env
+echo $DB_PORT >> gameshare-app/.env
+echo $DB_USER >> gameshare-app/.env
+echo $FRONTEND_HOST >> gameshare-app/.env
+echo $FRONTEND_PORT >> gameshare-app/.env
+echo $GCP_BUCKET_ID >> gameshare-app/.env
+echo $GCP_CONFIG_FILE >> gameshare-app/.env
+echo $GCP_DIR_NAME >> gameshare-app/.env
+echo $GCP_PROJECT_ID >> gameshare-app/.env
+echo $SECURE_LOCAL_STORAGE_HASH_KEY >> gameshare-app/.env
+echo $SECURE_LOCAL_STORAGE_PREFIX >> gameshare-app/.env
+echo $VITE_API_URL >> gameshare-app/.env
+echo $VITE_AUTH_CLIENT_ID >> gameshare-app/.env
+echo $VITE_SECURE_LOCAL_STORAGE_HASH_KEY >> gameshare-app/.env
+echo $VITE_SECURE_LOCAL_STORAGE_PREFIX >> gameshare-app/.env
 
-VITE_API_URL=${BACKEND_HOST}:${BACKEND_PORT}
-VITE_AUTH_CLIENT_ID=${AUTH_CLIENT_ID}
-VITE_SECURE_LOCAL_STORAGE_HASH_KEY=${SECURE_LOCAL_STORAGE_HASH_KEY}
-VITE_SECURE_LOCAL_STORAGE_PREFIX=${SECURE_LOCAL_STORAGE_PREFIX}
-
-DB_PASSWORD=share
-DB_USER=game
-DB_NAME=gamesharetest
-DB_HOST=db
-DB_PORT=5432
-
-GCP_CONFIG_FILE=gcp-account-file.json
-GCP_PROJECT_ID=zpi-test-1
-GCP_BUCKET_ID=game-pictures-bucket
-GCP_DIR_NAME=ola-game-pictures
-
-ADMIN1_EMAIL=260370@student.pwr.edu.pl
-ADMIN2_EMAIL=260378@student.pwr.edu.pl
-ADMIN3_EMAIL=260407@student.pwr.edu.pl
-ADMIN4_EMAIL=260417@student.pwr.edu.pl
-" > gameshare-app/.env
 cd gameshare-app
 sudo docker compose up

@@ -10,7 +10,38 @@ on:
       - synchronize
 
 env:
-  ENV: ${{ secrets.ENV }}
+  BACKEND_HOST: ${{ secrets.BACKEND_HOST }}
+  BACKEND_PORT: ${{ secrets.BACKEND_PORT }}
+
+  FRONTEND_HOST: ${{ secrets.FRONTEND_HOST }}
+  FRONTEND_PORT: ${{ secrets.FRONTEND_PORT }}
+  AUTH_CLIENT_ID: ${{ secrets.AUTH_CLIENT_ID }}
+  CLIENT_ID: ${{ secrets.CLIENT_ID }}
+
+  SECURE_LOCAL_STORAGE_HASH_KEY: ${{ secrets.SECURE_LOCAL_STORAGE_HASH_KEY }}
+  SECURE_LOCAL_STORAGE_PREFIX: ${{ secrets.SECURE_LOCAL_STORAGE_PREFIX }}
+
+  VITE_API_URL: ${{ secrets.VITE_API_URL }}
+  VITE_AUTH_CLIENT_ID: ${{ secrets.VITE_AUTH_CLIENT_ID }}
+  VITE_SECURE_LOCAL_STORAGE_HASH_KEY: ${{ secrets.VITE_SECURE_LOCAL_STORAGE_HASH_KEY }}
+  VITE_SECURE_LOCAL_STORAGE_PREFIX: ${{ secrets.VITE_SECURE_LOCAL_STORAGE_PREFIX }}
+
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_USER: ${{ secrets.DB_USER }}
+  DB_NAME: ${{ secrets.DB_NAME }}
+  DB_HOST: ${{ secrets.DB_HOST }}
+  DB_PORT: ${{ secrets.DB_PORT }}
+
+  GCP_CONFIG_FILE: ${{ secrets.GCP_CONFIG_FILE }}
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GCP_BUCKET_ID: ${{ secrets.GCP_BUCKET_ID }}
+  GCP_DIR_NAME: ${{ secrets.GCP_DIR_NAME }}
+
+  ADMIN1_EMAIL: ${{ secrets.ADMIN1_EMAIL }}
+  ADMIN2_EMAIL: ${{ secrets.ADMIN2_EMAIL }}
+  ADMIN3_EMAIL: ${{ secrets.ADMIN3_EMAIL }}
+  ADMIN4_EMAIL: ${{ secrets.ADMIN4_EMAIL }}
+
 
 jobs:
   cd:
