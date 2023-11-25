@@ -121,7 +121,7 @@ public class GameInstanceController {
                                                                             @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size)
             throws UserDoesNotExistException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getUserGameInstances(userUUID, searchName, size, page, false));
+                .body(gameInstanceService.getUserGameInstances(userUUID, searchName, size, page, true));
     }
 
     @Operation(

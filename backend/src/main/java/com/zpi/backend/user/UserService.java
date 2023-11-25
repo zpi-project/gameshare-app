@@ -8,7 +8,7 @@ import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.email_type.EmailTypeService;
 import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game_instance.GameInstanceSearch;
+import com.zpi.backend.game_instance.specification.GameInstanceSearch;
 import com.zpi.backend.role.RoleRepository;
 import com.zpi.backend.user.dto.UpdateUserDTO;
 import com.zpi.backend.user.dto.UserDTO;

@@ -1,6 +1,7 @@
-package com.zpi.backend.game_instance;
+package com.zpi.backend.game_instance.specification;
 
 import com.zpi.backend.game.Game;
+import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.user.User;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;

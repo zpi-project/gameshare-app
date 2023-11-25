@@ -2,7 +2,7 @@ package com.zpi.backend.user;
 
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game_instance.GameInstance;
-import com.zpi.backend.game_instance.GameInstanceSearch;
+import com.zpi.backend.game_instance.specification.GameInstanceSearch;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
 
