@@ -76,7 +76,7 @@ public class GameInstanceService {
         gameInstanceRepository.save(gameInstance);
     }
 
-    // TODO Implementation of checking reservation, what about status?
+    // TODO Implementation of considering future reservation
     public void deactivate(String gameInstanceUUID, Authentication authentication) throws GameInstanceDoesNotExistException, GameInstanceStatusException, UserDoesNotExistException {
         User user = userService.getUser(authentication);
         Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuidAndOwner(gameInstanceUUID, user);

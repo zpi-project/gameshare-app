@@ -96,7 +96,6 @@ public class GameService {
         return new GameDTO(game);
     }
 
-    // TODO Getting popular games (considering reservations)
     public ResultsDTO<GameDTO> getPopularGames(int page, int size){
         Pageable pageable = PageRequest.of(page, size);
         Page<Game> gamePage = gameRepository.getPopularAcceptedGames(pageable);
