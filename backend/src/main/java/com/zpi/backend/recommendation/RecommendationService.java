@@ -2,7 +2,6 @@ package com.zpi.backend.recommendation;
 
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
-import com.zpi.backend.email.EmailService;
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game.dto.GameDTO;
 import com.zpi.backend.user.User;
