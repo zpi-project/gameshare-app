@@ -80,4 +80,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
                                              @Param("acceptedStartDate") Date acceptedStartDate,
                                              @Param("acceptedEndDate") Date acceptedEndDate);
 
+    @Modifying
+    @Transactional
+    @Query("update Reservation set status = " +
+            "(from ReservationStatus where status = 'CANCELED BY OWNER') " +
+            "where gameInstance = :gameInstance and startDate > today()")
+    void setReservationStatusAsCanceledByOwnerForGameInstance(@Param("gameInstance") GameInstance gameInstance);
 }

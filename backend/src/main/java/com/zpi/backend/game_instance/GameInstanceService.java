@@ -86,6 +86,8 @@ public class GameInstanceService {
         GameInstance gameInstance = gameInstanceOptional.get();
         if (!gameInstance.isActive())
             throw new GameInstanceStatusException("The Game Instance (uuid = "+gameInstanceUUID+") has already been deactivated");
+//        Setting all future reservations as CANCELED BY OWNER
+        reservationRepository.setReservationStatusAsCanceledByOwnerForGameInstance(gameInstance);
         gameInstance.setActive(false);
         gameInstanceRepository.save(gameInstance);
     }
