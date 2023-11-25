@@ -55,6 +55,9 @@ public class UserSpecification implements Specification<User> {
             predicates.add(cb.notEqual(root.get("uuid"), criteria.getLoggedInUser()));
         }
 
+        // Only active games
+        predicates.add(cb.equal(gameInstances.get("isActive"), true));
+
         if (criteria.getLatitude() != null && criteria.getLongitude() != null) {
             predicates.add(cb.isNotNull(root.get("locationLatitude")));
             predicates.add(cb.isNotNull(root.get("locationLongitude")));
