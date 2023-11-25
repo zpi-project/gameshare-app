@@ -1,8 +1,10 @@
 package com.zpi.backend.game;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -61,5 +63,11 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "group by g " +
             "order by count(*) desc")
     Page<Game> getPopularAcceptedGames(Pageable pageable);
+
+    @Modifying
+    @Transactional
+    @Query("update Game g set g.image = :imageLink " +
+            "where g = :game")
+    void updateImageLink(@Param("game") Game game, @Param("imageLink") String imageLink);
 
 }

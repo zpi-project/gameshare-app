@@ -9,8 +9,8 @@ import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
 import com.zpi.backend.game.exception.GameAlreadyExistsException;
 import com.zpi.backend.game.exception.GameAlreadyRejectedException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
-import com.zpi.backend.game_instance_image.exception.*;
 import com.zpi.backend.game_instance_opinion.exception.GameInstanceOpinionDoesNotExistException;
+import com.zpi.backend.image.exception.*;
 import com.zpi.backend.user.exception.UndefinedUserException;
 import com.zpi.backend.user.exception.UserAlreadyExistsException;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
@@ -297,9 +297,9 @@ public class ExceptionController {
 
     // Game Instance Image
     @ResponseBody
-    @ExceptionHandler(GameInstanceImageDoesNotExistException.class)
+    @ExceptionHandler(ImageDoesNotExistException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    ResponseEntity GIINEHandler(GameInstanceImageDoesNotExistException ex) {
+    ResponseEntity GIINEHandler(ImageDoesNotExistException ex) {
         logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
