@@ -167,10 +167,23 @@ public class GameInstanceController {
             description = "Returns true if game instance can be reserved in given time frame " +
                     "can be called by anyone"
     )
-    @RequestMapping(method= GET,value = "/{uuid}/timeframes/avaliable")
+    @RequestMapping(method= GET,value = "/{uuid}/timeframes/available")
     public ResponseEntity<Boolean> canMakeReservation(@PathVariable String uuid, @RequestParam Date startDate, @RequestParam Date endDate)  {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.canMakeReservation(uuid,startDate,endDate));
     }
+
+  @Operation(
+          summary ="Gets game instance unavailability periods",
+          description = "Returns game instance unavailability periods and reservation uuid " +
+                  "can be called by owner of the game instance"
+  )
+  @RequestMapping(method = GET,value="/{uuid}/reservations")
+  @PreAuthorize("isAuthenticated()")
+  public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> checkGameInstanceFutureReservations(@PathVariable String uuid, @RequestParam String year, @RequestParam String month, Authentication authentication)
+          throws GameInstanceDoesNotExistException, UserDoesNotExistException {
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(gameInstanceService.getGameInstanceAvailabilityReservation(authentication,uuid,year,month));
+  }
 
 }
