@@ -2,15 +2,19 @@ package com.zpi.backend.recommendation;
 
 import com.zpi.backend.dto.Pagination;
 import com.zpi.backend.dto.ResultsDTO;
+import com.zpi.backend.email.EmailService;
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game.dto.GameDTO;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserService;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -26,6 +30,8 @@ public class RecommendationService {
     private int APRIORI_MIN_SUPPORT;
     @Value(value = "${APRIORI_MIN_CONFIDENCE}")
     private double APRIORI_MIN_CONFIDENCE;
+    private static final Logger logger = LoggerFactory.getLogger(RecommendationService.class);
+
     private final RecommendationRepository recommendationRepository;
     private final UserService userService;
 
@@ -100,7 +106,9 @@ public class RecommendationService {
                 .collect(Collectors.toList());
     }
 
+    @Scheduled(cron = "0 0 * * 1", zone = "Europe/Warsaw")
     public void runAprioriAlgorithm(){
+        logger.info("Run Apriori Algorithm");
         AprioriAlgorithm aprioriAlgorithm =
                 new AprioriAlgorithm(APRIORI_MIN_SUPPORT, APRIORI_MIN_CONFIDENCE, prepareTransactions());
         List<AssociationRule> associationRuleDBS = aprioriAlgorithm.run();
