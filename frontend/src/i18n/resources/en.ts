@@ -217,9 +217,9 @@ export default {
   gameDetails: "Game - details",
   gameReservationsCalendar: "Game reservations calendar",
   noOpinions: "This user has no opinions yet",
-  cannotAddOpinionAboutOwner: "You cannot add opinion about the owner yet.",
-  cannotAddOpinionAboutRenter: "You cannot add opinion about this renter yet.",
-  cannotAddOpinionAboutGame: "You cannot add opinion about the game yet.",
+  cannotAddOpinionAboutOwner: "You cannot add opinion about the owner now.",
+  cannotAddOpinionAboutRenter: "You cannot add opinion about this renter now.",
+  cannotAddOpinionAboutGame: "You cannot add opinion about the game now.",
   gameNoOpinions: "No opinions",
   successChangingStatus: "Status was changed successfully",
   successChangingStatusDescription:

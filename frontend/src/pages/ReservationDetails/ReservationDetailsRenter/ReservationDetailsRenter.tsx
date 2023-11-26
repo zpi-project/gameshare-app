@@ -1,15 +1,15 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { ReservationDetails } from "@/types/Reservation";
-import { ReservationsCalendar } from "@/components/Calendar";
 import { Map, LocationMarker } from "@/components/Map";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import GameInstanceDetails from "../GameInstanceDetails";
 import OpinionSection from "../OpinionSection";
 import ReservationDetailsStatus from "../ReservationDetailsStatus";
 import ReservationDetailsTable from "../ReservationDetailsTable";
 import UserDetailsSection from "../UserDetailsSection";
+import OpinionAboutGameIntance from "./OpinionAboutGameInstance";
+import OpinionAboutOwner from "./OpinionAboutOwner";
 
 interface ReservationDetailsRenterProps {
   reservation: ReservationDetails;
@@ -59,7 +59,7 @@ const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({
                 <ReservationDetailsStatus
                   reservationId={reservationId}
                   status={status}
-                  user="owner"
+                  user="renter"
                 />
                 <div className="flex flex-grow flex-col gap-2">
                   <h3 className="text-xl">{t("reservationDetails.renter.renterMessage")}</h3>
@@ -69,15 +69,13 @@ const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({
                 </div>
               </div>
             </div>
-            <OpinionSection
-              opinion={ownerOpinion}
-              opinionHeader={t("rentersOpinion")}
-              noOpinionMessage={t("rentersNoOpinion")}
+            <OpinionAboutOwner
+              ownerOpinion={ownerOpinion}
+              canAddOwnerOpinion={canAddOwnerOpinion}
             />
-            <OpinionSection
-              opinion={gameInstanceOpinion}
-              opinionHeader={t("rentersGameOpinion")}
-              noOpinionMessage={t("rentersNoGameOpinion")}
+            <OpinionAboutGameIntance
+              gameInstanceOpinion={gameInstanceOpinion}
+              canAddGameInstanceOpinion={canAddGameInstanceOpinion}
             />
           </div>
         </ScrollArea>
@@ -97,7 +95,7 @@ const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({
               />
             </div>
             <OpinionSection
-              opinion={gameInstanceOpinion}
+              opinion={renterOpinion}
               opinionHeader={t("reservationDetails.renter.renterOpinion")}
               noOpinionMessage={t("noRenterOpinion")}
             />
@@ -111,7 +109,7 @@ const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({
                 backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
               }}
             />
-            <div className="relative flex flex-grow items-center justify-between gap-8 xl:gap-4 p-4 xl:min-h-[calc(100vh-80px)] xl:flex-col">
+            <div className="relative flex flex-grow items-center justify-between gap-8 p-4 xl:min-h-[calc(100vh-80px)] xl:flex-col xl:gap-4">
               <GameInstanceDetails gameInstance={gameInstance} />
               <div className="flex h-[300px] w-full flex-grow flex-col gap-2 overflow-hidden rounded-lg xl:h-[500px]">
                 <Map
