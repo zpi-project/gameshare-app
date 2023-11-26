@@ -5,13 +5,13 @@ import { Pencil } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { URLS } from "@/constants/urls";
 import { GameInstance as GameInstanceType } from "@/types/GameInstance";
+import { cn } from "@/utils/tailwind";
 import { PlayersBadge, PriceBadge, TimeBadge } from "@/components/Badge";
 import AgeBadge from "@/components/Badge/AgeBadge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "../ui/badge";
 import GameReservations from "./GameReservations";
-import { cn } from "@/utils/tailwind";
 
 interface Props {
   gameInstance: GameInstanceType;

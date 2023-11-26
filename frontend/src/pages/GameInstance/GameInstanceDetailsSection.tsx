@@ -89,7 +89,7 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
       <div className="flex flex-col gap-2  lg:gap-4">
         <div className="flex w-full flex-row justify-between">
           <h1 className="p-2 text-xl font-bold xl:text-3xl">{gameInstance.game.name}</h1>
-          <div className="flex flex-col items-end p-3 gap-2">
+          <div className="flex flex-col items-end gap-2 p-3">
             <PriceBadge price={gameInstance.pricePerDay} />
             {!gameInstance.active && (
               <Badge variant="destructive" className="uppercase">
