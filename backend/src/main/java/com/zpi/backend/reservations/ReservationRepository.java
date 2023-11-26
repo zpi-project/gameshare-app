@@ -26,7 +26,13 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
            "From Reservation r where r.gameInstance.owner.uuid = :uuid and r.status.status = :status"
     )
     Page<Reservation> getCurrentReservationsByOwnerAndStatus(Pageable pageable, @Param("uuid") String OwnerUuid, @Param("status") String status);
-    List<Reservation> findReservationsByGameInstance_Uuid(String gameInstanceUuid);
+
+
+    @Query(
+            "From Reservation r where r.gameInstance.uuid= :gameInstanceUuid and (r.status.status = 'ACCEPTED' or r.status.status = 'RENTED')"
+    )
+    List<Reservation> findAcceptedOrRentedReservationsByGameInstance(@Param("gameInstanceUuid") String gameInstanceUuid);
+
     Page<Reservation> getReservationsByGameInstance_Uuid(Pageable pageable, String gameInstanceUuid);
     Optional<Reservation> getReservationByReservationId(String reservationId);
 
