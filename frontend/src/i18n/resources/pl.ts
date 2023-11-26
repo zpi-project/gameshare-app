@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -194,16 +195,31 @@ const pl: typeof en = {
   seeReservation: "Zobacz szczegóły rezerwacji",
   submitReservation: "Zarezerwuj",
 
+  reservationDetails: {
+    renter: {
+      userDetails: "Właściciel - szczegóły",
+      renterMessage: "Twoja wiadomość do rezerwacji:",
+      renterNoMessage: "Nie zostawiłeś żadnej wiadomości do rezerwacji.",
+      ownerOpinion: "Twoja opinia o właścicielu gry",
+      renterOpinion: "Opinia właściciela gry o tobie",
+      gameOpinion: "Twoja opinia o grze",
+    },
+    owner: {
+      userDetails: "Wypożyczający - szczegóły",
+      renterMessage: "Wiadomość od wypożyczającego:",
+      renterNoMessage: "Wypożyczający nie zostawił żadnej wiadomości.",
+      ownerOpinion: "Opinia wypożyczającego o tobie",
+      renterOpinion: "Twoja opinia o wypożyczającym",
+      gameOpinion: "Opinia wypożyczającego o twojej grze",
+    },
+  },
+
   reservationHeader: "rezerwacja - {{reservationId}} - szczegóły",
   status: "Status:",
-  renterMessage: "Wiadomość od wypożyczającego:",
-  renterNoMessage: "Wypożyczający nie zostawił żadnego wiadomości.",
-  rentersOpinion: "Opinia wypożyczającego o tobie",
-  rentersNoOpinion: "Wypożyczający nie dodał opinii o tobie.",
-  rentersGameOpinion: "Opinia wypożyczającego o twojej grze",
-  rentersNoGameOpinion: "Wypożyczający nie dodał opinii o twojej grze.",
-  renterDetails: "Wypożyczający - szczegóły",
-  yourOpinionAboutRenter: "Twoja opinia o wypożyczającym",
+  ownerNoOpinion: "Wypożyczający nie dodał opinii o tobie.",
+  noGameOpinion: "Wypożyczający nie dodał opinii o twojej grze.",
+  noRenterOpinion: "Właściciel gry nie dodał opinii o tobie.",
+  ownerDetails: "Właściciel gry - szczegóły",
   gameDetails: "Gra - szczegóły",
   gameReservationsCalendar: "Kalendarz rezerwacji gry",
   noOpinions: "Użytkownik nie ma jeszcze żadnej opinii",

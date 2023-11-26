@@ -61,22 +61,22 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
                   user="owner"
                 />
                 <div className="flex flex-grow flex-col gap-2">
-                  <h3 className="text-xl">{t("renterMessage")}</h3>
+                  <h3 className="text-xl">{t("reservationDetails.owner.renterMessage")}</h3>
                   <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
-                    {renterComment ? renterComment : t("renterNoMessage")}
+                    {renterComment ? renterComment : t("reservationDetails.owner.renterNoMessage")}
                   </p>
                 </div>
               </div>
             </div>
             <OpinionSection
               opinion={ownerOpinion}
-              opinionHeader={t("rentersOpinion")}
-              noOpinionMessage={t("rentersNoOpinion")}
+              opinionHeader={t("reservationDetails.owner.ownerOpinion")}
+              noOpinionMessage={t("ownerNoOpinion")}
             />
             <OpinionSection
               opinion={gameInstanceOpinion}
-              opinionHeader={t("rentersGameOpinion")}
-              noOpinionMessage={t("rentersNoGameOpinion")}
+              opinionHeader={t("reservationDetails.owner.gameOpinion")}
+              noOpinionMessage={t("noGameOpinion")}
             />
           </div>
         </ScrollArea>
@@ -91,7 +91,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
               />
               <UserDetailsSection
                 user={renter}
-                title={t("renterDetails")}
+                title={t("reservationDetails.owner.userDetails")}
                 btnText={t("seeProfile")}
               />
             </div>
