@@ -1,12 +1,15 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import { NewReservation } from "@/types/Reservation";
+import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { PriceBadge } from "@/components/Badge";
 import { Stars } from "@/components/Stars";
+import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
 import DatePicker from "@/components/ui/datepicker";
 import {
@@ -27,6 +30,7 @@ interface ReservationFormProps {
 const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) => {
   const { t } = useTranslation();
   const TODAY = new Date(new Date().setHours(0, 0, 0, 0));
+  const [isAvailable, setIsAvailable] = useState(false);
 
   const formSchema = z
     .object({
@@ -48,6 +52,10 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
     .refine(data => data.endDate >= data.startDate, {
       message: t("endDateAtLeastStartDate"),
       path: ["endDate"],
+    })
+    .refine(() => isAvailable, {
+      message: "this timeframe is not available",
+      path: ["root"],
     });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -58,6 +66,19 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
     },
   });
 
+  const startDate = form.watch("startDate");
+  const endDate = form.watch("endDate");
+  console.log(form.formState.errors);
+
+  const { isFetching } = useQuery({
+    queryKey: ["game-instance-is-available", { uuid: gameInstance.uuid, startDate, endDate }],
+    queryFn: () => GameInstanceApi.checkAvailability(gameInstance.uuid, startDate, endDate),
+    enabled: startDate !== undefined && endDate !== undefined,
+    onSuccess: data => {
+      setIsAvailable(data), form.trigger();
+    },
+  });
+
   return (
     <div className="flex w-[364px] min-w-[364px] flex-grow flex-col gap-4">
       <h2 className="text-2xl uppercase text-secondary">{t("reservationForm")}</h2>
@@ -65,6 +86,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
         <GameInstanceSummary gameInstance={gameInstance} />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-grow flex-col gap-4">
+            <p className="text-destructive">{form.formState.errors.root?.message}</p>
             <FormField
               control={form.control}
               name="startDate"
@@ -114,6 +136,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
           </form>
         </Form>
       </div>
+      {isFetching && <Spinner />}
     </div>
   );
 };
