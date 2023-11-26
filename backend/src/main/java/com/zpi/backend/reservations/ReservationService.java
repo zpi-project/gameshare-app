@@ -307,7 +307,7 @@ public class ReservationService {
                     return List.of("ACCEPTED_BY_OWNER", "REJECTED_BY_OWNER");
                 }
                 case "ACCEPTED_BY_OWNER" -> {
-                    return List.of("CANCELLED_BY_OWNER", "RENTED");
+                    return List.of("CANCELED_BY_OWNER", "RENTED");
                 }
                 case "RENTED" -> {
                     return List.of("FINISHED");
@@ -317,10 +317,10 @@ public class ReservationService {
         }
         else {
             if (reservation.getStatus().getStatus().equals("PENDING")) {
-                return List.of("CANCELLED_BY_RENTER");
+                return List.of("CANCELED_BY_RENTER");
             }
             else if (reservation.getStatus().getStatus().equals("ACCEPTED_BY_OWNER")) {
-                return List.of("CANCELLED_BY_RENTER");
+                return List.of("CANCELED_BY_RENTER");
             }
         }
         return List.of();
