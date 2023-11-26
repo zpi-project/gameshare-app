@@ -20,6 +20,7 @@ const Avatar: FC<AvatarProps> = ({ user, className, iconClassName, avatarImageCl
           <AvatarImage
             alt="user avatar"
             src={user.avatarLink}
+            src={""}
             className={cn("", avatarImageClassName)}
           />
           <AvatarFallback>{getNameFirstLetters(user)}</AvatarFallback>
