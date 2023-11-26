@@ -23,7 +23,6 @@ const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({
       endDate,
       duration,
       renterComment,
-      renter,
       gameInstance,
       status,
     },
