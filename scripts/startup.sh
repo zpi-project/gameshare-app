@@ -1,4 +1,4 @@
-
+#!/bin/bash
 sudo apt-get -y update
 sudo apt-get -y install ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
