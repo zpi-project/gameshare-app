@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import PriceBadge from "@/components/Badge/PriceBadge";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DialogTrigger, Dialog } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -88,10 +89,12 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
       <div className="flex flex-col gap-2  lg:gap-4">
         <div className="flex w-full flex-row justify-between">
           <h1 className="p-2 text-xl font-bold xl:text-3xl">{gameInstance.game.name}</h1>
-          <div className="flex flex-col items-end p-3">
+          <div className="flex flex-col items-end gap-2 p-3">
             <PriceBadge price={gameInstance.pricePerDay} />
             {!gameInstance.active && (
-              <div className="text-xl uppercase text-destructive">{t("deactivated")}</div>
+              <Badge variant="destructive" className="uppercase">
+                {t("deactivated")}
+              </Badge>
             )}
           </div>
         </div>
