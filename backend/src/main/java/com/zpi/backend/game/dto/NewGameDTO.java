@@ -22,10 +22,9 @@ public class NewGameDTO {
     private int playingTime;
     private int age;
     private String shortDescription;
-    private String image;
 
     public Game toGame(List<Category> categories){
-        return new Game(name, categories, minPlayers, maxPlayers, playingTime, age, shortDescription, image);
+        return new Game(name, categories, minPlayers, maxPlayers, playingTime, age, shortDescription);
     }
 
     public boolean validate() throws BadRequestException {

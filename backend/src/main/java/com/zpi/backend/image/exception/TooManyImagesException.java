@@ -1,4 +1,4 @@
-package com.zpi.backend.game_instance_image.exception;
+package com.zpi.backend.image.exception;
 
 public class TooManyImagesException extends Exception{
     public TooManyImagesException(String message) {

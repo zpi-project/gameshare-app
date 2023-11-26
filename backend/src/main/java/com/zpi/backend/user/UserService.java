@@ -8,7 +8,7 @@ import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.email_type.EmailTypeService;
 import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game_instance.GameInstanceSearch;
+import com.zpi.backend.game_instance.specification.GameInstanceSearch;
 import com.zpi.backend.role.RoleRepository;
 import com.zpi.backend.user.dto.UpdateUserDTO;
 import com.zpi.backend.user.dto.UserDTO;
@@ -27,6 +27,9 @@ import org.thymeleaf.context.Context;
 
 import java.io.IOException;
 import java.util.*;
+
+import static com.zpi.backend.email_type.EmailType.*;
+import static com.zpi.backend.role.Role.*;
 
 @Service
 @AllArgsConstructor
@@ -75,15 +78,15 @@ public class UserService {
         if(!checkIfUserExists(user.getGoogleId())) {
             user.update(updateUserDTO);
             if(adminChecker.isAdmin(user.getEmail()))
-                user.setRole(roleRepository.getRoleByName("admin"));
+                user.setRole(roleRepository.getRoleByName(ADMIN));
             else
-                user.setRole(roleRepository.getRoleByName("user"));
+                user.setRole(roleRepository.getRoleByName(USER));
             userRepository.save(user);
 
 //            Sending e-mail
             Context registrationContext = emailService.getRegistrationEmailContext();
                 emailService.sendEmailWithHtmlTemplate(user, registrationContext.getVariable("pl_title").toString(),
-                        EmailService.EMAIL_TEMPLATE, registrationContext, emailTypeService.findEmailTypeByStatus("REGISTRATION"));
+                        EmailService.EMAIL_TEMPLATE, registrationContext, emailTypeService.findEmailTypeByStatus(REGISTRATION));
         }
         else {
             throw new UserAlreadyExistsException("User already exists");

@@ -1,4 +1,4 @@
-package com.zpi.backend.game_instance;
+package com.zpi.backend.game_instance.specification;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

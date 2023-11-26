@@ -53,7 +53,7 @@ public class Game {
     @ManyToOne
     private GameStatus gameStatus;
 
-    public Game(String name, List<Category> categories, int minPlayers, int maxPlayers, int playingTime, int age, String shortDescription, String image){
+    public Game(String name, List<Category> categories, int minPlayers, int maxPlayers, int playingTime, int age, String shortDescription){
         this.name = name;
         this.categories = categories;
         this.minPlayers = minPlayers;
@@ -61,6 +61,5 @@ public class Game {
         this.playingTime = playingTime;
         this.age = age;
         this.shortDescription = shortDescription;
-        this.image = image;
     }
 }

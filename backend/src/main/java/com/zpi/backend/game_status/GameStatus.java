@@ -13,6 +13,9 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Table(name = "game_statuses")
 public class GameStatus {
+    public static final String PENDING = "Pending";
+    public static final String ACCEPTED = "Accepted";
+    public static final String REJECTED = "Rejected";
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)

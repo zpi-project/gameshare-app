@@ -1,4 +1,4 @@
-package com.zpi.backend.game_instance_image;
+package com.zpi.backend.image.game_instance_image;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

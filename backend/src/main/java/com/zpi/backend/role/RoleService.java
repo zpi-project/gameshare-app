@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import static com.zpi.backend.role.Role.ADMIN;
+
 @Service
 @RequiredArgsConstructor
 public class RoleService {
@@ -20,6 +22,6 @@ public class RoleService {
 
     public boolean checkIfAdmin(Authentication authentication) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
-        return user.getRole().getName().equals("admin");
+        return user.getRole().getName().equals(ADMIN);
     }
 }
