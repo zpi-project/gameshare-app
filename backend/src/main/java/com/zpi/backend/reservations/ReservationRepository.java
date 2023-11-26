@@ -2,6 +2,7 @@ package com.zpi.backend.reservations;
 
 import com.zpi.backend.game_instance.GameInstance;
 import jakarta.transaction.Transactional;
+import org.aspectj.weaver.ast.Literal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -34,6 +35,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findAcceptedOrRentedReservationsByGameInstance(@Param("gameInstanceUuid") String gameInstanceUuid);
 
     Page<Reservation> getReservationsByGameInstance_Uuid(Pageable pageable, String gameInstanceUuid);
+    List<Reservation> getReservationsByGameInstance(GameInstance gameInstance);
+
     Optional<Reservation> getReservationByReservationId(String reservationId);
 
     @Query(

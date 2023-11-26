@@ -29,6 +29,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
 
@@ -268,5 +269,17 @@ public class GameInstanceService {
                 return false;
         }
         return true;
+    }
+
+    public Boolean hasFutureReservations(Authentication authentication, String gameInstanceUUID)
+            throws GameInstanceDoesNotExistException, UserDoesNotExistException {
+        Optional<GameInstance> gameInstanceOptional = gameInstanceRepository.findByUuid(gameInstanceUUID);
+        if (gameInstanceOptional.isEmpty())
+            throw new GameInstanceDoesNotExistException("Game instance (ID: "+gameInstanceUUID+") does not exist.");
+        User user = userService.getUser(authentication);
+        if (user != gameInstanceOptional.get().getOwner())
+            throw new IllegalAccessError("User is not the Owner of the Game Instance");
+        List<Reservation> reservations = reservationRepository.getReservationsByGameInstance(gameInstanceOptional.get());
+        return !reservations.isEmpty();
     }
 }

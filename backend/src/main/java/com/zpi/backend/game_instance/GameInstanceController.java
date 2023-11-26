@@ -170,20 +170,20 @@ public class GameInstanceController {
     @RequestMapping(method= GET,value = "/{uuid}/timeframes/available")
     public ResponseEntity<Boolean> canMakeReservation(@PathVariable String uuid, @RequestParam Date startDate, @RequestParam Date endDate)  {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.canMakeReservation(uuid,startDate,endDate));
+                .body(gameInstanceService.canMakeReservation(uuid, startDate, endDate));
     }
 
   @Operation(
-          summary ="Gets game instance unavailability periods",
-          description = "Returns game instance unavailability periods and reservation uuid " +
-                  "can be called by owner of the game instance"
+          summary ="Check if Game Instance has future reservations",
+          description = "Returns true if game instance has any future reservations. " +
+                  "Can be called only by Owner of the Game Instance."
   )
-  @RequestMapping(method = GET,value="/{uuid}/reservations")
   @PreAuthorize("isAuthenticated()")
-  public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> checkGameInstanceFutureReservations(@PathVariable String uuid, @RequestParam String year, @RequestParam String month, Authentication authentication)
+  @RequestMapping(method= GET,value = "/{gameInstanceUUID}/deactivate/reservations")
+  public ResponseEntity<Boolean> checkGameInstanceFutureReservations(Authentication authentication, @PathVariable String gameInstanceUUID)
           throws GameInstanceDoesNotExistException, UserDoesNotExistException {
     return ResponseEntity.status(HttpStatus.OK)
-            .body(gameInstanceService.getGameInstanceAvailabilityReservation(authentication,uuid,year,month));
+            .body(gameInstanceService.hasFutureReservations(authentication, gameInstanceUUID));
   }
 
 }
