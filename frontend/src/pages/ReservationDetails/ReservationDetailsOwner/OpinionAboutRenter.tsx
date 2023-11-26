@@ -18,7 +18,7 @@ const OpinionAboutRenter: FC<OpinionAboutRenterProps> = ({
       {renterOpinion ? (
         <>
           <div className="flex flex-row flex-wrap justify-between gap-4">
-            <h3 className="text-xl uppercase">{t("yourOpinionAboutRenter")}</h3>
+            <h3 className="text-xl uppercase">{t("reservationDetails.owner.renterOpinion")}</h3>
             <Stars count={renterOpinion.stars} />
           </div>
           <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
@@ -29,7 +29,7 @@ const OpinionAboutRenter: FC<OpinionAboutRenterProps> = ({
         <div>you can add opinion about this user here</div>
       ) : (
         <>
-          <h3 className="text-xl uppercase">{t("yourOpinionAboutRenter")}</h3>
+          <h3 className="text-xl uppercase">{t("reservationDetails.owner.renterOpinion")}</h3>
           <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
             {t("cannotAddOpinionAboutRenter")}
           </p>
