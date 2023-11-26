@@ -46,7 +46,7 @@ public class GameService {
             throw new GameAlreadyExistsException("Game "+newGameDTO.getName()+" already exists");
         List<Category> categories = categoryService.getCategoriesByIDs(newGameDTO.getCategoriesIDs());
         Game newGame = newGameDTO.toGame(categories);
-        newGame.setGameStatus(gameStatusService.getGameStatus("PENDING"));
+        newGame.setGameStatus(gameStatusService.getGameStatus("Pending"));
         gameRepository.save(newGame);
 //        Sending emails do admins
         Context context = emailService.getNewGameEmailContext(newGame.getName());
