@@ -15,6 +15,8 @@ import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.game_instance.specification.*;
 import com.zpi.backend.image.game_instance_image.GameInstanceImageRepository;
 import com.zpi.backend.image.game_instance_image.GameInstanceImageService;
+import com.zpi.backend.reservation_status.ReservationStatus;
+import com.zpi.backend.reservation_status.ReservationStatusRepository;
 import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.reservations.ReservationRepository;
 import com.zpi.backend.user.User;
@@ -29,7 +31,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
 
@@ -43,6 +44,7 @@ public class GameInstanceService {
     GameService gameService;
     CategoryService categoryService;
     ReservationRepository reservationRepository;
+    ReservationStatusRepository reservationStatusRepository;
 
     public GameInstanceDTO addGameInstance(NewGameInstanceDTO newGameInstanceDTO, Authentication authentication) throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
         newGameInstanceDTO.validate();
@@ -279,7 +281,8 @@ public class GameInstanceService {
         User user = userService.getUser(authentication);
         if (user != gameInstanceOptional.get().getOwner())
             throw new IllegalAccessError("User is not the Owner of the Game Instance");
-        List<Reservation> reservations = reservationRepository.getReservationsByGameInstance(gameInstanceOptional.get());
+        List<ReservationStatus> statuses = reservationStatusRepository.findAllByStatusIn(Arrays.asList("ACCEPTED_BY_OWNER", "PENDING"));
+        List<Reservation> reservations = reservationRepository.getReservationsByGameInstanceAndStatusIn(gameInstanceOptional.get(), statuses);
         return !reservations.isEmpty();
     }
 }

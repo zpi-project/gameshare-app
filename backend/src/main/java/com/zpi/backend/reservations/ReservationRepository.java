@@ -1,6 +1,8 @@
 package com.zpi.backend.reservations;
 
 import com.zpi.backend.game_instance.GameInstance;
+import com.zpi.backend.reservation_status.ReservationStatus;
+import jakarta.transaction.Status;
 import jakarta.transaction.Transactional;
 import org.aspectj.weaver.ast.Literal;
 import org.springframework.data.domain.Page;
@@ -11,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +38,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findAcceptedOrRentedReservationsByGameInstance(@Param("gameInstanceUuid") String gameInstanceUuid);
 
     Page<Reservation> getReservationsByGameInstance_Uuid(Pageable pageable, String gameInstanceUuid);
-    List<Reservation> getReservationsByGameInstance(GameInstance gameInstance);
+
+    List<Reservation> getReservationsByGameInstanceAndStatusIn(GameInstance gameInstance, Collection<ReservationStatus> status);
 
     Optional<Reservation> getReservationByReservationId(String reservationId);
 
@@ -85,8 +89,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Modifying
     @Transactional
-    @Query("update Reservation set status = " +
-            "(from ReservationStatus where status = 'CANCELED BY OWNER') " +
-            "where gameInstance = :gameInstance and startDate > today()")
+    @Query("update Reservation as r set r.status = " +
+            "(select rs from ReservationStatus as rs where rs.status = 'CANCELED_BY_OWNER') " +
+            "where r.gameInstance = :gameInstance and r.startDate > CURRENT_DATE " +
+            "and r.status in (select rs from ReservationStatus as rs " +
+            "where rs.status in ('ACCEPTED_BY_OWNER', 'PENDING'))")
     void setReservationStatusAsCanceledByOwnerForGameInstance(@Param("gameInstance") GameInstance gameInstance);
 }
