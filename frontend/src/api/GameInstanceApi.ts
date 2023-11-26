@@ -93,6 +93,6 @@ export class GameInstanceApi {
     //   { params: { startDate, endDate } },
     // );
     await new Promise(resolve => setTimeout(resolve, 1000));
-    return false;
+    return true;
   }
 }

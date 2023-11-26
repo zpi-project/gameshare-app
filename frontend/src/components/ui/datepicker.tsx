@@ -38,8 +38,8 @@ const DatePicker: FC<DatePickerProps> = ({ onSelect, placeholder }) => {
           mode="single"
           selected={date}
           onSelect={date => {
-            setOpen(false);
             setDate(date);
+            setOpen(false);
             onSelect(date);
           }}
           initialFocus

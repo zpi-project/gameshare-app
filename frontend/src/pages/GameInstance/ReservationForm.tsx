@@ -12,15 +12,9 @@ import { Stars } from "@/components/Stars";
 import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
 import DatePicker from "@/components/ui/datepicker";
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-  Form,
-} from "@/components/ui/form";
+import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
+
 
 interface ReservationFormProps {
   gameInstance: GameInstanceDetails;
@@ -47,7 +41,9 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
         required_error: t("fieldIsRequired", { field: `${t("formEndDate")}`, context: "female" }),
       }),
       renterComment: z.string().trim().optional(),
-      gameInstanceUUID: z.string(),
+      gameInstanceUUID: z.string().refine(() => isAvailable, {
+        message: t("timeframeNoAvailable"),
+      }),
     })
     .refine(data => data.endDate >= data.startDate, {
       message: t("endDateAtLeastStartDate"),
@@ -68,14 +64,14 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
 
   const startDate = form.watch("startDate");
   const endDate = form.watch("endDate");
-  console.log(form.formState.errors);
 
   const { isFetching } = useQuery({
     queryKey: ["game-instance-is-available", { uuid: gameInstance.uuid, startDate, endDate }],
     queryFn: () => GameInstanceApi.checkAvailability(gameInstance.uuid, startDate, endDate),
     enabled: startDate !== undefined && endDate !== undefined,
     onSuccess: data => {
-      setIsAvailable(data), form.trigger();
+      setIsAvailable(data);
+      form.trigger("gameInstanceUUID");
     },
   });
 
@@ -85,8 +81,14 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
       <div className="flex flex-grow flex-col gap-8 rounded-lg bg-section p-4">
         <GameInstanceSummary gameInstance={gameInstance} />
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-grow flex-col gap-4">
-            <p className="text-destructive">{form.formState.errors.root?.message}</p>
+          <form
+            onSubmit={form.handleSubmit(data => {
+              console.log(data);
+              onSubmit(data);
+            })}
+            className="flex flex-grow flex-col gap-4"
+          >
+            <p className="h-[100px] text-destructive">{form.formState.errors.gameInstanceUUID?.message}</p>
             <FormField
               control={form.control}
               name="startDate"
@@ -121,7 +123,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
                   <FormControl>
                     <Textarea
                       placeholder={t("leaveMessage")}
-                      className="h-[180px] resize-none bg-card p-4"
+                      className="h-[100px] resize-none bg-card p-4"
                       {...field}
                       spellCheck={false}
                     />

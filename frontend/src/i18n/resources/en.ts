@@ -229,4 +229,6 @@ export default {
   renter: "Renter",
   owner: "Game owner",
   errorFetchingDetails: "There was an error fetching details about reservation {{reservationId}}",
+  timeframeNoAvailable:
+    "You cannot book this game on these dates because someone has already reserved the game within the time range you specified.",
 };

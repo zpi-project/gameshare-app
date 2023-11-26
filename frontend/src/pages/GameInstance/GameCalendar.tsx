@@ -28,7 +28,7 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
   const [newReservationId, setNewReservationId] = useState("");
 
   // add proper error messages when in api fixed
-  const { mutate, isLoading, isSuccess } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: (newReservation: NewReservation) => ReservationsApi.create(newReservation),
     onError: () => {
       toast({
@@ -46,7 +46,7 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
 
   return (
     <DialogContent
-      className="min-h-[724px] min-w-[1042px] p-10"
+      className="min-h-[755px] min-w-[1042px] p-10"
       onCloseAutoFocus={() => {
         setShowForm(false);
         setNewReservationId("");

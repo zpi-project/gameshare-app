@@ -24,6 +24,7 @@ export class ReservationsApi {
   }
 
   static async create(newReservation: NewReservation) {
+    console.log(newReservation);
     const { data: reservation } = await Api.post<Reservation>("/reservations", newReservation);
     return reservation;
   }
