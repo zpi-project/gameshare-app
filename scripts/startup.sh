@@ -19,10 +19,10 @@ touch gameshare-app/backend/src/main/resources/gcp-account-file.json
 
 echo $IAC_CICD_SA > gameshare-app/backend/src/main/resources/gcp-account-file.json
 
-echo ADMIN1_EMAIL="$ADMIN1_EMAIL" >> gameshare-app/.env
-echo ADMIN2_EMAIL="$ADMIN2_EMAIL" >> gameshare-app/.env
-echo ADMIN3_EMAIL="$ADMIN3_EMAIL" >> gameshare-app/.env
-echo ADMIN4_EMAIL="$ADMIN4_EMAIL" >> gameshare-app/.env
+echo ADMIN1_EMAIL=${{ADMIN1_EMAIL}} >> gameshare-app/.env
+echo ADMIN2_EMAIL=${{ADMIN2_EMAIL}} >> gameshare-app/.env
+echo ADMIN3_EMAIL=${{ADMIN3_EMAIL}} >> gameshare-app/.env
+echo ADMIN4_EMAIL=${{ADMIN4_EMAIL}} >> gameshare-app/.env
 echo AUTH_CLIENT_ID="$AUTH_CLIENT_ID" >> gameshare-app/.env
 echo BACKEND_HOST="$BACKEND_HOST" >> gameshare-app/.env
 echo BACKEND_PORT="$BACKEND_PORT" >> gameshare-app/.env
@@ -41,9 +41,9 @@ echo GCP_PROJECT_ID="$GCP_PROJECT_ID" >> gameshare-app/.env
 echo SECURE_LOCAL_STORAGE_HASH_KEY="$SECURE_LOCAL_STORAGE_HASH_KEY">> gameshare-app/.env
 echo SECURE_LOCAL_STORAGE_PREFIX="$SECURE_LOCAL_STORAGE_PREFIX" >> gameshare-app/.env
 echo VITE_API_URL="$VITE_API_URL" >> gameshare-app/.env
-echo VITE_AUTH_CLIENT_ID="$VITE_AUTH_CLIENT_ID" >> gameshare-app/.env
-echo VITE_SECURE_LOCAL_STORAGE_HASH_KEY="$VITE_SECURE_LOCAL_STORAGE_HASH_KEY" >> gameshare-app/.env
-echo VITE_SECURE_LOCAL_STORAGE_PREFIX="$VITE_SECURE_LOCAL_STORAGE_PREFIX" >> gameshare-app/.env
+echo VITE_AUTH_CLIENT_ID=${{VITE_AUTH_CLIENT_ID}} >> gameshare-app/.env
+echo VITE_SECURE_LOCAL_STORAGE_HASH_KEY=${{VITE_SECURE_LOCAL_STORAGE_HASH_KEY}} >> gameshare-app/.env
+echo VITE_SECURE_LOCAL_STORAGE_PREFIX=${{VITE_SECURE_LOCAL_STORAGE_PREFIX}} >> gameshare-app/.env
 
 cd gameshare-app
 sudo docker compose up
