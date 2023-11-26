@@ -396,4 +396,18 @@ public class ExceptionController {
                         .withDetail(ex.getMessage()));
     }
 
+    // Game Image
+    @ResponseBody
+    @ExceptionHandler(ImageAlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    ResponseEntity IAEEHandler(ImageAlreadyExistsException ex) {
+        logger.error(ex.getClass().getSimpleName() + ": " + ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
+                .body(Problem.create()
+                        .withStatus(HttpStatus.CONFLICT)
+                        .withTitle(ex.getClass().getSimpleName())
+                        .withDetail(ex.getMessage()));
+    }
 }

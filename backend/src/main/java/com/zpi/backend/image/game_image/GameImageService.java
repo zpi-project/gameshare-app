@@ -27,7 +27,7 @@ public class GameImageService {
     private final DataBucketUtil dataBucketUtil;
     private final RoleService roleService;
 
-    public FileDTO addImageToGameInstance(Long gameId, MultipartFile multipartFile)
+    public FileDTO addImageToGame(Long gameId, MultipartFile multipartFile)
             throws BadRequestException, GameDoesNotExistException, ImageAlreadyExistsException {
         Optional<Game> gameOptional = gameRepository.findGameById(gameId);
         if (gameOptional.isEmpty())

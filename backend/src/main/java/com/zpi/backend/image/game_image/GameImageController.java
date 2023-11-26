@@ -2,11 +2,8 @@ package com.zpi.backend.image.game_image;
 
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
-import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.image.dto.FileDTO;
 import com.zpi.backend.image.exception.ImageAlreadyExistsException;
-import com.zpi.backend.image.exception.ImageDoesNotExistException;
-import com.zpi.backend.image.exception.TooManyImagesException;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,9 +28,8 @@ public class GameImageController {
     @RequestMapping(method = POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<FileDTO> addImageToGame(@PathVariable Long gameId, @RequestParam("file") MultipartFile newFile)
             throws BadRequestException, GameDoesNotExistException, ImageAlreadyExistsException {
-        FileDTO file = gameImageService.addImageToGameInstance(gameId, newFile);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(file);
+        gameImageService.addImageToGame(gameId, newFile);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PreAuthorize("isAuthenticated()")
