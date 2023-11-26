@@ -5,10 +5,12 @@ import { Pencil } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { URLS } from "@/constants/urls";
 import { GameInstance as GameInstanceType } from "@/types/GameInstance";
+import { cn } from "@/utils/tailwind";
 import { PlayersBadge, PriceBadge, TimeBadge } from "@/components/Badge";
 import AgeBadge from "@/components/Badge/AgeBadge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Badge } from "../ui/badge";
 import GameReservations from "./GameReservations";
 
 interface Props {
@@ -30,7 +32,10 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
     <div className="flex w-full flex-row">
       <Link
         to={`${URLS.GAME_INSTANCE}/${uuid}`}
-        className="items-top flex w-full flex-row gap-3 rounded-lg bg-card p-3 shadow duration-300 hover:bg-accent"
+        className={cn(
+          "items-top flex w-full flex-row gap-3 rounded-lg bg-card p-3 shadow duration-300 hover:bg-accent",
+          !active && "bg-destructive/30",
+        )}
       >
         <div className="h-32 w-32 overflow-hidden rounded-lg">
           <img src={image} alt={name} className="h-full w-full object-cover object-top" />
@@ -46,9 +51,13 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
           </div>
           <div className="flex w-full flex-row justify-between gap-2">
             <p className="min-h-8 break-all text-xs italic">{description}</p>
-            <div className="flex flex-col items-end">
+            <div className="flex flex-col items-end gap-2">
               <PriceBadge price={pricePerDay} />
-              {!active && <div className="text-xl text-red-500">{t("deactivated")}</div>}
+              {!active && (
+                <Badge className="text-sm uppercase" variant="destructive">
+                  {t("deactivated")}
+                </Badge>
+              )}
             </div>
           </div>
         </section>

@@ -25,9 +25,15 @@ const GameReservations: FC<GameReservationsProps> = ({ gameInstance }) => {
         <div className="flex flex-grow flex-col gap-8">
           <div className="flex flex-row justify-between">
             <h2 className="text-2xl uppercase text-secondary">{t("reservationsCalendar")}</h2>
-            <Button variant="destructive" className="uppercase">
-              {t("deactivate")}
-            </Button>
+            {gameInstance.active ? (
+              <Button variant="destructive" className="uppercase">
+                {t("deactivate")}
+              </Button>
+            ) : (
+              <Button variant="secondary" className="uppercase">
+                {t("activate")}
+              </Button>
+            )}
           </div>
           <ReservationsCalendar gameInstanceUUID={uuid} />
         </div>
