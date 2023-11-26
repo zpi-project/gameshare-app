@@ -92,3 +92,8 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
 };
 
 export default GameCalendar;
+
+// student uuid: 239bda34-a3ad-4d97-84b0-8aceb4480801
+// 2023-11-1 - brak komentarza?
+// 2023-11-2 - komentarz
+// owner uuid: 94d0560d-9716-4a30-b1a6-5f9a97c53677

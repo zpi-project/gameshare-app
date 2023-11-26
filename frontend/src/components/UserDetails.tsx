@@ -37,15 +37,8 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
       {user && (
         <>
           <div className="flex h-full w-full flex-row items-center gap-6">
-            <div className="flex w-3/12 flex-col items-center gap-3 xl:gap-6">
-              <Avatar
-                user={user}
-                className={
-                  showEdit
-                    ? "h-1/2 w-1/2 text-5xl xl:h-4/5 xl:w-4/5"
-                    : "h-[90%] max-h-[100px] w-[90%] max-w-[100px] text-5xl"
-                }
-              />
+            <div className="flex flex-col items-center gap-3 xl:gap-6">
+              <Avatar user={user} className="h-20 w-20 xl:h-[148px] xl:w-[148px] xl:text-5xl" />
               {user.phoneNumber && (
                 <div className="w-full rounded-lg bg-card p-2.5 px-6 text-sm xl:text-base">
                   {parsePhoneNumber(user.phoneNumber).formatInternational()}
@@ -64,7 +57,7 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
               <div className="h-1/4">
                 <h2 className="rounded-lg bg-card p-2 xl:p-3 xl:text-xl">{getFullname(user)}</h2>
               </div>
-              <div className="h-3/4 min-w-[100px] flex-grow overflow-hidden rounded-lg bg-section">
+              <div className="h-3/4 min-w-[100px] overflow-hidden rounded-lg bg-section">
                 <Map location={[user.locationLatitude, user.locationLongitude]}>
                   <LocationMarker />
                 </Map>

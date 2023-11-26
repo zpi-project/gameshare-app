@@ -161,6 +161,7 @@ export default {
   reservationForm: "Reservation form",
   bookItNow: "Book it now",
   deactivate: "Deactivate",
+  activate: "Activate",
   errorFetchingReservationsCalendar: "We couldn't fetch reservations for this month.",
   errorStatus: {
     "400": "Bad Request",
