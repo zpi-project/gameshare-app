@@ -164,6 +164,7 @@ const pl: typeof en = {
   availabilityCalendar: "Kalendarz dostępności",
   reservationForm: "Formularz rezerwacji",
   deactivate: "Dezaktywuj",
+  activate: "Aktywuj",
   bookItNow: "Rezerwuj",
   errorFetchingReservationsCalendar: "Nie udało się pobrać rezerwacji na ten miesiąc.",
   errorStatus: {
