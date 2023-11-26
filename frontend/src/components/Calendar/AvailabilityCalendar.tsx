@@ -13,9 +13,8 @@ interface AvailabilityCalendarProps {
 }
 
 const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID }) => {
-  const [startDate, setStartDate] = useState(
-    getFirstDayOfMonth(new Date(new Date().setHours(0, 0, 0, 0))),
-  );
+  const FIRST_DAY_OF_CURRENT_MONTH = getFirstDayOfMonth(new Date(new Date().setHours(0, 0, 0, 0)));
+  const [startDate, setStartDate] = useState(FIRST_DAY_OF_CURRENT_MONTH);
   const [month, setMonth] = useState(startDate.getMonth() + 1);
   const [year, setYear] = useState(startDate.getFullYear());
   const { t } = useTranslation();
@@ -61,6 +60,7 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
       onNextClick={() => setStartDate(getFirstDayOfNextMonth(startDate))}
       onPrevClick={() => setStartDate(getFirstDayOfLastMonth(startDate))}
       date={startDate}
+      prevClickDisabled={FIRST_DAY_OF_CURRENT_MONTH >= startDate}
     >
       {isError ? (
         <h3 className="mt-4 text-center text-xl text-destructive">
