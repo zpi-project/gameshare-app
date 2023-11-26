@@ -89,7 +89,7 @@ const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({
                 }}
               />
               <UserDetailsSection
-                user={renter}
+                user={gameInstance.owner}
                 title={t("reservationDetails.renter.userDetails")}
                 btnText={t("seeProfile")}
               />

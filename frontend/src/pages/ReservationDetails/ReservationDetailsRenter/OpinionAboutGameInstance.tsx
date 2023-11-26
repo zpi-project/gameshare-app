@@ -19,7 +19,7 @@ const OpinionAboutGameIntance: FC<OpinionAboutGameIntanceProps> = ({
         <>
           <div className="flex flex-row flex-wrap justify-between gap-4">
             <h3 className="text-xl uppercase">{t("reservationDetails.renter.gameOpinion")}</h3>
-            <Stars count={gameInstanceOpinion.stars} />
+            <Stars count={gameInstanceOpinion.stars} variant="secondary" />
           </div>
           <p className="flex-grow break-all rounded-lg bg-card p-4 italic">
             {gameInstanceOpinion.description}

@@ -1,6 +1,5 @@
 import en from "./en";
 
-
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -132,8 +131,8 @@ const pl: typeof en = {
       PENDING: "Oczekujące na akceptację",
       ACCEPTED_BY_OWNER: "Zaakceptowane przeze mnie",
       REJECTED_BY_OWNER: "Odrzucone przeze mnie",
-      CANCELED_BY_OWNER: "Anulowane przeze mnie",
-      CANCELED_BY_RENTER: "Anulowane przez wypożyczającego",
+      CANCELLED_BY_OWNER: "Anulowane przeze mnie",
+      CANCELLED_BY_RENTER: "Anulowane przez wypożyczającego",
       RENTED: "Wypożyczone",
       FINISHED: "Zrealizowane",
       EXPIRED: "Po terminie",
@@ -143,8 +142,8 @@ const pl: typeof en = {
       PENDING: "Oczekujące na akceptację",
       ACCEPTED_BY_OWNER: "Zaakceptowane przez właściciela",
       REJECTED_BY_OWNER: "Odrzucone przez właściciela",
-      CANCELED_BY_OWNER: "Anulowane przez właściciela",
-      CANCELED_BY_RENTER: "Anulowane przeze mnie",
+      CANCELLED_BY_OWNER: "Anulowane przez właściciela",
+      CANCELLED_BY_RENTER: "Anulowane przeze mnie",
       RENTED: "Wypożyczone",
       FINISHED: "Zrealizowane",
       EXPIRED: "Po terminie",
