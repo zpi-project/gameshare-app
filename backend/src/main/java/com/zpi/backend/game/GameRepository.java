@@ -12,13 +12,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+import static com.zpi.backend.game_status.GameStatus.*;
+
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
 
     @Query(
             value = "select  G.id, original_id, G.name, age, min_players, max_players, playing_time," +
                     "short_description, image,game_status_id from games G join game_statuses GS on G.game_status_id = GS.id" +
-                    " where lower(G.name) like %:name% and GS.status = 'Accepted'",
+                    " where lower(G.name) like %:name% and GS.status = '"+ACCEPTED+"'",
             nativeQuery = true
     )
     Page<Game> searchAllByNameContains(@Param("name") String name, Pageable pageable);
@@ -26,7 +28,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     @Query(
             value = "select  G.id, original_id, G.name, age, min_players, max_players, playing_time," +
                     "short_description, image,game_status_id from games G join game_statuses GS on G.game_status_id = GS.id"
-                    +" where GS.status = 'Accepted'",
+                    +" where GS.status = '"+ACCEPTED+"'",
             nativeQuery = true
     )
     Page<Game> getAllAccepted(Pageable pageable);
@@ -37,7 +39,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     @Query(
             value = "select  G.id, original_id, G.name, age, min_players, max_players, playing_time," +
                     "short_description, image,game_status_id from games G join game_statuses GS on G.game_status_id = GS.id" +
-                    " where G.id = :id and GS.status = 'Accepted'",
+                    " where G.id = :id and GS.status = '"+ACCEPTED+"'",
             nativeQuery = true
     )
     Optional<Game> findByIdAndAccepted(@Param("id") Long id);
@@ -45,7 +47,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "short_description, image,game_status_id " +
             "from games G join games_categories GC on G.id = GC.game_id " +
             "join game_statuses GS on G.game_status_id = GS.id " +
-            "where GC.category_id in :categories and GS.status = 'Accepted'",
+            "where GC.category_id in :categories and GS.status = '"+ACCEPTED+"'",
     nativeQuery = true)
 
     Page<Game> getAllByAcceptedAndCategoriesIn(Pageable pageable, @Param("categories") List<Integer> categoriesIds);
@@ -53,7 +55,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "short_description, image,game_status_id " +
             "from games G join games_categories GC on G.id = GC.game_id " +
             "join game_statuses GS on G.game_status_id = GS.id " +
-            "where GC.category_id in :categories and GS.status = 'Accepted' and lower(G.name) like %:name%",
+            "where GC.category_id in :categories and GS.status = '"+ACCEPTED+"' and lower(G.name) like %:name%",
             nativeQuery = true)
     Page<Game>  searchAllByNameContainsAndAcceptedAndCategoriesIn(@Param("name") String name, @Param("categories") List<Integer> categoriesIds, Pageable pageable);
 

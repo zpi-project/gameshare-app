@@ -28,6 +28,9 @@ import org.thymeleaf.context.Context;
 import java.io.IOException;
 import java.util.*;
 
+import static com.zpi.backend.email_type.EmailType.*;
+import static com.zpi.backend.role.Role.*;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -75,15 +78,15 @@ public class UserService {
         if(!checkIfUserExists(user.getGoogleId())) {
             user.update(updateUserDTO);
             if(adminChecker.isAdmin(user.getEmail()))
-                user.setRole(roleRepository.getRoleByName("admin"));
+                user.setRole(roleRepository.getRoleByName(ADMIN));
             else
-                user.setRole(roleRepository.getRoleByName("user"));
+                user.setRole(roleRepository.getRoleByName(USER));
             userRepository.save(user);
 
 //            Sending e-mail
             Context registrationContext = emailService.getRegistrationEmailContext();
                 emailService.sendEmailWithHtmlTemplate(user, registrationContext.getVariable("pl_title").toString(),
-                        EmailService.EMAIL_TEMPLATE, registrationContext, emailTypeService.findEmailTypeByStatus("REGISTRATION"));
+                        EmailService.EMAIL_TEMPLATE, registrationContext, emailTypeService.findEmailTypeByStatus(REGISTRATION));
         }
         else {
             throw new UserAlreadyExistsException("User already exists");

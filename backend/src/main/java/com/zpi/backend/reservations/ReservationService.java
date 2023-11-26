@@ -19,7 +19,6 @@ import com.zpi.backend.user.User;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
 import com.zpi.backend.user_opinion.UserOpinion;
-import com.zpi.backend.game_instance.GameInstanceService;
 import com.zpi.backend.user_opinion.UserOpinionRepository;
 import com.zpi.backend.user_opinion.dto.UserOpinionDTO;
 import com.zpi.backend.utils.DateUtils;
@@ -39,6 +38,9 @@ import org.thymeleaf.context.Context;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.zpi.backend.email_type.EmailType.*;
+import static com.zpi.backend.reservation_status.ReservationStatus.*;
 
 @Service
 @AllArgsConstructor
@@ -60,7 +62,7 @@ public class ReservationService {
         checkIfOwnerIsNotRenter(renter,gameInstance);
 
         Reservation reservation = new Reservation().fromDTO(newReservationDTO, renter, gameInstance);
-        reservation.setStatus(reservationStatusRepository.findByStatus("PENDING").orElseThrow(()->new BadRequestException("Status does not exist")));
+        reservation.setStatus(reservationStatusRepository.findByStatus(PENDING).orElseThrow(()->new BadRequestException("Status does not exist")));
         reservation=  reservationRepository.save(reservation);
         reservation.setReservationId(DateUtils.getYear(reservation.getStartDate()) + "-" + DateUtils.getMonth(reservation.getStartDate())+'-'+reservation.getId());
         ReservationDTO reservationDTO = new ReservationDTO(reservationRepository.save(reservation));
@@ -69,7 +71,7 @@ public class ReservationService {
                 reservation.getGameInstance().getGame().getName(), reservation.getStartDate(), reservation.getEndDate());
         emailService.sendEmailWithHtmlTemplate(reservation.getGameInstance().getOwner(), context.getVariable("pl_title").toString(),
                 EmailService.EMAIL_TEMPLATE, context,
-                emailTypeService.findEmailTypeByStatus("RESERVATION_PENDING")
+                emailTypeService.findEmailTypeByStatus(RESERVATION_PENDING)
         );
         return reservationDTO;
     }
@@ -171,7 +173,7 @@ public class ReservationService {
         if(possibleStatuses == null || !possibleStatuses.contains(status))
             throw new BadRequestException("Status cannot be changed to "+status +" from "+reservation.getStatus().getStatus());
         Reservation changedReservation = changeStatus(reservation, status);
-        if (status.equals("ACCEPTED_BY_OWNER"))
+        if (status.equals(ACCEPTED_BY_OWNER))
             rejectReservationsAtTheTime(changedReservation);
         return changedReservation;
     }
@@ -182,39 +184,39 @@ public class ReservationService {
         // sending emails
         Context context;
         switch (status){
-            case "ACCEPTED_BY_OWNER" ->{
+            case ACCEPTED_BY_OWNER ->{
                 context = emailService.getAcceptingEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
                 emailService.sendEmailWithHtmlTemplate(reservation.getRenter(), context.getVariable("pl_title").toString(),
                         EmailService.EMAIL_TEMPLATE, context,
-                        emailTypeService.findEmailTypeByStatus("RESERVATION_ACCEPTED")
+                        emailTypeService.findEmailTypeByStatus(RESERVATION_ACCEPTED)
                 );
             }
-            case "REJECTED_BY_OWNER" ->{
+            case REJECTED_BY_OWNER -> {
                 context = emailService.getRejectingEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
                 emailService.sendEmailWithHtmlTemplate(reservation.getRenter(), context.getVariable("pl_title").toString(),
                         EmailService.EMAIL_TEMPLATE, context,
-                        emailTypeService.findEmailTypeByStatus("RESERVATION_REJECTED")
+                        emailTypeService.findEmailTypeByStatus(RESERVATION_REJECTED)
                 );
             }
-            case "CANCELED_BY_OWNER" ->{
+            case CANCELED_BY_OWNER ->{
                 context = emailService.getCancelingByOwnerEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
                 emailService.sendEmailWithHtmlTemplate(reservation.getRenter(), context.getVariable("pl_title").toString(),
                         EmailService.EMAIL_TEMPLATE, context,
-                        emailTypeService.findEmailTypeByStatus("RESERVATION_CANCELED_BY_OWNER")
+                        emailTypeService.findEmailTypeByStatus(RESERVATION_CANCELED_BY_OWNER)
                 );
             }
-            case "CANCELED_BY_RENTER" ->{
+            case CANCELED_BY_RENTER ->{
                 context = emailService.getCancelingByRenterEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
                 emailService.sendEmailWithHtmlTemplate(reservation.getGameInstance().getOwner(), context.getVariable("pl_title").toString(),
                         EmailService.EMAIL_TEMPLATE, context,
-                        emailTypeService.findEmailTypeByStatus("RESERVATION_CANCELED_BY_RENTER")
+                        emailTypeService.findEmailTypeByStatus(RESERVATION_CANCELED_BY_RENTER)
                 );
             }
-            case "FINISHED" ->{
+            case FINISHED ->{
                 context = emailService.getFinishingEmailContext(reservationId, reservation.getGameInstance().getGame().getName());
                 emailService.sendEmailWithHtmlTemplate(reservation.getGameInstance().getOwner(), context.getVariable("pl_title").toString(),
                         EmailService.EMAIL_TEMPLATE, context,
-                        emailTypeService.findEmailTypeByStatus("RESERVATION_FINISHED")
+                        emailTypeService.findEmailTypeByStatus(RESERVATION_FINISHED)
                 );
             }
         }
@@ -229,7 +231,7 @@ public class ReservationService {
                         acceptedReservation.getEndDate()
                 );
         for (Reservation r: reservationsToReject){
-            changeStatus(r, "REJECTED_BY_OWNER");
+            changeStatus(r, REJECTED_BY_OWNER);
         }
     }
 
@@ -268,7 +270,7 @@ public class ReservationService {
 
         boolean canAddOwnerOpinion = ownerOpinion == null;
         boolean canAddGameInstanceOpinion = gameInstanceOpinion == null;
-        if(!(reservation.getStatus().getStatus().equals("RENTED")|| reservation.getStatus().getStatus().equals("FINISHED"))){
+        if(!(reservation.getStatus().getStatus().equals(RENTED)|| reservation.getStatus().getStatus().equals(FINISHED))){
             canAddOwnerOpinion = false;
             canAddGameInstanceOpinion = false;
         }
@@ -303,24 +305,24 @@ public class ReservationService {
             throw new BadRequestException("User is not owner or renter of this reservation");
         else if(is_owner) {
             switch (reservation.getStatus().getStatus()) {
-                case "PENDING" -> {
-                    return List.of("ACCEPTED_BY_OWNER", "REJECTED_BY_OWNER");
+                case PENDING -> {
+                    return List.of(ACCEPTED_BY_OWNER, REJECTED_BY_OWNER);
                 }
-                case "ACCEPTED_BY_OWNER" -> {
-                    return List.of("CANCELED_BY_OWNER", "RENTED");
+                case ACCEPTED_BY_OWNER -> {
+                    return List.of(CANCELED_BY_OWNER, RENTED);
                 }
-                case "RENTED" -> {
-                    return List.of("FINISHED");
+                case RENTED -> {
+                    return List.of(FINISHED);
                 }
             }
 
         }
         else {
-            if (reservation.getStatus().getStatus().equals("PENDING")) {
-                return List.of("CANCELED_BY_RENTER");
+            if (reservation.getStatus().getStatus().equals(PENDING)) {
+                return List.of(CANCELED_BY_RENTER);
             }
-            else if (reservation.getStatus().getStatus().equals("ACCEPTED_BY_OWNER")) {
-                return List.of("CANCELED_BY_RENTER");
+            else if (reservation.getStatus().getStatus().equals(ACCEPTED_BY_OWNER)) {
+                return List.of(CANCELED_BY_RENTER);
             }
         }
         return List.of();
@@ -341,7 +343,7 @@ public class ReservationService {
                     context.getVariable("pl_title").toString(),
                     EmailService.EMAIL_TEMPLATE,
                     context,
-                    emailTypeService.findEmailTypeByStatus("RESERVATION_COMING_SOON")
+                    emailTypeService.findEmailTypeByStatus(RESERVATION_COMING_SOON)
             );
         }
     }
@@ -359,7 +361,7 @@ public class ReservationService {
                     context.getVariable("pl_title").toString(),
                     EmailService.EMAIL_TEMPLATE,
                     context,
-                    emailTypeService.findEmailTypeByStatus("RESERVATION_TODAY")
+                    emailTypeService.findEmailTypeByStatus(RESERVATION_TODAY)
             );
         }
     }
@@ -380,7 +382,7 @@ public class ReservationService {
                         context.getVariable("pl_title").toString(),
                         EmailService.EMAIL_TEMPLATE,
                         context,
-                        emailTypeService.findEmailTypeByStatus("RESERVATION_EXPIRED")
+                        emailTypeService.findEmailTypeByStatus(RESERVATION_EXPIRED)
                 );
             }
         }

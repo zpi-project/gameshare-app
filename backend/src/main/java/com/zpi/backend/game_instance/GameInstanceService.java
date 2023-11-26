@@ -34,6 +34,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static com.zpi.backend.reservation_status.ReservationStatus.*;
+
 @Service
 @AllArgsConstructor
 public class GameInstanceService {
@@ -184,7 +186,7 @@ public class GameInstanceService {
             return false;
         if( reservation.getStartDate().getMonth() + 1 > month && reservation.getEndDate().getMonth() + 1< month)
             return true;
-        return reservation.getStatus().getStatus().equals("ACCEPTED_BY_OWNER") || reservation.getStatus().getStatus().equals("RENTED");
+        return reservation.getStatus().getStatus().equals(ACCEPTED_BY_OWNER) || reservation.getStatus().getStatus().equals(RENTED);
     }
 
 
@@ -281,7 +283,7 @@ public class GameInstanceService {
         User user = userService.getUser(authentication);
         if (user != gameInstanceOptional.get().getOwner())
             throw new IllegalAccessError("User is not the Owner of the Game Instance");
-        List<ReservationStatus> statuses = reservationStatusRepository.findAllByStatusIn(Arrays.asList("ACCEPTED_BY_OWNER", "PENDING"));
+        List<ReservationStatus> statuses = reservationStatusRepository.findAllByStatusIn(Arrays.asList(ACCEPTED_BY_OWNER, PENDING));
         List<Reservation> reservations = reservationRepository.getReservationsByGameInstanceAndStatusIn(gameInstanceOptional.get(), statuses);
         return !reservations.isEmpty();
     }
