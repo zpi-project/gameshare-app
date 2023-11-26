@@ -95,7 +95,5 @@ jobs:
                 
       
       - name: Deploy GCE
-        uses: mattes/gce-deploy-action@v5
-        with:
-          creds: ${{ secrets.IAC_CICD_SA }}
-          config: ./scripts/deploy.yml
+        run: | 
+          gcloud compute instances create example-instance-1 --machine-type=e2-highmem-2 --metadata-from-file=startup-script=./scripts/startup.sh
