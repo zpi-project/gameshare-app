@@ -96,4 +96,4 @@ jobs:
       
       - name: Deploy GCE
         run: | 
-          gcloud compute instances create example-instance-1 --machine-type=e2-highmem-2 --metadata-from-file=startup-script=./scripts/startup.sh --project=zpi-test-1 --zone=us-east4
+          gcloud compute instances create example-instance-1 --machine-type=e2-highmem-2 --metadata-from-file=startup-script=./scripts/startup.sh --project=zpi-test-1 --zone=us-east4-a
