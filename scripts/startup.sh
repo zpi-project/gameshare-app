@@ -47,3 +47,4 @@ echo VITE_SECURE_LOCAL_STORAGE_PREFIX="$VITE_SECURE_LOCAL_STORAGE_PREFIX" >> gam
 
 cd gameshare-app
 sudo docker compose up
+
