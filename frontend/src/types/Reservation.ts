@@ -17,7 +17,7 @@ export interface Reservation {
   endDate: string;
   status: ReservationStatusType;
   gameInstance: GameInstanceDetails;
-  renterComment: string;
+  renterComment: string | null;
   timestamp: string;
   duration: number;
 }
