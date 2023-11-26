@@ -37,6 +37,7 @@ public class ReservationController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ReservationDTO> addReservation(Authentication authentication, @RequestBody NewReservationDTO newReservationDTO)
             throws BadRequestException, GameInstanceDoesNotExistException, UserDoesNotExistException, IOException, EmailTypeDoesNotExists {
+        System.out.println("... called addReservation");
         ReservationDTO reservationDTO = reservationService.addReservation(authentication, newReservationDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(reservationDTO);
     }
@@ -54,6 +55,7 @@ public class ReservationController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ResultsDTO<ReservationDTO>> getReservations(Authentication authentication, @RequestParam Optional<String> status, @RequestParam Boolean asOwner
             , @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) throws UserDoesNotExistException, BadRequestException {
+        System.out.println("... called getReservations");
         ResultsDTO<ReservationDTO> reservations;
         if (status.isPresent())
         {
@@ -77,6 +79,7 @@ public class ReservationController {
     public ResponseEntity<ResultsDTO<ReservationDTO>> getReservationsByGameInstance(@PathVariable String gameInstanceUuid,Authentication authentication,
                                                                                     @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size)
             throws UserDoesNotExistException, GameInstanceDoesNotExistException, BadRequestException {
+        System.out.println("... called getReservationsByGameInstance");
         ResultsDTO<ReservationDTO> reservations = reservationService.getReservationsByGameInstance(authentication,gameInstanceUuid,page,size);
         return ResponseEntity.ok().body(reservations);
     }
@@ -90,6 +93,7 @@ public class ReservationController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ReservationDTO> changeReservationStatus(Authentication authentication, @PathVariable String reservationId, @RequestParam String status)
             throws BadRequestException, UserDoesNotExistException, IOException, EmailTypeDoesNotExists {
+        System.out.println("... called changeReservationStatus");
         ReservationDTO reservationDTO = new ReservationDTO(reservationService.changeReservationStatus(authentication, reservationId, status));
         return ResponseEntity.ok().body(reservationDTO);
     }
@@ -103,6 +107,7 @@ public class ReservationController {
     @GetMapping("/reservations/{reservationId}/statuses")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<String>> getReservationStatuses(Authentication authentication, @PathVariable String reservationId) throws BadRequestException, UserDoesNotExistException {
+        System.out.println("... called getReservationStatuses");
         List<String> reservationStatuses = reservationService.getReservationStatuses(authentication, reservationId);
         return ResponseEntity.ok().body(reservationStatuses);
     }
@@ -115,6 +120,7 @@ public class ReservationController {
     @GetMapping("/reservations/{reservationId}/details")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ReservationDetailDTO> getReservationDetails(Authentication authentication, @PathVariable String reservationId) throws BadRequestException, UserDoesNotExistException {
+        System.out.println("... called getReservationDetails");
         ReservationDetailDTO reservationDetails = reservationService.getReservationDetails(authentication, reservationId);
         return ResponseEntity.ok().body(reservationDetails);
     }

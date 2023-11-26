@@ -29,6 +29,7 @@ public class GameInstanceImageController {
     @RequestMapping(value = "/{gameInstanceUUID}", method = POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<FileDTO> addImageToGameInstance(Authentication authentication, @PathVariable String gameInstanceUUID,
                                                           @RequestParam("file") MultipartFile newFile) throws GameInstanceDoesNotExistException, BadRequestException, TooManyImagesException, UserDoesNotExistException {
+        System.out.println("... called addImageToGameInstance");
         FileDTO file = gameInstanceImageService.addImageToGameInstance(authentication, gameInstanceUUID, newFile);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(file);
@@ -38,6 +39,7 @@ public class GameInstanceImageController {
     @RequestMapping(value = "/{gameInstanceImageUUID}", method = DELETE)
     public ResponseEntity deleteGameInstanceImage(Authentication authentication, @PathVariable String gameInstanceImageUUID)
             throws ImageDoesNotExistException {
+        System.out.println("... called deleteGameInstanceImage");
         gameInstanceImageService.deleteGameInstanceImage(authentication, gameInstanceImageUUID);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
