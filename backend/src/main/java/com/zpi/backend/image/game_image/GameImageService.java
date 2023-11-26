@@ -29,13 +29,12 @@ public class GameImageService {
 
     public FileDTO addImageToGame(Long gameId, MultipartFile multipartFile)
             throws BadRequestException, GameDoesNotExistException, ImageAlreadyExistsException {
-        Optional<Game> gameOptional = gameRepository.findGameById(gameId);
-        if (gameOptional.isEmpty())
-            throw new GameDoesNotExistException("Game (id = "+gameId+") does not exists.");
-        if (!gameOptional.get().getImage().isEmpty() && !gameOptional.get().getImage().isBlank())
+        Game game = gameRepository.findGameById(gameId)
+                .orElseThrow(() -> new GameDoesNotExistException("Game (id = "+gameId+") does not exists."));
+        if (!game.getImage().isEmpty() && !game.getImage().isBlank())
             throw new ImageAlreadyExistsException("Game (id = "+gameId+") already has an image. To change image you need " +
                     "to remove it first sending DELETE request for endpoint games/{gameId}/images.");
-        return uploadFiles(multipartFile, gameOptional.get());
+        return uploadFiles(multipartFile, game);
     }
 
     private FileDTO uploadFiles(MultipartFile file, Game game) throws BadRequestException {

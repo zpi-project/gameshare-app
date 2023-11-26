@@ -10,6 +10,7 @@ import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -178,7 +179,9 @@ public class GameInstanceController {
                     "can be called by anyone"
     )
     @RequestMapping(method= GET,value = "/{uuid}/timeframes/available")
-    public ResponseEntity<Boolean> canMakeReservation(@PathVariable String uuid, @RequestParam Date startDate, @RequestParam Date endDate)  {
+    public ResponseEntity<Boolean> canMakeReservation(@PathVariable String uuid,
+                                                      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                                      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate)  {
       System.out.println("... called canMakeReservation");
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.canMakeReservation(uuid, startDate, endDate));
