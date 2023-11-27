@@ -17,6 +17,9 @@ import com.zpi.backend.game.exception.GameAlreadyRejectedException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.RoleService;
+import com.zpi.backend.role.Roles;
+import com.zpi.backend.user.User;
+import com.zpi.backend.user.UserService;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -39,23 +42,32 @@ public class GameService {
     private final GameStatusService gameStatusService;
     private final EmailService emailService;
     private final EmailTypeService emailTypeService;
+    private final UserService userService;
 
-    public GameDTO addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException, IOException, EmailTypeDoesNotExists {
+    public GameDTO addGame(NewGameDTO newGameDTO,Authentication authentication) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException, IOException, EmailTypeDoesNotExists, UserDoesNotExistException {
         newGameDTO.validate();
+        User user = userService.getUser(authentication);
         if (gameRepository.existsGameByName(newGameDTO.getName()))
             throw new GameAlreadyExistsException("Game "+newGameDTO.getName()+" already exists");
         List<Category> categories = categoryService.getCategoriesByIDs(newGameDTO.getCategoriesIDs());
         Game newGame = newGameDTO.toGame(categories);
-        newGame.setGameStatus(gameStatusService.getGameStatus("PENDING"));
+
+        if(Roles.valueOf(user.getRole().getName()).equals(Roles.user)){
+            newGame.setGameStatus(gameStatusService.getGameStatus("Pending"));
+            Context context = emailService.getNewGameEmailContext(newGame.getName());
+            emailService.sendEmailToAdminsWithHtmlTemplate(
+                    context.getVariable("pl_title").toString(),
+                    EmailService.EMAIL_TEMPLATE,
+                    context,
+                    emailTypeService.findEmailTypeByStatus("NEW_GAME")
+            );
+        } else if (Roles.valueOf(user.getRole().getName()).equals(Roles.admin)){
+            newGame.setGameStatus(gameStatusService.getGameStatus("Accepted"));
+        } else {
+            throw new BadRequestException("User role is not valid");
+        }
+
         gameRepository.save(newGame);
-//        Sending emails do admins
-        Context context = emailService.getNewGameEmailContext(newGame.getName());
-        emailService.sendEmailToAdminsWithHtmlTemplate(
-                context.getVariable("pl_title").toString(),
-                EmailService.EMAIL_TEMPLATE,
-                context,
-                emailTypeService.findEmailTypeByStatus("NEW_GAME")
-        );
         return new GameDTO(newGame);
     }
 
