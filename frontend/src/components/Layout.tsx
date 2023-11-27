@@ -1,5 +1,5 @@
-import { FC, useEffect, useState } from "react";
-import { Outlet, useRouteError } from "react-router-dom";
+import { FC, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
