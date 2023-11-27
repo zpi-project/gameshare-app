@@ -57,8 +57,6 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
     },
   });
 
-  console.log(reservations);
-
   const daysWithReservations = useMemo(() => {
     const daysInMonth = getDaysInMonth(startDate);
     const startDateCopy = new Date(startDate);

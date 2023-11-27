@@ -5,7 +5,6 @@ import { cn } from "@/utils/tailwind";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
-
 interface CalendarProps {
   className?: string;
   children: JSX.Element | JSX.Element[];
@@ -23,11 +22,16 @@ const Calendar: FC<CalendarProps> = ({
   onPrevClick,
   date,
   tileClassName,
-  prevClickDisabled
+  prevClickDisabled,
 }) => {
   return (
     <div className={cn("flex flex-col gap-6", className)}>
-      <CalendarHeader onNextClick={onNextClick} onPrevClick={onPrevClick} date={date} prevClickDisabled={prevClickDisabled} />
+      <CalendarHeader
+        onNextClick={onNextClick}
+        onPrevClick={onPrevClick}
+        date={date}
+        prevClickDisabled={prevClickDisabled}
+      />
       <CalendarWeekDays tileClassName={tileClassName} />
       {children}
     </div>
@@ -41,7 +45,12 @@ interface CalendarHeaderProps {
   prevClickDisabled?: boolean;
 }
 
-const CalendarHeader: FC<CalendarHeaderProps> = ({ onPrevClick, onNextClick, date, prevClickDisabled }) => {
+const CalendarHeader: FC<CalendarHeaderProps> = ({
+  onPrevClick,
+  onNextClick,
+  date,
+  prevClickDisabled,
+}) => {
   const { t } = useTranslation();
 
   return (

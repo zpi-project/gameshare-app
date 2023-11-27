@@ -84,7 +84,6 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
     },
   });
 
-  console.log(form.formState.errors);
   return (
     <div className="flex w-[364px] min-w-[364px] flex-grow flex-col gap-4">
       <h2 className="text-2xl uppercase text-secondary">{t("reservationForm")}</h2>
@@ -93,7 +92,6 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(data => {
-              console.log(data);
               onSubmit(data);
             })}
             className="flex flex-grow flex-col gap-4"
