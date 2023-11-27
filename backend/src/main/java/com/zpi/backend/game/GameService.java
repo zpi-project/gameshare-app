@@ -16,8 +16,8 @@ import com.zpi.backend.game.exception.GameAlreadyExistsException;
 import com.zpi.backend.game.exception.GameAlreadyRejectedException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
 import com.zpi.backend.game_status.GameStatusService;
+import com.zpi.backend.role.Role;
 import com.zpi.backend.role.RoleService;
-import com.zpi.backend.role.Roles;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserService;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
@@ -54,7 +54,7 @@ public class GameService {
         List<Category> categories = categoryService.getCategoriesByIDs(newGameDTO.getCategoriesIDs());
         Game newGame = newGameDTO.toGame(categories);
 
-        if(Roles.valueOf(user.getRole().getName()).equals(Roles.user)){
+        if(Role.USER.equals(user.getRole().getName())){
             newGame.setGameStatus(gameStatusService.getGameStatus(PENDING));
             Context context = emailService.getNewGameEmailContext(newGame.getName());
             emailService.sendEmailToAdminsWithHtmlTemplate(
@@ -63,7 +63,7 @@ public class GameService {
                     context,
                     emailTypeService.findEmailTypeByStatus("NEW_GAME")
             );
-        } else if (Roles.valueOf(user.getRole().getName()).equals(Roles.admin)){
+        } else if (Role.ADMIN.equals(user.getRole().getName())){
             newGame.setGameStatus(gameStatusService.getGameStatus(ACCEPTED));
         } else {
             throw new BadRequestException("User role is not valid");
