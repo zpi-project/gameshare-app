@@ -24,3 +24,9 @@ export const stringToHexColor = (
 
   return `#${red}${green}${blue}`;
 };
+
+export const getRandomLetter = () => {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const randomIndex = Math.floor(Math.random() * alphabet.length);
+  return alphabet[randomIndex];
+};

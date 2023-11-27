@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import { NewReservation } from "@/types/Reservation";
+import { cn } from "@/utils/tailwind";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { PriceBadge } from "@/components/Badge";
 import { Stars } from "@/components/Stars";
@@ -21,7 +22,6 @@ import {
   Form,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/utils/tailwind";
 
 interface ReservationFormProps {
   gameInstance: GameInstanceDetails;
@@ -73,7 +73,11 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
   const { isFetching, isSuccess } = useQuery({
     queryKey: ["game-instance-is-available", { uuid: gameInstance.uuid, startDate, endDate }],
     queryFn: () => GameInstanceApi.checkAvailability(gameInstance.uuid, startDate, endDate),
-    enabled: startDate !== undefined && endDate !== undefined,
+    enabled:
+      startDate !== undefined &&
+      endDate !== undefined &&
+      !form.formState.errors["startDate"] &&
+      !form.formState.errors["endDate"],
     onSuccess: data => {
       setIsAvailable(data);
       form.trigger();
@@ -100,7 +104,11 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
                 "text-destructive": isSuccess && !isAvailable,
               })}
             >
-              {isSuccess ? (isAvailable ? t("timeframeAvailable") : t("timeframeNoAvailable")) : ""}
+              {isSuccess && !form.formState.errors["startDate"] && !form.formState.errors["endDate"]
+                ? isAvailable
+                  ? t("timeframeAvailable")
+                  : t("timeframeNoAvailable")
+                : ""}
             </p>
             <FormField
               control={form.control}

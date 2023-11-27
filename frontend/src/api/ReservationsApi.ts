@@ -1,12 +1,7 @@
 import { Paginated } from "@/types/Paginated";
-import {
-  NewReservation,
-  Reservation,
-  ReservationDetails,
-  ReservationQueryParams,
-  ReservationStatusType,
-} from "@/types/Reservation";
+import { NewReservation, Reservation, ReservationDetails, ReservationQueryParams, ReservationStatusType } from "@/types/Reservation";
 import Api from "./Api";
+
 
 export class ReservationsApi {
   static async getAll(page: number, size: number, queryParams: ReservationQueryParams) {
@@ -25,7 +20,11 @@ export class ReservationsApi {
 
   static async create(newReservation: NewReservation) {
     console.log(newReservation);
-    const { data: reservation } = await Api.post<Reservation>("/reservations", newReservation);
+    const { data: reservation } = await Api.post<Reservation>("/reservations", {
+      ...newReservation,
+      startDate: new Date(newReservation.startDate.setHours(0, 0, 0, 0)),
+      endDate: new Date(newReservation.endDate.setHours(0, 0, 0, 0)),
+    });
     return reservation;
   }
 
