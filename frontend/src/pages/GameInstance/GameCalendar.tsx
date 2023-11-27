@@ -27,8 +27,7 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
   const { toast } = useToast();
   const [newReservationId, setNewReservationId] = useState("");
 
-  // add proper error messages when in api fixed
-  const { mutate, isLoading, isSuccess } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: (newReservation: NewReservation) => ReservationsApi.create(newReservation),
     onError: () => {
       toast({
