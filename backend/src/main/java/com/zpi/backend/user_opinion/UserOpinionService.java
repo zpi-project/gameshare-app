@@ -25,6 +25,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.zpi.backend.reservation_status.ReservationStatus.*;
+
 @Service
 @AllArgsConstructor
 public class UserOpinionService {
@@ -55,7 +57,7 @@ public class UserOpinionService {
 
         if(!checkIfCanAddOpinion(reservation,ratedUser))
             throw new BadRequestException("User already rated this reservation");
-        if(!(reservation.getStatus().getStatus().equals("RENTED")|| reservation.getStatus().getStatus().equals("FINISHED"))&&reservation.getRenter().equals(user))
+        if(!(reservation.getStatus().getStatus().equals(RENTED)|| reservation.getStatus().getStatus().equals(FINISHED))&&reservation.getRenter().equals(user))
             throw new BadRequestException("Renter can rate only finished or rented reservations");
 
         UserOpinion userOpinion = newUserOpinionDTO.toUserOpinion(user, ratedUser);

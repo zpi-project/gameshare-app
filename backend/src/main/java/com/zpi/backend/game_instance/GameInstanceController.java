@@ -10,6 +10,7 @@ import com.zpi.backend.game_instance.exception.GameInstanceStatusException;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -38,6 +39,7 @@ public class GameInstanceController {
     @RequestMapping(method = POST)
     public ResponseEntity<GameInstanceDTO> addGameInstance(@RequestBody NewGameInstanceDTO newGameInstanceDTO, Authentication authentication)
             throws UserDoesNotExistException, GameDoesNotExistException, BadRequestException {
+      System.out.println("... called addGameInstance");
         GameInstanceDTO gameInstance = gameInstanceService.addGameInstance(newGameInstanceDTO, authentication);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(gameInstance);
@@ -52,6 +54,7 @@ public class GameInstanceController {
     @RequestMapping(value = "/{uuid}", method = PUT)
     public ResponseEntity<GameInstanceDTO> updateGameInstance(@PathVariable String uuid,@RequestBody UpdatedGameInstanceDTO updatedGameInstanceDTO,
                                              Authentication authentication) throws GameInstanceDoesNotExistException, BadRequestException, UserDoesNotExistException {
+      System.out.println("... called updateGameInstance");
         GameInstanceDTO gameInstance = gameInstanceService.updateGameInstance(uuid, updatedGameInstanceDTO, authentication);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstance);
@@ -66,6 +69,7 @@ public class GameInstanceController {
     @RequestMapping(value = "/{gameInstanceUUID}/activate", method = PATCH)
     public ResponseEntity activate(@PathVariable String gameInstanceUUID, Authentication authentication)
             throws GameInstanceStatusException, GameInstanceDoesNotExistException, UserDoesNotExistException {
+      System.out.println("... called activate");
         gameInstanceService.activate(gameInstanceUUID, authentication);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
@@ -80,6 +84,7 @@ public class GameInstanceController {
     @RequestMapping(value = "/{gameInstanceUUID}/deactivate", method = PATCH)
     public ResponseEntity deactivate(@PathVariable String gameInstanceUUID, Authentication authentication)
             throws GameInstanceStatusException, GameInstanceDoesNotExistException, UserDoesNotExistException {
+      System.out.println("... called deactivate");
         gameInstanceService.deactivate(gameInstanceUUID, authentication);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
@@ -93,6 +98,7 @@ public class GameInstanceController {
     public ResponseEntity<GameInstanceDetailsDTO> getGameInstance(@PathVariable String gameInstanceUUID,
                                                                   Authentication authentication)
             throws GameInstanceDoesNotExistException {
+      System.out.println("... called getGameInstance");
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstance(gameInstanceUUID, authentication));
     }
@@ -104,9 +110,11 @@ public class GameInstanceController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(method = GET)
     public ResponseEntity<ResultsDTO<GameInstanceDTO>> getMyGameInstances(@RequestParam Optional<String> searchName,
-                                                                              @RequestParam int size, @RequestParam int page,
+                                                                          @RequestParam(defaultValue = "0") int page,
+                                                                          @RequestParam(defaultValue = "10") int size,
                                                                               Authentication authentication)
             throws UserDoesNotExistException {
+      System.out.println("... called getMyGameInstances");
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getMyGameInstances(searchName, size, page, authentication));
     }
@@ -117,9 +125,11 @@ public class GameInstanceController {
     )
     @RequestMapping(value = "/user/{userUUID}", method = GET)
     public ResponseEntity<ResultsDTO<GameInstanceDTO>> getUserGameInstances(@PathVariable String userUUID, @RequestParam Optional<String> searchName,
-                                                                         @RequestParam int size, @RequestParam int page) throws UserDoesNotExistException {
+                                                                            @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size)
+            throws UserDoesNotExistException {
+      System.out.println("... called getUserGameInstances");
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getUserGameInstances(userUUID, searchName, size, page, false));
+                .body(gameInstanceService.getUserGameInstances(userUUID, searchName, size, page, true));
     }
 
     @Operation(
@@ -130,8 +140,9 @@ public class GameInstanceController {
     @RequestMapping(method = GET, value="/search")
     public ResponseEntity<ResultsDTO<SearchGameInstanceDTO>>  getGameInstances(Authentication authentication, @RequestParam Optional<String> searchName, @RequestParam Optional<Long> categoryId,
                                                                                @RequestParam Optional<Integer> age, @RequestParam Optional<Integer> playersNumber, @RequestParam Optional<Integer> maxPricePerDay,
-                                                                               @RequestParam Optional<String> userUUID, @RequestParam double latitude, @RequestParam double longitude, @RequestParam int size, @RequestParam int page)
+                                                                               @RequestParam Optional<String> userUUID, @RequestParam double latitude, @RequestParam double longitude, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size)
             throws CategoryDoesNotExistException {
+      System.out.println("... called getGameInstances");
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstances(authentication, size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, userUUID, latitude, longitude));
     }
@@ -143,6 +154,7 @@ public class GameInstanceController {
     )
     @GetMapping(value="/{uuid}/availability")
     public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceUnAvailability(@PathVariable String uuid, @RequestParam String year, @RequestParam String month) {
+      System.out.println("... called getGameInstanceUnAvailability");
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstanceAvailability(uuid,year,month,false));
     }
@@ -156,6 +168,7 @@ public class GameInstanceController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceReservations(@PathVariable String uuid, @RequestParam String year, @RequestParam String month, Authentication authentication)
             throws GameInstanceDoesNotExistException, UserDoesNotExistException {
+      System.out.println("... called getGameInstanceReservations");
         return ResponseEntity.status(HttpStatus.OK)
                 .body(gameInstanceService.getGameInstanceAvailabilityReservation(authentication,uuid,year,month));
     }
@@ -165,10 +178,27 @@ public class GameInstanceController {
             description = "Returns true if game instance can be reserved in given time frame " +
                     "can be called by anyone"
     )
-    @RequestMapping(method= GET,value = "/{uuid}/timeframes/avaliable")
-    public ResponseEntity<Boolean> canMakeReservation(@PathVariable String uuid, @RequestParam Date startDate, @RequestParam Date endDate)  {
+    @RequestMapping(method= GET,value = "/{uuid}/timeframes/available")
+    public ResponseEntity<Boolean> canMakeReservation(@PathVariable String uuid,
+                                                      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                                      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate)  {
+      System.out.println("... called canMakeReservation");
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.canMakeReservation(uuid,startDate,endDate));
+                .body(gameInstanceService.canMakeReservation(uuid, startDate, endDate));
     }
+
+  @Operation(
+          summary ="Check if Game Instance has future reservations",
+          description = "Returns true if game instance has any future reservations. " +
+                  "Can be called only by Owner of the Game Instance."
+  )
+  @PreAuthorize("isAuthenticated()")
+  @RequestMapping(method= GET,value = "/{gameInstanceUUID}/deactivate/reservations")
+  public ResponseEntity<Boolean> checkGameInstanceFutureReservations(Authentication authentication, @PathVariable String gameInstanceUUID)
+          throws GameInstanceDoesNotExistException, UserDoesNotExistException {
+    System.out.println("... called checkGameInstanceFutureReservations");
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(gameInstanceService.hasFutureReservations(authentication, gameInstanceUUID));
+  }
 
 }

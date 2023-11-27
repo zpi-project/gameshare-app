@@ -1,7 +1,8 @@
-package com.zpi.backend.game_instance;
+package com.zpi.backend.game_instance.specification;
 
 import com.zpi.backend.category.Category;
 import com.zpi.backend.game.Game;
+import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.user.User;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
@@ -20,6 +21,7 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
     public Predicate toPredicate(Root<GameInstance> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
         Path<Integer> pricePerDay = root.get("pricePerDay");
+        Path<Integer> isActive = root.get("isActive");
         Path<Game> game = root.get("game");
         Path<Integer> minPlayers = game.get("minPlayers");
         Path<Integer> maxPlayers = game.get("maxPlayers");
@@ -58,6 +60,9 @@ public class GameInstanceSpecification implements Specification<GameInstance> {
         if (criteria.getLoggedInUser() != null) {
             predicates.add(cb.notEqual(userUUID, criteria.getLoggedInUser()));
         }
+
+        // Only active games
+        predicates.add(cb.equal(isActive, true));
 
         Expression<Double> orderExpression =
                 cb.sqrt(cb.sum(cb.power(cb.diff(latitude, criteria.getLatitude()), 2),

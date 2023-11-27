@@ -1,6 +1,6 @@
-package com.zpi.backend.game_instance_image.dto;
+package com.zpi.backend.image.dto;
 
-import com.zpi.backend.game_instance_image.GameInstanceImage;
+import com.zpi.backend.image.game_instance_image.GameInstanceImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

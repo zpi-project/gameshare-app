@@ -1,11 +1,12 @@
-package com.zpi.backend.game_instance_image;
+package com.zpi.backend.image.game_instance_image;
 
 import com.zpi.backend.configuration.DataBucketUtil;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
 import com.zpi.backend.game_instance.GameInstanceRepository;
-import com.zpi.backend.game_instance_image.exception.*;
+import com.zpi.backend.image.exception.*;
+import com.zpi.backend.image.dto.FileDTO;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserService;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
@@ -70,12 +71,12 @@ public class GameInstanceImageService {
     }
 
     // TODO Delete photos from Google Storage - needed?
-    public void deleteGameInstanceImage(Authentication authentication, String gameInstanceImageUUID) throws GameInstanceImageDoesNotExistException {
+    public void deleteGameInstanceImage(Authentication authentication, String gameInstanceImageUUID) throws ImageDoesNotExistException {
         String googleId = ((User)authentication.getPrincipal()).getGoogleId();
         Optional<GameInstanceImage> gameInstanceImageOptional = gameInstanceImageRepository
                 .findByGameInstanceUuidAndGameInstance_OwnerGoogleId(gameInstanceImageUUID, googleId);
         if (gameInstanceImageOptional.isEmpty())
-            throw new GameInstanceImageDoesNotExistException("Game Instance Image (UUID = "+gameInstanceImageUUID+") does not exists or the User is not the Owner.");
+            throw new ImageDoesNotExistException("Game Instance Image (UUID = "+gameInstanceImageUUID+") does not exists or the User is not the Owner.");
         gameInstanceImageRepository.delete(gameInstanceImageOptional.get());
     }
 

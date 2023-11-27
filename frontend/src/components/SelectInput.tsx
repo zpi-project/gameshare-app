@@ -25,6 +25,8 @@ interface SelectInputProps {
   search?: boolean;
   scroll?: boolean;
   width?: string;
+  disabled?: boolean;
+  clearValueOnChange?: boolean;
 }
 
 const SelectInput: FC<SelectInputProps> = ({
@@ -35,6 +37,8 @@ const SelectInput: FC<SelectInputProps> = ({
   search,
   scroll,
   width,
+  disabled,
+  clearValueOnChange,
 }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -42,6 +46,9 @@ const SelectInput: FC<SelectInputProps> = ({
   useEffect(() => {
     if (value.length) {
       onChange(options.find(option => option.label.toLowerCase() == value)?.value ?? value);
+      if (clearValueOnChange) {
+        setValue("");
+      }
     } else {
       onChange();
     }
@@ -54,6 +61,7 @@ const SelectInput: FC<SelectInputProps> = ({
           variant="ghost"
           role="combobox"
           aria-expanded={open}
+          disabled={disabled}
           className={cn("w-[200px] justify-between bg-card leading-none", width)}
         >
           {value ? options.find(option => option.label.toLowerCase() == value)?.label : placeholder}
