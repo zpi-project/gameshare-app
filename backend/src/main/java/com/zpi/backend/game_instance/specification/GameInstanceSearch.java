@@ -1,4 +1,4 @@
-package com.zpi.backend.game_instance;
+package com.zpi.backend.game_instance.specification;
 
 import com.zpi.backend.category.Category;
 import lombok.AllArgsConstructor;

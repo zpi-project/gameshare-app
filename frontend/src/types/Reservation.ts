@@ -1,5 +1,6 @@
 import { RESERVATION_STATUSES } from "@/constants/reservationStatuses";
 import { GameInstanceDetails } from "./GameInstance";
+import { Opinion } from "./Opinion";
 import { User } from "./User";
 
 export type ReservationStatusType = (typeof RESERVATION_STATUSES)[number];
@@ -9,18 +10,26 @@ export interface ReservationStatus {
   status: ReservationStatusType;
 }
 
-// will probably change when backend implemented
 export interface Reservation {
-  id: number;
   reservationId: string;
   renter: User;
   startDate: string;
   endDate: string;
   status: ReservationStatusType;
   gameInstance: GameInstanceDetails;
-  renterComment: string;
+  renterComment: string | null;
   timestamp: string;
   duration: number;
+}
+
+export interface ReservationDetails {
+  reservation: Reservation;
+  canAddRenterOpinion: boolean;
+  canAddOwnerOpinion: boolean;
+  canAddGameInstanceOpinion: boolean;
+  ownerOpinion: Opinion | null;
+  renterOpinion: Opinion | null;
+  gameInstanceOpinion: Opinion | null;
 }
 
 export interface ReservationQueryParams {

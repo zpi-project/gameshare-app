@@ -1,8 +1,8 @@
 package com.zpi.backend.game_instance.dto;
 
 import com.zpi.backend.game_instance.GameInstance;
-import com.zpi.backend.game_instance_image.GameInstanceImage;
-import com.zpi.backend.game_instance_image.dto.LinkDTO;
+import com.zpi.backend.image.game_instance_image.GameInstanceImage;
+import com.zpi.backend.image.dto.LinkDTO;
 import com.zpi.backend.user.dto.UserDTO;
 import com.zpi.backend.user.dto.UserGuestDTO;
 import lombok.Data;

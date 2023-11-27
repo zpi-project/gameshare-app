@@ -15,12 +15,12 @@ const Error: FC = () => {
 
   const diceComponents: React.ReactNode[] = [
     <></>,
-    <Dice1 size={96} />,
-    <Dice2 />,
-    <Dice3 />,
+    <Dice1 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
+    <Dice2 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
+    <Dice3 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
     <Dice4 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
-    <Dice5 />,
-    <Dice6 />,
+    <Dice5 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
+    <Dice6 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
   ];
 
   return (

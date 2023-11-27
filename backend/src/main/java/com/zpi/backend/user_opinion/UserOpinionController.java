@@ -31,7 +31,8 @@ public class UserOpinionController {
     )
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/user/opinions")
-    public ResponseEntity<ResultsDTO<UserOpinionDTO>> getMyOpinions(Authentication authentication, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+    public ResponseEntity<ResultsDTO<UserOpinionDTO>> getMyOpinions(Authentication authentication, @RequestParam(defaultValue = "0") int page,
+                                                                    @RequestParam(defaultValue = "10") int size) throws UserDoesNotExistException {
         System.out.println("... called getMyOpinions");
         return ResponseEntity.ok().body(userOpinionService.getMyOpinions(authentication,page,size));
     }
@@ -55,7 +56,8 @@ public class UserOpinionController {
     )
 
     @GetMapping("/user/{uuid}/opinions")
-    public ResponseEntity<ResultsDTO<UserOpinionDTO>> getOpinions(Authentication authentication, @PathVariable String uuid, @RequestParam int page, @RequestParam int size) throws UserDoesNotExistException {
+    public ResponseEntity<ResultsDTO<UserOpinionDTO>> getOpinions(Authentication authentication, @PathVariable String uuid,
+                                                                  @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) throws UserDoesNotExistException {
         System.out.println("... called getOpinions");
         return ResponseEntity.ok().body(userOpinionService.getOpinions(authentication, uuid,page,size));
     }

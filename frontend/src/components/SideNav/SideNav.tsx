@@ -30,7 +30,7 @@ const SideNav: FC = () => {
   return (
     <div className="flex h-full w-[68px] flex-col justify-between rounded-lg bg-section px-3 py-4 text-section-foreground">
       <div className="flex flex-col items-center gap-3">
-        <img src="logo.png" className="h-12 w-12 rounded-lg" alt="GameShare logo" />
+        <img src="/logo.png" className="h-12 w-12 rounded-lg" alt="GameShare logo" />
         {ALL_LINKS.map(({ icon, path }) => (
           <SideNavLink icon={icon} path={path} key={path} />
         ))}

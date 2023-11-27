@@ -2,7 +2,7 @@ package com.zpi.backend.user;
 
 import com.zpi.backend.game.Game;
 import com.zpi.backend.game_instance.GameInstance;
-import com.zpi.backend.game_instance.GameInstanceSearch;
+import com.zpi.backend.game_instance.specification.GameInstanceSearch;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -54,6 +54,9 @@ public class UserSpecification implements Specification<User> {
         if (criteria.getLoggedInUser() != null) {
             predicates.add(cb.notEqual(root.get("uuid"), criteria.getLoggedInUser()));
         }
+
+        // Only active games
+        predicates.add(cb.equal(gameInstances.get("isActive"), true));
 
         if (criteria.getLatitude() != null && criteria.getLongitude() != null) {
             predicates.add(cb.isNotNull(root.get("locationLatitude")));

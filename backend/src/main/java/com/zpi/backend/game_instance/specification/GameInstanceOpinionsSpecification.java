@@ -1,6 +1,7 @@
-package com.zpi.backend.game_instance;
+package com.zpi.backend.game_instance.specification;
 
 import com.zpi.backend.game.Game;
+import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.user.User;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
@@ -18,6 +19,7 @@ public class GameInstanceOpinionsSpecification implements Specification<GameInst
     @Override
     public Predicate toPredicate(Root<GameInstance> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
+        Path<Game> isActive = root.get("isActive");
         Path<Game> game = root.get("game");
         Path<Long> gameId = game.get("id");
         Path<User> owner = root.get("owner");
@@ -28,6 +30,10 @@ public class GameInstanceOpinionsSpecification implements Specification<GameInst
         if (criteria.getGameId() != null) {
             predicates.add(cb.equal(gameId, criteria.getGameId()));
         }
+
+        // Only active games
+        predicates.add(cb.equal(isActive, true));
+
         Expression<Double> orderExpression =
                 cb.sqrt(cb.sum(cb.power(cb.diff(latitude, criteria.getLatitude()), 2),
                         cb.power(cb.diff(longitude, criteria.getLongitude()), 2)));

@@ -11,13 +11,21 @@ interface CalendarProps {
   onNextClick: () => void;
   onPrevClick: () => void;
   date: Date;
+  tileClassName?: string;
 }
 
-const Calendar: FC<CalendarProps> = ({ className, children, onNextClick, onPrevClick, date }) => {
+const Calendar: FC<CalendarProps> = ({
+  className,
+  children,
+  onNextClick,
+  onPrevClick,
+  date,
+  tileClassName,
+}) => {
   return (
     <div className={cn("flex flex-col gap-6", className)}>
       <CalendarHeader onNextClick={onNextClick} onPrevClick={onPrevClick} date={date} />
-      <CalendarWeekDays />
+      <CalendarWeekDays tileClassName={tileClassName} />
       {children}
     </div>
   );
@@ -45,13 +53,13 @@ const CalendarHeader: FC<CalendarHeaderProps> = ({ onPrevClick, onNextClick, dat
   );
 };
 
-const CalendarWeekDays: FC = () => {
+const CalendarWeekDays: FC<{ tileClassName?: string }> = ({ tileClassName }) => {
   const { t } = useTranslation();
 
   return (
     <div className="flex w-full flex-row gap-2">
       {Array.from({ length: 7 }).map((_, idx) => (
-        <p key={idx} className="w-[70px] text-center uppercase">
+        <p key={idx} className={cn("w-[70px] text-center uppercase", tileClassName)}>
           {t(`weekdays.${idx}`)}
         </p>
       ))}
@@ -66,6 +74,7 @@ interface CalendarDayProps {
   onClick?: () => void;
   disabled?: boolean;
   style?: CSSProperties;
+  tileClassName?: string;
 }
 
 const CalendarDay: FC<CalendarDayProps> = ({
@@ -77,9 +86,9 @@ const CalendarDay: FC<CalendarDayProps> = ({
   style,
 }) => {
   return variant === "loading" ? (
-    <Skeleton className="h-[70px] w-[70px]" />
+    <Skeleton className={cn("h-[70px] w-[70px]", className)} />
   ) : variant === "hidden" ? (
-    <div className={"flex h-[70px] w-[70px]"} />
+    <div className={cn("flex h-[70px] w-[70px]", className)} />
   ) : (
     <div
       className={cn(

@@ -30,8 +30,8 @@ const GameInstanceOpinions: FC<Props> = ({ gameInstance }) => {
           <div className="flex h-full w-full flex-col gap-4 p-4">
             {isLoading ? (
               <div className="flex flex-col gap-4 pr-4">
-                {Array.from({ length: 2 }).map(() => (
-                  <Skeleton className="h-[132px] rounded-lg" />
+                {Array.from({ length: 2 }).map((_, idx) => (
+                  <Skeleton className="h-[132px] rounded-lg" key={idx} />
                 ))}
               </div>
             ) : isError ? (

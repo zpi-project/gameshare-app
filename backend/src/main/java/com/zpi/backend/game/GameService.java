@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import static com.zpi.backend.game_status.GameStatus.*;
+
 @Service
 @AllArgsConstructor
 public class GameService {
@@ -53,7 +55,7 @@ public class GameService {
         Game newGame = newGameDTO.toGame(categories);
 
         if(Roles.valueOf(user.getRole().getName()).equals(Roles.user)){
-            newGame.setGameStatus(gameStatusService.getGameStatus("Pending"));
+            newGame.setGameStatus(gameStatusService.getGameStatus(PENDING));
             Context context = emailService.getNewGameEmailContext(newGame.getName());
             emailService.sendEmailToAdminsWithHtmlTemplate(
                     context.getVariable("pl_title").toString(),
@@ -62,7 +64,7 @@ public class GameService {
                     emailTypeService.findEmailTypeByStatus("NEW_GAME")
             );
         } else if (Roles.valueOf(user.getRole().getName()).equals(Roles.admin)){
-            newGame.setGameStatus(gameStatusService.getGameStatus("Accepted"));
+            newGame.setGameStatus(gameStatusService.getGameStatus(ACCEPTED));
         } else {
             throw new BadRequestException("User role is not valid");
         }
@@ -73,7 +75,7 @@ public class GameService {
 
     public Game getGame(long id) throws GameDoesNotExistException {
         Optional<Game> gameOptional = gameRepository.findByIdAndAccepted(id);
-        if (gameOptional.isEmpty() || !gameOptional.get().getGameStatus().getStatus().equals("Accepted"))
+        if (gameOptional.isEmpty() || !gameOptional.get().getGameStatus().getStatus().equals(ACCEPTED))
             throw new GameDoesNotExistException("Game (id = "+id+") does not exists");
         return gameOptional.get();
     }
@@ -108,7 +110,7 @@ public class GameService {
         return new GameDTO(game);
     }
 
-    // TODO Getting popular games (considering reservations)
+
     public ResultsDTO<GameDTO> getPopularGames(int page, int size){
         Pageable pageable = PageRequest.of(page, size);
         Page<Game> gamePage = gameRepository.getPopularAcceptedGames(pageable);
@@ -125,10 +127,10 @@ public class GameService {
         if (optionalGame.isEmpty())
             throw new GameDoesNotExistException("Game (id = "+id+") does not exists");
         Game game = optionalGame.get();
-        if (game.getGameStatus().getStatus().equals("Rejected"))
+        if (game.getGameStatus().getStatus().equals(REJECTED))
             throw new GameAlreadyRejectedException("Game (id = "+id+") has been already rejected.");
         else {
-            game.setGameStatus(gameStatusService.getGameStatus("Rejected"));
+            game.setGameStatus(gameStatusService.getGameStatus(REJECTED));
             gameRepository.save(game);
         }
     }
@@ -141,10 +143,10 @@ public class GameService {
         if (optionalGame.isEmpty())
             throw new GameDoesNotExistException("Game (id = "+id+") does not exists");
         Game game = optionalGame.get();
-        if (game.getGameStatus().getStatus().equals("Accepted"))
+        if (game.getGameStatus().getStatus().equals(ACCEPTED))
             throw new GameAlreadyAcceptedException("Game (id = "+id+") has been already accepted.");
         else {
-            game.setGameStatus(gameStatusService.getGameStatus("Accepted"));
+            game.setGameStatus(gameStatusService.getGameStatus(ACCEPTED));
             gameRepository.save(game);
         }
     }

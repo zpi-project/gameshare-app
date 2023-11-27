@@ -1,4 +1,3 @@
-import { timeframes } from "@cypress/fixtures/reservations";
 import { GameInstance } from "@/types/GameInstance";
 import {
   GameInstanceSearchParams,
@@ -80,10 +79,10 @@ export class GameInstanceApi {
   }
 
   static async getNonAvailability(uuid: string, month: number, year: number) {
-    // const { data: timeframes } = await Api.get<Timeframe[]>(
-    //   `/game-instances/${uuid}/availability`,
-    //   { params: { year, month } },
-    // );
+    const { data: timeframes } = await Api.get<Timeframe[]>(
+      `/game-instances/${uuid}/availability`,
+      { params: { year, month } },
+    );
 
     return timeframes;
   }
