@@ -232,4 +232,6 @@ export default {
   errorFetchingDetails: "There was an error fetching details about reservation {{reservationId}}",
   timeframeNoAvailable:
     "You cannot book this game on these dates because someone has already reserved the game within the time range you specified.",
+  timeframeAvailable:
+    "These dates are available, you can book this game within the time range you specified",
 };

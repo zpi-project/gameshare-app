@@ -1,6 +1,5 @@
 import en from "./en";
 
-
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -238,6 +237,7 @@ const pl: typeof en = {
   errorFetchingDetails: "Nie udało się pobrać szczegółów rezerwacji {{reservationId}}",
   timeframeNoAvailable:
     "Nie możesz zarezerwować tej gry w tych datach, ponieważ ktoś już zarezerwował grę w przedziale czasu podanym przez ciebie.",
+  timeframeAvailable: "Gra jest dostępna w podanym przez ciebie przedziale czasu. Możesz ją zarezerwować.",
 };
 
 export default pl;

@@ -66,7 +66,7 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
         ) : showForm ? (
           <ReservationForm gameInstance={gameInstance} onSubmit={mutate} />
         ) : (
-          <div className="hidden lg:flex">
+          <div className="flex">
             <GameInstanceDetailsCard gameInstance={gameInstance} />
           </div>
         )}

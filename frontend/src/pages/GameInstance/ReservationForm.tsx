@@ -12,9 +12,16 @@ import { Stars } from "@/components/Stars";
 import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
 import DatePicker from "@/components/ui/datepicker";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "@/components/ui/form";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+  Form,
+} from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-
+import { cn } from "@/utils/tailwind";
 
 interface ReservationFormProps {
   gameInstance: GameInstanceDetails;
@@ -41,16 +48,14 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
         required_error: t("fieldIsRequired", { field: `${t("formEndDate")}`, context: "female" }),
       }),
       renterComment: z.string().trim().optional(),
-      gameInstanceUUID: z.string().refine(() => isAvailable, {
-        message: t("timeframeNoAvailable"),
-      }),
+      gameInstanceUUID: z.string(),
     })
     .refine(data => data.endDate >= data.startDate, {
       message: t("endDateAtLeastStartDate"),
       path: ["endDate"],
     })
     .refine(() => isAvailable, {
-      message: "this timeframe is not available",
+      message: t("timeframeNoAvailable"),
       path: ["root"],
     });
 
@@ -65,16 +70,17 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
   const startDate = form.watch("startDate");
   const endDate = form.watch("endDate");
 
-  const { isFetching } = useQuery({
+  const { isFetching, isSuccess } = useQuery({
     queryKey: ["game-instance-is-available", { uuid: gameInstance.uuid, startDate, endDate }],
     queryFn: () => GameInstanceApi.checkAvailability(gameInstance.uuid, startDate, endDate),
     enabled: startDate !== undefined && endDate !== undefined,
     onSuccess: data => {
       setIsAvailable(data);
-      form.trigger("gameInstanceUUID");
+      form.trigger();
     },
   });
 
+  console.log(form.formState.errors);
   return (
     <div className="flex w-[364px] min-w-[364px] flex-grow flex-col gap-4">
       <h2 className="text-2xl uppercase text-secondary">{t("reservationForm")}</h2>
@@ -88,7 +94,14 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
             })}
             className="flex flex-grow flex-col gap-4"
           >
-            <p className="h-[100px] text-destructive">{form.formState.errors.gameInstanceUUID?.message}</p>
+            <p
+              className={cn("h-[100px]", {
+                "text-secondary": isSuccess && isAvailable,
+                "text-destructive": isSuccess && !isAvailable,
+              })}
+            >
+              {isSuccess ? (isAvailable ? t("timeframeAvailable") : t("timeframeNoAvailable")) : ""}
+            </p>
             <FormField
               control={form.control}
               name="startDate"

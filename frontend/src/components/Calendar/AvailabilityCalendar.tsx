@@ -53,9 +53,6 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
     });
   }, [reservations, startDate]);
 
-  // not show prev days
-
-  console.log(TODAY.getDate());
   return (
     <Calendar
       onNextClick={() => setStartDate(getFirstDayOfNextMonth(startDate))}
