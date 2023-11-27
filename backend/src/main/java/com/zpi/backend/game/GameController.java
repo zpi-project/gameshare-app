@@ -137,4 +137,16 @@ public class GameController {
                 .status(HttpStatus.OK)
                 .body(new Amount(gameService.getAmount()));
     }
+
+    @Operation(
+            summary = "Get games to accept",
+            description = "Returns paginated games to accept from database. Only Admin is allowed to do this operation."
+    )
+    @RequestMapping(method = RequestMethod.GET, value = "/pending")
+    public ResponseEntity<ResultsDTO<GameDTO>> getGamesToAccept(Authentication authentication, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) throws UserDoesNotExistException, BadRequestException {
+        System.out.println("... called getGamesToAccept");
+        ResultsDTO<GameDTO> games = gameService.getGamesToAccept(authentication, page, size);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(games);
+    }
 }
