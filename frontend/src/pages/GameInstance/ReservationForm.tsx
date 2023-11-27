@@ -92,7 +92,9 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(data => {
-              onSubmit(data);
+              if (form.formState.isValid) {
+                onSubmit(data);
+              }
             })}
             className="flex flex-grow flex-col gap-4"
           >
