@@ -13,6 +13,8 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 public class Role {
+    public static final String ADMIN = "admin";
+    public static final String USER = "user";
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)

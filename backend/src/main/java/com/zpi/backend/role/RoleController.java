@@ -24,6 +24,7 @@ public class RoleController {
     @GetMapping("/role")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<RoleDTO> getRole(Authentication authentication) throws UserDoesNotExistException {
+        System.out.println("... called getRole");
         RoleDTO roleDTO = new RoleDTO().fromRole(roleService.getRole(authentication));
         return ResponseEntity.ok(roleDTO);
     }

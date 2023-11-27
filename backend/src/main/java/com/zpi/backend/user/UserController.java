@@ -86,7 +86,8 @@ public class UserController {
                                                              @RequestParam Optional<Long> categoryId, @RequestParam Optional<Integer> age,
                                                              @RequestParam Optional<Integer> playersNumber, @RequestParam Optional<Integer> maxPricePerDay,
                                                              @RequestParam Optional<String> userUUID, @RequestParam double latitude,
-                                                             @RequestParam double longitude, @RequestParam int size, @RequestParam int page) {
+                                                             @RequestParam double longitude, @RequestParam(defaultValue = "0") int page,
+                                                             @RequestParam(defaultValue = "10") int size) {
         System.out.println("... called getUsersSearch");
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.getUsersSearch(authentication, size, page, searchName, categoryId, age, playersNumber, maxPricePerDay, userUUID, latitude, longitude));

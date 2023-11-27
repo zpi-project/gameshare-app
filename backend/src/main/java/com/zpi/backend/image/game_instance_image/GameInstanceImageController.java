@@ -1,9 +1,10 @@
-package com.zpi.backend.game_instance_image;
+package com.zpi.backend.image.game_instance_image;
 
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
-import com.zpi.backend.game_instance_image.exception.GameInstanceImageDoesNotExistException;
-import com.zpi.backend.game_instance_image.exception.TooManyImagesException;
+import com.zpi.backend.image.dto.FileDTO;
+import com.zpi.backend.image.exception.ImageDoesNotExistException;
+import com.zpi.backend.image.exception.TooManyImagesException;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,8 @@ public class GameInstanceImageController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{gameInstanceUUID}", method = POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<FileDTO> addImageToGameInstance(Authentication authentication, @PathVariable String gameInstanceUUID,
-                                                 @RequestParam("file") MultipartFile newFile) throws GameInstanceDoesNotExistException, BadRequestException, TooManyImagesException, UserDoesNotExistException {
+                                                          @RequestParam("file") MultipartFile newFile) throws GameInstanceDoesNotExistException, BadRequestException, TooManyImagesException, UserDoesNotExistException {
+        System.out.println("... called addImageToGameInstance");
         FileDTO file = gameInstanceImageService.addImageToGameInstance(authentication, gameInstanceUUID, newFile);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(file);
@@ -36,7 +38,8 @@ public class GameInstanceImageController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/{gameInstanceImageUUID}", method = DELETE)
     public ResponseEntity deleteGameInstanceImage(Authentication authentication, @PathVariable String gameInstanceImageUUID)
-            throws GameInstanceImageDoesNotExistException {
+            throws ImageDoesNotExistException {
+        System.out.println("... called deleteGameInstanceImage");
         gameInstanceImageService.deleteGameInstanceImage(authentication, gameInstanceImageUUID);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();

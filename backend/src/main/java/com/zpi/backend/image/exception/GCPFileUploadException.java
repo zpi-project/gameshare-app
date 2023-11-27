@@ -1,15 +1,15 @@
-package com.zpi.backend.game_instance_image.exception;
+package com.zpi.backend.image.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class InvalidFileTypeException extends RuntimeException{
+public class GCPFileUploadException extends RuntimeException{
 
     private final String message;
 
-    public InvalidFileTypeException(String message) {
+    public GCPFileUploadException(String message) {
         super(message);
         this.message = message;
     }

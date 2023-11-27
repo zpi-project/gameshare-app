@@ -52,7 +52,7 @@ public class GameController {
             description = "Returns paginated games from database. Optional filtering by name and categories."
     )
     @GetMapping
-    public ResponseEntity<ResultsDTO<GameDTO>> getGames(@RequestParam int page, @RequestParam int size, @RequestParam Optional<String> search,
+    public ResponseEntity<ResultsDTO<GameDTO>> getGames(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam Optional<String> search,
                                    @RequestParam Optional<List<Integer>> categoriesIds) {
         System.out.println("... called getGames");
         ResultsDTO<GameDTO> games = gameService.getGames(page, size, search, categoriesIds);
@@ -104,7 +104,7 @@ public class GameController {
             description = "Returns paginated popular games from database. [Not implemented] Popularity is calculated considering reservations."
     )
     @GetMapping(value = "/popular")
-    public ResponseEntity<ResultsDTO<GameDTO>> getPopularGames(@RequestParam int page, @RequestParam int size) {
+    public ResponseEntity<ResultsDTO<GameDTO>> getPopularGames(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         System.out.println("... called getPopularGames");
         ResultsDTO<GameDTO> games = gameService.getPopularGames(page, size);
         return ResponseEntity.status(HttpStatus.OK)
@@ -118,7 +118,7 @@ public class GameController {
     @GetMapping(value = "/{gameId}/users")
     public ResponseEntity<ResultsDTO<GameInstanceDetailsDTO>> getUsersAndGameInstancesWithGame(
             @PathVariable long gameId, @RequestParam double latitude, @RequestParam double longitude,
-            @RequestParam int page, @RequestParam int size) {
+            @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         System.out.println("... called getUsersAndGameInstancesWithGame");
         ResultsDTO<GameInstanceDetailsDTO> userWithGames =
                 gameInstanceService.getGameInstancesToOpinions(gameId, latitude, longitude, page, size);
