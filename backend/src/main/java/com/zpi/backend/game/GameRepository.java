@@ -1,5 +1,6 @@
 package com.zpi.backend.game;
 
+import com.zpi.backend.game_status.GameStatus;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -72,4 +73,5 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "where g = :game")
     void updateImageLink(@Param("game") Game game, @Param("imageLink") String imageLink);
 
+    Page<Game> findAllByGameStatus(Pageable pageable, GameStatus status);
 }
