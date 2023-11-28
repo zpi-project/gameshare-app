@@ -40,9 +40,9 @@ public class GameController {
     )
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<GameDTO> addGame(@RequestBody NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException, IOException, EmailTypeDoesNotExists {
+    public ResponseEntity<GameDTO> addGame(@RequestBody NewGameDTO newGameDTO, Authentication authentication) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException, IOException, EmailTypeDoesNotExists, UserDoesNotExistException {
         System.out.println("... called addGame");
-        GameDTO newGame = gameService.addGame(newGameDTO);
+        GameDTO newGame = gameService.addGame(newGameDTO,authentication);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(newGame);
     }
