@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Marker, Popup, useMapEvents } from "react-leaflet";
 import { Link } from "react-router-dom";
-import { t } from "i18next";
 import { divIcon } from "leaflet";
 import { URLS } from "@/constants/urls";
 import { User } from "@/types/User";
@@ -16,7 +16,7 @@ interface UserMarkerProps {
 }
 const UserMarker: FC<UserMarkerProps> = ({ user, onClick, active }) => {
   const [isClicked, setIsClicked] = useState(false);
-
+  const { t } = useTranslation();
   useMapEvents({
     click(e) {
       const mapContainer = e.target._container;
