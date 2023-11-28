@@ -41,7 +41,7 @@ const GameInstanceDetails: FC<GameInstanceDetailsProps> = ({
               {avgRating > 0 ? (
                 <Stars count={Math.round(avgRating)} variant="secondary" />
               ) : (
-                <Badge variant="secondary">{t("gameNoOpinions")}</Badge>
+                <Badge variant="secondary">{t("noOpinions")}</Badge>
               )}
             </div>
             <p className="line-clamp-6 break-words italic">{description}</p>

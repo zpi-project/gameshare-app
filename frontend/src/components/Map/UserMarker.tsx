@@ -1,11 +1,13 @@
 import { FC, useState } from "react";
 import { Marker, Popup, useMapEvents } from "react-leaflet";
 import { Link } from "react-router-dom";
+import { t } from "i18next";
 import { divIcon } from "leaflet";
 import { URLS } from "@/constants/urls";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
 import { Stars } from "@/components/Stars";
+import { Badge } from "../ui/badge";
 
 interface UserMarkerProps {
   user: User;
@@ -26,7 +28,7 @@ const UserMarker: FC<UserMarkerProps> = ({ user, onClick, active }) => {
     },
   });
 
-  const { locationLatitude, locationLongitude, avatarLink, avgRating, uuid } = user;
+  const { locationLatitude, locationLongitude, avatarLink, avgRating, uuid, opinionsAmount } = user;
 
   const pinIcon = divIcon({
     html: `
@@ -61,7 +63,15 @@ const UserMarker: FC<UserMarkerProps> = ({ user, onClick, active }) => {
                 {getFullname(user)}
               </h4>
             </Link>
-            {avgRating > 0 && <Stars count={Math.round(avgRating)} size={20} />}
+
+            {opinionsAmount > 0 ? (
+              <div className="flex h-[20px] flex-row items-center gap-4">
+                <p className="text-base tracking-wider text-foreground">({opinionsAmount})</p>
+                <Stars count={Math.round(avgRating)} size={20} />
+              </div>
+            ) : (
+              <Badge className="w-max px-3 py-1 hover:bg-primary">{t("noOpinions")}</Badge>
+            )}
           </div>
         </div>
       </Popup>
