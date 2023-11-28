@@ -105,7 +105,7 @@ public class RecommendationService {
                 .collect(Collectors.toList());
     }
 
-    @Scheduled(cron = "0 0 * * 1", zone = "Europe/Warsaw")
+    @Scheduled(cron = "0 0 * * 1 0", zone = "Europe/Warsaw")
     public void runAprioriAlgorithm(){
         logger.info("Run Apriori Algorithm");
         AprioriAlgorithm aprioriAlgorithm =
