@@ -24,6 +24,9 @@ public class Game {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false)
+    private String name_pl;
+
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "games_categories",
@@ -47,6 +50,9 @@ public class Game {
 
     @Column(nullable = false, length = 10000)
     private String shortDescription;
+
+    @Column(nullable = false, length = 10000)
+    private String description_pl;
 
     private String image;
 

@@ -33,6 +33,7 @@ for original_id_str in file:
     image = data['boardgames']['boardgame']['image']
     categories_json = data['boardgames']['boardgame']['boardgamecategory']
     categories = []
+    categories_pl = []
 
     if type(names_json) is list:
         for n in names_json:
@@ -47,12 +48,20 @@ for original_id_str in file:
         name = names_json["#text"]
 
     if type(categories_json) is list:
-        for c in categories_json:   
+        for c in categories_json:
+            c_pl = gpt.get_category_pl(c['#text'])
             categories.append(c['#text'])
+            categories_pl.append(c_pl)
+
     else:
+        c_pl = gpt.get_category_pl(categories_json['#text'])
+        categories_pl.append(c_pl)
         categories.append(categories_json['#text'])
 
     description = gpt.get_short_description(description)
+    description_pl = gpt.get_short_description_pl(description)
+    names_pl = gpt.get_names_pl(name)
+
 
     db.connect(db.insert_game, original_id, name, description, min_players, max_players, playing_time, age, image)
     for c in categories:

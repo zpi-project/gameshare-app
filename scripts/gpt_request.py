@@ -12,15 +12,82 @@ def get_short_description(description):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "user", 
+            {"role": "user",
              "content": question + description
-            }
+             }
         ]
     )
 
     stop = t.time_ns()
 
-    print((stop-start)/10**6)
+    print((stop - start) / 10 ** 6)
 
     return response['choices'][0]['message']['content']
 
+
+def get_category_pl(category):
+    openai.api_key_path = 'scripts/path_api_key'
+
+    question = "Translate this category to Polish\n\n"
+
+    start = t.time_ns()
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user",
+             "content": question + category
+             }
+        ]
+    )
+
+    stop = t.time_ns()
+
+    print((stop - start) / 10 ** 6)
+
+    return response['choices'][0]['message']['content']
+
+
+def get_short_description_pl(description):
+    openai.api_key_path = 'scripts/path_api_key'
+
+    question = "Translate this description to Polish\n\n"
+
+    start = t.time_ns()
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user",
+             "content": question + description
+             }
+        ]
+    )
+
+    stop = t.time_ns()
+
+    print((stop - start) / 10 ** 6)
+
+    return response['choices'][0]['message']['content']
+
+def get_names_pl(name):
+    openai.api_key_path = 'scripts/path_api_key'
+
+    question = "Translate this name to Polish\n\n"
+
+    start = t.time_ns()
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user",
+             "content": question + name
+             }
+        ]
+    )
+
+    stop = t.time_ns()
+
+    print((stop - start) / 10 ** 6)
+
+    return response['choices'][0]['message']['content']
