@@ -144,9 +144,9 @@ public class GameService {
     }
 
 
-    public ResultsDTO<GameDTO> getGamesToAccept(Authentication authentication, int page, int size) throws UserDoesNotExistException, BadRequestException {
+    public ResultsDTO<GameDTO> getGamesToAccept(Authentication authentication, int page, int size) throws UserDoesNotExistException, IllegalAccessException {
         if(!roleService.checkIfAdmin(authentication)){
-            throw new BadRequestException("User is not admin");
+            throw new IllegalAccessException("User is not admin");
         }
         Pageable pageable = PageRequest.of(page, size);
         GameStatus pending = gameStatusService.getGameStatus(PENDING);
