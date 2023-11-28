@@ -35,4 +35,11 @@ export class GameApi {
     );
     return gameInstances;
   }
+
+  static async getPending(page: number, size: number) {
+    const { data: games } = await Api.get<Paginated<Game>>("/games/pending", {
+      params: { page, size },
+    });
+    return games;
+  }
 }

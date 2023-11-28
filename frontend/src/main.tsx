@@ -7,6 +7,7 @@ import Dashboard from "@/pages/Dashboard";
 import Error from "@/pages/Error";
 import Game from "@/pages/Game";
 import GameInstance from "@/pages/GameInstance";
+import GameRequests from "@/pages/GameRequests";
 import GameSearch from "@/pages/GameSearch";
 import MyProfile from "@/pages/MyProfile";
 import ReservationDetails from "@/pages/ReservationDetails";
@@ -68,7 +69,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: URLS.GAME_REQUESTS,
-            element: <div>admin game requests</div>,
+            element: <GameRequests />,
           },
         ],
       },

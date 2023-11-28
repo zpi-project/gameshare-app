@@ -239,6 +239,8 @@ const pl: typeof en = {
     "Nie możesz zarezerwować tej gry w tych datach, ponieważ ktoś już zarezerwował grę w przedziale czasu podanym przez ciebie.",
   timeframeAvailable:
     "Gra jest dostępna w podanym przez ciebie przedziale czasu. Możesz ją zarezerwować.",
+
+  gameRequests: "Gry oczekujące na twoją akceptację",
 };
 
 export default pl;

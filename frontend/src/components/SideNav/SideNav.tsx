@@ -27,13 +27,12 @@ const USER_LINKS = [
 const ADMIN_LINKS = [
   {
     path: URLS.GAME_REQUESTS,
-    icon: <Dices size={40} strokeWidth={1} />
-  }
-]
+    icon: <Dices size={40} strokeWidth={1} />,
+  },
+];
 
 const SideNav: FC = () => {
   const role = useRecoilValue(roleState);
-  console.log(role);
 
   return (
     <div className="flex h-full w-[68px] flex-col justify-between rounded-lg bg-section px-3 py-4 text-section-foreground">
