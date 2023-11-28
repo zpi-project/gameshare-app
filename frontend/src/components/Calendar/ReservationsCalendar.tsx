@@ -52,7 +52,7 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
     select: data => {
       return data.map(reservationTimeframe => ({
         ...reservationTimeframe,
-        salt: getRandomLetter(),
+        salt: new Date(reservationTimeframe.endDate).getDay(),
       }));
     },
   });
