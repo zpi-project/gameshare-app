@@ -98,4 +98,11 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             "and r.status in (select rs from ReservationStatus as rs " +
             "where rs.status in ('"+ACCEPTED_BY_OWNER+"', '"+PENDING+"'))")
     void setReservationStatusAsCanceledByOwnerForGameInstance(@Param("gameInstance") GameInstance gameInstance);
+
+    @Query("select r from Reservation as r " +
+            "where r.gameInstance = :gameInstance and " +
+            "(month(r.startDate) = :month or month(r.endDate) = :month) and " +
+            "(year(r.startDate) = :year or year(r.endDate) = :year) and " +
+            "r.status.status in ('"+ACCEPTED_BY_OWNER+"', '"+RENTED+"')")
+    List<Reservation> getUnavailabilityOfGameInstance(@Param("gameInstance") GameInstance gameInstance, @Param("year") int year, @Param("month") int month);
 }

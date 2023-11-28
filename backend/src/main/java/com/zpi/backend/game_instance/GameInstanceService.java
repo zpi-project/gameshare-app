@@ -192,8 +192,14 @@ public class GameInstanceService {
 
 
 // nawet nie proponuj robienia tego kwerendą
-    public List<GameInstanceUnAvailabilityDTO> getUnAvailability(List<Reservation> reservationList, int year, int month, Boolean withReservations){
+    public List<GameInstanceUnAvailabilityDTO> getUnAvailability(String gameInstanceUUID, int year, int month, Boolean withReservations) throws GameInstanceDoesNotExistException {
         List<GameInstanceUnAvailabilityDTO> periods = new ArrayList<>();
+        GameInstance gameInstance = gameInstanceRepository.findByUuid(gameInstanceUUID)
+                .orElseThrow(() -> new GameInstanceDoesNotExistException("Game instance (UUID: "+gameInstanceUUID+") does not exists."));
+        List<Reservation> reservationList= reservationRepository.getUnavailabilityOfGameInstance(gameInstance, year, month);
+
+
+
        for(Reservation reservation:reservationList){
            if(matchesUnAvailabilityCriteria(year,month,reservation)){
                Date startDate = reservation.getStartDate();
@@ -246,23 +252,21 @@ public class GameInstanceService {
        return periods;
     }
 
-
-    public List<GameInstanceUnAvailabilityDTO> getGameInstanceAvailability(String uuid, String year, String month,Boolean withReservations) {
-        List<Reservation> reservations= reservationRepository.findAcceptedOrRentedReservationsByGameInstance(uuid);
-        return getUnAvailability(reservations,Integer.parseInt(year),Integer.parseInt(month),withReservations);
+    public List<GameInstanceUnAvailabilityDTO> getGameInstanceUnavailability(String uuid, int year, int month, Boolean withReservations)
+            throws GameInstanceDoesNotExistException {
+        return getUnAvailability(uuid, year, month, withReservations);
     }
 
     public boolean isOwner(User user,GameInstance gameInstance){
         return gameInstance.getOwner().equals(user);
     }
-    public List<GameInstanceUnAvailabilityDTO> getGameInstanceAvailabilityReservation(Authentication authentication, String uuid, String year, String month) throws UserDoesNotExistException, GameInstanceDoesNotExistException {
-        List<Reservation> reservations= reservationRepository.findAcceptedOrRentedReservationsByGameInstance(uuid);
+    public List<GameInstanceUnAvailabilityDTO> getGameInstanceUnavailabilityReservation(Authentication authentication, String uuid, int year, int month) throws UserDoesNotExistException, GameInstanceDoesNotExistException {
         User user = userService.getUser(authentication);
-        GameInstance gameinstance =gameInstanceRepository.findByUuid(uuid).orElseThrow(()->new GameInstanceDoesNotExistException("Game instance with uuid "+uuid+" does not exist"));
-
+        GameInstance gameinstance =gameInstanceRepository.findByUuid(uuid)
+                .orElseThrow(()->new GameInstanceDoesNotExistException("Game instance with uuid "+uuid+" does not exist"));
         if(!isOwner(user,gameinstance))
             throw new UserDoesNotExistException("User is not an owner of game instance with uuid "+uuid);
-        return  getUnAvailability(reservations,Integer.parseInt(year),Integer.parseInt(month),true);
+        return  getUnAvailability(uuid, year, month,true);
     }
 
     public Boolean canMakeReservation(String uuid, Date startDate, Date endDate) {

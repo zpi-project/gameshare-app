@@ -310,7 +310,6 @@ public class ReservationService {
                     return List.of(FINISHED);
                 }
             }
-
         }
         else {
             if (reservation.getStatus().getStatus().equals(PENDING)) {
