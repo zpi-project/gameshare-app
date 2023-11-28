@@ -52,7 +52,6 @@ public class User{
     @ManyToOne
     private Role role;
 
-    @Transient
     @OneToMany(mappedBy = "owner", orphanRemoval = true)
     private List<GameInstance> gameInstances;
 
