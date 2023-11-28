@@ -15,6 +15,7 @@ import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
 import com.zpi.backend.game.exception.GameAlreadyExistsException;
 import com.zpi.backend.game.exception.GameAlreadyRejectedException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
+import com.zpi.backend.game_status.GameStatus;
 import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.role.Role;
 import com.zpi.backend.role.RoleService;
@@ -156,4 +157,17 @@ public class GameService {
     }
 
 
+    public ResultsDTO<GameDTO> getGamesToAccept(Authentication authentication, int page, int size) throws UserDoesNotExistException, IllegalAccessException {
+        if(!roleService.checkIfAdmin(authentication)){
+            throw new IllegalAccessException("User is not admin");
+        }
+        Pageable pageable = PageRequest.of(page, size);
+        GameStatus pending = gameStatusService.getGameStatus(PENDING);
+        Page<Game> gamePage = gameRepository.findAllByGameStatus(pageable, pending);
+        return new ResultsDTO<>(gamePage
+                .map(this::convertToDTO)
+                .stream().toList(),
+                new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+
+    }
 }
