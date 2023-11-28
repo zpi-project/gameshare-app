@@ -222,11 +222,11 @@ const pl: typeof en = {
   ownerDetails: "Właściciel gry - szczegóły",
   gameDetails: "Gra - szczegóły",
   gameReservationsCalendar: "Kalendarz rezerwacji gry",
-  noOpinions: "Użytkownik nie ma jeszcze żadnej opinii",
+  userNoOpinions: "Użytkownik nie ma jeszcze żadnej opinii",
   cannotAddOpinionAboutOwner: "Nie możesz dodać jeszcze opinii o właścicielu gry.",
   cannotAddOpinionAboutRenter: "Nie możesz dodać jeszcze opinii o wypożyczającym.",
   cannotAddOpinionAboutGame: "Nie możesz dodać jeszcze opinii o tej grze.",
-  gameNoOpinions: "Brak opinii",
+  noOpinions: "Brak opinii",
   successChangingStatus: "Status zmieniony pomyślnie",
   successChangingStatusDescription:
     "Aktualny status to - {{status}}. {{user}} otrzymał maila z potwierdzeniem zmiany statusu rezerwacji.",

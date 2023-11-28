@@ -217,11 +217,11 @@ export default {
   ownerDetails: "Owner - details",
   gameDetails: "Game - details",
   gameReservationsCalendar: "Game reservations calendar",
-  noOpinions: "This user has no opinions yet",
+  userNoOpinions: "This user has no opinions yet",
   cannotAddOpinionAboutOwner: "You cannot add opinion about the owner now.",
   cannotAddOpinionAboutRenter: "You cannot add opinion about this renter now.",
   cannotAddOpinionAboutGame: "You cannot add opinion about the game now.",
-  gameNoOpinions: "No opinions",
+  noOpinions: "No opinions",
   successChangingStatus: "Status was changed successfully",
   successChangingStatusDescription:
     "Current status is - {{status}}. {{user}} has received an email with new status change confirmation.",

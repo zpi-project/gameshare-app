@@ -29,7 +29,11 @@ const UserDetailsSection: FC<UserDetailsSectionProps> = ({ user, title, btnText 
             {user.phoneNumber && parsePhoneNumber(user.phoneNumber).formatInternational()}
           </p>
           <div className="flex w-full rounded-lg bg-background p-2 px-4 text-lg xl:justify-center">
-            {user.avgRating > 0 ? <Stars count={Math.round(user.avgRating)} /> : t("noOpinions")}
+            {user.avgRating > 0 ? (
+              <Stars count={Math.round(user.avgRating)} />
+            ) : (
+              t("userNoOpinions")
+            )}
           </div>
           <Link
             className="ml-auto rounded-lg bg-primary px-8 py-2 duration-200 hover:bg-accent"
