@@ -61,7 +61,7 @@ public class ReservationService {
         GameInstance gameInstance = gameInstanceService.getGameInstance(newReservationDTO.getGameInstanceUUID());
         checkIfOwnerIsNotRenter(renter,gameInstance);
 
-        Reservation reservation = new Reservation().fromDTO(newReservationDTO, renter, gameInstance);
+        Reservation reservation = new Reservation(newReservationDTO, renter, gameInstance);
         reservation.setStatus(reservationStatusRepository.findByStatus(PENDING).orElseThrow(()->new BadRequestException("Status does not exist")));
         reservation=  reservationRepository.save(reservation);
         reservation.setReservationId(DateUtils.getYear(reservation.getStartDate()) + "-" + DateUtils.getMonth(reservation.getStartDate())+'-'+reservation.getId());
