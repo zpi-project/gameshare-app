@@ -165,11 +165,6 @@ public class ReservationService {
             throw new BadRequestException("User is not owner or renter of this reservation");
         List<String> possibleStatuses = getReservationStatuses(authentication,reservationId);
 
-        User user = userService.getUser(authentication);
-        String user_type = "Owner";
-        if (checkIfUserIsRenter(user, reservation))
-             user_type = "Renter";
-
         if(possibleStatuses == null || !possibleStatuses.contains(status))
             throw new BadRequestException("Status cannot be changed to "+status +" from "+reservation.getStatus().getStatus());
         Reservation changedReservation = changeStatus(reservation, status);
