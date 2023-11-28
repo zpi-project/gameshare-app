@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getDaysInMonth } from "date-fns";
 import { URLS } from "@/constants/urls";
 import { getFirstDayOfLastMonth, getFirstDayOfMonth, getFirstDayOfNextMonth } from "@/utils/date";
-import { getRandomLetter, stringToHexColor } from "@/utils/stringToColor";
+import { stringToHexColor } from "@/utils/stringToColor";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { useTheme } from "@/components/ThemeProvider";
 import { Calendar, CalendarDay } from "./Calendar";
@@ -73,7 +73,7 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
       });
 
       return matchingReservation
-        ? { id: matchingReservation.reservationId, salt: matchingReservation.salt }
+        ? { id: matchingReservation.reservationId, salt: matchingReservation.salt.toString() }
         : null;
     });
   }, [reservations, startDate]);
