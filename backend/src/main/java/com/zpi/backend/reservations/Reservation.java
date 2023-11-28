@@ -22,14 +22,11 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "reservation_id", unique = true)
     private String reservationId;
 
-
     @ManyToOne
     private User renter;
-
 
     @Column(name="start_date",nullable = false)
     private Date startDate;
@@ -81,6 +78,4 @@ public class Reservation {
         this.duration = DateUtils.getDuration(startDate,endDate);
         this.reservationId = UUID.randomUUID().toString();
     }
-
-
 }
