@@ -20,7 +20,7 @@ const UserDetailsSection: FC<UserDetailsSectionProps> = ({ user, title, btnText 
     <div className="relative flex h-full flex-col gap-4">
       <h3 className="text-xl uppercase">{title}</h3>
       <div className="flex gap-6 px-4 xl:flex-col xl:items-center">
-        <Avatar user={user} className="h-20 w-20 lg:h-[148px] lg:w-[148px]" />
+        <Avatar user={user} className="h-20 w-20 lg:h-[148px] lg:w-[148px] lg:text-5xl" />
         <div className="flex w-full flex-grow flex-col gap-4 xl:gap-6">
           <p className="w-full rounded-lg bg-background p-2 px-4 text-lg xl:text-center">
             {getFullname(user)}

@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Calendar as CalendarIcon } from "lucide-react";
@@ -15,11 +15,12 @@ interface DatePickerProps {
 }
 
 const DatePicker: FC<DatePickerProps> = ({ onSelect, placeholder }) => {
-  const [date, setDate] = React.useState<Date>();
+  const [date, setDate] = useState<Date>();
+  const [open, setOpen] = useState(false);
   const { t } = useTranslation();
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
@@ -38,6 +39,7 @@ const DatePicker: FC<DatePickerProps> = ({ onSelect, placeholder }) => {
           selected={date}
           onSelect={date => {
             setDate(date);
+            setOpen(false);
             onSelect(date);
           }}
           initialFocus

@@ -44,6 +44,9 @@ const ReservationDetailsStatus: FC<ReservationDetailsStatusProps> = ({
           user: t(user === "owner" ? "renter" : "owner"),
         }),
       });
+      if (user === "owner") {
+        queryClient.invalidateQueries(["reservations-calendar"]);
+      }
     },
     onError: () => {
       toast({

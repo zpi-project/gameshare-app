@@ -49,6 +49,12 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
   } = useQuery({
     queryKey: ["reservations-calendar", { uuid: gameInstanceUUID, month, year }],
     queryFn: () => GameInstanceApi.getReservations(gameInstanceUUID, month, year),
+    select: data => {
+      return data.map(reservationTimeframe => ({
+        ...reservationTimeframe,
+        salt: new Date(reservationTimeframe.endDate).getDay(),
+      }));
+    },
   });
 
   const daysWithReservations = useMemo(() => {
@@ -66,7 +72,9 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
         return reservationStartDate <= currDate && currDate <= reservationEndDate;
       });
 
-      return matchingReservation ? matchingReservation.reservationId : null;
+      return matchingReservation
+        ? { id: matchingReservation.reservationId, salt: matchingReservation.salt.toString() }
+        : null;
     });
   }, [reservations, startDate]);
 
@@ -95,17 +103,20 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
             </>
           ) : (
             <>
-              {daysWithReservations.map((reservationId, idx) => {
-                const id = (reservationId ? reservationId.slice(-3) : "") + "salt";
+              {daysWithReservations.map((reservation, idx) => {
+                const id = ((reservation ? reservation.id.slice(-3) : "") + "salt").replace(
+                  "-",
+                  reservation?.salt ?? "",
+                );
 
                 return (
                   <CalendarDay
                     key={idx}
                     className={tileClassName}
-                    variant={reservationId ? "filled" : "outlined"}
-                    disabled={reservationId === null}
+                    variant={reservation ? "filled" : "outlined"}
+                    disabled={reservation === null}
                     style={{
-                      backgroundColor: reservationId
+                      backgroundColor: reservation?.id
                         ? color === "dark"
                           ? stringToHexColor(id, 0.4, 0.2)
                           : stringToHexColor(id, 0.5, 0.7)
@@ -113,7 +124,7 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
                     }}
                     day={idx + 1}
                     onClick={() =>
-                      reservationId && navigate(`${URLS.MY_RESERVATIONS}/${reservationId}`)
+                      reservation && navigate(`${URLS.MY_RESERVATIONS}/${reservation.id}`)
                     }
                   />
                 );
