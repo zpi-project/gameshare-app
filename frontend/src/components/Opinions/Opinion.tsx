@@ -13,7 +13,7 @@ const Opinion: FC<Props> = ({ opinion }) => {
   const [showAll, setshowAll] = useState(false);
   const { t } = useTranslation();
   const handleClick = () => setshowAll(!showAll);
-  console.log(new Date(opinion.timestamp));
+
   return (
     <div className="flex w-full flex-row items-center gap-3 rounded-lg bg-card p-4">
       <Avatar user={opinion.ratingUser} className="h-16 w-16" />

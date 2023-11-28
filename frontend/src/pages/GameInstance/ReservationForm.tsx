@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,7 +43,6 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
           }),
         })
         .min(TODAY, { message: t("startDateNotPast") }),
-
       endDate: z.date({
         required_error: t("fieldIsRequired", { field: `${t("formEndDate")}`, context: "female" }),
       }),
@@ -53,10 +52,6 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
     .refine(data => data.endDate >= data.startDate, {
       message: t("endDateAtLeastStartDate"),
       path: ["endDate"],
-    })
-    .refine(() => isAvailable, {
-      message: t("timeframeNoAvailable"),
-      path: ["root"],
     });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -69,6 +64,12 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
 
   const startDate = form.watch("startDate");
   const endDate = form.watch("endDate");
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      form.trigger();
+    }
+  }, [startDate, endDate]);
 
   const { isFetching, isSuccess } = useQuery({
     queryKey: ["game-instance-is-available", { uuid: gameInstance.uuid, startDate, endDate }],
@@ -92,7 +93,9 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(data => {
-              onSubmit(data);
+              if (isAvailable) {
+                onSubmit(data);
+              }
             })}
             className="flex flex-grow flex-col gap-4"
           >
