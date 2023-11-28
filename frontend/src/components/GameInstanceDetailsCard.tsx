@@ -1,9 +1,11 @@
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { GameInstance, GameInstanceDetails } from "@/types/GameInstance";
 import { stringToHexColor } from "@/utils/stringToColor";
 import { PriceBadge } from "./Badge";
 import { Stars } from "./Stars";
 import { useTheme } from "./ThemeProvider";
+import { Badge } from "./ui/badge";
 
 interface GameInstanceDetailsCardProps {
   gameInstance: GameInstance | GameInstanceDetails;
@@ -14,10 +16,12 @@ const GameInstanceDetailsCard: FC<GameInstanceDetailsCardProps> = ({
     description,
     game: { name, image },
     avgRating,
+    opinionsAmount,
     pricePerDay,
   },
 }) => {
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   const color =
     theme === "system"
@@ -41,9 +45,18 @@ const GameInstanceDetailsCard: FC<GameInstanceDetailsCardProps> = ({
           <img src={image} alt={name} className="h-full w-full object-cover object-top" />
         </div>
         <h3 className="text-xl">{name}</h3>
-        <div className="flex flex-row justify-between">
-          {avgRating > 0 && <Stars count={avgRating} variant="secondary" />}
+        <div className="flex flex-row justify-between mr-4">
           <PriceBadge price={pricePerDay} />
+          {opinionsAmount > 0 ? (
+            <div className="flex flex-row gap-2">
+              <p className="text-base tracking-widest text-foreground">({opinionsAmount})</p>
+              <Stars count={Math.round(avgRating)} variant="secondary" />
+            </div>
+          ) : (
+            <Badge variant="secondary" className="w-max px-3 py-1 hover:bg-primary">
+              {t("noOpinions")}
+            </Badge>
+          )}
         </div>
         <p className="mt-2 line-clamp-6 break-words italic">{description}</p>
       </div>
