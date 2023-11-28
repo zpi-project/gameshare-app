@@ -14,6 +14,7 @@ const GameInstanceDetails: FC<GameInstanceDetailsProps> = ({
     game: { image, name },
     description,
     avgRating,
+    opinionsAmount,
     pricePerDay,
     images,
   },
@@ -37,11 +38,16 @@ const GameInstanceDetails: FC<GameInstanceDetailsProps> = ({
             />
           </div>
           <div className="flex flex-grow flex-col gap-2">
-            <div className="ml-auto">
+            <div className="ml-auto flex flex-row gap-2">
               {avgRating > 0 ? (
-                <Stars count={Math.round(avgRating)} variant="secondary" />
+                <>
+                  <p className="text-lg tracking-widest text-foreground">({opinionsAmount})</p>
+                  <Stars count={Math.round(avgRating)} variant="secondary" />
+                </>
               ) : (
-                <Badge variant="secondary">{t("noOpinions")}</Badge>
+                <Badge variant="secondary" className="w-max px-3 py-1 hover:bg-primary">
+                  {t("noOpinions")}
+                </Badge>
               )}
             </div>
             <p className="line-clamp-6 break-words italic">{description}</p>
