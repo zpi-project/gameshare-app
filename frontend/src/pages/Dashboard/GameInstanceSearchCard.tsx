@@ -41,7 +41,7 @@ const GameInstanceSearchCard: FC<GameInstanceSearchCardProps> = ({
           <h3 className="text-lg font-bold text-primary">{name}</h3>
           {opinionsAmount > 0 ? (
             <div className="flex flex-row gap-2">
-               <p className="text-base tracking-widest text-foreground">({opinionsAmount})</p>
+              <p className="text-base tracking-widest text-foreground">({opinionsAmount})</p>
               <Stars count={Math.round(avgRating)} variant="secondary" />
             </div>
           ) : (
