@@ -56,7 +56,7 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
             <p className="min-h-8 break-all text-xs italic">{description}</p>
             <div className="flex flex-col items-end gap-2">
               {opinionsAmount > 0 ? (
-                <div className="flex flex-row gap-2 ml-4">
+                <div className="ml-4 flex flex-row gap-2">
                   <p className="text-base tracking-widest text-foreground">({opinionsAmount})</p>
                   <Stars count={Math.round(avgRating)} variant="secondary" />
                 </div>

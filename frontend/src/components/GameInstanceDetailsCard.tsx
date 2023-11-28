@@ -45,7 +45,7 @@ const GameInstanceDetailsCard: FC<GameInstanceDetailsCardProps> = ({
           <img src={image} alt={name} className="h-full w-full object-cover object-top" />
         </div>
         <h3 className="text-xl">{name}</h3>
-        <div className="flex flex-row justify-between mr-4">
+        <div className="mr-4 flex flex-row justify-between">
           <PriceBadge price={pricePerDay} />
           {opinionsAmount > 0 ? (
             <div className="flex flex-row gap-2">
