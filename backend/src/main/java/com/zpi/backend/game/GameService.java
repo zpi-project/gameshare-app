@@ -15,8 +15,12 @@ import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
 import com.zpi.backend.game.exception.GameAlreadyExistsException;
 import com.zpi.backend.game.exception.GameAlreadyRejectedException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
+import com.zpi.backend.game_status.GameStatus;
 import com.zpi.backend.game_status.GameStatusService;
+import com.zpi.backend.role.Role;
 import com.zpi.backend.role.RoleService;
+import com.zpi.backend.user.User;
+import com.zpi.backend.user.UserService;
 import com.zpi.backend.user.exception.UserDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -41,23 +45,32 @@ public class GameService {
     private final GameStatusService gameStatusService;
     private final EmailService emailService;
     private final EmailTypeService emailTypeService;
+    private final UserService userService;
 
-    public GameDTO addGame(NewGameDTO newGameDTO) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException, IOException, EmailTypeDoesNotExists {
+    public GameDTO addGame(NewGameDTO newGameDTO,Authentication authentication) throws GameAlreadyExistsException, BadRequestException, CategoryDoesNotExistException, IOException, EmailTypeDoesNotExists, UserDoesNotExistException {
         newGameDTO.validate();
+        User user = userService.getUser(authentication);
         if (gameRepository.existsGameByName(newGameDTO.getName()))
             throw new GameAlreadyExistsException("Game "+newGameDTO.getName()+" already exists");
         List<Category> categories = categoryService.getCategoriesByIDs(newGameDTO.getCategoriesIDs());
         Game newGame = newGameDTO.toGame(categories);
-        newGame.setGameStatus(gameStatusService.getGameStatus(PENDING));
+
+        if(Role.USER.equals(user.getRole().getName())){
+            newGame.setGameStatus(gameStatusService.getGameStatus(PENDING));
+            Context context = emailService.getNewGameEmailContext(newGame.getName());
+            emailService.sendEmailToAdminsWithHtmlTemplate(
+                    context.getVariable("pl_title").toString(),
+                    EmailService.EMAIL_TEMPLATE,
+                    context,
+                    emailTypeService.findEmailTypeByStatus("NEW_GAME")
+            );
+        } else if (Role.ADMIN.equals(user.getRole().getName())){
+            newGame.setGameStatus(gameStatusService.getGameStatus(ACCEPTED));
+        } else {
+            throw new BadRequestException("User role is not valid");
+        }
+
         gameRepository.save(newGame);
-//        Sending emails do admins
-        Context context = emailService.getNewGameEmailContext(newGame.getName());
-        emailService.sendEmailToAdminsWithHtmlTemplate(
-                context.getVariable("pl_title").toString(),
-                EmailService.EMAIL_TEMPLATE,
-                context,
-                emailTypeService.findEmailTypeByStatus("NEW_GAME")
-        );
         return new GameDTO(newGame);
     }
 
@@ -97,6 +110,7 @@ public class GameService {
     private GameDTO convertToDTO(Game game){
         return new GameDTO(game);
     }
+
 
     public ResultsDTO<GameDTO> getPopularGames(int page, int size){
         Pageable pageable = PageRequest.of(page, size);
@@ -143,4 +157,17 @@ public class GameService {
     }
 
 
+    public ResultsDTO<GameDTO> getGamesToAccept(Authentication authentication, int page, int size) throws UserDoesNotExistException, IllegalAccessException {
+        if(!roleService.checkIfAdmin(authentication)){
+            throw new IllegalAccessException("User is not admin");
+        }
+        Pageable pageable = PageRequest.of(page, size);
+        GameStatus pending = gameStatusService.getGameStatus(PENDING);
+        Page<Game> gamePage = gameRepository.findAllByGameStatus(pageable, pending);
+        return new ResultsDTO<>(gamePage
+                .map(this::convertToDTO)
+                .stream().toList(),
+                new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+
+    }
 }
