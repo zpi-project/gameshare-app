@@ -1,68 +1,63 @@
-insert into public.categories (id, name)
-values  (1, 'Economic'),
-        (2, 'Industry / Manufacturing'),
-        (3, 'Post-Napoleonic'),
-        (4, 'Trains'),
-        (5, 'Transportation'),
-        (6, 'Environmental'),
-        (7, 'Medical'),
-        (8, 'Adventure'),
-        (9, 'Exploration'),
-        (10, 'Fantasy'),
-        (11, 'Fighting'),
-        (12, 'Miniatures'),
-        (13, 'Animals'),
-        (528, 'Aviation / Flight'),
-        (16, 'Civilization'),
-        (19, 'Negotiation'),
-        (20, 'Political'),
-        (21, 'Science Fiction'),
-        (22, 'Space Exploration'),
-        (23, 'Wargame'),
-        (234, 'Racing'),
-        (235, 'Sports'),
-        (29, 'Territory Building'),
-        (30, 'Movies / TV / Radio theme'),
-        (31, 'Novel-based'),
-        (160, 'Spies/Secret Agents'),
-        (163, 'Comic Book / Strip'),
-        (914, 'Age of Reason'),
-        (45, 'Civil War'),
-        (322, 'Prehistoric'),
-        (550, 'Number'),
-        (53, 'Mythology'),
-        (328, 'Deduction'),
-        (258, 'Video Game Theme'),
-        (61, 'Card Game'),
-        (64, 'Modern Warfare'),
-        (263, 'Mature / Adult'),
-        (67, 'American West'),
-        (266, 'Bluffing'),
-        (561, 'World War II'),
-        (74, 'Dice'),
-        (75, 'Medieval'),
-        (77, 'Ancient'),
-        (79, 'City Building'),
-        (275, 'Abstract Strategy'),
-        (277, 'Renaissance'),
-        (196, 'Action / Dexterity'),
-        (648, 'Pike and Shot'),
-        (92, 'Horror'),
-        (741, 'World War I'),
-        (97, 'Nautical'),
-        (99, 'Farming'),
-        (102, 'Puzzle'),
-        (359, 'Party Game'),
-        (295, 'Arabian'),
-        (108, 'Educational'),
-        (361, 'Word Game'),
-        (218, 'Murder/Mystery'),
-        (115, 'Collectible Components'),
-        (222, 'Pirates'),
-        (122, 'Travel'),
-        (128, 'Religious'),
-        (677, 'Zombies'),
-        (775, 'Humor'),
-        (693, 'Real-time'),
-        (778, 'Print & Play')
-        ON CONFLICT DO NOTHING;
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.1 (Debian 13.1-1.pgdg100+1)
+-- Dumped by pg_dump version 13.1 (Debian 13.1-1.pgdg100+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: admin
+--
+
+INSERT INTO public.categories (id, name, name_pl) VALUES (0, 'Age of Reason', 'Wiek Pracy');
+INSERT INTO public.categories (id, name, name_pl) VALUES (1, 'Economic', 'gospodarczy');
+INSERT INTO public.categories (id, name, name_pl) VALUES (2, 'Industry / Manufacturing', 'Branża / Produkcja');
+INSERT INTO public.categories (id, name, name_pl) VALUES (3, 'Post-Napoleonic', 'Post-Napoleoński');
+INSERT INTO public.categories (id, name, name_pl) VALUES (4, 'Trains', 'Pociągi');
+INSERT INTO public.categories (id, name, name_pl) VALUES (5, 'Transportation', 'Transport');
+INSERT INTO public.categories (id, name, name_pl) VALUES (6, 'Environmental', 'Środowiskowy');
+INSERT INTO public.categories (id, name, name_pl) VALUES (7, 'Medical', 'Medyczny');
+INSERT INTO public.categories (id, name, name_pl) VALUES (8, 'Adventure', 'Przygoda');
+INSERT INTO public.categories (id, name, name_pl) VALUES (9, 'Exploration', 'Eksploracja');
+INSERT INTO public.categories (id, name, name_pl) VALUES (10, 'Fantasy', 'Fantazja');
+INSERT INTO public.categories (id, name, name_pl) VALUES (11, 'Fighting', 'Walka');
+INSERT INTO public.categories (id, name, name_pl) VALUES (12, 'Miniatures', 'Miniaturki');
+INSERT INTO public.categories (id, name, name_pl) VALUES (13, 'Animals', 'Zwierzęta');
+INSERT INTO public.categories (id, name, name_pl) VALUES (14, 'Civilization', 'Cywilizacja');
+INSERT INTO public.categories (id, name, name_pl) VALUES (15, 'Negotiation', 'Negocjacje');
+INSERT INTO public.categories (id, name, name_pl) VALUES (16, 'Political', 'Polityczny');
+INSERT INTO public.categories (id, name, name_pl) VALUES (17, 'Science Fiction', 'Fantastyka naukowa');
+INSERT INTO public.categories (id, name, name_pl) VALUES (18, 'Space Exploration', 'Eksploracja kosmiczna');
+INSERT INTO public.categories (id, name, name_pl) VALUES (19, 'Wargame', 'Gra wojenna');
+INSERT INTO public.categories (id, name, name_pl) VALUES (20, 'Territory Building', 'Budowa terytorium');
+INSERT INTO public.categories (id, name, name_pl) VALUES (21, 'Movies / TV / Radio theme', 'Filmy / TV / Radio Temat');
+INSERT INTO public.categories (id, name, name_pl) VALUES (22, 'Novel-based', 'Opierające się na powieściach');
+INSERT INTO public.categories (id, name, name_pl) VALUES (23, 'Civil War', 'Wojna domowa');
+INSERT INTO public.categories (id, name, name_pl) VALUES (24, 'Mythology', 'Mitologia');
+INSERT INTO public.categories (id, name, name_pl) VALUES (25, 'Card Game', 'Gra karciana');
+INSERT INTO public.categories (id, name, name_pl) VALUES (26, 'Modern Warfare', 'Nowoczesna Wojna');
+INSERT INTO public.categories (id, name, name_pl) VALUES (27, 'American West', 'Dziki Zachód Ameryki');
+INSERT INTO public.categories (id, name, name_pl) VALUES (28, 'Dice', 'Kostki');
+INSERT INTO public.categories (id, name, name_pl) VALUES (29, 'Medieval', 'Średniowiecze');
+INSERT INTO public.categories (id, name, name_pl) VALUES (30, 'Ancient', 'Starożytny');
+INSERT INTO public.categories (id, name, name_pl) VALUES (31, 'City Building', 'Budowa miasta');
+INSERT INTO public.categories (id, name, name_pl) VALUES (32, 'Horror', 'Horror');
+INSERT INTO public.categories (id, name, name_pl) VALUES (33, 'Nautical', 'Morski');
+INSERT INTO public.categories (id, name, name_pl) VALUES (34, 'Farming', 'Rolnictwo');
+INSERT INTO public.categories (id, name, name_pl) VALUES (35, 'Puzzle', 'Gra logiczna');
+INSERT INTO public.categories (id, name, name_pl) VALUES (36, 'Educational', 'Edukacyjny');
+INSERT INTO public.categories (id, name, name_pl) VALUES (37, 'Collectible Components', 'Zbieralne komponenty');
+INSERT INTO public.categories (id, name, name_pl) VALUES (38, 'Travel', 'Podróże');
+INSERT INTO public.categories (id, name, name_pl) VALUES (39, 'Religious', 'Religijny');
+

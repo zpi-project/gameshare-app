@@ -9,7 +9,7 @@ import scripts.gpt_request as gpt
 
 @dataclasses.dataclass
 class BoardGameData:
-    original_id:int
+    original_id: int
     name: str
     name_pl: str
     age: int
@@ -51,7 +51,8 @@ class ExtractData:
             short_description = gpt.get_short_description(data['boardgames']['boardgame']['description'])
             short_description_pl = gpt.get_short_description_pl(short_description)
             image = data['boardgames']['boardgame']['image']
-            boardGame = BoardGameData(original_id,name, name_pl, age, max_players, min_players, playing_time, short_description,
+            boardGame = BoardGameData(original_id, name, name_pl, age, max_players, min_players, playing_time,
+                                      short_description,
                                       short_description_pl, image, categories, categories_pl)
             boardGames.append(boardGame)
         return boardGames
@@ -85,15 +86,18 @@ class ExtractData:
             categories.append(categories_json['#text'])
         return categories, categories_pl
 
+
 class PersistData:
     def __init__(self):
         self.connection = None
         self.connect()
         self.cursor = self.connection.cursor()
+        self.category_id = 0
+        self.game_id=0
+        self.categories_inserted= []
 
     def __del__(self):
         self.connection.close()
-
 
     def connect(self):
         conn = psycopg2.connect(
@@ -104,20 +108,25 @@ class PersistData:
             port=os.getenv("DB_PORT"))
         self.connection = conn
 
-
     def insert_game(self, game):
-        insert_game = """
-        INSERT INTO games (original_id, name, name_pl,short_description,short_description_pl, min_players, max_players, playing_time, age,image) 
-        VALUES (%s, %s, %s,%s,%s, %s, %s, %s, %s, %s);
-        """
-        self.cursor.execute(insert_game, (game.original_id, game.name, game.name_pl, game.description,
+        insert_game = insert_game = \
+            """
+    INSERT INTO games (id,original_id, name, name_pl, short_description, short_description_pl, min_players, max_players, playing_time, age, image)
+    VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) 
+"""
+        self.cursor.execute(insert_game, (self.game_id, game.original_id, game.name, game.name_pl, game.description,
                                           game.description_pl,
                                           game.min_players, game.max_players, game.playing_time, game.age, game.image))
+        self.game_id +=1
 
     def insert_category(self, game):
-        insert_category = "INSERT INTO categories (name,name_pl) VALUES (%s,%s);"
+        insert_category = "INSERT INTO categories (id,name,name_pl) VALUES (%s,%s,%s);"
         for category, category_pl in zip(game.categories, game.categories_pl):
-            self.cursor.execute(insert_category, (category, category_pl))
+            if category not in self.categories_inserted:
+                self.cursor.execute(insert_category, (self.category_id, category, category_pl))
+                self.categories_inserted.append(category)
+                self.category_id += 1
+
     def insert_games_categories(self, game):
         insert_category_game = """
         INSERT INTO games_categories (game_id, category_id) VALUES 
@@ -128,18 +137,18 @@ class PersistData:
             self.cursor.execute(insert_category_game, (game.name, category))
 
     def persist_data(self, boardGames):
-        for boardGame in boardGames:
+        for i, boardGame in enumerate(boardGames):
             self.insert_game(boardGame)
             self.insert_category(boardGame)
             self.insert_games_categories(boardGame)
-            self.cursor.commit()
+            self.connection.commit()
             print("Game inserted:", boardGame.name)
 
+
 if __name__ == '__main__':
-    FILE_PATH = "top_300_games_ids.txt"
+    FILE_PATH = "top_100_games_ids.txt"
     URL = "https://boardgamegeek.com/xmlapi"
     import_data = ExtractData(FILE_PATH, URL)
     data = import_data.get_board_games()
     persist_data = PersistData()
     persist_data.persist_data(data)
-
