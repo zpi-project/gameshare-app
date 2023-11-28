@@ -101,8 +101,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query("select r from Reservation as r " +
             "where r.gameInstance = :gameInstance and " +
-            "(month(r.startDate) = :month or month(r.endDate) = :month) and " +
-            "(year(r.startDate) = :year or year(r.endDate) = :year) and " +
-            "r.status.status in ('"+ACCEPTED_BY_OWNER+"', '"+RENTED+"')")
+            "(((month(r.startDate) = :month or month(r.endDate) = :month) and " +
+            "(year(r.startDate) = :year or year(r.endDate) = :year)) or " +
+            "(to_date(CONCAT(:year, '-', :month, '-15'), 'YYYY-MM-DD') between r.startDate and r.endDate)) and " +
+            "r.status.status in ('"+ACCEPTED_BY_OWNER+"', '"+RENTED+"', '"+FINISHED+"')")
     List<Reservation> getUnavailabilityOfGameInstance(@Param("gameInstance") GameInstance gameInstance, @Param("year") int year, @Param("month") int month);
 }
