@@ -21,8 +21,8 @@ const Opinion: FC<Props> = ({ opinion }) => {
         <div className="flex w-full flex-row justify-between">
           <div className="flex flex-row gap-2">
             <p className="text-lg text-primary">{getFullname(opinion.ratingUser)}</p>
-            <p className="text-lg opacity-80 font-thin">(
-              {t("dateFormat", { date: new Date(opinion.timestamp) })})
+            <p className="text-lg font-thin opacity-80">
+              ({t("dateFormat", { date: new Date(opinion.timestamp) })})
             </p>
           </div>
           <Stars count={opinion.stars} />
