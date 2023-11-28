@@ -52,7 +52,7 @@ public class Game {
     private String shortDescription;
 
     @Column(nullable = false, length = 10000)
-    private String description_pl;
+    private String short_description_pl;
 
     private String image;
 

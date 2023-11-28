@@ -18,6 +18,9 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false)
+    private String name_pl;
+
     public Category(String name){
         this.name = name;
     }

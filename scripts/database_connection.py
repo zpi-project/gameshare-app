@@ -1,12 +1,13 @@
+import os
+
 import psycopg2
-from db_credentials import *
 
 select_categories = "select * from categories"
-insert_category = "INSERT INTO categories (name) VALUES (%s);"
+insert_category = "INSERT INTO categories (name,name_pl) VALUES (%s,%s);"
 insert_game = """
 INSERT INTO games 
-(original_id, name, short_description, min_players, max_players, playing_time, age, image, is_accepted) 
-VALUES (%s, %s, %s, %s, %s, %s, %s, %s, true);
+(original_id, name, name_pl,short_description,short_description_pl, min_players, max_players, playing_time, age, image) 
+VALUES (%s, %s, %s,%s,%s, %s, %s, %s, %s, %s, true);
 """
 insert_category_game = """
 INSERT INTO games_categories (game_id, category_id) VALUES 
@@ -19,11 +20,11 @@ def connect(insert, *args):
     try:
         # connecting to postresql 
         conn = psycopg2.connect(
-            host=HOST,
-            database=DBNAME,
-            user=USER,
-            password=PASSWORD,
-            port=PORT)
+            host=os.getenv("DB_HOST"),
+            database=os.getenv("DB_NAME"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            port=os.getenv("DB_PORT"))
         
         # creating cursor
         cur = conn.cursor()

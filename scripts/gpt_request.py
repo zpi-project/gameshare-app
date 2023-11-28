@@ -3,7 +3,7 @@ import time as t
 
 
 def get_short_description(description):
-    openai.api_key_path = 'scripts/path_api_key'
+    openai.api_key_path = 'path_api_key'
 
     question = "Shorten this game description to 3-4 sentences removing all html markups (<br> etc.)\n\n"
 
@@ -21,12 +21,14 @@ def get_short_description(description):
     stop = t.time_ns()
 
     print((stop - start) / 10 ** 6)
+    print(description,response['choices'][0]['message']['content'])
+
 
     return response['choices'][0]['message']['content']
 
 
 def get_category_pl(category):
-    openai.api_key_path = 'scripts/path_api_key'
+    openai.api_key_path = 'path_api_key'
 
     question = "Translate this category to Polish\n\n"
 
@@ -44,12 +46,14 @@ def get_category_pl(category):
     stop = t.time_ns()
 
     print((stop - start) / 10 ** 6)
+    print(category,response['choices'][0]['message']['content'])
+
 
     return response['choices'][0]['message']['content']
 
 
 def get_short_description_pl(description):
-    openai.api_key_path = 'scripts/path_api_key'
+    openai.api_key_path = 'path_api_key'
 
     question = "Translate this description to Polish\n\n"
 
@@ -67,11 +71,13 @@ def get_short_description_pl(description):
     stop = t.time_ns()
 
     print((stop - start) / 10 ** 6)
+    print(description,response['choices'][0]['message']['content'])
+
 
     return response['choices'][0]['message']['content']
 
 def get_names_pl(name):
-    openai.api_key_path = 'scripts/path_api_key'
+    openai.api_key_path = 'path_api_key'
 
     question = "Translate this name to Polish\n\n"
 
@@ -89,5 +95,6 @@ def get_names_pl(name):
     stop = t.time_ns()
 
     print((stop - start) / 10 ** 6)
+    print(name,response['choices'][0]['message']['content'])
 
     return response['choices'][0]['message']['content']
