@@ -31,8 +31,8 @@ const GameRequest: FC<GameRequestProps> = ({ game }) => {
     onError: () => {
       toast({
         variant: "destructive",
-        title: t("gameAcceptError"),
-        description: t("gameAcceptErrorDescription", { title: game.name }),
+        title: t("gameAcceptError", { title: game.name }),
+        description: t("gameAcceptErrorDescription"),
       });
     },
   });
@@ -60,7 +60,7 @@ const GameRequest: FC<GameRequestProps> = ({ game }) => {
         <img src={game.image} alt={game.name} className="h-full w-full object-cover object-top" />
       </div>
       <div className="flex flex-grow flex-col gap-2">
-        <div className="flex flex-row flex-wrap gap-4">
+        <div className="flex flex-row flex-wrap justify-end gap-4">
           <h1 className="mr-auto text-xl font-bold xl:text-2xl">{game.name}</h1>
           <Button
             onClick={() => accept()}
