@@ -109,7 +109,7 @@ class PersistData:
         self.connection = conn
 
     def insert_game(self, game):
-        insert_game = insert_game = \
+        insert_game = \
             """
     INSERT INTO games (id,original_id, name, name_pl, short_description, short_description_pl, min_players, max_players, playing_time, age, image)
     VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) 
