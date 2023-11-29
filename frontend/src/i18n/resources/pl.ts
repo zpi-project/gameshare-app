@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -241,8 +242,10 @@ const pl: typeof en = {
     "Gra jest dostępna w podanym przez ciebie przedziale czasu. Możesz ją zarezerwować.",
 
   gameRequests: "Gry oczekujące na twoją akceptację",
-  noGameRequests: "Aktualnie nie ma gier oczekujących na akceptację.",
+  noGameRequests: "Aktualnie nie ma żadnych gier oczekujących na twoją akceptację.",
   gameRequestsError: "Nie udało się pobrać gier do akceptacji.",
+  accept: "Akceptuj",
+  reject: "Odrzuć",
 };
 
 export default pl;

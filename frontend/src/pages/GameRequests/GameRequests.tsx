@@ -65,8 +65,8 @@ const GameRequests: FC = () => {
             </>
           ) : (
             !isError &&
-            (games.pages[0].paginationInfo.totalElements > 10 ? (
-              games.pages.flatMap(page => page.results).map((_, idx) => <GameRequest key={idx} />)
+            (games.pages[0].paginationInfo.totalElements > 0 ? (
+                games.pages.flatMap(page => page.results).map((game, idx) => <GameRequest key={idx} game={game} />)
             ) : (
               <h2 className="mt-4 text-xl lg:text-center">{t("noGameRequests")}</h2>
             ))

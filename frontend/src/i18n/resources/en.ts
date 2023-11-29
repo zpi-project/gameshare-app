@@ -238,4 +238,6 @@ export default {
   gameRequests: "Games awaiting for your acceptation",
   noGameRequests: "Currently there are no games awaiting or your acceptation.",
   gameRequestsError: "We couldn't fetch games awaiting for acceptation.",
+  accept: "Accept",
+  reject: "Reject",
 };
