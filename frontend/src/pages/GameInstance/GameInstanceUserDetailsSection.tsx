@@ -35,7 +35,7 @@ const GameInstanceUserDetailsSection: FC<Props> = ({ user, isLoading }) => {
       {user && (
         <>
           <div className="flex h-full w-full flex-col items-center gap-6">
-            <Avatar user={user} className="h-32 w-32" />
+            <Avatar user={user} className="h-32 w-32 text-4xl" />
             <h2 className="flex w-5/6 items-center justify-center rounded-lg bg-card p-2">
               {getFullname(user)}
             </h2>

@@ -7,7 +7,9 @@ import { Map, LocationMarker } from "@/components/Map";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import Avatar from "./Avatar";
+import { Stars } from "./Stars";
 import { EditUserForm } from "./UserForm";
+import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 
 interface Props {
@@ -53,11 +55,23 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
                 </Dialog>
               )}
             </div>
-            <div className="h-full flex-grow flex-col justify-between gap-6">
-              <div className="h-1/4">
-                <h2 className="rounded-lg bg-card p-2 xl:p-3 xl:text-xl">{getFullname(user)}</h2>
+            <div className="h-full flex-grow flex-col justify-between">
+              <div className="mb-4 flex flex-row justify-between rounded-lg bg-card p-2 xl:p-3">
+                <h2 className="xl:text-xl">{getFullname(user)}</h2>
+                {user.opinionsAmount > 0 ? (
+                  <div className="flex flex-row gap-2">
+                    <p className="text-base tracking-widest text-foreground">
+                      ({user.opinionsAmount})
+                    </p>
+                    <Stars count={Math.round(user.avgRating)} />
+                  </div>
+                ) : (
+                  <Badge variant="secondary" className="w-max px-3 py-1 hover:bg-primary">
+                    {t("noOpinions")}
+                  </Badge>
+                )}
               </div>
-              <div className="h-3/4 min-w-[100px] overflow-hidden rounded-lg bg-section">
+              <div className="h-[calc(100%-70px)] min-w-[100px] overflow-hidden rounded-lg bg-section">
                 <Map location={[user.locationLatitude, user.locationLongitude]}>
                   <LocationMarker />
                 </Map>

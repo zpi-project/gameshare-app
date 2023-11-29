@@ -10,6 +10,7 @@ import { PlayersBadge, PriceBadge, TimeBadge } from "@/components/Badge";
 import AgeBadge from "@/components/Badge/AgeBadge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Stars } from "../Stars";
 import { Badge } from "../ui/badge";
 import GameReservations from "./GameReservations";
 
@@ -25,6 +26,8 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
     game: { name, maxPlayers, minPlayers, image, playingTime, age },
     description,
     pricePerDay,
+    avgRating,
+    opinionsAmount,
     active,
   } = gameInstance;
 
@@ -52,6 +55,16 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
           <div className="flex w-full flex-row justify-between gap-2">
             <p className="min-h-8 break-all text-xs italic">{description}</p>
             <div className="flex flex-col items-end gap-2">
+              {opinionsAmount > 0 ? (
+                <div className="ml-4 flex flex-row gap-2">
+                  <p className="text-base tracking-widest text-foreground">({opinionsAmount})</p>
+                  <Stars count={Math.round(avgRating)} variant="secondary" />
+                </div>
+              ) : (
+                <Badge variant="secondary" className="w-max px-3 py-1 hover:bg-primary">
+                  {t("noOpinions")}
+                </Badge>
+              )}
               <PriceBadge price={pricePerDay} />
               {!active && (
                 <Badge className="text-sm uppercase" variant="destructive">

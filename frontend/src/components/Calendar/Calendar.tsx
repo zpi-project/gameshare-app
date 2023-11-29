@@ -12,6 +12,7 @@ interface CalendarProps {
   onPrevClick: () => void;
   date: Date;
   tileClassName?: string;
+  prevClickDisabled?: boolean;
 }
 
 const Calendar: FC<CalendarProps> = ({
@@ -21,10 +22,16 @@ const Calendar: FC<CalendarProps> = ({
   onPrevClick,
   date,
   tileClassName,
+  prevClickDisabled,
 }) => {
   return (
     <div className={cn("flex flex-col gap-6", className)}>
-      <CalendarHeader onNextClick={onNextClick} onPrevClick={onPrevClick} date={date} />
+      <CalendarHeader
+        onNextClick={onNextClick}
+        onPrevClick={onPrevClick}
+        date={date}
+        prevClickDisabled={prevClickDisabled}
+      />
       <CalendarWeekDays tileClassName={tileClassName} />
       {children}
     </div>
@@ -35,15 +42,21 @@ interface CalendarHeaderProps {
   onNextClick: () => void;
   onPrevClick: () => void;
   date: Date;
+  prevClickDisabled?: boolean;
 }
 
-const CalendarHeader: FC<CalendarHeaderProps> = ({ onPrevClick, onNextClick, date }) => {
+const CalendarHeader: FC<CalendarHeaderProps> = ({
+  onPrevClick,
+  onNextClick,
+  date,
+  prevClickDisabled,
+}) => {
   const { t } = useTranslation();
 
   return (
     <div className="flex flex-row items-center gap-2">
       <p className="mr-auto text-xl capitalize">{t("monthYearFormat", { date: date })}</p>
-      <Button size="icon" onClick={onPrevClick} variant="ghost">
+      <Button size="icon" onClick={onPrevClick} variant="ghost" disabled={prevClickDisabled}>
         <ChevronLeft />
       </Button>
       <Button size="icon" onClick={onNextClick} variant="ghost">
