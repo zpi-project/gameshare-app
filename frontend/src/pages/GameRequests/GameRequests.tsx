@@ -1,9 +1,11 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { id } from "date-fns/locale";
 import { GameApi } from "@/api/GameApi";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import GameRequest from "./GameRequest";
 
 const GAME_PAGE_SIZE = 8;
@@ -29,6 +31,12 @@ const GameRequests: FC = () => {
 
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
 
+  useEffect(() => {
+    if (entry?.isIntersecting && !isLoading) {
+      void fetchNextPage();
+    }
+  }, [entry?.isIntersecting, fetchNextPage, isLoading]);
+
   return (
     <div className="relative flex h-full w-full flex-col gap-8 rounded-lg bg-section p-8">
       <div
@@ -38,15 +46,19 @@ const GameRequests: FC = () => {
         }}
       />
       <h1 className="relative text-xl uppercase">{t("gameRequests")}</h1>
-      <div className="">
-        {isLoading ? (
-          <>loading</>
-        ) : isError ? (
-          <>isError</>
-        ) : (
-          games.pages.flatMap(page => page.results).map((_, idx) => <GameRequest key={idx} />)
-        )}
-      </div>
+      <ScrollArea className="h-full">
+        <div className="">
+          {isLoading ? (
+            <>loading</>
+          ) : isError ? (
+            <>isError</>
+          ) : (
+            games.pages.flatMap(page => page.results).map((_, idx) => <GameRequest key={idx} />)
+          )}
+          {isFetchingNextPage && <Skeleton className="h-40 w-full rounded-lg" />}
+          {hasNextPage && <div ref={ref} data-test="scroller-trigger" />}
+        </div>
+      </ScrollArea>
     </div>
   );
 };
