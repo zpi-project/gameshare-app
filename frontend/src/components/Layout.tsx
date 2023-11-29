@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import jwt_decode, { JwtPayload } from "jwt-decode";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { isRoleFetchedState } from "@/state/isRoleFetched";
@@ -33,10 +34,12 @@ const Layout: FC = () => {
       }
       setIsRoleFetched(true);
     },
-    onError: () => {
+    onError: error => {
       if (token) {
-        setRegisterFormOpen(true);
-        setIsRoleFetched(true);
+        if (axios.isAxiosError(error) && error.response?.status === 404) {
+          setRegisterFormOpen(true);
+          setIsRoleFetched(true);
+        }
       }
     },
   });

@@ -22,14 +22,11 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "reservation_id", unique = true)
     private String reservationId;
 
-
     @ManyToOne
     private User renter;
-
 
     @Column(name="start_date",nullable = false)
     private Date startDate;
@@ -53,18 +50,16 @@ public class Reservation {
     private int duration;
 
 
-    public Reservation fromDTO(NewReservationDTO newReservationDTO, User renter, GameInstance gameInstance) {
+    public Reservation(NewReservationDTO newReservationDTO, User renter, GameInstance gameInstance) {
 
         this.renter = renter;
         this.gameInstance = gameInstance;
         this.startDate = newReservationDTO.getStartDate();
         this.endDate = newReservationDTO.getEndDate();
-        if(this.renterComment !=null)
-            this.renterComment = newReservationDTO.getRenterComment().orElse(null);
+        this.renterComment = newReservationDTO.getRenterComment();
         this.timestamp = new Date(System.currentTimeMillis());
         this.duration = DateUtils.getDuration(startDate,endDate);
         this.reservationId = UUID.randomUUID().toString();
-        return this;
     }
 
     public int getDuration() {
@@ -81,6 +76,4 @@ public class Reservation {
         this.duration = DateUtils.getDuration(startDate,endDate);
         this.reservationId = UUID.randomUUID().toString();
     }
-
-
 }

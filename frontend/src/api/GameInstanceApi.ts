@@ -86,4 +86,12 @@ export class GameInstanceApi {
 
     return timeframes;
   }
+
+  static async checkAvailability(uuid: string, startDate: Date, endDate: Date) {
+    const { data: isAvailable } = await Api.get<boolean>(
+      `/game-instances/${uuid}/timeframes/available`,
+      { params: { startDate, endDate } },
+    );
+    return isAvailable;
+  }
 }

@@ -1,12 +1,16 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import { NewReservation } from "@/types/Reservation";
+import { cn } from "@/utils/tailwind";
+import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { PriceBadge } from "@/components/Badge";
 import { Stars } from "@/components/Stars";
+import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
 import DatePicker from "@/components/ui/datepicker";
 import {
@@ -27,6 +31,7 @@ interface ReservationFormProps {
 const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) => {
   const { t } = useTranslation();
   const TODAY = new Date(new Date().setHours(0, 0, 0, 0));
+  const [isAvailable, setIsAvailable] = useState(false);
 
   const formSchema = z
     .object({
@@ -38,7 +43,6 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
           }),
         })
         .min(TODAY, { message: t("startDateNotPast") }),
-
       endDate: z.date({
         required_error: t("fieldIsRequired", { field: `${t("formEndDate")}`, context: "female" }),
       }),
@@ -58,13 +62,55 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
     },
   });
 
+  const startDate = form.watch("startDate");
+  const endDate = form.watch("endDate");
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      form.trigger();
+    }
+  }, [startDate, endDate]);
+
+  const { isFetching, isSuccess } = useQuery({
+    queryKey: ["game-instance-is-available", { uuid: gameInstance.uuid, startDate, endDate }],
+    queryFn: () => GameInstanceApi.checkAvailability(gameInstance.uuid, startDate, endDate),
+    enabled:
+      startDate !== undefined &&
+      endDate !== undefined &&
+      !form.formState.errors["startDate"] &&
+      !form.formState.errors["endDate"],
+    onSuccess: data => {
+      setIsAvailable(data);
+      form.trigger();
+    },
+  });
+
   return (
     <div className="flex w-[364px] min-w-[364px] flex-grow flex-col gap-4">
       <h2 className="text-2xl uppercase text-secondary">{t("reservationForm")}</h2>
       <div className="flex flex-grow flex-col gap-8 rounded-lg bg-section p-4">
         <GameInstanceSummary gameInstance={gameInstance} />
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-grow flex-col gap-4">
+          <form
+            onSubmit={form.handleSubmit(data => {
+              if (isAvailable) {
+                onSubmit(data);
+              }
+            })}
+            className="flex flex-grow flex-col gap-4"
+          >
+            <p
+              className={cn("h-[100px]", {
+                "text-secondary": isSuccess && isAvailable,
+                "text-destructive": isSuccess && !isAvailable,
+              })}
+            >
+              {isSuccess && !form.formState.errors["startDate"] && !form.formState.errors["endDate"]
+                ? isAvailable
+                  ? t("timeframeAvailable")
+                  : t("timeframeNoAvailable")
+                : ""}
+            </p>
             <FormField
               control={form.control}
               name="startDate"
@@ -99,7 +145,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
                   <FormControl>
                     <Textarea
                       placeholder={t("leaveMessage")}
-                      className="h-[180px] resize-none bg-card p-4"
+                      className="h-[100px] resize-none bg-card p-4"
                       {...field}
                       spellCheck={false}
                     />
@@ -114,6 +160,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
           </form>
         </Form>
       </div>
+      {isFetching && <Spinner />}
     </div>
   );
 };

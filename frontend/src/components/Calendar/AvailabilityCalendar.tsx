@@ -13,9 +13,9 @@ interface AvailabilityCalendarProps {
 }
 
 const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID }) => {
-  const [startDate, setStartDate] = useState(
-    getFirstDayOfMonth(new Date(new Date().setHours(0, 0, 0, 0))),
-  );
+  const TODAY = new Date(new Date().setHours(0, 0, 0, 0));
+  const FIRST_DAY_OF_CURRENT_MONTH = getFirstDayOfMonth(TODAY);
+  const [startDate, setStartDate] = useState(FIRST_DAY_OF_CURRENT_MONTH);
   const [month, setMonth] = useState(startDate.getMonth() + 1);
   const [year, setYear] = useState(startDate.getFullYear());
   const { t } = useTranslation();
@@ -53,14 +53,12 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
     });
   }, [reservations, startDate]);
 
-  // disable back click
-  // not show prev days
-
   return (
     <Calendar
       onNextClick={() => setStartDate(getFirstDayOfNextMonth(startDate))}
       onPrevClick={() => setStartDate(getFirstDayOfLastMonth(startDate))}
       date={startDate}
+      prevClickDisabled={FIRST_DAY_OF_CURRENT_MONTH >= startDate}
     >
       {isError ? (
         <h3 className="mt-4 text-center text-xl text-destructive">
@@ -74,21 +72,23 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
           {isLoading ? (
             <>
               {Array.from({ length: getDaysInMonth(startDate) }).map((_, idx) => (
-                <CalendarDay key={idx + "loading"} variant="loading" />
+                <CalendarDay key={idx + "loading"} variant="loading" disabled />
               ))}
             </>
           ) : (
             <>
-              {availableDays.map((available, idx) => {
-                return (
+              {availableDays.map((available, idx) =>
+                idx < TODAY.getDate() && FIRST_DAY_OF_CURRENT_MONTH >= startDate ? (
+                  <CalendarDay key={idx} variant="outlined" disabled day={idx + 1} />
+                ) : (
                   <CalendarDay
                     key={idx}
                     variant={available ? "filled" : "outlined"}
-                    disabled={true}
+                    disabled
                     day={idx + 1}
                   />
-                );
-              })}
+                ),
+              )}
             </>
           )}
         </div>

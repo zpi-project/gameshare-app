@@ -6,6 +6,7 @@ export interface User {
   locationLongitude: number;
   avatarLink: string;
   avgRating: number;
+  opinionsAmount: number;
   phoneNumber?: string;
 }
 

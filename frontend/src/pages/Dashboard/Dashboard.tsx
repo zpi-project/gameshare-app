@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useRecoilState } from "recoil";
 import { locationState } from "@/state/location";
+import { tokenState } from "@/state/token";
 import { GameInstanceSearchParams } from "@/types/GameInstance";
 import { User } from "@/types/User";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
@@ -33,6 +34,7 @@ const Dashboard: FC = () => {
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
   const { toast } = useToast();
   const { t } = useTranslation();
+  const token = useRecoilState(tokenState);
 
   const {
     data: gameInstances,
@@ -42,7 +44,7 @@ const Dashboard: FC = () => {
     fetchNextPage: fetchGamesNextPage,
     isFetchingNextPage: isFetchingGamesNextPage,
   } = useInfiniteQuery({
-    queryKey: ["search-game-instances", searchParams, userParam?.uuid],
+    queryKey: ["search-game-instances", { ...searchParams, uuid: userParam?.uuid, token }],
     queryFn: ({ pageParam = 0 }) =>
       GameInstanceApi.search(
         latitude,
@@ -64,7 +66,7 @@ const Dashboard: FC = () => {
     fetchNextPage: usersFetchNextPage,
     isFetchingNextPage: isFetchingUsersNextPage,
   } = useInfiniteQuery({
-    queryKey: ["user-pins", searchParams],
+    queryKey: ["user-pins", { ...searchParams, token }],
     queryFn: ({ pageParam = 0 }) =>
       UserApi.search(latitude, longitude, pageParam as number, USERS_PAGE_SIZE, searchParams),
     getNextPageParam: (_, pages) => {

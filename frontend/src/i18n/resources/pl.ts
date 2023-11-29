@@ -131,8 +131,8 @@ const pl: typeof en = {
       PENDING: "Oczekujące na akceptację",
       ACCEPTED_BY_OWNER: "Zaakceptowane przeze mnie",
       REJECTED_BY_OWNER: "Odrzucone przeze mnie",
-      CANCELLED_BY_OWNER: "Anulowane przeze mnie",
-      CANCELLED_BY_RENTER: "Anulowane przez wypożyczającego",
+      CANCELED_BY_OWNER: "Anulowane przeze mnie",
+      CANCELED_BY_RENTER: "Anulowane przez wypożyczającego",
       RENTED: "Wypożyczone",
       FINISHED: "Zrealizowane",
       EXPIRED: "Po terminie",
@@ -142,8 +142,8 @@ const pl: typeof en = {
       PENDING: "Oczekujące na akceptację",
       ACCEPTED_BY_OWNER: "Zaakceptowane przez właściciela",
       REJECTED_BY_OWNER: "Odrzucone przez właściciela",
-      CANCELLED_BY_OWNER: "Anulowane przez właściciela",
-      CANCELLED_BY_RENTER: "Anulowane przeze mnie",
+      CANCELED_BY_OWNER: "Anulowane przez właściciela",
+      CANCELED_BY_RENTER: "Anulowane przeze mnie",
       RENTED: "Wypożyczone",
       FINISHED: "Zrealizowane",
       EXPIRED: "Po terminie",
@@ -222,11 +222,11 @@ const pl: typeof en = {
   ownerDetails: "Właściciel gry - szczegóły",
   gameDetails: "Gra - szczegóły",
   gameReservationsCalendar: "Kalendarz rezerwacji gry",
-  noOpinions: "Użytkownik nie ma jeszcze żadnej opinii",
+  userNoOpinions: "Użytkownik nie ma jeszcze żadnej opinii",
   cannotAddOpinionAboutOwner: "Nie możesz dodać jeszcze opinii o właścicielu gry.",
   cannotAddOpinionAboutRenter: "Nie możesz dodać jeszcze opinii o wypożyczającym.",
   cannotAddOpinionAboutGame: "Nie możesz dodać jeszcze opinii o tej grze.",
-  gameNoOpinions: "Brak opinii",
+  noOpinions: "Brak opinii",
   successChangingStatus: "Status zmieniony pomyślnie",
   successChangingStatusDescription:
     "Aktualny status to - {{status}}. {{user}} otrzymał maila z potwierdzeniem zmiany statusu rezerwacji.",
@@ -235,6 +235,10 @@ const pl: typeof en = {
   owner: "Właściciel gry",
   renter: "Wypożyczający",
   errorFetchingDetails: "Nie udało się pobrać szczegółów rezerwacji {{reservationId}}",
+  timeframeNoAvailable:
+    "Nie możesz zarezerwować tej gry w tych datach, ponieważ ktoś już zarezerwował grę w przedziale czasu podanym przez ciebie.",
+  timeframeAvailable:
+    "Gra jest dostępna w podanym przez ciebie przedziale czasu. Możesz ją zarezerwować.",
 };
 
 export default pl;

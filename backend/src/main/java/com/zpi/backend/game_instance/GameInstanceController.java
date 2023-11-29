@@ -153,10 +153,10 @@ public class GameInstanceController {
                     "can be called by anyone"
     )
     @GetMapping(value="/{uuid}/availability")
-    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceUnAvailability(@PathVariable String uuid, @RequestParam String year, @RequestParam String month) {
+    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceUnAvailability(@PathVariable String uuid, @RequestParam int year, @RequestParam int month) throws GameInstanceDoesNotExistException {
       System.out.println("... called getGameInstanceUnAvailability");
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getGameInstanceAvailability(uuid,year,month,false));
+                .body(gameInstanceService.getGameInstanceUnavailability(uuid,year,month,false));
     }
 
     @Operation(
@@ -166,11 +166,11 @@ public class GameInstanceController {
     )
     @RequestMapping(method = GET,value="/{uuid}/reservations")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceReservations(@PathVariable String uuid, @RequestParam String year, @RequestParam String month, Authentication authentication)
+    public ResponseEntity<List<GameInstanceUnAvailabilityDTO>> getGameInstanceReservations(@PathVariable String uuid, @RequestParam int year, @RequestParam int month, Authentication authentication)
             throws GameInstanceDoesNotExistException, UserDoesNotExistException {
       System.out.println("... called getGameInstanceReservations");
         return ResponseEntity.status(HttpStatus.OK)
-                .body(gameInstanceService.getGameInstanceAvailabilityReservation(authentication,uuid,year,month));
+                .body(gameInstanceService.getGameInstanceUnavailabilityReservation(authentication,uuid,year,month));
     }
 
     @Operation(

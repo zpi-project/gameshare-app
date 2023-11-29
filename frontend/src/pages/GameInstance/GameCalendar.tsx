@@ -27,8 +27,7 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
   const { toast } = useToast();
   const [newReservationId, setNewReservationId] = useState("");
 
-  // add proper error messages when in api fixed
-  const { mutate, isLoading, isSuccess } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: (newReservation: NewReservation) => ReservationsApi.create(newReservation),
     onError: () => {
       toast({
@@ -46,7 +45,7 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
 
   return (
     <DialogContent
-      className="min-h-[724px] min-w-[1042px] p-10"
+      className="min-h-[755px] min-w-[1042px] p-10"
       onCloseAutoFocus={() => {
         setShowForm(false);
         setNewReservationId("");
@@ -67,7 +66,7 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
         ) : showForm ? (
           <ReservationForm gameInstance={gameInstance} onSubmit={mutate} />
         ) : (
-          <div className="hidden lg:flex">
+          <div className="flex">
             <GameInstanceDetailsCard gameInstance={gameInstance} />
           </div>
         )}
@@ -92,8 +91,3 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance }) => {
 };
 
 export default GameCalendar;
-
-// student uuid: 239bda34-a3ad-4d97-84b0-8aceb4480801
-// 2023-11-1 - brak komentarza?
-// 2023-11-2 - komentarz
-// owner uuid: 94d0560d-9716-4a30-b1a6-5f9a97c53677

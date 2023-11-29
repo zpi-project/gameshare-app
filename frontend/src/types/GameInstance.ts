@@ -8,6 +8,7 @@ export interface GameInstance {
   pricePerDay: number;
   game: Game;
   avgRating: number;
+  opinionsAmount: number;
   active: boolean;
 }
 
