@@ -241,6 +241,8 @@ const pl: typeof en = {
     "Gra jest dostępna w podanym przez ciebie przedziale czasu. Możesz ją zarezerwować.",
 
   gameRequests: "Gry oczekujące na twoją akceptację",
+  noGameRequests: "Aktualnie nie ma gier oczekujących na akceptację.",
+  gameRequestsError: "Nie udało się pobrać gier do akceptacji.",
 };
 
 export default pl;

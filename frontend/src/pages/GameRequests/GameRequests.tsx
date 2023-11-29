@@ -6,12 +6,14 @@ import { id } from "date-fns/locale";
 import { GameApi } from "@/api/GameApi";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/components/ui/use-toast";
 import GameRequest from "./GameRequest";
 
 const GAME_PAGE_SIZE = 8;
 
 const GameRequests: FC = () => {
   const { t } = useTranslation();
+  const { toast } = useToast();
 
   const {
     data: games,
@@ -26,6 +28,13 @@ const GameRequests: FC = () => {
     getNextPageParam: (_, pages) => {
       const newPageParam = pages.length;
       return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
+    },
+    onError: () => {
+      toast({
+        variant: "destructive",
+        title: t("gameRequestsError"),
+        description: t("tryRefreshing"),
+      });
     },
   });
 
@@ -45,15 +54,22 @@ const GameRequests: FC = () => {
           backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
         }}
       />
-      <h1 className="relative text-xl uppercase">{t("gameRequests")}</h1>
+      <h1 className="relative text-2xl uppercase">{t("gameRequests")}</h1>
       <ScrollArea className="h-full">
         <div className="">
           {isLoading ? (
-            <>loading</>
-          ) : isError ? (
-            <>isError</>
+            <>
+              {Array.from({ length: GAME_PAGE_SIZE }).map((_, idx) => (
+                <Skeleton className="h-40 w-full rounded-lg" key={idx} />
+              ))}
+            </>
           ) : (
-            games.pages.flatMap(page => page.results).map((_, idx) => <GameRequest key={idx} />)
+            !isError &&
+            (games.pages[0].paginationInfo.totalElements > 10 ? (
+              games.pages.flatMap(page => page.results).map((_, idx) => <GameRequest key={idx} />)
+            ) : (
+              <h2 className="mt-4 text-xl lg:text-center">{t("noGameRequests")}</h2>
+            ))
           )}
           {isFetchingNextPage && <Skeleton className="h-40 w-full rounded-lg" />}
           {hasNextPage && <div ref={ref} data-test="scroller-trigger" />}
