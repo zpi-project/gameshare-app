@@ -240,4 +240,11 @@ export default {
   gameRequestsError: "We couldn't fetch games awaiting for acceptation.",
   accept: "Accept",
   reject: "Reject",
+  gameAcceptSuccess: "Game - {{title}} - has been accepted successfully.",
+  gameAcceptError: "There was an error accepting game - {{title}}.",
+  gameAcceptErrorDescription: "Game has been not accepted.",
+
+  gameRejectSuccess: "Game - {{title}} has been rejected.",
+  gameRejectError: "There was an error rejecting game - {{title}}.",
+  gameRejectErrorDescription: "Game has been not rejected.",
 };

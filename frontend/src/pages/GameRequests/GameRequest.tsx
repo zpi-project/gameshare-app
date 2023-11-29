@@ -1,11 +1,15 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { X, Check } from "lucide-react";
 import { Game } from "@/types/Game";
+import { GameApi } from "@/api/GameApi";
 import { TimeBadge, PlayersBadge, AgeBadge } from "@/components/Badge";
+import Spinner from "@/components/ui/Spinner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/components/ui/use-toast";
 
 interface GameRequestProps {
   game: Game;
@@ -13,20 +17,64 @@ interface GameRequestProps {
 
 const GameRequest: FC<GameRequestProps> = ({ game }) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  const { mutate: accept, isLoading: isAcceptLoading } = useMutation({
+    mutationFn: () => GameApi.accept(game.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["game-requests"]);
+      toast({
+        title: t("gameAcceptSuccess", { title: game.name }),
+      });
+    },
+    onError: () => {
+      toast({
+        variant: "destructive",
+        title: t("gameAcceptError"),
+        description: t("gameAcceptErrorDescription", { title: game.name }),
+      });
+    },
+  });
+
+  const { mutate: reject, isLoading: isRejectLoading } = useMutation({
+    mutationFn: () => GameApi.reject(game.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["game-requests"]);
+      toast({
+        title: t("gameRejectSuccess", { title: game.name }),
+      });
+    },
+    onError: () => {
+      toast({
+        variant: "destructive",
+        title: t("gameRejectError", { title: game.name }),
+        description: t("gameRejectErrorDescription"),
+      });
+    },
+  });
 
   return (
-    <div className="lex-row flex gap-4 rounded-lg bg-card p-4">
-      <div className="max-h-full min-h-full w-[150px] min-w-[150px] flex-grow overflow-hidden rounded-lg bg-section">
+    <div className="lex-row flex min-h-[180px] gap-6 rounded-lg bg-card p-4 shadow-lg">
+      <div className="max-h-full min-h-full w-[200px] min-w-[200px] overflow-hidden rounded-lg bg-section">
         <img src={game.image} alt={game.name} className="h-full w-full object-cover object-top" />
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-grow flex-col gap-2">
         <div className="flex flex-row flex-wrap gap-4">
           <h1 className="mr-auto text-xl font-bold xl:text-2xl">{game.name}</h1>
-          <Button variant="secondary" className="flex flex-row items-center gap-2">
+          <Button
+            onClick={() => accept()}
+            variant="secondary"
+            className="flex flex-row items-center gap-2"
+          >
             <p className="uppercase">{t("accept")}</p>
             <Check size={20} />
           </Button>
-          <Button variant="destructive" className="flex flex-row items-center gap-2">
+          <Button
+            onClick={() => reject()}
+            variant="destructive"
+            className="flex flex-row items-center gap-2"
+          >
             <p className="uppercase">{t("reject")}</p>
             <X size={20} />
           </Button>
@@ -46,6 +94,7 @@ const GameRequest: FC<GameRequestProps> = ({ game }) => {
           <AgeBadge age={game.age} />
         </div>
       </div>
+      {(isAcceptLoading || isRejectLoading) && <Spinner />}
     </div>
   );
 };

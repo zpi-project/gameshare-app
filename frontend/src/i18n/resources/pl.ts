@@ -1,6 +1,5 @@
 import en from "./en";
 
-
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -246,6 +245,12 @@ const pl: typeof en = {
   gameRequestsError: "Nie udało się pobrać gier do akceptacji.",
   accept: "Akceptuj",
   reject: "Odrzuć",
+  gameAcceptSuccess: "Gra - {{title}} - została zaakceptowana pomyślnie.",
+  gameAcceptError: "Wystąpił błąd podczas akceptowania gry - {{title}}.",
+  gameAcceptErrorDescription: "Gra nie została akceptowana.",
+  gameRejectSuccess: "Gra - {{title}} została odrzucona.",
+  gameRejectError: "Wystąpił błąd podczas odrzucania gry - {{title}}.",
+  gameRejectErrorDescription: "Gra nie została odrzucona.",
 };
 
 export default pl;

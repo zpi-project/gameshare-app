@@ -2,7 +2,6 @@ import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { id } from "date-fns/locale";
 import { GameApi } from "@/api/GameApi";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -23,7 +22,7 @@ const GameRequests: FC = () => {
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ["category-games", { id }],
+    queryKey: ["game-requests"],
     queryFn: ({ pageParam = 0 }) => GameApi.getPending(pageParam as number, GAME_PAGE_SIZE),
     getNextPageParam: (_, pages) => {
       const newPageParam = pages.length;
@@ -56,7 +55,7 @@ const GameRequests: FC = () => {
       />
       <h1 className="relative text-2xl uppercase">{t("gameRequests")}</h1>
       <ScrollArea className="h-full">
-        <div className="">
+        <div className="flex flex-col gap-4">
           {isLoading ? (
             <>
               {Array.from({ length: GAME_PAGE_SIZE }).map((_, idx) => (
@@ -66,7 +65,9 @@ const GameRequests: FC = () => {
           ) : (
             !isError &&
             (games.pages[0].paginationInfo.totalElements > 0 ? (
-                games.pages.flatMap(page => page.results).map((game, idx) => <GameRequest key={idx} game={game} />)
+              games.pages
+                .flatMap(page => page.results)
+                .map((game, idx) => <GameRequest key={idx} game={game} />)
             ) : (
               <h2 className="mt-4 text-xl lg:text-center">{t("noGameRequests")}</h2>
             ))

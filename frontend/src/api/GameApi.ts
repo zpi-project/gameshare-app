@@ -42,4 +42,14 @@ export class GameApi {
     });
     return games;
   }
+
+  static async accept(id: number) {
+    const { data } = await Api.put(`/games/${id}/accept`);
+    return data;
+  }
+
+  static async reject(id: number) {
+    const { data } = await Api.put(`/games/${id}/reject`);
+    return data;
+  }
 }
