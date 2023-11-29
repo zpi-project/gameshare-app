@@ -24,7 +24,7 @@ public class Game {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false)
+
     private String name_pl;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
@@ -51,7 +51,7 @@ public class Game {
     @Column(nullable = false, length = 10000)
     private String shortDescription;
 
-    @Column(nullable = false, length = 10000)
+    @Column(length = 10000)
     private String short_description_pl;
 
     private String image;

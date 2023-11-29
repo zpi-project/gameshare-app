@@ -53,9 +53,9 @@ public class GameController {
     )
     @GetMapping
     public ResponseEntity<ResultsDTO<GameDTO>> getGames(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam Optional<String> search,
-                                   @RequestParam Optional<List<Integer>> categoriesIds) {
+                                   @RequestParam Optional<List<Integer>> categoriesIds, @RequestParam(defaultValue = "enUS") String language) throws BadRequestException {
         System.out.println("... called getGames");
-        ResultsDTO<GameDTO> games = gameService.getGames(page, size, search, categoriesIds);
+        ResultsDTO<GameDTO> games = gameService.getGames(page, size, search, categoriesIds,language);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }
@@ -65,9 +65,9 @@ public class GameController {
             description = "Returns Game from database by its id."
     )
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<GameDTO> getGame(@PathVariable long id) throws GameDoesNotExistException {
+    public ResponseEntity<GameDTO> getGame(@PathVariable long id,@RequestParam(defaultValue = "enUS") String language) throws GameDoesNotExistException, BadRequestException {
         System.out.println("... called getGame("+id+")");
-        GameDTO game = gameService.getGameDTO(id);
+        GameDTO game = gameService.getGameDTO(id,language);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(game);
     }
@@ -104,13 +104,12 @@ public class GameController {
             description = "Returns paginated popular games from database. [Not implemented] Popularity is calculated considering reservations."
     )
     @GetMapping(value = "/popular")
-    public ResponseEntity<ResultsDTO<GameDTO>> getPopularGames(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+    public ResponseEntity<ResultsDTO<GameDTO>> getPopularGames(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "enUS") String language) throws BadRequestException {
         System.out.println("... called getPopularGames");
-        ResultsDTO<GameDTO> games = gameService.getPopularGames(page, size);
+        ResultsDTO<GameDTO> games = gameService.getPopularGames(page, size,language);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }
-
     @Operation(
             summary = "Get users' rating with game by id",
             description = "Returns paginated user data along with their rating based on User Opinions and their Game Instance rating from database. [Note: Calculating game instance opinions is NOT IMPLEMENTED yet]."
@@ -137,15 +136,15 @@ public class GameController {
                 .status(HttpStatus.OK)
                 .body(new Amount(gameService.getAmount()));
     }
-
+//TODO convert this
     @Operation(
             summary = "Get games to accept",
             description = "Returns paginated games to accept from database. Only Admin is allowed to do this operation."
     )
     @RequestMapping(method = RequestMethod.GET, value = "/pending")
-    public ResponseEntity<ResultsDTO<GameDTO>> getGamesToAccept(Authentication authentication, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) throws UserDoesNotExistException, BadRequestException, IllegalAccessException {
+    public ResponseEntity<ResultsDTO<GameDTO>> getGamesToAccept(Authentication authentication, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "enUS") String language) throws UserDoesNotExistException, BadRequestException, IllegalAccessException {
         System.out.println("... called getGamesToAccept");
-        ResultsDTO<GameDTO> games = gameService.getGamesToAccept(authentication, page, size);
+        ResultsDTO<GameDTO> games = gameService.getGamesToAccept(authentication, page, size,language);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(games);
     }

@@ -9,14 +9,17 @@ import com.zpi.backend.email.EmailService;
 import com.zpi.backend.email_type.EmailTypeService;
 import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
+import com.zpi.backend.game.dto.EnGameDTO;
 import com.zpi.backend.game.dto.GameDTO;
 import com.zpi.backend.game.dto.NewGameDTO;
+import com.zpi.backend.game.dto.PlGameDTO;
 import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
 import com.zpi.backend.game.exception.GameAlreadyExistsException;
 import com.zpi.backend.game.exception.GameAlreadyRejectedException;
 import com.zpi.backend.game.exception.GameDoesNotExistException;
 import com.zpi.backend.game_status.GameStatus;
 import com.zpi.backend.game_status.GameStatusService;
+import com.zpi.backend.languages.LanguageCodes;
 import com.zpi.backend.role.Role;
 import com.zpi.backend.role.RoleService;
 import com.zpi.backend.user.User;
@@ -81,11 +84,17 @@ public class GameService {
         return gameOptional.get();
     }
 
-    public GameDTO getGameDTO(long id) throws GameDoesNotExistException{
-        return new GameDTO(getGame(id));
+    public GameDTO getGameDTO(long id,String language) throws GameDoesNotExistException, BadRequestException {
+        if(language.equals(LanguageCodes.ENGLISH)){
+            return new EnGameDTO(getGame(id));
+        } else if (language.equals(LanguageCodes.POLISH)){
+            return new PlGameDTO(getGame(id));
+        }else
+            throw new BadRequestException("Language is not valid");
+
     }
 
-    public ResultsDTO<GameDTO> getGames(int page, int size, Optional<String> search, Optional<List<Integer>> categoriesIds) {
+    public ResultsDTO<GameDTO> getGames(int page, int size, Optional<String> search, Optional<List<Integer>> categoriesIds,String language) throws BadRequestException {
         Pageable pageable = PageRequest.of(page, size);
         Page<Game> gamePage;
         if (search.isEmpty()) {
@@ -101,24 +110,46 @@ public class GameService {
                 gamePage = gameRepository.searchAllByNameContainsAndAcceptedAndCategoriesIn(search.get().toLowerCase(), categoriesIds.get(), pageable);
             }
         }
-        return new ResultsDTO<>(gamePage
-                .map(this::convertToDTO)
-                .stream().toList(),
-                new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+        if(language.equals(LanguageCodes.ENGLISH)){
+             return   new ResultsDTO<>(gamePage
+                    .map(this::convertToEnDTO)
+                    .stream().toList(),
+                    new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+        } else if (language.equals(LanguageCodes.POLISH)){
+            return new ResultsDTO<>(gamePage
+                    .map(this::convertToPlDTO)
+                    .stream().toList(),
+                    new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+        }else
+            throw new BadRequestException("Language is not valid");
     }
 
-    private GameDTO convertToDTO(Game game){
-        return new GameDTO(game);
+
+
+    private GameDTO convertToEnDTO(Game game){
+        return new EnGameDTO(game);
+    }
+
+    private GameDTO convertToPlDTO(Game game){
+        return new PlGameDTO(game);
     }
 
 
-    public ResultsDTO<GameDTO> getPopularGames(int page, int size){
+    public ResultsDTO<GameDTO> getPopularGames(int page, int size,String language) throws BadRequestException {
         Pageable pageable = PageRequest.of(page, size);
         Page<Game> gamePage = gameRepository.getPopularAcceptedGames(pageable);
-        return new ResultsDTO<>(gamePage
-                .map(this::convertToDTO)
-                .stream().toList(),
-                new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+        if(language.equals(LanguageCodes.ENGLISH)){
+            return new ResultsDTO<>(gamePage
+                    .map(this::convertToEnDTO)
+                    .stream().toList(),
+                    new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+        } else if (language.equals(LanguageCodes.POLISH)){
+            return new ResultsDTO<>(gamePage
+                    .map(this::convertToPlDTO)
+                    .stream().toList(),
+                    new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+        }else
+            throw new BadRequestException("Language is not valid");
     }
 
     public void rejectGame(Authentication authentication, long id) throws GameAlreadyRejectedException, GameDoesNotExistException, IllegalAccessException, UserDoesNotExistException {
@@ -157,17 +188,24 @@ public class GameService {
     }
 
 
-    public ResultsDTO<GameDTO> getGamesToAccept(Authentication authentication, int page, int size) throws UserDoesNotExistException, IllegalAccessException {
+    public ResultsDTO<GameDTO> getGamesToAccept(Authentication authentication, int page, int size,String language) throws UserDoesNotExistException, IllegalAccessException, BadRequestException {
         if(!roleService.checkIfAdmin(authentication)){
             throw new IllegalAccessException("User is not admin");
         }
         Pageable pageable = PageRequest.of(page, size);
         GameStatus pending = gameStatusService.getGameStatus(PENDING);
         Page<Game> gamePage = gameRepository.findAllByGameStatus(pageable, pending);
-        return new ResultsDTO<>(gamePage
-                .map(this::convertToDTO)
-                .stream().toList(),
-                new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
-
+        if(language.equals(LanguageCodes.ENGLISH)){
+            return new ResultsDTO<>(gamePage
+                    .map(this::convertToEnDTO)
+                    .stream().toList(),
+                    new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+        } else if (language.equals(LanguageCodes.POLISH)){
+            return new ResultsDTO<>(gamePage
+                    .map(this::convertToPlDTO)
+                    .stream().toList(),
+                    new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+        }else
+            throw new BadRequestException("Language is not valid");
     }
 }

@@ -1,5 +1,6 @@
-package com.zpi.backend.category;
+package com.zpi.backend.category.DTO;
 
+import com.zpi.backend.category.Category;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.validators.ValueChecker;
 import lombok.AllArgsConstructor;
