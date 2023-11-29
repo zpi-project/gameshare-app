@@ -61,7 +61,7 @@ public class ReservationService {
         GameInstance gameInstance = gameInstanceService.getGameInstance(newReservationDTO.getGameInstanceUUID());
         checkIfOwnerIsNotRenter(renter,gameInstance);
 
-        Reservation reservation = new Reservation().fromDTO(newReservationDTO, renter, gameInstance);
+        Reservation reservation = new Reservation(newReservationDTO, renter, gameInstance);
         reservation.setStatus(reservationStatusRepository.findByStatus(PENDING).orElseThrow(()->new BadRequestException("Status does not exist")));
         reservation=  reservationRepository.save(reservation);
         reservation.setReservationId(DateUtils.getYear(reservation.getStartDate()) + "-" + DateUtils.getMonth(reservation.getStartDate())+'-'+reservation.getId());
@@ -164,11 +164,6 @@ public class ReservationService {
         if(!canChangeStatus(authentication,reservation))
             throw new BadRequestException("User is not owner or renter of this reservation");
         List<String> possibleStatuses = getReservationStatuses(authentication,reservationId);
-
-        User user = userService.getUser(authentication);
-        String user_type = "Owner";
-        if (checkIfUserIsRenter(user, reservation))
-             user_type = "Renter";
 
         if(possibleStatuses == null || !possibleStatuses.contains(status))
             throw new BadRequestException("Status cannot be changed to "+status +" from "+reservation.getStatus().getStatus());
@@ -315,7 +310,6 @@ public class ReservationService {
                     return List.of(FINISHED);
                 }
             }
-
         }
         else {
             if (reservation.getStatus().getStatus().equals(PENDING)) {

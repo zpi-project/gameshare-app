@@ -12,7 +12,7 @@ public class NewReservationDTO {
     private Date startDate;
     private Date endDate;
     private String gameInstanceUUID;
-    private Optional<String> renterComment;
+    private String renterComment;
 
     public boolean validate() throws BadRequestException {
         Date now = new Date(System.currentTimeMillis());
@@ -20,8 +20,8 @@ public class NewReservationDTO {
             throw new BadRequestException("Start date is before current date");
         if(endDate.before(startDate))
             throw new BadRequestException("End date is before start date");
-        if(renterComment !=null) {
-            if (renterComment.get().length() > 500)
+        if(renterComment != null) {
+            if (renterComment.length() > 500)
                 throw new BadRequestException("Comment is too long");
         }
         if (ValueChecker.isStringEmpty(gameInstanceUUID))
