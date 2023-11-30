@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { isAxiosError } from "axios";
 import z from "zod";
 import { Game } from "@/types/Game";
 import { NewGameInstance } from "@/types/GameInstance";
@@ -103,12 +104,20 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
             toast({
               title: t("successAddingImage", { nr: idx + 1 }),
             });
-          } catch {
-            toast({
-              title: t("errorAddingImage", { nr: idx + 1 }),
-              description: t("errorAddingImageDescription"),
-              variant: "destructive",
-            });
+          } catch (e) {
+            if (isAxiosError(e) && e.response?.data?.title === "InvalidFileTypeException") {
+              toast({
+                title: t("errorAddingImage", { nr: idx + 1 }),
+                description: t("incorrectFileType"),
+                variant: "destructive",
+              });
+            } else {
+              toast({
+                title: t("errorAddingImage", { nr: idx + 1 }),
+                description: t("errorAddingImageDescription"),
+                variant: "destructive",
+              });
+            }
           }
         }
       }

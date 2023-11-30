@@ -93,6 +93,7 @@ export default {
   errorAddingGame: "There was an error adding a new game.",
   errorAddingImage: "There was an error adding image nr {{nr}}.",
   errorAddingImageDescription: "Image was not added.",
+  incorrectFileType: "Incorrect file type. Allowed file types: PNG, JPG, JPEG.",
   successAddingImage: "Image nr {{nr}} was added successfully.",
   tryAgain: "Something went wrong. Please try again.",
   gameInstanceAdded: "Game istance was addedd successfully.",

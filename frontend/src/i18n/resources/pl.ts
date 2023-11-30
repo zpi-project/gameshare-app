@@ -89,6 +89,7 @@ const pl: typeof en = {
   errorAddingImage: "Wystąpił błąd podczas dodawania zdjęcia nr {{nr}}.",
   successAddingImage: "Zdjęcie nr {{nr}} zostało dodane pomyślnie.",
   errorAddingImageDescription: "Zdjęcie nie zostało dodane.",
+  incorrectFileType: "Nieprawidłowy typ pliku Dozwolone typy  to JPG, JPEG, PNG.",
   tryAgain: "Nie udało się dodać gry. Proszę spróbuj ponownie",
   gameInstanceAdded: "Egzemplarz gry został dodany.",
   gameInstanceDescriptionMin: "Opis musi mieć przynajmniej 2 znaki.",
