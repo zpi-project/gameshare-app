@@ -78,13 +78,8 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
     mutationFn: (gameInstance: NewGameInstance) => GameInstanceApi.create(gameInstance),
   });
 
-  const { mutateAsync: addImage } = useMutation(
-    (params: { uuid: string; file: File }) => GameInstanceApi.addImage(params.uuid, params.file),
-    {
-      onSuccess: data => {
-        console.log("success", data);
-      },
-    },
+  const { mutateAsync: addImage } = useMutation((params: { uuid: string; file: File }) =>
+    GameInstanceApi.addImage(params.uuid, params.file),
   );
 
   const handleFormSubmit = async (data: NewGameInstance) => {
