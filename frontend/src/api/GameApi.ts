@@ -35,4 +35,21 @@ export class GameApi {
     );
     return gameInstances;
   }
+
+  static async getPending(page: number, size: number) {
+    const { data: games } = await Api.get<Paginated<Game>>("/games/pending", {
+      params: { page, size },
+    });
+    return games;
+  }
+
+  static async accept(id: number) {
+    const { data } = await Api.put(`/games/${id}/accept`);
+    return data;
+  }
+
+  static async reject(id: number) {
+    const { data } = await Api.put(`/games/${id}/reject`);
+    return data;
+  }
 }

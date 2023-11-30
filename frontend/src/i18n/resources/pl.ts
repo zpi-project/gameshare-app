@@ -239,6 +239,18 @@ const pl: typeof en = {
     "Nie możesz zarezerwować tej gry w tych datach, ponieważ ktoś już zarezerwował grę w przedziale czasu podanym przez ciebie.",
   timeframeAvailable:
     "Gra jest dostępna w podanym przez ciebie przedziale czasu. Możesz ją zarezerwować.",
+
+  gameRequests: "Gry oczekujące na twoją akceptację",
+  noGameRequests: "Aktualnie nie ma żadnych gier oczekujących na twoją akceptację.",
+  gameRequestsError: "Nie udało się pobrać gier do akceptacji.",
+  accept: "Akceptuj",
+  reject: "Odrzuć",
+  gameAcceptSuccess: "Gra - {{title}} - została zaakceptowana pomyślnie.",
+  gameAcceptError: "Wystąpił błąd podczas akceptowania gry - {{title}}.",
+  gameAcceptErrorDescription: "Gra nie została akceptowana.",
+  gameRejectSuccess: "Gra - {{title}} została odrzucona.",
+  gameRejectError: "Wystąpił błąd podczas odrzucania gry - {{title}}.",
+  gameRejectErrorDescription: "Gra nie została odrzucona.",
 };
 
 export default pl;
