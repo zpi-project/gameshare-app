@@ -55,6 +55,7 @@ export default {
   popularNow: "Popular now",
   seeAll: "See all",
   popularGamesErrorTitle: "We couldn't load popular games.",
+  recommendationsErrorTitle: "We couldn't load recommendations for you",
   categoriesErrorTitle: "We couldn't load game categories.",
   searchGamePlaceholder: "What board game would you like to play?",
   searchGameWithinCategoryPlaceholder: "Search games within this category",
@@ -247,4 +248,5 @@ export default {
   gameRejectSuccess: "Game - {{title}} has been rejected.",
   gameRejectError: "There was an error rejecting game - {{title}}.",
   gameRejectErrorDescription: "Game has been not rejected.",
+  recommendedGames: "You may like these games",
 };

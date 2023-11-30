@@ -57,6 +57,7 @@ const pl: typeof en = {
   popularNow: "Popularne teraz",
   seeAll: "Zobacz wszystkie",
   popularGamesErrorTitle: "Nie udało się pobrać popularnych gier.",
+  recommendationsErrorTitle: "Nie udało się pobrać rekomendacji gier dla ciebie.",
   categoriesErrorTitle: "Nie udało się pobrać kategorii gier.",
   searchGamePlaceholder: "W jaką grę planszową chcesz zagrać?",
   searchGameWithinCategoryPlaceholder: "Wyszukaj grę w tej kategorii...",
@@ -251,6 +252,7 @@ const pl: typeof en = {
   gameRejectSuccess: "Gra - {{title}} została odrzucona.",
   gameRejectError: "Wystąpił błąd podczas odrzucania gry - {{title}}.",
   gameRejectErrorDescription: "Gra nie została odrzucona.",
- };
+  recommendedGames: "Te gry mogą ci się spodobać",
+};
 
 export default pl;
