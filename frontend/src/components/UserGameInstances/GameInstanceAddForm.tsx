@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { GameSearchBar, GameSearchCard } from "../GameSearch";
+import { Label } from "../ui/label";
 
 interface GameInstanceFormProps {
   onSubmit: (gameInstance: NewGameInstance) => void;
@@ -26,6 +27,14 @@ interface GameInstanceFormProps {
 
 const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
+  const [selectedImages, setSelectedImages] = useState<FileList | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      setSelectedImages(files);
+    }
+  };
 
   const formSchema = z.object({
     gameId: z.number({
@@ -70,11 +79,13 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleFormSubmit)}
-          className="m-4 w-full rounded-md bg-background p-3 shadow-lg"
+          className="m-4 w-full rounded-md bg-background p-3"
         >
           <div className="flex h-full w-full flex-row gap-4">
-            <div className="flex w-3/5 flex-col gap-2">
-              <h1 className="w-full text-2xl uppercase text-primary">{t("yourGameDetails")}</h1>
+            <div className="flex w-[55%] flex-col gap-2">
+              <h1 className="mb-2 w-full text-2xl uppercase text-primary">
+                {t("yourGameDetails")}
+              </h1>
               <FormField
                 control={form.control}
                 name="gameId"
@@ -126,6 +137,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                         <Textarea
                           placeholder={t("typeHere")}
                           id="message-2"
+                          spellCheck={false}
                           className="h-full resize-none"
                           {...field}
                         />
@@ -137,10 +149,38 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
               />
             </div>
             <Separator orientation="vertical" className="mx-2 h-full rounded-lg bg-primary" />
-            <div className="flex flex-col justify-between">
-              <h1 className="w-full text-2xl uppercase text-primary">{t("uploadGamePhotos")}</h1>
-              <div className="h-4/5">Place to upload images</div>
-              <Button type="submit" className="w-1/5 place-self-end">
+            <div className="flex flex-grow flex-col justify-between gap-2">
+              <h1 className="mb-2 w-full text-2xl uppercase text-primary">
+                {t("uploadGamePhotos")}
+              </h1>
+              <div className="flex w-full flex-grow flex-col gap-2">
+                <div>
+                  <Label htmlFor="picture">{t("choosePictures")}</Label>
+                  <Input
+                    id="picture"
+                    type="file"
+                    multiple
+                    accept="image/png, image/jpeg, image/jpg"
+                    className="w-full min-w-[100%] max-w-[600px] border-none"
+                    onChange={handleFileChange}
+                  />
+                </div>
+                <div className="flex-grow rounded-lg bg-card">
+                  {selectedImages && (
+                    <div>
+                      {Array.from(selectedImages).map((image, idx) => (
+                        <img
+                          key={idx}
+                          src={URL.createObjectURL(image)}
+                          alt={`Selected ${idx + 1}`}
+                          className="max-h-[100px] rounded-lg object-cover"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <Button type="submit" className="place-self-end px-8">
                 {t("submit")}
               </Button>
             </div>
