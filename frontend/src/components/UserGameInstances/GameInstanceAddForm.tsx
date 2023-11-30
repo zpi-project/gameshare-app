@@ -16,10 +16,11 @@ import {
   Form,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { GameSearchBar, GameSearchCard } from "../GameSearch";
-import { Label } from "../ui/label";
 
 interface GameInstanceFormProps {
   onSubmit: (gameInstance: NewGameInstance) => void;
@@ -27,12 +28,18 @@ interface GameInstanceFormProps {
 
 const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
-  const [selectedImages, setSelectedImages] = useState<FileList | null>(null);
+  const [selectedImages, setSelectedImages] = useState<File[] | null>(null);
+  const [game, setGame] = useState<Game | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      setSelectedImages(files);
+    const filesList = e.target.files;
+    if (filesList) {
+      setSelectedImages(prevImages =>
+        (prevImages ? [...prevImages, ...Array.from(filesList)] : Array.from(filesList)).slice(
+          0,
+          3,
+        ),
+      );
     }
   };
 
@@ -66,14 +73,13 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
     onSubmit(data);
   };
 
-  const [game, setGame] = useState<Game | null>(null);
-
   return (
     <DialogContent
       className="flex max-w-6xl"
       onCloseAutoFocus={() => {
         form.reset();
         setGame(null);
+        setSelectedImages(null);
       }}
     >
       <Form {...form}>
@@ -83,7 +89,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
         >
           <div className="flex h-full w-full flex-row gap-4">
             <div className="flex w-[55%] flex-col gap-2">
-              <h1 className="mb-2 w-full text-2xl uppercase text-primary">
+              <h1 className="mb-2 w-full text-center text-2xl uppercase text-primary">
                 {t("yourGameDetails")}
               </h1>
               <FormField
@@ -148,12 +154,12 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                 )}
               />
             </div>
-            <Separator orientation="vertical" className="mx-2 h-full rounded-lg bg-primary" />
+            <Separator orientation="vertical" className="mx-4 h-full rounded-lg bg-primary" />
             <div className="flex flex-grow flex-col justify-between gap-2">
-              <h1 className="mb-2 w-full text-2xl uppercase text-primary">
+              <h1 className="mb-2 w-full text-center text-2xl uppercase text-primary">
                 {t("uploadGamePhotos")}
               </h1>
-              <div className="flex w-full flex-grow flex-col gap-2">
+              <div className="flex w-full flex-grow flex-col gap-4">
                 <div>
                   <Label htmlFor="picture">{t("choosePictures")}</Label>
                   <Input
@@ -161,23 +167,30 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                     type="file"
                     multiple
                     accept="image/png, image/jpeg, image/jpg"
-                    className="w-full min-w-[100%] max-w-[600px] border-none"
+                    className="w-full min-w-[100%] max-w-[600px] border-none text-transparent"
                     onChange={handleFileChange}
+                    disabled={(selectedImages && selectedImages.length >= 3) ?? false}
                   />
                 </div>
                 <div className="flex-grow rounded-lg bg-card">
-                  {selectedImages && (
-                    <div>
-                      {Array.from(selectedImages).map((image, idx) => (
-                        <img
-                          key={idx}
-                          src={URL.createObjectURL(image)}
-                          alt={`Selected ${idx + 1}`}
-                          className="max-h-[100px] rounded-lg object-cover"
-                        />
-                      ))}
-                    </div>
-                  )}
+                  <ScrollArea className="h-[500px]">
+                    {selectedImages && (
+                      <div className="flex flex-col gap-4 p-4">
+                        {selectedImages.map((image, idx) => (
+                          <div
+                            className="h-[250px] w-full overflow-hidden rounded-lg"
+                            key={idx + "img"}
+                          >
+                            <img
+                              src={URL.createObjectURL(image)}
+                              alt={`Selected ${idx + 1}`}
+                              className="h-full w-full object-cover object-top"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </ScrollArea>
                 </div>
               </div>
               <Button type="submit" className="place-self-end px-8">

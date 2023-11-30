@@ -1,6 +1,7 @@
 import { FC, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
+import { googleLogout } from "@react-oauth/google";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import jwt_decode, { JwtPayload } from "jwt-decode";
@@ -52,6 +53,8 @@ const Layout: FC = () => {
       if (decodedToken.exp && decodedToken.exp < currentTime) {
         secureLocalStorage.removeItem("token");
         setToken(null);
+        setRole("guest");
+        googleLogout();
       } else {
         setToken(token as string);
       }
