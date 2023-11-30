@@ -85,6 +85,10 @@ const pl: typeof en = {
 
   noGameUsers: "Nikt jeszcze nie ma tej gry",
   errorFetchingGameInstances: "Nie udało się pobrać egzemplarzy tej gry",
+  errorAddingGame: "Nie udało się dodać nowej gry.",
+  errorAddingImage: "Wystąpił błąd podczas dodawania zdjęcia nr {{nr}}.",
+  successAddingImage: "Zdjęcie nr {{nr}} zostało dodane pomyślnie.",
+  errorAddingImageDescription: "Zdjęcie nie zostało dodane.",
   tryAgain: "Nie udało się dodać gry. Proszę spróbuj ponownie",
   gameInstanceAdded: "Egzemplarz gry został dodany.",
   gameInstanceDescriptionMin: "Opis musi mieć przynajmniej 2 znaki.",

@@ -2,9 +2,11 @@ import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import z from "zod";
 import { Game } from "@/types/Game";
 import { NewGameInstance } from "@/types/GameInstance";
+import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { Button } from "@/components/ui/button";
 import { DialogContent } from "@/components/ui/dialog";
 import {
@@ -21,13 +23,15 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { GameSearchBar, GameSearchCard } from "../GameSearch";
+import { useToast } from "../ui/use-toast";
 
 interface GameInstanceFormProps {
-  onSubmit: (gameInstance: NewGameInstance) => void;
+  onSubmit: () => void;
 }
 
 const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const [selectedImages, setSelectedImages] = useState<File[] | null>(null);
   const [game, setGame] = useState<Game | null>(null);
 
@@ -69,8 +73,54 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
     resolver: zodResolver(formSchema),
   });
 
-  const handleFormSubmit = (data: NewGameInstance) => {
-    onSubmit(data);
+  const { mutateAsync: addGameInstance } = useMutation({
+    mutationFn: (gameInstance: NewGameInstance) => GameInstanceApi.create(gameInstance),
+  });
+
+  const { mutateAsync: addImage } = useMutation(
+    (params: { uuid: string; file: File }) => GameInstanceApi.addImage(params.uuid, params.file),
+    {
+      onSuccess: data => {
+        console.log("success", data);
+      },
+    },
+  );
+
+  const handleFormSubmit = async (data: NewGameInstance) => {
+    try {
+      const newGame = await addGameInstance(data);
+
+      toast({
+        title: t("gameInstanceAdded"),
+      });
+
+      if (selectedImages) {
+        for (let idx = 0; idx < (selectedImages.length || 0); idx++) {
+          const file = selectedImages[idx];
+
+          try {
+            await addImage({ uuid: newGame.uuid, file });
+            toast({
+              title: t("successAddingImage", { nr: idx + 1 }),
+            });
+          } catch {
+            toast({
+              title: t("errorAddingImage", { nr: idx + 1 }),
+              description: t("errorAddingImageDescription"),
+              variant: "destructive",
+            });
+          }
+        }
+      }
+
+      onSubmit();
+    } catch {
+      toast({
+        title: t("errorAddingGame"),
+        description: t("tryAgain"),
+        variant: "destructive",
+      });
+    }
   };
 
   return (
