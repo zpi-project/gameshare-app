@@ -28,10 +28,12 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
 
   const formSchema = z.object({
-    gameId: z.number(),
+    gameId: z.number({
+      required_error: t("fieldIsRequired", { field: t("game"), context: "female" }),
+    }),
     description: z
       .string()
-      .min(1, { message: t("fieldIsRequired", { field: t("gameDesctiption"), context: "male" }) })
+      .min(1, { message: t("fieldIsRequired", { field: t("gameDescription"), context: "male" }) })
       .min(2, {
         message: t("gameInstaneDescriptionMin"),
       })
@@ -58,7 +60,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
 
   return (
     <DialogContent
-      className="flex max-w-7xl"
+      className="flex max-w-6xl"
       onCloseAutoFocus={() => {
         form.reset();
         setGame(null);
@@ -70,7 +72,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
           className="m-4 w-full rounded-md bg-background p-3 shadow-lg"
         >
           <div className="flex h-full w-full flex-row gap-4">
-            <div className="flex w-1/2 flex-col gap-2">
+            <div className="flex w-3/5 flex-col gap-2">
               <h1 className="w-full text-2xl uppercase text-primary">{t("yourGameDetails")}</h1>
               <FormField
                 control={form.control}
@@ -134,7 +136,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
               />
             </div>
             <Separator orientation="vertical" className="mx-2 h-full rounded-lg bg-primary" />
-            <div className="flex w-1/2 flex-col justify-between">
+            <div className="flex flex-col justify-between">
               <h1 className="w-full text-2xl uppercase text-primary">{t("uploadGamePhotos")}</h1>
               <div className="h-4/5">Place to upload images</div>
               <Button type="submit" className="w-1/5 place-self-end">

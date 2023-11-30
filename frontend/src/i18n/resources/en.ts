@@ -35,7 +35,7 @@ export default {
   fieldIsRequired_female: "{{field}} is required.",
   phoneNumberIsInvalid: "Phone number is incorrect.",
 
-  gameDesctiption: "Game description",
+  gameDescription: "Game description",
 
   tryRefreshing: "Try refreshing this page.",
   userErrorTitle: "Error",
@@ -102,6 +102,7 @@ export default {
   addGameDesc: "Add game description",
   chooseGameTitle: "Choose game title",
   uploadGamePhotos: "upload your game photos",
+  game: "Game",
 
   any: "Any",
   any_male: "Any",

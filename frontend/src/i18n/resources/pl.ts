@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -37,7 +38,7 @@ const pl: typeof en = {
   fieldIsRequired_female: "{{field}} jest wymagana.",
   phoneNumberIsInvalid: "Numer telefonu jest nieprawidłowy.",
 
-  gameDesctiption: "Opis gry",
+  gameDescription: "Opis gry",
 
   tryRefreshing: "Spróbuj odświeżyć stronę.",
   userErrorTitle: "Błąd",
@@ -48,6 +49,7 @@ const pl: typeof en = {
   updateErrorTitle: "Wystąpił błąd podczas zapisywania twoich nowych danych.",
   registerSuccessDescription: "Pomyślnie zapisano twoje dane.",
   updateSuccessDescription: "Pomyślnie zapisano twoje nowe dane.",
+  game: "Gra",
 
   welcomeHeader: "Witaj w GameShare!",
   welcomeDescription:
