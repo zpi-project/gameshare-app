@@ -5,8 +5,7 @@ import Api from "./Api";
 
 export class GameApi {
   static async getPopular(page: number, size: number) {
-    // for now it uses games endpoint cause /games/popular does not exist yet
-    const { data: games } = await Api.get<Paginated<Game>>("/games", { params: { page, size } });
+    const { data: games } = await Api.get<Paginated<Game>>("/games/popular", { params: { page, size } });
     return games;
   }
 

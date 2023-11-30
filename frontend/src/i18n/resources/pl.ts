@@ -251,6 +251,6 @@ const pl: typeof en = {
   gameRejectSuccess: "Gra - {{title}} została odrzucona.",
   gameRejectError: "Wystąpił błąd podczas odrzucania gry - {{title}}.",
   gameRejectErrorDescription: "Gra nie została odrzucona.",
-};
+ };
 
 export default pl;
