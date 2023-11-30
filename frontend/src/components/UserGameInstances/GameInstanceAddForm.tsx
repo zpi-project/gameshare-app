@@ -32,8 +32,9 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
       required_error: t("fieldIsRequired", { field: t("game"), context: "female" }),
     }),
     description: z
-      .string()
-      .min(1, { message: t("fieldIsRequired", { field: t("gameDescription"), context: "male" }) })
+      .string({
+        required_error: t("fieldIsRequired", { field: t("gameDescription"), context: "male" }),
+      })
       .min(2, {
         message: t("gameInstaneDescriptionMin"),
       })
