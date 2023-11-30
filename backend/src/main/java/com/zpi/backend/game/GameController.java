@@ -136,7 +136,6 @@ public class GameController {
                 .status(HttpStatus.OK)
                 .body(new Amount(gameService.getAmount()));
     }
-//TODO convert this
     @Operation(
             summary = "Get games to accept",
             description = "Returns paginated games to accept from database. Only Admin is allowed to do this operation."

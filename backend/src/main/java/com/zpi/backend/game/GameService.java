@@ -9,10 +9,8 @@ import com.zpi.backend.email.EmailService;
 import com.zpi.backend.email_type.EmailTypeService;
 import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game.dto.EnGameDTO;
 import com.zpi.backend.game.dto.GameDTO;
 import com.zpi.backend.game.dto.NewGameDTO;
-import com.zpi.backend.game.dto.PlGameDTO;
 import com.zpi.backend.game.exception.GameAlreadyAcceptedException;
 import com.zpi.backend.game.exception.GameAlreadyExistsException;
 import com.zpi.backend.game.exception.GameAlreadyRejectedException;
@@ -86,9 +84,9 @@ public class GameService {
 
     public GameDTO getGameDTO(long id,String language) throws GameDoesNotExistException, BadRequestException {
         if(language.equals(LanguageCodes.ENGLISH)){
-            return new EnGameDTO(getGame(id));
+            return new GameDTO(getGame(id),language);
         } else if (language.equals(LanguageCodes.POLISH)){
-            return new PlGameDTO(getGame(id));
+            return new GameDTO(getGame(id),language);
         }else
             throw new BadRequestException("Language is not valid");
 
@@ -127,11 +125,11 @@ public class GameService {
 
 
     private GameDTO convertToEnDTO(Game game){
-        return new EnGameDTO(game);
+        return new GameDTO(game, LanguageCodes.ENGLISH);
     }
 
     private GameDTO convertToPlDTO(Game game){
-        return new PlGameDTO(game);
+        return new GameDTO(game,LanguageCodes.POLISH);
     }
 
 

@@ -1,9 +1,7 @@
 package com.zpi.backend.category;
 
 import com.zpi.backend.category.DTO.CategoryDTO;
-import com.zpi.backend.category.DTO.EnCategoryDTO;
 import com.zpi.backend.category.DTO.NewCategoryDTO;
-import com.zpi.backend.category.DTO.PlCategoryDTO;
 import com.zpi.backend.category.exception.CategoryAlreadyExistsException;
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.exception_handlers.BadRequestException;
@@ -40,10 +38,10 @@ public class CategoryService {
         List<CategoryDTO> categoriesDTO = new ArrayList<>();
         for (Category category:categories) {
             if (language.equals(LanguageCodes.ENGLISH)) {
-                categoriesDTO.add(new EnCategoryDTO(category));
+                categoriesDTO.add(new CategoryDTO(category,language));
             }
             else if (language.equals(LanguageCodes.POLISH)) {
-                categoriesDTO.add(new PlCategoryDTO(category));
+                categoriesDTO.add(new CategoryDTO(category,language));
             }
 
         }
@@ -55,10 +53,10 @@ public class CategoryService {
         if (categoryOptional.isEmpty()) throw new CategoryDoesNotExistException("Category (id = "+id+") does not exist.");
         Category category = categoryOptional.get();
         if (language.equals(LanguageCodes.ENGLISH)) {
-            return new EnCategoryDTO(category);
+            return new CategoryDTO(category,language);
         }
         else if (language.equals(LanguageCodes.POLISH)) {
-            return new PlCategoryDTO(category);
+            return new CategoryDTO(category,language);
         }
         else
             throw new BadRequestException("Language "+language+" is not supported.");
