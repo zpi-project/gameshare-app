@@ -35,6 +35,8 @@ export default {
   fieldIsRequired_female: "{{field}} is required.",
   phoneNumberIsInvalid: "Phone number is incorrect.",
 
+  gameDesctiption: "Game description",
+
   tryRefreshing: "Try refreshing this page.",
   userErrorTitle: "Error",
   userErrorDescription: "User with given ID doesn't exists.",
@@ -79,6 +81,7 @@ export default {
   noGameUsers: "No one has this game yet",
   errorFetchingGameInstances: "We couldn't load copies of this game",
   noOpinionsGameInstance: "This game instance doesn't have any opinions yet",
+  gameInstaneDescriptionMin: "The description must be a minimum of 2 characters in length.",
 
   typeToSearch: "Type to search...",
   category: "Category",
@@ -91,13 +94,14 @@ export default {
   gameInstanceAdded: "Game istance was addedd successfully.",
   gameInstanceDescriptionMin: "Description must be at least 2 characters.",
   gameInstanceDescriptionMax: "Description must be less then 500 characters.",
-  gameInstancePriceValue: "Price per day must be at least 0.",
-  yourGameDetails: "YOUR GAME DETAILS",
+  minPricePerDay: "Price per day must be at least 0.",
+  maxPricePerDay: "Price per day must be less than 200.",
+  yourGameDetails: "Your game details",
   provideGamePrice: "Provide game instance price",
   typeHere: "Type here...",
   addGameDesc: "Add game description",
   chooseGameTitle: "Choose game title",
-  uploadGamePhotos: "UPLOAD YOUR GAME PHOTOS",
+  uploadGamePhotos: "upload your game photos",
 
   any: "Any",
   any_male: "Any",

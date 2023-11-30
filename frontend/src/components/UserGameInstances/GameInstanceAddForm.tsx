@@ -31,32 +31,39 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
     gameId: z.number(),
     description: z
       .string()
+      .min(1, { message: t("fieldIsRequired", { field: t("gameDesctiption"), context: "male" }) })
       .min(2, {
         message: t("gameInstaneDescriptionMin"),
       })
       .max(500, { message: t("gameInstanceDescriptionMax") }),
-    pricePerDay: z.coerce.number().refine(value => value >= 0, {
-      message: t("gameInstancePriceValue"),
-    }),
+    pricePerDay: z.coerce
+      .number({
+        invalid_type_error: t("fieldIsRequired", { field: t("pricePerDay"), context: "female" }),
+      })
+      .positive({
+        message: t("minPricePerDay"),
+      })
+      .max(200, { message: t("maxPricePerDay") }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      description: "",
-    },
   });
 
   const handleFormSubmit = (data: NewGameInstance) => {
     onSubmit(data);
-    form.reset();
-    setGame(null);
   };
 
   const [game, setGame] = useState<Game | null>(null);
 
   return (
-    <DialogContent className="flex max-w-7xl">
+    <DialogContent
+      className="flex max-w-7xl"
+      onCloseAutoFocus={() => {
+        form.reset();
+        setGame(null);
+      }}
+    >
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleFormSubmit)}
@@ -64,7 +71,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
         >
           <div className="flex h-full w-full flex-row gap-4">
             <div className="flex w-1/2 flex-col gap-2">
-              <h1 className="w-full text-center text-2xl">{t("yourGameDetails")}</h1>
+              <h1 className="w-full text-2xl uppercase text-primary">{t("yourGameDetails")}</h1>
               <FormField
                 control={form.control}
                 name="gameId"
@@ -93,12 +100,12 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                     <FormLabel>{t("provideGamePrice")}</FormLabel>
                     <FormControl>
                       <Input
+                        className="border-none"
                         {...field}
                         onChange={e => {
                           const value = parseFloat(e.target.value);
                           field.onChange(isNaN(value) ? "" : value);
                         }}
-                        placeholder="0"
                       />
                     </FormControl>
                     <FormMessage />
@@ -116,7 +123,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                         <Textarea
                           placeholder={t("typeHere")}
                           id="message-2"
-                          className="h-[300px]"
+                          className="h-full resize-none"
                           {...field}
                         />
                       </div>
@@ -126,9 +133,9 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                 )}
               />
             </div>
-            <Separator orientation="vertical" className="h-full w-1.5 rounded-lg bg-card" />
+            <Separator orientation="vertical" className="mx-2 h-full rounded-lg bg-primary" />
             <div className="flex w-1/2 flex-col justify-between">
-              <h1 className="w-full text-center text-2xl">{t("uploadGamePhotos")}</h1>
+              <h1 className="w-full text-2xl uppercase text-primary">{t("uploadGamePhotos")}</h1>
               <div className="h-4/5">Place to upload images</div>
               <Button type="submit" className="w-1/5 place-self-end">
                 {t("submit")}
