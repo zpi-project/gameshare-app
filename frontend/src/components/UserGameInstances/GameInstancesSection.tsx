@@ -1,17 +1,14 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
-import { useQuery } from "@tanstack/react-query";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Search } from "lucide-react";
-import { NewGameInstance } from "@/types/GameInstance";
 import { User } from "@/types/User";
 import { getName } from "@/utils/user";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useToast } from "@/components/ui/use-toast";
 import { Button } from "../ui/button";
 import GameInstance from "./GameInstance";
 import GameInstanceForm from "./GameInstanceAddForm";
@@ -25,39 +22,19 @@ const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { toast } = useToast();
   const {
     data: gameInstances,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["gameInstances", { uuid: owner?.uuid }],
+    queryKey: ["user-game-instances", { uuid: owner?.uuid }],
     queryFn: () =>
       isMyPage
         ? GameInstanceApi.getAll(0, 100)
         : GameInstanceApi.getAllByUUID(owner?.uuid ?? "", 0, 100),
     enabled: owner !== undefined,
   });
-
   const queryClient = useQueryClient();
-
-  const { mutate: addGameInstance } = useMutation({
-    mutationFn: (gameInstance: NewGameInstance) => GameInstanceApi.create(gameInstance),
-    onError: () => {
-      toast({
-        title: "error adding game",
-        description: t("tryAgain"),
-        variant: "destructive",
-      });
-    },
-    onSuccess: () => {
-      toast({
-        description: t("gameInstanceAdded"),
-      });
-      setDialogOpen(false);
-      queryClient.invalidateQueries(["gameInstances", { uuid: owner?.uuid }]);
-    },
-  });
 
   return (
     <div className="flex h-full w-full flex-col gap-6">
@@ -81,7 +58,12 @@ const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
                   <DialogTrigger asChild>
                     <Button className="w-56">{t("addGameInstance")}</Button>
                   </DialogTrigger>
-                  <GameInstanceForm onSubmit={(game: NewGameInstance) => addGameInstance(game)} />
+                  <GameInstanceForm
+                    onSubmit={() => {
+                      queryClient.invalidateQueries(["user-game-instances", { uuid: owner?.uuid }]);
+                      setDialogOpen(false);
+                    }}
+                  />
                 </Dialog>
               )}
             </div>

@@ -94,4 +94,21 @@ export class GameInstanceApi {
     );
     return isAvailable;
   }
+
+  static async addImage(uuid: string, file: File) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const { data } = await Api.post<{
+      id: number;
+      fileName: string;
+      fileURL: string;
+    }>(`/game-instances/images/${uuid}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return data;
+  }
 }

@@ -37,6 +37,8 @@ const pl: typeof en = {
   fieldIsRequired_female: "{{field}} jest wymagana.",
   phoneNumberIsInvalid: "Numer telefonu jest nieprawidłowy.",
 
+  gameDescription: "Opis gry",
+
   tryRefreshing: "Spróbuj odświeżyć stronę.",
   userErrorTitle: "Błąd",
   userErrorDescription: "Użytkownik z danym ID nie istnieje.",
@@ -46,6 +48,7 @@ const pl: typeof en = {
   updateErrorTitle: "Wystąpił błąd podczas zapisywania twoich nowych danych.",
   registerSuccessDescription: "Pomyślnie zapisano twoje dane.",
   updateSuccessDescription: "Pomyślnie zapisano twoje nowe dane.",
+  game: "Gra",
 
   welcomeHeader: "Witaj w GameShare!",
   welcomeDescription:
@@ -82,19 +85,25 @@ const pl: typeof en = {
 
   noGameUsers: "Nikt jeszcze nie ma tej gry",
   errorFetchingGameInstances: "Nie udało się pobrać egzemplarzy tej gry",
+  errorAddingGame: "Nie udało się dodać nowej gry.",
+  errorAddingImage: "Wystąpił błąd podczas dodawania zdjęcia nr {{nr}}.",
+  successAddingImage: "Zdjęcie nr {{nr}} zostało dodane pomyślnie.",
+  errorAddingImageDescription: "Zdjęcie nie zostało dodane.",
+  incorrectFileType: "Nieprawidłowy typ pliku Dozwolone typy  to JPG, JPEG, PNG.",
   tryAgain: "Nie udało się dodać gry. Proszę spróbuj ponownie",
   gameInstanceAdded: "Egzemplarz gry został dodany.",
   gameInstanceDescriptionMin: "Opis musi mieć przynajmniej 2 znaki.",
   gameInstanceDescriptionMax: "Opis musi mieć maksymalnie 500 znaków",
-  gameInstancePriceValue: "Cena musi być przynajmniej 0",
-  yourGameDetails: "INFORMACJE O TWOJEJ GRZE",
+  minPricePerDay: "Cena musi być przynajmniej 0",
+  maxPricePerDay: "Maksymalna cena to 200",
+  yourGameDetails: "Informacje o twojej grze",
   provideGamePrice: "Podaj cenę swojego egzemplarza gry",
   typeHere: "Wpisz tutaj...",
   addGameDesc: "Dodaj opis swojej gry",
   chooseGameTitle: "Wybierz tytuł gry",
-  uploadGamePhotos: "DODAJ ZDJĘCIA SWOJEJ GRY",
+  uploadGamePhotos: "Dodaj zdjęcia swojej gry",
   noOpinionsGameInstance: "Ten egzemplarz nie ma jeszcze żadnej opinii",
-
+  gameInstaneDescriptionMin: "Opis gry musi mieć min 2 znaki.",
   typeToSearch: "Wyszukaj grę...",
   category: "Kategoria",
   all: "Wszystkie",
@@ -251,6 +260,7 @@ const pl: typeof en = {
   gameRejectSuccess: "Gra - {{title}} została odrzucona.",
   gameRejectError: "Wystąpił błąd podczas odrzucania gry - {{title}}.",
   gameRejectErrorDescription: "Gra nie została odrzucona.",
+  choosePictures: "Wybierz maksymalnie 3 pliki. Format: JPG, JPEG or PNG",
 };
 
 export default pl;
