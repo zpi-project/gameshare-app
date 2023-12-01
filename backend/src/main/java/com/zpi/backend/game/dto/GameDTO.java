@@ -1,6 +1,6 @@
 package com.zpi.backend.game.dto;
 
-import com.zpi.backend.category.Category;
+import com.zpi.backend.category.DTO.CategoryDTO;
 import com.zpi.backend.game.Game;
 import com.zpi.backend.languages.LanguageCodes;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ public class GameDTO {
     private int maxPlayers;
     private int playingTime;
     private int age;
-    private List<Category> categories;
+    private List<CategoryDTO> categories;
 
     public GameDTO(Game game,String language){
         id = game.getId();
@@ -30,7 +30,7 @@ public class GameDTO {
         maxPlayers = game.getMaxPlayers();
         age = game.getAge();
         playingTime = game.getPlayingTime();
-        categories = game.getCategories();
+        categories = game.getCategoriesDTO(language);
         if(language.equals(LanguageCodes.ENGLISH)){
             name = game.getName();
             shortDescription = game.getShortDescription();
@@ -49,7 +49,7 @@ public class GameDTO {
         maxPlayers = game.getMaxPlayers();
         age = game.getAge();
         playingTime = game.getPlayingTime();
-        categories = game.getCategories();
+        categories = game.getCategoriesDTO(LanguageCodes.ENGLISH);
         name = game.getName();
         shortDescription = game.getShortDescription();
     }

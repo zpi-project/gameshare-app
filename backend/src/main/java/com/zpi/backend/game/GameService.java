@@ -134,9 +134,15 @@ public class GameService {
     public ResultsDTO<GameDTO> getPopularGames(int page, int size,String language) throws BadRequestException {
         Pageable pageable = PageRequest.of(page, size);
         Page<Game> gamePage = gameRepository.getPopularAcceptedGames(pageable);
-        if(language.equals(LanguageCodes.ENGLISH)|| language.equals(LanguageCodes.POLISH)){
+        if(language.equals(LanguageCodes.ENGLISH)){
             return new ResultsDTO<>(gamePage
                     .map(this::convertToEnDTO)
+                    .stream().toList(),
+                    new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
+        }
+        else if (language.equals(LanguageCodes.POLISH)) {
+            return new ResultsDTO<>(gamePage
+                    .map(this::convertToPlDTO)
                     .stream().toList(),
                     new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
         }

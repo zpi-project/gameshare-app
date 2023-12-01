@@ -4,6 +4,9 @@ import com.zpi.backend.category.Category;
 import com.zpi.backend.languages.LanguageCodes;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class CategoryDTO {
     private final Long id;
@@ -25,5 +28,13 @@ public class CategoryDTO {
             this.name = category.getName_pl();
         }
 
+    }
+
+    public static List<CategoryDTO> convertToDTO(List<Category> categories, String language) {
+        List<CategoryDTO> categoriesDTO = new ArrayList<>();
+        for (Category category : categories) {
+            categoriesDTO.add(new CategoryDTO(category,language));
+        }
+        return categoriesDTO;
     }
 }
