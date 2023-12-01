@@ -37,13 +37,7 @@ public class CategoryService {
         List<Category> categories =  categoryRepository.findAll(Sort.by("name"));
         List<CategoryDTO> categoriesDTO = new ArrayList<>();
         for (Category category:categories) {
-            if (language.equals(LanguageCodes.ENGLISH)) {
-                categoriesDTO.add(new CategoryDTO(category,language));
-            }
-            else if (language.equals(LanguageCodes.POLISH)) {
-                categoriesDTO.add(new CategoryDTO(category,language));
-            }
-
+            categoriesDTO.add(new CategoryDTO(category,language));
         }
         return categoriesDTO;
     }
@@ -52,12 +46,8 @@ public class CategoryService {
         Optional<Category> categoryOptional = categoryRepository.findById(id);
         if (categoryOptional.isEmpty()) throw new CategoryDoesNotExistException("Category (id = "+id+") does not exist.");
         Category category = categoryOptional.get();
-        if (language.equals(LanguageCodes.ENGLISH)) {
-            return new CategoryDTO(category,language);
-        }
-        else if (language.equals(LanguageCodes.POLISH)) {
-            return new CategoryDTO(category,language);
-        }
+        if (language.equals(LanguageCodes.ENGLISH)|| language.equals(LanguageCodes.POLISH))
+            return new CategoryDTO(category, language);
         else
             throw new BadRequestException("Language "+language+" is not supported.");
     }

@@ -83,11 +83,9 @@ public class GameService {
     }
 
     public GameDTO getGameDTO(long id,String language) throws GameDoesNotExistException, BadRequestException {
-        if(language.equals(LanguageCodes.ENGLISH)){
+        if(language.equals(LanguageCodes.ENGLISH)|| language.equals(LanguageCodes.POLISH))
             return new GameDTO(getGame(id),language);
-        } else if (language.equals(LanguageCodes.POLISH)){
-            return new GameDTO(getGame(id),language);
-        }else
+        else
             throw new BadRequestException("Language is not valid");
 
     }
@@ -136,17 +134,13 @@ public class GameService {
     public ResultsDTO<GameDTO> getPopularGames(int page, int size,String language) throws BadRequestException {
         Pageable pageable = PageRequest.of(page, size);
         Page<Game> gamePage = gameRepository.getPopularAcceptedGames(pageable);
-        if(language.equals(LanguageCodes.ENGLISH)){
+        if(language.equals(LanguageCodes.ENGLISH)|| language.equals(LanguageCodes.POLISH)){
             return new ResultsDTO<>(gamePage
                     .map(this::convertToEnDTO)
                     .stream().toList(),
                     new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
-        } else if (language.equals(LanguageCodes.POLISH)){
-            return new ResultsDTO<>(gamePage
-                    .map(this::convertToPlDTO)
-                    .stream().toList(),
-                    new Pagination(gamePage.getTotalElements(), gamePage.getTotalPages()));
-        }else
+        }
+        else
             throw new BadRequestException("Language is not valid");
     }
 
