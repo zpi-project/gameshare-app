@@ -1,7 +1,6 @@
 package com.zpi.backend.game;
 
 import com.zpi.backend.category.Category;
-import com.zpi.backend.category.DTO.CategoryDTO;
 import com.zpi.backend.game_status.GameStatus;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -68,9 +67,5 @@ public class Game {
         this.playingTime = playingTime;
         this.age = age;
         this.shortDescription = shortDescription;
-    }
-
-    public List<CategoryDTO> getCategoriesDTO(String language) {
-        return CategoryDTO.convertToDTO(categories,language);
     }
 }

@@ -30,7 +30,7 @@ public class GameDTO {
         maxPlayers = game.getMaxPlayers();
         age = game.getAge();
         playingTime = game.getPlayingTime();
-        categories = game.getCategoriesDTO(language);
+        categories = getCategoriesDTO(game,language);
         if(language.equals(LanguageCodes.ENGLISH)){
             name = game.getName();
             shortDescription = game.getShortDescription();
@@ -49,8 +49,14 @@ public class GameDTO {
         maxPlayers = game.getMaxPlayers();
         age = game.getAge();
         playingTime = game.getPlayingTime();
-        categories = game.getCategoriesDTO(LanguageCodes.ENGLISH);
+        categories = getCategoriesDTO(game,LanguageCodes.ENGLISH);
         name = game.getName();
         shortDescription = game.getShortDescription();
     }
+
+    public List<CategoryDTO> getCategoriesDTO(Game game,String language) {
+        return CategoryDTO.convertToDTO(game.getCategories(),language);
+    }
+
+
 }
