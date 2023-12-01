@@ -1,5 +1,7 @@
 package com.zpi.backend.category;
 
+import com.zpi.backend.category.DTO.CategoryDTO;
+import com.zpi.backend.category.DTO.NewCategoryDTO;
 import com.zpi.backend.category.exception.CategoryAlreadyExistsException;
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.Amount;
@@ -40,9 +42,9 @@ public class CategoryController {
             description = "Returns all Categories from the database."
     )
     @GetMapping
-    public ResponseEntity<List<Category>> getCategories(){
+    public ResponseEntity<List<CategoryDTO>> getCategories(@RequestParam(defaultValue = "enUS") String language){
         System.out.println("... called getCategories");
-        List<Category> categories = categoryService.getCategories();
+        List<CategoryDTO> categories = categoryService.getCategories(language);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(categories);
     }
@@ -52,9 +54,9 @@ public class CategoryController {
             description = "Returns a category identified by its id from the database."
     )
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<Category> getCategory(@PathVariable long id) throws CategoryDoesNotExistException {
+    public ResponseEntity<CategoryDTO> getCategory(@PathVariable long id,@RequestParam(defaultValue = "enUS") String language) throws CategoryDoesNotExistException, BadRequestException {
         System.out.println("... called getCategory");
-        Category category = categoryService.getCategory(id);
+        CategoryDTO category = categoryService.getCategoryDTO(id,language);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(category);
     }
