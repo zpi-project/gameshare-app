@@ -50,7 +50,7 @@ const GameInstanceDetails: FC<GameInstanceDetailsProps> = ({
                 </Badge>
               )}
             </div>
-            <p className="line-clamp-6 break-words italic">{description}</p>
+            <p className="line-clamp-6 break-all italic">{description}</p>
           </div>
         </div>
       </div>

@@ -60,6 +60,7 @@ const pl: typeof en = {
   popularNow: "Popularne teraz",
   seeAll: "Zobacz wszystkie",
   popularGamesErrorTitle: "Nie udało się pobrać popularnych gier.",
+  recommendationsErrorTitle: "Nie udało się pobrać rekomendacji gier dla ciebie.",
   categoriesErrorTitle: "Nie udało się pobrać kategorii gier.",
   searchGamePlaceholder: "W jaką grę planszową chcesz zagrać?",
   searchGameWithinCategoryPlaceholder: "Wyszukaj grę w tej kategorii...",
@@ -195,7 +196,7 @@ const pl: typeof en = {
   formStartDate: "Data początkowa",
   formEndDate: "Data końcowa",
   pickDate: "Wybierz datę",
-  startDateNotPast: "Data początkowa nie może być przeszła.",
+  startDateNotPast: "Data początkowa musi być przyszła.",
   endDateAtLeastStartDate: "Data do musi być późniejsza niż data od.",
   createReservationSuccess: "Gra została pomyślnie zarezerwowana!",
   createReservationSuccessDescription:
@@ -260,6 +261,7 @@ const pl: typeof en = {
   gameRejectSuccess: "Gra - {{title}} została odrzucona.",
   gameRejectError: "Wystąpił błąd podczas odrzucania gry - {{title}}.",
   gameRejectErrorDescription: "Gra nie została odrzucona.",
+  recommendedGames: "Te gry mogą ci się spodobać",
   choosePictures: "Wybierz maksymalnie 3 pliki. Format: JPG, JPEG or PNG",
 };
 

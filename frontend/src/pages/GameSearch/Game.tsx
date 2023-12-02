@@ -2,16 +2,16 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { TooltipContent } from "@radix-ui/react-tooltip";
 import { URLS } from "@/constants/urls";
-import { Game } from "@/types/Game";
+import { Game as GameType } from "@/types/Game";
 import { cn } from "@/utils/tailwind";
 import { TooltipTrigger, Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
-interface PopularGameProps {
-  game: Game;
+interface GameProps {
+  game: GameType;
   className?: string;
 }
 
-const PopularGame: FC<PopularGameProps> = ({ game: { name, image, id }, className }) => {
+const Game: FC<GameProps> = ({ game: { name, image, id }, className }) => {
   return (
     <TooltipProvider>
       <Tooltip>
@@ -41,4 +41,4 @@ const PopularGame: FC<PopularGameProps> = ({ game: { name, image, id }, classNam
   );
 };
 
-export default PopularGame;
+export default Game;
