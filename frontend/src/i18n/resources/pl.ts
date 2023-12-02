@@ -196,7 +196,7 @@ const pl: typeof en = {
   formStartDate: "Data początkowa",
   formEndDate: "Data końcowa",
   pickDate: "Wybierz datę",
-  startDateNotPast: "Data początkowa nie może być przeszła.",
+  startDateNotPast: "Data początkowa musi być przyszła.",
   endDateAtLeastStartDate: "Data do musi być późniejsza niż data od.",
   createReservationSuccess: "Gra została pomyślnie zarezerwowana!",
   createReservationSuccessDescription:

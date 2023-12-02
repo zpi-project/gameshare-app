@@ -31,6 +31,8 @@ interface ReservationFormProps {
 const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) => {
   const { t } = useTranslation();
   const TODAY = new Date(new Date().setHours(0, 0, 0, 0));
+  let TOMORROW = new Date(TODAY);
+  TOMORROW.setDate(TODAY.getDate() + 1);
   const [isAvailable, setIsAvailable] = useState(false);
 
   const formSchema = z
@@ -42,7 +44,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
             context: "female",
           }),
         })
-        .min(TODAY, { message: t("startDateNotPast") }),
+        .min(TOMORROW, { message: t("startDateNotPast") }),
       endDate: z.date({
         required_error: t("fieldIsRequired", { field: `${t("formEndDate")}`, context: "female" }),
       }),

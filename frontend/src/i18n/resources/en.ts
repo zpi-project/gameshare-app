@@ -192,7 +192,7 @@ export default {
   formStartDate: "Start date",
   formEndDate: "End date",
   pickDate: "Pick a date",
-  startDateNotPast: "Start date cannot be a past date.",
+  startDateNotPast: "Start date cannot be a past date or today.",
   endDateAtLeastStartDate: "End date cannot be earlier than start date.",
   createReservationSuccess: "Game has been booked successfully!",
   createReservationSuccessDescription:

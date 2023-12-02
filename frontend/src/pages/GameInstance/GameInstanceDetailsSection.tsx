@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import PriceBadge from "@/components/Badge/PriceBadge";
+import { Stars } from "@/components/Stars";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DialogTrigger, Dialog } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import GameCalendar from "./GameCalendar";
-import { Stars } from "@/components/Stars";
 
 interface GameDetailsSectionProps {
   gameInstance: GameInstanceDetails;
@@ -93,15 +93,17 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
           <div className="flex flex-col items-end gap-2 p-3">
             <PriceBadge price={gameInstance.pricePerDay} />
             {gameInstance.opinionsAmount > 0 ? (
-            <div className="flex flex-row gap-2">
-              <p className="text-base tracking-widest text-foreground">({gameInstance.opinionsAmount})</p>
-              <Stars count={Math.round(gameInstance.avgRating)} variant="secondary" />
-            </div>
-          ) : (
-            <Badge variant="secondary" className="w-max px-3 py-1 hover:bg-primary">
-              {t("noOpinions")}
-            </Badge>
-          )}
+              <div className="flex flex-row gap-2">
+                <p className="text-base tracking-widest text-foreground">
+                  ({gameInstance.opinionsAmount})
+                </p>
+                <Stars count={Math.round(gameInstance.avgRating)} variant="secondary" />
+              </div>
+            ) : (
+              <Badge variant="secondary" className="w-max px-3 py-1 hover:bg-primary">
+                {t("noOpinions")}
+              </Badge>
+            )}
             {!gameInstance.active && (
               <Badge variant="destructive" className="uppercase">
                 {t("deactivated")}
@@ -109,7 +111,7 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
             )}
           </div>
         </div>
-        <p className="px-2 italic xl:text-lg 2xl:w-3/4 break-all">{gameInstance.description}</p>
+        <p className="break-all px-2 italic xl:text-lg 2xl:w-3/4">{gameInstance.description}</p>
       </div>
       <div className="mt-auto flex flex-row flex-wrap justify-between gap-2">
         <Button onClick={redirectGamePage} className="flex-grow">

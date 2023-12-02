@@ -79,7 +79,7 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
           ) : (
             <>
               {availableDays.map((available, idx) =>
-                idx + 1 < TODAY.getDate() && FIRST_DAY_OF_CURRENT_MONTH >= startDate ? (
+                idx < TODAY.getDate() && FIRST_DAY_OF_CURRENT_MONTH >= startDate ? (
                   <CalendarDay key={idx} variant="outlined" disabled day={idx + 1} />
                 ) : (
                   <CalendarDay
