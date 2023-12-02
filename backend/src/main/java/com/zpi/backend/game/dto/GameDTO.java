@@ -1,7 +1,8 @@
 package com.zpi.backend.game.dto;
 
-import com.zpi.backend.category.Category;
+import com.zpi.backend.category.DTO.CategoryDTO;
 import com.zpi.backend.game.Game;
+import com.zpi.backend.languages.LanguageCodes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,25 +14,49 @@ import java.util.List;
 @AllArgsConstructor
 public class GameDTO {
     private long id;
-    private String name;
     private String image;
+    private String name;
+    private String shortDescription;
     private int minPlayers;
     private int maxPlayers;
     private int playingTime;
     private int age;
-    private String shortDescription;
-    private List<Category> categories;
+    private List<CategoryDTO> categories;
 
-    public GameDTO(Game game){
+    public GameDTO(Game game,String language){
         id = game.getId();
-        name = game.getName();
         image = game.getImage();
         minPlayers = game.getMinPlayers();
         maxPlayers = game.getMaxPlayers();
         age = game.getAge();
         playingTime = game.getPlayingTime();
-        shortDescription = game.getShortDescription();
-        categories = game.getCategories();
+        categories = getCategoriesDTO(game,language);
+        if(language.equals(LanguageCodes.ENGLISH)){
+            name = game.getName();
+            shortDescription = game.getShortDescription();
+        }
+        else if(language.equals(LanguageCodes.POLISH)){
+            name = game.getName_pl();
+            shortDescription = game.getShort_description_pl();
+        }
+
     }
+
+    public GameDTO(Game game) {
+        id = game.getId();
+        image = game.getImage();
+        minPlayers = game.getMinPlayers();
+        maxPlayers = game.getMaxPlayers();
+        age = game.getAge();
+        playingTime = game.getPlayingTime();
+        categories = getCategoriesDTO(game,LanguageCodes.ENGLISH);
+        name = game.getName();
+        shortDescription = game.getShortDescription();
+    }
+
+    public List<CategoryDTO> getCategoriesDTO(Game game,String language) {
+        return CategoryDTO.convertToDTO(game.getCategories(),language);
+    }
+
 
 }
