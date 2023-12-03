@@ -32,8 +32,9 @@ Cypress.Commands.add('loginByGoogleApi', () => {
     method: 'POST',
     url: 'https://www.googleapis.com/oauth2/v4/token',
     body: {
-      grant_type: 'credentials',
-      client_id: Cypress.env('googleClientId'),
+      grant_type: 'authorization_code',
+      client_id: Cypress.env('VITE_AUTH_CLIENT_ID'),
+      client_secret: Cypress.env('AUTH_SECRET'),
     },
   }).then(({ body }) => {
     const { access_token, id_token } = body
