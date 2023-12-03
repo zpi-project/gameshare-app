@@ -36,7 +36,7 @@ const CategoryCard: FC<CategoryCardProps> = ({ category: { name, id } }) => {
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
     >
-      <p className="font-bold">{name}</p>
+      <p className="font-bold capitalize">{name}</p>
     </Link>
   );
 };
