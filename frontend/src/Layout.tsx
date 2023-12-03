@@ -68,6 +68,10 @@ const Layout: FC = () => {
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
+      config.params = {
+        ...config.params,
+        language: i18n.language,
+      };
       return config;
     });
 
@@ -80,7 +84,7 @@ const Layout: FC = () => {
     const tokenInterceptor = Api.interceptors.request.use(config => {
       config.params = {
         ...config.params,
-        language: i18n.language ?? "enUS",
+        language: i18n.language,
       };
       return config;
     });

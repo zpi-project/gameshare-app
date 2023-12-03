@@ -13,13 +13,16 @@ import GameInstanceOpinions from "./GameInstanceOpinions";
 import GameInstanceUserDetailsSection from "./GameInstanceUserDetailsSection";
 
 const GameInstance: FC = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { id = "" } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   const { data: gameInstance, isLoading } = useQuery({
-    queryKey: ["gameInstance", { id }],
+    queryKey: ["gameInstance", { id, language }],
     queryFn: () => GameInstanceApi.getByUUID(id),
     onError: () => {
       toast({

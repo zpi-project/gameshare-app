@@ -12,13 +12,16 @@ import GameInstancesSection from "./GameInstancesSection";
 import LoadingGameDetailsSection from "./LoadingGameDetailsSection";
 
 const Game: FC = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { id = "" } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   const { data: game, isLoading } = useQuery({
-    queryKey: ["game", { id }],
+    queryKey: ["game", { id, language }],
     queryFn: () => GameApi.getOne(parseInt(id)),
     onError: () => {
       toast({

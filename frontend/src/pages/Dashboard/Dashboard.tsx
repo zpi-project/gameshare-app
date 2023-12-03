@@ -33,7 +33,10 @@ const Dashboard: FC = () => {
   const [latitude, longitude] = location as number[];
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
   const { toast } = useToast();
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const token = useRecoilState(tokenState);
 
   const {
@@ -44,7 +47,10 @@ const Dashboard: FC = () => {
     fetchNextPage: fetchGamesNextPage,
     isFetchingNextPage: isFetchingGamesNextPage,
   } = useInfiniteQuery({
-    queryKey: ["search-game-instances", { ...searchParams, uuid: userParam?.uuid, token }],
+    queryKey: [
+      "search-game-instances",
+      { ...searchParams, uuid: userParam?.uuid, token, language },
+    ],
     queryFn: ({ pageParam = 0 }) =>
       GameInstanceApi.search(
         latitude,

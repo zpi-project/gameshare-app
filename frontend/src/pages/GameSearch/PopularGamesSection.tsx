@@ -10,7 +10,10 @@ import Game from "./Game";
 const POPULAR_GAMES_PAGE_SIZE = 8;
 
 const PopularGamesSection: FC = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { toast } = useToast();
 
   const {
@@ -18,7 +21,7 @@ const PopularGamesSection: FC = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["popular-games"],
+    queryKey: ["popular-games", { language }],
     queryFn: () => GameApi.getPopular(0, POPULAR_GAMES_PAGE_SIZE),
     onError: () => {
       toast({

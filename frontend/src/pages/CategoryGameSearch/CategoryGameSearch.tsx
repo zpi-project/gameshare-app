@@ -20,11 +20,14 @@ const GAME_PAGE_SIZE = 16;
 const CategoryGameSearch: FC = () => {
   const { id = "" } = useParams();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { toast } = useToast();
 
   const { data: category, isLoading } = useQuery({
-    queryKey: ["category", { id }],
+    queryKey: ["category", { id, language }],
     queryFn: () => CategoryApi.getOne(parseInt(id)),
     onError: () => {
       toast({
@@ -44,7 +47,7 @@ const CategoryGameSearch: FC = () => {
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ["category-games", { id }],
+    queryKey: ["category-games", { id, language }],
     queryFn: ({ pageParam = 0 }) =>
       GameApi.search(pageParam as number, GAME_PAGE_SIZE, "", [parseInt(id)]),
     getNextPageParam: (_, pages) => {
