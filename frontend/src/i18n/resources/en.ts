@@ -268,4 +268,9 @@ export default {
   maxCharCount: "{{field}} can be of max length {{length}} characters.",
   uploadGamePhoto: "Upload game photo",
   choosePicture: "Choose 1 file. Format: JPG, JPEG or PNG",
+  filGameDetails: "Fill in details about a new game",
+  minPlayers: "Min number of players",
+  maxPlayers: "Max number of players",
+  playingTime: "Playing time",
+
 };

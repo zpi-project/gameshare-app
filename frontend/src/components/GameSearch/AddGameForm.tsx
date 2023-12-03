@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import { z } from "zod";
 import { NewGame } from "@/types/Game";
@@ -22,27 +22,36 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { useToast } from "../ui/use-toast";
+import { CategoryApi } from "@/api/CategoryApi";
 
 const AddGameForm: FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n: { language } } = useTranslation();
   const { toast } = useToast();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
+    const { data: categories } = useQuery({
+      queryKey: ["categories", { language }],
+    queryFn: CategoryApi.getAll,
+    select: data => data.map(({ name, id }) => ({ label: name, value: id })),
+    });
+  
   const formSchema = z.object({
     name: z
-      .string()
+      .string({ required_error: t("fieldIsRequired", { field: t("gameName"), context: "female" }) })
       .trim()
       .min(1, {
         message: t("fieldIsRequired", { field: t("gameName"), context: "female" }),
       })
       .max(200, { message: t("maxCharCount", { field: t("gameName"), length: 200 }) }),
     shortDescription: z
-      .string()
+      .string({
+        required_error: t("fieldIsRequired", { field: t("gameDescription"), context: "female" }),
+      })
       .trim()
       .min(1, {
         message: t("fieldIsRequired", { field: t("gameDescription"), context: "male" }),
       })
-      .max(1000, { message: t("maxCharCount", { field: t("gameDescription"), length: 200 }) }),
+      .max(1000, { message: t("maxCharCount", { field: t("gameDescription"), length: 1000 }) }),
     minPlayers: z.coerce
       .number({
         invalid_type_error: t("fieldIsRequired", { field: t("pricePerDay"), context: "female" }),
@@ -128,7 +137,7 @@ const AddGameForm: FC = () => {
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const filesList = e.target.files;
-    if (filesList) {
+    if (filesList && filesList[0]) {
       setSelectedImage(filesList[0]);
     }
   };
@@ -148,9 +157,7 @@ const AddGameForm: FC = () => {
         >
           <div className="flex h-full w-full flex-row gap-4">
             <div className="flex w-[55%] flex-col gap-2">
-              <h1 className="mb-2 w-full text-center text-2xl uppercase text-primary">
-                {t("yourGameDetails")}
-              </h1>
+              <h1 className="mb-2 w-full text-2xl uppercase text-primary">{t("filGameDetails")}</h1>
               <FormField
                 control={form.control}
                 name="name"
@@ -164,6 +171,90 @@ const AddGameForm: FC = () => {
                   </FormItem>
                 )}
               />
+              <div>
+                <FormField
+                control={form.control}
+                name="playingTime"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("playingTime")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="border-none"
+                        {...field}
+                        onChange={e => {
+                          const value = parseFloat(e.target.value);
+                          field.onChange(isNaN(value) ? "" : value);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+                />
+              </div>
+              <div className="flex flex-row gap-2">
+                <FormField
+                control={form.control}
+                name="minPlayers"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("minPlayers")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="border-none"
+                        {...field}
+                        onChange={e => {
+                          const value = parseFloat(e.target.value);
+                          field.onChange(isNaN(value) ? "" : value);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+                />
+                <FormField
+                control={form.control}
+                name="maxPlayers"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("maxPlayers")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="border-none"
+                        {...field}
+                        onChange={e => {
+                          const value = parseFloat(e.target.value);
+                          field.onChange(isNaN(value) ? "" : value);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+                />
+                 <FormField
+                control={form.control}
+                name="age"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("age")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="border-none"
+                        {...field}
+                        onChange={e => {
+                          const value = parseFloat(e.target.value);
+                          field.onChange(isNaN(value) ? "" : value);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              </div>
               <FormField
                 control={form.control}
                 name="shortDescription"
@@ -188,7 +279,7 @@ const AddGameForm: FC = () => {
             </div>
             <Separator orientation="vertical" className="mx-4 h-full rounded-lg bg-primary" />
             <div className="flex flex-grow flex-col justify-between gap-2">
-              <h1 className="mb-2 w-full text-center text-2xl uppercase text-primary">
+              <h1 className="mb-2 w-full text-2xl uppercase text-primary">
                 {t("uploadGamePhoto")}
               </h1>
               <div className="flex w-full flex-grow flex-col gap-4">
@@ -205,7 +296,7 @@ const AddGameForm: FC = () => {
                 </div>
                 <div className="flex flex-grow flex-col gap-4 rounded-lg bg-card p-4">
                   {selectedImage && (
-                    <div className="h-[350px] w-full overflow-hidden rounded-lg">
+                    <div className="h-[320px] w-full overflow-hidden rounded-lg">
                       <img
                         src={URL.createObjectURL(selectedImage)}
                         alt={`Selected image`}
