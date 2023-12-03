@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -263,6 +264,10 @@ const pl: typeof en = {
   gameRejectErrorDescription: "Gra nie została odrzucona.",
   recommendedGames: "Te gry mogą ci się spodobać",
   choosePictures: "Wybierz maksymalnie 3 pliki. Format: JPG, JPEG or PNG",
+  cannotFindGame:
+    "Jeżeli nie możesz znaleźć gry, której szukasz, możesz wysłać zapytanie do jednego z naszych administratorów o dodanie gry do ogólnej bazy gier.",
+  addGame: "Dodaj nową grę",
+  
 };
 
 export default pl;
