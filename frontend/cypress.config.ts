@@ -16,8 +16,10 @@ export default defineConfig({
 
   e2e: {
     setupNodeEvents() {},
+    experimentalStudio: true,
     env: {
       FRONTEND_URL: `${process.env.FRONTEND_HOST}:${process.env.FRONTEND_PORT}`,
+      googleClientId: process.env.VITE_AUTH_CLIENT_ID,
     },
   },
 });
