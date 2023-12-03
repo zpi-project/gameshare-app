@@ -2,6 +2,8 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Opinion } from "@/types/Opinion";
 import { Stars } from "@/components/Stars";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 interface OpinionAboutOwnerProps {
   ownerOpinion: Opinion | null;
@@ -11,7 +13,7 @@ interface OpinionAboutOwnerProps {
 const OpinionAboutOwner: FC<OpinionAboutOwnerProps> = ({ ownerOpinion, canAddOwnerOpinion }) => {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-grow flex-col gap-4 rounded-lg bg-section p-4">
+    <div className="flex flex-grow flex-col gap-4 rounded-lg bg-section p-4 pb-1">
       {ownerOpinion ? (
         <>
           <div className="flex flex-row flex-wrap justify-between gap-4">
@@ -23,7 +25,20 @@ const OpinionAboutOwner: FC<OpinionAboutOwnerProps> = ({ ownerOpinion, canAddOwn
           </p>
         </>
       ) : canAddOwnerOpinion ? (
-        <div>you can add opinion about owner here</div>
+        <div className="flex w-full flex-col gap-1">
+          <div className="flex flex-row justify-between p-1">
+            <h3 className="text-xl uppercase">{t("reservationDetails.renter.ownerOpinion")}</h3>
+            <Stars count={0} />
+          </div>
+          <div className="flex w-full flex-row justify-between gap-1">
+            <div className="flex w-full">
+              <Textarea placeholder="Type your message here." id="message-2" />
+            </div>
+          </div>
+          <div className="flex justify-end p-1.5">
+            <Button className="w-40">Save opinion</Button>
+          </div>
+        </div>
       ) : (
         <>
           <h3 className="text-xl uppercase">{t("reservationDetails.renter.ownerOpinion")}</h3>

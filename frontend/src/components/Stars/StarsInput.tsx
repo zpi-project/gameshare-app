@@ -3,9 +3,10 @@ import { Star as StarIcon } from "lucide-react";
 
 interface Props {
   variant?: "primary" | "secondary";
+  onChange: (stars: number) => void;
 }
 
-const StarsInput: FC<Props> = ({ variant = "primary" }) => {
+const StarsInput: FC<Props> = ({ variant = "primary", onChange }) => {
   const [clickedCount, setClickedCount] = useState<number>(0);
   const [hoveredCount, setHoveredCount] = useState<number>(clickedCount);
 
@@ -18,7 +19,10 @@ const StarsInput: FC<Props> = ({ variant = "primary" }) => {
           filled={idx < hoveredCount}
           onMouseEnter={() => setHoveredCount(idx + 1)}
           onMouseLeave={() => setHoveredCount(clickedCount)}
-          onClick={() => setClickedCount(idx + 1)}
+          onClick={() => {
+            setClickedCount(idx + 1);
+            onChange(idx + 1);
+          }}
         />
       ))}
     </div>
