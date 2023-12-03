@@ -1,4 +1,4 @@
-import { Game } from "@/types/Game";
+import { Game, NewGame } from "@/types/Game";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import { Paginated } from "@/types/Paginated";
 import Api from "./Api";
@@ -21,6 +21,28 @@ export class GameApi {
   static async getOne(id: number) {
     const { data: game } = await Api.get<Game>(`/games/${id}`);
     return game;
+  }
+
+  static async create(game: NewGame) {
+    const { data } = await Api.post<Game>("/games", game);
+    return data;
+  }
+
+  static async addImage(gameId: number, file: File) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const { data } = await Api.post<{
+      id: number;
+      fileName: string;
+      fileURL: string;
+    }>(`/games/${gameId}/images`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return data;
   }
 
   static async getInstances(

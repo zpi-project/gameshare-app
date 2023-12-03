@@ -263,4 +263,9 @@ export default {
   cannotFindGame:
     "If you cannot find the game you are looking for, you can make a new game request and await for one of our admins to accept it.",
   addGame: "Add new game",
+
+  gameName: "Game name",
+  maxCharCount: "{{field}} can be of max length {{length}} characters.",
+  uploadGamePhoto: "Upload game photo",
+  choosePicture: "Choose 1 file. Format: JPG, JPEG or PNG",
 };
