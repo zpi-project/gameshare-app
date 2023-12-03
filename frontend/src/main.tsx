@@ -13,7 +13,7 @@ import MyProfile from "@/pages/MyProfile";
 import ReservationDetails from "@/pages/ReservationDetails";
 import ReservationsHistory from "@/pages/ReservationsHistory";
 import UserProfile from "@/pages/UserProfile";
-import ProtectedRoute from "@/components/ProtectedRoute";
+import ProtectedRoute from "@/ProtectedRoute";
 import App from "./App";
 import "./index.css";
 

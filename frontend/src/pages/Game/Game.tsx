@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
+import { useTheme } from "@/ThemeProvider";
 import { useQuery } from "@tanstack/react-query";
 import { URLS } from "@/constants/urls";
 import { stringToHexColor } from "@/utils/stringToColor";
 import { GameApi } from "@/api/GameApi";
-import { useTheme } from "@/components/ThemeProvider";
 import { useToast } from "@/components/ui/use-toast";
 import GameDetailsSection from "./GameDetailsSection";
 import GameInstancesSection from "./GameInstancesSection";
