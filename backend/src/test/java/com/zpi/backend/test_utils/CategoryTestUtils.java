@@ -1,7 +1,6 @@
 package com.zpi.backend.test_utils;
 
 import com.zpi.backend.category.Category;
-import com.zpi.backend.category.DTO.NewCategoryDTO;
 
 import java.util.ArrayList;
 import java.util.List;

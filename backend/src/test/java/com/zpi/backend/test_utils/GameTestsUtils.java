@@ -2,7 +2,6 @@ package com.zpi.backend.test_utils;
 
 import com.zpi.backend.category.Category;
 import com.zpi.backend.game.Game;
-import com.zpi.backend.game.dto.GameDTO;
 import com.zpi.backend.game.dto.NewGameDTO;
 
 import java.util.ArrayList;

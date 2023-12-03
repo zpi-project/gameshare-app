@@ -1,19 +1,12 @@
 package com.zpi.backend.reservationsTests;
 
-import com.zpi.backend.category.CategoryRepository;
-import com.zpi.backend.category.CategoryService;
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.email.EmailService;
-import com.zpi.backend.email_type.EmailTypeService;
 import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import com.zpi.backend.game.GameRepository;
-import com.zpi.backend.game.GameService;
-import com.zpi.backend.game.dto.GameDTO;
 import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.game_instance.GameInstanceService;
 import com.zpi.backend.game_instance.exception.GameInstanceDoesNotExistException;
-import com.zpi.backend.game_status.GameStatusService;
 import com.zpi.backend.reservation_status.ReservationStatus;
 import com.zpi.backend.reservation_status.ReservationStatusRepository;
 import com.zpi.backend.reservations.DTO.NewReservationDTO;
@@ -23,7 +16,6 @@ import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.reservations.ReservationRepository;
 import com.zpi.backend.reservations.ReservationService;
 import com.zpi.backend.role.Role;
-import com.zpi.backend.role.RoleService;
 import com.zpi.backend.test_utils.*;
 import com.zpi.backend.user.User;
 import com.zpi.backend.user.UserService;
@@ -52,8 +44,7 @@ class GameServiceTests {
     @InjectMocks
     private ReservationService reservationService;
 
-    @Mock
-    private CategoryRepository categoryRepository;
+
 
 
     @Mock
@@ -71,8 +62,6 @@ class GameServiceTests {
     @Mock
     private ReservationRepository reservationRepository;
 
-    @Mock
-    private GameStatusService gameStatusService;
 
     @Mock
     private EmailService emailService;

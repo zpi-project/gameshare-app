@@ -1,6 +1,5 @@
 package com.zpi.backend.games_tests;
 
-import com.zpi.backend.category.CategoryRepository;
 import com.zpi.backend.category.CategoryService;
 import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.dto.ResultsDTO;
@@ -284,7 +283,7 @@ class GameServiceTests {
     @Test
     void testRejectGameSuccessfully() throws UserDoesNotExistException {
         
-        Authentication authentication = any() /* create a mock Authentication */;
+        Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
         GameStatus gamestatus  = GameStatusTestUtils.createGameStatus(REJECTED);
@@ -304,7 +303,7 @@ class GameServiceTests {
     @Test
     void testRejectGameWithNonAdminUser() throws UserDoesNotExistException {
         
-        Authentication authentication = any() /* create a mock Authentication */;
+        Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(false);
 
@@ -318,7 +317,7 @@ class GameServiceTests {
     @Test
     void testRejectGameWithAlreadyRejectedGame() throws UserDoesNotExistException {
         
-        Authentication authentication = any() /* create a mock Authentication */;
+        Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
 
@@ -336,7 +335,7 @@ class GameServiceTests {
     @Test
     void testRejectGameWithNonexistentGame() throws UserDoesNotExistException {
         
-        Authentication authentication = any() /* create a mock Authentication */;
+        Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
 
@@ -353,13 +352,13 @@ class GameServiceTests {
     @Test
     void testAcceptGameSuccessfully() throws  UserDoesNotExistException {
         
-        Authentication authentication = any() /* create a mock Authentication */;
+        Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
 
         Game existingGame = GameTestsUtils.createGame(PENDING);
         GameStatus gameStatus = GameStatusTestUtils.createGameStatus(ACCEPTED);
-                /* create an existing game with status other than ACCEPTED */;
+                
         when(gameRepository.findGameById(gameId)).thenReturn(Optional.of(existingGame));
         when(gameStatusService.getGameStatus(ACCEPTED)).thenReturn(gameStatus);
 
@@ -388,7 +387,7 @@ class GameServiceTests {
     @Test
     void testAcceptGameWithAlreadyAcceptedGame() throws UserDoesNotExistException {
         
-        Authentication authentication =any() /* create a mock Authentication */;
+        Authentication authentication =any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
 
@@ -406,7 +405,7 @@ class GameServiceTests {
     @Test
     void testAcceptGameWithNonexistentGame() throws UserDoesNotExistException {
         
-        Authentication authentication = any() /* create a mock Authentication */;
+        Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
 
@@ -450,7 +449,7 @@ class GameServiceTests {
     @Test
     void testGetGamesToAcceptWithNonAdminUser() throws UserDoesNotExistException {
         
-        Authentication authentication =any() /* create a mock Authentication for a non-admin user */;
+        Authentication authentication =any();
         int page = 0;
         int size = 10;
         String language = LanguageCodes.ENGLISH;
@@ -466,7 +465,7 @@ class GameServiceTests {
     @Test
     void testGetGamesToAcceptWithInvalidLanguage() throws UserDoesNotExistException {
         
-        Authentication authentication = any() /* create a mock Authentication for an admin user */;
+        Authentication authentication = any();
         int page = 0;
         int size = 10;
         String invalidLanguage = "InvalidLanguage";
