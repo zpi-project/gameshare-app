@@ -4,14 +4,14 @@ import java.util.*;
 
 public class AprioriAlgorithm {
 
-    private final int minSupport;
+    private final double minSupport;
     private final int noOfTransactions;
     private final double minConfidence;
     private final List<Set<Long>> transactions;
     private final List<Set<Long>> itemSet;
     private final Map<Set<Long>, Integer> frequentItemSets;
 
-    public AprioriAlgorithm(int minSupport, double minConfidence, List<Set<Long>> transactions) {
+    public AprioriAlgorithm(double minSupport, double minConfidence, List<Set<Long>> transactions) {
         this.minSupport = minSupport;
         this.minConfidence = minConfidence;
         this.transactions = transactions;
