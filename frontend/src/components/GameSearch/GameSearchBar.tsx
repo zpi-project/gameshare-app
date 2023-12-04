@@ -130,8 +130,8 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
           </ScrollArea>
         </div>
       )}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} >
-        <AddGameForm close={() => setIsDialogOpen(false)}/>
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <AddGameForm close={() => setIsDialogOpen(false)} />
       </Dialog>
     </div>
   );

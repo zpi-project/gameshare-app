@@ -1,9 +1,10 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
+import { Trash2 } from "lucide-react";
 import z from "zod";
 import { Game } from "@/types/Game";
 import { NewGameInstance } from "@/types/GameInstance";
@@ -30,11 +31,14 @@ interface GameInstanceFormProps {
   onSubmit: () => void;
 }
 
+const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
+
 const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [selectedImages, setSelectedImages] = useState<File[] | null>(null);
   const [game, setGame] = useState<Game | null>(null);
+  const [imageSizeErrors, setImageSizeErrors] = useState<boolean[]>([]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const filesList = e.target.files;
@@ -47,6 +51,10 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
       );
     }
   };
+
+  useEffect(() => {
+    setImageSizeErrors((selectedImages || [])?.map(file => file.size > MAX_IMAGE_SIZE));
+  }, [selectedImages]);
 
   const formSchema = z.object({
     gameId: z.number({
@@ -83,47 +91,49 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
   );
 
   const handleFormSubmit = async (data: NewGameInstance) => {
-    try {
-      const newGame = await addGameInstance(data);
+    if (!imageSizeErrors.includes(true)) {
+      try {
+        const newGame = await addGameInstance(data);
 
-      toast({
-        title: t("gameInstanceAdded"),
-      });
+        toast({
+          title: t("gameInstanceAdded"),
+        });
 
-      if (selectedImages) {
-        for (let idx = 0; idx < (selectedImages.length || 0); idx++) {
-          const file = selectedImages[idx];
+        if (selectedImages) {
+          for (let idx = 0; idx < (selectedImages.length || 0); idx++) {
+            const file = selectedImages[idx];
 
-          try {
-            await addImage({ uuid: newGame.uuid, file });
-            toast({
-              title: t("successAddingImage", { nr: idx + 1 }),
-            });
-          } catch (e) {
-            if (isAxiosError(e) && e.response?.data?.title === "InvalidFileTypeException") {
+            try {
+              await addImage({ uuid: newGame.uuid, file });
               toast({
-                title: t("errorAddingImage", { nr: idx + 1 }),
-                description: t("incorrectFileType"),
-                variant: "destructive",
+                title: t("successAddingImage", { nr: idx + 1 }),
               });
-            } else {
-              toast({
-                title: t("errorAddingImage", { nr: idx + 1 }),
-                description: t("errorAddingImageDescription"),
-                variant: "destructive",
-              });
+            } catch (e) {
+              if (isAxiosError(e) && e.response?.data?.title === "InvalidFileTypeException") {
+                toast({
+                  title: t("errorAddingImage", { nr: idx + 1 }),
+                  description: t("incorrectFileType"),
+                  variant: "destructive",
+                });
+              } else {
+                toast({
+                  title: t("errorAddingImage", { nr: idx + 1 }),
+                  description: t("errorAddingImageDescription"),
+                  variant: "destructive",
+                });
+              }
             }
           }
         }
-      }
 
-      onSubmit();
-    } catch {
-      toast({
-        title: t("errorAddingGame"),
-        description: t("tryAgain"),
-        variant: "destructive",
-      });
+        onSubmit();
+      } catch {
+        toast({
+          title: t("errorAddingGame"),
+          description: t("tryAgain"),
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -231,15 +241,29 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                     {selectedImages && (
                       <div className="flex flex-col gap-4 p-4">
                         {selectedImages.map((image, idx) => (
-                          <div
-                            className="h-[250px] w-full overflow-hidden rounded-lg"
-                            key={idx + "img"}
-                          >
-                            <img
-                              src={URL.createObjectURL(image)}
-                              alt={`Selected ${idx + 1}`}
-                              className="h-full w-full object-cover object-top"
-                            />
+                          <div>
+                            <p className="font-bold text-destructive">
+                              {imageSizeErrors[idx] && t("maxImgSize", { size: 3 })}
+                            </p>
+                            <div
+                              className="relative h-[250px] w-full overflow-hidden rounded-lg"
+                              key={idx + "img"}
+                            >
+                              <img
+                                src={URL.createObjectURL(image)}
+                                alt={`Selected ${idx + 1}`}
+                                className="h-full w-full object-cover object-top"
+                              />
+                              <Trash2
+                                className="absolute left-0 top-0 h-full w-full bg-none p-[90px] text-destructive opacity-0 duration-300 hover:bg-background/80 hover:opacity-100"
+                                size={30}
+                                onClick={() =>
+                                  setSelectedImages(
+                                    selectedImages.filter((_, index) => index !== idx),
+                                  )
+                                }
+                              />
+                            </div>
                           </div>
                         ))}
                       </div>
