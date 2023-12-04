@@ -25,6 +25,8 @@ import { Textarea } from "../ui/textarea";
 import { useToast } from "../ui/use-toast";
 import SelectCategory from "./SelectCategory";
 
+const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
+
 const AddGameForm: FC = () => {
   const {
     t,
@@ -32,6 +34,7 @@ const AddGameForm: FC = () => {
   } = useTranslation();
   const { toast } = useToast();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imageSizeError, setImageSizeError] = useState(false);
 
   const { data: categories } = useQuery({
     queryKey: ["categories", { language }],
@@ -39,6 +42,7 @@ const AddGameForm: FC = () => {
     select: data => data.map(({ name, id }) => ({ label: name, value: id })),
   });
 
+  // handle GameAlreadyExistsException
   const formSchema = z.object({
     categoriesIDs: z.number().array(),
     name: z
@@ -120,47 +124,54 @@ const AddGameForm: FC = () => {
   );
 
   const handleFormSubmit = async (data: NewGame) => {
-    try {
-      const newGame = await addGame(data);
-      console.log(newGame);
-      toast({
-        title: t("gameAdded"),
-      });
-
+    if (!imageSizeError) {
       try {
-        if (selectedImage) {
-          await addImage({ gameId: newGame.id, file: selectedImage });
-          toast({
-            title: t("successAddingImage"),
-          });
+        const newGame = await addGame(data);
+        console.log(newGame);
+        toast({
+          title: t("gameAdded"),
+        });
+
+        try {
+          if (selectedImage) {
+            await addImage({ gameId: newGame.id, file: selectedImage });
+            toast({
+              title: t("successAddingImage"),
+            });
+          }
+        } catch (e) {
+          if (isAxiosError(e) && e.response?.data?.title === "InvalidFileTypeException") {
+            toast({
+              title: t("errorAddingImage"),
+              description: t("incorrectFileType"),
+              variant: "destructive",
+            });
+          } else {
+            toast({
+              title: t("errorAddingImage"),
+              description: t("errorAddingImageDescription"),
+              variant: "destructive",
+            });
+          }
         }
-      } catch (e) {
-        if (isAxiosError(e) && e.response?.data?.title === "InvalidFileTypeException") {
-          toast({
-            title: t("errorAddingImage"),
-            description: t("incorrectFileType"),
-            variant: "destructive",
-          });
-        } else {
-          toast({
-            title: t("errorAddingImage"),
-            description: t("errorAddingImageDescription"),
-            variant: "destructive",
-          });
-        }
+      } catch {
+        toast({
+          title: t("errorAddingGame"),
+          description: t("tryAgain"),
+          variant: "destructive",
+        });
       }
-    } catch {
-      toast({
-        title: t("errorAddingGame"),
-        description: t("tryAgain"),
-        variant: "destructive",
-      });
     }
   };
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const filesList = e.target.files;
     if (filesList && filesList[0]) {
+      if (filesList[0].size > MAX_IMAGE_SIZE) {
+        setImageSizeError(true);
+      } else {
+        setImageSizeError(false);
+      }
       setSelectedImage(filesList[0]);
     }
   };
@@ -170,6 +181,7 @@ const AddGameForm: FC = () => {
       className="flex max-w-6xl"
       onCloseAutoFocus={() => {
         form.reset();
+        setImageSizeError(false);
         setSelectedImage(null);
       }}
     >
@@ -189,7 +201,12 @@ const AddGameForm: FC = () => {
                     <FormItem className="flex-grow">
                       <FormLabel>{t("gameName")}</FormLabel>
                       <FormControl>
-                        <Input className="border-none" spellCheck={false} {...field} autoComplete="off"/>
+                        <Input
+                          className="border-none"
+                          spellCheck={false}
+                          {...field}
+                          autoComplete="off"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -227,7 +244,7 @@ const AddGameForm: FC = () => {
                     <FormItem className="flex-grow">
                       <FormLabel>{t("playingTime")}</FormLabel>
                       <FormControl>
-                        <Input className="border-none" {...field} autoComplete="off"/>
+                        <Input className="border-none" {...field} autoComplete="off" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -240,7 +257,7 @@ const AddGameForm: FC = () => {
                     <FormItem className="flex-grow">
                       <FormLabel>{t("age")}</FormLabel>
                       <FormControl>
-                        <Input className="border-none" {...field} autoComplete="off"/>
+                        <Input className="border-none" {...field} autoComplete="off" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -252,10 +269,10 @@ const AddGameForm: FC = () => {
                   control={form.control}
                   name="minPlayers"
                   render={({ field }) => (
-                    <FormItem className="flex-grow w-1/2">
+                    <FormItem className="w-1/2 flex-grow">
                       <FormLabel>{t("minPlayers")}</FormLabel>
                       <FormControl>
-                        <Input className="border-none" {...field} autoComplete="off"/>
+                        <Input className="border-none" {...field} autoComplete="off" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -265,10 +282,10 @@ const AddGameForm: FC = () => {
                   control={form.control}
                   name="maxPlayers"
                   render={({ field }) => (
-                    <FormItem  className="flex-grow w-1/2">
+                    <FormItem className="w-1/2 flex-grow">
                       <FormLabel>{t("maxPlayers")}</FormLabel>
                       <FormControl>
-                        <Input className="border-none" {...field} autoComplete="off"/>
+                        <Input className="border-none" {...field} autoComplete="off" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -314,6 +331,9 @@ const AddGameForm: FC = () => {
                     className="w-full min-w-[100%] max-w-[600px] border-none text-transparent"
                     onChange={onFileChange}
                   />
+                  <p className="text-destructive">
+                    {imageSizeError && t("maxImgSize", { size: 3 })}
+                  </p>
                 </div>
                 <div className="flex flex-grow flex-col gap-4 rounded-lg bg-card p-4">
                   {selectedImage && (

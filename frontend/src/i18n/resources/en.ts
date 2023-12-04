@@ -276,4 +276,7 @@ export default {
   chooseCategories: "Choose categories",
   numberTypeError: "{{field}} has to be a number.",
   intTypeError: "{{field}} has to be an integer.",
+  maxImgSize: "Max image size is {{size}}MB",
+  gameAlreadyExists: "Game with this name already exists.",
+  errorAddingNewGame: "There was an error adding this game.",
 };

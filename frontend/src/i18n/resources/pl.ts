@@ -1,6 +1,5 @@
 import en from "./en";
 
-
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -280,6 +279,9 @@ const pl: typeof en = {
   chooseCategories: "Wybierz kategorie",
   numberTypeError: "{{field}} musi być liczbą.",
   intTypeError: "{{field}} musi być liczbą całkowitą.",
+  maxImgSize: "Max rozmiar zdjęcia to {{size}}MB",
+  gameAlreadyExists: "Gra z tą nazwą już istnieje.",
+  errorAddingNewGame: "Wystąpił błąd podczas dodawania gry.",
 };
 
 export default pl;
