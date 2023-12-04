@@ -31,7 +31,7 @@ public class GameDTO {
         age = game.getAge();
         playingTime = game.getPlayingTime();
         categories = getCategoriesDTO(game,language);
-        if(language.equals(LanguageCodes.ENGLISH)){
+        if(language.equals(LanguageCodes.ENGLISH) || language.equals(LanguageCodes.POLISH) && game.getName_pl() == null){
             name = game.getName();
             shortDescription = game.getShortDescription();
         }

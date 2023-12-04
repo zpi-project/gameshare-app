@@ -17,6 +17,7 @@ public class RoleService {
     public RoleService(UserService userService, RoleRepository roleRepository) {
         this.userService = userService;
         this.roleRepository = roleRepository;
+        saveRoles();
     }
 
     public Role getRole(Authentication authentication) throws UserDoesNotExistException {
