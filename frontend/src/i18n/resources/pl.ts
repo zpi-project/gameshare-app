@@ -282,6 +282,10 @@ const pl: typeof en = {
   maxImgSize: "Max rozmiar zdjęcia to {{size}}MB",
   gameAlreadyExists: "Gra z tą nazwą już istnieje.",
   errorAddingNewGame: "Wystąpił błąd podczas dodawania gry.",
+  successAddingNewGame: "Pytanie z prośbą o dodanie nowej gry zostało wysłane do administratora.",
+  successAddingNewGameAdmin: "Nowa gra została pomyślnie dodana.",
+  successAddingSingleImage: "Zdjęcie zostało dodane.",
+  errorAddingSingleImage: "Wystąpił błąd podczas dodawania zdjęcia.",
 };
 
 export default pl;

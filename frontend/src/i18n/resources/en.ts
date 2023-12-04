@@ -279,4 +279,8 @@ export default {
   maxImgSize: "Max image size is {{size}}MB",
   gameAlreadyExists: "Game with this name already exists.",
   errorAddingNewGame: "There was an error adding this game.",
+  successAddingNewGame: "A request to add a new game was sent to admin.",
+  successAddingNewGameAdmin: "New game was successfully added.",
+  successAddingSingleImage: "Image has been added successfully.",
+  errorAddingSingleImage: "There was an error adding image.",
 };

@@ -9,14 +9,7 @@ import { NewGame } from "@/types/Game";
 import { CategoryApi } from "@/api/CategoryApi";
 import { GameApi } from "@/api/GameApi";
 import { DialogContent } from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -24,6 +17,7 @@ import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { useToast } from "../ui/use-toast";
 import SelectCategory from "./SelectCategory";
+
 
 const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
 
@@ -136,30 +130,38 @@ const AddGameForm: FC = () => {
           if (selectedImage) {
             await addImage({ gameId: newGame.id, file: selectedImage });
             toast({
-              title: t("successAddingImage"),
+              title: t("successAddingSingleImage"),
             });
           }
         } catch (e) {
           if (isAxiosError(e) && e.response?.data?.title === "InvalidFileTypeException") {
             toast({
-              title: t("errorAddingImage"),
+              title: t("errorAddingSingleImage"),
               description: t("incorrectFileType"),
               variant: "destructive",
             });
           } else {
             toast({
-              title: t("errorAddingImage"),
+              title: t("errorAddingSingleImage"),
               description: t("errorAddingImageDescription"),
               variant: "destructive",
             });
           }
         }
-      } catch {
-        toast({
-          title: t("errorAddingGame"),
-          description: t("tryAgain"),
-          variant: "destructive",
-        });
+      } catch (e) {
+        if (isAxiosError(e) && e.response?.data?.title === "GameAlreadyExistsException") {
+          toast({
+            title: t("errorAddingNewGame"),
+            description: t("gameAlreadyExists"),
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: t("errorAddingGame"),
+            description: t("tryAgain"),
+            variant: "destructive",
+          });
+        }
       }
     }
   };
