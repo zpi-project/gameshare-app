@@ -122,7 +122,7 @@ public class AprioriAlgorithm {
                     Set<Long> consequent = new HashSet<>(itemset);
                     consequent.removeAll(antecedent);
 
-                    double support = frequentItemSets.get(itemset);
+                    double support = calculateSupport(itemset);
                     double confidence = calculateConfidence(itemset, antecedent);
 
                     if (support >= minSupport && confidence >= minConfidence) {
@@ -137,7 +137,7 @@ public class AprioriAlgorithm {
     }
 
     private double calculateSupport(Set<Long> itemset) {
-        return this.frequentItemSets.get(itemset);
+        return (double) this.frequentItemSets.get(itemset) / this.noOfTransactions;
     }
 
     private double calculateConfidence(Set<Long> itemset, Set<Long> antecedent) {
