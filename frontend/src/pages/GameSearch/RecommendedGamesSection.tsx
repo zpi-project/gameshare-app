@@ -28,7 +28,6 @@ const RecommendedGamesSection: FC = () => {
       });
     },
   });
-  console.log(games);
 
   return (
     <div className="flex w-full flex-col gap-2">

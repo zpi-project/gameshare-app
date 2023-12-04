@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import { cn } from "@/utils/tailwind";
 import { Button } from "@/components/ui/button";
@@ -14,14 +14,14 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Option {
   label: string;
-  value: string | number;
+  value: number;
 }
 
 interface SelectInputProps {
   options: Option[];
   placeholder: string;
   noResultsInfo: string;
-  onChange: (value?: (string | number)[]) => void;
+  onChange: (value: number[]) => void;
   search?: boolean;
   scroll?: boolean;
   width?: string;
@@ -29,7 +29,7 @@ interface SelectInputProps {
   clearValueOnChange?: boolean;
 }
 
-const SelectMultiple: FC<SelectInputProps> = ({
+const SelectCategory: FC<SelectInputProps> = ({
   options,
   placeholder,
   noResultsInfo,
@@ -38,18 +38,26 @@ const SelectMultiple: FC<SelectInputProps> = ({
   scroll,
   width,
   disabled,
-  clearValueOnChange,
 }) => {
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState<string[]>([]);
+  const [valuesIDs, setValuesIDs] = useState<number[]>([]);
 
   const onSelect = (currentValue: string) => {
-    setValues(prevValues =>
-      prevValues.includes(currentValue)
-        ? prevValues.filter(value => value !== currentValue)
-        : [...prevValues, currentValue],
-    );
-    onChange(values);
+    const optionId = options.findIndex(option => option.label.toLowerCase() === currentValue);
+    const valueId = options[optionId].value;
+
+    if (values.includes(currentValue)) {
+      setValues(values.filter(value => value !== currentValue));
+      const newValuesIDs = valuesIDs.filter(value => value! == valueId);
+      setValuesIDs(newValuesIDs);
+      onChange(newValuesIDs);
+    } else {
+      setValues([...values, currentValue]);
+      const newValuesIDs = [...valuesIDs, valueId];
+      setValuesIDs(newValuesIDs);
+      onChange(newValuesIDs);
+    }
   };
 
   return (
@@ -75,10 +83,8 @@ const SelectMultiple: FC<SelectInputProps> = ({
               {options.map(option => (
                 <CommandItem
                   key={option.value}
-                  value={option.value as string}
-                  onSelect={currentValue => {
-                    onSelect(currentValue);
-                  }}
+                  value={option.value as unknown as string}
+                  onSelect={onSelect}
                 >
                   {option.label}
                   <Check
@@ -97,4 +103,4 @@ const SelectMultiple: FC<SelectInputProps> = ({
   );
 };
 
-export default SelectMultiple;
+export default SelectCategory;

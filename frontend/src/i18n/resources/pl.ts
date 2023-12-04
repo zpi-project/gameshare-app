@@ -95,7 +95,7 @@ const pl: typeof en = {
   gameInstanceAdded: "Egzemplarz gry został dodany.",
   gameInstanceDescriptionMin: "Opis musi mieć przynajmniej 2 znaki.",
   gameInstanceDescriptionMax: "Opis musi mieć maksymalnie 500 znaków",
-  minPricePerDay: "Cena musi być przynajmniej 0",
+  fieldPositive: "{{field}} musi być przynajmniej 0",
   maxPricePerDay: "Maksymalna cena to 200",
   yourGameDetails: "Informacje o twojej grze",
   provideGamePrice: "Podaj cenę swojego egzemplarza gry",
@@ -266,6 +266,17 @@ const pl: typeof en = {
   cannotFindGame:
     "Jeżeli nie możesz znaleźć gry, której szukasz, możesz wysłać zapytanie do jednego z naszych administratorów o dodanie gry do ogólnej bazy gier.",
   addGame: "Dodaj nową grę",
+
+  gameName: "Nazwa gry",
+  maxCharCount: "{{field}} może mieć maksymalną długość {{length}} znaków.",
+  uploadGamePhoto: "Dodaj zdjęcie gry",
+  choosePicture: "Wybierz 1 plik. Format: JPG, JPEG lub PNG",
+  filGameDetails: "Uzupełnij dane o grze",
+  minPlayers: "Min liczba graczy",
+  maxPlayers: "Max liczba graczy",
+  playingTime: "Czas gry",
+  categories: "Kategories",
+  chooseCategories: "Wybierz kategorie",
 };
 
 export default pl;

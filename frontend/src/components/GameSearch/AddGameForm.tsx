@@ -20,10 +20,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import SelectMultiple from "../SelectMultiple";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { useToast } from "../ui/use-toast";
+import SelectCategory from "./SelectCategory";
 
 const AddGameForm: FC = () => {
   const {
@@ -59,33 +59,33 @@ const AddGameForm: FC = () => {
       .max(1000, { message: t("maxCharCount", { field: t("gameDescription"), length: 1000 }) }),
     minPlayers: z.coerce
       .number({
-        invalid_type_error: t("fieldIsRequired", { field: t("pricePerDay"), context: "female" }),
+        invalid_type_error: t("fieldIsRequired", { field: t("minPlayers"), context: "female" }),
       })
       .positive({
-        message: t("minPricePerDay"),
+        message: t("fieldPositive", { field: t("minPlayers") }),
       }),
     maxPlayers: z.coerce
       .number({
-        invalid_type_error: t("fieldIsRequired", { field: t("pricePerDay"), context: "female" }),
+        invalid_type_error: t("fieldIsRequired", { field: t("maxPlayers"), context: "female" }),
       })
       .positive({
-        message: t("minPricePerDay"),
+        message: t("fieldPositive", { field: t("maxPlayers") }),
       }),
     playingTime: z.coerce
       .number({
-        invalid_type_error: t("fieldIsRequired", { field: t("pricePerDay"), context: "female" }),
+        invalid_type_error: t("fieldIsRequired", { field: t("playingTime"), context: "female" }),
       })
       .int()
       .positive({
-        message: t("minPricePerDay"),
+        message: t("fieldPositive", { field: t("playingTime") }),
       }),
     age: z.coerce
       .number({
-        invalid_type_error: t("fieldIsRequired", { field: t("pricePerDay"), context: "female" }),
+        invalid_type_error: t("fieldIsRequired", { field: t("age"), context: "female" }),
       })
       .int()
       .positive({
-        message: t("minPricePerDay"),
+        message: t("fieldPositive", { field: t("age") }),
       }),
   });
 
@@ -180,16 +180,18 @@ const AddGameForm: FC = () => {
                 <FormField
                   control={form.control}
                   name="categoriesIDs"
-                  render={({ field }) => (
+                  render={() => (
                     <FormItem className="mt-1.5 flex flex-col gap-1">
                       <FormLabel>{t("categories")}</FormLabel>
                       <FormControl>
-                        <SelectMultiple
+                        <SelectCategory
                           options={categories ?? []}
                           width="w-[280px]"
                           placeholder={t("chooseCategories")}
                           noResultsInfo={t("noResults")}
-                          onChange={field.onChange}
+                          onChange={(values: number[]) => {
+                            form.setValue("categoriesIDs", values);
+                          }}
                           scroll
                           search
                         />

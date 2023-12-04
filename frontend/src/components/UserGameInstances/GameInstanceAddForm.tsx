@@ -65,7 +65,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
         invalid_type_error: t("fieldIsRequired", { field: t("pricePerDay"), context: "female" }),
       })
       .positive({
-        message: t("minPricePerDay"),
+        message: t("fieldPositive", { field: t("pricePerDay") }),
       })
       .max(200, { message: t("maxPricePerDay") }),
   });
