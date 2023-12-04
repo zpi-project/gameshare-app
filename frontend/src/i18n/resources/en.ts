@@ -83,6 +83,15 @@ export default {
   errorFetchingGameInstances: "We couldn't load copies of this game",
   noOpinionsGameInstance: "This game instance doesn't have any opinions yet",
   gameInstaneDescriptionMin: "The description must be a minimum of 2 characters in length.",
+  deactivateErrorTitle: "An error occured while deactivating your game.",
+  activateErrorTitle: "An error occured while activating your game.",
+  deactivateSuccessDescription: "Deactivation was succesfull.",
+  activateSuccessDescription: "Activation was successfull",
+  areYouSure: "Are you sure?",
+  deactivationWarning:
+    "This action cannot be undone. This will permanently delete all your current and upcoming reservations of this game. You want be able to get them back!",
+  activationWarning:
+    "This action will make this game visible again. Other users will have possibility to see it and make resrevations.",
 
   typeToSearch: "Type to search...",
   category: "Category",
@@ -173,6 +182,8 @@ export default {
   bookItNow: "Book it now",
   deactivate: "Deactivate",
   activate: "Activate",
+  cancel: "Cancel",
+  continue: "Continue",
   errorFetchingReservationsCalendar: "We couldn't fetch reservations for this month.",
   errorStatus: {
     "400": "Bad Request",

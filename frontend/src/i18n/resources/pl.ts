@@ -31,6 +31,8 @@ const pl: typeof en = {
   firstName: "Imię",
   lastName: "Nazwisko",
   phoneNumber: "Nr telefonu",
+  cancel: "Anuluj",
+  continue: "Kontynuuj",
 
   fieldIsRequired: "{{field}} jest wymagane.",
   fieldIsRequired_male: "{{field}} jest wymagany.",
@@ -83,6 +85,15 @@ const pl: typeof en = {
   deactivated: "nieaktywna",
   noGameInstances: "Nie znaleziono żadnych gier",
   errorFetchingUsersOnMap: "Wystąpił błąd podczas pobierania użytkowników.",
+  deactivateErrorTitle: "Wystąpił błąd podczas dezaktywowania gry.",
+  activateErrorTitle: "Wystąpił błąd podczas aktywowania gry.",
+  deactivateSuccessDescription: "Pomyślnie dezaktywowano grę.",
+  activateSuccessDescription: "Pomyślnie aktywowano grę.",
+  areYouSure: "Jesteś pewny?",
+  deactivationWarning:
+    "To działanie jest permanentne. Wszystkie twoje aktualne i przyszłe rezerwacje tej gry zostaną usunięte. Nie będziesz miał możliwości ich odzyskać!",
+  activationWarning:
+    "To działanie sprawi, że gra znowu będzie widoczna. Inni użytkownicy będą widzieć tę grę oraz będą mogli złożyć rezerwacje.",
 
   noGameUsers: "Nikt jeszcze nie ma tej gry",
   errorFetchingGameInstances: "Nie udało się pobrać egzemplarzy tej gry",
