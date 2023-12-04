@@ -9,6 +9,7 @@ import z from "zod";
 import { Game } from "@/types/Game";
 import { NewGameInstance } from "@/types/GameInstance";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
+import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
 import { DialogContent } from "@/components/ui/dialog";
 import {
@@ -82,12 +83,12 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
     resolver: zodResolver(formSchema),
   });
 
-  const { mutateAsync: addGameInstance } = useMutation({
+  const { mutateAsync: addGameInstance, isLoading: isLoadingGame } = useMutation({
     mutationFn: (gameInstance: NewGameInstance) => GameInstanceApi.create(gameInstance),
   });
 
-  const { mutateAsync: addImage } = useMutation((params: { uuid: string; file: File }) =>
-    GameInstanceApi.addImage(params.uuid, params.file),
+  const { mutateAsync: addImage, isLoading: isLoadingImage } = useMutation(
+    (params: { uuid: string; file: File }) => GameInstanceApi.addImage(params.uuid, params.file),
   );
 
   const handleFormSubmit = async (data: NewGameInstance) => {
@@ -146,6 +147,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
         setSelectedImages(null);
       }}
     >
+      {(isLoadingGame || isLoadingImage) && <Spinner />}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleFormSubmit)}

@@ -10,16 +10,23 @@ import { roleState } from "@/state/role";
 import { NewGame } from "@/types/Game";
 import { CategoryApi } from "@/api/CategoryApi";
 import { GameApi } from "@/api/GameApi";
+import Spinner from "@/components/ui/Spinner";
+import { Button } from "@/components/ui/button";
 import { DialogContent } from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "../ui/button";
-import { Textarea } from "../ui/textarea";
-import { useToast } from "../ui/use-toast";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 import SelectCategory from "./SelectCategory";
-
 
 const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
 
@@ -117,12 +124,12 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
     },
   });
 
-  const { mutateAsync: addGame } = useMutation({
+  const { mutateAsync: addGame, isLoading: isLoadingGame } = useMutation({
     mutationFn: (game: NewGame) => GameApi.create(game),
   });
 
-  const { mutateAsync: addImage } = useMutation((params: { gameId: number; file: File }) =>
-    GameApi.addImage(params.gameId, params.file),
+  const { mutateAsync: addImage, isLoading: isLoadingImage } = useMutation(
+    (params: { gameId: number; file: File }) => GameApi.addImage(params.gameId, params.file),
   );
 
   const handleFormSubmit = async (data: NewGame) => {
@@ -200,6 +207,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
         setSelectedImage(null);
       }}
     >
+      {(isLoadingGame || isLoadingImage) && <Spinner />}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleFormSubmit)}
