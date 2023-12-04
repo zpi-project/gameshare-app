@@ -4,19 +4,14 @@ import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
+import { useRecoilValue } from "recoil";
 import { z } from "zod";
+import { roleState } from "@/state/role";
 import { NewGame } from "@/types/Game";
 import { CategoryApi } from "@/api/CategoryApi";
 import { GameApi } from "@/api/GameApi";
 import { DialogContent } from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -24,6 +19,7 @@ import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { useToast } from "../ui/use-toast";
 import SelectCategory from "./SelectCategory";
+
 
 const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
 
@@ -46,6 +42,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
     queryFn: CategoryApi.getAll,
     select: data => data.map(({ name, id }) => ({ label: name, value: id })),
   });
+  const role = useRecoilValue(roleState);
 
   const formSchema = z.object({
     categoriesIDs: z.number().array(),
@@ -137,7 +134,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
         const newGame = await addGame(data);
         console.log(newGame);
         toast({
-          title: t("gameAdded"),
+          title: t(role === "admin" ? "successAddingNewGameAdmin" : "successAddingNewGame"),
         });
 
         try {
