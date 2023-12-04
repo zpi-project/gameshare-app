@@ -8,12 +8,12 @@ import { useDebounce } from "use-debounce";
 import { roleState } from "@/state/role";
 import { Game } from "@/types/Game";
 import { GameApi } from "@/api/GameApi";
+import AddGameForm from "@/components/AddGameForm";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
-import AddGameForm from "./AddGameForm";
 import GameSearchCard from "./GameSearchCard";
 
 const GAME_PAGE_SIZE = 8;

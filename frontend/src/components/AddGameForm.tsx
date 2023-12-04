@@ -26,7 +26,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import SelectCategory from "./SelectCategory";
+import SelectCategory from "./GameSearch/SelectCategory";
 
 const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
 
