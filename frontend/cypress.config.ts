@@ -7,7 +7,7 @@ dotenv.config({ path: ".env.cypress" });
 export default defineConfig({
   env: {
     codeCoverage: {
-      exclude: "cypress/**/*.*",
+      exclude: ["cypress/**/*.*", "src/components/ui/*.*"],
     },
   },
   component: {
