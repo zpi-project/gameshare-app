@@ -272,5 +272,6 @@ export default {
   minPlayers: "Min number of players",
   maxPlayers: "Max number of players",
   playingTime: "Playing time",
-
+  categories: "Categories",
+  chooseCategories: "Choose categories",
 };

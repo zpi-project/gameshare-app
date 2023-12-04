@@ -6,6 +6,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import { z } from "zod";
 import { NewGame } from "@/types/Game";
+import { CategoryApi } from "@/api/CategoryApi";
 import { GameApi } from "@/api/GameApi";
 import { DialogContent } from "@/components/ui/dialog";
 import {
@@ -19,23 +20,27 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import SelectMultiple from "../SelectMultiple";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { useToast } from "../ui/use-toast";
-import { CategoryApi } from "@/api/CategoryApi";
 
 const AddGameForm: FC = () => {
-  const { t, i18n: { language } } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { toast } = useToast();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-    const { data: categories } = useQuery({
-      queryKey: ["categories", { language }],
+  const { data: categories } = useQuery({
+    queryKey: ["categories", { language }],
     queryFn: CategoryApi.getAll,
     select: data => data.map(({ name, id }) => ({ label: name, value: id })),
-    });
-  
+  });
+
   const formSchema = z.object({
+    categoriesIDs: z.number().array(),
     name: z
       .string({ required_error: t("fieldIsRequired", { field: t("gameName"), context: "female" }) })
       .trim()
@@ -171,89 +176,110 @@ const AddGameForm: FC = () => {
                   </FormItem>
                 )}
               />
-              <div>
+              <div className="flex flex-row gap-2">
                 <FormField
-                control={form.control}
-                name="playingTime"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("playingTime")}</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="border-none"
-                        {...field}
-                        onChange={e => {
-                          const value = parseFloat(e.target.value);
-                          field.onChange(isNaN(value) ? "" : value);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                  control={form.control}
+                  name="categoriesIDs"
+                  render={({ field }) => (
+                    <FormItem className="mt-1.5 flex flex-col gap-1">
+                      <FormLabel>{t("categories")}</FormLabel>
+                      <FormControl>
+                        <SelectMultiple
+                          options={categories ?? []}
+                          width="w-[280px]"
+                          placeholder={t("chooseCategories")}
+                          noResultsInfo={t("noResults")}
+                          onChange={field.onChange}
+                          scroll
+                          search
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="playingTime"
+                  render={({ field }) => (
+                    <FormItem className="flex-grow">
+                      <FormLabel>{t("playingTime")}</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="border-none"
+                          {...field}
+                          onChange={e => {
+                            const value = parseFloat(e.target.value);
+                            field.onChange(isNaN(value) ? "" : value);
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
               </div>
               <div className="flex flex-row gap-2">
                 <FormField
-                control={form.control}
-                name="minPlayers"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("minPlayers")}</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="border-none"
-                        {...field}
-                        onChange={e => {
-                          const value = parseFloat(e.target.value);
-                          field.onChange(isNaN(value) ? "" : value);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                  control={form.control}
+                  name="minPlayers"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("minPlayers")}</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="border-none"
+                          {...field}
+                          onChange={e => {
+                            const value = parseFloat(e.target.value);
+                            field.onChange(isNaN(value) ? "" : value);
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
                 <FormField
-                control={form.control}
-                name="maxPlayers"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("maxPlayers")}</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="border-none"
-                        {...field}
-                        onChange={e => {
-                          const value = parseFloat(e.target.value);
-                          field.onChange(isNaN(value) ? "" : value);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                  control={form.control}
+                  name="maxPlayers"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("maxPlayers")}</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="border-none"
+                          {...field}
+                          onChange={e => {
+                            const value = parseFloat(e.target.value);
+                            field.onChange(isNaN(value) ? "" : value);
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-                 <FormField
-                control={form.control}
-                name="age"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("age")}</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="border-none"
-                        {...field}
-                        onChange={e => {
-                          const value = parseFloat(e.target.value);
-                          field.onChange(isNaN(value) ? "" : value);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="age"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("age")}</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="border-none"
+                          {...field}
+                          onChange={e => {
+                            const value = parseFloat(e.target.value);
+                            field.onChange(isNaN(value) ? "" : value);
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
               <FormField
                 control={form.control}
@@ -296,7 +322,7 @@ const AddGameForm: FC = () => {
                 </div>
                 <div className="flex flex-grow flex-col gap-4 rounded-lg bg-card p-4">
                   {selectedImage && (
-                    <div className="h-[320px] w-full overflow-hidden rounded-lg">
+                    <div className="h-[380px] w-full overflow-hidden rounded-lg">
                       <img
                         src={URL.createObjectURL(selectedImage)}
                         alt={`Selected image`}
