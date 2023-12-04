@@ -244,24 +244,37 @@ public class ReservationService {
         UserOpinionDTO renterOpinionDTO = null;
         if(renterOpinion != null)
             renterOpinionDTO = new UserOpinionDTO(renterOpinion,false);
+        User owner = reservation.getGameInstance().getOwner();
+        UserOpinion ownerOpinion =  userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation, owner).stream().findFirst().orElse(null);
+        UserOpinionDTO ownerOpinionDTO = null;
+        if(ownerOpinion != null)
+            ownerOpinionDTO = new UserOpinionDTO(ownerOpinion,false);
+
         boolean canAddRenterOpinion = renterOpinion == null;
-        return new ReservationDetailDTO(new ReservationDTO(reservation),canAddRenterOpinion,false,false,null,renterOpinionDTO,null);
+        return new ReservationDetailDTO(new ReservationDTO(reservation),canAddRenterOpinion,false,false,ownerOpinionDTO,renterOpinionDTO,null);
     }
 
     public ReservationDetailDTO getReservationRenterDetails(Reservation reservation)  {
+        User renter = reservation.getRenter();
         User owner = reservation.getGameInstance().getOwner();
         GameInstance gameInstance = reservation.getGameInstance();
 
+        UserOpinion renterOpinion = userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation, renter).stream().findFirst().orElse(null);
         UserOpinion ownerOpinion =  userOpinionRepository.getUserOpinionsByReservationAndRatedUser(reservation, owner).stream().findFirst().orElse(null);
         GameInstanceOpinion gameInstanceOpinion = gameinstanceOpinionService.getOpinionsByGameInstance(gameInstance).stream().findFirst().orElse(null);
+
+        UserOpinionDTO renterOpinionDTO = null;
         UserOpinionDTO ownerOpinionDTO = null;
         GameInstanceOpinionDTO gameInstanceOpinionDTO = null;
+
+        if(renterOpinion != null)
+            renterOpinionDTO = new UserOpinionDTO(renterOpinion,false);
+
         if(ownerOpinion != null)
             ownerOpinionDTO = new UserOpinionDTO(ownerOpinion,false);
 
         if(gameInstanceOpinion != null)
             gameInstanceOpinionDTO = new GameInstanceOpinionDTO(gameInstanceOpinion,false);
-
 
         boolean canAddOwnerOpinion = ownerOpinion == null;
         boolean canAddGameInstanceOpinion = gameInstanceOpinion == null;
@@ -269,7 +282,7 @@ public class ReservationService {
             canAddOwnerOpinion = false;
             canAddGameInstanceOpinion = false;
         }
-        return new ReservationDetailDTO(new ReservationDTO(reservation),false,canAddOwnerOpinion,canAddGameInstanceOpinion,ownerOpinionDTO,null,gameInstanceOpinionDTO);
+        return new ReservationDetailDTO(new ReservationDTO(reservation),false,canAddOwnerOpinion,canAddGameInstanceOpinion,ownerOpinionDTO,renterOpinionDTO,gameInstanceOpinionDTO);
     }
 
     public ReservationDetailDTO getReservationDetails(Authentication authentication, String reservationId) throws UserDoesNotExistException, BadRequestException {
