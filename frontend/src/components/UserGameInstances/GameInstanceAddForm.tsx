@@ -37,7 +37,7 @@ const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
 const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const [selectedImages, setSelectedImages] = useState<File[] | null>(null);
+  const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [game, setGame] = useState<Game | null>(null);
   const [imageSizeErrors, setImageSizeErrors] = useState<boolean[]>([]);
 
@@ -54,7 +54,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
   };
 
   useEffect(() => {
-    setImageSizeErrors((selectedImages || [])?.map(file => file.size > MAX_IMAGE_SIZE));
+    setImageSizeErrors((selectedImages)?.map(file => file.size > MAX_IMAGE_SIZE));
   }, [selectedImages]);
 
   const formSchema = z.object({
@@ -81,6 +81,10 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      description: "",
+      pricePerDay: 0,
+    },
   });
 
   const { mutateAsync: addGameInstance, isLoading: isLoadingGame } = useMutation({
@@ -100,7 +104,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
           title: t("gameInstanceAdded"),
         });
 
-        if (selectedImages) {
+        if (selectedImages.length) {
           for (let idx = 0; idx < (selectedImages.length || 0); idx++) {
             const file = selectedImages[idx];
 
@@ -144,7 +148,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
       onCloseAutoFocus={() => {
         form.reset();
         setGame(null);
-        setSelectedImages(null);
+        setSelectedImages([]);
       }}
     >
       {(isLoadingGame || isLoadingImage) && <Spinner />}
@@ -243,14 +247,11 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                     {selectedImages && (
                       <div className="flex flex-col gap-4 p-4">
                         {selectedImages.map((image, idx) => (
-                          <div>
+                          <div key={idx + "img"}>
                             <p className="font-bold text-destructive">
                               {imageSizeErrors[idx] && t("maxImgSize", { size: 3 })}
                             </p>
-                            <div
-                              className="relative h-[250px] w-full overflow-hidden rounded-lg"
-                              key={idx + "img"}
-                            >
+                            <div className="relative h-[250px] w-full overflow-hidden rounded-lg">
                               <img
                                 src={URL.createObjectURL(image)}
                                 alt={`Selected ${idx + 1}`}
