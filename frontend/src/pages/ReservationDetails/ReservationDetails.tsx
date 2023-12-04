@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { t } from "i18next";
@@ -18,13 +19,16 @@ const ReservationDetails: FC = () => {
   const { toast } = useToast();
   const token = useRecoilValue(tokenState);
   const [userType, setUserType] = useState<"owner" | "renter">();
+  const {
+    i18n: { language },
+  } = useTranslation();
 
   const {
     data: reservation,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["reservation", { id }],
+    queryKey: ["reservation", { id, language }],
     queryFn: () => ReservationsApi.getDetails(id),
   });
 

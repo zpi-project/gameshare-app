@@ -16,7 +16,10 @@ import GameInstancesList from "./GameInstancesList";
 const GAMES_PAGE_SIZE = 15;
 
 const GameUsersSection: FC = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { id = "" } = useParams();
   const [location, setLocation] = useRecoilState(locationState);
   const [latitude, longitude] = location as number[];
@@ -26,7 +29,7 @@ const GameUsersSection: FC = () => {
 
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage, isError } =
     useInfiniteQuery({
-      queryKey: ["game-game-instances", { id }],
+      queryKey: ["game-game-instances", { id, language }],
       queryFn: ({ pageParam = 0 }) =>
         GameApi.getInstances(
           parseInt(id),

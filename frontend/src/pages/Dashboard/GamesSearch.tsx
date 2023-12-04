@@ -25,10 +25,13 @@ interface GamesSearchProps {
 }
 
 const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
 
   const { data: categories } = useQuery({
-    queryKey: ["categories"],
+    queryKey: ["categories", { language }],
     queryFn: CategoryApi.getAll,
     select: data => data.map(({ name, id }) => ({ label: name, value: id })),
   });

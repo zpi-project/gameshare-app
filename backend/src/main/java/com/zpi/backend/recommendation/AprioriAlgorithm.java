@@ -51,7 +51,7 @@ public class AprioriAlgorithm {
                 if (transaction.containsAll(item))
                     countItemOccurrence++;
 
-            if (countItemOccurrence >= minSupport) {
+            if ((double) countItemOccurrence /noOfTransactions >= minSupport) {
                 frequentItemSets.put(item, countItemOccurrence);
             }
         }
@@ -65,11 +65,10 @@ public class AprioriAlgorithm {
             candidates = generateCandidates(candidates);
             addFrequentItemSets(candidates);
         }
-
-        System.out.println(frequentItemSets);
     }
 
-    private void generateCandidatesHelper(List<Long> set, int n, int start, List<Long> current, List<Set<Long>> result) {
+    private void generateCandidatesHelper(List<Long> set, int n, int start, List<Long> current,
+                                          List<Set<Long>> result) {
         if (current.size() == n) {
             result.add(new HashSet<>(current));
             return;
@@ -88,7 +87,8 @@ public class AprioriAlgorithm {
         Set<Long> allInOneSet = new HashSet<>();
         for (Set<Long> c : candidates)
             allInOneSet.addAll(c);
-        generateCandidatesHelper(allInOneSet.stream().toList(), combinationLength, 0, new ArrayList<>(), nextFrequentItemSet);
+        generateCandidatesHelper(allInOneSet.stream().toList(), combinationLength, 0,
+                new ArrayList<>(), nextFrequentItemSet);
         return nextFrequentItemSet;
     }
 
@@ -132,7 +132,6 @@ public class AprioriAlgorithm {
                 }
             }
         }
-
         return rules;
     }
 

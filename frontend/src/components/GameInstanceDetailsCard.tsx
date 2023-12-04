@@ -2,9 +2,9 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { GameInstance, GameInstanceDetails } from "@/types/GameInstance";
 import { stringToHexColor } from "@/utils/stringToColor";
+import { useTheme } from "../ThemeProvider";
 import { PriceBadge } from "./Badge";
 import { Stars } from "./Stars";
-import { useTheme } from "./ThemeProvider";
 import { Badge } from "./ui/badge";
 
 interface GameInstanceDetailsCardProps {

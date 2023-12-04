@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouteError, isRouteErrorResponse, Link } from "react-router-dom";
+import { ThemeProvider } from "@/ThemeProvider";
 import { Dice1, Dice2, Dice3, Dice4, Dice5, Dice6 } from "lucide-react";
 import { URLS } from "@/constants/urls";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import { Separator } from "@/components/ui/separator";
 
 const errorStatuses = [400, 401, 403, 404, 500, 501, 503, 504];
