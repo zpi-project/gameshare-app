@@ -4,14 +4,14 @@ import java.util.*;
 
 public class AprioriAlgorithm {
 
-    private final int minSupport;
+    private final double minSupport;
     private final int noOfTransactions;
     private final double minConfidence;
     private final List<Set<Long>> transactions;
     private final List<Set<Long>> itemSet;
     private final Map<Set<Long>, Integer> frequentItemSets;
 
-    public AprioriAlgorithm(int minSupport, double minConfidence, List<Set<Long>> transactions) {
+    public AprioriAlgorithm(double minSupport, double minConfidence, List<Set<Long>> transactions) {
         this.minSupport = minSupport;
         this.minConfidence = minConfidence;
         this.transactions = transactions;
@@ -122,7 +122,7 @@ public class AprioriAlgorithm {
                     Set<Long> consequent = new HashSet<>(itemset);
                     consequent.removeAll(antecedent);
 
-                    double support = frequentItemSets.get(itemset);
+                    double support = calculateSupport(itemset);
                     double confidence = calculateConfidence(itemset, antecedent);
 
                     if (support >= minSupport && confidence >= minConfidence) {
@@ -137,7 +137,7 @@ public class AprioriAlgorithm {
     }
 
     private double calculateSupport(Set<Long> itemset) {
-        return this.frequentItemSets.get(itemset);
+        return (double) this.frequentItemSets.get(itemset) / this.noOfTransactions;
     }
 
     private double calculateConfidence(Set<Long> itemset, Set<Long> antecedent) {
