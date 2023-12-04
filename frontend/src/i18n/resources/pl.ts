@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -275,8 +276,10 @@ const pl: typeof en = {
   minPlayers: "Min liczba graczy",
   maxPlayers: "Max liczba graczy",
   playingTime: "Czas gry",
-  categories: "Kategories",
+  categories: "Kategorie",
   chooseCategories: "Wybierz kategorie",
+  numberTypeError: "{{field}} musi być liczbą.",
+  intTypeError: "{{field}} musi być liczbą całkowitą.",
 };
 
 export default pl;

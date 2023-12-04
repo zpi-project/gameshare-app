@@ -9,16 +9,10 @@ import { GameInstanceSearchParams } from "@/types/GameInstance";
 import { CategoryApi } from "@/api/CategoryApi";
 import SelectInput from "@/components/SelectInput";
 import { Button } from "@/components/ui/button";
-import {
-  FormField,
-  FormItem,
-  FormControl,
-  FormMessage,
-  Form,
-  FormLabel,
-} from "@/components/ui/form";
+import { FormField, FormItem, FormControl, FormMessage, Form, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { AGE_OPTIONS, PLAYERS_OPTIONS, PRICE_PER_DAY_OPTIONS } from "./options";
+
 
 interface GamesSearchProps {
   onSubmit: Dispatch<SetStateAction<GameInstanceSearchParams>>;

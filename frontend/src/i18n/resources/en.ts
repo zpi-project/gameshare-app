@@ -274,4 +274,6 @@ export default {
   playingTime: "Playing time",
   categories: "Categories",
   chooseCategories: "Choose categories",
+  numberTypeError: "{{field}} has to be a number.",
+  intTypeError: "{{field}} has to be an integer.",
 };

@@ -59,31 +59,41 @@ const AddGameForm: FC = () => {
       .max(1000, { message: t("maxCharCount", { field: t("gameDescription"), length: 1000 }) }),
     minPlayers: z.coerce
       .number({
-        invalid_type_error: t("fieldIsRequired", { field: t("minPlayers"), context: "female" }),
+        invalid_type_error: t("numberTypeError", { field: t("minPlayers") }),
+      })
+      .int({
+        message: t("intTypeError", { field: t("minPlayers") }),
       })
       .positive({
         message: t("fieldPositive", { field: t("minPlayers") }),
       }),
     maxPlayers: z.coerce
       .number({
-        invalid_type_error: t("fieldIsRequired", { field: t("maxPlayers"), context: "female" }),
+        invalid_type_error: t("numberTypeError", { field: t("maxPlayers") }),
+      })
+      .int({
+        message: t("intTypeError", { field: t("maxPlayers") }),
       })
       .positive({
         message: t("fieldPositive", { field: t("maxPlayers") }),
       }),
     playingTime: z.coerce
       .number({
-        invalid_type_error: t("fieldIsRequired", { field: t("playingTime"), context: "female" }),
+        invalid_type_error: t("numberTypeError", { field: t("playingTime") }),
       })
-      .int()
+      .int({
+        message: t("intTypeError", { field: t("playingTime") }),
+      })
       .positive({
         message: t("fieldPositive", { field: t("playingTime") }),
       }),
     age: z.coerce
       .number({
-        invalid_type_error: t("fieldIsRequired", { field: t("age"), context: "female" }),
+        invalid_type_error: t("numberTypeError", { field: t("age"), context: "female" }),
       })
-      .int()
+      .int({
+        message: t("intTypeError", { field: t("age") }),
+      })
       .positive({
         message: t("fieldPositive", { field: t("age") }),
       }),
@@ -91,6 +101,14 @@ const AddGameForm: FC = () => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      shortDescription: "",
+      minPlayers: 0,
+      maxPlayers: 0,
+      playingTime: 0,
+      age: 0,
+    },
   });
 
   const { mutateAsync: addGame } = useMutation({
@@ -104,7 +122,7 @@ const AddGameForm: FC = () => {
   const handleFormSubmit = async (data: NewGame) => {
     try {
       const newGame = await addGame(data);
-
+      console.log(newGame);
       toast({
         title: t("gameAdded"),
       });
@@ -161,22 +179,22 @@ const AddGameForm: FC = () => {
           className="m-4 w-full rounded-md bg-background p-3"
         >
           <div className="flex h-full w-full flex-row gap-4">
-            <div className="flex w-[55%] flex-col gap-2">
+            <div className="flex w-[55%] flex-col gap-4">
               <h1 className="mb-2 w-full text-2xl uppercase text-primary">{t("filGameDetails")}</h1>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("gameName")}</FormLabel>
-                    <FormControl>
-                      <Input className="border-none" spellCheck={false} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="flex flex-row gap-2">
+              <div className="flex flex-row gap-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem className="flex-grow">
+                      <FormLabel>{t("gameName")}</FormLabel>
+                      <FormControl>
+                        <Input className="border-none" spellCheck={false} {...field} autoComplete="off"/>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="categoriesIDs"
@@ -200,6 +218,8 @@ const AddGameForm: FC = () => {
                     </FormItem>
                   )}
                 />
+              </div>
+              <div className="flex flex-row gap-4">
                 <FormField
                   control={form.control}
                   name="playingTime"
@@ -207,56 +227,7 @@ const AddGameForm: FC = () => {
                     <FormItem className="flex-grow">
                       <FormLabel>{t("playingTime")}</FormLabel>
                       <FormControl>
-                        <Input
-                          className="border-none"
-                          {...field}
-                          onChange={e => {
-                            const value = parseFloat(e.target.value);
-                            field.onChange(isNaN(value) ? "" : value);
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="flex flex-row gap-2">
-                <FormField
-                  control={form.control}
-                  name="minPlayers"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("minPlayers")}</FormLabel>
-                      <FormControl>
-                        <Input
-                          className="border-none"
-                          {...field}
-                          onChange={e => {
-                            const value = parseFloat(e.target.value);
-                            field.onChange(isNaN(value) ? "" : value);
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="maxPlayers"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("maxPlayers")}</FormLabel>
-                      <FormControl>
-                        <Input
-                          className="border-none"
-                          {...field}
-                          onChange={e => {
-                            const value = parseFloat(e.target.value);
-                            field.onChange(isNaN(value) ? "" : value);
-                          }}
-                        />
+                        <Input className="border-none" {...field} autoComplete="off"/>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -266,17 +237,38 @@ const AddGameForm: FC = () => {
                   control={form.control}
                   name="age"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="flex-grow">
                       <FormLabel>{t("age")}</FormLabel>
                       <FormControl>
-                        <Input
-                          className="border-none"
-                          {...field}
-                          onChange={e => {
-                            const value = parseFloat(e.target.value);
-                            field.onChange(isNaN(value) ? "" : value);
-                          }}
-                        />
+                        <Input className="border-none" {...field} autoComplete="off"/>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex flex-row gap-4">
+                <FormField
+                  control={form.control}
+                  name="minPlayers"
+                  render={({ field }) => (
+                    <FormItem className="flex-grow w-1/2">
+                      <FormLabel>{t("minPlayers")}</FormLabel>
+                      <FormControl>
+                        <Input className="border-none" {...field} autoComplete="off"/>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="maxPlayers"
+                  render={({ field }) => (
+                    <FormItem  className="flex-grow w-1/2">
+                      <FormLabel>{t("maxPlayers")}</FormLabel>
+                      <FormControl>
+                        <Input className="border-none" {...field} autoComplete="off"/>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -297,6 +289,7 @@ const AddGameForm: FC = () => {
                           spellCheck={false}
                           className="h-full resize-none"
                           {...field}
+                          autoComplete="off"
                         />
                       </div>
                     </FormControl>
