@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface ReservationStatusRepository extends JpaRepository<ReservationStatus, Long> {
     Optional<ReservationStatus> findByStatus(String status);
     List<ReservationStatus> findAllByStatusIn(Collection<String> status);
+    boolean existsByStatus(String status);
 }

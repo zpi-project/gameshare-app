@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Set;
 
+import static com.zpi.backend.reservation_status.ReservationStatus.*;
+
 @Repository
 public interface RecommendationRepository extends JpaRepository<AssociationRuleDB, Long> {
 
@@ -24,7 +26,7 @@ public interface RecommendationRepository extends JpaRepository<AssociationRuleD
             "from GameInstance gi " +
             "join Reservation r on gi = r.gameInstance " +
             "where r.renter.id = :userId " +
-            "and r.status.status in ('RENTED', 'FINISHED')")
+            "and r.status.status in ('"+PENDING+"','"+ACCEPTED_BY_OWNER+"','"+RENTED+"', '"+FINISHED+"')")
     List<Long> getAllGamesInUserReservations(@Param("userId") long userId);
 
     @Query("select g from Game g where g.id in :gamesIds")
