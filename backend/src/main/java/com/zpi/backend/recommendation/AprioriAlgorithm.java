@@ -65,8 +65,6 @@ public class AprioriAlgorithm {
             candidates = generateCandidates(candidates);
             addFrequentItemSets(candidates);
         }
-
-        System.out.println(frequentItemSets);
     }
 
     private void generateCandidatesHelper(List<Long> set, int n, int start, List<Long> current,
