@@ -2,8 +2,10 @@ package com.zpi.backend.email_type;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@NoArgsConstructor
 @Data
 @Table(name = "email_types")
 public class EmailType {
@@ -25,4 +27,8 @@ public class EmailType {
     private long id;
     @Column(nullable = false,unique = true)
     private String type;
+
+    public EmailType(String type) {
+        this.type = type;
+    }
 }

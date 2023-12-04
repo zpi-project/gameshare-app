@@ -8,4 +8,5 @@ import java.util.Optional;
 @Repository
 public interface EmailTypeRepository extends JpaRepository<EmailType, Long> {
     Optional<EmailType> findEmailTypeByType(String type);
+    boolean existsByType(String type);
 }

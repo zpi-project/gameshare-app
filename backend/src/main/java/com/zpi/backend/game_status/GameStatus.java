@@ -24,6 +24,10 @@ public class GameStatus {
     @Column(name = "status",nullable = false,unique = true)
     private String status;
 
+    public GameStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

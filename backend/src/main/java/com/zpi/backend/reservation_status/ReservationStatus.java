@@ -2,9 +2,11 @@ package com.zpi.backend.reservation_status;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "reservation_status")
 public class ReservationStatus {
     public static final String ACCEPTED_BY_OWNER = "ACCEPTED_BY_OWNER";
@@ -22,4 +24,8 @@ public class ReservationStatus {
 
     @Column(name = "status",nullable = false,unique = true)
     private String status;
+
+    public ReservationStatus(String status) {
+        this.status = status;
+    }
 }
