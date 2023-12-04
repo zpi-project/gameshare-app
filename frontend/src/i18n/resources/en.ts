@@ -46,6 +46,9 @@ export default {
   updateErrorTitle: "An error occured while saving your new data.",
   registerSuccessDescription: "Your data was saved successfully.",
   updateSuccessDescription: "Your new data was saved successfully.",
+  opinionSuccessDescription: "Your opinion was saved successfully.",
+  opinionErrorTitle: "An error occured while saving your opinion.",
+  saveOpinion: "Save opinion",
 
   welcomeHeader: "Welcome to GameShare!",
   welcomeDescription:

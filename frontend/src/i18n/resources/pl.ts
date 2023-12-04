@@ -48,6 +48,9 @@ const pl: typeof en = {
   updateErrorTitle: "Wystąpił błąd podczas zapisywania twoich nowych danych.",
   registerSuccessDescription: "Pomyślnie zapisano twoje dane.",
   updateSuccessDescription: "Pomyślnie zapisano twoje nowe dane.",
+  opinionSuccessDescription: "Pomyślnie zapisano twoją opinie.",
+  opinionErrorTitle: "Wystąpił błąd podczas zapisywania twojej opinii.",
+  saveOpinion: "Zapisz opinie",
   game: "Gra",
 
   welcomeHeader: "Witaj w GameShare!",

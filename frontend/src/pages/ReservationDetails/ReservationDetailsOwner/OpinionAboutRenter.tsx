@@ -1,16 +1,14 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { queryClient } from "@cypress/support/queryClient";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
-import { Game } from "@/types/Game";
 import { NewOpinion, Opinion } from "@/types/Opinion";
 import { UserApi } from "@/api/UserApi";
 import { Stars, StarsInput } from "@/components/Stars";
 import { Button } from "@/components/ui/button";
-import { FormField, FormItem, FormLabel, FormControl, Form } from "@/components/ui/form";
+import { FormField, FormItem, FormControl, Form } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
@@ -33,16 +31,16 @@ const OpinionAboutRenter: FC<OpinionAboutRenterProps> = ({
     mutationFn: (opinion: NewOpinion) => UserApi.addOpinion(opinion),
     onError: () => {
       toast({
-        title: t("registerErrorTitle"),
+        title: t("opinionErrorTitle"),
         description: t("tryRefreshing"),
         variant: "destructive",
       });
     },
     onSuccess: () => {
       toast({
-        description: t("registerSuccessDescription"),
+        description: t("opinionSuccessDescription"),
       });
-      queryClient.invalidateQueries(["reservation", { reservationId }]);
+      queryClient.invalidateQueries(["reservation", { id: reservationId }]);
     },
   });
 
@@ -69,16 +67,6 @@ const OpinionAboutRenter: FC<OpinionAboutRenterProps> = ({
       ratedUserUUID: renterUUID,
     },
   });
-
-  // const handleFormSubmit = async (data: NewOpinion) => {
-
-  //     const newOpinion = addOpinion(data);
-
-  //     toast({
-  //       title: t("gameInstanceAdded"),
-  //     });
-
-  // };
 
   return (
     <div className="flex h-full  flex-grow flex-col gap-4 rounded-lg bg-section p-4">
@@ -135,7 +123,7 @@ const OpinionAboutRenter: FC<OpinionAboutRenterProps> = ({
               </div>
               <div className="flex justify-end p-1">
                 <Button className="w-40" type="submit">
-                  Save opinion
+                  {t("saveOpinion")}
                 </Button>
               </div>
             </div>

@@ -5,7 +5,7 @@ import {
   SearchGameInstance,
   NewGameInstance,
 } from "@/types/GameInstance";
-import { Opinion } from "@/types/Opinion";
+import { NewGameInstanceOpinion, Opinion } from "@/types/Opinion";
 import { Paginated } from "@/types/Paginated";
 import { ReservationTimeframe, Timeframe } from "@/types/Reservation";
 import Api from "./Api";
@@ -68,6 +68,11 @@ export class GameInstanceApi {
       },
     );
     return opinions;
+  }
+
+  static async addGameInstanceOpinion(opinion: NewGameInstanceOpinion) {
+    const { data } = await Api.post<NewGameInstanceOpinion>(`game-instances/opinions`, opinion);
+    return data;
   }
 
   static async getReservations(uuid: string, month: number, year: number) {

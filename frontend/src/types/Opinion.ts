@@ -14,3 +14,10 @@ export interface NewOpinion {
   description: string;
   reservationId: string;
 }
+
+export interface NewGameInstanceOpinion {
+  gameInstanceUuid: string;
+  stars: number;
+  description: string;
+  reservationId: string;
+}
