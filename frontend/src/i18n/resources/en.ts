@@ -258,6 +258,6 @@ export default {
   gameRejectSuccess: "Game - {{title}} has been rejected.",
   gameRejectError: "There was an error rejecting game - {{title}}.",
   gameRejectErrorDescription: "Game has been not rejected.",
-  recommendedGames: "You may like these games",
+  recommendedGames: "Recommended for you",
   choosePictures: "Choose up to 3 files. Format: JPG, JPEG or PNG",
 };

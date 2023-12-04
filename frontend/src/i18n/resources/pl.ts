@@ -261,7 +261,7 @@ const pl: typeof en = {
   gameRejectSuccess: "Gra - {{title}} została odrzucona.",
   gameRejectError: "Wystąpił błąd podczas odrzucania gry - {{title}}.",
   gameRejectErrorDescription: "Gra nie została odrzucona.",
-  recommendedGames: "Te gry mogą ci się spodobać",
+  recommendedGames: "Rekomendowane dla ciebie",
   choosePictures: "Wybierz maksymalnie 3 pliki. Format: JPG, JPEG or PNG",
 };
 

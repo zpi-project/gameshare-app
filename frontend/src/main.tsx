@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProtectedRoute from "@/ProtectedRoute";
 import { URLS } from "@/constants/urls";
 import CategoryGameSearch from "@/pages/CategoryGameSearch";
 import Dashboard from "@/pages/Dashboard";
@@ -13,7 +14,6 @@ import MyProfile from "@/pages/MyProfile";
 import ReservationDetails from "@/pages/ReservationDetails";
 import ReservationsHistory from "@/pages/ReservationsHistory";
 import UserProfile from "@/pages/UserProfile";
-import ProtectedRoute from "@/components/ProtectedRoute";
 import App from "./App";
 import "./index.css";
 

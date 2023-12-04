@@ -40,7 +40,7 @@ const GameDetailsSection: FC<GameDetailsSectionProps> = ({ game }) => {
           <div className="flex flex-row flex-wrap gap-1">
             {game.categories.map(({ id, name }) => (
               <Badge key={id}>
-                <Link to={`${URLS.CATEGORY_GAMES}/${id}`} className="text-sm">
+                <Link to={`${URLS.CATEGORY_GAMES}/${id}`} className="text-sm capitalize">
                   {name}
                 </Link>
               </Badge>
