@@ -44,7 +44,7 @@ const GameInstance: FC = () => {
     <div className="flex h-full w-full flex-row gap-6">
       {gameInstance && (
         <>
-          <div className="relative w-1/3 flex-grow rounded-lg bg-section">
+          <div className="relative w-1/3 flex-grow rounded-lg bg-section p-4">
             <div
               className="absolute bottom-0 left-0 right-0 top-0 rounded-lg opacity-50 dark:opacity-40"
               style={{
@@ -57,13 +57,10 @@ const GameInstance: FC = () => {
                 } 100%)`,
               }}
             />
-            <div className="h-400 absolute bottom-5 left-5 right-5 top-5 flex flex-row">
-              {gameInstance && (
-                <GameInstanceDetailsSection gameInstance={gameInstance} color={color} />
-              )}
-            </div>
+            {gameInstance && (
+              <GameInstanceDetailsSection gameInstance={gameInstance} color={color} />
+            )}
           </div>
-
           <div className="flex h-full w-2/3 flex-grow flex-col gap-5">
             <div className="flex h-[400px] w-full flex-row gap-5">
               <div className="h-full w-3/5 overflow-hidden rounded-lg">

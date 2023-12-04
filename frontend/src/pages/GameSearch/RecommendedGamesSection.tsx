@@ -2,14 +2,14 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import "@radix-ui/react-scroll-area";
 import { useQuery } from "@tanstack/react-query";
-import { GameApi } from "@/api/GameApi";
+import { RecommendationsApi } from "@/api/RecommendationsApi";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
 import Game from "./Game";
 
-const POPULAR_GAMES_PAGE_SIZE = 8;
+const RECOMMENDATIONS_PAGE_SIZE = 8;
 
-const PopularGamesSection: FC = () => {
+const RecommendedGamesSection: FC = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
@@ -18,16 +18,17 @@ const PopularGamesSection: FC = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["popular-games"],
-    queryFn: () => GameApi.getPopular(0, POPULAR_GAMES_PAGE_SIZE),
+    queryKey: ["recommended-games"],
+    queryFn: () => RecommendationsApi.getAll(0, RECOMMENDATIONS_PAGE_SIZE),
     onError: () => {
       toast({
-        title: t("popularGamesErrorTitle"),
+        title: t("recommendationsErrorTitle"),
         description: t("tryRefreshing"),
         variant: "destructive",
       });
     },
   });
+  console.log(games);
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -41,7 +42,7 @@ const PopularGamesSection: FC = () => {
         !isError &&
         games.results.length > 0 && (
           <>
-            <h2 className="text-3xl leading-loose text-primary">{t("popularNow")}</h2>
+            <h2 className="text-3xl leading-loose text-primary">{t("recommendedGames")}</h2>
             <div className="flex w-full flex-row flex-wrap gap-6">
               {games.results.map(game => (
                 <Game game={game} key={game.id} />
@@ -54,4 +55,4 @@ const PopularGamesSection: FC = () => {
   );
 };
 
-export default PopularGamesSection;
+export default RecommendedGamesSection;

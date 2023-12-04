@@ -57,6 +57,7 @@ export default {
   popularNow: "Popular now",
   seeAll: "See all",
   popularGamesErrorTitle: "We couldn't load popular games.",
+  recommendationsErrorTitle: "We couldn't load recommendations for you",
   categoriesErrorTitle: "We couldn't load game categories.",
   searchGamePlaceholder: "What board game would you like to play?",
   searchGameWithinCategoryPlaceholder: "Search games within this category",
@@ -191,7 +192,7 @@ export default {
   formStartDate: "Start date",
   formEndDate: "End date",
   pickDate: "Pick a date",
-  startDateNotPast: "Start date cannot be a past date.",
+  startDateNotPast: "Start date cannot be a past date or today.",
   endDateAtLeastStartDate: "End date cannot be earlier than start date.",
   createReservationSuccess: "Game has been booked successfully!",
   createReservationSuccessDescription:
@@ -257,5 +258,6 @@ export default {
   gameRejectSuccess: "Game - {{title}} has been rejected.",
   gameRejectError: "There was an error rejecting game - {{title}}.",
   gameRejectErrorDescription: "Game has been not rejected.",
+  recommendedGames: "You may like these games",
   choosePictures: "Choose up to 3 files. Format: JPG, JPEG or PNG",
 };
