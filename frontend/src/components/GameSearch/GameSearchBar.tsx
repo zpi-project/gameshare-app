@@ -3,12 +3,17 @@ import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
+import { useRecoilValue } from "recoil";
 import { useDebounce } from "use-debounce";
+import { roleState } from "@/state/role";
 import { Game } from "@/types/Game";
 import { GameApi } from "@/api/GameApi";
+import AddGameForm from "@/components/AddGameForm";
+import { Button } from "@/components/ui/button";
+import { Dialog } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "../ui/scroll-area";
-import { Skeleton } from "../ui/skeleton";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import GameSearchCard from "./GameSearchCard";
 
 const GAME_PAGE_SIZE = 8;
@@ -24,6 +29,8 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
   const [showResults, setShowResults] = useState(false);
   const [debouncedSearch] = useDebounce(search, 500);
   const [blurTimeout, setBlurTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const {
     t,
     i18n: { language },
@@ -46,6 +53,7 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
   });
 
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
+  const role = useRecoilValue(roleState);
 
   useEffect(() => {
     if (entry?.isIntersecting && !isLoading) {
@@ -93,7 +101,22 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
                   )),
                 )
               ) : (
-                <h4 className="ml-2 mt-2 text-xl">{t("noResults")}</h4>
+                !isLoading && (
+                  <>
+                    <h4 className="ml-2 mt-2 text-xl">{t("noResults")}</h4>
+                    {role !== "guest" && (
+                      <>
+                        <p className="p-2 italic">{t("cannotFindGame")}</p>
+                        <Button
+                          className="ml-auto mt-4 w-max"
+                          onClick={() => setIsDialogOpen(true)}
+                        >
+                          {t("addGame")}
+                        </Button>
+                      </>
+                    )}
+                  </>
+                )
               )}
               {(isFetchingNextPage || isLoading) && (
                 <>
@@ -107,6 +130,9 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
           </ScrollArea>
         </div>
       )}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <AddGameForm close={() => setIsDialogOpen(false)} />
+      </Dialog>
     </div>
   );
 };
