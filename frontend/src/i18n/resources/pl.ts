@@ -95,7 +95,7 @@ const pl: typeof en = {
   gameInstanceAdded: "Egzemplarz gry został dodany.",
   gameInstanceDescriptionMin: "Opis musi mieć przynajmniej 2 znaki.",
   gameInstanceDescriptionMax: "Opis musi mieć maksymalnie 500 znaków",
-  fieldPositive: "{{field}} musi być przynajmniej 0",
+  fieldPositive: "{{field}} musi być więcej niż 0.",
   maxPricePerDay: "Maksymalna cena to 200",
   yourGameDetails: "Informacje o twojej grze",
   provideGamePrice: "Podaj cenę swojego egzemplarza gry",

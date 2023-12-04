@@ -100,7 +100,7 @@ export default {
   gameInstanceAdded: "Game istance was addedd successfully.",
   gameInstanceDescriptionMin: "Description must be at least 2 characters.",
   gameInstanceDescriptionMax: "Description must be less then 500 characters.",
-  fieldPositive: "{{field}} must be at least 0.",
+  fieldPositive: "{{field}} must be greater than 0.",
   maxPricePerDay: "Price per day must be less than 200.",
   yourGameDetails: "Your game details",
   provideGamePrice: "Provide game instance price",

@@ -9,7 +9,14 @@ import { NewGame } from "@/types/Game";
 import { CategoryApi } from "@/api/CategoryApi";
 import { GameApi } from "@/api/GameApi";
 import { DialogContent } from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -18,10 +25,13 @@ import { Textarea } from "../ui/textarea";
 import { useToast } from "../ui/use-toast";
 import SelectCategory from "./SelectCategory";
 
-
 const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
 
-const AddGameForm: FC = () => {
+interface AddGameFormProps {
+  close: () => void;
+}
+
+const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
   const {
     t,
     i18n: { language },
@@ -29,6 +39,7 @@ const AddGameForm: FC = () => {
   const { toast } = useToast();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imageSizeError, setImageSizeError] = useState(false);
+  const [imageRequiredError, setImageRequiredError] = useState(false);
 
   const { data: categories } = useQuery({
     queryKey: ["categories", { language }],
@@ -36,7 +47,6 @@ const AddGameForm: FC = () => {
     select: data => data.map(({ name, id }) => ({ label: name, value: id })),
   });
 
-  // handle GameAlreadyExistsException
   const formSchema = z.object({
     categoriesIDs: z.number().array(),
     name: z
@@ -106,6 +116,7 @@ const AddGameForm: FC = () => {
       maxPlayers: 0,
       playingTime: 0,
       age: 0,
+      categoriesIDs: [],
     },
   });
 
@@ -118,7 +129,10 @@ const AddGameForm: FC = () => {
   );
 
   const handleFormSubmit = async (data: NewGame) => {
-    if (!imageSizeError) {
+    if (!selectedImage) {
+      setImageRequiredError(true);
+    }
+    if (!imageSizeError && selectedImage) {
       try {
         const newGame = await addGame(data);
         console.log(newGame);
@@ -148,6 +162,7 @@ const AddGameForm: FC = () => {
             });
           }
         }
+        close();
       } catch (e) {
         if (isAxiosError(e) && e.response?.data?.title === "GameAlreadyExistsException") {
           toast({
@@ -174,6 +189,7 @@ const AddGameForm: FC = () => {
       } else {
         setImageSizeError(false);
       }
+      setImageRequiredError(false);
       setSelectedImage(filesList[0]);
     }
   };
@@ -228,6 +244,7 @@ const AddGameForm: FC = () => {
                           noResultsInfo={t("noResults")}
                           onChange={(values: number[]) => {
                             form.setValue("categoriesIDs", values);
+                            form.trigger("categoriesIDs");
                           }}
                           scroll
                           search
@@ -319,12 +336,14 @@ const AddGameForm: FC = () => {
             </div>
             <Separator orientation="vertical" className="mx-4 h-full rounded-lg bg-primary" />
             <div className="flex flex-grow flex-col justify-between gap-2">
-              <h1 className="mb-2 w-full text-2xl uppercase text-primary">
+              <h1 className={"mb-2 w-full text-2xl uppercase text-primary"}>
                 {t("uploadGamePhoto")}
               </h1>
               <div className="flex w-full flex-grow flex-col gap-4">
                 <div>
-                  <Label htmlFor="picture">{t("choosePicture")}</Label>
+                  <Label htmlFor="picture" className={imageRequiredError ? "text-destructive" : ""}>
+                    {t("choosePicture")}
+                  </Label>
                   <Input
                     id="picture"
                     type="file"

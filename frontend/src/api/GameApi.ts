@@ -3,7 +3,6 @@ import { GameInstanceDetails } from "@/types/GameInstance";
 import { Paginated } from "@/types/Paginated";
 import Api from "./Api";
 
-
 export class GameApi {
   static async getPopular(page: number, size: number) {
     const { data: games } = await Api.get<Paginated<Game>>("/games/popular", {

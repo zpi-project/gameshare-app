@@ -101,17 +101,22 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
                   )),
                 )
               ) : (
-                <>
-                  <h4 className="ml-2 mt-2 text-xl">{t("noResults")}</h4>
-                  {role !== "guest" && (
-                    <>
-                      <p className="p-2 italic">{t("cannotFindGame")}</p>
-                      <Button className="ml-auto mt-4 w-max" onClick={() => setIsDialogOpen(true)}>
-                        {t("addGame")}
-                      </Button>
-                    </>
-                  )}
-                </>
+                !isLoading && (
+                  <>
+                    <h4 className="ml-2 mt-2 text-xl">{t("noResults")}</h4>
+                    {role !== "guest" && (
+                      <>
+                        <p className="p-2 italic">{t("cannotFindGame")}</p>
+                        <Button
+                          className="ml-auto mt-4 w-max"
+                          onClick={() => setIsDialogOpen(true)}
+                        >
+                          {t("addGame")}
+                        </Button>
+                      </>
+                    )}
+                  </>
+                )
               )}
               {(isFetchingNextPage || isLoading) && (
                 <>
@@ -125,8 +130,8 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
           </ScrollArea>
         </div>
       )}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <AddGameForm />
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} >
+        <AddGameForm close={() => setIsDialogOpen(false)}/>
       </Dialog>
     </div>
   );
