@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1701689617971" clover="3.2.0">
+  <project timestamp="1701689617971" name="All files">
+    <metrics statements="183" coveredstatements="98" conditionals="63" coveredconditionals="16" methods="57" coveredmethods="11" elements="303" coveredelements="125" complexity="0" loc="183" ncloc="183" packages="32" files="166" classes="166"/>
+    <package name="src">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="App.tsx" path="/home/maria/studia/gameshare-app/frontend/src/App.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="main.tsx" path="/home/maria/studia/gameshare-app/frontend/src/main.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.api">
+      <metrics statements="15" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <file name="Api.ts" path="/home/maria/studia/gameshare-app/frontend/src/api/Api.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="4" type="stmt"/>
+      </file>
+      <file name="CategoryApi.ts" path="/home/maria/studia/gameshare-app/frontend/src/api/CategoryApi.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameApi.ts" path="/home/maria/studia/gameshare-app/frontend/src/api/GameApi.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstanceApi.ts" path="/home/maria/studia/gameshare-app/frontend/src/api/GameInstanceApi.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="RecommendationsApi.ts" path="/home/maria/studia/gameshare-app/frontend/src/api/RecommendationsApi.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ReservationsApi.ts" path="/home/maria/studia/gameshare-app/frontend/src/api/ReservationsApi.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="RoleApi.ts" path="/home/maria/studia/gameshare-app/frontend/src/api/RoleApi.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="UserApi.ts" path="/home/maria/studia/gameshare-app/frontend/src/api/UserApi.ts">
+        <metrics statements="14" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components">
+      <metrics statements="22" coveredstatements="15" conditionals="9" coveredconditionals="6" methods="7" coveredmethods="4"/>
+      <file name="Avatar.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Avatar.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="15" count="4" type="stmt"/>
+      </file>
+      <file name="CategoryCard.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/CategoryCard.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameDetailsCard.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/GameDetailsCard.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstanceDetailsCard.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/GameInstanceDetailsCard.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="Layout.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Layout.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ProtectedRoute.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ProtectedRoute.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="SelectInput.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/SelectInput.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ThemeProvider.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ThemeProvider.tsx">
+        <metrics statements="21" coveredstatements="14" conditionals="8" coveredconditionals="6" methods="6" coveredmethods="3"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+        <line num="23" count="8" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="30" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="38" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="39" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="43" count="4" type="stmt"/>
+        <line num="44" count="4" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="50" count="4" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="65" count="4" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="68" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="70" count="0" type="stmt"/>
+      </file>
+      <file name="UserDetails.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/UserDetails.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="UserFilter.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/UserFilter.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Badge">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="AgeBadge.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Badge/AgeBadge.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="PlayersBadge.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Badge/PlayersBadge.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="PriceBadge.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Badge/PriceBadge.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="TimeBadge.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Badge/TimeBadge.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/components/Badge/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Calendar">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="AvailabilityCalendar.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Calendar/AvailabilityCalendar.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="Calendar.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Calendar/Calendar.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ReservationsCalendar.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Calendar/ReservationsCalendar.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/components/Calendar/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.GameSearch">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="GameSearchBar.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/GameSearch/GameSearchBar.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameSearchCard.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/GameSearch/GameSearchCard.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/components/GameSearch/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Map">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="LoadingMap.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Map/LoadingMap.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="LocationButton.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Map/LocationButton.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="LocationMarker.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Map/LocationMarker.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="Map.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Map/Map.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="UserMarker.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Map/UserMarker.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/components/Map/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Opinions">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Opinion.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Opinions/Opinion.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="OpinionInput.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Opinions/OpinionInput.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="Opinions.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Opinions/Opinions.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/components/Opinions/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.SideNav">
+      <metrics statements="37" coveredstatements="17" conditionals="15" coveredconditionals="9" methods="13" coveredmethods="3"/>
+      <file name="LanguageToggle.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LanguageToggle.tsx">
+        <metrics statements="3" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+      </file>
+      <file name="LoginButton.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LoginButton.tsx">
+        <metrics statements="4" coveredstatements="1" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="13" count="0" type="stmt"/>
+      </file>
+      <file name="LogoutButton.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LogoutButton.tsx">
+        <metrics statements="11" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+      </file>
+      <file name="ModeToggle.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/SideNav/ModeToggle.tsx">
+        <metrics statements="6" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+      </file>
+      <file name="SideNav.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNav.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="35" count="4" type="stmt"/>
+      </file>
+      <file name="SideNavLink.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNavLink.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+      </file>
+      <file name="UserItem.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/SideNav/UserItem.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="8" coveredconditionals="6" methods="1" coveredmethods="1"/>
+        <line num="22" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Stars">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Stars.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Stars/Stars.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="StarsInput.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Stars/StarsInput.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/components/Stars/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.UserForm">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="EditUserForm.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/UserForm/EditUserForm.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="RegisterUserForm.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/UserForm/RegisterUserForm.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="UserForm.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/UserForm/UserForm.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/components/UserForm/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.UserGameInstances">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="GameInstance.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/UserGameInstances/GameInstance.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstanceAddForm.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/UserGameInstances/GameInstanceAddForm.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstancesSection.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/UserGameInstances/GameInstancesSection.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameReservations.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/UserGameInstances/GameReservations.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/components/UserGameInstances/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.ui">
+      <metrics statements="88" coveredstatements="50" conditionals="30" coveredconditionals="1" methods="23" coveredmethods="3"/>
+      <file name="Spinner.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/Spinner.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="avatar.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/avatar.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="42" count="4" type="stmt"/>
+      </file>
+      <file name="badge.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/badge.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="button.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/button.tsx">
+        <metrics statements="4" coveredstatements="3" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="41" count="4" type="stmt"/>
+        <line num="43" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="49" count="4" type="stmt"/>
+      </file>
+      <file name="calendar.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/calendar.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="command.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/command.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="datepicker.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/datepicker.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="dialog.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/dialog.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="dropdown-menu.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/dropdown-menu.tsx">
+        <metrics statements="16" coveredstatements="16" conditionals="7" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="37" count="4" type="stmt"/>
+        <line num="52" count="4" type="stmt"/>
+        <line num="70" count="4" type="stmt"/>
+        <line num="88" count="4" type="stmt"/>
+        <line num="111" count="4" type="stmt"/>
+        <line num="133" count="4" type="stmt"/>
+        <line num="147" count="4" type="stmt"/>
+        <line num="159" count="4" type="stmt"/>
+        <line num="161" count="4" type="stmt"/>
+        <line num="166" count="4" type="stmt"/>
+      </file>
+      <file name="form.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/form.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="hover-card.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/hover-card.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="input.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/input.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="label.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/label.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="popover.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/popover.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+      </file>
+      <file name="scroll-area.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/scroll-area.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="select.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/select.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="separator.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/separator.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="skeleton.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/skeleton.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="tabs.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/tabs.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="textarea.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/textarea.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="toast.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/toast.tsx">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="40" count="4" type="stmt"/>
+        <line num="52" count="4" type="stmt"/>
+        <line num="67" count="4" type="stmt"/>
+        <line num="85" count="4" type="stmt"/>
+        <line num="93" count="4" type="stmt"/>
+        <line num="105" count="4" type="stmt"/>
+      </file>
+      <file name="toaster.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/toaster.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+      </file>
+      <file name="tooltip.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/tooltip.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="use-toast.ts" path="/home/maria/studia/gameshare-app/frontend/src/components/ui/use-toast.ts">
+        <metrics statements="51" coveredstatements="14" conditionals="16" coveredconditionals="0" methods="18" coveredmethods="2"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="53" count="4" type="stmt"/>
+        <line num="55" count="4" type="stmt"/>
+        <line num="56" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="72" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="82" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="90" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="101" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="111" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="119" count="0" type="stmt"/>
+        <line num="124" count="4" type="stmt"/>
+        <line num="126" count="4" type="stmt"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="131" count="0" type="stmt"/>
+        <line num="138" count="0" type="stmt"/>
+        <line num="140" count="0" type="stmt"/>
+        <line num="141" count="0" type="stmt"/>
+        <line num="145" count="0" type="stmt"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="154" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="159" count="0" type="stmt"/>
+        <line num="167" count="4" type="stmt"/>
+        <line num="169" count="4" type="stmt"/>
+        <line num="170" count="4" type="stmt"/>
+        <line num="171" count="4" type="stmt"/>
+        <line num="172" count="0" type="stmt"/>
+        <line num="173" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="174" count="0" type="stmt"/>
+        <line num="179" count="4" type="stmt"/>
+        <line num="182" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.constants">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="languages.ts" path="/home/maria/studia/gameshare-app/frontend/src/constants/languages.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+      </file>
+      <file name="lorem.ts" path="/home/maria/studia/gameshare-app/frontend/src/constants/lorem.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="reservationStatuses.ts" path="/home/maria/studia/gameshare-app/frontend/src/constants/reservationStatuses.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="urls.ts" path="/home/maria/studia/gameshare-app/frontend/src/constants/urls.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.i18n">
+      <metrics statements="7" coveredstatements="3" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="i18n.ts" path="/home/maria/studia/gameshare-app/frontend/src/i18n/i18n.ts">
+        <metrics statements="7" coveredstatements="3" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="30" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="34" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.i18n.resources">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="pl.ts" path="/home/maria/studia/gameshare-app/frontend/src/i18n/resources/pl.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.pages.CategoryGameSearch">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="CategoryGameSearch.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/CategoryGameSearch/CategoryGameSearch.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/CategoryGameSearch/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.Dashboard">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Dashboard.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/Dashboard/Dashboard.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstanceSearchCard.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/Dashboard/GameInstanceSearchCard.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GamesInstancesSearchResults.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/Dashboard/GamesInstancesSearchResults.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GamesSearch.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/Dashboard/GamesSearch.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/Dashboard/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="options.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/Dashboard/options.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.Error">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Error.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/Error/Error.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/Error/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.Game">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Game.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/Game/Game.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameDetailsSection.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/Game/GameDetailsSection.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstanceCard.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/Game/GameInstanceCard.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstancesList.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/Game/GameInstancesList.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstancesSection.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/Game/GameInstancesSection.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="LoadingGameDetailsSection.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/Game/LoadingGameDetailsSection.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/Game/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.GameInstance">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="GameCalendar.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameInstance/GameCalendar.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstance.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameInstance/GameInstance.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstanceDetailsSection.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameInstance/GameInstanceDetailsSection.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstanceOpinions.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameInstance/GameInstanceOpinions.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstanceUserDetailsSection.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameInstance/GameInstanceUserDetailsSection.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ReservationForm.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameInstance/ReservationForm.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameInstance/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.GameRequests">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="GameRequest.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameRequests/GameRequest.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameRequests.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameRequests/GameRequests.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameRequests/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.GameSearch">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="CategoriesSection.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameSearch/CategoriesSection.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="Game.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameSearch/Game.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameSearch.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameSearch/GameSearch.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="PopularGamesSection.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameSearch/PopularGamesSection.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="RecommendedGamesSection.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameSearch/RecommendedGamesSection.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/GameSearch/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.MyProfile">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="MyProfile.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/MyProfile/MyProfile.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/MyProfile/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.ReservationDetails">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="GameInstanceDetails.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/GameInstanceDetails.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="OpinionSection.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/OpinionSection.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ReservationDetails.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/ReservationDetails.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ReservationDetailsStatus.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/ReservationDetailsStatus.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ReservationDetailsTable.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/ReservationDetailsTable.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="UserDetailsSection.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/UserDetailsSection.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.ReservationDetails.ReservationDetailsOwner">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="OpinionAboutRenter.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/ReservationDetailsOwner/OpinionAboutRenter.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ReservationDetailsOwner.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/ReservationDetailsOwner/ReservationDetailsOwner.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/ReservationDetailsOwner/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.ReservationDetails.ReservationDetailsRenter">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="OpinionAboutGameInstance.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/ReservationDetailsRenter/OpinionAboutGameInstance.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="OpinionAboutOwner.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/ReservationDetailsRenter/OpinionAboutOwner.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ReservationDetailsRenter.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/ReservationDetailsRenter/ReservationDetailsRenter.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationDetails/ReservationDetailsRenter/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.ReservationsHistory">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="ReservationCard.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationsHistory/ReservationCard.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ReservationsHistory.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationsHistory/ReservationsHistory.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ReservationsList.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationsHistory/ReservationsList.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ReservationsSideBar.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationsHistory/ReservationsSideBar.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/ReservationsHistory/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.pages.UserProfile">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="AddUserOpinionModal.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/UserProfile/AddUserOpinionModal.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="UserProfile.tsx" path="/home/maria/studia/gameshare-app/frontend/src/pages/UserProfile/UserProfile.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/pages/UserProfile/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.state">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="isRoleFetched.ts" path="/home/maria/studia/gameshare-app/frontend/src/state/isRoleFetched.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="location.ts" path="/home/maria/studia/gameshare-app/frontend/src/state/location.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="registerForm.ts" path="/home/maria/studia/gameshare-app/frontend/src/state/registerForm.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="role.ts" path="/home/maria/studia/gameshare-app/frontend/src/state/role.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="4" type="stmt"/>
+      </file>
+      <file name="token.ts" path="/home/maria/studia/gameshare-app/frontend/src/state/token.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.types">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Category.ts" path="/home/maria/studia/gameshare-app/frontend/src/types/Category.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="Game.ts" path="/home/maria/studia/gameshare-app/frontend/src/types/Game.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="GameInstance.ts" path="/home/maria/studia/gameshare-app/frontend/src/types/GameInstance.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="Image.ts" path="/home/maria/studia/gameshare-app/frontend/src/types/Image.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="Opinion.ts" path="/home/maria/studia/gameshare-app/frontend/src/types/Opinion.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="Paginated.ts" path="/home/maria/studia/gameshare-app/frontend/src/types/Paginated.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="Reservation.ts" path="/home/maria/studia/gameshare-app/frontend/src/types/Reservation.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="Role.ts" path="/home/maria/studia/gameshare-app/frontend/src/types/Role.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="User.ts" path="/home/maria/studia/gameshare-app/frontend/src/types/User.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="8" coveredstatements="6" conditionals="6" coveredconditionals="0" methods="6" coveredmethods="1"/>
+      <file name="date.ts" path="/home/maria/studia/gameshare-app/frontend/src/utils/date.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="stringToColor.ts" path="/home/maria/studia/gameshare-app/frontend/src/utils/stringToColor.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="tailwind.ts" path="/home/maria/studia/gameshare-app/frontend/src/utils/tailwind.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="24" type="stmt"/>
+      </file>
+      <file name="user.ts" path="/home/maria/studia/gameshare-app/frontend/src/utils/user.ts">
+        <metrics statements="7" coveredstatements="5" conditionals="6" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
+      </file>
+    </package>
+  </project>
+</coverage>

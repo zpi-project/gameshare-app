@@ -6,6 +6,7 @@ import {
   Routes,
   createMemoryRouter,
 } from "react-router-dom";
+import "@cypress/code-coverage/support";
 import { mount } from "cypress/react18";
 import "../../src/index.css";
 import "./commands";
