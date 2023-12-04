@@ -1,25 +1,28 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
+import { useTheme } from "@/ThemeProvider";
 import { useQuery } from "@tanstack/react-query";
 import { URLS } from "@/constants/urls";
 import { stringToHexColor } from "@/utils/stringToColor";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { Map, LocationButton, LocationMarker } from "@/components/Map";
-import { useTheme } from "@/components/ThemeProvider";
 import { useToast } from "@/components/ui/use-toast";
 import GameInstanceDetailsSection from "./GameInstanceDetailsSection";
 import GameInstanceOpinions from "./GameInstanceOpinions";
 import GameInstanceUserDetailsSection from "./GameInstanceUserDetailsSection";
 
 const GameInstance: FC = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { id = "" } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   const { data: gameInstance, isLoading } = useQuery({
-    queryKey: ["gameInstance", { id }],
+    queryKey: ["gameInstance", { id, language }],
     queryFn: () => GameInstanceApi.getByUUID(id),
     onError: () => {
       toast({

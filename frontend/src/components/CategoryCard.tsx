@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { URLS } from "@/constants/urls";
 import { Category } from "@/types/Category";
 import { stringToHexColor } from "@/utils/stringToColor";
-import { useTheme } from "./ThemeProvider";
+import { useTheme } from "../ThemeProvider";
 
 interface CategoryCardProps {
   category: Category;
@@ -36,7 +36,7 @@ const CategoryCard: FC<CategoryCardProps> = ({ category: { name, id } }) => {
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
     >
-      <p className="font-bold">{name}</p>
+      <p className="font-bold capitalize">{name}</p>
     </Link>
   );
 };

@@ -1,17 +1,17 @@
 package com.zpi.backend.game_status;
 
-import com.zpi.backend.role.RoleService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import static com.zpi.backend.game_status.GameStatus.*;
 
 @Service
-@AllArgsConstructor
 public class GameStatusService {
-    RoleService roleService;
-    GameStatusRepository gameStatusRepository;
+    private final GameStatusRepository gameStatusRepository;
 
+    public GameStatusService(GameStatusRepository gameStatusRepository){
+        this.gameStatusRepository = gameStatusRepository;
+        saveStatuses();
+    }
     public GameStatus getGameStatus(String name) {
         return gameStatusRepository.getGameStatusByStatus(name);
     }

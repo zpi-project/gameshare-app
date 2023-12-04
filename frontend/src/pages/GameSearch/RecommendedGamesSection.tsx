@@ -10,7 +10,10 @@ import Game from "./Game";
 const RECOMMENDATIONS_PAGE_SIZE = 8;
 
 const RecommendedGamesSection: FC = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { toast } = useToast();
 
   const {
@@ -18,7 +21,7 @@ const RecommendedGamesSection: FC = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["recommended-games"],
+    queryKey: ["recommended-games", { language }],
     queryFn: () => RecommendationsApi.getAll(0, RECOMMENDATIONS_PAGE_SIZE),
     onError: () => {
       toast({

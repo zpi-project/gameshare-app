@@ -31,7 +31,10 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
   const [blurTimeout, setBlurTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const {
     data: games,
     isFetchingNextPage,
@@ -40,7 +43,7 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ["games", { debouncedSearch }],
+    queryKey: ["games", { debouncedSearch, language }],
     queryFn: ({ pageParam = 0 }) =>
       GameApi.search(pageParam as number, GAME_PAGE_SIZE, debouncedSearch, categories),
     getNextPageParam: (_, pages) => {

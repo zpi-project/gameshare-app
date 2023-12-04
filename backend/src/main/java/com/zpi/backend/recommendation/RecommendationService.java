@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class RecommendationService {
 
     @Value(value = "${APRIORI_MIN_SUPPORT}")
-    private int APRIORI_MIN_SUPPORT;
+    private double APRIORI_MIN_SUPPORT;
     @Value(value = "${APRIORI_MIN_CONFIDENCE}")
     private double APRIORI_MIN_CONFIDENCE;
     private static final Logger logger = LoggerFactory.getLogger(RecommendationService.class);
