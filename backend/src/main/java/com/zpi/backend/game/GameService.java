@@ -71,7 +71,7 @@ public class GameService {
             throw new BadRequestException("User role is not valid");
         }
 
-        gameRepository.save(newGame);
+        newGame = gameRepository.save(newGame);
         return new GameDTO(newGame);
     }
 
