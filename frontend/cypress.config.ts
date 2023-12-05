@@ -23,7 +23,7 @@ export default defineConfig({
       FRONTEND_URL: `${process.env.FRONTEND_HOST}:${process.env.FRONTEND_PORT}`,
       googleClientId: process.env.VITE_AUTH_CLIENT_ID,
       googleClientSecret: process.env.AUTH_SECRET,
-      googleRefreshToken: process.env.VITE_AUTH_REFRESH_TOKEN,
+      googleToken: process.env.googleToken,
     },
   },
 });

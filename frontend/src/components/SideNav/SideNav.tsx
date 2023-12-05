@@ -35,7 +35,10 @@ const SideNav: FC = () => {
   const role = useRecoilValue(roleState);
 
   return (
-    <div className="flex h-full w-[68px] flex-col justify-between rounded-lg bg-section px-3 py-4 text-section-foreground" data-test="cokolwiek">
+    <div
+      className="flex h-full w-[68px] flex-col justify-between rounded-lg bg-section px-3 py-4 text-section-foreground"
+      data-test="cokolwiek"
+    >
       <div className="flex flex-col items-center gap-3">
         <img src="/logo.png" className="h-12 w-12 rounded-lg" alt="GameShare logo" />
         {ALL_LINKS.map(({ icon, path }) => (

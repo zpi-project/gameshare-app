@@ -9,13 +9,7 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-
 import secureLocalStorage from "react-secure-storage";
-import { useSetRecoilState } from "recoil";
-import { tokenState } from "../../src/state/token";
-import { roleState } from "../../src/state/role";
-import { roleState } from "@/state/role.ts";
-import { useEffect } from "react";
 
 Cypress.Commands.add("getBySel", (selector, ...args) => {
   return cy.get(`[data-test=${selector}]`, ...args);
@@ -33,33 +27,9 @@ Cypress.Commands.add("findLink", { prevSubject: "element" }, (subject, path, ...
   return cy.wrap(subject).find(`[href="${path}"]`, ...args);
 });
 // @ts-ignore
-Cypress.Commands.add('loginByGoogleApi', () => {
-  cy.log('Logging in to Google')
-  cy.request({
-    method: 'POST',
-    url: 'https://www.googleapis.com/oauth2/v4/token',
-    body: {
-      grant_type: 'refresh_token',
-      client_id: Cypress.env('googleClientId'),
-      client_secret: Cypress.env('googleClientSecret'),
-      refresh_token: Cypress.env('googleRefreshToken'),
-    },
-  }).then(({ body }) => {
-    const { access_token, id_token } = body
-    // const setToken = useSetRecoilState(tokenState)
-
-    cy.request({
-      method: 'GET',
-      url: 'https://www.googleapis.com/oauth2/v3/userinfo',
-      headers: { Authorization: `Bearer ${access_token}` },
-    }).then(({ body }) => {
-      cy.log(body.email)
-      cy.log(typeof(id_token)) //string
-      cy.log(id_token)
-      secureLocalStorage.setItem('token', id_token)
-      cy.visit('localhost:5173/my-reservations').reload()
-    })
-  })
-})
+Cypress.Commands.add("loginByGoogleApi", () => {
+  cy.log("Logging in to Google");
+  secureLocalStorage.setItem("token", Cypress.env("googleToken"));
+});
 
 export {};
