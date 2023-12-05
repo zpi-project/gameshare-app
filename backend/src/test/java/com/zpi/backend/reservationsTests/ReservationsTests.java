@@ -2,6 +2,7 @@ package com.zpi.backend.reservationsTests;
 
 import com.zpi.backend.dto.ResultsDTO;
 import com.zpi.backend.email.EmailService;
+import com.zpi.backend.email_type.EmailTypeService;
 import com.zpi.backend.email_type.exceptions.EmailTypeDoesNotExists;
 import com.zpi.backend.exception_handlers.BadRequestException;
 import com.zpi.backend.game_instance.GameInstance;
@@ -40,12 +41,9 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class GameServiceTests {
+class ReservationsTests {
     @InjectMocks
     private ReservationService reservationService;
-
-
-
 
     @Mock
     private UserService userService;
@@ -67,7 +65,8 @@ class GameServiceTests {
     private EmailService emailService;
 
 
-
+    @Mock
+    EmailTypeService emailTypeService;
     @Test
     void testAddReservationSuccessfully() throws UserDoesNotExistException, BadRequestException, GameInstanceDoesNotExistException, IOException, EmailTypeDoesNotExists {
         // Mock dependencies
@@ -132,7 +131,6 @@ class GameServiceTests {
 
         // Call the method being tested and expect a GameInstanceDoesNotExistException
         assertThrows(GameInstanceDoesNotExistException.class, () -> reservationService.addReservation(authentication, newReservationDTO));
-
         // Verify that other methods are not called
         verifyNoInteractions(reservationStatusRepository, reservationRepository, emailService);
     }

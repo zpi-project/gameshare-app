@@ -70,6 +70,10 @@ dependencyManagement {
 	}
 }
 
+test{
+	systemProperty: 'net.bytebuddy.experimental', 'true'
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
