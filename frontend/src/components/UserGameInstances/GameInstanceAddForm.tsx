@@ -54,7 +54,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
   };
 
   useEffect(() => {
-    setImageSizeErrors((selectedImages)?.map(file => file.size > MAX_IMAGE_SIZE));
+    setImageSizeErrors(selectedImages?.map(file => file.size > MAX_IMAGE_SIZE));
   }, [selectedImages]);
 
   const formSchema = z.object({
