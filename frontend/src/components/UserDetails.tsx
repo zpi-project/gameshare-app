@@ -7,12 +7,14 @@ import { Map, LocationMarker } from "@/components/Map";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import Avatar from "./Avatar";
+import { Stars } from "./Stars";
 import { EditUserForm } from "./UserForm";
+import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 
 interface Props {
   user?: User;
-  showEdit: boolean;
+  showEdit?: boolean;
   isLoading: boolean;
 }
 
@@ -37,27 +39,39 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
       {user && (
         <>
           <div className="flex h-full w-full flex-row items-center gap-6">
-            <div className="flex w-3/12 flex-col items-center gap-6">
-              <Avatar user={user} className="h-40 w-40 text-5xl" />
-              <div className="rounded-lg bg-card p-2.5 px-6">
-                {parsePhoneNumber(user.phoneNumber).formatInternational()}
-              </div>
-              <div>
-                {showEdit && (
-                  <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                    <DialogTrigger asChild>
-                      <Button className="w-44">{t("edit")}</Button>
-                    </DialogTrigger>
-                    <EditUserForm user={user} onSubmit={() => setDialogOpen(false)} />
-                  </Dialog>
+            <div className="flex flex-col items-center gap-3 xl:gap-6">
+              <Avatar user={user} className="h-20 w-20 xl:h-[148px] xl:w-[148px] xl:text-5xl" />
+              {user.phoneNumber && (
+                <div className="w-full rounded-lg bg-card p-2.5 px-6 text-sm xl:text-base">
+                  {parsePhoneNumber(user.phoneNumber).formatInternational()}
+                </div>
+              )}
+              {showEdit && (
+                <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="w-full">{t("edit")}</Button>
+                  </DialogTrigger>
+                  <EditUserForm user={user} onSubmit={() => setDialogOpen(false)} />
+                </Dialog>
+              )}
+            </div>
+            <div className="h-full flex-grow flex-col justify-between">
+              <div className="mb-4 flex flex-row justify-between rounded-lg bg-card p-2 xl:p-3">
+                <h2 className="xl:text-xl">{getFullname(user)}</h2>
+                {user.opinionsAmount > 0 ? (
+                  <div className="flex flex-row gap-2">
+                    <p className="text-base tracking-widest text-foreground">
+                      ({user.opinionsAmount})
+                    </p>
+                    <Stars count={Math.round(user.avgRating)} />
+                  </div>
+                ) : (
+                  <Badge variant="secondary" className="w-max px-3 py-1 hover:bg-primary">
+                    {t("noOpinions")}
+                  </Badge>
                 )}
               </div>
-            </div>
-            <div className="h-full flex-grow flex-col justify-between gap-6">
-              <div className="h-1/4 flex-grow">
-                <div className="rounded-lg bg-card p-3 text-xl">{getFullname(user)}</div>
-              </div>
-              <div className="h-3/4 min-w-[100px] flex-grow overflow-hidden rounded-lg bg-section">
+              <div className="h-[calc(100%-70px)] min-w-[100px] overflow-hidden rounded-lg bg-section">
                 <Map location={[user.locationLatitude, user.locationLongitude]}>
                   <LocationMarker />
                 </Map>

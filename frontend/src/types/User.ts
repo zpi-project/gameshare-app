@@ -2,11 +2,12 @@ export interface User {
   uuid: string;
   firstName: string;
   lastName: string;
-  phoneNumber: string;
   locationLatitude: number;
   locationLongitude: number;
-  email: string;
   avatarLink: string;
+  avgRating: number;
+  opinionsAmount: number;
+  phoneNumber?: string;
 }
 
 export interface NewUser {
@@ -16,3 +17,5 @@ export interface NewUser {
   locationLatitude: number;
   locationLongitude: number;
 }
+
+export interface RatingRatedUser {}

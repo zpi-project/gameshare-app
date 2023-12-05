@@ -1,25 +1,26 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useRecoilValue } from "recoil";
+import { roleState } from "@/state/role";
 import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
-import AddOpinion from "@/components/AddOpinion";
-import Opinions from "@/components/Opinions";
+import { Opinions } from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
+import GameInstancesSection from "@/components/UserGameInstances";
 import { useToast } from "@/components/ui/use-toast";
-import AddUserOpinionModal from "./AddUserOpinionModal";
 
 const UserProfile: FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { id = "" } = useParams();
+  const role = useRecoilValue(roleState);
 
   const { data: user, isLoading } = useQuery({
-    queryKey: ["user"],
+    queryKey: ["user", { role }],
     queryFn: () => UserApi.getByUUID(id),
     onError: () => {
       toast({
@@ -32,17 +33,18 @@ const UserProfile: FC = () => {
   });
 
   return (
-    <div className="flex h-full flex-row gap-6">
-      <div className="flex w-1/2 flex-col items-stretch gap-6 rounded-lg">
-        <div className="flex-grow rounded-lg bg-section p-4">
-          <UserDetails user={user} showEdit={false} isLoading={isLoading} />
-          {isModalOpen && <AddUserOpinionModal />}
+    <div className="flex h-full w-full flex-col gap-2 overflow-hidden xl:h-full xl:flex-row xl:gap-6">
+      <div className="flex flex-grow flex-col gap-2 rounded-lg xl:h-full xl:w-1/2 xl:gap-6">
+        <div className="h-[200px] rounded-lg bg-section p-4 xl:h-[365px]">
+          <UserDetails user={user} isLoading={isLoading} />
         </div>
-        <div className="flex h-3/5 flex-col gap-2 rounded-lg bg-section p-2">
-          <Opinions />
+        <div className="flex max-h-[150px] rounded-lg  bg-section xl:h-[calc(100%-389px)] xl:max-h-[calc(100%-389px)]">
+          <Opinions isMyPage={false} user={user} />
         </div>
       </div>
-      <div className="w-1/2 flex-grow rounded-lg bg-section p-4">space for search games</div>
+      <div className="h-[calc(100%-350px)] flex-grow rounded-lg bg-section p-4 xl:h-full xl:w-1/2">
+        <GameInstancesSection owner={user} />
+      </div>
     </div>
   );
 };

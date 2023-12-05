@@ -1,8 +1,16 @@
 package com.zpi.backend.category;
 
+import com.zpi.backend.category.DTO.CategoryDTO;
+import com.zpi.backend.category.DTO.NewCategoryDTO;
+import com.zpi.backend.category.exception.CategoryAlreadyExistsException;
+import com.zpi.backend.category.exception.CategoryDoesNotExistException;
 import com.zpi.backend.exception_handlers.BadRequestException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zpi.backend.languages.LanguageCodes;
+import com.zpi.backend.role.RoleService;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,12 +18,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class CategoryService {
-    @Autowired
     CategoryRepository categoryRepository;
+    RoleService roleService;
 
-    public Category addCategory(NewCategoryDTO newCategoryDTO) throws CategoryAlreadyExistsException, BadRequestException {
+    public Category addCategory(Authentication authentication, NewCategoryDTO newCategoryDTO) throws CategoryAlreadyExistsException, BadRequestException, UserDoesNotExistException {
         newCategoryDTO.validate();
+        roleService.checkIfAdmin(authentication);
         if (categoryRepository.existsCategoryByName(newCategoryDTO.getName()))
             throw new CategoryAlreadyExistsException(newCategoryDTO.getName());
         Category newCategory = newCategoryDTO.toCategory();
@@ -23,14 +33,29 @@ public class CategoryService {
         return newCategory;
     }
 
-    public List<Category> getCategories(){
-        return categoryRepository.findAll(Sort.by("name"));
+    public List<CategoryDTO> getCategories(String language){
+        List<Category> categories =  categoryRepository.findAll(Sort.by("name"));
+        List<CategoryDTO> categoriesDTO = new ArrayList<>();
+        for (Category category:categories) {
+            categoriesDTO.add(new CategoryDTO(category,language));
+        }
+        return categoriesDTO;
     }
 
-    public Category getCategory(long id) throws CategoryDoesNotExistException{
+    public CategoryDTO getCategoryDTO(long id, String language) throws CategoryDoesNotExistException, BadRequestException {
         Optional<Category> categoryOptional = categoryRepository.findById(id);
         if (categoryOptional.isEmpty()) throw new CategoryDoesNotExistException("Category (id = "+id+") does not exist.");
-        else return categoryOptional.get();
+        Category category = categoryOptional.get();
+        if (language.equals(LanguageCodes.ENGLISH)|| language.equals(LanguageCodes.POLISH))
+            return new CategoryDTO(category, language);
+        else
+            throw new BadRequestException("Language "+language+" is not supported.");
+    }
+
+    public Category getCategory(long id) throws CategoryDoesNotExistException {
+        Optional<Category> categoryOptional = categoryRepository.findById(id);
+        if (categoryOptional.isEmpty()) throw new CategoryDoesNotExistException("Category (id = "+id+") does not exist.");
+        return categoryOptional.get();
     }
 
     public List<Category> getCategoriesByIDs(List<Long> categoriesIds) throws CategoryDoesNotExistException {

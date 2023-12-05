@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
-import Opinions from "@/components/Opinions";
+import { Opinions } from "@/components/Opinions";
 import UserDetails from "@/components/UserDetails";
+import GameInstancesSection from "@/components/UserGameInstances";
 import { useToast } from "@/components/ui/use-toast";
 
 const MyProfile: FC = () => {
@@ -27,16 +28,18 @@ const MyProfile: FC = () => {
   });
 
   return (
-    <div className="flex h-full flex-row gap-6">
-      <div className="flex h-full w-1/2 flex-grow flex-col gap-6 rounded-lg">
-        <div className="h-2/5 rounded-lg bg-section p-4">
-          <UserDetails user={user} showEdit={true} isLoading={isLoading} />
+    <div className="flex h-full w-full flex-col gap-2 overflow-hidden xl:h-full xl:flex-row xl:gap-6">
+      <div className="flex flex-grow flex-col gap-2 rounded-lg xl:h-full xl:w-1/2 xl:gap-6">
+        <div className="h-[200px] rounded-lg bg-section p-4 xl:h-[365px]">
+          <UserDetails user={user} isLoading={isLoading} showEdit />
         </div>
-        <div className="flex h-3/5 rounded-lg bg-section">
-          <Opinions />
+        <div className="flex max-h-[150px] rounded-lg  bg-section xl:h-[calc(100%-389px)] xl:max-h-[calc(100%-389px)]">
+          <Opinions isMyPage={true} user={user} />
         </div>
       </div>
-      <div className="w-1/2 flex-grow rounded-lg bg-section p-4">space for search games</div>
+      <div className="h-[calc(100%-350px)] flex-grow rounded-lg bg-section p-4 xl:h-full xl:w-1/2">
+        <GameInstancesSection owner={user} isMyPage />
+      </div>
     </div>
   );
 };

@@ -1,9 +1,12 @@
 package com.zpi.backend.user_opinion;
 
-import com.google.api.client.util.DateTime;
+import com.zpi.backend.reservations.Reservation;
 import com.zpi.backend.user.User;
+import com.zpi.backend.user_opinion.dto.ModifiedUserOpinionDTO;
+import com.zpi.backend.user_opinion.dto.NewUserOpinionDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_opinions")
@@ -25,31 +28,30 @@ public class UserOpinion {
     @Column(name = "stars")
     private int stars;
 
-    @Column(name = "description")
+    @Column(name = "description",length = 500)
     private String description;
 
     @Column(name="timestamp")
-    private DateTime timestamp;
+    private Date timestamp;
 
-    @Column(name="isRatingUserOwner")
+    @Column(name="is_rating_user_owner")
     private boolean isRatingUserOwner;
+
+    @ManyToOne
+    private Reservation reservation;
 
     public UserOpinion(User user, User ratedUser, NewUserOpinionDTO newUserOpinionDTO) {
         this.ratingUser = user;
         this.ratedUser = ratedUser;
         this.stars = newUserOpinionDTO.getStars();
         this.description = newUserOpinionDTO.getDescription();
-        this.timestamp = newUserOpinionDTO.getTimestamp();
-        //this.isRatingUserOwner =; TODO add later when we have game instances
+        this.timestamp = new Date(System.currentTimeMillis());
     }
 
-    public UserOpinion update(UpdateUserOpinionDTO updateUserOpinionDTO) {
-        this.stars = updateUserOpinionDTO.getStars();
-        this.description = updateUserOpinionDTO.getDescription();
-        this.timestamp = updateUserOpinionDTO.getTimestamp();
+    public UserOpinion update(ModifiedUserOpinionDTO modifiedUserOpinionDTO) {
+        this.stars = modifiedUserOpinionDTO.getStars();
+        this.description = modifiedUserOpinionDTO.getDescription();
+        this.timestamp = new Date(System.currentTimeMillis());
         return this;
     }
-
-
-
 }

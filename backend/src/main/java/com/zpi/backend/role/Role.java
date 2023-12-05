@@ -13,6 +13,8 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 public class Role {
+    public static final String ADMIN = "admin";
+    public static final String USER = "user";
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -20,6 +22,10 @@ public class Role {
 
     @Column(nullable = false,unique = true)
     private String name;
+
+    public Role(String name) {
+        this.name = name;
+    }
 
     @Override
     public boolean equals(Object o) {

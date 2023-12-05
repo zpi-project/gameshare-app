@@ -31,7 +31,7 @@ const GameDetailsSection: FC<GameDetailsSectionProps> = ({ game }) => {
 
   return (
     <>
-      <div className="h-full overflow-hidden rounded-lg bg-section" ref={divRef}>
+      <div className="h-full max-h-[320px] overflow-hidden rounded-lg bg-section" ref={divRef}>
         <img src={game.image} alt={game.name} className="h-full w-full object-cover object-top" />
       </div>
       <ScrollArea className="h-full">
@@ -40,7 +40,7 @@ const GameDetailsSection: FC<GameDetailsSectionProps> = ({ game }) => {
           <div className="flex flex-row flex-wrap gap-1">
             {game.categories.map(({ id, name }) => (
               <Badge key={id}>
-                <Link to={`${URLS.CATEGORY_GAMES}/${id}`} className="text-sm">
+                <Link to={`${URLS.CATEGORY_GAMES}/${id}`} className="text-sm capitalize">
                   {name}
                 </Link>
               </Badge>

@@ -1,21 +1,23 @@
 package com.zpi.backend.role;
 
 import com.zpi.backend.user.User;
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import com.zpi.backend.user.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-@Service
-//TODO make it only for admin user
-@RequiredArgsConstructor
-public class RoleService {
-    private final RoleRepository roleRepository;
-    private final UserService userService;
+import static com.zpi.backend.role.Role.*;
 
-    public Role getRoleByName(String name) {
-        return roleRepository.getRoleByName(name);
+@Service
+public class RoleService {
+    private final UserService userService;
+    private final RoleRepository roleRepository;
+
+
+    public RoleService(UserService userService, RoleRepository roleRepository) {
+        this.userService = userService;
+        this.roleRepository = roleRepository;
+        saveRoles();
     }
 
     public Role getRole(Authentication authentication) throws UserDoesNotExistException {
@@ -25,6 +27,17 @@ public class RoleService {
 
     public boolean checkIfAdmin(Authentication authentication) throws UserDoesNotExistException {
         User user = userService.getUser(authentication);
-        return user.getRole().getName().equals("admin");
+        return user.getRole().getName().equals(ADMIN);
+    }
+
+    private void saveRoles(){
+        saveRole(ADMIN);
+        saveRole(USER);
+    }
+
+    private void saveRole(String name){
+        if (!roleRepository.existsRoleByName(name)){
+            roleRepository.save(new Role(name));
+        }
     }
 }

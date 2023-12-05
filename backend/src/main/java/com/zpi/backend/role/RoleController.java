@@ -1,6 +1,6 @@
 package com.zpi.backend.role;
 
-import com.zpi.backend.user.UserDoesNotExistException;
+import com.zpi.backend.user.exception.UserDoesNotExistException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +24,7 @@ public class RoleController {
     @GetMapping("/role")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<RoleDTO> getRole(Authentication authentication) throws UserDoesNotExistException {
+        System.out.println("... called getRole");
         RoleDTO roleDTO = new RoleDTO().fromRole(roleService.getRole(authentication));
         return ResponseEntity.ok(roleDTO);
     }

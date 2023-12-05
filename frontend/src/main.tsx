@@ -1,17 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProtectedRoute from "@/ProtectedRoute";
 import { URLS } from "@/constants/urls";
 import CategoryGameSearch from "@/pages/CategoryGameSearch";
 import Dashboard from "@/pages/Dashboard";
 import Error from "@/pages/Error";
+import Game from "@/pages/Game";
+import GameInstance from "@/pages/GameInstance";
+import GameRequests from "@/pages/GameRequests";
 import GameSearch from "@/pages/GameSearch";
 import MyProfile from "@/pages/MyProfile";
+import ReservationDetails from "@/pages/ReservationDetails";
+import ReservationsHistory from "@/pages/ReservationsHistory";
 import UserProfile from "@/pages/UserProfile";
-import ProtectedRoute from "@/components/ProtectedRoute";
 import App from "./App";
 import "./index.css";
-import Game from "./pages/Game";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: `${URLS.GAME_INSTANCE}/:id`,
-        element: <div>game instance page</div>,
+        element: <GameInstance />,
       },
       {
         path: `${URLS.PROFILE}/:id`,
@@ -52,11 +56,11 @@ const router = createBrowserRouter([
           },
           {
             path: URLS.MY_RESERVATIONS,
-            element: <div>my reservations page</div>,
+            element: <ReservationsHistory />,
           },
           {
-            path: URLS.MY_GAMES_INSTANCES,
-            element: <div>my game instances page</div>,
+            path: `${URLS.MY_RESERVATIONS}/:id`,
+            element: <ReservationDetails />,
           },
         ],
       },
@@ -65,7 +69,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: URLS.GAME_REQUESTS,
-            element: <div>admin game requests</div>,
+            element: <GameRequests />,
           },
         ],
       },

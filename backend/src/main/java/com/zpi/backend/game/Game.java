@@ -24,6 +24,9 @@ public class Game {
     @Column(nullable = false, unique = true)
     private String name;
 
+
+    private String name_pl;
+
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "games_categories",
@@ -48,12 +51,15 @@ public class Game {
     @Column(nullable = false, length = 10000)
     private String shortDescription;
 
+    @Column(length = 10000)
+    private String short_description_pl;
+
     private String image;
 
     @ManyToOne
     private GameStatus gameStatus;
 
-    public Game(String name, List<Category> categories, int minPlayers, int maxPlayers, int playingTime, int age, String shortDescription, String image){
+    public Game(String name, List<Category> categories, int minPlayers, int maxPlayers, int playingTime, int age, String shortDescription){
         this.name = name;
         this.categories = categories;
         this.minPlayers = minPlayers;
@@ -61,6 +67,5 @@ public class Game {
         this.playingTime = playingTime;
         this.age = age;
         this.shortDescription = shortDescription;
-        this.image = image;
     }
 }

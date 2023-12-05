@@ -1,11 +1,14 @@
 package com.zpi.backend.user;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.zpi.backend.game_instance.GameInstance;
 import com.zpi.backend.role.Role;
+import com.zpi.backend.user.dto.UpdateUserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -42,8 +45,15 @@ public class User{
 
     private String avatarLink;
 
+    private double avgRating;
+
+    private int opinionsAmount;
+
     @ManyToOne
     private Role role;
+
+    @OneToMany(mappedBy = "owner", orphanRemoval = true)
+    private List<GameInstance> gameInstances;
 
     public User(String email,String avatarLink,String googleId) {
         this.googleId = googleId;

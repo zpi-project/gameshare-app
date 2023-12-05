@@ -13,6 +13,9 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Table(name = "game_statuses")
 public class GameStatus {
+    public static final String PENDING = "Pending";
+    public static final String ACCEPTED = "Accepted";
+    public static final String REJECTED = "Rejected";
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -20,6 +23,10 @@ public class GameStatus {
 
     @Column(name = "status",nullable = false,unique = true)
     private String status;
+
+    public GameStatus(String status) {
+        this.status = status;
+    }
 
     @Override
     public boolean equals(Object o) {

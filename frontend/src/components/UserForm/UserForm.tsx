@@ -37,12 +37,18 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
   const location = useRecoilValue(locationState) as number[];
 
   const formSchema = z.object({
-    firstName: z.string().min(1, {
-      message: t("fieldIsRequired", { field: `${t("firstName")}` }),
-    }),
-    lastName: z.string().min(1, {
-      message: t("fieldIsRequired", { field: `${t("lastName")}` }),
-    }),
+    firstName: z
+      .string()
+      .trim()
+      .min(1, {
+        message: t("fieldIsRequired", { field: `${t("firstName")}` }),
+      }),
+    lastName: z
+      .string()
+      .trim()
+      .min(1, {
+        message: t("fieldIsRequired", { field: `${t("lastName")}` }),
+      }),
     phoneNumber: z
       .string()
       .refine(phoneNumber => isValidPhoneNumber(formatPhoneNumber(phoneNumber)), {
@@ -83,7 +89,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
       <form
         onSubmit={form.handleSubmit(onFormSubmit)}
         className={cn(
-          `m-4 rounded-md bg-background p-6  ${type === "register" ? "shadow-lg xl:w-[70%]" : ""}`,
+          `m-4 rounded-md bg-background p-6 ${type === "register" ? "shadow-lg xl:w-[70%]" : ""}`,
           formClassName,
         )}
       >
@@ -110,7 +116,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
                         placeholder={t("firstName")}
                         {...field}
                         className="border-0 bg-section"
-                        autoComplete="false"
+                        autoComplete="off"
                       />
                     </FormControl>
                     <FormMessage />
@@ -127,7 +133,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
                       <Input
                         placeholder={t("lastName")}
                         {...field}
-                        autoComplete="false"
+                        autoComplete="off"
                         className="border-0 bg-section"
                       />
                     </FormControl>

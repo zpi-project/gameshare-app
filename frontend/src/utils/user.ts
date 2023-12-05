@@ -2,6 +2,8 @@ import { User } from "@/types/User";
 
 export const getFullname = ({ firstName, lastName }: User) => `${firstName} ${lastName}`;
 
+export const getName = ({ firstName }: User) => `${firstName}`;
+
 export const getNameFirstLetters = ({ firstName, lastName }: User) =>
   `${firstName[0] || ""}${lastName[0] || ""}`;
 
