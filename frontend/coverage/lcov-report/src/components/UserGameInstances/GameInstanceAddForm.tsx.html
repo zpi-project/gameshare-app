@@ -324,7 +324,34 @@
 <a name='L259'></a><a href='#L259'>259</a>
 <a name='L260'></a><a href='#L260'>260</a>
 <a name='L261'></a><a href='#L261'>261</a>
-<a name='L262'></a><a href='#L262'>262</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a>
+<a name='L288'></a><a href='#L288'>288</a>
+<a name='L289'></a><a href='#L289'>289</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -585,16 +612,45 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FC, useState } from "react";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
+import { Trash2 } from "lucide-react";
 import z from "zod";
 import { Game } from "@/types/Game";
 import { NewGameInstance } from "@/types/GameInstance";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
+import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
 import { DialogContent } from "@/components/ui/dialog";
 import {
@@ -617,11 +673,14 @@ interface GameInstanceFormProps {
   onSubmit: () =&gt; void;
 }
 &nbsp;
+const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
+&nbsp;
 const GameInstanceForm: FC&lt;GameInstanceFormProps&gt; = ({ onSubmit }) =&gt; {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const [selectedImages, setSelectedImages] = useState&lt;File[] | null&gt;(null);
+  const [selectedImages, setSelectedImages] = useState&lt;File[]&gt;([]);
   const [game, setGame] = useState&lt;Game | null&gt;(null);
+  const [imageSizeErrors, setImageSizeErrors] = useState&lt;boolean[]&gt;([]);
 &nbsp;
   const handleFileChange = (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
     const filesList = e.target.files;
@@ -634,6 +693,10 @@ const GameInstanceForm: FC&lt;GameInstanceFormProps&gt; = ({ onSubmit }) =&gt; {
       );
     }
   };
+&nbsp;
+  useEffect(() =&gt; {
+    setImageSizeErrors((selectedImages)?.map(file =&gt; file.size &gt; MAX_IMAGE_SIZE));
+  }, [selectedImages]);
 &nbsp;
   const formSchema = z.object({
     gameId: z.number({
@@ -652,65 +715,71 @@ const GameInstanceForm: FC&lt;GameInstanceFormProps&gt; = ({ onSubmit }) =&gt; {
         invalid_type_error: t("fieldIsRequired", { field: t("pricePerDay"), context: "female" }),
       })
       .positive({
-        message: t("minPricePerDay"),
+        message: t("fieldPositive", { field: t("pricePerDay") }),
       })
       .max(200, { message: t("maxPricePerDay") }),
   });
 &nbsp;
   const form = useForm&lt;z.infer&lt;typeof formSchema&gt;&gt;({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      description: "",
+      pricePerDay: 0,
+    },
   });
 &nbsp;
-  const { mutateAsync: addGameInstance } = useMutation({
+  const { mutateAsync: addGameInstance, isLoading: isLoadingGame } = useMutation({
     mutationFn: (gameInstance: NewGameInstance) =&gt; GameInstanceApi.create(gameInstance),
   });
 &nbsp;
-  const { mutateAsync: addImage } = useMutation((params: { uuid: string; file: File }) =&gt;
-    GameInstanceApi.addImage(params.uuid, params.file),
+  const { mutateAsync: addImage, isLoading: isLoadingImage } = useMutation(
+    (params: { uuid: string; file: File }) =&gt; GameInstanceApi.addImage(params.uuid, params.file),
   );
 &nbsp;
   const handleFormSubmit = async (data: NewGameInstance) =&gt; {
-    try {
-      const newGame = await addGameInstance(data);
+    if (!imageSizeErrors.includes(true)) {
+      try {
+        const newGame = await addGameInstance(data);
 &nbsp;
-      toast({
-        title: t("gameInstanceAdded"),
-      });
+        toast({
+          title: t("gameInstanceAdded"),
+        });
 &nbsp;
-      if (selectedImages) {
-        for (let idx = 0; idx &lt; (selectedImages.length || 0); idx++) {
-          const file = selectedImages[idx];
+        if (selectedImages.length) {
+          for (let idx = 0; idx &lt; (selectedImages.length || 0); idx++) {
+            const file = selectedImages[idx];
 &nbsp;
-          try {
-            await addImage({ uuid: newGame.uuid, file });
-            toast({
-              title: t("successAddingImage", { nr: idx + 1 }),
-            });
-          } catch (e) {
-            if (isAxiosError(e) &amp;&amp; e.response?.data?.title === "InvalidFileTypeException") {
+            try {
+              await addImage({ uuid: newGame.uuid, file });
               toast({
-                title: t("errorAddingImage", { nr: idx + 1 }),
-                description: t("incorrectFileType"),
-                variant: "destructive",
+                title: t("successAddingImage", { nr: idx + 1 }),
               });
-            } else {
-              toast({
-                title: t("errorAddingImage", { nr: idx + 1 }),
-                description: t("errorAddingImageDescription"),
-                variant: "destructive",
-              });
+            } catch (e) {
+              if (isAxiosError(e) &amp;&amp; e.response?.data?.title === "InvalidFileTypeException") {
+                toast({
+                  title: t("errorAddingImage", { nr: idx + 1 }),
+                  description: t("incorrectFileType"),
+                  variant: "destructive",
+                });
+              } else {
+                toast({
+                  title: t("errorAddingImage", { nr: idx + 1 }),
+                  description: t("errorAddingImageDescription"),
+                  variant: "destructive",
+                });
+              }
             }
           }
         }
-      }
 &nbsp;
-      onSubmit();
-    } catch {
-      toast({
-        title: t("errorAddingGame"),
-        description: t("tryAgain"),
-        variant: "destructive",
-      });
+        onSubmit();
+      } catch {
+        toast({
+          title: t("errorAddingGame"),
+          description: t("tryAgain"),
+          variant: "destructive",
+        });
+      }
     }
   };
 &nbsp;
@@ -720,9 +789,10 @@ const GameInstanceForm: FC&lt;GameInstanceFormProps&gt; = ({ onSubmit }) =&gt; {
       onCloseAutoFocus={() =&gt; {
         form.reset();
         setGame(null);
-        setSelectedImages(null);
+        setSelectedImages([]);
       }}
     &gt;
+      {(isLoadingGame || isLoadingImage) &amp;&amp; &lt;Spinner /&gt;}
       &lt;Form {...form}&gt;
         &lt;form
           onSubmit={form.handleSubmit(handleFormSubmit)}
@@ -818,15 +888,26 @@ const GameInstanceForm: FC&lt;GameInstanceFormProps&gt; = ({ onSubmit }) =&gt; {
                     {selectedImages &amp;&amp; (
                       &lt;div className="flex flex-col gap-4 p-4"&gt;
                         {selectedImages.map((image, idx) =&gt; (
-                          &lt;div
-                            className="h-[250px] w-full overflow-hidden rounded-lg"
-                            key={idx + "img"}
-                          &gt;
-                            &lt;img
-                              src={URL.createObjectURL(image)}
-                              alt={`Selected ${idx + 1}`}
-                              className="h-full w-full object-cover object-top"
-                            /&gt;
+                          &lt;div key={idx + "img"}&gt;
+                            &lt;p className="font-bold text-destructive"&gt;
+                              {imageSizeErrors[idx] &amp;&amp; t("maxImgSize", { size: 3 })}
+                            &lt;/p&gt;
+                            &lt;div className="relative h-[250px] w-full overflow-hidden rounded-lg"&gt;
+                              &lt;img
+                                src={URL.createObjectURL(image)}
+                                alt={`Selected ${idx + 1}`}
+                                className="h-full w-full object-cover object-top"
+                              /&gt;
+                              &lt;Trash2
+                                className="absolute left-0 top-0 h-full w-full bg-none p-[90px] text-destructive opacity-0 duration-300 hover:bg-background/80 hover:opacity-100"
+                                size={30}
+                                onClick={() =&gt;
+                                  setSelectedImages(
+                                    selectedImages.filter((_, index) =&gt; index !== idx),
+                                  )
+                                }
+                              /&gt;
+                            &lt;/div&gt;
                           &lt;/div&gt;
                         ))}
                       &lt;/div&gt;
@@ -853,7 +934,7 @@ export default GameInstanceForm;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-04T12:41:00.345Z
+                at 2023-12-05T12:12:47.002Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

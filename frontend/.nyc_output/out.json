@@ -1,6 +1,6 @@
 {
-  "/home/maria/studia/gameshare-app/frontend/src/components/ThemeProvider.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ThemeProvider.tsx",
+  "/home/maria/studia/gameshare-app/frontend/src/ThemeProvider.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/ThemeProvider.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -49,7 +49,7 @@
         },
         "end": {
           "line": 6,
-          "column": 129
+          "column": 118
         }
       },
       "5": {
@@ -399,7 +399,7 @@
         },
         "end": {
           "line": 65,
-          "column": 142
+          "column": 131
         }
       },
       "40": {
@@ -934,47 +934,47 @@
       }
     },
     "s": {
-      "0": 2,
+      "0": 33,
       "1": 0,
-      "2": 2,
-      "3": 2,
-      "4": 2,
-      "5": 2,
-      "6": 2,
-      "7": 2,
-      "8": 2,
+      "2": 33,
+      "3": 33,
+      "4": 33,
+      "5": 33,
+      "6": 33,
+      "7": 33,
+      "8": 33,
       "9": 0,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 2,
+      "10": 33,
+      "11": 11,
+      "12": 11,
+      "13": 11,
+      "14": 11,
+      "15": 11,
+      "16": 11,
+      "17": 11,
+      "18": 11,
+      "19": 11,
+      "20": 11,
       "21": 0,
-      "22": 2,
+      "22": 11,
       "23": 0,
       "24": 0,
-      "25": 2,
-      "26": 2,
-      "27": 2,
-      "28": 2,
+      "25": 11,
+      "26": 33,
+      "27": 33,
+      "28": 33,
       "29": 0,
       "30": 0,
       "31": 0,
       "32": 0,
       "33": 0,
-      "34": 2,
-      "35": 2,
-      "36": 2,
-      "37": 2,
-      "38": 2,
-      "39": 2,
-      "40": 2,
+      "34": 33,
+      "35": 33,
+      "36": 33,
+      "37": 33,
+      "38": 33,
+      "39": 33,
+      "40": 33,
       "41": 0,
       "42": 0,
       "43": 0,
@@ -983,36 +983,36 @@
     },
     "f": {
       "0": 0,
-      "1": 2,
-      "2": 2,
-      "3": 2,
+      "1": 11,
+      "2": 11,
+      "3": 11,
       "4": 0,
       "5": 0,
-      "6": 2,
+      "6": 33,
       "7": 0
     },
     "b": {
       "0": [
         0,
-        2
+        33
       ],
       "1": [
-        2
+        11
       ],
       "2": [
-        2
+        11
       ],
       "3": [
-        2,
-        2
+        11,
+        11
       ],
       "4": [
-        2,
+        11,
         0
       ],
       "5": [
         0,
-        2
+        11
       ],
       "6": [
         0,
@@ -1030,7 +1030,7 @@
     "inputSourceMap": {
       "version": 3,
       "sources": [
-        "/home/maria/studia/gameshare-app/frontend/src/components/ThemeProvider.tsx"
+        "/home/maria/studia/gameshare-app/frontend/src/ThemeProvider.tsx"
       ],
       "names": [
         "createContext",
@@ -1069,7 +1069,7 @@
       "mappings": ";;;;;;;;;;AAAA,SAASA,aAAa,EAAEC,UAAU,EAAEC,SAAS,EAAEC,QAAQ,QAAQ,QAAQ;AAevE,MAAMC,eAAmC;IACvCC,OAAO;IACPC,UAAU,IAAM;AAClB;AAEA,MAAMC,qCAAuBP,cAAkCI;AAE/D,OAAO,SAASI,cAAc,EAC5BC,QAAQ,EACRC,eAAe,QAAQ,EACvBC,aAAa,eAAe,EAC5B,GAAGC,OACgB;;IACnB,MAAM,CAACP,OAAOC,SAAS,GAAGH,SACxB,IAAM,AAACU,aAAaC,OAAO,CAACH,eAAyBD;IAGvDR,UAAU;QACR,MAAMa,OAAOC,OAAOC,QAAQ,CAACC,eAAe;QAE5CH,KAAKI,SAAS,CAACC,MAAM,CAAC,SAAS;QAE/B,IAAIf,UAAU,UAAU;YACtB,MAAMgB,cAAcL,OAAOM,UAAU,CAAC,gCAAgCC,OAAO,GACzE,SACA;YAEJR,KAAKI,SAAS,CAACK,GAAG,CAACH;YACnB;QACF;QAEAN,KAAKI,SAAS,CAACK,GAAG,CAACnB;IACrB,GAAG;QAACA;KAAM;IAEV,MAAMoB,QAAQ;QACZpB;QACAC,UAAU,CAACD;YACTQ,aAAaa,OAAO,CAACf,YAAYN;YACjCC,SAASD;QACX;IACF;IAEA,qBACE,QAACE,qBAAqBoB,QAAQ;QAAE,GAAGf,KAAK;QAAEa,OAAOA;kBAC9ChB;;;;;;AAGP;GAxCgBD;KAAAA;AA0ChB,OAAO,MAAMoB,WAAW;;IACtB,MAAMC,UAAU5B,WAAWM;IAE3B,IAAIsB,YAAYC,WAAW,MAAM,IAAIC,MAAM;IAE3C,OAAOF;AACT,EAAE;IANWD"
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "446dc0aecfcc1e1677144a890b4e62cf94d9377e"
+    "hash": "2ec983856e8cf03708816179a6acb338390c98ce"
   },
   "/home/maria/studia/gameshare-app/frontend/src/utils/tailwind.ts": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/utils/tailwind.ts",
@@ -1113,10 +1113,10 @@
     },
     "branchMap": {},
     "s": {
-      "0": 4
+      "0": 30
     },
     "f": {
-      "0": 4
+      "0": 30
     },
     "b": {},
     "inputSourceMap": {
@@ -1135,510 +1135,460 @@
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
     "hash": "d001c98e56376ea9bf92c7837691daa6933e803e"
   },
-  "/home/maria/studia/gameshare-app/frontend/src/i18n/resources/en.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/i18n/resources/en.ts",
-    "statementMap": {},
-    "fnMap": {},
+  "/home/maria/studia/gameshare-app/frontend/src/utils/date.ts": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/utils/date.ts",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 2,
+          "column": 4
+        },
+        "end": {
+          "line": 2,
+          "column": 60
+        }
+      },
+      "1": {
+        "start": {
+          "line": 5,
+          "column": 4
+        },
+        "end": {
+          "line": 5,
+          "column": 64
+        }
+      },
+      "2": {
+        "start": {
+          "line": 8,
+          "column": 33
+        },
+        "end": {
+          "line": 8,
+          "column": 57
+        }
+      },
+      "3": {
+        "start": {
+          "line": 9,
+          "column": 4
+        },
+        "end": {
+          "line": 9,
+          "column": 73
+        }
+      },
+      "4": {
+        "start": {
+          "line": 10,
+          "column": 4
+        },
+        "end": {
+          "line": 10,
+          "column": 38
+        }
+      },
+      "5": {
+        "start": {
+          "line": 11,
+          "column": 4
+        },
+        "end": {
+          "line": 11,
+          "column": 34
+        }
+      },
+      "6": {
+        "start": {
+          "line": 14,
+          "column": 32
+        },
+        "end": {
+          "line": 14,
+          "column": 55
+        }
+      },
+      "7": {
+        "start": {
+          "line": 15,
+          "column": 4
+        },
+        "end": {
+          "line": 15,
+          "column": 71
+        }
+      },
+      "8": {
+        "start": {
+          "line": 16,
+          "column": 4
+        },
+        "end": {
+          "line": 16,
+          "column": 37
+        }
+      },
+      "9": {
+        "start": {
+          "line": 17,
+          "column": 4
+        },
+        "end": {
+          "line": 17,
+          "column": 33
+        }
+      },
+      "10": {
+        "start": {
+          "line": 20,
+          "column": 4
+        },
+        "end": {
+          "line": 20,
+          "column": 45
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "getFirstDayOfMonth",
+        "decl": {
+          "start": {
+            "line": 1,
+            "column": 16
+          },
+          "end": {
+            "line": 1,
+            "column": 34
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 41
+          },
+          "end": {
+            "line": 3,
+            "column": 1
+          }
+        },
+        "line": 1
+      },
+      "1": {
+        "name": "getLastDayOfMonth",
+        "decl": {
+          "start": {
+            "line": 4,
+            "column": 16
+          },
+          "end": {
+            "line": 4,
+            "column": 33
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 4,
+            "column": 40
+          },
+          "end": {
+            "line": 6,
+            "column": 1
+          }
+        },
+        "line": 4
+      },
+      "2": {
+        "name": "getFirstDayOfLastMonth",
+        "decl": {
+          "start": {
+            "line": 7,
+            "column": 16
+          },
+          "end": {
+            "line": 7,
+            "column": 38
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 45
+          },
+          "end": {
+            "line": 12,
+            "column": 1
+          }
+        },
+        "line": 7
+      },
+      "3": {
+        "name": "getFirstDayOfNextMonth",
+        "decl": {
+          "start": {
+            "line": 13,
+            "column": 16
+          },
+          "end": {
+            "line": 13,
+            "column": 38
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 13,
+            "column": 45
+          },
+          "end": {
+            "line": 18,
+            "column": 1
+          }
+        },
+        "line": 13
+      },
+      "4": {
+        "name": "getDaysInMonth",
+        "decl": {
+          "start": {
+            "line": 19,
+            "column": 16
+          },
+          "end": {
+            "line": 19,
+            "column": 30
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 19,
+            "column": 37
+          },
+          "end": {
+            "line": 21,
+            "column": 1
+          }
+        },
+        "line": 19
+      }
+    },
     "branchMap": {},
-    "s": {},
-    "f": {},
+    "s": {
+      "0": 16,
+      "1": 28,
+      "2": 7,
+      "3": 7,
+      "4": 7,
+      "5": 7,
+      "6": 6,
+      "7": 6,
+      "8": 6,
+      "9": 6,
+      "10": 14
+    },
+    "f": {
+      "0": 16,
+      "1": 28,
+      "2": 7,
+      "3": 6,
+      "4": 14
+    },
     "b": {},
     "inputSourceMap": {
       "version": 3,
       "sources": [
-        "/home/maria/studia/gameshare-app/frontend/src/i18n/resources/en.ts"
+        "/home/maria/studia/gameshare-app/frontend/src/utils/date.ts"
       ],
       "names": [
-        "myProfile",
-        "login",
-        "logout",
-        "loading",
-        "mode",
-        "dark",
-        "light",
-        "system",
-        "language",
-        "pl",
-        "enUS",
-        "addOpinion",
-        "seeMore",
-        "seeLess",
-        "edit",
-        "locationDisabledTooltip",
-        "locationNotAvailableTooltip",
-        "fillInPersonalData",
-        "editPersonalData",
-        "markLocation",
-        "editLocation",
-        "submit",
-        "firstName",
-        "lastName",
-        "phoneNumber",
-        "fieldIsRequired",
-        "fieldIsRequired_male",
-        "fieldIsRequired_female",
-        "phoneNumberIsInvalid",
-        "gameDescription",
-        "tryRefreshing",
-        "userErrorTitle",
-        "userErrorDescription",
-        "settingsErrorTitle",
-        "settingsErrorDescription",
-        "registerErrorTitle",
-        "updateErrorTitle",
-        "registerSuccessDescription",
-        "updateSuccessDescription",
-        "welcomeHeader",
-        "welcomeDescription",
-        "userGames",
-        "myGames",
-        "addGameInstance",
-        "popularNow",
-        "seeAll",
-        "popularGamesErrorTitle",
-        "recommendationsErrorTitle",
-        "categoriesErrorTitle",
-        "searchGamePlaceholder",
-        "searchGameWithinCategoryPlaceholder",
-        "searchGamesError",
-        "noResults",
-        "categoryGamesError",
-        "categoryError",
-        "gameError",
-        "gameInstances",
-        "noGamesMyPage",
-        "noGamesUserPage",
-        "seeProfile",
-        "seeAvailability",
-        "seeGamePage",
-        "noOpinionsMyPage",
-        "noOpinionsUserPage",
-        "errorFetchingOpinions",
-        "errorFetchingGames",
-        "deactivated",
-        "noGameInstances",
-        "errorFetchingUsersOnMap",
-        "noGameUsers",
-        "errorFetchingGameInstances",
-        "noOpinionsGameInstance",
-        "gameInstaneDescriptionMin",
-        "typeToSearch",
-        "category",
-        "all",
-        "pricePerDay",
-        "players",
-        "age",
-        "perDay",
-        "errorAddingGame",
-        "errorAddingImage",
-        "errorAddingImageDescription",
-        "incorrectFileType",
-        "successAddingImage",
-        "tryAgain",
-        "gameInstanceAdded",
-        "gameInstanceDescriptionMin",
-        "gameInstanceDescriptionMax",
-        "minPricePerDay",
-        "maxPricePerDay",
-        "yourGameDetails",
-        "provideGamePrice",
-        "typeHere",
-        "addGameDesc",
-        "chooseGameTitle",
-        "uploadGamePhotos",
-        "game",
-        "any",
-        "any_male",
-        "any_female",
-        "myReservations",
-        "reservationStatus",
-        "reservationType",
-        "errorFetchingReservations",
-        "noReservations",
-        "noReservationsStatus",
-        "reservationNumber",
-        "startDate",
-        "endDate",
-        "days",
-        "dateFormat",
-        "monthYearFormat",
-        "reservationTypes",
-        "owner",
-        "renter",
-        "reservationStatuses",
-        "ALL",
-        "PENDING",
-        "ACCEPTED_BY_OWNER",
-        "REJECTED_BY_OWNER",
-        "CANCELED_BY_OWNER",
-        "CANCELED_BY_RENTER",
-        "RENTED",
-        "FINISHED",
-        "EXPIRED",
-        "weekdays",
-        "reservationsCalendar",
-        "availabilityCalendar",
-        "reservationForm",
-        "bookItNow",
-        "deactivate",
-        "activate",
-        "errorFetchingReservationsCalendar",
-        "errorStatus",
-        "unexpectedError",
-        "ooops",
-        "backToHome",
-        "error",
-        "leaveMessage",
-        "formStartDate",
-        "formEndDate",
-        "pickDate",
-        "startDateNotPast",
-        "endDateAtLeastStartDate",
-        "createReservationSuccess",
-        "createReservationSuccessDescription",
-        "createReservationError",
-        "seeReservation",
-        "submitReservation",
-        "reservationDetails",
-        "userDetails",
-        "renterMessage",
-        "renterNoMessage",
-        "ownerOpinion",
-        "renterOpinion",
-        "gameOpinion",
-        "reservationHeader",
-        "status",
-        "ownerNoOpinion",
-        "noGameOpinion",
-        "noRenterOpinion",
-        "ownerDetails",
-        "gameDetails",
-        "gameReservationsCalendar",
-        "userNoOpinions",
-        "cannotAddOpinionAboutOwner",
-        "cannotAddOpinionAboutRenter",
-        "cannotAddOpinionAboutGame",
-        "noOpinions",
-        "successChangingStatus",
-        "successChangingStatusDescription",
-        "errorChangingStatus",
-        "errorChangingStatusDescription",
-        "errorFetchingDetails",
-        "timeframeNoAvailable",
-        "timeframeAvailable",
-        "gameRequests",
-        "noGameRequests",
-        "gameRequestsError",
-        "accept",
-        "reject",
-        "gameAcceptSuccess",
-        "gameAcceptError",
-        "gameAcceptErrorDescription",
-        "gameRejectSuccess",
-        "gameRejectError",
-        "gameRejectErrorDescription",
-        "recommendedGames",
-        "choosePictures"
+        "getFirstDayOfMonth",
+        "date",
+        "Date",
+        "getFullYear",
+        "getMonth",
+        "getLastDayOfMonth",
+        "getFirstDayOfLastMonth",
+        "firstDayOfCurrentMonth",
+        "setDate",
+        "getDate",
+        "getFirstDayOfNextMonth",
+        "lastDayOfCurrentMonth",
+        "getDaysInMonth"
       ],
-      "mappings": "AAAA,eAAe;IACbA,WAAW;IACXC,OAAO;IACPC,QAAQ;IACRC,SAAS;IAETC,MAAM;IACNC,MAAM;IACNC,OAAO;IACPC,QAAQ;IAERC,UAAU;IACVC,IAAI;IACJC,MAAM;IAENC,YAAY;IACZC,SAAS;IACTC,SAAS;IACTC,MAAM;IAENC,yBAAyB;IACzBC,6BAA6B;IAE7BC,oBAAoB;IACpBC,kBAAkB;IAClBC,cAAc;IACdC,cAAc;IACdC,QAAQ;IACRC,WAAW;IACXC,UAAU;IACVC,aAAa;IAEbC,iBAAiB;IACjBC,sBAAsB;IACtBC,wBAAwB;IACxBC,sBAAsB;IAEtBC,iBAAiB;IAEjBC,eAAe;IACfC,gBAAgB;IAChBC,sBAAsB;IACtBC,oBAAoB;IACpBC,0BAA0B;IAC1BC,oBAAoB;IACpBC,kBAAkB;IAClBC,4BAA4B;IAC5BC,0BAA0B;IAE1BC,eAAe;IACfC,oBACE;IAEFC,WAAW;IACXC,SAAS;IACTC,iBAAiB;IACjBC,YAAY;IACZC,QAAQ;IACRC,wBAAwB;IACxBC,2BAA2B;IAC3BC,sBAAsB;IACtBC,uBAAuB;IACvBC,qCAAqC;IACrCC,kBAAkB;IAClBC,WAAW;IACXC,oBAAoB;IACpBC,eAAe;IACfC,WAAW;IACXC,eAAe;IACfC,eAAe;IACfC,iBAAiB;IACjBC,YAAY;IACZC,iBAAiB;IACjBC,aAAa;IACbC,kBAAkB;IAClBC,oBAAoB;IACpBC,uBAAuB;IACvBC,oBAAoB;IACpBC,aAAa;IACbC,iBAAiB;IACjBC,yBAAyB;IACzBC,aAAa;IACbC,4BAA4B;IAC5BC,wBAAwB;IACxBC,2BAA2B;IAE3BC,cAAc;IACdC,UAAU;IACVC,KAAK;IACLC,aAAa;IACbC,SAAS;IACTC,KAAK;IACLC,QAAQ;IACRC,iBAAiB;IACjBC,kBAAkB;IAClBC,6BAA6B;IAC7BC,mBAAmB;IACnBC,oBAAoB;IACpBC,UAAU;IACVC,mBAAmB;IACnBC,4BAA4B;IAC5BC,4BAA4B;IAC5BC,gBAAgB;IAChBC,gBAAgB;IAChBC,iBAAiB;IACjBC,kBAAkB;IAClBC,UAAU;IACVC,aAAa;IACbC,iBAAiB;IACjBC,kBAAkB;IAClBC,MAAM;IAENC,KAAK;IACLC,UAAU;IACVC,YAAY;IAEZC,gBAAgB;IAChBC,mBAAmB;IACnBC,iBAAiB;IACjBC,2BAA2B;IAC3BC,gBAAgB;IAChBC,sBAAsB;IACtBC,mBAAmB;IACnBC,WAAW;IACXC,SAAS;IACTC,MAAM;IACNC,YAAY;IACZC,iBAAiB;IAEjBC,kBAAkB;QAChBC,OAAO;QACPC,QAAQ;IACV;IAEAC,qBAAqB;QACnBF,OAAO;YACLG,KAAK;YACLC,SAAS;YACTC,mBAAmB;YACnBC,mBAAmB;YACnBC,mBAAmB;YACnBC,oBAAoB;YACpBC,QAAQ;YACRC,UAAU;YACVC,SAAS;QACX;QACAV,QAAQ;YACNE,KAAK;YACLC,SAAS;YACTC,mBAAmB;YACnBC,mBAAmB;YACnBC,mBAAmB;YACnBC,oBAAoB;YACpBC,QAAQ;YACRC,UAAU;YACVC,SAAS;QACX;IACF;IAEAC,UAAU;QACR,GAAG;QACH,GAAG;QACH,GAAG;QACH,GAAG;QACH,GAAG;QACH,GAAG;QACH,GAAG;IACL;IAEAC,sBAAsB;IACtBC,sBAAsB;IACtBC,iBAAiB;IACjBC,WAAW;IACXC,YAAY;IACZC,UAAU;IACVC,mCAAmC;IACnCC,aAAa;QACX,OAAO;QACP,OAAO;QACP,OAAO;QACP,OAAO;QACP,OAAO;QACP,OAAO;QACP,OAAO;QACP,OAAO;IACT;IACAC,iBAAiB;IACjBC,OAAO;IACPC,YAAY;IACZC,OAAO;IACPC,cAAc;IACdC,eAAe;IACfC,aAAa;IACbC,UAAU;IACVC,kBAAkB;IAClBC,yBAAyB;IACzBC,0BAA0B;IAC1BC,qCACE;IACFC,wBAAwB;IACxBC,gBAAgB;IAChBC,mBAAmB;IAEnBC,oBAAoB;QAClBnC,QAAQ;YACNoC,aAAa;YACbC,eAAe;YACfC,iBAAiB;YACjBC,cAAc;YACdC,eAAe;YACfC,aAAa;QACf;QACA1C,OAAO;YACLqC,aAAa;YACbC,eAAe;YACfC,iBAAiB;YACjBC,cAAc;YACdC,eAAe;YACfC,aAAa;QACf;IACF;IAEAC,mBAAmB;IACnBC,QAAQ;IACRC,gBAAgB;IAChBC,eAAe;IACfC,iBAAiB;IACjBC,cAAc;IACdC,aAAa;IACbC,0BAA0B;IAC1BC,gBAAgB;IAChBC,4BAA4B;IAC5BC,6BAA6B;IAC7BC,2BAA2B;IAC3BC,YAAY;IACZC,uBAAuB;IACvBC,kCACE;IACFC,qBAAqB;IACrBC,gCAAgC;IAChC1D,QAAQ;IACRD,OAAO;IACP4D,sBAAsB;IACtBC,sBACE;IACFC,oBACE;IAEFC,cAAc;IACdC,gBAAgB;IAChBC,mBAAmB;IACnBC,QAAQ;IACRC,QAAQ;IACRC,mBAAmB;IACnBC,iBAAiB;IACjBC,4BAA4B;IAE5BC,mBAAmB;IACnBC,iBAAiB;IACjBC,4BAA4B;IAC5BC,kBAAkB;IAClBC,gBAAgB;AAClB,EAAE"
+      "mappings": "AAAA,OAAO,SAASA,mBAAmBC,IAAU;IAC3C,OAAO,IAAIC,KAAKD,KAAKE,WAAW,IAAIF,KAAKG,QAAQ,IAAI;AACvD;AAEA,OAAO,SAASC,kBAAkBJ,IAAU;IAC1C,OAAO,IAAIC,KAAKD,KAAKE,WAAW,IAAIF,KAAKG,QAAQ,KAAK,GAAG;AAC3D;AAEA,OAAO,SAASE,uBAAuBL,IAAU;IAC/C,IAAIM,yBAAyBP,mBAAmBC;IAChDM,uBAAuBC,OAAO,CAACD,uBAAuBE,OAAO,KAAK;IAClEF,uBAAuBC,OAAO,CAAC;IAC/B,OAAOD;AACT;AAEA,OAAO,SAASG,uBAAuBT,IAAU;IAC/C,IAAIU,wBAAwBN,kBAAkBJ;IAC9CU,sBAAsBH,OAAO,CAACG,sBAAsBF,OAAO,KAAK;IAChEE,sBAAsBH,OAAO,CAAC;IAC9B,OAAOG;AACT;AAEA,OAAO,SAASC,eAAeX,IAAU;IACvC,OAAOI,kBAAkBJ,MAAMQ,OAAO;AACxC"
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "5ec1b8ff0055ad7767432dc424409acc25a87b50"
+    "hash": "4e3ee5c43cc115596ee9784f6e9e9a53c2a6f5e3"
   },
-  "/home/maria/studia/gameshare-app/frontend/src/i18n/resources/pl.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/i18n/resources/pl.ts",
+  "/home/maria/studia/gameshare-app/frontend/src/utils/stringToColor.ts": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/utils/stringToColor.ts",
     "statementMap": {
       "0": {
         "start": {
           "line": 1,
-          "column": 11
+          "column": 32
         },
         "end": {
-          "line": 237,
-          "column": 1
-        }
-      }
-    },
-    "fnMap": {},
-    "branchMap": {},
-    "s": {
-      "0": 2
-    },
-    "f": {},
-    "b": {},
-    "inputSourceMap": {
-      "version": 3,
-      "sources": [
-        "/home/maria/studia/gameshare-app/frontend/src/i18n/resources/pl.ts"
-      ],
-      "names": [
-        "pl",
-        "myProfile",
-        "login",
-        "logout",
-        "loading",
-        "mode",
-        "dark",
-        "light",
-        "system",
-        "language",
-        "enUS",
-        "addOpinion",
-        "seeMore",
-        "seeLess",
-        "edit",
-        "locationDisabledTooltip",
-        "locationNotAvailableTooltip",
-        "fillInPersonalData",
-        "editPersonalData",
-        "markLocation",
-        "editLocation",
-        "submit",
-        "firstName",
-        "lastName",
-        "phoneNumber",
-        "fieldIsRequired",
-        "fieldIsRequired_male",
-        "fieldIsRequired_female",
-        "phoneNumberIsInvalid",
-        "gameDescription",
-        "tryRefreshing",
-        "userErrorTitle",
-        "userErrorDescription",
-        "settingsErrorTitle",
-        "settingsErrorDescription",
-        "registerErrorTitle",
-        "updateErrorTitle",
-        "registerSuccessDescription",
-        "updateSuccessDescription",
-        "game",
-        "welcomeHeader",
-        "welcomeDescription",
-        "userGames",
-        "myGames",
-        "addGameInstance",
-        "popularNow",
-        "seeAll",
-        "popularGamesErrorTitle",
-        "recommendationsErrorTitle",
-        "categoriesErrorTitle",
-        "searchGamePlaceholder",
-        "searchGameWithinCategoryPlaceholder",
-        "searchGamesError",
-        "noResults",
-        "categoryGamesError",
-        "categoryError",
-        "gameError",
-        "gameInstances",
-        "noGamesMyPage",
-        "noGamesUserPage",
-        "errorFetchingGames",
-        "seeProfile",
-        "seeAvailability",
-        "seeGamePage",
-        "noOpinionsMyPage",
-        "noOpinionsUserPage",
-        "errorFetchingOpinions",
-        "deactivated",
-        "noGameInstances",
-        "errorFetchingUsersOnMap",
-        "noGameUsers",
-        "errorFetchingGameInstances",
-        "errorAddingGame",
-        "errorAddingImage",
-        "successAddingImage",
-        "errorAddingImageDescription",
-        "incorrectFileType",
-        "tryAgain",
-        "gameInstanceAdded",
-        "gameInstanceDescriptionMin",
-        "gameInstanceDescriptionMax",
-        "minPricePerDay",
-        "maxPricePerDay",
-        "yourGameDetails",
-        "provideGamePrice",
-        "typeHere",
-        "addGameDesc",
-        "chooseGameTitle",
-        "uploadGamePhotos",
-        "noOpinionsGameInstance",
-        "gameInstaneDescriptionMin",
-        "typeToSearch",
-        "category",
-        "all",
-        "pricePerDay",
-        "players",
-        "age",
-        "perDay",
-        "any",
-        "any_male",
-        "any_female",
-        "myReservations",
-        "reservationStatus",
-        "reservationType",
-        "errorFetchingReservations",
-        "noReservations",
-        "noReservationsStatus",
-        "reservationNumber",
-        "startDate",
-        "endDate",
-        "days",
-        "dateFormat",
-        "monthYearFormat",
-        "reservationTypes",
-        "owner",
-        "renter",
-        "reservationStatuses",
-        "ALL",
-        "PENDING",
-        "ACCEPTED_BY_OWNER",
-        "REJECTED_BY_OWNER",
-        "CANCELED_BY_OWNER",
-        "CANCELED_BY_RENTER",
-        "RENTED",
-        "FINISHED",
-        "EXPIRED",
-        "weekdays",
-        "reservationsCalendar",
-        "availabilityCalendar",
-        "reservationForm",
-        "deactivate",
-        "activate",
-        "bookItNow",
-        "errorFetchingReservationsCalendar",
-        "errorStatus",
-        "unexpectedError",
-        "ooops",
-        "backToHome",
-        "error",
-        "leaveMessage",
-        "formStartDate",
-        "formEndDate",
-        "pickDate",
-        "startDateNotPast",
-        "endDateAtLeastStartDate",
-        "createReservationSuccess",
-        "createReservationSuccessDescription",
-        "createReservationError",
-        "seeReservation",
-        "submitReservation",
-        "reservationDetails",
-        "userDetails",
-        "renterMessage",
-        "renterNoMessage",
-        "ownerOpinion",
-        "renterOpinion",
-        "gameOpinion",
-        "reservationHeader",
-        "status",
-        "ownerNoOpinion",
-        "noGameOpinion",
-        "noRenterOpinion",
-        "ownerDetails",
-        "gameDetails",
-        "gameReservationsCalendar",
-        "userNoOpinions",
-        "cannotAddOpinionAboutOwner",
-        "cannotAddOpinionAboutRenter",
-        "cannotAddOpinionAboutGame",
-        "noOpinions",
-        "successChangingStatus",
-        "successChangingStatusDescription",
-        "errorChangingStatus",
-        "errorChangingStatusDescription",
-        "errorFetchingDetails",
-        "timeframeNoAvailable",
-        "timeframeAvailable",
-        "gameRequests",
-        "noGameRequests",
-        "gameRequestsError",
-        "accept",
-        "reject",
-        "gameAcceptSuccess",
-        "gameAcceptError",
-        "gameAcceptErrorDescription",
-        "gameRejectSuccess",
-        "gameRejectError",
-        "gameRejectErrorDescription",
-        "recommendedGames",
-        "choosePictures"
-      ],
-      "mappings": "AAEA,MAAMA,KAAgB;IACpBC,WAAW;IACXC,OAAO;IACPC,QAAQ;IACRC,SAAS;IAETC,MAAM;IACNC,MAAM;IACNC,OAAO;IACPC,QAAQ;IAERC,UAAU;IACVT,IAAI;IACJU,MAAM;IAENC,YAAY;IACZC,SAAS;IACTC,SAAS;IACTC,MAAM;IAENC,yBAAyB;IACzBC,6BAA6B;IAE7BC,oBAAoB;IACpBC,kBAAkB;IAClBC,cAAc;IACdC,cAAc;IACdC,QAAQ;IACRC,WAAW;IACXC,UAAU;IACVC,aAAa;IAEbC,iBAAiB;IACjBC,sBAAsB;IACtBC,wBAAwB;IACxBC,sBAAsB;IAEtBC,iBAAiB;IAEjBC,eAAe;IACfC,gBAAgB;IAChBC,sBAAsB;IACtBC,oBAAoB;IACpBC,0BAA0B;IAC1BC,oBAAoB;IACpBC,kBAAkB;IAClBC,4BAA4B;IAC5BC,0BAA0B;IAC1BC,MAAM;IAENC,eAAe;IACfC,oBACE;IAEFC,WAAW;IACXC,SAAS;IACTC,iBAAiB;IACjBC,YAAY;IACZC,QAAQ;IACRC,wBAAwB;IACxBC,2BAA2B;IAC3BC,sBAAsB;IACtBC,uBAAuB;IACvBC,qCAAqC;IACrCC,kBAAkB;IAClBC,WAAW;IACXC,oBAAoB;IACpBC,eAAe;IACfC,WAAW;IAEXC,eAAe;IACfC,eAAe;IACfC,iBAAiB;IACjBC,oBAAoB;IACpBC,YAAY;IACZC,iBAAiB;IACjBC,aAAa;IACbC,kBAAkB;IAClBC,oBAAoB;IACpBC,uBAAuB;IACvBC,aAAa;IACbC,iBAAiB;IACjBC,yBAAyB;IAEzBC,aAAa;IACbC,4BAA4B;IAC5BC,iBAAiB;IACjBC,kBAAkB;IAClBC,oBAAoB;IACpBC,6BAA6B;IAC7BC,mBAAmB;IACnBC,UAAU;IACVC,mBAAmB;IACnBC,4BAA4B;IAC5BC,4BAA4B;IAC5BC,gBAAgB;IAChBC,gBAAgB;IAChBC,iBAAiB;IACjBC,kBAAkB;IAClBC,UAAU;IACVC,aAAa;IACbC,iBAAiB;IACjBC,kBAAkB;IAClBC,wBAAwB;IACxBC,2BAA2B;IAC3BC,cAAc;IACdC,UAAU;IACVC,KAAK;IACLC,aAAa;IACbC,SAAS;IACTC,KAAK;IACLC,QAAQ;IAERC,KAAK;IACLC,UAAU;IACVC,YAAY;IAEZC,gBAAgB;IAChBC,mBAAmB;IACnBC,iBAAiB;IACjBC,2BAA2B;IAC3BC,gBAAgB;IAChBC,sBAAsB;IACtBC,mBAAmB;IACnBC,WAAW;IACXC,SAAS;IACTC,MAAM;IACNC,YAAY;IACZC,iBAAiB;IAEjBC,kBAAkB;QAChBC,OAAO;QACPC,QAAQ;IACV;IAEAC,qBAAqB;QACnBF,OAAO;YACLG,KAAK;YACLC,SAAS;YACTC,mBAAmB;YACnBC,mBAAmB;YACnBC,mBAAmB;YACnBC,oBAAoB;YACpBC,QAAQ;YACRC,UAAU;YACVC,SAAS;QACX;QACAV,QAAQ;YACNE,KAAK;YACLC,SAAS;YACTC,mBAAmB;YACnBC,mBAAmB;YACnBC,mBAAmB;YACnBC,oBAAoB;YACpBC,QAAQ;YACRC,UAAU;YACVC,SAAS;QACX;IACF;IAEAC,UAAU;QACR,GAAG;QACH,GAAG;QACH,GAAG;QACH,GAAG;QACH,GAAG;QACH,GAAG;QACH,GAAG;IACL;IAEAC,sBAAsB;IACtBC,sBAAsB;IACtBC,iBAAiB;IACjBC,YAAY;IACZC,UAAU;IACVC,WAAW;IACXC,mCAAmC;IACnCC,aAAa;QACX,OAAO;QACP,OAAO;QACP,OAAO;QACP,OAAO;QACP,OAAO;QACP,OAAO;QACP,OAAO;QACP,OAAO;IACT;IAEAC,iBAAiB;IACjBC,OAAO;IACPC,YAAY;IACZC,OAAO;IACPC,cAAc;IACdC,eAAe;IACfC,aAAa;IACbC,UAAU;IACVC,kBAAkB;IAClBC,yBAAyB;IACzBC,0BAA0B;IAC1BC,qCACE;IACFC,wBAAwB;IACxBC,gBAAgB;IAChBC,mBAAmB;IAEnBC,oBAAoB;QAClBnC,QAAQ;YACNoC,aAAa;YACbC,eAAe;YACfC,iBAAiB;YACjBC,cAAc;YACdC,eAAe;YACfC,aAAa;QACf;QACA1C,OAAO;YACLqC,aAAa;YACbC,eAAe;YACfC,iBAAiB;YACjBC,cAAc;YACdC,eAAe;YACfC,aAAa;QACf;IACF;IAEAC,mBAAmB;IACnBC,QAAQ;IACRC,gBAAgB;IAChBC,eAAe;IACfC,iBAAiB;IACjBC,cAAc;IACdC,aAAa;IACbC,0BAA0B;IAC1BC,gBAAgB;IAChBC,4BAA4B;IAC5BC,6BAA6B;IAC7BC,2BAA2B;IAC3BC,YAAY;IACZC,uBAAuB;IACvBC,kCACE;IACFC,qBAAqB;IACrBC,gCAAgC;IAChC3D,OAAO;IACPC,QAAQ;IACR2D,sBAAsB;IACtBC,sBACE;IACFC,oBACE;IAEFC,cAAc;IACdC,gBAAgB;IAChBC,mBAAmB;IACnBC,QAAQ;IACRC,QAAQ;IACRC,mBAAmB;IACnBC,iBAAiB;IACjBC,4BAA4B;IAC5BC,mBAAmB;IACnBC,iBAAiB;IACjBC,4BAA4B;IAC5BC,kBAAkB;IAClBC,gBAAgB;AAClB;AAEA,eAAe7L,GAAG"
-    },
-    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "0b325e6868454ad9cb510e8f73373fb743e4d9c1"
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/i18n/i18n.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/i18n/i18n.ts",
-    "statementMap": {
-      "0": {
-        "start": {
-          "line": 8,
-          "column": 16
-        },
-        "end": {
-          "line": 11,
+          "line": 16,
           "column": 1
         }
       },
       "1": {
         "start": {
-          "line": 12,
-          "column": 25
+          "line": 2,
+          "column": 4
         },
         "end": {
-          "line": 19,
-          "column": 1
+          "line": 4,
+          "column": 5
         }
       },
       "2": {
         "start": {
-          "line": 20,
-          "column": 0
+          "line": 3,
+          "column": 8
         },
         "end": {
-          "line": 40,
-          "column": 3
+          "line": 3,
+          "column": 28
         }
       },
       "3": {
         "start": {
-          "line": 30,
-          "column": 12
+          "line": 5,
+          "column": 16
         },
         "end": {
-          "line": 35,
-          "column": 13
+          "line": 5,
+          "column": 76
         }
       },
       "4": {
         "start": {
-          "line": 31,
-          "column": 31
+          "line": 6,
+          "column": 14
         },
         "end": {
-          "line": 31,
-          "column": 43
+          "line": 6,
+          "column": 61
         }
       },
       "5": {
         "start": {
-          "line": 32,
-          "column": 16
+          "line": 7,
+          "column": 27
         },
         "end": {
-          "line": 34,
-          "column": 19
+          "line": 11,
+          "column": 5
         }
       },
       "6": {
         "start": {
-          "line": 36,
-          "column": 12
+          "line": 8,
+          "column": 18
         },
         "end": {
-          "line": 36,
-          "column": 25
+          "line": 8,
+          "column": 37
+        }
+      },
+      "7": {
+        "start": {
+          "line": 9,
+          "column": 22
+        },
+        "end": {
+          "line": 9,
+          "column": 77
+        }
+      },
+      "8": {
+        "start": {
+          "line": 10,
+          "column": 8
+        },
+        "end": {
+          "line": 10,
+          "column": 69
+        }
+      },
+      "9": {
+        "start": {
+          "line": 12,
+          "column": 16
+        },
+        "end": {
+          "line": 12,
+          "column": 33
+        }
+      },
+      "10": {
+        "start": {
+          "line": 13,
+          "column": 18
+        },
+        "end": {
+          "line": 13,
+          "column": 35
+        }
+      },
+      "11": {
+        "start": {
+          "line": 14,
+          "column": 17
+        },
+        "end": {
+          "line": 14,
+          "column": 34
+        }
+      },
+      "12": {
+        "start": {
+          "line": 15,
+          "column": 4
+        },
+        "end": {
+          "line": 15,
+          "column": 36
+        }
+      },
+      "13": {
+        "start": {
+          "line": 17,
+          "column": 31
+        },
+        "end": {
+          "line": 21,
+          "column": 1
+        }
+      },
+      "14": {
+        "start": {
+          "line": 18,
+          "column": 21
+        },
+        "end": {
+          "line": 18,
+          "column": 49
+        }
+      },
+      "15": {
+        "start": {
+          "line": 19,
+          "column": 24
+        },
+        "end": {
+          "line": 19,
+          "column": 67
+        }
+      },
+      "16": {
+        "start": {
+          "line": 20,
+          "column": 4
+        },
+        "end": {
+          "line": 20,
+          "column": 33
         }
       }
     },
@@ -1647,49 +1597,175 @@
         "name": "(anonymous_0)",
         "decl": {
           "start": {
-            "line": 29,
-            "column": 16
+            "line": 1,
+            "column": 32
           },
           "end": {
-            "line": 29,
-            "column": 17
+            "line": 1,
+            "column": 33
           }
         },
         "loc": {
           "start": {
-            "line": 29,
-            "column": 38
+            "line": 1,
+            "column": 101
           },
           "end": {
-            "line": 37,
-            "column": 9
+            "line": 16,
+            "column": 1
           }
         },
-        "line": 29
+        "line": 1
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 7,
+            "column": 27
+          },
+          "end": {
+            "line": 7,
+            "column": 28
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 32
+          },
+          "end": {
+            "line": 11,
+            "column": 5
+          }
+        },
+        "line": 7
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 17,
+            "column": 31
+          },
+          "end": {
+            "line": 17,
+            "column": 32
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 17,
+            "column": 35
+          },
+          "end": {
+            "line": 21,
+            "column": 1
+          }
+        },
+        "line": 17
       }
     },
     "branchMap": {
       "0": {
         "loc": {
           "start": {
-            "line": 30,
-            "column": 12
+            "line": 1,
+            "column": 39
           },
           "end": {
-            "line": 35,
-            "column": 13
+            "line": 1,
+            "column": 55
+          }
+        },
+        "type": "default-arg",
+        "locations": [
+          {
+            "start": {
+              "line": 1,
+              "column": 52
+            },
+            "end": {
+              "line": 1,
+              "column": 55
+            }
+          }
+        ],
+        "line": 1
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 57
+          },
+          "end": {
+            "line": 1,
+            "column": 72
+          }
+        },
+        "type": "default-arg",
+        "locations": [
+          {
+            "start": {
+              "line": 1,
+              "column": 69
+            },
+            "end": {
+              "line": 1,
+              "column": 72
+            }
+          }
+        ],
+        "line": 1
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 74
+          },
+          "end": {
+            "line": 1,
+            "column": 98
+          }
+        },
+        "type": "default-arg",
+        "locations": [
+          {
+            "start": {
+              "line": 1,
+              "column": 89
+            },
+            "end": {
+              "line": 1,
+              "column": 98
+            }
+          }
+        ],
+        "line": 1
+      },
+      "3": {
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 4
+          },
+          "end": {
+            "line": 4,
+            "column": 5
           }
         },
         "type": "if",
         "locations": [
           {
             "start": {
-              "line": 30,
-              "column": 12
+              "line": 2,
+              "column": 4
             },
             "end": {
-              "line": 35,
-              "column": 13
+              "line": 4,
+              "column": 5
             }
           },
           {
@@ -1697,63 +1773,925 @@
             "end": {}
           }
         ],
-        "line": 30
+        "line": 2
       },
-      "1": {
+      "4": {
         "loc": {
           "start": {
-            "line": 32,
-            "column": 41
+            "line": 2,
+            "column": 8
           },
           "end": {
-            "line": 32,
-            "column": 65
+            "line": 2,
+            "column": 32
           }
         },
         "type": "binary-expr",
         "locations": [
           {
             "start": {
-              "line": 32,
-              "column": 41
+              "line": 2,
+              "column": 8
             },
             "end": {
-              "line": 32,
-              "column": 47
+              "line": 2,
+              "column": 13
             }
           },
           {
             "start": {
-              "line": 32,
-              "column": 51
+              "line": 2,
+              "column": 17
             },
             "end": {
-              "line": 32,
-              "column": 65
+              "line": 2,
+              "column": 32
             }
           }
         ],
-        "line": 32
+        "line": 2
+      }
+    },
+    "s": {
+      "0": 9,
+      "1": 47,
+      "2": 18,
+      "3": 29,
+      "4": 29,
+      "5": 29,
+      "6": 87,
+      "7": 87,
+      "8": 87,
+      "9": 29,
+      "10": 29,
+      "11": 29,
+      "12": 29,
+      "13": 9,
+      "14": 20,
+      "15": 20,
+      "16": 20
+    },
+    "f": {
+      "0": 47,
+      "1": 87,
+      "2": 20
+    },
+    "b": {
+      "0": [
+        47
+      ],
+      "1": [
+        47
+      ],
+      "2": [
+        47
+      ],
+      "3": [
+        18,
+        29
+      ],
+      "4": [
+        47,
+        38
+      ]
+    },
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/utils/stringToColor.ts"
+      ],
+      "names": [
+        "stringToHexColor",
+        "word",
+        "saturation",
+        "lightness",
+        "defaultColor",
+        "length",
+        "hue",
+        "charCodeAt",
+        "a",
+        "Math",
+        "min",
+        "calculateColor",
+        "n",
+        "k",
+        "color",
+        "max",
+        "round",
+        "toString",
+        "padStart",
+        "red",
+        "green",
+        "blue",
+        "getRandomLetter",
+        "alphabet",
+        "randomIndex",
+        "floor",
+        "random"
+      ],
+      "mappings": "AAAA,OAAO,MAAMA,mBAAmB,CAC9BC,MACAC,aAAqB,GAAG,EACxBC,YAAoB,GAAG,EACvBC,eAAe,SAAS;IAExB,IAAI,CAACH,QAAQA,KAAKI,MAAM,GAAG,GAAG;QAC5B,OAAOD;IACT;IACA,MAAME,MAAML,KAAKM,UAAU,CAAC,KAAKN,KAAKM,UAAU,CAAC,KAAKN,KAAKM,UAAU,CAAC;IACtE,MAAMC,IAAIN,aAAaO,KAAKC,GAAG,CAACP,WAAW,IAAIA;IAE/C,MAAMQ,iBAAiB,CAACC;QACtB,MAAMC,IAAI,AAACD,CAAAA,IAAIN,MAAM,EAAC,IAAK;QAC3B,MAAMQ,QAAQX,YAAYK,IAAIC,KAAKM,GAAG,CAACN,KAAKC,GAAG,CAACG,IAAI,GAAG,IAAIA,GAAG,IAAI,CAAC;QACnE,OAAOJ,KAAKO,KAAK,CAAC,MAAMF,OACrBG,QAAQ,CAAC,IACTC,QAAQ,CAAC,GAAG;IACjB;IAEA,MAAMC,MAAMR,eAAe;IAC3B,MAAMS,QAAQT,eAAe;IAC7B,MAAMU,OAAOV,eAAe;IAE5B,OAAO,CAAC,CAAC,EAAEQ,IAAI,EAAEC,MAAM,EAAEC,KAAK,CAAC;AACjC,EAAE;AAEF,OAAO,MAAMC,kBAAkB;IAC7B,MAAMC,WAAW;IACjB,MAAMC,cAAcf,KAAKgB,KAAK,CAAChB,KAAKiB,MAAM,KAAKH,SAASlB,MAAM;IAC9D,OAAOkB,QAAQ,CAACC,YAAY;AAC9B,EAAE"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "e2a2db37057be94d193c46d525c98b788455e0d6"
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/utils/user.ts": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/utils/user.ts",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 1,
+          "column": 27
+        },
+        "end": {
+          "line": 1,
+          "column": 80
+        }
+      },
+      "1": {
+        "start": {
+          "line": 1,
+          "column": 54
+        },
+        "end": {
+          "line": 1,
+          "column": 80
+        }
+      },
+      "2": {
+        "start": {
+          "line": 2,
+          "column": 23
+        },
+        "end": {
+          "line": 2,
+          "column": 54
+        }
+      },
+      "3": {
+        "start": {
+          "line": 2,
+          "column": 40
+        },
+        "end": {
+          "line": 2,
+          "column": 54
+        }
+      },
+      "4": {
+        "start": {
+          "line": 3,
+          "column": 35
+        },
+        "end": {
+          "line": 3,
+          "column": 105
+        }
+      },
+      "5": {
+        "start": {
+          "line": 3,
+          "column": 62
+        },
+        "end": {
+          "line": 3,
+          "column": 105
+        }
+      },
+      "6": {
+        "start": {
+          "line": 4,
+          "column": 23
+        },
+        "end": {
+          "line": 4,
+          "column": 88
+        }
+      },
+      "7": {
+        "start": {
+          "line": 4,
+          "column": 50
+        },
+        "end": {
+          "line": 4,
+          "column": 88
+        }
+      },
+      "8": {
+        "start": {
+          "line": 5,
+          "column": 33
+        },
+        "end": {
+          "line": 5,
+          "column": 109
+        }
+      },
+      "9": {
+        "start": {
+          "line": 5,
+          "column": 48
+        },
+        "end": {
+          "line": 5,
+          "column": 109
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "(anonymous_0)",
+        "decl": {
+          "start": {
+            "line": 1,
+            "column": 27
+          },
+          "end": {
+            "line": 1,
+            "column": 28
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 54
+          },
+          "end": {
+            "line": 1,
+            "column": 80
+          }
+        },
+        "line": 1
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 2,
+            "column": 23
+          },
+          "end": {
+            "line": 2,
+            "column": 24
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 40
+          },
+          "end": {
+            "line": 2,
+            "column": 54
+          }
+        },
+        "line": 2
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 3,
+            "column": 35
+          },
+          "end": {
+            "line": 3,
+            "column": 36
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 62
+          },
+          "end": {
+            "line": 3,
+            "column": 105
+          }
+        },
+        "line": 3
+      },
+      "3": {
+        "name": "(anonymous_3)",
+        "decl": {
+          "start": {
+            "line": 4,
+            "column": 23
+          },
+          "end": {
+            "line": 4,
+            "column": 24
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 4,
+            "column": 50
+          },
+          "end": {
+            "line": 4,
+            "column": 88
+          }
+        },
+        "line": 4
+      },
+      "4": {
+        "name": "(anonymous_4)",
+        "decl": {
+          "start": {
+            "line": 5,
+            "column": 33
+          },
+          "end": {
+            "line": 5,
+            "column": 34
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 5,
+            "column": 48
+          },
+          "end": {
+            "line": 5,
+            "column": 109
+          }
+        },
+        "line": 5
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 65
+          },
+          "end": {
+            "line": 3,
+            "column": 83
+          }
+        },
+        "type": "binary-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 65
+            },
+            "end": {
+              "line": 3,
+              "column": 77
+            }
+          },
+          {
+            "start": {
+              "line": 3,
+              "column": 81
+            },
+            "end": {
+              "line": 3,
+              "column": 83
+            }
+          }
+        ],
+        "line": 3
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 86
+          },
+          "end": {
+            "line": 3,
+            "column": 103
+          }
+        },
+        "type": "binary-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 86
+            },
+            "end": {
+              "line": 3,
+              "column": 97
+            }
+          },
+          {
+            "start": {
+              "line": 3,
+              "column": 101
+            },
+            "end": {
+              "line": 3,
+              "column": 103
+            }
+          }
+        ],
+        "line": 3
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 5,
+            "column": 48
+          },
+          "end": {
+            "line": 5,
+            "column": 109
+          }
+        },
+        "type": "cond-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 5,
+              "column": 78
+            },
+            "end": {
+              "line": 5,
+              "column": 89
+            }
+          },
+          {
+            "start": {
+              "line": 5,
+              "column": 92
+            },
+            "end": {
+              "line": 5,
+              "column": 109
+            }
+          }
+        ],
+        "line": 5
+      }
+    },
+    "s": {
+      "0": 8,
+      "1": 24,
+      "2": 8,
+      "3": 10,
+      "4": 8,
+      "5": 16,
+      "6": 8,
+      "7": 12,
+      "8": 8,
+      "9": 4
+    },
+    "f": {
+      "0": 24,
+      "1": 10,
+      "2": 16,
+      "3": 12,
+      "4": 4
+    },
+    "b": {
+      "0": [
+        16,
+        8
+      ],
+      "1": [
+        16,
+        8
+      ],
+      "2": [
+        2,
+        2
+      ]
+    },
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/utils/user.ts"
+      ],
+      "names": [
+        "getFullname",
+        "firstName",
+        "lastName",
+        "getName",
+        "getNameFirstLetters",
+        "hasName",
+        "length",
+        "formatPhoneNumber",
+        "phoneNumber",
+        "startsWith"
+      ],
+      "mappings": "AAEA,OAAO,MAAMA,cAAc,CAAC,EAAEC,SAAS,EAAEC,QAAQ,EAAQ,GAAK,CAAC,EAAED,UAAU,CAAC,EAAEC,SAAS,CAAC,CAAC;AAEzF,OAAO,MAAMC,UAAU,CAAC,EAAEF,SAAS,EAAQ,GAAK,CAAC,EAAEA,UAAU,CAAC,CAAC;AAE/D,OAAO,MAAMG,sBAAsB,CAAC,EAAEH,SAAS,EAAEC,QAAQ,EAAQ,GAC/D,CAAC,EAAED,SAAS,CAAC,EAAE,IAAI,GAAG,EAAEC,QAAQ,CAAC,EAAE,IAAI,GAAG,CAAC,CAAC;AAE9C,OAAO,MAAMG,UAAU,CAAC,EAAEJ,SAAS,EAAEC,QAAQ,EAAQ,GAAKD,UAAUK,MAAM,GAAGJ,SAASI,MAAM,GAAG,EAAE;AAEjG,OAAO,MAAMC,oBAAoB,CAACC,cAChCA,YAAYC,UAAU,CAAC,OAAOD,cAAc,CAAC,CAAC,EAAEA,YAAY,CAAC,CAAC"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "5ded27e75fa02ba82258068d691b55ab0cc92642"
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/components/Badge/AgeBadge.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/Badge/AgeBadge.tsx",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "1": {
+        "start": {
+          "line": 3,
+          "column": 26
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "2": {
+        "start": {
+          "line": 4,
+          "column": 23
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      },
+      "3": {
+        "start": {
+          "line": 5,
+          "column": 23
+        },
+        "end": {
+          "line": 5,
+          "column": 42
+        }
+      },
+      "4": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 130
+        }
+      },
+      "5": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 73
+        }
+      },
+      "6": {
+        "start": {
+          "line": 12,
+          "column": 17
+        },
+        "end": {
+          "line": 44,
+          "column": 1
+        }
+      },
+      "7": {
+        "start": {
+          "line": 13,
+          "column": 4
+        },
+        "end": {
+          "line": 43,
+          "column": 13
+        }
+      },
+      "8": {
+        "start": {
+          "line": 45,
+          "column": 0
+        },
+        "end": {
+          "line": 45,
+          "column": 14
+        }
+      },
+      "9": {
+        "start": {
+          "line": 48,
+          "column": 0
+        },
+        "end": {
+          "line": 48,
+          "column": 29
+        }
+      },
+      "10": {
+        "start": {
+          "line": 51,
+          "column": 0
+        },
+        "end": {
+          "line": 51,
+          "column": 37
+        }
+      },
+      "11": {
+        "start": {
+          "line": 52,
+          "column": 0
+        },
+        "end": {
+          "line": 52,
+          "column": 37
+        }
+      },
+      "12": {
+        "start": {
+          "line": 53,
+          "column": 0
+        },
+        "end": {
+          "line": 60,
+          "column": 3
+        }
+      },
+      "13": {
+        "start": {
+          "line": 54,
+          "column": 2
+        },
+        "end": {
+          "line": 54,
+          "column": 143
+        }
+      },
+      "14": {
+        "start": {
+          "line": 55,
+          "column": 2
+        },
+        "end": {
+          "line": 59,
+          "column": 5
+        }
+      },
+      "15": {
+        "start": {
+          "line": 56,
+          "column": 4
+        },
+        "end": {
+          "line": 56,
+          "column": 29
+        }
+      },
+      "16": {
+        "start": {
+          "line": 56,
+          "column": 22
+        },
+        "end": {
+          "line": 56,
+          "column": 29
+        }
+      },
+      "17": {
+        "start": {
+          "line": 57,
+          "column": 30
+        },
+        "end": {
+          "line": 57,
+          "column": 113
+        }
+      },
+      "18": {
+        "start": {
+          "line": 58,
+          "column": 4
+        },
+        "end": {
+          "line": 58,
+          "column": 73
+        }
+      },
+      "19": {
+        "start": {
+          "line": 58,
+          "column": 27
+        },
+        "end": {
+          "line": 58,
+          "column": 73
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "(anonymous_0)",
+        "decl": {
+          "start": {
+            "line": 12,
+            "column": 17
+          },
+          "end": {
+            "line": 12,
+            "column": 18
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 12,
+            "column": 28
+          },
+          "end": {
+            "line": 44,
+            "column": 1
+          }
+        },
+        "line": 12
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 53,
+            "column": 50
+          },
+          "end": {
+            "line": 53,
+            "column": 51
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 53,
+            "column": 70
+          },
+          "end": {
+            "line": 60,
+            "column": 1
+          }
+        },
+        "line": 53
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 55,
+            "column": 25
+          },
+          "end": {
+            "line": 55,
+            "column": 26
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 55,
+            "column": 42
+          },
+          "end": {
+            "line": 59,
+            "column": 3
+          }
+        },
+        "line": 55
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 104
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 104
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 3
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 56,
+            "column": 4
+          },
+          "end": {
+            "line": 56,
+            "column": 29
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 56,
+              "column": 4
+            },
+            "end": {
+              "line": 56,
+              "column": 29
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 56
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 58,
+            "column": 4
+          },
+          "end": {
+            "line": 58,
+            "column": 73
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 58,
+              "column": 4
+            },
+            "end": {
+              "line": 58,
+              "column": 73
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 58
       }
     },
     "s": {
       "0": 2,
-      "1": 2,
+      "1": 0,
       "2": 2,
-      "3": 0,
-      "4": 0,
-      "5": 0,
-      "6": 0
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 2,
+      "9": 2,
+      "10": 2,
+      "11": 2,
+      "12": 2,
+      "13": 2,
+      "14": 2,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0
     },
     "f": {
-      "0": 0
+      "0": 2,
+      "1": 2,
+      "2": 0
     },
     "b": {
       "0": [
         0,
-        0
+        2
       ],
       "1": [
+        0,
+        0
+      ],
+      "2": [
         0,
         0
       ]
@@ -1761,37 +2699,496 @@
     "inputSourceMap": {
       "version": 3,
       "sources": [
-        "/home/maria/studia/gameshare-app/frontend/src/i18n/i18n.ts"
+        "/home/maria/studia/gameshare-app/frontend/src/components/Badge/AgeBadge.tsx"
       ],
       "names": [
-        "initReactI18next",
-        "format",
-        "formatDate",
-        "isDate",
-        "enUS",
-        "pl",
-        "i18n",
-        "LanguageDetector",
-        "englishResources",
-        "polishResources",
-        "locales",
-        "resources",
-        "translation",
-        "use",
-        "init",
-        "fallbackLng",
-        "supportedLngs",
-        "keySeparator",
-        "interpolation",
-        "escapeValue",
-        "value",
-        "lng",
-        "locale"
+        "Baby",
+        "Badge",
+        "AgeBadge",
+        "age",
+        "variant",
+        "className",
+        "data-test",
+        "size",
+        "span"
       ],
-      "mappings": "AAAA,SAASA,gBAAgB,QAAQ,gBAAgB;AACjD,SAASC,UAAUC,UAAU,EAAEC,MAAM,QAAQ,WAAW;AACxD,SAASC,IAAI,EAAEC,EAAE,QAAQ,kBAAkB;AAC3C,OAAOC,UAAU,UAAU;AAC3B,OAAOC,sBAAsB,mCAAmC;AAChE,OAAOC,sBAAsB,iBAAiB;AAC9C,OAAOC,qBAAqB,iBAAiB;AAE7C,MAAMC,UAAU;IAAEN;IAAMC;AAAG;AAE3B,OAAO,MAAMM,YAAY;IACvBP,MAAM;QACJQ,aAAaJ;IACf;IACAH,IAAI;QACFO,aAAaH;IACf;AACF,EAAE;AAEF,KAAKH,KACFO,GAAG,CAACN,kBACJM,GAAG,CAACb,kBACJc,IAAI,CAAC;IACJC,aAAa;IACbC,eAAe;QAAC;QAAQ;KAAK;IAC7BC,cAAc;IACdC,eAAe;QACbC,aAAa;QACblB,QAAQ,CAACmB,OAAOnB,QAAQoB;YACtB,IAAIlB,OAAOiB,QAAQ;gBACjB,MAAME,SAASZ,OAAO,CAACW,IAAqB;gBAC5C,OAAOnB,WAAWkB,OAAOnB,UAAU,gBAAgB;oBAAEqB;gBAAO;YAC9D;YACA,OAAOF;QACT;IACF;IACAT;AACF;AAEF,eAAeL,KAAK"
+      "mappings": ";;;;;;;;;AACA,SAASA,IAAI,QAAQ,eAAe;AACpC,SAASC,KAAK,QAAQ,wBAAwB;AAM9C,MAAMC,WAA8B,CAAC,EAAEC,GAAG,EAAE;IAC1C,qBACE,QAACF;QAAMG,SAAQ;QAAYC,WAAU;QAA4BC,aAAU;;0BACzE,QAACN;gBAAKO,MAAM;gBAAID,aAAU;;;;;;0BAC1B,QAACE;gBAAKH,WAAU;gBAAiBC,aAAU;;oBAAM;oBAC7CH;;;;;;;;;;;;;AAIV;KATMD;AAWN,eAAeA,SAAS"
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "adca6ad200d4dc09152f6bd206d009ffb6307f84"
+    "hash": "a7d917fe356a7f07809c7163b33a7fde7f7b60c3"
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/components/Badge/PlayersBadge.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/Badge/PlayersBadge.tsx",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "1": {
+        "start": {
+          "line": 3,
+          "column": 26
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "2": {
+        "start": {
+          "line": 4,
+          "column": 23
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      },
+      "3": {
+        "start": {
+          "line": 5,
+          "column": 23
+        },
+        "end": {
+          "line": 5,
+          "column": 42
+        }
+      },
+      "4": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 134
+        }
+      },
+      "5": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 73
+        }
+      },
+      "6": {
+        "start": {
+          "line": 12,
+          "column": 21
+        },
+        "end": {
+          "line": 52,
+          "column": 1
+        }
+      },
+      "7": {
+        "start": {
+          "line": 13,
+          "column": 4
+        },
+        "end": {
+          "line": 51,
+          "column": 13
+        }
+      },
+      "8": {
+        "start": {
+          "line": 53,
+          "column": 0
+        },
+        "end": {
+          "line": 53,
+          "column": 18
+        }
+      },
+      "9": {
+        "start": {
+          "line": 56,
+          "column": 0
+        },
+        "end": {
+          "line": 56,
+          "column": 33
+        }
+      },
+      "10": {
+        "start": {
+          "line": 59,
+          "column": 0
+        },
+        "end": {
+          "line": 59,
+          "column": 37
+        }
+      },
+      "11": {
+        "start": {
+          "line": 60,
+          "column": 0
+        },
+        "end": {
+          "line": 60,
+          "column": 37
+        }
+      },
+      "12": {
+        "start": {
+          "line": 61,
+          "column": 0
+        },
+        "end": {
+          "line": 68,
+          "column": 3
+        }
+      },
+      "13": {
+        "start": {
+          "line": 62,
+          "column": 2
+        },
+        "end": {
+          "line": 62,
+          "column": 147
+        }
+      },
+      "14": {
+        "start": {
+          "line": 63,
+          "column": 2
+        },
+        "end": {
+          "line": 67,
+          "column": 5
+        }
+      },
+      "15": {
+        "start": {
+          "line": 64,
+          "column": 4
+        },
+        "end": {
+          "line": 64,
+          "column": 29
+        }
+      },
+      "16": {
+        "start": {
+          "line": 64,
+          "column": 22
+        },
+        "end": {
+          "line": 64,
+          "column": 29
+        }
+      },
+      "17": {
+        "start": {
+          "line": 65,
+          "column": 30
+        },
+        "end": {
+          "line": 65,
+          "column": 113
+        }
+      },
+      "18": {
+        "start": {
+          "line": 66,
+          "column": 4
+        },
+        "end": {
+          "line": 66,
+          "column": 73
+        }
+      },
+      "19": {
+        "start": {
+          "line": 66,
+          "column": 27
+        },
+        "end": {
+          "line": 66,
+          "column": 73
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "(anonymous_0)",
+        "decl": {
+          "start": {
+            "line": 12,
+            "column": 21
+          },
+          "end": {
+            "line": 12,
+            "column": 22
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 12,
+            "column": 51
+          },
+          "end": {
+            "line": 52,
+            "column": 1
+          }
+        },
+        "line": 12
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 61,
+            "column": 50
+          },
+          "end": {
+            "line": 61,
+            "column": 51
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 61,
+            "column": 70
+          },
+          "end": {
+            "line": 68,
+            "column": 1
+          }
+        },
+        "line": 61
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 63,
+            "column": 25
+          },
+          "end": {
+            "line": 63,
+            "column": 26
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 63,
+            "column": 42
+          },
+          "end": {
+            "line": 67,
+            "column": 3
+          }
+        },
+        "line": 63
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 104
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 104
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 3
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 25,
+            "column": 12
+          },
+          "end": {
+            "line": 45,
+            "column": 20
+          }
+        },
+        "type": "cond-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 25,
+              "column": 54
+            },
+            "end": {
+              "line": 33,
+              "column": 20
+            }
+          },
+          {
+            "start": {
+              "line": 33,
+              "column": 37
+            },
+            "end": {
+              "line": 45,
+              "column": 20
+            }
+          }
+        ],
+        "line": 25
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 64,
+            "column": 4
+          },
+          "end": {
+            "line": 64,
+            "column": 29
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 64,
+              "column": 4
+            },
+            "end": {
+              "line": 64,
+              "column": 29
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 64
+      },
+      "3": {
+        "loc": {
+          "start": {
+            "line": 66,
+            "column": 4
+          },
+          "end": {
+            "line": 66,
+            "column": 73
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 66,
+              "column": 4
+            },
+            "end": {
+              "line": 66,
+              "column": 73
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 66
+      }
+    },
+    "s": {
+      "0": 3,
+      "1": 0,
+      "2": 3,
+      "3": 3,
+      "4": 3,
+      "5": 3,
+      "6": 3,
+      "7": 5,
+      "8": 3,
+      "9": 3,
+      "10": 3,
+      "11": 3,
+      "12": 3,
+      "13": 3,
+      "14": 3,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0
+    },
+    "f": {
+      "0": 5,
+      "1": 3,
+      "2": 0
+    },
+    "b": {
+      "0": [
+        0,
+        3
+      ],
+      "1": [
+        3,
+        2
+      ],
+      "2": [
+        0,
+        0
+      ],
+      "3": [
+        0,
+        0
+      ]
+    },
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/components/Badge/PlayersBadge.tsx"
+      ],
+      "names": [
+        "User2",
+        "Badge",
+        "PlayersBadge",
+        "minPlayers",
+        "maxPlayers",
+        "variant",
+        "className",
+        "size",
+        "data-test",
+        "span"
+      ],
+      "mappings": ";;;;;;;;;AACA,SAASA,KAAK,QAAQ,eAAe;AACrC,SAASC,KAAK,QAAQ,wBAAwB;AAO9C,MAAMC,eAAsC,CAAC,EAAEC,UAAU,EAAEC,UAAU,EAAE;IACrE,qBACE,QAACH;QAAMI,SAAQ;QAAYC,WAAU;;0BACnC,QAACN;gBAAMO,MAAM;gBAAIC,aAAU;;;;;;YAC1BL,eAAeC,2BACd,QAACK;gBAAKH,WAAU;gBAAiBE,aAAU;0BACxCL;;;;;qCAGH,QAACM;gBAAKH,WAAU;gBAAiBE,aAAU;;oBACxCL;oBAAW;oBAAEC;;;;;;;;;;;;;AAKxB;KAfMF;AAiBN,eAAeA,aAAa"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "cc6047db629b6d37bffc23ae78482f208053a744"
   },
   "/home/maria/studia/gameshare-app/frontend/src/components/Badge/PriceBadge.tsx": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/components/Badge/PriceBadge.tsx",
@@ -2306,86 +3703,5292 @@
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
     "hash": "99bb522a2f6addb81149fc2400f490a7e94b100a"
   },
-  "/home/maria/studia/gameshare-app/frontend/src/api/Api.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/api/Api.ts",
-    "statementMap": {},
+  "/home/maria/studia/gameshare-app/frontend/src/state/role.ts": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/state/role.ts",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 2,
+          "column": 25
+        },
+        "end": {
+          "line": 5,
+          "column": 2
+        }
+      }
+    },
     "fnMap": {},
     "branchMap": {},
-    "s": {},
+    "s": {
+      "0": 2
+    },
     "f": {},
-    "b": {}
+    "b": {},
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/state/role.ts"
+      ],
+      "names": [
+        "atom",
+        "roleState",
+        "key",
+        "default"
+      ],
+      "mappings": "AAAA,SAASA,IAAI,QAAQ,SAAS;AAG9B,OAAO,MAAMC,YAAYD,KAAe;IACtCE,KAAK;IACLC,SAAS;AACX,GAAG"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "55818948e717a7b9734c7209e002c38a4b9f4412"
   },
-  "/home/maria/studia/gameshare-app/frontend/src/api/CategoryApi.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/api/CategoryApi.ts",
-    "statementMap": {},
+  "/home/maria/studia/gameshare-app/frontend/src/constants/urls.ts": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/constants/urls.ts",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 1,
+          "column": 20
+        },
+        "end": {
+          "line": 10,
+          "column": 1
+        }
+      }
+    },
     "fnMap": {},
     "branchMap": {},
-    "s": {},
+    "s": {
+      "0": 2
+    },
     "f": {},
-    "b": {}
+    "b": {},
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/constants/urls.ts"
+      ],
+      "names": [
+        "URLS",
+        "DASHBOARD",
+        "GAMES",
+        "CATEGORY_GAMES",
+        "GAME_INSTANCE",
+        "PROFILE",
+        "MY_RESERVATIONS",
+        "MY_PROFILE",
+        "GAME_REQUESTS"
+      ],
+      "mappings": "AAAA,OAAO,MAAMA,OAAO;IAClBC,WAAW;IACXC,OAAO;IACPC,gBAAgB;IAChBC,eAAe;IACfC,SAAS;IACTC,iBAAiB;IACjBC,YAAY;IACZC,eAAe;AACjB,EAAW"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "18e9d48df725b8adf0c62742817922c212f52fa2"
   },
-  "/home/maria/studia/gameshare-app/frontend/src/api/GameApi.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/api/GameApi.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
+  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNavLink.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNavLink.tsx",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "1": {
+        "start": {
+          "line": 3,
+          "column": 26
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "2": {
+        "start": {
+          "line": 4,
+          "column": 23
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      },
+      "3": {
+        "start": {
+          "line": 5,
+          "column": 23
+        },
+        "end": {
+          "line": 5,
+          "column": 42
+        }
+      },
+      "4": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 135
+        }
+      },
+      "5": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 73
+        }
+      },
+      "6": {
+        "start": {
+          "line": 10,
+          "column": 9
+        },
+        "end": {
+          "line": 10,
+          "column": 23
+        }
+      },
+      "7": {
+        "start": {
+          "line": 12,
+          "column": 20
+        },
+        "end": {
+          "line": 24,
+          "column": 1
+        }
+      },
+      "8": {
+        "start": {
+          "line": 13,
+          "column": 4
+        },
+        "end": {
+          "line": 13,
+          "column": 9
+        }
+      },
+      "9": {
+        "start": {
+          "line": 14,
+          "column": 18
+        },
+        "end": {
+          "line": 14,
+          "column": 32
+        }
+      },
+      "10": {
+        "start": {
+          "line": 15,
+          "column": 4
+        },
+        "end": {
+          "line": 23,
+          "column": 13
+        }
+      },
+      "11": {
+        "start": {
+          "line": 25,
+          "column": 0
+        },
+        "end": {
+          "line": 29,
+          "column": 3
+        }
+      },
+      "12": {
+        "start": {
+          "line": 26,
+          "column": 4
+        },
+        "end": {
+          "line": 28,
+          "column": 6
+        }
+      },
+      "13": {
+        "start": {
+          "line": 30,
+          "column": 0
+        },
+        "end": {
+          "line": 30,
+          "column": 17
+        }
+      },
+      "14": {
+        "start": {
+          "line": 33,
+          "column": 0
+        },
+        "end": {
+          "line": 33,
+          "column": 32
+        }
+      },
+      "15": {
+        "start": {
+          "line": 36,
+          "column": 0
+        },
+        "end": {
+          "line": 36,
+          "column": 37
+        }
+      },
+      "16": {
+        "start": {
+          "line": 37,
+          "column": 0
+        },
+        "end": {
+          "line": 37,
+          "column": 37
+        }
+      },
+      "17": {
+        "start": {
+          "line": 38,
+          "column": 0
+        },
+        "end": {
+          "line": 45,
+          "column": 3
+        }
+      },
+      "18": {
+        "start": {
+          "line": 39,
+          "column": 2
+        },
+        "end": {
+          "line": 39,
+          "column": 148
+        }
+      },
+      "19": {
+        "start": {
+          "line": 40,
+          "column": 2
+        },
+        "end": {
+          "line": 44,
+          "column": 5
+        }
+      },
+      "20": {
+        "start": {
+          "line": 41,
+          "column": 4
+        },
+        "end": {
+          "line": 41,
+          "column": 29
+        }
+      },
+      "21": {
+        "start": {
+          "line": 41,
+          "column": 22
+        },
+        "end": {
+          "line": 41,
+          "column": 29
+        }
+      },
+      "22": {
+        "start": {
+          "line": 42,
+          "column": 30
+        },
+        "end": {
+          "line": 42,
+          "column": 113
+        }
+      },
+      "23": {
+        "start": {
+          "line": 43,
+          "column": 4
+        },
+        "end": {
+          "line": 43,
+          "column": 73
+        }
+      },
+      "24": {
+        "start": {
+          "line": 43,
+          "column": 27
+        },
+        "end": {
+          "line": 43,
+          "column": 73
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "(anonymous_0)",
+        "decl": {
+          "start": {
+            "line": 12,
+            "column": 20
+          },
+          "end": {
+            "line": 12,
+            "column": 21
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 12,
+            "column": 38
+          },
+          "end": {
+            "line": 24,
+            "column": 1
+          }
+        },
+        "line": 12
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 25,
+            "column": 55
+          },
+          "end": {
+            "line": 25,
+            "column": 56
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 25,
+            "column": 66
+          },
+          "end": {
+            "line": 29,
+            "column": 1
+          }
+        },
+        "line": 25
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 38,
+            "column": 50
+          },
+          "end": {
+            "line": 38,
+            "column": 51
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 38,
+            "column": 70
+          },
+          "end": {
+            "line": 45,
+            "column": 1
+          }
+        },
+        "line": 38
+      },
+      "3": {
+        "name": "(anonymous_3)",
+        "decl": {
+          "start": {
+            "line": 40,
+            "column": 25
+          },
+          "end": {
+            "line": 40,
+            "column": 26
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 40,
+            "column": 42
+          },
+          "end": {
+            "line": 44,
+            "column": 3
+          }
+        },
+        "line": 40
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 104
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 104
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 3
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 17,
+            "column": 112
+          },
+          "end": {
+            "line": 17,
+            "column": 146
+          }
+        },
+        "type": "cond-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 17,
+              "column": 129
+            },
+            "end": {
+              "line": 17,
+              "column": 141
+            }
+          },
+          {
+            "start": {
+              "line": 17,
+              "column": 144
+            },
+            "end": {
+              "line": 17,
+              "column": 146
+            }
+          }
+        ],
+        "line": 17
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 41,
+            "column": 4
+          },
+          "end": {
+            "line": 41,
+            "column": 29
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 41,
+              "column": 4
+            },
+            "end": {
+              "line": 41,
+              "column": 29
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 41
+      },
+      "3": {
+        "loc": {
+          "start": {
+            "line": 43,
+            "column": 4
+          },
+          "end": {
+            "line": 43,
+            "column": 73
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 43,
+              "column": 4
+            },
+            "end": {
+              "line": 43,
+              "column": 73
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 43
+      }
+    },
+    "s": {
+      "0": 2,
+      "1": 0,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 2,
+      "12": 2,
+      "13": 2,
+      "14": 2,
+      "15": 2,
+      "16": 2,
+      "17": 2,
+      "18": 2,
+      "19": 2,
+      "20": 0,
+      "21": 0,
+      "22": 0,
+      "23": 0,
+      "24": 0
+    },
+    "f": {
+      "0": 4,
+      "1": 2,
+      "2": 2,
+      "3": 0
+    },
+    "b": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        0,
+        4
+      ],
+      "2": [
+        0,
+        0
+      ],
+      "3": [
+        0,
+        0
+      ]
+    },
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNavLink.tsx"
+      ],
+      "names": [
+        "Link",
+        "useMatch",
+        "SideNavLink",
+        "path",
+        "icon",
+        "match",
+        "to",
+        "className"
+      ],
+      "mappings": ";;;;;;;;;;AACA,SAASA,IAAI,EAAEC,QAAQ,QAAQ,mBAAmB;AAMlD,MAAMC,cAAoC,CAAC,EAAEC,IAAI,EAAEC,IAAI,EAAE;;IACvD,MAAMC,QAAQJ,SAASE;IAEvB,qBACE,QAACH;QACCM,IAAIH;QACJI,WAAW,CAAC,0FAA0F,EACpGF,UAAU,OAAO,eAAe,GACjC,CAAC;kBAEDD;;;;;;AAGP;GAbMF;;QACUD;;;KADVC;AAcN,eAAeA,YAAY"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "5285702f2e948bbc7602e267e19a11bd464c4921"
   },
-  "/home/maria/studia/gameshare-app/frontend/src/api/GameInstanceApi.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/api/GameInstanceApi.ts",
-    "statementMap": {},
+  "/home/maria/studia/gameshare-app/frontend/src/state/token.ts": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/state/token.ts",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 2,
+          "column": 26
+        },
+        "end": {
+          "line": 5,
+          "column": 2
+        }
+      }
+    },
     "fnMap": {},
     "branchMap": {},
-    "s": {},
+    "s": {
+      "0": 2
+    },
     "f": {},
-    "b": {}
+    "b": {},
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/state/token.ts"
+      ],
+      "names": [
+        "atom",
+        "tokenState",
+        "key",
+        "default"
+      ],
+      "mappings": "AAAA,SAASA,IAAI,QAAQ,SAAS;AAE9B,OAAO,MAAMC,aAAaD,KAAoB;IAC5CE,KAAK;IACLC,SAAS;AACX,GAAG"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "bbe4f92b8580f3c2a19186cdfa40c01be2aba368"
   },
-  "/home/maria/studia/gameshare-app/frontend/src/api/RecommendationsApi.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/api/RecommendationsApi.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/api/ReservationsApi.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/api/ReservationsApi.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/api/RoleApi.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/api/RoleApi.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/api/UserApi.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/api/UserApi.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
+  "/home/maria/studia/gameshare-app/frontend/src/components/Avatar.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/Avatar.tsx",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "1": {
+        "start": {
+          "line": 3,
+          "column": 26
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "2": {
+        "start": {
+          "line": 4,
+          "column": 23
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      },
+      "3": {
+        "start": {
+          "line": 5,
+          "column": 23
+        },
+        "end": {
+          "line": 5,
+          "column": 42
+        }
+      },
+      "4": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 122
+        }
+      },
+      "5": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 73
+        }
+      },
+      "6": {
+        "start": {
+          "line": 14,
+          "column": 15
+        },
+        "end": {
+          "line": 48,
+          "column": 1
+        }
+      },
+      "7": {
+        "start": {
+          "line": 15,
+          "column": 4
+        },
+        "end": {
+          "line": 47,
+          "column": 13
+        }
+      },
+      "8": {
+        "start": {
+          "line": 49,
+          "column": 0
+        },
+        "end": {
+          "line": 49,
+          "column": 12
+        }
+      },
+      "9": {
+        "start": {
+          "line": 52,
+          "column": 0
+        },
+        "end": {
+          "line": 52,
+          "column": 27
+        }
+      },
+      "10": {
+        "start": {
+          "line": 55,
+          "column": 0
+        },
+        "end": {
+          "line": 55,
+          "column": 37
+        }
+      },
+      "11": {
+        "start": {
+          "line": 56,
+          "column": 0
+        },
+        "end": {
+          "line": 56,
+          "column": 37
+        }
+      },
+      "12": {
+        "start": {
+          "line": 57,
+          "column": 0
+        },
+        "end": {
+          "line": 64,
+          "column": 3
+        }
+      },
+      "13": {
+        "start": {
+          "line": 58,
+          "column": 2
+        },
+        "end": {
+          "line": 58,
+          "column": 135
+        }
+      },
+      "14": {
+        "start": {
+          "line": 59,
+          "column": 2
+        },
+        "end": {
+          "line": 63,
+          "column": 5
+        }
+      },
+      "15": {
+        "start": {
+          "line": 60,
+          "column": 4
+        },
+        "end": {
+          "line": 60,
+          "column": 29
+        }
+      },
+      "16": {
+        "start": {
+          "line": 60,
+          "column": 22
+        },
+        "end": {
+          "line": 60,
+          "column": 29
+        }
+      },
+      "17": {
+        "start": {
+          "line": 61,
+          "column": 30
+        },
+        "end": {
+          "line": 61,
+          "column": 113
+        }
+      },
+      "18": {
+        "start": {
+          "line": 62,
+          "column": 4
+        },
+        "end": {
+          "line": 62,
+          "column": 73
+        }
+      },
+      "19": {
+        "start": {
+          "line": 62,
+          "column": 27
+        },
+        "end": {
+          "line": 62,
+          "column": 73
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "(anonymous_0)",
+        "decl": {
+          "start": {
+            "line": 14,
+            "column": 15
+          },
+          "end": {
+            "line": 14,
+            "column": 16
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 14,
+            "column": 75
+          },
+          "end": {
+            "line": 48,
+            "column": 1
+          }
+        },
+        "line": 14
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 57,
+            "column": 50
+          },
+          "end": {
+            "line": 57,
+            "column": 51
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 57,
+            "column": 70
+          },
+          "end": {
+            "line": 64,
+            "column": 1
+          }
+        },
+        "line": 57
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 59,
+            "column": 25
+          },
+          "end": {
+            "line": 59,
+            "column": 26
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 59,
+            "column": 42
+          },
+          "end": {
+            "line": 63,
+            "column": 3
+          }
+        },
+        "line": 59
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 104
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 104
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 3
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 17,
+            "column": 18
+          },
+          "end": {
+            "line": 42,
+            "column": 16
+          }
+        },
+        "type": "cond-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 17,
+              "column": 53
+            },
+            "end": {
+              "line": 36,
+              "column": 24
+            }
+          },
+          {
+            "start": {
+              "line": 36,
+              "column": 41
+            },
+            "end": {
+              "line": 42,
+              "column": 16
+            }
+          }
+        ],
+        "line": 17
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 60,
+            "column": 4
+          },
+          "end": {
+            "line": 60,
+            "column": 29
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 60,
+              "column": 4
+            },
+            "end": {
+              "line": 60,
+              "column": 29
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 60
+      },
+      "3": {
+        "loc": {
+          "start": {
+            "line": 62,
+            "column": 4
+          },
+          "end": {
+            "line": 62,
+            "column": 73
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 62,
+              "column": 4
+            },
+            "end": {
+              "line": 62,
+              "column": 73
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 62
+      }
+    },
+    "s": {
+      "0": 2,
+      "1": 0,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 2,
+      "9": 2,
+      "10": 2,
+      "11": 2,
+      "12": 2,
+      "13": 2,
+      "14": 2,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0
+    },
+    "f": {
+      "0": 2,
+      "1": 2,
+      "2": 0
+    },
+    "b": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        0,
+        2
+      ],
+      "2": [
+        0,
+        0
+      ],
+      "3": [
+        0,
+        0
+      ]
+    },
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/components/Avatar.tsx"
+      ],
+      "names": [
+        "User",
+        "UserIcon",
+        "cn",
+        "getNameFirstLetters",
+        "Avatar",
+        "UiAvatar",
+        "AvatarImage",
+        "AvatarFallback",
+        "user",
+        "className",
+        "iconClassName",
+        "avatarImageClassName",
+        "undefined",
+        "alt",
+        "src",
+        "avatarLink"
+      ],
+      "mappings": ";;;;;;;;;AACA,SAASA,QAAQC,QAAQ,QAAQ,eAAe;AAEhD,SAASC,EAAE,QAAQ,mBAAmB;AACtC,SAASC,mBAAmB,QAAQ,eAAe;AACnD,SAASC,UAAUC,QAAQ,EAAEC,WAAW,EAAEC,cAAc,QAAQ,yBAAyB;AASzF,MAAMH,SAA0B,CAAC,EAAEI,IAAI,EAAEC,SAAS,EAAEC,aAAa,EAAEC,oBAAoB,EAAE;IACvF,qBACE,QAACN;QAASI,WAAWP,GAAG,IAAIO;kBACzBD,SAASI,0BACR;;8BACE,QAACN;oBACCO,KAAI;oBACJC,KAAKN,KAAKO,UAAU;oBACpBN,WAAWP,GAAG,IAAIS;;;;;;8BAEpB,QAACJ;8BAAgBJ,oBAAoBK;;;;;;;yCAGvC,QAACP;YACCQ,WAAWP,GACT,2FACAQ;;;;;;;;;;;AAMZ;KAtBMN;AAwBN,eAAeA,OAAO"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "31bcb3001d90ee48365dbbf397effa0170f0cbd0"
   },
   "/home/maria/studia/gameshare-app/frontend/src/constants/languages.ts": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/constants/languages.ts",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 1,
+          "column": 34
+        },
+        "end": {
+          "line": 4,
+          "column": 1
+        }
+      },
+      "1": {
+        "start": {
+          "line": 5,
+          "column": 32
+        },
+        "end": {
+          "line": 5,
+          "column": 38
+        }
+      }
+    },
+    "fnMap": {},
+    "branchMap": {},
+    "s": {
+      "0": 2,
+      "1": 2
+    },
+    "f": {},
+    "b": {},
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/constants/languages.ts"
+      ],
+      "names": [
+        "supportedLanguages",
+        "fallbackLanguage"
+      ],
+      "mappings": "AAAA,OAAO,MAAMA,qBAAqB;IAAC;IAAQ;CAAK,CAAU;AAE1D,OAAO,MAAMC,mBAAmB,OAAgB"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "fb58b2da9a83faf6e78feb5d758dd9b86199aae9"
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LanguageToggle.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LanguageToggle.tsx",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "1": {
+        "start": {
+          "line": 3,
+          "column": 26
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "2": {
+        "start": {
+          "line": 4,
+          "column": 23
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      },
+      "3": {
+        "start": {
+          "line": 5,
+          "column": 23
+        },
+        "end": {
+          "line": 5,
+          "column": 42
+        }
+      },
+      "4": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 138
+        }
+      },
+      "5": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 73
+        }
+      },
+      "6": {
+        "start": {
+          "line": 10,
+          "column": 9
+        },
+        "end": {
+          "line": 10,
+          "column": 23
+        }
+      },
+      "7": {
+        "start": {
+          "line": 15,
+          "column": 23
+        },
+        "end": {
+          "line": 76,
+          "column": 1
+        }
+      },
+      "8": {
+        "start": {
+          "line": 16,
+          "column": 4
+        },
+        "end": {
+          "line": 16,
+          "column": 9
+        }
+      },
+      "9": {
+        "start": {
+          "line": 17,
+          "column": 24
+        },
+        "end": {
+          "line": 17,
+          "column": 40
+        }
+      },
+      "10": {
+        "start": {
+          "line": 18,
+          "column": 4
+        },
+        "end": {
+          "line": 75,
+          "column": 13
+        }
+      },
+      "11": {
+        "start": {
+          "line": 56,
+          "column": 80
+        },
+        "end": {
+          "line": 64,
+          "column": 28
+        }
+      },
+      "12": {
+        "start": {
+          "line": 57,
+          "column": 37
+        },
+        "end": {
+          "line": 57,
+          "column": 71
+        }
+      },
+      "13": {
+        "start": {
+          "line": 77,
+          "column": 0
+        },
+        "end": {
+          "line": 81,
+          "column": 3
+        }
+      },
+      "14": {
+        "start": {
+          "line": 78,
+          "column": 4
+        },
+        "end": {
+          "line": 80,
+          "column": 6
+        }
+      },
+      "15": {
+        "start": {
+          "line": 82,
+          "column": 0
+        },
+        "end": {
+          "line": 82,
+          "column": 20
+        }
+      },
+      "16": {
+        "start": {
+          "line": 85,
+          "column": 0
+        },
+        "end": {
+          "line": 85,
+          "column": 35
+        }
+      },
+      "17": {
+        "start": {
+          "line": 88,
+          "column": 0
+        },
+        "end": {
+          "line": 88,
+          "column": 37
+        }
+      },
+      "18": {
+        "start": {
+          "line": 89,
+          "column": 0
+        },
+        "end": {
+          "line": 89,
+          "column": 37
+        }
+      },
+      "19": {
+        "start": {
+          "line": 90,
+          "column": 0
+        },
+        "end": {
+          "line": 97,
+          "column": 3
+        }
+      },
+      "20": {
+        "start": {
+          "line": 91,
+          "column": 2
+        },
+        "end": {
+          "line": 91,
+          "column": 151
+        }
+      },
+      "21": {
+        "start": {
+          "line": 92,
+          "column": 2
+        },
+        "end": {
+          "line": 96,
+          "column": 5
+        }
+      },
+      "22": {
+        "start": {
+          "line": 93,
+          "column": 4
+        },
+        "end": {
+          "line": 93,
+          "column": 29
+        }
+      },
+      "23": {
+        "start": {
+          "line": 93,
+          "column": 22
+        },
+        "end": {
+          "line": 93,
+          "column": 29
+        }
+      },
+      "24": {
+        "start": {
+          "line": 94,
+          "column": 30
+        },
+        "end": {
+          "line": 94,
+          "column": 113
+        }
+      },
+      "25": {
+        "start": {
+          "line": 95,
+          "column": 4
+        },
+        "end": {
+          "line": 95,
+          "column": 73
+        }
+      },
+      "26": {
+        "start": {
+          "line": 95,
+          "column": 27
+        },
+        "end": {
+          "line": 95,
+          "column": 73
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "(anonymous_0)",
+        "decl": {
+          "start": {
+            "line": 15,
+            "column": 23
+          },
+          "end": {
+            "line": 15,
+            "column": 24
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 15,
+            "column": 27
+          },
+          "end": {
+            "line": 76,
+            "column": 1
+          }
+        },
+        "line": 15
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 56,
+            "column": 49
+          },
+          "end": {
+            "line": 56,
+            "column": 50
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 56,
+            "column": 80
+          },
+          "end": {
+            "line": 64,
+            "column": 28
+          }
+        },
+        "line": 56
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 57,
+            "column": 33
+          },
+          "end": {
+            "line": 57,
+            "column": 34
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 57,
+            "column": 37
+          },
+          "end": {
+            "line": 57,
+            "column": 71
+          }
+        },
+        "line": 57
+      },
+      "3": {
+        "name": "(anonymous_3)",
+        "decl": {
+          "start": {
+            "line": 77,
+            "column": 58
+          },
+          "end": {
+            "line": 77,
+            "column": 59
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 77,
+            "column": 69
+          },
+          "end": {
+            "line": 81,
+            "column": 1
+          }
+        },
+        "line": 77
+      },
+      "4": {
+        "name": "(anonymous_4)",
+        "decl": {
+          "start": {
+            "line": 90,
+            "column": 50
+          },
+          "end": {
+            "line": 90,
+            "column": 51
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 90,
+            "column": 70
+          },
+          "end": {
+            "line": 97,
+            "column": 1
+          }
+        },
+        "line": 90
+      },
+      "5": {
+        "name": "(anonymous_5)",
+        "decl": {
+          "start": {
+            "line": 92,
+            "column": 25
+          },
+          "end": {
+            "line": 92,
+            "column": 26
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 92,
+            "column": 42
+          },
+          "end": {
+            "line": 96,
+            "column": 3
+          }
+        },
+        "line": 92
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 104
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 104
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 3
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 28,
+            "column": 38
+          },
+          "end": {
+            "line": 28,
+            "column": 85
+          }
+        },
+        "type": "cond-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 28,
+              "column": 65
+            },
+            "end": {
+              "line": 28,
+              "column": 69
+            }
+          },
+          {
+            "start": {
+              "line": 28,
+              "column": 72
+            },
+            "end": {
+              "line": 28,
+              "column": 85
+            }
+          }
+        ],
+        "line": 28
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 93,
+            "column": 4
+          },
+          "end": {
+            "line": 93,
+            "column": 29
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 93,
+              "column": 4
+            },
+            "end": {
+              "line": 93,
+              "column": 29
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 93
+      },
+      "3": {
+        "loc": {
+          "start": {
+            "line": 95,
+            "column": 4
+          },
+          "end": {
+            "line": 95,
+            "column": 73
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 95,
+              "column": 4
+            },
+            "end": {
+              "line": 95,
+              "column": 73
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 95
+      }
+    },
+    "s": {
+      "0": 2,
+      "1": 0,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 2,
+      "14": 0,
+      "15": 2,
+      "16": 2,
+      "17": 2,
+      "18": 2,
+      "19": 2,
+      "20": 2,
+      "21": 2,
+      "22": 0,
+      "23": 0,
+      "24": 0,
+      "25": 0,
+      "26": 0
+    },
+    "f": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 2,
+      "5": 0
+    },
+    "b": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        0,
+        0
+      ],
+      "2": [
+        0,
+        0
+      ],
+      "3": [
+        0,
+        0
+      ]
+    },
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LanguageToggle.tsx"
+      ],
+      "names": [
+        "useTranslation",
+        "supportedLanguages",
+        "Button",
+        "DropdownMenu",
+        "DropdownMenuContent",
+        "DropdownMenuItem",
+        "DropdownMenuTrigger",
+        "LanguageToggle",
+        "t",
+        "i18n",
+        "asChild",
+        "variant",
+        "size",
+        "div",
+        "className",
+        "language",
+        "span",
+        "align",
+        "side",
+        "map",
+        "idx",
+        "onClick",
+        "changeLanguage"
+      ],
+      "mappings": ";;;;;;;;;;AACA,SAASA,cAAc,QAAQ,gBAAgB;AAC/C,SAASC,kBAAkB,QAAQ,wBAAwB;AAC3D,SAASC,MAAM,QAAQ,yBAAyB;AAChD,SACEC,YAAY,EACZC,mBAAmB,EACnBC,gBAAgB,EAChBC,mBAAmB,QACd,gCAAgC;AAEvC,MAAMC,iBAAqB;;IACzB,MAAM,EAAEC,CAAC,EAAEC,IAAI,EAAE,GAAGT;IAEpB,qBACE,QAACG;;0BACC,QAACG;gBAAoBI,OAAO;0BAC1B,cAAA,QAACR;oBAAOS,SAAQ;oBAAUC,MAAK;;sCAC7B,QAACC;4BAAIC,WAAU;sCAAaL,KAAKM,QAAQ,KAAK,SAAS,OAAON,KAAKM,QAAQ;;;;;;sCAC3E,QAACC;4BAAKF,WAAU;sCAAU;;;;;;;;;;;;;;;;;0BAG9B,QAACV;gBAAoBa,OAAM;gBAAMC,MAAK;0BACnCjB,mBAAmBkB,GAAG,CAAC,CAACJ,UAAUK,oBACjC,QAACf;wBACCgB,SAAS,IAAM,KAAKZ,KAAKa,cAAc,CAACP;wBAExCD,WAAU;kCAETN,EAAEO;uBAHEK;;;;;;;;;;;;;;;;AASjB;GAxBMb;;QACgBP;;;KADhBO;AA0BN,eAAeA,eAAe"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "f16f823cdc77d63d2535df95ca63418cf83aaa28"
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LoginButton.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LoginButton.tsx",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "1": {
+        "start": {
+          "line": 3,
+          "column": 26
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "2": {
+        "start": {
+          "line": 4,
+          "column": 23
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      },
+      "3": {
+        "start": {
+          "line": 5,
+          "column": 23
+        },
+        "end": {
+          "line": 5,
+          "column": 42
+        }
+      },
+      "4": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 135
+        }
+      },
+      "5": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 73
+        }
+      },
+      "6": {
+        "start": {
+          "line": 10,
+          "column": 9
+        },
+        "end": {
+          "line": 10,
+          "column": 23
+        }
+      },
+      "7": {
+        "start": {
+          "line": 14,
+          "column": 20
+        },
+        "end": {
+          "line": 29,
+          "column": 1
+        }
+      },
+      "8": {
+        "start": {
+          "line": 15,
+          "column": 4
+        },
+        "end": {
+          "line": 15,
+          "column": 9
+        }
+      },
+      "9": {
+        "start": {
+          "line": 16,
+          "column": 21
+        },
+        "end": {
+          "line": 16,
+          "column": 50
+        }
+      },
+      "10": {
+        "start": {
+          "line": 17,
+          "column": 4
+        },
+        "end": {
+          "line": 28,
+          "column": 13
+        }
+      },
+      "11": {
+        "start": {
+          "line": 19,
+          "column": 12
+        },
+        "end": {
+          "line": 21,
+          "column": 13
+        }
+      },
+      "12": {
+        "start": {
+          "line": 20,
+          "column": 16
+        },
+        "end": {
+          "line": 20,
+          "column": 41
+        }
+      },
+      "13": {
+        "start": {
+          "line": 30,
+          "column": 0
+        },
+        "end": {
+          "line": 34,
+          "column": 3
+        }
+      },
+      "14": {
+        "start": {
+          "line": 31,
+          "column": 4
+        },
+        "end": {
+          "line": 33,
+          "column": 6
+        }
+      },
+      "15": {
+        "start": {
+          "line": 35,
+          "column": 0
+        },
+        "end": {
+          "line": 35,
+          "column": 17
+        }
+      },
+      "16": {
+        "start": {
+          "line": 38,
+          "column": 0
+        },
+        "end": {
+          "line": 38,
+          "column": 32
+        }
+      },
+      "17": {
+        "start": {
+          "line": 41,
+          "column": 0
+        },
+        "end": {
+          "line": 41,
+          "column": 37
+        }
+      },
+      "18": {
+        "start": {
+          "line": 42,
+          "column": 0
+        },
+        "end": {
+          "line": 42,
+          "column": 37
+        }
+      },
+      "19": {
+        "start": {
+          "line": 43,
+          "column": 0
+        },
+        "end": {
+          "line": 50,
+          "column": 3
+        }
+      },
+      "20": {
+        "start": {
+          "line": 44,
+          "column": 2
+        },
+        "end": {
+          "line": 44,
+          "column": 148
+        }
+      },
+      "21": {
+        "start": {
+          "line": 45,
+          "column": 2
+        },
+        "end": {
+          "line": 49,
+          "column": 5
+        }
+      },
+      "22": {
+        "start": {
+          "line": 46,
+          "column": 4
+        },
+        "end": {
+          "line": 46,
+          "column": 29
+        }
+      },
+      "23": {
+        "start": {
+          "line": 46,
+          "column": 22
+        },
+        "end": {
+          "line": 46,
+          "column": 29
+        }
+      },
+      "24": {
+        "start": {
+          "line": 47,
+          "column": 30
+        },
+        "end": {
+          "line": 47,
+          "column": 113
+        }
+      },
+      "25": {
+        "start": {
+          "line": 48,
+          "column": 4
+        },
+        "end": {
+          "line": 48,
+          "column": 73
+        }
+      },
+      "26": {
+        "start": {
+          "line": 48,
+          "column": 27
+        },
+        "end": {
+          "line": 48,
+          "column": 73
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "(anonymous_0)",
+        "decl": {
+          "start": {
+            "line": 14,
+            "column": 20
+          },
+          "end": {
+            "line": 14,
+            "column": 21
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 14,
+            "column": 24
+          },
+          "end": {
+            "line": 29,
+            "column": 1
+          }
+        },
+        "line": 14
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 18,
+            "column": 19
+          },
+          "end": {
+            "line": 18,
+            "column": 20
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 18,
+            "column": 26
+          },
+          "end": {
+            "line": 22,
+            "column": 9
+          }
+        },
+        "line": 18
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 30,
+            "column": 55
+          },
+          "end": {
+            "line": 30,
+            "column": 56
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 30,
+            "column": 66
+          },
+          "end": {
+            "line": 34,
+            "column": 1
+          }
+        },
+        "line": 30
+      },
+      "3": {
+        "name": "(anonymous_3)",
+        "decl": {
+          "start": {
+            "line": 43,
+            "column": 50
+          },
+          "end": {
+            "line": 43,
+            "column": 51
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 43,
+            "column": 70
+          },
+          "end": {
+            "line": 50,
+            "column": 1
+          }
+        },
+        "line": 43
+      },
+      "4": {
+        "name": "(anonymous_4)",
+        "decl": {
+          "start": {
+            "line": 45,
+            "column": 25
+          },
+          "end": {
+            "line": 45,
+            "column": 26
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 45,
+            "column": 42
+          },
+          "end": {
+            "line": 49,
+            "column": 3
+          }
+        },
+        "line": 45
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 104
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 104
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 3
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 19,
+            "column": 12
+          },
+          "end": {
+            "line": 21,
+            "column": 13
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 19,
+              "column": 12
+            },
+            "end": {
+              "line": 21,
+              "column": 13
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 19
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 46,
+            "column": 4
+          },
+          "end": {
+            "line": 46,
+            "column": 29
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 46,
+              "column": 4
+            },
+            "end": {
+              "line": 46,
+              "column": 29
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 46
+      },
+      "3": {
+        "loc": {
+          "start": {
+            "line": 48,
+            "column": 4
+          },
+          "end": {
+            "line": 48,
+            "column": 73
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 48,
+              "column": 4
+            },
+            "end": {
+              "line": 48,
+              "column": 73
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 48
+      }
+    },
+    "s": {
+      "0": 2,
+      "1": 0,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 2,
+      "14": 0,
+      "15": 2,
+      "16": 2,
+      "17": 2,
+      "18": 2,
+      "19": 2,
+      "20": 2,
+      "21": 2,
+      "22": 0,
+      "23": 0,
+      "24": 0,
+      "25": 0,
+      "26": 0
+    },
+    "f": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 2,
+      "4": 0
+    },
+    "b": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        0,
+        0
+      ],
+      "2": [
+        0,
+        0
+      ],
+      "3": [
+        0,
+        0
+      ]
+    },
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LoginButton.tsx"
+      ],
+      "names": [
+        "GoogleLogin",
+        "useSetRecoilState",
+        "tokenState",
+        "LoginButton",
+        "setToken",
+        "onSuccess",
+        "res",
+        "credential",
+        "width"
+      ],
+      "mappings": ";;;;;;;;;;AACA,SAASA,WAAW,QAAQ,sBAAsB;AAClD,SAASC,iBAAiB,QAAQ,SAAS;AAC3C,SAASC,UAAU,QAAQ,gBAAgB;AAE3C,MAAMC,cAAkB;;IACtB,MAAMC,WAAWH,kBAAkBC;IAEnC,qBACE,QAACF;QACCK,WAAWC,CAAAA;YACT,IAAIA,IAAIC,UAAU,EAAE;gBAClBH,SAASE,IAAIC,UAAU;YACzB;QACF;QACAC,OAAM;;;;;;AAGZ;GAbML;;QACaF;;;KADbE;AAeN,eAAeA,YAAY"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "2c59f592b5e2fe914f1563e24a37917ba7cae14d"
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LogoutButton.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LogoutButton.tsx",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "1": {
+        "start": {
+          "line": 3,
+          "column": 26
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "2": {
+        "start": {
+          "line": 4,
+          "column": 23
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      },
+      "3": {
+        "start": {
+          "line": 5,
+          "column": 23
+        },
+        "end": {
+          "line": 5,
+          "column": 42
+        }
+      },
+      "4": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 136
+        }
+      },
+      "5": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 73
+        }
+      },
+      "6": {
+        "start": {
+          "line": 10,
+          "column": 9
+        },
+        "end": {
+          "line": 10,
+          "column": 23
+        }
+      },
+      "7": {
+        "start": {
+          "line": 20,
+          "column": 21
+        },
+        "end": {
+          "line": 42,
+          "column": 1
+        }
+      },
+      "8": {
+        "start": {
+          "line": 21,
+          "column": 4
+        },
+        "end": {
+          "line": 21,
+          "column": 9
+        }
+      },
+      "9": {
+        "start": {
+          "line": 22,
+          "column": 21
+        },
+        "end": {
+          "line": 22,
+          "column": 50
+        }
+      },
+      "10": {
+        "start": {
+          "line": 23,
+          "column": 20
+        },
+        "end": {
+          "line": 23,
+          "column": 48
+        }
+      },
+      "11": {
+        "start": {
+          "line": 24,
+          "column": 21
+        },
+        "end": {
+          "line": 24,
+          "column": 34
+        }
+      },
+      "12": {
+        "start": {
+          "line": 25,
+          "column": 18
+        },
+        "end": {
+          "line": 25,
+          "column": 34
+        }
+      },
+      "13": {
+        "start": {
+          "line": 26,
+          "column": 19
+        },
+        "end": {
+          "line": 32,
+          "column": 5
+        }
+      },
+      "14": {
+        "start": {
+          "line": 27,
+          "column": 8
+        },
+        "end": {
+          "line": 27,
+          "column": 23
+        }
+      },
+      "15": {
+        "start": {
+          "line": 28,
+          "column": 8
+        },
+        "end": {
+          "line": 28,
+          "column": 23
+        }
+      },
+      "16": {
+        "start": {
+          "line": 29,
+          "column": 8
+        },
+        "end": {
+          "line": 29,
+          "column": 47
+        }
+      },
+      "17": {
+        "start": {
+          "line": 30,
+          "column": 8
+        },
+        "end": {
+          "line": 30,
+          "column": 25
+        }
+      },
+      "18": {
+        "start": {
+          "line": 31,
+          "column": 8
+        },
+        "end": {
+          "line": 31,
+          "column": 33
+        }
+      },
+      "19": {
+        "start": {
+          "line": 33,
+          "column": 4
+        },
+        "end": {
+          "line": 41,
+          "column": 13
+        }
+      },
+      "20": {
+        "start": {
+          "line": 43,
+          "column": 0
+        },
+        "end": {
+          "line": 50,
+          "column": 3
+        }
+      },
+      "21": {
+        "start": {
+          "line": 44,
+          "column": 4
+        },
+        "end": {
+          "line": 49,
+          "column": 6
+        }
+      },
+      "22": {
+        "start": {
+          "line": 51,
+          "column": 0
+        },
+        "end": {
+          "line": 51,
+          "column": 18
+        }
+      },
+      "23": {
+        "start": {
+          "line": 54,
+          "column": 0
+        },
+        "end": {
+          "line": 54,
+          "column": 33
+        }
+      },
+      "24": {
+        "start": {
+          "line": 57,
+          "column": 0
+        },
+        "end": {
+          "line": 57,
+          "column": 37
+        }
+      },
+      "25": {
+        "start": {
+          "line": 58,
+          "column": 0
+        },
+        "end": {
+          "line": 58,
+          "column": 37
+        }
+      },
+      "26": {
+        "start": {
+          "line": 59,
+          "column": 0
+        },
+        "end": {
+          "line": 66,
+          "column": 3
+        }
+      },
+      "27": {
+        "start": {
+          "line": 60,
+          "column": 2
+        },
+        "end": {
+          "line": 60,
+          "column": 149
+        }
+      },
+      "28": {
+        "start": {
+          "line": 61,
+          "column": 2
+        },
+        "end": {
+          "line": 65,
+          "column": 5
+        }
+      },
+      "29": {
+        "start": {
+          "line": 62,
+          "column": 4
+        },
+        "end": {
+          "line": 62,
+          "column": 29
+        }
+      },
+      "30": {
+        "start": {
+          "line": 62,
+          "column": 22
+        },
+        "end": {
+          "line": 62,
+          "column": 29
+        }
+      },
+      "31": {
+        "start": {
+          "line": 63,
+          "column": 30
+        },
+        "end": {
+          "line": 63,
+          "column": 113
+        }
+      },
+      "32": {
+        "start": {
+          "line": 64,
+          "column": 4
+        },
+        "end": {
+          "line": 64,
+          "column": 73
+        }
+      },
+      "33": {
+        "start": {
+          "line": 64,
+          "column": 27
+        },
+        "end": {
+          "line": 64,
+          "column": 73
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "(anonymous_0)",
+        "decl": {
+          "start": {
+            "line": 20,
+            "column": 21
+          },
+          "end": {
+            "line": 20,
+            "column": 22
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 20,
+            "column": 25
+          },
+          "end": {
+            "line": 42,
+            "column": 1
+          }
+        },
+        "line": 20
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 26,
+            "column": 19
+          },
+          "end": {
+            "line": 26,
+            "column": 20
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 26,
+            "column": 23
+          },
+          "end": {
+            "line": 32,
+            "column": 5
+          }
+        },
+        "line": 26
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 43,
+            "column": 56
+          },
+          "end": {
+            "line": 43,
+            "column": 57
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 43,
+            "column": 67
+          },
+          "end": {
+            "line": 50,
+            "column": 1
+          }
+        },
+        "line": 43
+      },
+      "3": {
+        "name": "(anonymous_3)",
+        "decl": {
+          "start": {
+            "line": 59,
+            "column": 50
+          },
+          "end": {
+            "line": 59,
+            "column": 51
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 59,
+            "column": 70
+          },
+          "end": {
+            "line": 66,
+            "column": 1
+          }
+        },
+        "line": 59
+      },
+      "4": {
+        "name": "(anonymous_4)",
+        "decl": {
+          "start": {
+            "line": 61,
+            "column": 25
+          },
+          "end": {
+            "line": 61,
+            "column": 26
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 61,
+            "column": 42
+          },
+          "end": {
+            "line": 65,
+            "column": 3
+          }
+        },
+        "line": 61
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 104
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 104
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 3
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 62,
+            "column": 4
+          },
+          "end": {
+            "line": 62,
+            "column": 29
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 62,
+              "column": 4
+            },
+            "end": {
+              "line": 62,
+              "column": 29
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 62
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 64,
+            "column": 4
+          },
+          "end": {
+            "line": 64,
+            "column": 73
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 64,
+              "column": 4
+            },
+            "end": {
+              "line": 64,
+              "column": 73
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 64
+      }
+    },
+    "s": {
+      "0": 2,
+      "1": 0,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 2,
+      "21": 0,
+      "22": 2,
+      "23": 2,
+      "24": 2,
+      "25": 2,
+      "26": 2,
+      "27": 2,
+      "28": 2,
+      "29": 0,
+      "30": 0,
+      "31": 0,
+      "32": 0,
+      "33": 0
+    },
+    "f": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 2,
+      "4": 0
+    },
+    "b": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        0,
+        0
+      ],
+      "2": [
+        0,
+        0
+      ]
+    },
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LogoutButton.tsx"
+      ],
+      "names": [
+        "useTranslation",
+        "useNavigate",
+        "secureLocalStorage",
+        "googleLogout",
+        "useSetRecoilState",
+        "roleState",
+        "tokenState",
+        "URLS",
+        "Button",
+        "LogoutButton",
+        "setToken",
+        "setRole",
+        "navigate",
+        "t",
+        "logout",
+        "removeItem",
+        "DASHBOARD",
+        "onClick",
+        "variant"
+      ],
+      "mappings": ";;;;;;;;;;AACA,SAASA,cAAc,QAAQ,gBAAgB;AAC/C,SAASC,WAAW,QAAQ,mBAAmB;AAC/C,OAAOC,wBAAwB,uBAAuB;AACtD,SAASC,YAAY,QAAQ,sBAAsB;AACnD,SAASC,iBAAiB,QAAQ,SAAS;AAC3C,SAASC,SAAS,QAAQ,eAAe;AACzC,SAASC,UAAU,QAAQ,gBAAgB;AAC3C,SAASC,IAAI,QAAQ,mBAAmB;AACxC,SAASC,MAAM,QAAQ,yBAAyB;AAEhD,MAAMC,eAAmB;;IACvB,MAAMC,WAAWN,kBAAkBE;IACnC,MAAMK,UAAUP,kBAAkBC;IAClC,MAAMO,WAAWX;IACjB,MAAM,EAAEY,CAAC,EAAE,GAAGb;IACd,MAAMc,SAAS;QACbX;QACAO,SAAS;QACTR,mBAAmBa,UAAU,CAAC;QAC9BJ,QAAQ;QACRC,SAASL,KAAKS,SAAS;IACzB;IAEA,qBACE,QAACR;QAAOS,SAASH;QAAQI,SAAQ;kBAC9BL,EAAE;;;;;;AAGT;GAlBMJ;;QACaL;QACDA;QACCH;QACHD;;;KAJVS;AAoBN,eAAeA,aAAa"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "551a76f9de558b10f92093812fb2dc7f5e5eb6f5"
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/ModeToggle.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/ModeToggle.tsx",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "1": {
+        "start": {
+          "line": 3,
+          "column": 26
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "2": {
+        "start": {
+          "line": 4,
+          "column": 23
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      },
+      "3": {
+        "start": {
+          "line": 5,
+          "column": 23
+        },
+        "end": {
+          "line": 5,
+          "column": 42
+        }
+      },
+      "4": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 134
+        }
+      },
+      "5": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 73
+        }
+      },
+      "6": {
+        "start": {
+          "line": 10,
+          "column": 9
+        },
+        "end": {
+          "line": 10,
+          "column": 23
+        }
+      },
+      "7": {
+        "start": {
+          "line": 17,
+          "column": 4
+        },
+        "end": {
+          "line": 17,
+          "column": 9
+        }
+      },
+      "8": {
+        "start": {
+          "line": 18,
+          "column": 25
+        },
+        "end": {
+          "line": 18,
+          "column": 35
+        }
+      },
+      "9": {
+        "start": {
+          "line": 19,
+          "column": 18
+        },
+        "end": {
+          "line": 19,
+          "column": 34
+        }
+      },
+      "10": {
+        "start": {
+          "line": 20,
+          "column": 4
+        },
+        "end": {
+          "line": 103,
+          "column": 13
+        }
+      },
+      "11": {
+        "start": {
+          "line": 66,
+          "column": 37
+        },
+        "end": {
+          "line": 66,
+          "column": 54
+        }
+      },
+      "12": {
+        "start": {
+          "line": 75,
+          "column": 37
+        },
+        "end": {
+          "line": 75,
+          "column": 53
+        }
+      },
+      "13": {
+        "start": {
+          "line": 84,
+          "column": 37
+        },
+        "end": {
+          "line": 84,
+          "column": 55
+        }
+      },
+      "14": {
+        "start": {
+          "line": 105,
+          "column": 0
+        },
+        "end": {
+          "line": 110,
+          "column": 3
+        }
+      },
+      "15": {
+        "start": {
+          "line": 106,
+          "column": 4
+        },
+        "end": {
+          "line": 109,
+          "column": 6
+        }
+      },
+      "16": {
+        "start": {
+          "line": 111,
+          "column": 0
+        },
+        "end": {
+          "line": 111,
+          "column": 16
+        }
+      },
+      "17": {
+        "start": {
+          "line": 113,
+          "column": 0
+        },
+        "end": {
+          "line": 113,
+          "column": 31
+        }
+      },
+      "18": {
+        "start": {
+          "line": 116,
+          "column": 0
+        },
+        "end": {
+          "line": 116,
+          "column": 37
+        }
+      },
+      "19": {
+        "start": {
+          "line": 117,
+          "column": 0
+        },
+        "end": {
+          "line": 117,
+          "column": 37
+        }
+      },
+      "20": {
+        "start": {
+          "line": 118,
+          "column": 0
+        },
+        "end": {
+          "line": 125,
+          "column": 3
+        }
+      },
+      "21": {
+        "start": {
+          "line": 119,
+          "column": 2
+        },
+        "end": {
+          "line": 119,
+          "column": 147
+        }
+      },
+      "22": {
+        "start": {
+          "line": 120,
+          "column": 2
+        },
+        "end": {
+          "line": 124,
+          "column": 5
+        }
+      },
+      "23": {
+        "start": {
+          "line": 121,
+          "column": 4
+        },
+        "end": {
+          "line": 121,
+          "column": 29
+        }
+      },
+      "24": {
+        "start": {
+          "line": 121,
+          "column": 22
+        },
+        "end": {
+          "line": 121,
+          "column": 29
+        }
+      },
+      "25": {
+        "start": {
+          "line": 122,
+          "column": 30
+        },
+        "end": {
+          "line": 122,
+          "column": 113
+        }
+      },
+      "26": {
+        "start": {
+          "line": 123,
+          "column": 4
+        },
+        "end": {
+          "line": 123,
+          "column": 73
+        }
+      },
+      "27": {
+        "start": {
+          "line": 123,
+          "column": 27
+        },
+        "end": {
+          "line": 123,
+          "column": 73
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "ModeToggle",
+        "decl": {
+          "start": {
+            "line": 16,
+            "column": 16
+          },
+          "end": {
+            "line": 16,
+            "column": 26
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 16,
+            "column": 29
+          },
+          "end": {
+            "line": 104,
+            "column": 1
+          }
+        },
+        "line": 16
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 66,
+            "column": 33
+          },
+          "end": {
+            "line": 66,
+            "column": 34
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 66,
+            "column": 37
+          },
+          "end": {
+            "line": 66,
+            "column": 54
+          }
+        },
+        "line": 66
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 75,
+            "column": 33
+          },
+          "end": {
+            "line": 75,
+            "column": 34
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 75,
+            "column": 37
+          },
+          "end": {
+            "line": 75,
+            "column": 53
+          }
+        },
+        "line": 75
+      },
+      "3": {
+        "name": "(anonymous_3)",
+        "decl": {
+          "start": {
+            "line": 84,
+            "column": 33
+          },
+          "end": {
+            "line": 84,
+            "column": 34
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 84,
+            "column": 37
+          },
+          "end": {
+            "line": 84,
+            "column": 55
+          }
+        },
+        "line": 84
+      },
+      "4": {
+        "name": "(anonymous_4)",
+        "decl": {
+          "start": {
+            "line": 105,
+            "column": 54
+          },
+          "end": {
+            "line": 105,
+            "column": 55
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 105,
+            "column": 65
+          },
+          "end": {
+            "line": 110,
+            "column": 1
+          }
+        },
+        "line": 105
+      },
+      "5": {
+        "name": "(anonymous_5)",
+        "decl": {
+          "start": {
+            "line": 118,
+            "column": 50
+          },
+          "end": {
+            "line": 118,
+            "column": 51
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 118,
+            "column": 70
+          },
+          "end": {
+            "line": 125,
+            "column": 1
+          }
+        },
+        "line": 118
+      },
+      "6": {
+        "name": "(anonymous_6)",
+        "decl": {
+          "start": {
+            "line": 120,
+            "column": 25
+          },
+          "end": {
+            "line": 120,
+            "column": 26
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 120,
+            "column": 42
+          },
+          "end": {
+            "line": 124,
+            "column": 3
+          }
+        },
+        "line": 120
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 104
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 104
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 3
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 121,
+            "column": 4
+          },
+          "end": {
+            "line": 121,
+            "column": 29
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 121,
+              "column": 4
+            },
+            "end": {
+              "line": 121,
+              "column": 29
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 121
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 123,
+            "column": 4
+          },
+          "end": {
+            "line": 123,
+            "column": 73
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 123,
+              "column": 4
+            },
+            "end": {
+              "line": 123,
+              "column": 73
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 123
+      }
+    },
+    "s": {
+      "0": 2,
+      "1": 0,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 2,
+      "15": 0,
+      "16": 2,
+      "17": 2,
+      "18": 2,
+      "19": 2,
+      "20": 2,
+      "21": 2,
+      "22": 2,
+      "23": 0,
+      "24": 0,
+      "25": 0,
+      "26": 0,
+      "27": 0
+    },
+    "f": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 2,
+      "6": 0
+    },
+    "b": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        0,
+        0
+      ],
+      "2": [
+        0,
+        0
+      ]
+    },
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/ModeToggle.tsx"
+      ],
+      "names": [
+        "useTranslation",
+        "useTheme",
+        "Moon",
+        "Sun",
+        "Button",
+        "DropdownMenu",
+        "DropdownMenuContent",
+        "DropdownMenuItem",
+        "DropdownMenuTrigger",
+        "ModeToggle",
+        "setTheme",
+        "t",
+        "asChild",
+        "variant",
+        "size",
+        "className",
+        "span",
+        "align",
+        "side",
+        "onClick"
+      ],
+      "mappings": ";;;;;;;;;;AAAA,SAASA,cAAc,QAAQ,gBAAgB;AAC/C,SAASC,QAAQ,QAAQ,kBAAkB;AAC3C,SAASC,IAAI,EAAEC,GAAG,QAAQ,eAAe;AACzC,SAASC,MAAM,QAAQ,yBAAyB;AAChD,SACEC,YAAY,EACZC,mBAAmB,EACnBC,gBAAgB,EAChBC,mBAAmB,QACd,gCAAgC;AAEvC,OAAO,SAASC;;IACd,MAAM,EAAEC,QAAQ,EAAE,GAAGT;IACrB,MAAM,EAAEU,CAAC,EAAE,GAAGX;IAEd,qBACE,QAACK;;0BACC,QAACG;gBAAoBI,OAAO;0BAC1B,cAAA,QAACR;oBAAOS,SAAQ;oBAAUC,MAAK;;sCAC7B,QAACX;4BAAIY,WAAU;;;;;;sCACf,QAACb;4BAAKa,WAAU;;;;;;sCAChB,QAACC;4BAAKD,WAAU;sCAAU;;;;;;;;;;;;;;;;;0BAG9B,QAACT;gBAAoBW,OAAM;gBAAMC,MAAK;;kCACpC,QAACX;wBAAiBY,SAAS,IAAMT,SAAS;wBAAUK,WAAU;kCAC3DJ,EAAE;;;;;;kCAEL,QAACJ;wBAAiBY,SAAS,IAAMT,SAAS;wBAASK,WAAU;kCAC1DJ,EAAE;;;;;;kCAEL,QAACJ;wBAAiBY,SAAS,IAAMT,SAAS;wBAAWK,WAAU;kCAC5DJ,EAAE;;;;;;;;;;;;;;;;;;AAKb;GA1BgBF;;QACOR;QACPD;;;KAFAS"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "c6bda3f3af58216eb5f113b9b1620f3350be3936"
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/UserItem.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/UserItem.tsx",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "1": {
+        "start": {
+          "line": 3,
+          "column": 26
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "2": {
+        "start": {
+          "line": 4,
+          "column": 23
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      },
+      "3": {
+        "start": {
+          "line": 5,
+          "column": 23
+        },
+        "end": {
+          "line": 5,
+          "column": 42
+        }
+      },
+      "4": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 132
+        }
+      },
+      "5": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 73
+        }
+      },
+      "6": {
+        "start": {
+          "line": 10,
+          "column": 9
+        },
+        "end": {
+          "line": 10,
+          "column": 23
+        }
+      },
+      "7": {
+        "start": {
+          "line": 27,
+          "column": 17
+        },
+        "end": {
+          "line": 152,
+          "column": 1
+        }
+      },
+      "8": {
+        "start": {
+          "line": 28,
+          "column": 4
+        },
+        "end": {
+          "line": 28,
+          "column": 9
+        }
+      },
+      "9": {
+        "start": {
+          "line": 29,
+          "column": 17
+        },
+        "end": {
+          "line": 29,
+          "column": 42
+        }
+      },
+      "10": {
+        "start": {
+          "line": 30,
+          "column": 18
+        },
+        "end": {
+          "line": 30,
+          "column": 43
+        }
+      },
+      "11": {
+        "start": {
+          "line": 31,
+          "column": 18
+        },
+        "end": {
+          "line": 31,
+          "column": 34
+        }
+      },
+      "12": {
+        "start": {
+          "line": 32,
+          "column": 18
+        },
+        "end": {
+          "line": 32,
+          "column": 44
+        }
+      },
+      "13": {
+        "start": {
+          "line": 33,
+          "column": 27
+        },
+        "end": {
+          "line": 42,
+          "column": 6
+        }
+      },
+      "14": {
+        "start": {
+          "line": 43,
+          "column": 4
+        },
+        "end": {
+          "line": 151,
+          "column": 13
+        }
+      },
+      "15": {
+        "start": {
+          "line": 153,
+          "column": 0
+        },
+        "end": {
+          "line": 161,
+          "column": 3
+        }
+      },
+      "16": {
+        "start": {
+          "line": 154,
+          "column": 4
+        },
+        "end": {
+          "line": 160,
+          "column": 6
+        }
+      },
+      "17": {
+        "start": {
+          "line": 162,
+          "column": 0
+        },
+        "end": {
+          "line": 162,
+          "column": 14
+        }
+      },
+      "18": {
+        "start": {
+          "line": 165,
+          "column": 0
+        },
+        "end": {
+          "line": 165,
+          "column": 29
+        }
+      },
+      "19": {
+        "start": {
+          "line": 168,
+          "column": 0
+        },
+        "end": {
+          "line": 168,
+          "column": 37
+        }
+      },
+      "20": {
+        "start": {
+          "line": 169,
+          "column": 0
+        },
+        "end": {
+          "line": 169,
+          "column": 37
+        }
+      },
+      "21": {
+        "start": {
+          "line": 170,
+          "column": 0
+        },
+        "end": {
+          "line": 177,
+          "column": 3
+        }
+      },
+      "22": {
+        "start": {
+          "line": 171,
+          "column": 2
+        },
+        "end": {
+          "line": 171,
+          "column": 145
+        }
+      },
+      "23": {
+        "start": {
+          "line": 172,
+          "column": 2
+        },
+        "end": {
+          "line": 176,
+          "column": 5
+        }
+      },
+      "24": {
+        "start": {
+          "line": 173,
+          "column": 4
+        },
+        "end": {
+          "line": 173,
+          "column": 29
+        }
+      },
+      "25": {
+        "start": {
+          "line": 173,
+          "column": 22
+        },
+        "end": {
+          "line": 173,
+          "column": 29
+        }
+      },
+      "26": {
+        "start": {
+          "line": 174,
+          "column": 30
+        },
+        "end": {
+          "line": 174,
+          "column": 113
+        }
+      },
+      "27": {
+        "start": {
+          "line": 175,
+          "column": 4
+        },
+        "end": {
+          "line": 175,
+          "column": 73
+        }
+      },
+      "28": {
+        "start": {
+          "line": 175,
+          "column": 27
+        },
+        "end": {
+          "line": 175,
+          "column": 73
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "(anonymous_0)",
+        "decl": {
+          "start": {
+            "line": 27,
+            "column": 17
+          },
+          "end": {
+            "line": 27,
+            "column": 18
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 27,
+            "column": 39
+          },
+          "end": {
+            "line": 152,
+            "column": 1
+          }
+        },
+        "line": 27
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 153,
+            "column": 52
+          },
+          "end": {
+            "line": 153,
+            "column": 53
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 153,
+            "column": 63
+          },
+          "end": {
+            "line": 161,
+            "column": 1
+          }
+        },
+        "line": 153
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 170,
+            "column": 50
+          },
+          "end": {
+            "line": 170,
+            "column": 51
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 170,
+            "column": 70
+          },
+          "end": {
+            "line": 177,
+            "column": 1
+          }
+        },
+        "line": 170
+      },
+      "3": {
+        "name": "(anonymous_3)",
+        "decl": {
+          "start": {
+            "line": 172,
+            "column": 25
+          },
+          "end": {
+            "line": 172,
+            "column": 26
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 172,
+            "column": 42
+          },
+          "end": {
+            "line": 176,
+            "column": 3
+          }
+        },
+        "line": 172
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 104
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 104
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 3
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 27,
+            "column": 20
+          },
+          "end": {
+            "line": 27,
+            "column": 34
+          }
+        },
+        "type": "default-arg",
+        "locations": [
+          {
+            "start": {
+              "line": 27,
+              "column": 32
+            },
+            "end": {
+              "line": 27,
+              "column": 34
+            }
+          }
+        ],
+        "line": 27
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 48,
+            "column": 101
+          },
+          "end": {
+            "line": 48,
+            "column": 132
+          }
+        },
+        "type": "cond-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 48,
+              "column": 122
+            },
+            "end": {
+              "line": 48,
+              "column": 127
+            }
+          },
+          {
+            "start": {
+              "line": 48,
+              "column": 130
+            },
+            "end": {
+              "line": 48,
+              "column": 132
+            }
+          }
+        ],
+        "line": 48
+      },
+      "3": {
+        "loc": {
+          "start": {
+            "line": 48,
+            "column": 136
+          },
+          "end": {
+            "line": 48,
+            "column": 170
+          }
+        },
+        "type": "cond-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 48,
+              "column": 153
+            },
+            "end": {
+              "line": 48,
+              "column": 165
+            }
+          },
+          {
+            "start": {
+              "line": 48,
+              "column": 168
+            },
+            "end": {
+              "line": 48,
+              "column": 170
+            }
+          }
+        ],
+        "line": 48
+      },
+      "4": {
+        "loc": {
+          "start": {
+            "line": 115,
+            "column": 20
+          },
+          "end": {
+            "line": 119,
+            "column": 28
+          }
+        },
+        "type": "binary-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 115,
+              "column": 20
+            },
+            "end": {
+              "line": 115,
+              "column": 26
+            }
+          },
+          {
+            "start": {
+              "line": 115,
+              "column": 44
+            },
+            "end": {
+              "line": 119,
+              "column": 28
+            }
+          }
+        ],
+        "line": 115
+      },
+      "5": {
+        "loc": {
+          "start": {
+            "line": 120,
+            "column": 20
+          },
+          "end": {
+            "line": 134,
+            "column": 28
+          }
+        },
+        "type": "binary-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 120,
+              "column": 20
+            },
+            "end": {
+              "line": 120,
+              "column": 36
+            }
+          },
+          {
+            "start": {
+              "line": 120,
+              "column": 54
+            },
+            "end": {
+              "line": 134,
+              "column": 28
+            }
+          }
+        ],
+        "line": 120
+      },
+      "6": {
+        "loc": {
+          "start": {
+            "line": 135,
+            "column": 20
+          },
+          "end": {
+            "line": 139,
+            "column": 28
+          }
+        },
+        "type": "binary-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 135,
+              "column": 20
+            },
+            "end": {
+              "line": 135,
+              "column": 25
+            }
+          },
+          {
+            "start": {
+              "line": 135,
+              "column": 43
+            },
+            "end": {
+              "line": 139,
+              "column": 28
+            }
+          }
+        ],
+        "line": 135
+      },
+      "7": {
+        "loc": {
+          "start": {
+            "line": 173,
+            "column": 4
+          },
+          "end": {
+            "line": 173,
+            "column": 29
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 173,
+              "column": 4
+            },
+            "end": {
+              "line": 173,
+              "column": 29
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 173
+      },
+      "8": {
+        "loc": {
+          "start": {
+            "line": 175,
+            "column": 4
+          },
+          "end": {
+            "line": 175,
+            "column": 73
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 175,
+              "column": 4
+            },
+            "end": {
+              "line": 175,
+              "column": 73
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 175
+      }
+    },
+    "s": {
+      "0": 2,
+      "1": 0,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 2,
+      "9": 2,
+      "10": 2,
+      "11": 2,
+      "12": 2,
+      "13": 2,
+      "14": 2,
+      "15": 2,
+      "16": 2,
+      "17": 2,
+      "18": 2,
+      "19": 2,
+      "20": 2,
+      "21": 2,
+      "22": 2,
+      "23": 2,
+      "24": 0,
+      "25": 0,
+      "26": 0,
+      "27": 0,
+      "28": 0
+    },
+    "f": {
+      "0": 2,
+      "1": 2,
+      "2": 2,
+      "3": 0
+    },
+    "b": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        2
+      ],
+      "2": [
+        0,
+        2
+      ],
+      "3": [
+        0,
+        2
+      ],
+      "4": [
+        2,
+        2
+      ],
+      "5": [
+        2,
+        0
+      ],
+      "6": [
+        2,
+        0
+      ],
+      "7": [
+        0,
+        0
+      ],
+      "8": [
+        0,
+        0
+      ]
+    },
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/UserItem.tsx"
+      ],
+      "names": [
+        "useTranslation",
+        "Link",
+        "useMatch",
+        "useQuery",
+        "useRecoilValue",
+        "roleState",
+        "tokenState",
+        "URLS",
+        "cn",
+        "UserApi",
+        "Avatar",
+        "Popover",
+        "PopoverTrigger",
+        "PopoverContent",
+        "Button",
+        "LanguageToggle",
+        "LoginButton",
+        "LogoutButton",
+        "ModeToggle",
+        "UserItem",
+        "className",
+        "role",
+        "match",
+        "MY_PROFILE",
+        "t",
+        "token",
+        "data",
+        "user",
+        "queryKey",
+        "queryFn",
+        "get",
+        "enabled",
+        "undefined",
+        "avatarImageClassName",
+        "side",
+        "align",
+        "div",
+        "to"
+      ],
+      "mappings": ";;;;;;;;;;AACA,SAASA,cAAc,QAAQ,gBAAgB;AAC/C,SAASC,IAAI,EAAEC,QAAQ,QAAQ,mBAAmB;AAClD,SAASC,QAAQ,QAAQ,wBAAwB;AACjD,SAASC,cAAc,QAAQ,SAAS;AACxC,SAASC,SAAS,QAAQ,eAAe;AACzC,SAASC,UAAU,QAAQ,gBAAgB;AAC3C,SAASC,IAAI,QAAQ,mBAAmB;AACxC,SAASC,EAAE,QAAQ,mBAAmB;AACtC,SAASC,OAAO,QAAQ,gBAAgB;AACxC,OAAOC,YAAY,sBAAsB;AACzC,SAASC,OAAO,EAAEC,cAAc,EAAEC,cAAc,QAAQ,0BAA0B;AAClF,SAASC,MAAM,QAAQ,eAAe;AACtC,OAAOC,oBAAoB,mBAAmB;AAC9C,OAAOC,iBAAiB,gBAAgB;AACxC,OAAOC,kBAAkB,iBAAiB;AAC1C,SAASC,UAAU,QAAQ,eAAe;AAK1C,MAAMC,WAA8B,CAAC,EAAEC,YAAY,EAAE,EAAE;;IACrD,MAAMC,OAAOjB,eAAeC;IAC5B,MAAMiB,QAAQpB,SAASK,KAAKgB,UAAU;IACtC,MAAM,EAAEC,CAAC,EAAE,GAAGxB;IACd,MAAMyB,QAAQrB,eAAeE;IAE7B,MAAM,EAAEoB,MAAMC,IAAI,EAAE,GAAGxB,SAAS;QAC9ByB,UAAU;YAAC;YAAQ;gBAAEH;YAAM;SAAE;QAC7BI,SAASpB,QAAQqB,GAAG;QACpBC,SAASV,SAAS;IACpB;IAEA,qBACE,QAACV;;0BACC,QAACC;0BACC,cAAA,QAACF;oBACCiB,MAAMA;oBACNP,WAAWZ,GACT,CAAC,gEAAgE,EAC/DmB,SAASK,YAAY,QAAQ,GAC9B,CAAC,EAAEV,UAAU,OAAO,eAAe,GAAG,CAAC,EACxCF;oBAEFa,sBAAqB;;;;;;;;;;;0BAGzB,QAACpB;gBAAeqB,MAAK;gBAAQC,OAAM;gBAAMf,WAAU;;kCACjD,QAACgB;wBAAIhB,WAAU;;0CACb,QAACgB;gCAAIhB,WAAU;;oCAAwDI,EAAE;oCAAQ;;;;;;;0CACjF,QAACN;;;;;;;;;;;kCAEH,QAACkB;wBAAIhB,WAAU;;0CACb,QAACgB;gCAAIhB,WAAU;;oCACZI,EAAE;oCAAY;;;;;;;0CAEjB,QAACT;;;;;;;;;;;oBAEF,CAACU,uBAAS,QAACT;;;;;oBACXK,SAAS,yBACR,QAACpB;wBAAKoC,IAAI9B,KAAKgB,UAAU;kCACvB,cAAA,QAACT;4BAAOM,WAAU;sCAAUI,EAAE;;;;;;;;;;;oBAGjCC,uBAAS,QAACR;;;;;;;;;;;;;;;;;AAInB;GA/CME;;QACSf;QACCF;QACAF;QACAI;QAESD;;;KANnBgB;AAiDN,eAAeA,SAAS"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "d9dd27f6319ec4e15762215f3cef3e19999aa0ed"
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNav.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNav.tsx",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "1": {
+        "start": {
+          "line": 3,
+          "column": 26
+        },
+        "end": {
+          "line": 3,
+          "column": 104
+        }
+      },
+      "2": {
+        "start": {
+          "line": 4,
+          "column": 23
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      },
+      "3": {
+        "start": {
+          "line": 5,
+          "column": 23
+        },
+        "end": {
+          "line": 5,
+          "column": 42
+        }
+      },
+      "4": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 131
+        }
+      },
+      "5": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 73
+        }
+      },
+      "6": {
+        "start": {
+          "line": 10,
+          "column": 9
+        },
+        "end": {
+          "line": 10,
+          "column": 23
+        }
+      },
+      "7": {
+        "start": {
+          "line": 17,
+          "column": 18
+        },
+        "end": {
+          "line": 40,
+          "column": 1
+        }
+      },
+      "8": {
+        "start": {
+          "line": 41,
+          "column": 19
+        },
+        "end": {
+          "line": 53,
+          "column": 1
+        }
+      },
+      "9": {
+        "start": {
+          "line": 54,
+          "column": 20
+        },
+        "end": {
+          "line": 66,
+          "column": 1
+        }
+      },
+      "10": {
+        "start": {
+          "line": 67,
+          "column": 16
+        },
+        "end": {
+          "line": 135,
+          "column": 1
+        }
+      },
+      "11": {
+        "start": {
+          "line": 68,
+          "column": 4
+        },
+        "end": {
+          "line": 68,
+          "column": 9
+        }
+      },
+      "12": {
+        "start": {
+          "line": 69,
+          "column": 17
+        },
+        "end": {
+          "line": 69,
+          "column": 42
+        }
+      },
+      "13": {
+        "start": {
+          "line": 70,
+          "column": 4
+        },
+        "end": {
+          "line": 134,
+          "column": 13
+        }
+      },
+      "14": {
+        "start": {
+          "line": 85,
+          "column": 66
+        },
+        "end": {
+          "line": 92,
+          "column": 32
+        }
+      },
+      "15": {
+        "start": {
+          "line": 102,
+          "column": 87
+        },
+        "end": {
+          "line": 109,
+          "column": 32
+        }
+      },
+      "16": {
+        "start": {
+          "line": 110,
+          "column": 88
+        },
+        "end": {
+          "line": 117,
+          "column": 32
+        }
+      },
+      "17": {
+        "start": {
+          "line": 136,
+          "column": 0
+        },
+        "end": {
+          "line": 140,
+          "column": 3
+        }
+      },
+      "18": {
+        "start": {
+          "line": 137,
+          "column": 4
+        },
+        "end": {
+          "line": 139,
+          "column": 6
+        }
+      },
+      "19": {
+        "start": {
+          "line": 141,
+          "column": 0
+        },
+        "end": {
+          "line": 141,
+          "column": 13
+        }
+      },
+      "20": {
+        "start": {
+          "line": 144,
+          "column": 0
+        },
+        "end": {
+          "line": 144,
+          "column": 28
+        }
+      },
+      "21": {
+        "start": {
+          "line": 147,
+          "column": 0
+        },
+        "end": {
+          "line": 147,
+          "column": 37
+        }
+      },
+      "22": {
+        "start": {
+          "line": 148,
+          "column": 0
+        },
+        "end": {
+          "line": 148,
+          "column": 37
+        }
+      },
+      "23": {
+        "start": {
+          "line": 149,
+          "column": 0
+        },
+        "end": {
+          "line": 156,
+          "column": 3
+        }
+      },
+      "24": {
+        "start": {
+          "line": 150,
+          "column": 2
+        },
+        "end": {
+          "line": 150,
+          "column": 144
+        }
+      },
+      "25": {
+        "start": {
+          "line": 151,
+          "column": 2
+        },
+        "end": {
+          "line": 155,
+          "column": 5
+        }
+      },
+      "26": {
+        "start": {
+          "line": 152,
+          "column": 4
+        },
+        "end": {
+          "line": 152,
+          "column": 29
+        }
+      },
+      "27": {
+        "start": {
+          "line": 152,
+          "column": 22
+        },
+        "end": {
+          "line": 152,
+          "column": 29
+        }
+      },
+      "28": {
+        "start": {
+          "line": 153,
+          "column": 30
+        },
+        "end": {
+          "line": 153,
+          "column": 113
+        }
+      },
+      "29": {
+        "start": {
+          "line": 154,
+          "column": 4
+        },
+        "end": {
+          "line": 154,
+          "column": 73
+        }
+      },
+      "30": {
+        "start": {
+          "line": 154,
+          "column": 27
+        },
+        "end": {
+          "line": 154,
+          "column": 73
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "(anonymous_0)",
+        "decl": {
+          "start": {
+            "line": 67,
+            "column": 16
+          },
+          "end": {
+            "line": 67,
+            "column": 17
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 67,
+            "column": 20
+          },
+          "end": {
+            "line": 135,
+            "column": 1
+          }
+        },
+        "line": 67
+      },
+      "1": {
+        "name": "(anonymous_1)",
+        "decl": {
+          "start": {
+            "line": 85,
+            "column": 34
+          },
+          "end": {
+            "line": 85,
+            "column": 35
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 85,
+            "column": 66
+          },
+          "end": {
+            "line": 92,
+            "column": 32
+          }
+        },
+        "line": 85
+      },
+      "2": {
+        "name": "(anonymous_2)",
+        "decl": {
+          "start": {
+            "line": 102,
+            "column": 55
+          },
+          "end": {
+            "line": 102,
+            "column": 56
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 102,
+            "column": 87
+          },
+          "end": {
+            "line": 109,
+            "column": 32
+          }
+        },
+        "line": 102
+      },
+      "3": {
+        "name": "(anonymous_3)",
+        "decl": {
+          "start": {
+            "line": 110,
+            "column": 56
+          },
+          "end": {
+            "line": 110,
+            "column": 57
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 110,
+            "column": 88
+          },
+          "end": {
+            "line": 117,
+            "column": 32
+          }
+        },
+        "line": 110
+      },
+      "4": {
+        "name": "(anonymous_4)",
+        "decl": {
+          "start": {
+            "line": 136,
+            "column": 51
+          },
+          "end": {
+            "line": 136,
+            "column": 52
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 136,
+            "column": 62
+          },
+          "end": {
+            "line": 140,
+            "column": 1
+          }
+        },
+        "line": 136
+      },
+      "5": {
+        "name": "(anonymous_5)",
+        "decl": {
+          "start": {
+            "line": 149,
+            "column": 50
+          },
+          "end": {
+            "line": 149,
+            "column": 51
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 149,
+            "column": 70
+          },
+          "end": {
+            "line": 156,
+            "column": 1
+          }
+        },
+        "line": 149
+      },
+      "6": {
+        "name": "(anonymous_6)",
+        "decl": {
+          "start": {
+            "line": 151,
+            "column": 25
+          },
+          "end": {
+            "line": 151,
+            "column": 26
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 151,
+            "column": 42
+          },
+          "end": {
+            "line": 155,
+            "column": 3
+          }
+        },
+        "line": 151
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 104
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 104
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 3
+      },
+      "1": {
+        "loc": {
+          "start": {
+            "line": 102,
+            "column": 20
+          },
+          "end": {
+            "line": 109,
+            "column": 33
+          }
+        },
+        "type": "binary-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 102,
+              "column": 20
+            },
+            "end": {
+              "line": 102,
+              "column": 36
+            }
+          },
+          {
+            "start": {
+              "line": 102,
+              "column": 40
+            },
+            "end": {
+              "line": 109,
+              "column": 33
+            }
+          }
+        ],
+        "line": 102
+      },
+      "2": {
+        "loc": {
+          "start": {
+            "line": 110,
+            "column": 20
+          },
+          "end": {
+            "line": 117,
+            "column": 33
+          }
+        },
+        "type": "binary-expr",
+        "locations": [
+          {
+            "start": {
+              "line": 110,
+              "column": 20
+            },
+            "end": {
+              "line": 110,
+              "column": 36
+            }
+          },
+          {
+            "start": {
+              "line": 110,
+              "column": 40
+            },
+            "end": {
+              "line": 117,
+              "column": 33
+            }
+          }
+        ],
+        "line": 110
+      },
+      "3": {
+        "loc": {
+          "start": {
+            "line": 152,
+            "column": 4
+          },
+          "end": {
+            "line": 152,
+            "column": 29
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 152,
+              "column": 4
+            },
+            "end": {
+              "line": 152,
+              "column": 29
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 152
+      },
+      "4": {
+        "loc": {
+          "start": {
+            "line": 154,
+            "column": 4
+          },
+          "end": {
+            "line": 154,
+            "column": 73
+          }
+        },
+        "type": "if",
+        "locations": [
+          {
+            "start": {
+              "line": 154,
+              "column": 4
+            },
+            "end": {
+              "line": 154,
+              "column": 73
+            }
+          },
+          {
+            "start": {},
+            "end": {}
+          }
+        ],
+        "line": 154
+      }
+    },
+    "s": {
+      "0": 2,
+      "1": 0,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 2,
+      "9": 2,
+      "10": 2,
+      "11": 2,
+      "12": 2,
+      "13": 2,
+      "14": 4,
+      "15": 0,
+      "16": 0,
+      "17": 2,
+      "18": 2,
+      "19": 2,
+      "20": 2,
+      "21": 2,
+      "22": 2,
+      "23": 2,
+      "24": 2,
+      "25": 2,
+      "26": 0,
+      "27": 0,
+      "28": 0,
+      "29": 0,
+      "30": 0
+    },
+    "f": {
+      "0": 2,
+      "1": 4,
+      "2": 0,
+      "3": 0,
+      "4": 2,
+      "5": 2,
+      "6": 0
+    },
+    "b": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        2,
+        0
+      ],
+      "2": [
+        2,
+        0
+      ],
+      "3": [
+        0,
+        0
+      ],
+      "4": [
+        0,
+        0
+      ]
+    },
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNav.tsx"
+      ],
+      "names": [
+        "Home",
+        "CalendarDays",
+        "Search",
+        "Dices",
+        "useRecoilValue",
+        "roleState",
+        "URLS",
+        "SideNavLink",
+        "UserItem",
+        "ALL_LINKS",
+        "path",
+        "DASHBOARD",
+        "icon",
+        "size",
+        "strokeWidth",
+        "GAMES",
+        "USER_LINKS",
+        "MY_RESERVATIONS",
+        "ADMIN_LINKS",
+        "GAME_REQUESTS",
+        "SideNav",
+        "role",
+        "div",
+        "className",
+        "img",
+        "src",
+        "alt",
+        "map"
+      ],
+      "mappings": ";;;;;;;;;;AACA,SAASA,IAAI,EAAEC,YAAY,EAAEC,MAAM,EAAEC,KAAK,QAAQ,eAAe;AACjE,SAASC,cAAc,QAAQ,SAAS;AACxC,SAASC,SAAS,QAAQ,eAAe;AACzC,SAASC,IAAI,QAAQ,mBAAmB;AACxC,OAAOC,iBAAiB,gBAAgB;AACxC,OAAOC,cAAc,aAAa;AAElC,MAAMC,YAAY;IAChB;QACEC,MAAMJ,KAAKK,SAAS;QACpBC,oBAAM,QAACZ;YAAKa,MAAM;YAAIC,aAAa;;;;;;IACrC;IACA;QACEJ,MAAMJ,KAAKS,KAAK;QAChBH,oBAAM,QAACV;YAAOW,MAAM;YAAIC,aAAa;;;;;;IACvC;CACD;AAED,MAAME,aAAa;IACjB;QACEN,MAAMJ,KAAKW,eAAe;QAC1BL,oBAAM,QAACX;YAAaY,MAAM;YAAIC,aAAa;;;;;;IAC7C;CACD;AAED,MAAMI,cAAc;IAClB;QACER,MAAMJ,KAAKa,aAAa;QACxBP,oBAAM,QAACT;YAAMU,MAAM;YAAIC,aAAa;;;;;;IACtC;CACD;AAED,MAAMM,UAAc;;IAClB,MAAMC,OAAOjB,eAAeC;IAE5B,qBACE,QAACiB;QAAIC,WAAU;;0BACb,QAACD;gBAAIC,WAAU;;kCACb,QAACC;wBAAIC,KAAI;wBAAYF,WAAU;wBAAuBG,KAAI;;;;;;oBACzDjB,UAAUkB,GAAG,CAAC,CAAC,EAAEf,IAAI,EAAEF,IAAI,EAAE,iBAC5B,QAACH;4BAAYK,MAAMA;4BAAMF,MAAMA;2BAAWA;;;;;;;;;;;0BAI9C,QAACY;gBAAIC,WAAU;;oBACZF,SAAS,WACRL,WAAWW,GAAG,CAAC,CAAC,EAAEf,IAAI,EAAEF,IAAI,EAAE,iBAAK,QAACH;4BAAYK,MAAMA;4BAAMF,MAAMA;2BAAWA;;;;;oBAC9EW,SAAS,WACRH,YAAYS,GAAG,CAAC,CAAC,EAAEf,IAAI,EAAEF,IAAI,EAAE,iBAAK,QAACH;4BAAYK,MAAMA;4BAAMF,MAAMA;2BAAWA;;;;;kCAChF,QAACF;;;;;;;;;;;;;;;;;AAIT;GArBMY;;QACShB;;;KADTgB;AAuBN,eAAeA,QAAQ"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "34a11fe8dc77ac1af148240dcadf055ab2b9f375"
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/index.ts": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/index.ts",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
     "s": {},
     "f": {},
-    "b": {}
+    "b": {},
+    "inputSourceMap": {
+      "version": 3,
+      "sources": [
+        "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/index.ts"
+      ],
+      "names": [
+        "default"
+      ],
+      "mappings": "AAAA,SAASA,OAAO,QAAQ,YAAY"
+    },
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "bd635a4cd70cac7c97a8ff786dcdb070cb6c3656"
   },
   "/home/maria/studia/gameshare-app/frontend/src/constants/lorem.ts": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/constants/lorem.ts",
@@ -2398,15 +9001,6 @@
   },
   "/home/maria/studia/gameshare-app/frontend/src/constants/reservationStatuses.ts": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/constants/reservationStatuses.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/constants/urls.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/constants/urls.ts",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -2434,132 +9028,6 @@
   },
   "/home/maria/studia/gameshare-app/frontend/src/state/registerForm.ts": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/state/registerForm.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/state/role.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/state/role.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/state/token.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/state/token.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/types/Category.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/types/Category.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/types/Game.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/types/Game.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/types/GameInstance.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/types/GameInstance.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/types/Image.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/types/Image.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/types/Opinion.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/types/Opinion.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/types/Paginated.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/types/Paginated.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/types/Reservation.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/types/Reservation.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/types/Role.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/types/Role.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/types/User.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/types/User.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/utils/date.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/utils/date.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/utils/stringToColor.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/utils/stringToColor.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/utils/user.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/utils/user.ts",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -2612,15 +9080,6 @@
     "f": {},
     "b": {}
   },
-  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/index.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/index.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
   "/home/maria/studia/gameshare-app/frontend/src/components/Stars/index.ts": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/components/Stars/index.ts",
     "statementMap": {},
@@ -2641,15 +9100,6 @@
   },
   "/home/maria/studia/gameshare-app/frontend/src/components/UserGameInstances/index.ts": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/components/UserGameInstances/index.ts",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/use-toast.ts": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/use-toast.ts",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -2792,6 +9242,24 @@
     "f": {},
     "b": {}
   },
+  "/home/maria/studia/gameshare-app/frontend/src/Layout.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/Layout.tsx",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/ProtectedRoute.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/ProtectedRoute.tsx",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
   "/home/maria/studia/gameshare-app/frontend/src/main.tsx": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/main.tsx",
     "statementMap": {},
@@ -2801,8 +9269,8 @@
     "f": {},
     "b": {}
   },
-  "/home/maria/studia/gameshare-app/frontend/src/components/Avatar.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/Avatar.tsx",
+  "/home/maria/studia/gameshare-app/frontend/src/components/AddGameForm.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/AddGameForm.tsx",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -2837,24 +9305,6 @@
     "f": {},
     "b": {}
   },
-  "/home/maria/studia/gameshare-app/frontend/src/components/Layout.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/Layout.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ProtectedRoute.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ProtectedRoute.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
   "/home/maria/studia/gameshare-app/frontend/src/components/SelectInput.tsx": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/components/SelectInput.tsx",
     "statementMap": {},
@@ -2875,24 +9325,6 @@
   },
   "/home/maria/studia/gameshare-app/frontend/src/components/UserFilter.tsx": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/components/UserFilter.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/Badge/AgeBadge.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/Badge/AgeBadge.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/Badge/PlayersBadge.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/Badge/PlayersBadge.tsx",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -2947,6 +9379,15 @@
   },
   "/home/maria/studia/gameshare-app/frontend/src/components/GameSearch/GameSearchCard.tsx": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/components/GameSearch/GameSearchCard.tsx",
+    "statementMap": {},
+    "fnMap": {},
+    "branchMap": {},
+    "s": {},
+    "f": {},
+    "b": {}
+  },
+  "/home/maria/studia/gameshare-app/frontend/src/components/GameSearch/SelectCategory.tsx": {
+    "path": "/home/maria/studia/gameshare-app/frontend/src/components/GameSearch/SelectCategory.tsx",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -3019,69 +9460,6 @@
   },
   "/home/maria/studia/gameshare-app/frontend/src/components/Opinions/Opinions.tsx": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/components/Opinions/Opinions.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LanguageToggle.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LanguageToggle.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LoginButton.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LoginButton.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LogoutButton.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/LogoutButton.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/ModeToggle.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/ModeToggle.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNav.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNav.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNavLink.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/SideNavLink.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/UserItem.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/SideNav/UserItem.tsx",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -3163,213 +9541,6 @@
   },
   "/home/maria/studia/gameshare-app/frontend/src/components/UserGameInstances/GameReservations.tsx": {
     "path": "/home/maria/studia/gameshare-app/frontend/src/components/UserGameInstances/GameReservations.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/Spinner.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/Spinner.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/avatar.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/avatar.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/badge.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/badge.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/button.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/button.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/calendar.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/calendar.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/command.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/command.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/datepicker.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/datepicker.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/dialog.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/dialog.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/dropdown-menu.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/dropdown-menu.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/form.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/form.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/hover-card.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/hover-card.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/input.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/input.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/label.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/label.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/popover.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/popover.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/scroll-area.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/scroll-area.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/select.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/select.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/separator.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/separator.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/skeleton.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/skeleton.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/tabs.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/tabs.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/textarea.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/textarea.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/toast.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/toast.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/toaster.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/toaster.tsx",
-    "statementMap": {},
-    "fnMap": {},
-    "branchMap": {},
-    "s": {},
-    "f": {},
-    "b": {}
-  },
-  "/home/maria/studia/gameshare-app/frontend/src/components/ui/tooltip.tsx": {
-    "path": "/home/maria/studia/gameshare-app/frontend/src/components/ui/tooltip.tsx",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},

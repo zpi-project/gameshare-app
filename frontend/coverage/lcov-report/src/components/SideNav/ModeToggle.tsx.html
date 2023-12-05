@@ -23,14 +23,14 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>0/0</span>
             </div>
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
@@ -112,6 +112,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -123,16 +126,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -140,8 +140,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useTranslation } from "react-i18next";
+import { useTheme } from "@/ThemeProvider";
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "@/components/ThemeProvider";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -150,9 +150,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 &nbsp;
-export function ModeToggle() {
-  const { setTheme } = useTheme();
-  const { t } = useTranslation();
+export function <span class="fstat-no" title="function not covered" >ModeToggle() {</span>
+  const { setTheme } = <span class="cstat-no" title="statement not covered" >useTheme();</span>
+  const { t } = <span class="cstat-no" title="statement not covered" >useTranslation();</span>
 &nbsp;
   return (
     &lt;DropdownMenu&gt;
@@ -164,13 +164,13 @@ export function ModeToggle() {
         &lt;/Button&gt;
       &lt;/DropdownMenuTrigger&gt;
       &lt;DropdownMenuContent align="end" side="right"&gt;
-        &lt;DropdownMenuItem onClick={() =&gt; setTheme("light")} className="text-base"&gt;
+        &lt;DropdownMenuItem onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etTheme("light")} c</span>lassName="text-base"&gt;
           {t("light")}
         &lt;/DropdownMenuItem&gt;
-        &lt;DropdownMenuItem onClick={() =&gt; setTheme("dark")} className="text-base"&gt;
+        &lt;DropdownMenuItem onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etTheme("dark")} c</span>lassName="text-base"&gt;
           {t("dark")}
         &lt;/DropdownMenuItem&gt;
-        &lt;DropdownMenuItem onClick={() =&gt; setTheme("system")} className="text-base"&gt;
+        &lt;DropdownMenuItem onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etTheme("system")} c</span>lassName="text-base"&gt;
           {t("system")}
         &lt;/DropdownMenuItem&gt;
       &lt;/DropdownMenuContent&gt;
@@ -184,7 +184,7 @@ export function ModeToggle() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-04T12:41:00.345Z
+                at 2023-12-05T12:12:47.002Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/api/GameInstanceApi.ts</title>
+    <title>Code coverage report for src/Layout.tsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/api</a> GameInstanceApi.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">src</a> Layout.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -172,12 +172,7 @@
 <a name='L107'></a><a href='#L107'>107</a>
 <a name='L108'></a><a href='#L108'>108</a>
 <a name='L109'></a><a href='#L109'>109</a>
-<a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a>
-<a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L110'></a><a href='#L110'>110</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -286,125 +281,115 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { GameInstance } from "@/types/GameInstance";
-import {
-  GameInstanceSearchParams,
-  GameInstanceDetails,
-  SearchGameInstance,
-  NewGameInstance,
-} from "@/types/GameInstance";
-import { Opinion } from "@/types/Opinion";
-import { Paginated } from "@/types/Paginated";
-import { ReservationTimeframe, Timeframe } from "@/types/Reservation";
-import Api from "./Api";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FC, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { Outlet } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
+import { googleLogout } from "@react-oauth/google";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import jwt_decode, { JwtPayload } from "jwt-decode";
+import { useSetRecoilState, useRecoilState } from "recoil";
+import { isRoleFetchedState } from "@/state/isRoleFetched";
+import { registerFormOpenState } from "@/state/registerForm";
+import { roleState } from "@/state/role";
+import { tokenState } from "@/state/token";
+import Api from "@/api/Api";
+import { RoleApi } from "@/api/RoleApi";
+import { RegisterUserForm } from "@/components/UserForm";
+import SideNav from "./components/SideNav";
+import Spinner from "./components/ui/Spinner";
 &nbsp;
-export class GameInstanceApi {
-  static async getAllByUUID(uuid: string, page: number, size: number) {
-    const { data: instances } = await Api.get&lt;Paginated&lt;GameInstance&gt;&gt;(
-      `game-instances/user/${uuid}`,
-      { params: { page, size } },
-    );
-    return instances;
-  }
+const Layout: FC = () =&gt; {
+  const setRole = useSetRecoilState(roleState);
+  const setIsRoleFetched = useSetRecoilState(isRoleFetchedState);
+  const setRegisterFormOpen = useSetRecoilState(registerFormOpenState);
+  const [token, setToken] = useRecoilState(tokenState);
+  const { i18n } = useTranslation();
 &nbsp;
-  static async getByUUID(uuid: string) {
-    const { data: instance } = await Api.get&lt;GameInstanceDetails&gt;(`game-instances/${uuid}`);
-    return instance;
-  }
+  const { refetch, isFetching } = useQuery({
+    queryKey: ["role"],
+    queryFn: RoleApi.getRole,
+    enabled: token !== null,
+    retry: 1,
+    refetchOnWindowFocus: false,
+    onSuccess: ({ name }) =&gt; {
+      setRole(name);
+      if (token) {
+        secureLocalStorage.setItem("token", token);
+      }
+      setIsRoleFetched(true);
+    },
+    onError: error =&gt; {
+      if (token) {
+        if (axios.isAxiosError(error) &amp;&amp; error.response?.status === 404) {
+          setRegisterFormOpen(true);
+          setIsRoleFetched(true);
+        }
+      }
+    },
+  });
 &nbsp;
-  static async getAll(page: number, size: number) {
-    const { data: instances } = await Api.get&lt;Paginated&lt;GameInstance&gt;&gt;(`game-instances`, {
-      params: { page, size },
-    });
-    return instances;
-  }
+  useEffect(() =&gt; {
+    const token = secureLocalStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwt_decode&lt;JwtPayload&gt;(token as string);
+      const currentTime = Date.now() / 1000;
+      if (decodedToken.exp &amp;&amp; decodedToken.exp &lt; currentTime) {
+        secureLocalStorage.removeItem("token");
+        setToken(null);
+        setRole("guest");
+        googleLogout();
+      } else {
+        setToken(token as string);
+      }
+    }
+  }, []);
 &nbsp;
-  static async create(gameInstance: NewGameInstance) {
-    const { data } = await Api.post&lt;GameInstance&gt;(`game-instances`, gameInstance);
-    return data;
-  }
-&nbsp;
-  static async search(
-    latitude: number,
-    longitude: number,
-    page: number,
-    size: number,
-    searchParams: GameInstanceSearchParams,
-    userUUID?: string,
-  ) {
-    const { data: gameInstances } = await Api.get&lt;Paginated&lt;SearchGameInstance&gt;&gt;(
-      "/game-instances/search",
-      {
-        params: {
-          latitude,
-          longitude,
-          page,
-          size,
-          ...searchParams,
-          userUUID,
-        },
-      },
-    );
-    return gameInstances;
-  }
-&nbsp;
-  static async getAllGameInstanceOpinions(uuid: string, page: number, size: number) {
-    const { data: opinions } = await Api.get&lt;Paginated&lt;Opinion&gt;&gt;(
-      `game-instances/${uuid}/opinions`,
-      {
-        params: { page, size },
-      },
-    );
-    return opinions;
-  }
-&nbsp;
-  static async getReservations(uuid: string, month: number, year: number) {
-    const { data: reservations } = await Api.get&lt;ReservationTimeframe[]&gt;(
-      `/game-instances/${uuid}/reservations`,
-      { params: { year, month } },
-    );
-    return reservations;
-  }
-&nbsp;
-  static async getNonAvailability(uuid: string, month: number, year: number) {
-    const { data: timeframes } = await Api.get&lt;Timeframe[]&gt;(
-      `/game-instances/${uuid}/availability`,
-      { params: { year, month } },
-    );
-&nbsp;
-    return timeframes;
-  }
-&nbsp;
-  static async checkAvailability(uuid: string, startDate: Date, endDate: Date) {
-    const { data: isAvailable } = await Api.get&lt;boolean&gt;(
-      `/game-instances/${uuid}/timeframes/available`,
-      { params: { startDate, endDate } },
-    );
-    return isAvailable;
-  }
-&nbsp;
-  static async addImage(uuid: string, file: File) {
-    const formData = new FormData();
-    formData.append("file", file);
-&nbsp;
-    const { data } = await Api.post&lt;{
-      id: number;
-      fileName: string;
-      fileURL: string;
-    }&gt;(`/game-instances/images/${uuid}`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+  useEffect(() =&gt; {
+    const tokenInterceptor = Api.interceptors.request.use(config =&gt; {
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      config.params = {
+        ...config.params,
+        language: i18n.language,
+      };
+      return config;
     });
 &nbsp;
-    return data;
-  }
-}
+    return () =&gt; {
+      Api.interceptors.request.eject(tokenInterceptor);
+    };
+  }, [token]);
+&nbsp;
+  useEffect(() =&gt; {
+    const tokenInterceptor = Api.interceptors.request.use(config =&gt; {
+      config.params = {
+        ...config.params,
+        language: i18n.language,
+      };
+      return config;
+    });
+&nbsp;
+    return () =&gt; {
+      Api.interceptors.request.eject(tokenInterceptor);
+    };
+  }, [i18n.language]);
+&nbsp;
+  return (
+    &lt;div className=" flex h-screen w-screen flex-row gap-6 p-6"&gt;
+      &lt;SideNav /&gt;
+      &lt;div className="h-[calc(100vh-48px)] w-[calc(100vw-140px)]"&gt;
+        &lt;RegisterUserForm onRegisterSuccess={() =&gt; void refetch()} /&gt;
+        &lt;Outlet /&gt;
+      &lt;/div&gt;
+      {isFetching &amp;&amp; &lt;Spinner /&gt;}
+    &lt;/div&gt;
+  );
+};
+&nbsp;
+export default Layout;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -412,16 +397,16 @@ export class GameInstanceApi {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-04T12:41:00.345Z
+                at 2023-12-05T12:12:47.002Z
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     

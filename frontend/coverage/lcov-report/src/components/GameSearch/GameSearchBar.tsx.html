@@ -174,7 +174,65 @@
 <a name='L109'></a><a href='#L109'>109</a>
 <a name='L110'></a><a href='#L110'>110</a>
 <a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -290,12 +348,17 @@ import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
+import { useRecoilValue } from "recoil";
 import { useDebounce } from "use-debounce";
+import { roleState } from "@/state/role";
 import { Game } from "@/types/Game";
 import { GameApi } from "@/api/GameApi";
+import AddGameForm from "@/components/AddGameForm";
+import { Button } from "@/components/ui/button";
+import { Dialog } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "../ui/scroll-area";
-import { Skeleton } from "../ui/skeleton";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import GameSearchCard from "./GameSearchCard";
 &nbsp;
 const GAME_PAGE_SIZE = 8;
@@ -311,7 +374,12 @@ const GameSearchBar: FC&lt;GameSearchBarProps&gt; = ({ onGameClick, placeholder,
   const [showResults, setShowResults] = useState(false);
   const [debouncedSearch] = useDebounce(search, 500);
   const [blurTimeout, setBlurTimeout] = useState&lt;NodeJS.Timeout | null&gt;(null);
-  const { t } = useTranslation();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+&nbsp;
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const {
     data: games,
     isFetchingNextPage,
@@ -320,7 +388,7 @@ const GameSearchBar: FC&lt;GameSearchBarProps&gt; = ({ onGameClick, placeholder,
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ["games", { debouncedSearch }],
+    queryKey: ["games", { debouncedSearch, language }],
     queryFn: ({ pageParam = 0 }) =&gt;
       GameApi.search(pageParam as number, GAME_PAGE_SIZE, debouncedSearch, categories),
     getNextPageParam: (_, pages) =&gt; {
@@ -330,6 +398,7 @@ const GameSearchBar: FC&lt;GameSearchBarProps&gt; = ({ onGameClick, placeholder,
   });
 &nbsp;
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
+  const role = useRecoilValue(roleState);
 &nbsp;
   useEffect(() =&gt; {
     if (entry?.isIntersecting &amp;&amp; !isLoading) {
@@ -377,7 +446,22 @@ const GameSearchBar: FC&lt;GameSearchBarProps&gt; = ({ onGameClick, placeholder,
                   )),
                 )
               ) : (
-                &lt;h4 className="ml-2 mt-2 text-xl"&gt;{t("noResults")}&lt;/h4&gt;
+                !isLoading &amp;&amp; (
+                  &lt;&gt;
+                    &lt;h4 className="ml-2 mt-2 text-xl"&gt;{t("noResults")}&lt;/h4&gt;
+                    {role !== "guest" &amp;&amp; (
+                      &lt;&gt;
+                        &lt;p className="p-2 italic"&gt;{t("cannotFindGame")}&lt;/p&gt;
+                        &lt;Button
+                          className="ml-auto mt-4 w-max"
+                          onClick={() =&gt; setIsDialogOpen(true)}
+                        &gt;
+                          {t("addGame")}
+                        &lt;/Button&gt;
+                      &lt;/&gt;
+                    )}
+                  &lt;/&gt;
+                )
               )}
               {(isFetchingNextPage || isLoading) &amp;&amp; (
                 &lt;&gt;
@@ -391,6 +475,9 @@ const GameSearchBar: FC&lt;GameSearchBarProps&gt; = ({ onGameClick, placeholder,
           &lt;/ScrollArea&gt;
         &lt;/div&gt;
       )}
+      &lt;Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}&gt;
+        &lt;AddGameForm close={() =&gt; setIsDialogOpen(false)} /&gt;
+      &lt;/Dialog&gt;
     &lt;/div&gt;
   );
 };
@@ -403,7 +490,7 @@ export default GameSearchBar;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-04T12:41:00.345Z
+                at 2023-12-05T12:12:47.002Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
