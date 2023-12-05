@@ -4,14 +4,14 @@ import java.util.*;
 
 public class AprioriAlgorithm {
 
-    private final int minSupport;
+    private final double minSupport;
     private final int noOfTransactions;
     private final double minConfidence;
     private final List<Set<Long>> transactions;
     private final List<Set<Long>> itemSet;
     private final Map<Set<Long>, Integer> frequentItemSets;
 
-    public AprioriAlgorithm(int minSupport, double minConfidence, List<Set<Long>> transactions) {
+    public AprioriAlgorithm(double minSupport, double minConfidence, List<Set<Long>> transactions) {
         this.minSupport = minSupport;
         this.minConfidence = minConfidence;
         this.transactions = transactions;
@@ -51,7 +51,7 @@ public class AprioriAlgorithm {
                 if (transaction.containsAll(item))
                     countItemOccurrence++;
 
-            if (countItemOccurrence >= minSupport) {
+            if ((double) countItemOccurrence /noOfTransactions >= minSupport) {
                 frequentItemSets.put(item, countItemOccurrence);
             }
         }
@@ -65,11 +65,10 @@ public class AprioriAlgorithm {
             candidates = generateCandidates(candidates);
             addFrequentItemSets(candidates);
         }
-
-        System.out.println(frequentItemSets);
     }
 
-    private void generateCandidatesHelper(List<Long> set, int n, int start, List<Long> current, List<Set<Long>> result) {
+    private void generateCandidatesHelper(List<Long> set, int n, int start, List<Long> current,
+                                          List<Set<Long>> result) {
         if (current.size() == n) {
             result.add(new HashSet<>(current));
             return;
@@ -88,7 +87,8 @@ public class AprioriAlgorithm {
         Set<Long> allInOneSet = new HashSet<>();
         for (Set<Long> c : candidates)
             allInOneSet.addAll(c);
-        generateCandidatesHelper(allInOneSet.stream().toList(), combinationLength, 0, new ArrayList<>(), nextFrequentItemSet);
+        generateCandidatesHelper(allInOneSet.stream().toList(), combinationLength, 0,
+                new ArrayList<>(), nextFrequentItemSet);
         return nextFrequentItemSet;
     }
 
@@ -122,7 +122,7 @@ public class AprioriAlgorithm {
                     Set<Long> consequent = new HashSet<>(itemset);
                     consequent.removeAll(antecedent);
 
-                    double support = frequentItemSets.get(itemset);
+                    double support = calculateSupport(itemset);
                     double confidence = calculateConfidence(itemset, antecedent);
 
                     if (support >= minSupport && confidence >= minConfidence) {
@@ -132,12 +132,11 @@ public class AprioriAlgorithm {
                 }
             }
         }
-
         return rules;
     }
 
     private double calculateSupport(Set<Long> itemset) {
-        return this.frequentItemSets.get(itemset);
+        return (double) this.frequentItemSets.get(itemset) / this.noOfTransactions;
     }
 
     private double calculateConfidence(Set<Long> itemset, Set<Long> antecedent) {

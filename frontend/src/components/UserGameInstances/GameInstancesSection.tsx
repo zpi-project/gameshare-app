@@ -19,7 +19,10 @@ interface Props {
 }
 
 const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const [query, setQuery] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
   const {
@@ -27,7 +30,7 @@ const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["user-game-instances", { uuid: owner?.uuid }],
+    queryKey: ["user-game-instances", { uuid: owner?.uuid, language }],
     queryFn: () =>
       isMyPage
         ? GameInstanceApi.getAll(0, 100)

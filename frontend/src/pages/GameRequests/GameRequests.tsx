@@ -11,7 +11,10 @@ import GameRequest from "./GameRequest";
 const GAME_PAGE_SIZE = 8;
 
 const GameRequests: FC = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { toast } = useToast();
 
   const {
@@ -22,7 +25,7 @@ const GameRequests: FC = () => {
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ["game-requests"],
+    queryKey: ["game-requests", { language }],
     queryFn: ({ pageParam = 0 }) => GameApi.getPending(pageParam as number, GAME_PAGE_SIZE),
     getNextPageParam: (_, pages) => {
       const newPageParam = pages.length;

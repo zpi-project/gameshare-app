@@ -32,3 +32,13 @@ export interface GameInfo {
   shortDescription: string;
   categories: Category[];
 }
+
+export interface NewGame {
+  name: string;
+  categoriesIDs: number[];
+  minPlayers: number;
+  maxPlayers: number;
+  playingTime: number;
+  age: number;
+  shortDescription: string;
+}

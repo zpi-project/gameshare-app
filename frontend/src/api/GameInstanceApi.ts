@@ -112,6 +112,7 @@ export class GameInstanceApi {
       headers: {
         "Content-Type": "multipart/form-data",
       },
+      timeout: 200000,
     });
 
     return data;

@@ -16,14 +16,17 @@ interface GameRequestProps {
 }
 
 const GameRequest: FC<GameRequestProps> = ({ game }) => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
   const { mutate: accept, isLoading: isAcceptLoading } = useMutation({
     mutationFn: () => GameApi.accept(game.id),
     onSuccess: () => {
-      queryClient.invalidateQueries(["game-requests"]);
+      queryClient.invalidateQueries(["game-requests", { language }]);
       toast({
         title: t("gameAcceptSuccess", { title: game.name }),
       });

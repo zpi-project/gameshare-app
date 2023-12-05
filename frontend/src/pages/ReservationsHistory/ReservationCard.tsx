@@ -31,8 +31,19 @@ const ReservationCard: FC<ReservationCardProps> = ({
   asOwner,
 }) => {
   const { t } = useTranslation();
-  const { avatarLink: ownerAvatar, avgRating: ownerRating } = owner;
-  const { avatarLink: renterAvatar, avgRating: renterRating } = renter;
+  const {
+    avatarLink: ownerAvatar,
+    avgRating: ownerRating,
+    opinionsAmount: ownerOpinionsAmount,
+  } = owner;
+  const {
+    avatarLink: renterAvatar,
+    avgRating: renterRating,
+    opinionsAmount: renterOpinionsAmount,
+  } = renter;
+
+  const opinionsAmount = asOwner ? renterOpinionsAmount : ownerOpinionsAmount;
+  const rating = asOwner ? renterRating : ownerRating;
 
   return (
     <Link
@@ -66,11 +77,18 @@ const ReservationCard: FC<ReservationCardProps> = ({
             </div>
             <div className="hidden h-full flex-col gap-1 2xl:flex ">
               <h4 className="text-xl">{getFullname(asOwner ? renter : owner)}</h4>
-              {asOwner ? (
-                renterRating > 0 && <Stars count={Math.round(renterRating)} size={24} />
-              ) : (
-                <Stars count={ownerRating} size={24} />
-              )}
+              <>
+                {opinionsAmount > 0 ? (
+                  <div className="flex flex-row gap-2">
+                    <p className="text-base tracking-widest text-foreground">({opinionsAmount})</p>
+                    <Stars count={Math.round(rating)} variant="secondary" />
+                  </div>
+                ) : (
+                  <Badge variant="secondary" className="w-max px-3 py-1 hover:bg-primary">
+                    {t("noOpinions")}
+                  </Badge>
+                )}
+              </>
             </div>
           </div>
           <div className="w-full lg:w-max lg:min-w-[300px]">

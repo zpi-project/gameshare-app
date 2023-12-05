@@ -1,12 +1,13 @@
-import { Game } from "@/types/Game";
+import { Game, NewGame } from "@/types/Game";
 import { GameInstanceDetails } from "@/types/GameInstance";
 import { Paginated } from "@/types/Paginated";
 import Api from "./Api";
 
 export class GameApi {
   static async getPopular(page: number, size: number) {
-    // for now it uses games endpoint cause /games/popular does not exist yet
-    const { data: games } = await Api.get<Paginated<Game>>("/games", { params: { page, size } });
+    const { data: games } = await Api.get<Paginated<Game>>("/games/popular", {
+      params: { page, size },
+    });
     return games;
   }
 
@@ -20,6 +21,29 @@ export class GameApi {
   static async getOne(id: number) {
     const { data: game } = await Api.get<Game>(`/games/${id}`);
     return game;
+  }
+
+  static async create(game: NewGame) {
+    const { data } = await Api.post<Game>("/games", game);
+    return data;
+  }
+
+  static async addImage(gameId: number, file: File) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const { data } = await Api.post<{
+      id: number;
+      fileName: string;
+      fileURL: string;
+    }>(`/games/${gameId}/images`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      timeout: 200000,
+    });
+
+    return data;
   }
 
   static async getInstances(

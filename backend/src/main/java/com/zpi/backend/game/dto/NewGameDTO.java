@@ -38,6 +38,8 @@ public class NewGameDTO {
             throw new BadRequestException("Age cannot be less than 1");
         if(ValueChecker.isStringEmpty(shortDescription))
             throw new BadRequestException("Short description cannot be empty");
+        if(shortDescription.length() > 10000)
+            throw new BadRequestException("Short description cannot have more than 10000 characters.");
         return true;
     }
 }

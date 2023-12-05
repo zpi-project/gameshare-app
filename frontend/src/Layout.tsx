@@ -1,4 +1,5 @@
 import { FC, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import { googleLogout } from "@react-oauth/google";
@@ -13,14 +14,15 @@ import { tokenState } from "@/state/token";
 import Api from "@/api/Api";
 import { RoleApi } from "@/api/RoleApi";
 import { RegisterUserForm } from "@/components/UserForm";
-import SideNav from "./SideNav";
-import Spinner from "./ui/Spinner";
+import SideNav from "./components/SideNav";
+import Spinner from "./components/ui/Spinner";
 
 const Layout: FC = () => {
   const setRole = useSetRecoilState(roleState);
   const setIsRoleFetched = useSetRecoilState(isRoleFetchedState);
   const setRegisterFormOpen = useSetRecoilState(registerFormOpenState);
   const [token, setToken] = useRecoilState(tokenState);
+  const { i18n } = useTranslation();
 
   const { refetch, isFetching } = useQuery({
     queryKey: ["role"],
@@ -66,6 +68,10 @@ const Layout: FC = () => {
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
+      config.params = {
+        ...config.params,
+        language: i18n.language,
+      };
       return config;
     });
 
@@ -73,6 +79,20 @@ const Layout: FC = () => {
       Api.interceptors.request.eject(tokenInterceptor);
     };
   }, [token]);
+
+  useEffect(() => {
+    const tokenInterceptor = Api.interceptors.request.use(config => {
+      config.params = {
+        ...config.params,
+        language: i18n.language,
+      };
+      return config;
+    });
+
+    return () => {
+      Api.interceptors.request.eject(tokenInterceptor);
+    };
+  }, [i18n.language]);
 
   return (
     <div className=" flex h-screen w-screen flex-row gap-6 p-6">

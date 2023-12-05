@@ -22,12 +22,15 @@ const ReservationsHistory: FC = () => {
   });
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
   const token = useRecoilValue(tokenState);
 
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ["reservations", queryParams, token],
+    queryKey: ["reservations", { queryParams, token, language }],
     queryFn: ({ pageParam = 0 }) =>
       ReservationsApi.getAll(pageParam, RESERVATIONS_PAGE_SIZE, queryParams),
     getNextPageParam: (_, pages) => {

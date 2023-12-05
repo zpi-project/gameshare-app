@@ -7,7 +7,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
 
 const CategoriesSection: FC = () => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { toast } = useToast();
 
   const {
@@ -15,7 +18,7 @@ const CategoriesSection: FC = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["categories"],
+    queryKey: ["categories", { language }],
     queryFn: CategoryApi.getAll,
     onError: () => {
       toast({

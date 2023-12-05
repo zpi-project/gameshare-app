@@ -2,9 +2,9 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { GameInstance, GameInstanceDetails } from "@/types/GameInstance";
 import { stringToHexColor } from "@/utils/stringToColor";
+import { useTheme } from "../ThemeProvider";
 import { PriceBadge } from "./Badge";
 import { Stars } from "./Stars";
-import { useTheme } from "./ThemeProvider";
 import { Badge } from "./ui/badge";
 
 interface GameInstanceDetailsCardProps {
@@ -40,12 +40,12 @@ const GameInstanceDetailsCard: FC<GameInstanceDetailsCardProps> = ({
           } 100%)`,
         }}
       />
-      <div className="absolute flex flex-col gap-3 p-4">
+      <div className="relative flex flex-col gap-3 p-4">
         <div className="h-[300px] w-[300px] overflow-hidden rounded-lg bg-section">
           <img src={image} alt={name} className="h-full w-full object-cover object-top" />
         </div>
         <h3 className="text-xl">{name}</h3>
-        <div className="mr-4 flex flex-row justify-between">
+        <div className="flex flex-row justify-between">
           <PriceBadge price={pricePerDay} />
           {opinionsAmount > 0 ? (
             <div className="flex flex-row gap-2">
