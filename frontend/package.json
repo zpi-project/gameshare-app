@@ -15,7 +15,8 @@
     "cypress:run:component": "cypress run --component",
     "cypress:run:e2e": "cypress run --e2e",
     "cypress:open": "cypress open",
-    "prepare": "cd .. && husky install frontend/.husky"
+    "prepare": "cd .. && husky install frontend/.husky",
+    "restore-database": "powershell -ExecutionPolicy Bypass ../restore_db.ps1"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
