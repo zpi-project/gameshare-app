@@ -5,3 +5,4 @@ describe("<Opinions />", () => {
   it("displays 'no opinions' message when user has no opinions", () => {});
   it("displays no opinions if user is not provided", () => {});
 });
+  

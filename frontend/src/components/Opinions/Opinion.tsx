@@ -49,7 +49,7 @@ const Opinion: FC<Props> = ({ opinion }) => {
               {opinion.description.slice(0, 200)}
               {opinion.description.length > 200 && (
                 <>
-                  <span dadta-test="ellipsis">... </span>
+                  <span data-test="ellipsis">... </span>
                   <button
                     className="mx-2 inline text-xs italic text-secondary"
                     onClick={handleClick}

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">44.44% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>4/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>2/7</span>
             </div>
         
             
@@ -132,6 +132,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,21 +162,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,9 +194,9 @@ interface Props {
   variant?: "primary" | "secondary";
 }
 &nbsp;
-const StarsInput: FC&lt;Props&gt; = ({ variant = "primary" }) =&gt; {
-  const [clickedCount, setClickedCount] = useState&lt;number&gt;(0);
-  const [hoveredCount, setHoveredCount] = useState&lt;number&gt;(clickedCount);
+const StarsInput: FC&lt;Props&gt; = <span class="fstat-no" title="function not covered" >({</span> variant = <span class="branch-0 cbranch-no" title="branch not covered" >"primary" </span>}) =&gt; {
+  const [clickedCount, setClickedCount] = <span class="cstat-no" title="statement not covered" >useState&lt;number&gt;(0);</span>
+  const [hoveredCount, setHoveredCount] = <span class="cstat-no" title="statement not covered" >useState&lt;number&gt;(clickedCount);</span>
 &nbsp;
   return (
     &lt;div className="flex gap-1"&gt;
@@ -205,9 +205,9 @@ const StarsInput: FC&lt;Props&gt; = ({ variant = "primary" }) =&gt; {
           variant={variant}
           key={idx}
           filled={idx &lt; hoveredCount}
-          onMouseEnter={() =&gt; setHoveredCount(idx + 1)}
-          onMouseLeave={() =&gt; setHoveredCount(clickedCount)}
-          onClick={() =&gt; setClickedCount(idx + 1)}
+          onMouseEnter={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etHoveredCount(idx + 1)}</span>
+          onMouseLeave={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etHoveredCount(clickedCount)}</span>
+          onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etClickedCount(idx + 1)}</span>
         /&gt;
       ))}
     &lt;/div&gt;
@@ -224,9 +224,9 @@ interface StarProps {
   variant?: "primary" | "secondary";
 }
 &nbsp;
-const Star: FC&lt;StarProps&gt; = ({
+const Star: FC&lt;StarProps&gt; = <span class="fstat-no" title="function not covered" >({</span>
   filled,
-  variant = "primary",
+  variant = <span class="branch-0 cbranch-no" title="branch not covered" >"primary",</span>
   onMouseEnter,
   onMouseLeave,
   onClick,
@@ -256,7 +256,7 @@ const Star: FC&lt;StarProps&gt; = ({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-05T12:12:47.002Z
+                at 2023-12-05T13:21:08.616Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

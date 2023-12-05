@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -123,11 +123,31 @@
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -200,23 +220,32 @@ const Opinion: FC&lt;Props&gt; = ({ opinion }) =&gt; {
   const handleClick = () =&gt; setshowAll(!showAll);
 &nbsp;
   return (
-    &lt;div className="flex w-full flex-row items-center gap-3 rounded-lg bg-card p-4"&gt;
+    &lt;div
+      className="flex w-full flex-row items-center gap-3 rounded-lg bg-card p-4"
+      data-test="opinion"
+    &gt;
       &lt;Avatar user={opinion.ratingUser} className="h-16 w-16" /&gt;
       &lt;div className="flex w-full flex-col gap-4"&gt;
         &lt;div className="flex w-full flex-row justify-between"&gt;
           &lt;div className="flex flex-row gap-2"&gt;
-            &lt;p className="text-lg text-primary"&gt;{getFullname(opinion.ratingUser)}&lt;/p&gt;
-            &lt;p className="text-lg font-thin opacity-80"&gt;
+            &lt;p className="text-lg text-primary" data-test="fullname"&gt;
+              {getFullname(opinion.ratingUser)}
+            &lt;/p&gt;
+            &lt;p className="text-lg font-thin opacity-80" data-test="dateformat"&gt;
               ({t("dateFormat", { date: new Date(opinion.timestamp) })})
             &lt;/p&gt;
           &lt;/div&gt;
           &lt;Stars count={opinion.stars} /&gt;
         &lt;/div&gt;
-        &lt;div className="min-h-8 break-all pr-2 text-xs italic"&gt;
+        &lt;div className="min-h-8 break-all pr-2 text-xs italic" data-test="description"&gt;
           {showAll ? (
             &lt;&gt;
               {opinion.description}
-              &lt;button className="mx-2 inline text-xs italic text-secondary" onClick={handleClick}&gt;
+              &lt;button
+                className="mx-2 inline text-xs italic text-secondary"
+                onClick={handleClick}
+                data-test="see-less"
+              &gt;
                 {t("seeLess")}
               &lt;/button&gt;
             &lt;/&gt;
@@ -225,10 +254,11 @@ const Opinion: FC&lt;Props&gt; = ({ opinion }) =&gt; {
               {opinion.description.slice(0, 200)}
               {opinion.description.length &gt; 200 &amp;&amp; (
                 &lt;&gt;
-                  &lt;span&gt;... &lt;/span&gt;
+                  &lt;span data-test="ellipsis"&gt;... &lt;/span&gt;
                   &lt;button
                     className="mx-2 inline text-xs italic text-secondary"
                     onClick={handleClick}
+                    data-test="see-more"
                   &gt;
                     {t("seeMore")}
                   &lt;/button&gt;
@@ -250,7 +280,7 @@ export default Opinion;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-05T12:12:47.002Z
+                at 2023-12-05T13:21:08.616Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

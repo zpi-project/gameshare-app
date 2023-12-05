@@ -29,6 +29,6 @@
       "@public/*": ["./public/*"]
     }
   },
-  "include": ["src", "cypress", "src/main.tsx"],
+  "include": ["src", "cypress", "src/main.tsx", "coverage/lcov-report"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
