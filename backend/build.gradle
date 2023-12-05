@@ -71,7 +71,7 @@ dependencyManagement {
 }
 
 test{
-	systemProperty: 'net.bytebuddy.experimental', 'true'
+	systemProperty 'net.bytebuddy.experimental', 'true'
 }
 
 tasks.named('test') {

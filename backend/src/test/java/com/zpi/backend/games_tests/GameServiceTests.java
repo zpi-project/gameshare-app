@@ -164,10 +164,7 @@ class GameServiceTests {
         when(gameStatusService.getGameStatus(any())).thenReturn(GameStatusTestUtils.createGameStatus(ACCEPTED));
         when(gameRepository.save(any())).thenReturn(GameTestsUtils.createGame(newGameDTO, CategoryTestUtils.createCategories()));
 
-
-        
         GameDTO result = gameService.addGame(newGameDTO, authentication);
-
 
         assertEquals(newGameDTO.getName(), result.getName());
         assertEquals(newGameDTO.getAge(), result.getAge());
@@ -175,8 +172,6 @@ class GameServiceTests {
         assertEquals(newGameDTO.getMinPlayers(), result.getMinPlayers());
         assertEquals(newGameDTO.getPlayingTime(), result.getPlayingTime());
         assertEquals(newGameDTO.getShortDescription(), result.getShortDescription());
-
-
     }
 
     @Test
@@ -185,11 +180,9 @@ class GameServiceTests {
         long gameId = 1L;
         String language = LanguageCodes.ENGLISH;
         when(gameRepository.findByIdAndAccepted(any(Long.class))).thenReturn(java.util.Optional.of(GameTestsUtils.createGame(ACCEPTED)));
-
         
         GameDTO result = gameService.getGameDTO(gameId, language);
 
-        
         assertEquals(gameId, result.getId());
     }
 
@@ -199,7 +192,6 @@ class GameServiceTests {
         long gameId = 1L;
         String language = "InvalidLanguage";
 
-        
         assertThrows(BadRequestException.class, () -> gameService.getGameDTO(gameId, language));
     }
 
@@ -219,10 +211,8 @@ class GameServiceTests {
 
         when(gameRepository.getAllAccepted(any(Pageable.class))).thenReturn(gamePage);
 
-        
         ResultsDTO<GameDTO> result = gameService.getGames(page, size, search, categoriesIds, language);
 
-        
         assertNotNull(result);
         assertEquals(result.getResults().size(), games.size());
     }
@@ -235,7 +225,6 @@ class GameServiceTests {
         Optional<String> search = Optional.empty();
         Optional<List<Integer>> categoriesIds = Optional.empty();
         String language = "INVALID_LANGUAGE";
-
         
         assertThrows(BadRequestException.class, () ->
                 gameService.getGames(page, size, search, categoriesIds, language));
@@ -249,10 +238,8 @@ class GameServiceTests {
         Page<Game> gamePage = new PageImpl<>(games, pageable, games.size());
         when(gameRepository.getPopularAcceptedGames(pageable)).thenReturn(gamePage);
 
-        
         ResultsDTO<GameDTO> resultsDTO = gameService.getPopularGames(0, 10, LanguageCodes.ENGLISH);
 
-        
         assertEquals(games.size(), resultsDTO.getResults().size());
         assertEquals(gamePage.getTotalElements(), resultsDTO.getPaginationInfo().getTotalElements());
         assertEquals(gamePage.getTotalPages(), resultsDTO.getPaginationInfo().getTotalPages());
@@ -260,16 +247,13 @@ class GameServiceTests {
 
     @Test
     void testGetPopularGamesWithPolishLanguage() throws BadRequestException {
-        
         Pageable pageable = PageRequest.of(0, 10);
         List<Game> games = GameTestsUtils.createGames(ACCEPTED);
         Page<Game> gamePage = new PageImpl<>(games, pageable, games.size());
         when(gameRepository.getPopularAcceptedGames(pageable)).thenReturn(gamePage);
-
         
         ResultsDTO<GameDTO> resultsDTO = gameService.getPopularGames(0, 10, LanguageCodes.POLISH);
 
-        
         assertEquals(games.size(), resultsDTO.getResults().size());
         assertEquals(gamePage.getTotalElements(), resultsDTO.getPaginationInfo().getTotalElements());
         assertEquals(gamePage.getTotalPages(), resultsDTO.getPaginationInfo().getTotalPages());
@@ -282,7 +266,6 @@ class GameServiceTests {
 
     @Test
     void testRejectGameSuccessfully() throws UserDoesNotExistException {
-        
         Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
@@ -292,60 +275,47 @@ class GameServiceTests {
         when(gameRepository.findGameById(gameId)).thenReturn(Optional.of(existingGame));
         when(gameStatusService.getGameStatus(REJECTED)).thenReturn(gamestatus);
 
-        
         assertDoesNotThrow(() -> gameService.rejectGame(authentication, gameId));
 
-        
         assertEquals(REJECTED, existingGame.getGameStatus().getStatus());
         verify(gameRepository).save(existingGame);
     }
 
     @Test
     void testRejectGameWithNonAdminUser() throws UserDoesNotExistException {
-        
         Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(false);
 
-        
         assertThrows(IllegalAccessException.class, () -> gameService.rejectGame(authentication, gameId));
 
-        
         verifyNoInteractions(gameRepository, gameStatusService);
     }
 
     @Test
     void testRejectGameWithAlreadyRejectedGame() throws UserDoesNotExistException {
-        
         Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
-
         
         Game rejectedGame = GameTestsUtils.createGame(REJECTED);
         when(gameRepository.findGameById(gameId)).thenReturn(Optional.of(rejectedGame));
-
         
         assertThrows(GameAlreadyRejectedException.class, () -> gameService.rejectGame(authentication, gameId));
 
-        
         verifyNoInteractions(gameStatusService);
     }
 
     @Test
     void testRejectGameWithNonexistentGame() throws UserDoesNotExistException {
-        
         Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
-
         
         when(gameRepository.findGameById(gameId)).thenReturn(Optional.empty());
-
         
         assertThrows(GameDoesNotExistException.class, () -> gameService.rejectGame(authentication, gameId));
 
-        
         verifyNoInteractions(gameStatusService);
     }
 
@@ -362,60 +332,47 @@ class GameServiceTests {
         when(gameRepository.findGameById(gameId)).thenReturn(Optional.of(existingGame));
         when(gameStatusService.getGameStatus(ACCEPTED)).thenReturn(gameStatus);
 
-        
         assertDoesNotThrow(() -> gameService.acceptGame(authentication, gameId));
 
-        
         assertEquals(ACCEPTED, existingGame.getGameStatus().getStatus());
         verify(gameRepository).save(existingGame);
     }
 
     @Test
     void testAcceptGameWithNonAdminUser() throws UserDoesNotExistException {
-        
         Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(false);
 
-        
         assertThrows(IllegalAccessException.class, () -> gameService.acceptGame(authentication, gameId));
 
-        
         verifyNoInteractions(gameRepository, gameStatusService);
     }
 
     @Test
     void testAcceptGameWithAlreadyAcceptedGame() throws UserDoesNotExistException {
-        
         Authentication authentication =any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
-
         
         Game acceptedGame = GameTestsUtils.createGame(ACCEPTED);
         when(gameRepository.findGameById(gameId)).thenReturn(Optional.of(acceptedGame));
 
-        
         assertThrows(GameAlreadyAcceptedException.class, () -> gameService.acceptGame(authentication, gameId));
 
-        
         verifyNoInteractions(gameStatusService);
     }
 
     @Test
     void testAcceptGameWithNonexistentGame() throws UserDoesNotExistException {
-        
         Authentication authentication = any();
         long gameId = 1L;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
 
-        
         when(gameRepository.findGameById(gameId)).thenReturn(Optional.empty());
 
-        
         assertThrows(GameDoesNotExistException.class, () -> gameService.acceptGame(authentication, gameId));
 
-        
         verifyNoInteractions(gameStatusService);
     }
 
@@ -428,7 +385,6 @@ class GameServiceTests {
         int size = 10;
         String language = LanguageCodes.ENGLISH;
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
-
         
         Pageable pageable = PageRequest.of(page, size);
         List<Game> games = GameTestsUtils.createGames(PENDING);
@@ -436,11 +392,9 @@ class GameServiceTests {
         Page<Game> gamePage = new PageImpl<>(games, pageable, games.size());
         when(gameStatusService.getGameStatus(PENDING)).thenReturn(gameStatus);
         when(gameRepository.findAllByGameStatus(pageable, gameStatusService.getGameStatus(PENDING))).thenReturn(gamePage);
-
         
         ResultsDTO<GameDTO> resultsDTO = gameService.getGamesToAccept(authentication, page, size, language);
 
-        
         assertEquals(games.size(), resultsDTO.getResults().size());
         assertEquals(gamePage.getTotalElements(), resultsDTO.getPaginationInfo().getTotalElements());
         assertEquals(gamePage.getTotalPages(), resultsDTO.getPaginationInfo().getTotalPages());
@@ -448,33 +402,26 @@ class GameServiceTests {
 
     @Test
     void testGetGamesToAcceptWithNonAdminUser() throws UserDoesNotExistException {
-        
         Authentication authentication =any();
         int page = 0;
         int size = 10;
         String language = LanguageCodes.ENGLISH;
         when(roleService.checkIfAdmin(authentication)).thenReturn(false);
 
-        
         assertThrows(IllegalAccessException.class, () -> gameService.getGamesToAccept(authentication, page, size, language));
 
-        
         verifyNoInteractions(gameRepository, gameStatusService);
     }
 
     @Test
     void testGetGamesToAcceptWithInvalidLanguage() throws UserDoesNotExistException {
-        
         Authentication authentication = any();
         int page = 0;
         int size = 10;
         String invalidLanguage = "InvalidLanguage";
         when(roleService.checkIfAdmin(authentication)).thenReturn(true);
 
-        
         assertThrows(BadRequestException.class, () -> gameService.getGamesToAccept(authentication, page, size, invalidLanguage));
-
-
     }
 
 }
