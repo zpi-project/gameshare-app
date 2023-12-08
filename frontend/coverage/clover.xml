@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1701793697556" clover="3.2.0">
-  <project timestamp="1701793697556" name="All files">
-    <metrics statements="49" coveredstatements="36" conditionals="45" coveredconditionals="25" methods="25" coveredmethods="13" elements="119" coveredelements="74" complexity="0" loc="49" ncloc="49" packages="27" files="124" classes="124"/>
+<coverage generated="1701795030065" clover="3.2.0">
+  <project timestamp="1701795030065" name="All files">
+    <metrics statements="44" coveredstatements="31" conditionals="34" coveredconditionals="17" methods="22" coveredmethods="11" elements="100" coveredelements="59" complexity="0" loc="44" ncloc="44" packages="27" files="124" classes="124"/>
     <package name="src">
       <metrics statements="21" coveredstatements="14" conditionals="8" coveredconditionals="6" methods="6" coveredmethods="3"/>
       <file name="App.tsx" path="/home/maria/studia/gameshare-app/frontend/src/App.tsx">
@@ -15,24 +15,24 @@
       </file>
       <file name="ThemeProvider.tsx" path="/home/maria/studia/gameshare-app/frontend/src/ThemeProvider.tsx">
         <metrics statements="21" coveredstatements="14" conditionals="8" coveredconditionals="6" methods="6" coveredmethods="3"/>
-        <line num="16" count="7" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
-        <line num="21" count="7" type="stmt"/>
-        <line num="23" count="14" type="stmt"/>
-        <line num="29" count="27" type="stmt"/>
-        <line num="30" count="27" type="cond" truecount="2" falsecount="0"/>
-        <line num="33" count="27" type="stmt"/>
-        <line num="34" count="27" type="stmt"/>
-        <line num="36" count="27" type="stmt"/>
-        <line num="38" count="27" type="cond" truecount="1" falsecount="0"/>
-        <line num="39" count="27" type="cond" truecount="1" falsecount="1"/>
-        <line num="43" count="27" type="stmt"/>
-        <line num="44" count="27" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+        <line num="23" count="8" type="stmt"/>
+        <line num="29" count="9" type="stmt"/>
+        <line num="30" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="9" type="stmt"/>
+        <line num="34" count="9" type="stmt"/>
+        <line num="36" count="9" type="stmt"/>
+        <line num="38" count="9" type="cond" truecount="1" falsecount="0"/>
+        <line num="39" count="9" type="cond" truecount="1" falsecount="1"/>
+        <line num="43" count="9" type="stmt"/>
+        <line num="44" count="9" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="50" count="27" type="stmt"/>
+        <line num="50" count="9" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
-        <line num="65" count="7" type="stmt"/>
+        <line num="65" count="4" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
         <line num="68" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="70" count="0" type="stmt"/>
@@ -48,7 +48,7 @@
       </file>
       <file name="Avatar.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Avatar.tsx">
         <metrics statements="1" coveredstatements="1" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="15" count="7" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
       </file>
       <file name="CategoryCard.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/CategoryCard.tsx">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -139,21 +139,16 @@
       </file>
     </package>
     <package name="src.components.Opinions">
-      <metrics statements="9" coveredstatements="9" conditionals="13" coveredconditionals="10" methods="5" coveredmethods="4"/>
+      <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="Opinion.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Opinions/Opinion.tsx">
-        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
-        <line num="12" count="7" type="stmt"/>
-        <line num="13" count="54" type="stmt"/>
-        <line num="14" count="54" type="stmt"/>
-        <line num="15" count="54" type="stmt"/>
+        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="13" type="stmt"/>
+        <line num="14" count="13" type="stmt"/>
+        <line num="15" count="13" type="stmt"/>
       </file>
       <file name="Opinions.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Opinions/Opinions.tsx">
-        <metrics statements="5" coveredstatements="5" conditionals="11" coveredconditionals="9" methods="3" coveredmethods="3"/>
-        <line num="15" count="7" type="stmt"/>
-        <line num="16" count="52" type="stmt"/>
-        <line num="21" count="52" type="stmt"/>
-        <line num="24" count="25" type="cond" truecount="2" falsecount="0"/>
-        <line num="49" count="54" type="cond" truecount="1" falsecount="0"/>
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
       <file name="index.ts" path="/home/maria/studia/gameshare-app/frontend/src/components/Opinions/index.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -190,18 +185,18 @@
       <metrics statements="9" coveredstatements="4" conditionals="17" coveredconditionals="6" methods="7" coveredmethods="2"/>
       <file name="Stars.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Stars/Stars.tsx">
         <metrics statements="2" coveredstatements="2" conditionals="9" coveredconditionals="6" methods="2" coveredmethods="2"/>
-        <line num="10" count="7" type="cond" truecount="2" falsecount="0"/>
-        <line num="26" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="10" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="4" type="cond" truecount="0" falsecount="1"/>
       </file>
       <file name="StarsInput.tsx" path="/home/maria/studia/gameshare-app/frontend/src/components/Stars/StarsInput.tsx">
         <metrics statements="7" coveredstatements="2" conditionals="8" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="8" count="14" type="cond" truecount="0" falsecount="1"/>
+        <line num="8" count="8" type="cond" truecount="0" falsecount="1"/>
         <line num="9" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
-        <line num="38" count="7" type="stmt"/>
+        <line num="38" count="4" type="stmt"/>
       </file>
     </package>
     <package name="src.components.UserForm">
@@ -244,7 +239,7 @@
       </file>
       <file name="lorem.ts" path="/home/maria/studia/gameshare-app/frontend/src/constants/lorem.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="2" count="7" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
       </file>
       <file name="reservationStatuses.ts" path="/home/maria/studia/gameshare-app/frontend/src/constants/reservationStatuses.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -491,16 +486,16 @@
       </file>
       <file name="tailwind.ts" path="/home/maria/studia/gameshare-app/frontend/src/utils/tailwind.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="503" type="stmt"/>
+        <line num="5" count="74" type="stmt"/>
       </file>
       <file name="user.ts" path="/home/maria/studia/gameshare-app/frontend/src/utils/user.ts">
         <metrics statements="7" coveredstatements="6" conditionals="6" coveredconditionals="2" methods="5" coveredmethods="2"/>
-        <line num="3" count="54" type="stmt"/>
-        <line num="5" count="7" type="stmt"/>
-        <line num="7" count="7" type="stmt"/>
-        <line num="8" count="54" type="cond" truecount="2" falsecount="2"/>
-        <line num="10" count="7" type="stmt"/>
-        <line num="12" count="7" type="stmt"/>
+        <line num="3" count="17" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="13" type="cond" truecount="2" falsecount="2"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
         <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
       </file>
     </package>

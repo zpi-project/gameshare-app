@@ -58,7 +58,7 @@ const UserItem: FC<UserItemProps> = ({ className = "" }) => {
         </div>
         {!token && <LoginButton />}
         {role !== "guest" && (
-          <Link to={URLS.MY_PROFILE}>
+          <Link to={URLS.MY_PROFILE} data-test="link-to-profile">
             <Button className="w-full">{t("myProfile")}</Button>
           </Link>
         )}

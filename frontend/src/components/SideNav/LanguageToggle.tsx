@@ -13,7 +13,7 @@ const LanguageToggle: FC = () => {
   const { t, i18n } = useTranslation();
 
   return (
-    <DropdownMenu>
+    <DropdownMenu data-test="language-toggle">
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
           <div className="uppercase">{i18n.language === "enUS" ? "en" : i18n.language}</div>
