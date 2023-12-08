@@ -24,7 +24,7 @@ export class GameInstanceApi {
     return instance;
   }
 
-  static async edit(uuid: string, description: string, pricePerDay: string) {
+  static async edit(uuid: string, description: string, pricePerDay: number) {
     const { data: gameInstance } = await Api.put<GameInstance>(`/game-instances/${uuid}`, {
       description,
       pricePerDay,

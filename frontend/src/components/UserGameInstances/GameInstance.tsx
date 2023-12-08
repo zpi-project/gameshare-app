@@ -12,8 +12,8 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Stars } from "../Stars";
 import { Badge } from "../ui/badge";
-import GameReservations from "./GameReservations";
 import GameEditForm from "./GameInstanceEditForm";
+import GameReservations from "./GameReservations";
 
 interface Props {
   gameInstance: GameInstanceType;
