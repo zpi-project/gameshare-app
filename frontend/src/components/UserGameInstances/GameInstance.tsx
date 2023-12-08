@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Pencil } from "lucide-react";
@@ -13,6 +13,7 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Stars } from "../Stars";
 import { Badge } from "../ui/badge";
 import GameReservations from "./GameReservations";
+import GameEditForm from "./GameInstanceEditForm";
 
 interface Props {
   gameInstance: GameInstanceType;
@@ -30,6 +31,8 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
     opinionsAmount,
     active,
   } = gameInstance;
+
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
   return (
     <div className="flex w-full flex-row">
@@ -77,9 +80,14 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
       </Link>
       {showButtons && (
         <div className="ml-4 flex flex-col justify-between gap-4">
-          <Button className="h-16 w-14 flex-grow bg-card">
-            <Pencil />
-          </Button>
+          <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="h-16 w-14 flex-grow bg-card">
+                <Pencil />
+              </Button>
+            </DialogTrigger>
+            <GameEditForm id={gameInstance.uuid} onClose={() => setIsEditDialogOpen(false)} />
+          </Dialog>
           <Dialog>
             <DialogTrigger asChild>
               <Button className="h-16 w-14 flex-grow bg-card">

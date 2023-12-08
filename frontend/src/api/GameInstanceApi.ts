@@ -19,9 +19,18 @@ export class GameInstanceApi {
     return instances;
   }
 
-  static async getByUUID(uuid: string) {
+  static async getOne(uuid: string) {
     const { data: instance } = await Api.get<GameInstanceDetails>(`game-instances/${uuid}`);
     return instance;
+  }
+
+  static async edit(uuid: string, description: string, pricePerDay: string) {
+    const { data: gameInstance } = await Api.put<GameInstance>(`/game-instances/${uuid}`, {
+      description,
+      pricePerDay,
+    });
+
+    return gameInstance;
   }
 
   static async getAll(page: number, size: number) {
@@ -110,6 +119,11 @@ export class GameInstanceApi {
       timeout: 200000,
     });
 
+    return data;
+  }
+
+  static async deleteImage(uuid: string) {
+    const data = await Api.delete<string>(`/game-instances/images/${uuid}`);
     return data;
   }
 }
