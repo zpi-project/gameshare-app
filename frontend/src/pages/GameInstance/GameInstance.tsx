@@ -7,6 +7,7 @@ import { URLS } from "@/constants/urls";
 import { stringToHexColor } from "@/utils/stringToColor";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { Map, LocationButton, LocationMarker } from "@/components/Map";
+import Spinner from "@/components/ui/Spinner";
 import { useToast } from "@/components/ui/use-toast";
 import GameInstanceDetailsSection from "./GameInstanceDetailsSection";
 import GameInstanceOpinions from "./GameInstanceOpinions";
@@ -45,6 +46,7 @@ const GameInstance: FC = () => {
 
   return (
     <div className="flex h-full w-full flex-row gap-6">
+      {isLoading && <Spinner />}
       {gameInstance && (
         <>
           <div className="relative w-1/3 flex-grow rounded-lg bg-section p-4">
