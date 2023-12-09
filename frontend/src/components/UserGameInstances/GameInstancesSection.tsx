@@ -39,27 +39,35 @@ const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
   });
   const queryClient = useQueryClient();
 
+  console.log(gameInstances);
+
   return (
-    <div className="flex h-full w-full flex-col gap-6">
+    <div className="flex h-full w-full flex-col gap-6" data-test="game-instances">
       {owner && (
         <>
-          <div className="flex h-full w-full flex-col gap-4">
-            <div className="h-max w-full flex-grow rounded-lg bg-card p-2 xl:p-5 xl:text-2xl">
+          <div className="flex h-full w-full flex-col gap-4" data-test="game-instances-content">
+            <h2
+              className="h-max w-full flex-grow rounded-lg bg-card p-2 xl:p-5 xl:text-2xl"
+              data-test="header"
+            >
               {isMyPage ? t("myGames") : `${t("userGames")} ${getName(owner)}`}
-            </div>
+            </h2>
             <div className="flex flex-row gap-2">
               <div className="relative flex-grow">
                 <Input
                   className="flex-grow rounded-lg border-none bg-card"
                   placeholder={t("typeToSearch")}
                   onChange={event => setQuery(event.target.value)}
+                  data-test="filter-input"
                 />
                 <Search className="absolute right-4 top-2" />
               </div>
               {isMyPage && (
                 <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                   <DialogTrigger asChild>
-                    <Button className="w-56">{t("addGameInstance")}</Button>
+                    <Button className="w-56" data-test="add-game-button">
+                      {t("addGameInstance")}
+                    </Button>
                   </DialogTrigger>
                   <GameInstanceForm
                     onSubmit={() => {
@@ -78,7 +86,7 @@ const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
                   ))}
                 </div>
               ) : isError ? (
-                <h3 className="mt-2 text-center text-xl text-destructive">
+                <h3 className="mt-2 text-center text-xl text-destructive" data-test="error-message">
                   {t("errorFetchingGames")}
                 </h3>
               ) : (
@@ -101,7 +109,7 @@ const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
                         />
                       ))
                   ) : (
-                    <h4 className="mt-4 text-center text-xl">
+                    <h4 className="mt-4 text-center text-xl" data-test="no-games">
                       {t(isMyPage ? "noGamesMyPage" : "noGamesUserPage")}
                     </h4>
                   )}
