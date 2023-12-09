@@ -13,9 +13,9 @@ const LanguageToggle: FC = () => {
   const { t, i18n } = useTranslation();
 
   return (
-    <DropdownMenu data-test="language-toggle">
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" data-test="language-toggle">
           <div className="uppercase">{i18n.language === "enUS" ? "en" : i18n.language}</div>
           <span className="sr-only">Toggle language</span>
         </Button>
@@ -26,6 +26,7 @@ const LanguageToggle: FC = () => {
             onClick={() => void i18n.changeLanguage(language)}
             key={idx}
             className="text-base"
+            data-test="language"
           >
             {t(language)}
           </DropdownMenuItem>

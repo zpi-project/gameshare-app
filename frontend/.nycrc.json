@@ -12,6 +12,7 @@
     "src/components/ui/**/*.*",
     "src/i18n/**/*.*",
     "src/i18n/*.*",
-    "src/types/**/*.*"
+    "src/types/**/*.*",
+    "src/components/SideNav/LoginButton.tsx"
   ]
 }

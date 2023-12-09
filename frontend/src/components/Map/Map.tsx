@@ -92,7 +92,7 @@ const MapContent: FC<MapContentProps> = ({ children }) => {
 
   return (
     <>
-      <TileLayer attribution={attribution} url={URL} />
+      <TileLayer attribution={attribution} url={URL} data-test="tile-layer" />
       <ZoomControl position="topright" />
       {children}
     </>

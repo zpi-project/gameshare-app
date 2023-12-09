@@ -33,7 +33,7 @@ const UserItem: FC<UserItemProps> = ({ className = "" }) => {
 
   return (
     <Popover>
-      <PopoverTrigger>
+      <PopoverTrigger data-test="avatar-button">
         <Avatar
           user={user}
           className={cn(

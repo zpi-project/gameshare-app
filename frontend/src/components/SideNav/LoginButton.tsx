@@ -14,7 +14,6 @@ const LoginButton: FC = () => {
         }
       }}
       width="256px"
-      data-test="login-button"
     />
   );
 };
