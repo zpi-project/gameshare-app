@@ -283,4 +283,9 @@ export default {
   successAddingNewGameAdmin: "New game was successfully added.",
   successAddingSingleImage: "Image has been added successfully.",
   errorAddingSingleImage: "There was an error adding image.",
+  errorDeletingImage: "There was an error deleting image.",
+  successDeteletingImage: "The image has been deleted successfully.",
+  successEditingGameInstance: "Game was edited successfully.",
+  editGameData: "Edit your game details",
+  updateImages: "Update images",
 };
