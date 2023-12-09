@@ -15,12 +15,12 @@ const Error: FC = () => {
 
   const diceComponents: React.ReactNode[] = [
     <></>,
-    <Dice1 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
-    <Dice2 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
-    <Dice3 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
-    <Dice4 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
-    <Dice5 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
-    <Dice6 size={140} strokeWidth={1.2} className="rotate-[16deg]" />,
+    <Dice1 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-1" />,
+    <Dice2 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-2" />,
+    <Dice3 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-3" />,
+    <Dice4 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-4" />,
+    <Dice5 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-5" />,
+    <Dice6 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-6" />,
   ];
 
   return (
@@ -37,23 +37,34 @@ const Error: FC = () => {
             <div className="flex h-max flex-grow flex-col gap-8 lg:max-w-[70%]">
               {isRouteError ? (
                 error.status % 10 > 0 && error.status % 10 <= 6 ? (
-                  <h1 className="flex flex-row items-center justify-end gap-1 text-[140px] leading-none text-primary">
+                  <h1
+                    className="flex flex-row items-center justify-end gap-1 text-[140px] leading-none text-primary"
+                    data-test="error-code"
+                  >
                     {error.status.toString().slice(0, 2)}
                     {diceComponents[error.status % 10]}
                   </h1>
                 ) : (
-                  <h1 className="text-end leading-none text-[80] text-primary lg:text-[140px]">
+                  <h1
+                    className="text-end leading-none text-[80] text-primary lg:text-[140px]"
+                    data-test="error-code"
+                  >
                     {error.status}
                   </h1>
                 )
               ) : (
-                <h1 className="text-end text-[140px] leading-none text-primary">{t("error")}</h1>
+                <h1
+                  className="text-end text-[140px] leading-none text-primary"
+                  data-test="error-code"
+                >
+                  {t("error")}
+                </h1>
               )}
 
               <Separator className="h-2 max-w-[400px] rounded-lg bg-primary xl:max-w-[600px]" />
               <h2 className="text-bold text-3xl">{t("ooops")}</h2>
               <Separator className="h-[3px] max-w-[300px] rounded-lg bg-foreground" />
-              <p className="text-2xl">
+              <p className="text-2xl" data-test="error-description">
                 {isRouteError
                   ? errorStatuses.includes(error.status)
                     ? t(`errorStatus.${error.status}`)
@@ -63,6 +74,7 @@ const Error: FC = () => {
               <Link
                 to={URLS.DASHBOARD}
                 className="w-max rounded-lg bg-primary px-4 py-2 text-xl hover:bg-accent"
+                data-test="back-home"
               >
                 {t("backToHome")}
               </Link>
