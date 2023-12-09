@@ -116,3 +116,5 @@ jobs:
 
             cd gameshare-app
             sudo docker compose up'
+
+            
