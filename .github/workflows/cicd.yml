@@ -65,8 +65,7 @@ jobs:
 
       - name: Deploy GCE
         run: | 
-          gcloud compute instances create app --machine-type=e2-highmem-2  --project=zpi-test-1 --zone=us-east4-a \
-          --metadata=startup-script='
+          gcloud compute instances create app --machine-type=e2-highmem-2  --project=zpi-test-1 --zone=us-east4-a --metadata=startup-script='
             #!/bin/bash
             sudo apt-get -y update
             sudo apt-get -y install ca-certificates curl gnupg
