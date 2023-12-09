@@ -36,11 +36,11 @@ public class GameInstanceImageController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value = "/{gameInstanceImageUUID}", method = DELETE)
-    public ResponseEntity deleteGameInstanceImage(Authentication authentication, @PathVariable String gameInstanceImageUUID)
-            throws ImageDoesNotExistException {
+    @RequestMapping(value = "/{gameInstanceImageID}", method = DELETE)
+    public ResponseEntity deleteGameInstanceImage(Authentication authentication, @PathVariable long gameInstanceImageID)
+            throws ImageDoesNotExistException, UserDoesNotExistException {
         System.out.println("... called deleteGameInstanceImage");
-        gameInstanceImageService.deleteGameInstanceImage(authentication, gameInstanceImageUUID);
+        gameInstanceImageService.deleteGameInstanceImage(authentication, gameInstanceImageID);
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
     }

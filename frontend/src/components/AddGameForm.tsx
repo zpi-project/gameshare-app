@@ -139,7 +139,6 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
     if (!imageSizeError && selectedImage) {
       try {
         const newGame = await addGame(data);
-        console.log(newGame);
         toast({
           title: t(role === "admin" ? "successAddingNewGameAdmin" : "successAddingNewGame"),
         });

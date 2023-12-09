@@ -34,7 +34,6 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
     queryFn: () => GameInstanceApi.getNonAvailability(gameInstanceUUID, month, year),
   });
 
-  console.log(reservations);
   const availableDays = useMemo(() => {
     const daysInMonth = getDaysInMonth(startDate);
     const startDateCopy = new Date(startDate);
