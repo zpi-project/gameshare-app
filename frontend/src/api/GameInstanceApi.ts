@@ -122,8 +122,8 @@ export class GameInstanceApi {
     return data;
   }
 
-  static async deleteImage(uuid: string) {
-    const data = await Api.delete<string>(`/game-instances/images/${uuid}`);
+  static async deleteImage(imageId: number) {
+    const data = await Api.delete<string>(`/game-instances/images/${imageId}`);
     return data;
   }
 }

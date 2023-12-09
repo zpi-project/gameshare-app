@@ -93,7 +93,12 @@ const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
                         }
                       })
                       .map((gameInstance, id) => (
-                        <GameInstance gameInstance={gameInstance} key={id} showButtons={isMyPage} />
+                        <GameInstance
+                          gameInstance={gameInstance}
+                          key={id}
+                          showButtons={isMyPage}
+                          userId={owner.uuid}
+                        />
                       ))
                   ) : (
                     <h4 className="mt-4 text-center text-xl">

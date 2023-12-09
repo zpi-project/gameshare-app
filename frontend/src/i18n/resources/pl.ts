@@ -1,5 +1,6 @@
 import en from "./en";
 
+
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
@@ -286,6 +287,11 @@ const pl: typeof en = {
   successAddingNewGameAdmin: "Nowa gra została pomyślnie dodana.",
   successAddingSingleImage: "Zdjęcie zostało dodane.",
   errorAddingSingleImage: "Wystąpił błąd podczas dodawania zdjęcia.",
+  errorDeletingImage: "Wystąpił błąd podczas usuwania zdjęcia.",
+  successDeteletingImage: "Zdjęcie usunięte pomyślnie",
+  successEditingGameInstance: "Gra została zedytowana pomyślnie.",
+  editGameData: "Edytuj szczegóły twojej gry",
+  updateImages: "Edytuj zdjęcia",
 };
 
 export default pl;

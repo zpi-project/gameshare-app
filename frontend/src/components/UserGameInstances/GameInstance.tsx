@@ -18,9 +18,10 @@ import GameReservations from "./GameReservations";
 interface Props {
   gameInstance: GameInstanceType;
   showButtons?: boolean;
+  userId: string;
 }
 
-const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
+const GameInstance: FC<Props> = ({ gameInstance, showButtons, userId }) => {
   const { t } = useTranslation();
   const {
     uuid,
@@ -86,7 +87,11 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons }) => {
                 <Pencil />
               </Button>
             </DialogTrigger>
-            <GameEditForm id={gameInstance.uuid} onClose={() => setIsEditDialogOpen(false)} />
+            <GameEditForm
+              id={gameInstance.uuid}
+              onClose={() => setIsEditDialogOpen(false)}
+              userId={userId}
+            />
           </Dialog>
           <Dialog>
             <DialogTrigger asChild>
