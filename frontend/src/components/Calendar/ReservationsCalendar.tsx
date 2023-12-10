@@ -87,7 +87,7 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
       className={className}
     >
       {isError ? (
-        <h3 className="mt-4 text-center text-xl text-destructive">
+        <h3 className="mt-4 text-center text-xl text-destructive" data-test="error-message">
           {t("errorFetchingReservationsCalendar")}
         </h3>
       ) : (
