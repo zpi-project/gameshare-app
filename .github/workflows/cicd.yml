@@ -66,9 +66,14 @@ jobs:
       - name: Build frontend
         run: docker build -t europe-central2-docker.pkg.dev/zpi-test-1/docker-repository-zpi/frontend:${GITHUB_SHA} -f ./frontend/Dockerfile ./frontend
 
+      - name: Push frontend image
+        run: docker push europe-central2-docker.pkg.dev/zpi-test-1/docker-repository-zpi/frontend:${GITHUB_SHA}
+
       - name: Build backend
         run: docker build -t europe-central2-docker.pkg.dev/zpi-test-1/docker-repository-zpi/backend:${GITHUB_SHA} -f ./backend/Dockerfile ./backend
 
+      - name: Push frontend image
+        run: docker push europe-central2-docker.pkg.dev/zpi-test-1/docker-repository-zpi/backend:${GITHUB_SHA}
 
 
     #  - name: Deploy GCE
