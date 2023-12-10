@@ -1,3 +1,4 @@
+import { FC, useEffect } from "react";
 import {
   Toast,
   ToastClose,
@@ -8,8 +9,18 @@ import {
 } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 
-export function Toaster() {
-  const { toasts } = useToast();
+interface Props {
+  removeAllOnUnmount?: boolean;
+}
+
+export const Toaster: FC<Props> = ({ removeAllOnUnmount }) => {
+  const { toasts, removeAll } = useToast();
+
+  useEffect(() => {
+    if (removeAllOnUnmount) {
+      return removeAll;
+    }
+  }, [removeAll, removeAllOnUnmount]);
 
   return (
     <ToastProvider>
@@ -28,4 +39,4 @@ export function Toaster() {
       <ToastViewport />
     </ToastProvider>
   );
-}
+};

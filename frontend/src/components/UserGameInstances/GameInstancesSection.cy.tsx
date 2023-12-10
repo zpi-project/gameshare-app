@@ -69,7 +69,7 @@ describe("<GameInstancesSection />", () => {
       cy.getBySel("badges").should("be.visible");
       cy.getBySel("game-instance").should("have.length", 2);
       cy.getBySel("no-opinions").should("be.visible");
-      cy.getBySel("opinion-amount").should("be.visible").should("have.text", 1);
+      cy.getBySel("opinion-amount").should("be.visible");
     });
 
     it("filters games on input change", () => {

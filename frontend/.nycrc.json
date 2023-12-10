@@ -17,6 +17,8 @@
     "src/components/Map/LocationButton.tsx",
     "src/components/AddGameForm.tsx",
     "src/components/GameInstanceDetailsCard.tsx",
-    "src/components/SelectCategory.tsx"
+    "src/components/SelectCategory.tsx",
+    "src/components/UserGameInstances/GameInstanceAddForm.tsx",
+    "src/components/UserForm"
   ]
 }

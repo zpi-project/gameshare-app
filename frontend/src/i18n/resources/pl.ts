@@ -291,6 +291,7 @@ const pl: typeof en = {
   successEditingGameInstance: "Gra została zedytowana pomyślnie.",
   editGameData: "Edytuj szczegóły twojej gry",
   updateImages: "Edytuj zdjęcia",
+  errorEditingGameInstance: "Wystąpił błąd podczas edytowania tej gry.",
 };
 
 export default pl;

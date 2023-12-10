@@ -3,7 +3,6 @@ import { user } from "@cypress/fixtures/user";
 import { UserApi } from "@/api/UserApi";
 import UserProfile from "./UserProfile";
 
-
 describe("<UserProfile />", () => {
   it("should render correctly", () => {
     cy.stub(UserApi, "getByUUID").resolves(user);

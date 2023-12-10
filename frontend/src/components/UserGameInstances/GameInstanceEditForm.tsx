@@ -82,6 +82,8 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
     refetchOnWindowFocus: false,
   });
 
+  console.log(gameInstance);
+
   const { mutateAsync: editGame, isLoading: isLoadingEditGame } = useMutation(
     (params: { uuid: string; description: string; pricePerDay: number }) =>
       GameInstanceApi.edit(params.uuid, params.description, params.pricePerDay),
@@ -178,7 +180,8 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
           queryClient.invalidateQueries(["gameInstance", { id, language }]);
           onClose();
         } catch {
-          //
+          toast({ title: t("errorEditingGameInstance"), variant: "destructive" });
+          onClose();
         }
       }
     }
@@ -187,6 +190,7 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
   return (
     <DialogContent
       className="flex max-w-6xl"
+      data-test="edit-dialog"
       onCloseAutoFocus={() => {
         form.setValue("description", gameInstance?.description ?? "");
         form.setValue("pricePerDay", gameInstance?.pricePerDay ?? 0);
@@ -194,8 +198,10 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
       }}
     >
       {isError ? (
-        <p className="fon-bold h-[740px] w-full pt-10 text-center text-2xl tracking-wide text-destructive">
-          {" "}
+        <p
+          className="fon-bold h-[740px] w-full pt-10 text-center text-2xl tracking-wide text-destructive"
+          data-test="details-error-message"
+        >
           {t("gameError")}
         </p>
       ) : (
@@ -221,6 +227,7 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
                       <FormLabel>{t("provideGamePrice")}</FormLabel>
                       <FormControl>
                         <Input
+                          data-test="price-per-day"
                           className="border-none"
                           {...field}
                           onChange={e => {
@@ -242,6 +249,7 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
                       <FormControl>
                         <div className="grid h-[370px] w-full gap-2.5 rounded-lg bg-card p-4">
                           <Textarea
+                            data-test="description-game"
                             placeholder={t("typeHere")}
                             id="message-2"
                             spellCheck={false}
@@ -250,7 +258,7 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
                           />
                         </div>
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage data-test="error-description" />
                     </FormItem>
                   )}
                 />
@@ -264,6 +272,7 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
                   <div>
                     <Label htmlFor="picture">{t("choosePictures")}</Label>
                     <Input
+                      data-test="image-input"
                       id="picture"
                       type="file"
                       multiple
@@ -279,9 +288,11 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
                         <div className="flex flex-col gap-4 p-4">
                           {images.map((image, idx) => (
                             <div key={idx + "img"}>
-                              <p className="font-bold text-destructive">
-                                {images[idx].error && t("maxImgSize", { size: 3 })}
-                              </p>
+                              {images[idx].error && (
+                                <p className="font-bold text-destructive" data-test="img-error">
+                                  {t("maxImgSize", { size: 3 })}
+                                </p>
+                              )}
                               <div className="relative h-[250px] w-full overflow-hidden rounded-lg">
                                 <img
                                   src={
@@ -291,9 +302,11 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
                                   }
                                   alt={`Selected ${idx + 1}`}
                                   className="h-full w-full object-cover object-top"
+                                  data-test="instance-image"
                                 />
                                 <Trash2
                                   className="absolute left-0 top-0 h-full w-full bg-none p-[90px] text-destructive opacity-0 duration-300 hover:bg-background/80 hover:opacity-100"
+                                  data-test="trash"
                                   size={30}
                                   onClick={() =>
                                     setImages(images.filter((_, index) => index !== idx))
@@ -307,7 +320,11 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
                     </ScrollArea>
                   </div>
                 </div>
-                <Button type="submit" className="place-self-end px-8">
+                <Button
+                  type="submit"
+                  className="place-self-end px-8"
+                  data-test="edit-submit-button"
+                >
                   {t("submit")}
                 </Button>
               </div>
