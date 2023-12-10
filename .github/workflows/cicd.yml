@@ -63,6 +63,9 @@ jobs:
         with: 
           credentials_json: ${{ secrets.IAC_CICD_SA }}
 
+      - name: Configure docker
+        run: gcloud auth configure-docker europe-central2-docker.pkg.dev
+
       - name: Build frontend
         run: docker build -t europe-central2-docker.pkg.dev/zpi-test-1/docker-repository-zpi/frontend:${GITHUB_SHA} -f ./frontend/Dockerfile ./frontend
 
