@@ -76,6 +76,7 @@ jobs:
         run: docker push europe-central2-docker.pkg.dev/zpi-test-1/docker-repository-zpi/backend:${GITHUB_SHA}
 
 
+
     #  - name: Deploy GCE
     #     run: | 
     #       gcloud compute instances create app --machine-type=e2-highmem-2  --project=zpi-test-1 --zone=us-east4-a --metadata=startup-script='
