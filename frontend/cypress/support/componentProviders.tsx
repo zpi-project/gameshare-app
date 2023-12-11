@@ -17,7 +17,7 @@ const ComponentProviders: FC<Props> = ({ children }) => {
       <GoogleOAuthProvider clientId={""}>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider>
-            <Toaster />
+            <Toaster removeAllOnUnmount />
             {children}
           </ThemeProvider>
         </QueryClientProvider>

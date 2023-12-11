@@ -38,7 +38,7 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
       )}
       {user && (
         <>
-          <div className="flex h-full w-full flex-row items-center gap-6">
+          <div className="flex h-full w-full flex-row items-center gap-6" data-test="user-details">
             <div className="flex flex-col items-center gap-3 xl:gap-6">
               <Avatar user={user} className="h-20 w-20 xl:h-[148px] xl:w-[148px] xl:text-5xl" />
               {user.phoneNumber && (

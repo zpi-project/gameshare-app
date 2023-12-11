@@ -31,15 +31,15 @@ const Opinions: FC<Props> = ({ isMyPage, user }) => {
     <ScrollArea className="w-full">
       {user && (
         <>
-          <div className="flex h-full w-full flex-col gap-4 p-4">
+          <div className="flex h-full w-full flex-col gap-4 p-4" data-test="opinions-section">
             {isLoading ? (
-              <div className="flex flex-col gap-4 pr-4">
+              <div className="flex flex-col gap-4 pr-4" data-test="loading-opinions">
                 {Array.from({ length: 2 }).map((_, idx) => (
                   <Skeleton className="h-[132px] rounded-lg" key={idx} />
                 ))}
               </div>
             ) : isError ? (
-              <h3 className="mt-2 text-center text-xl text-destructive">
+              <h3 className="mt-2 text-center text-xl text-destructive" data-test="error-message">
                 {t("errorFetchingOpinions")}
               </h3>
             ) : (
@@ -48,7 +48,7 @@ const Opinions: FC<Props> = ({ isMyPage, user }) => {
                   {opinions.results.length ? (
                     opinions?.results.map((opinion, id) => <Opinion opinion={opinion} key={id} />)
                   ) : (
-                    <h4 className="mt-4 text-center text-xl">
+                    <h4 className="mt-4 text-center text-xl" data-test="no-opinions">
                       {t(isMyPage ? "noOpinionsMyPage" : "noOpinionsUserPage")}
                     </h4>
                   )}

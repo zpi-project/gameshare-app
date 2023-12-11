@@ -23,7 +23,7 @@ const LogoutButton: FC = () => {
   };
 
   return (
-    <Button onClick={logout} variant="outline">
+    <Button onClick={logout} variant="outline" data-test="logout-button">
       {t("logout")}
     </Button>
   );

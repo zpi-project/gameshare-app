@@ -180,6 +180,7 @@ function useToast() {
     ...state,
     toast,
     dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
+    removeAll: () => dispatch({ type: "REMOVE_TOAST" }),
   };
 }
 

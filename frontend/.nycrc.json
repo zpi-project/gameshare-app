@@ -1,0 +1,24 @@
+{
+  "all": true,
+  "extends": "@istanbuljs/nyc-config-typescript",
+  "check-coverage": true,
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": [
+    "cypress/**/*.*",
+    "**/*.d.ts",
+    "**/*.cy.tsx",
+    "**/*.cy.ts",
+    "src/api/**/*.*",
+    "src/components/ui/**/*.*",
+    "src/i18n/**/*.*",
+    "src/i18n/*.*",
+    "src/types/**/*.*",
+    "src/components/SideNav/LoginButton.tsx",
+    "src/components/Map/LocationButton.tsx",
+    "src/components/AddGameForm.tsx",
+    "src/components/GameInstanceDetailsCard.tsx",
+    "src/components/SelectCategory.tsx",
+    "src/components/UserGameInstances/GameInstanceAddForm.tsx",
+    "src/components/UserForm"
+  ]
+}

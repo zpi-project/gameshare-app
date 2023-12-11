@@ -20,12 +20,14 @@ const Avatar: FC<AvatarProps> = ({ user, className, iconClassName, avatarImageCl
           <AvatarImage
             alt="user avatar"
             src={user.avatarLink}
+            data-test="user-image"
             className={cn("", avatarImageClassName)}
           />
-          <AvatarFallback>{getNameFirstLetters(user)}</AvatarFallback>
+          <AvatarFallback data-test="user-image">{getNameFirstLetters(user)}</AvatarFallback>
         </>
       ) : (
         <UserIcon
+          data-test="guest-image"
           className={cn(
             "flex h-full w-full items-center justify-center stroke-1 p-2 transition-all duration-300",
             iconClassName,

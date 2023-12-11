@@ -8,9 +8,11 @@ interface AgeBadgeProps {
 
 const AgeBadge: FC<AgeBadgeProps> = ({ age }) => {
   return (
-    <Badge variant="secondary" className="flex w-max flex-row gap-1">
-      <Baby size={20} />
-      <span className="tracking-wider">+{age}</span>
+    <Badge variant="secondary" className="flex w-max flex-row gap-1" data-test="age-badge">
+      <Baby size={20} data-test="baby-icon" />
+      <span className="tracking-wider" data-test="age">
+        +{age}
+      </span>
     </Badge>
   );
 };

@@ -36,7 +36,7 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons, userId }) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
   return (
-    <div className="flex w-full flex-row">
+    <div className="flex w-full flex-row" data-test="game-instance">
       <Link
         to={`${URLS.GAME_INSTANCE}/${uuid}`}
         className={cn(
@@ -50,7 +50,7 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons, userId }) => {
         <section className="flex w-[calc(100%-140px)] flex-grow flex-col items-start gap-2">
           <div className="flex w-full flex-row justify-between gap-2">
             <h3 className="text-2xl text-primary">{name}</h3>
-            <div className="flex flex-row flex-wrap justify-end gap-1">
+            <div className="flex flex-row flex-wrap justify-end gap-1" data-test="badges">
               <TimeBadge time={playingTime} />
               <PlayersBadge minPlayers={minPlayers} maxPlayers={maxPlayers} />
               <AgeBadge age={age} />
@@ -61,17 +61,30 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons, userId }) => {
             <div className="flex flex-col items-end gap-2">
               {opinionsAmount > 0 ? (
                 <div className="ml-4 flex flex-row gap-2">
-                  <p className="text-base tracking-widest text-foreground">({opinionsAmount})</p>
+                  <p
+                    className="text-base tracking-widest text-foreground"
+                    data-test="opinion-amount"
+                  >
+                    ({opinionsAmount})
+                  </p>
                   <Stars count={Math.round(avgRating)} variant="secondary" />
                 </div>
               ) : (
-                <Badge variant="secondary" className="w-max px-3 py-1 hover:bg-primary">
+                <Badge
+                  variant="secondary"
+                  className="w-max px-3 py-1 hover:bg-primary"
+                  data-test="no-opinions"
+                >
                   {t("noOpinions")}
                 </Badge>
               )}
               <PriceBadge price={pricePerDay} />
               {!active && (
-                <Badge className="text-sm uppercase" variant="destructive">
+                <Badge
+                  className="text-sm uppercase"
+                  variant="destructive"
+                  data-test="activity-badge"
+                >
                   {t("deactivated")}
                 </Badge>
               )}
@@ -83,7 +96,7 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons, userId }) => {
         <div className="ml-4 flex flex-col justify-between gap-4">
           <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="h-16 w-14 flex-grow bg-card">
+              <Button className="h-16 w-14 flex-grow bg-card" data-test="edit-button">
                 <Pencil />
               </Button>
             </DialogTrigger>
@@ -95,7 +108,7 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons, userId }) => {
           </Dialog>
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="h-16 w-14 flex-grow bg-card">
+              <Button className="h-16 w-14 flex-grow bg-card" data-test="availability-button">
                 <CalendarDays />
               </Button>
             </DialogTrigger>

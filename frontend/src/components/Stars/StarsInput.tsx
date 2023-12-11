@@ -48,6 +48,7 @@ const Star: FC<StarProps> = ({
       onMouseLeave={onMouseLeave}
       onClick={onClick}
       size={24}
+      data-test="star"
       color={variant == "primary" ? "hsl(var(--primary))" : "hsl(var(--secondary))"}
       fill={
         filled

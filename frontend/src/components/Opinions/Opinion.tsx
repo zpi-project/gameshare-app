@@ -15,23 +15,32 @@ const Opinion: FC<Props> = ({ opinion }) => {
   const handleClick = () => setshowAll(!showAll);
 
   return (
-    <div className="flex w-full flex-row items-center gap-3 rounded-lg bg-card p-4">
+    <div
+      className="flex w-full flex-row items-center gap-3 rounded-lg bg-card p-4"
+      data-test="opinion"
+    >
       <Avatar user={opinion.ratingUser} className="h-16 w-16" />
       <div className="flex w-full flex-col gap-4">
         <div className="flex w-full flex-row justify-between">
           <div className="flex flex-row gap-2">
-            <p className="text-lg text-primary">{getFullname(opinion.ratingUser)}</p>
-            <p className="text-lg font-thin opacity-80">
+            <p className="text-lg text-primary" data-test="fullname">
+              {getFullname(opinion.ratingUser)}
+            </p>
+            <p className="text-lg font-thin opacity-80" data-test="dateformat">
               ({t("dateFormat", { date: new Date(opinion.timestamp) })})
             </p>
           </div>
           <Stars count={opinion.stars} />
         </div>
-        <div className="min-h-8 break-all pr-2 text-xs italic">
+        <div className="min-h-8 break-all pr-2 text-xs italic" data-test="description">
           {showAll ? (
             <>
               {opinion.description}
-              <button className="mx-2 inline text-xs italic text-secondary" onClick={handleClick}>
+              <button
+                className="mx-2 inline text-xs italic text-secondary"
+                onClick={handleClick}
+                data-test="see-less"
+              >
                 {t("seeLess")}
               </button>
             </>
@@ -40,10 +49,11 @@ const Opinion: FC<Props> = ({ opinion }) => {
               {opinion.description.slice(0, 200)}
               {opinion.description.length > 200 && (
                 <>
-                  <span>... </span>
+                  <span data-test="ellipsis">... </span>
                   <button
                     className="mx-2 inline text-xs italic text-secondary"
                     onClick={handleClick}
+                    data-test="see-more"
                   >
                     {t("seeMore")}
                   </button>

@@ -288,4 +288,5 @@ export default {
   successEditingGameInstance: "Game was edited successfully.",
   editGameData: "Edit your game details",
   updateImages: "Update images",
+  errorEditingGameInstance: "There was an error editing this game.",
 };

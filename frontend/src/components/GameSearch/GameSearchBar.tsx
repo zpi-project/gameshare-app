@@ -52,6 +52,7 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
     },
   });
 
+  console.log(games);
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
   const role = useRecoilValue(roleState);
 
@@ -85,13 +86,14 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
         onChange={e => setSearch(e.target.value)}
         onFocus={onFocus}
         onBlur={onBlur}
+        data-test="input"
       />
       {showResults && (
         <div className="absolute left-0 top-12 z-10 h-[400px] w-full rounded-lg bg-background p-2 shadow">
           <ScrollArea className="h-full w-full pr-4">
             <div className="flex flex-col gap-1">
               {isError ? (
-                <h4 className="mt-4 text-center text-xl text-destructive">
+                <h4 className="mt-4 text-center text-xl text-destructive" data-test="error-message">
                   {t("searchGamesError")}
                 </h4>
               ) : games && games.pages[0].paginationInfo.totalElements > 0 ? (
@@ -103,12 +105,15 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
               ) : (
                 !isLoading && (
                   <>
-                    <h4 className="ml-2 mt-2 text-xl">{t("noResults")}</h4>
+                    <h4 className="ml-2 mt-2 text-xl" data-test="no-results">
+                      {t("noResults")}
+                    </h4>
                     {role !== "guest" && (
                       <>
                         <p className="p-2 italic">{t("cannotFindGame")}</p>
                         <Button
                           className="ml-auto mt-4 w-max"
+                          data-test="add-game"
                           onClick={() => setIsDialogOpen(true)}
                         >
                           {t("addGame")}

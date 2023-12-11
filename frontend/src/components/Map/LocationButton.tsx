@@ -27,6 +27,7 @@ const LocationButton: FC = () => {
           className="absolute right-3 top-20 z-[11]"
           onClick={onClick}
           disabled={disabled}
+          data-test="location-button"
         >
           <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-background text-foreground outline outline-2 outline-black/20">
             {isGeolocationEnabled && isGeolocationAvailable ? (
@@ -37,7 +38,10 @@ const LocationButton: FC = () => {
           </div>
         </TooltipTrigger>
         {disabled && (
-          <TooltipContent className="absolute right-0 top-8 z-[1000] w-52 rounded-md bg-secondary p-2 text-sm shadow">
+          <TooltipContent
+            className="absolute right-0 top-8 z-[1000] w-52 rounded-md bg-secondary p-2 text-sm shadow"
+            data-test="disabled-location"
+          >
             <p>
               {!isGeolocationAvailable
                 ? t("locationNotAvailableTooltip")

@@ -56,10 +56,16 @@ const CalendarHeader: FC<CalendarHeaderProps> = ({
   return (
     <div className="flex flex-row items-center gap-2">
       <p className="mr-auto text-xl capitalize">{t("monthYearFormat", { date: date })}</p>
-      <Button size="icon" onClick={onPrevClick} variant="ghost" disabled={prevClickDisabled}>
+      <Button
+        size="icon"
+        onClick={onPrevClick}
+        variant="ghost"
+        disabled={prevClickDisabled}
+        data-test="prev-button"
+      >
         <ChevronLeft />
       </Button>
-      <Button size="icon" onClick={onNextClick} variant="ghost">
+      <Button size="icon" onClick={onNextClick} variant="ghost" data-test="next-button">
         <ChevronRight />
       </Button>
     </div>
@@ -99,11 +105,13 @@ const CalendarDay: FC<CalendarDayProps> = ({
   style,
 }) => {
   return variant === "loading" ? (
-    <Skeleton className={cn("h-[70px] w-[70px]", className)} />
+    <Skeleton className={cn("h-[70px] w-[70px]", className)} data-test="loading-day" />
   ) : variant === "hidden" ? (
-    <div className={cn("flex h-[70px] w-[70px]", className)} />
+    <div className={cn("flex h-[70px] w-[70px]", className)} data-test="hidden-day" />
   ) : (
     <div
+      data-test="day"
+      aria-disabled={disabled}
       className={cn(
         "flex h-[70px] w-[70px] items-center justify-center rounded-lg text-xl",
         variant === "filled" && "bg-secondary text-foreground",
@@ -114,7 +122,7 @@ const CalendarDay: FC<CalendarDayProps> = ({
       style={style}
       onClick={() => onClick && onClick()}
     >
-      {day ?? ""}
+      {day}
     </div>
   );
 };

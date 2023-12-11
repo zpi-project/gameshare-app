@@ -8,8 +8,6 @@ import { Calendar, CalendarDay } from "./Calendar";
 
 interface AvailabilityCalendarProps {
   gameInstanceUUID: string;
-  startDate?: Date;
-  endDate?: Date;
 }
 
 const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID }) => {
@@ -61,7 +59,7 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
       prevClickDisabled={FIRST_DAY_OF_CURRENT_MONTH >= startDate}
     >
       {isError ? (
-        <h3 className="mt-4 text-center text-xl text-destructive">
+        <h3 className="mt-4 text-center text-xl text-destructive" data-test="error-message">
           {t("errorFetchingReservationsCalendar")}
         </h3>
       ) : (
