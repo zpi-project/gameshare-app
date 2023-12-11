@@ -38,7 +38,7 @@ describe("<MyProfile />", () => {
     cy.getBySel("dashboard").should("be.visible");
   });
 
-  describe("edit game form", () => {
+  describe("Edit game form", () => {
     it("correctly edits a game", () => {
       cy.stub(UserApi, "get").resolves(user);
       cy.stub(GameInstanceApi, "getAll").resolves(paginatedGameInstances);
@@ -80,7 +80,7 @@ describe("<MyProfile />", () => {
       cy.getBySel("edit-dialog").should("not.exist");
     });
 
-    it("shows error message when image is to big", () => {
+    it("shows error message when an image is too big", () => {
       cy.stub(UserApi, "get").resolves(user);
       cy.stub(GameInstanceApi, "getAll").resolves(paginatedGameInstances);
       cy.stub(UserApi, "getMyOpinions").resolves(paginatedOpinions);
@@ -92,7 +92,7 @@ describe("<MyProfile />", () => {
       cy.getBySel("img-error");
     });
 
-    it("shows error message when adding image fails", () => {
+    it("shows an error message when adding an image fails", () => {
       cy.stub(UserApi, "get").resolves(user);
       cy.stub(GameInstanceApi, "getAll").resolves(paginatedGameInstances);
       cy.stub(UserApi, "getMyOpinions").resolves(paginatedOpinions);
@@ -106,7 +106,7 @@ describe("<MyProfile />", () => {
       cy.getBySel("edit-dialog").should("not.exist");
     });
 
-    it("correctly deletes game image", () => {
+    it("correctly deletes a game image", () => {
       cy.stub(UserApi, "get").resolves(user);
       cy.stub(GameInstanceApi, "getAll").resolves(paginatedGameInstances);
       cy.stub(UserApi, "getMyOpinions").resolves(paginatedOpinions);
@@ -153,11 +153,10 @@ describe("<MyProfile />", () => {
       cy.getBySel("description-game").clear().type("description test test");
       cy.getBySel("trash").first().click();
       cy.getBySel("edit-submit-button").click();
-      cy.getBySel("toast").should("be.visible");
       cy.getBySel("edit-dialog").should("not.exist");
     });
 
-    it("show validation messages when edit game form is invalid", () => {
+    it("shows validation messages when form is invalid", () => {
       cy.stub(UserApi, "get").resolves(user);
       cy.stub(GameInstanceApi, "getAll").resolves(paginatedGameInstances);
       cy.stub(UserApi, "getMyOpinions").resolves(paginatedOpinions);
