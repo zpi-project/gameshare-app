@@ -9,6 +9,7 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
+import secureLocalStorage from "react-secure-storage";
 
 Cypress.Commands.add("getBySel", (selector, ...args) => {
   return cy.get(`[data-test=${selector}]`, ...args);
@@ -24,6 +25,11 @@ Cypress.Commands.add("getLink", (path, ...args) => {
 
 Cypress.Commands.add("findLink", { prevSubject: "element" }, (subject, path, ...args) => {
   return cy.wrap(subject).find(`[href="${path}"]`, ...args);
+});
+// @ts-ignore
+Cypress.Commands.add("loginByGoogleApi", () => {
+  cy.log("Logging in to Google");
+  secureLocalStorage.setItem("token", Cypress.env("googleToken"));
 });
 
 export {};
