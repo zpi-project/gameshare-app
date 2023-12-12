@@ -31,6 +31,11 @@ services:
     build:
       context: frontend
       dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL}
+        - VITE_AUTH_CLIENT_ID=${VITE_AUTH_CLIENT_ID}
+        - VITE_SECURE_LOCAL_STORAGE_HASH_KEY=${VITE_SECURE_LOCAL_STORAGE_HASH_KEY}
+        - VITE_SECURE_LOCAL_STORAGE_PREFIX=${VITE_SECURE_LOCAL_STORAGE_PREFIX}
     volumes:
       - "./frontend/src/:/usr/app/src/"
       - "./frontend/build:/usr/app/build/"
@@ -38,8 +43,5 @@ services:
       - "./frontend/cypress/:/usr/app/cypress/"
     ports:
       - "${FRONTEND_PORT}:5173"
-    environment:
-      - VITE_API_URL=${VITE_API_URL}
-      - VITE_AUTH_CLIENT_ID=${AUTH_CLIENT_ID}
     env_file:
       - .env
