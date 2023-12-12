@@ -38,5 +38,8 @@ services:
       - "./frontend/cypress/:/usr/app/cypress/"
     ports:
       - "${FRONTEND_PORT}:5173"
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+      - VITE_AUTH_CLIENT_ID=${AUTH_CLIENT_ID}
     env_file:
       - .env
