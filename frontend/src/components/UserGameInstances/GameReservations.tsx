@@ -8,6 +8,8 @@ import GameInstanceDetailsCard from "@/components/GameInstanceDetailsCard";
 import { Button } from "@/components/ui/button";
 import { DialogContent } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
+import { toast } from "@/components/ui/use-toast";
+import Spinner from "../ui/Spinner";
 import {
   AlertDialogHeader,
   AlertDialogFooter,
@@ -19,7 +21,6 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "../ui/alert-dialog";
-import { toast } from "../ui/use-toast";
 
 interface GameReservationsProps {
   gameInstance: GameInstance;
@@ -30,7 +31,7 @@ const GameReservations: FC<GameReservationsProps> = ({ gameInstance }) => {
   const { uuid } = gameInstance;
 
   const queryClient = useQueryClient();
-  const { mutate: deactivate } = useMutation({
+  const { mutate: deactivate, isLoading: deactivateLoading } = useMutation({
     mutationFn: () => GameInstanceApi.deactivate(uuid),
     onError: () => {
       toast({
@@ -48,7 +49,7 @@ const GameReservations: FC<GameReservationsProps> = ({ gameInstance }) => {
     },
   });
 
-  const { mutate: activate } = useMutation({
+  const { mutate: activate, isLoading: activateLoading } = useMutation({
     mutationFn: () => GameInstanceApi.activate(uuid),
     onError: () => {
       toast({
@@ -78,7 +79,7 @@ const GameReservations: FC<GameReservationsProps> = ({ gameInstance }) => {
             <h2 className="text-2xl uppercase text-secondary">{t("reservationsCalendar")}</h2>
             {gameInstance.active ? (
               <AlertDialog>
-                <AlertDialogTrigger>
+                <AlertDialogTrigger asChild>
                   <Button variant="destructive" className="uppercase">
                     {t("deactivate")}
                   </Button>
@@ -98,7 +99,7 @@ const GameReservations: FC<GameReservationsProps> = ({ gameInstance }) => {
               </AlertDialog>
             ) : (
               <AlertDialog>
-                <AlertDialogTrigger>
+                <AlertDialogTrigger asChild>
                   <Button variant="destructive" className="uppercase">
                     {t("activate")}
                   </Button>
@@ -121,6 +122,7 @@ const GameReservations: FC<GameReservationsProps> = ({ gameInstance }) => {
           <ReservationsCalendar gameInstanceUUID={uuid} />
         </div>
       </div>
+      {(deactivateLoading || activateLoading) && <Spinner />}
     </DialogContent>
   );
 };

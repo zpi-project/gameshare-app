@@ -89,7 +89,7 @@ export default {
   activateSuccessDescription: "Activation was successfull",
   areYouSure: "Are you sure?",
   deactivationWarning:
-    "This action cannot be undone. This will permanently delete all your current and upcoming reservations of this game. You want be able to get them back!",
+    "This action cannot be undone. This will permanently delete all your current and upcoming reservations of this game. You won't be able to get them back!",
   activationWarning:
     "This action will make this game visible again. Other users will have possibility to see it and make resrevations.",
 
