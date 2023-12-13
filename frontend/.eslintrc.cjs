@@ -14,7 +14,6 @@ module.exports = {
     ".eslintrc.cjs",
     "cypress.config.ts",
     "postcss.config.js",
-    "./src/components/ui",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -45,4 +44,10 @@ module.exports = {
       version: "detect",
     },
   },
+  overrides: [
+    {
+      files: ["./src/components/ui/**/*.tsx"],
+      extends: ["./src/components/ui/.eslintrc.cjs"],
+    },
+  ],
 };

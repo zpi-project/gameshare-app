@@ -44,7 +44,8 @@ const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({
               <div
                 className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
                 style={{
-                  backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
+                  backgroundImage:
+                    "linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)",
                 }}
               />
               <div className="relative flex h-full flex-col gap-8">
@@ -84,7 +85,8 @@ const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({
               <div
                 className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
                 style={{
-                  backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
+                  backgroundImage:
+                    "linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)",
                 }}
               />
               <UserDetailsSection
@@ -105,7 +107,8 @@ const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({
             <div
               className="absolute left-4 right-4 top-4 h-1/3 rounded-lg opacity-50 dark:opacity-40"
               style={{
-                backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
+                backgroundImage:
+                  "linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)",
               }}
             />
             <div className="relative flex flex-grow items-center justify-between gap-8 p-4 xl:min-h-[calc(100vh-80px)] xl:flex-col xl:gap-4">

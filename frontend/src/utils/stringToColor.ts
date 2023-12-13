@@ -1,7 +1,7 @@
 export const stringToHexColor = (
   word: string,
-  saturation: number = 0.5,
-  lightness: number = 0.6,
+  saturation = 0.5,
+  lightness = 0.6,
   defaultColor = "#000000",
 ) => {
   if (!word || word.length < 3) {
