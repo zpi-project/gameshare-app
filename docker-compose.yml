@@ -41,7 +41,12 @@ services:
       - "./frontend/build:/usr/app/build/"
       - "./frontend/public/:/usr/app/public/"
       - "./frontend/cypress/:/usr/app/cypress/"
+      -  "./certbot/www:/var/www/certbot/:ro"
     ports:
       - "${FRONTEND_PORT}:5173"
     env_file:
       - .env
+  certbot:
+    image: certbot/certbot:v2.8.0
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
