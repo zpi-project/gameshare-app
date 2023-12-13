@@ -8,7 +8,7 @@ import { NewGameInstanceOpinion, Opinion } from "@/types/Opinion";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
 import { Stars, StarsInput } from "@/components/Stars";
 import { Button } from "@/components/ui/button";
-import { FormField, FormItem, FormControl, Form } from "@/components/ui/form";
+import { FormField, FormItem, FormControl, Form, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
@@ -47,11 +47,11 @@ const OpinionAboutGameIntance: FC<OpinionAboutGameIntanceProps> = ({
 
   const formSchema = z.object({
     stars: z.number({
-      required_error: t("fieldIsRequired", { field: "stars", context: "female" }),
+      required_error: t("fieldIsRequired", { field: t("stars"), context: "female" }),
     }),
     description: z
       .string({
-        required_error: t("fieldIsRequired", { field: "opinion description", context: "male" }),
+        required_error: t("fieldIsRequired", { field: t("opinionDescription"), context: "male" }),
       })
       .min(2, {
         message: t("gameInstaneDescriptionMin"),
@@ -101,6 +101,7 @@ const OpinionAboutGameIntance: FC<OpinionAboutGameIntanceProps> = ({
                           }}
                         />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -120,6 +121,7 @@ const OpinionAboutGameIntance: FC<OpinionAboutGameIntanceProps> = ({
                           {...field}
                         />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />

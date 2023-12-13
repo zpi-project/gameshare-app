@@ -30,6 +30,8 @@ export default {
   lastName: "Last name",
   phoneNumber: "Phone number",
 
+  stars: "Rating",
+  opinionDescription: "Opinion description",
   fieldIsRequired: "{{field}} is required.",
   fieldIsRequired_male: "{{field}} is required.",
   fieldIsRequired_female: "{{field}} is required.",
