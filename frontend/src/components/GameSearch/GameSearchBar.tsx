@@ -52,7 +52,6 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
     },
   });
 
-  console.log(games);
   const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
   const role = useRecoilValue(roleState);
 

@@ -1,8 +1,13 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useRecoilValue } from "recoil";
+import { roleState } from "@/state/role";
+import { tokenState } from "@/state/token";
 import { URLS } from "@/constants/urls";
 import { GameInstanceDetails } from "@/types/GameInstance";
+import { UserApi } from "@/api/UserApi";
 import PriceBadge from "@/components/Badge/PriceBadge";
 import { Stars } from "@/components/Stars";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +24,13 @@ interface GameDetailsSectionProps {
 const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const role = useRecoilValue(roleState);
+  const token = useRecoilValue(tokenState);
+
+  const { data: user } = useQuery({
+    queryKey: ["user", { token }],
+    queryFn: UserApi.get,
+  });
 
   return (
     <div className="relative flex h-full w-full flex-col gap-3">
@@ -114,21 +126,20 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
             )}
           </div>
         </div>
-        <p className="break-all px-2 italic xl:text-lg 2xl:w-3/4">{gameInstance.description}</p>
+        <p className="break-all px-2 italic xl:text-lg">{gameInstance.description}</p>
       </div>
-      <div className="mt-auto flex flex-row flex-wrap justify-between gap-2">
-        <Button
-          onClick={() => navigate(`${URLS.GAMES}/${gameInstance.game.id}`)}
-          className="flex-grow"
-        >
+      <div className="mt-auto flex flex-row flex-wrap justify-end gap-2">
+        <Button onClick={() => navigate(`${URLS.GAMES}/${gameInstance.game.id}`)} className="px-8">
           {t("seeGamePage")}
         </Button>
-        <Dialog>
-          <DialogTrigger asChild className="flex-grow">
-            <Button>{t("seeAvailability")}</Button>
-          </DialogTrigger>
-          <GameCalendar gameInstance={gameInstance} />
-        </Dialog>
+        {role !== "guest" && user && gameInstance.owner.uuid !== user.uuid && (
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="px-8">{t("seeAvailability")}</Button>
+            </DialogTrigger>
+            <GameCalendar gameInstance={gameInstance} />
+          </Dialog>
+        )}
       </div>
     </div>
   );

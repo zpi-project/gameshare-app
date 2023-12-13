@@ -10,8 +10,6 @@ interface GameSearchCardProps {
 const GameSearchCard: FC<GameSearchCardProps> = ({ game, onClick }) => {
   const { image, name, minPlayers, maxPlayers, playingTime, age } = game;
 
-  console.log(game);
-
   return (
     <div
       className="relative flex h-[100px] w-full cursor-pointer flex-row gap-2 rounded-lg bg-card p-2 shadow duration-200 hover:bg-accent lg:h-max"
