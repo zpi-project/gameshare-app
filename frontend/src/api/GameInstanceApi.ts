@@ -45,6 +45,16 @@ export class GameInstanceApi {
     return data;
   }
 
+  static async activate(uuid: string) {
+    const { data } = await Api.patch(`game-instances/${uuid}/activate`);
+    return data;
+  }
+
+  static async deactivate(uuid: string) {
+    const { data } = await Api.patch(`game-instances/${uuid}/deactivate`);
+    return data;
+  }
+
   static async search(
     latitude: number,
     longitude: number,
