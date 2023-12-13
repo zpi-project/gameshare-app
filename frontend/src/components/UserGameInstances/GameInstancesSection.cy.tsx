@@ -61,7 +61,7 @@ describe("<GameInstancesSection />", () => {
     it("renders correctly other user's games", () => {
       cy.stub(GameInstanceApi, "getAllByUUID").resolves(paginatedGameInstances);
       cy.mount(<GameInstancesSection owner={user} />);
-      cy.getBySel("header").should("have.text", t("userGames") + " Amy");
+      cy.getBySel("header").should("have.text", `${t("userGames")} Amy`);
       cy.getBySel("availability-button").should("not.exist");
       cy.getBySel("edit-button").should("not.exist");
       cy.getBySel("activity-badge").should("not.exist");

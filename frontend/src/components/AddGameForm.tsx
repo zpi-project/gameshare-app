@@ -365,7 +365,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
                     <div className="h-[380px] w-full overflow-hidden rounded-lg">
                       <img
                         src={URL.createObjectURL(selectedImage)}
-                        alt={`Selected image`}
+                        alt="Selected image"
                         className="h-full w-full object-cover object-top"
                       />
                     </div>

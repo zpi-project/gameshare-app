@@ -126,7 +126,7 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
               {(isFetchingNextPage || isLoading) && (
                 <>
                   {Array.from({ length: 4 }).map((_, idx) => (
-                    <Skeleton className="h-20 w-full rounded-lg" key={"skeleton" + idx} />
+                    <Skeleton className="h-20 w-full rounded-lg" key={`skeleton${idx}`} />
                   ))}
                 </>
               )}

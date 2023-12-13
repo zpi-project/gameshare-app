@@ -18,12 +18,7 @@ interface GameDetailsSectionProps {
 
 const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance }) => {
   const { t } = useTranslation();
-
-  let navigate = useNavigate();
-  const redirectGamePage = () => {
-    let path = `${URLS.GAMES}/${gameInstance.game.id}`;
-    navigate(path);
-  };
+  const navigate = useNavigate();
 
   return (
     <div className="relative flex h-full w-full flex-col gap-3">
@@ -39,7 +34,11 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
                 />
               </TabsTrigger>
               {gameInstance.images.map(image => (
-                <TabsTrigger value={image.link} className="bg-transparent focus:outline-none">
+                <TabsTrigger
+                  value={image.link}
+                  className="bg-transparent focus:outline-none"
+                  key={image.name}
+                >
                   <img
                     src={image.link}
                     alt={image.name}
@@ -68,7 +67,11 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
               />
             </TabsContent>
             {gameInstance.images.map(image => (
-              <TabsContent value={image.link} className="h-96 w-96 overflow-hidden rounded-lg">
+              <TabsContent
+                value={image.link}
+                className="h-96 w-96 overflow-hidden rounded-lg"
+                key={image.name}
+              >
                 <img
                   src={image.link}
                   alt={image.name}
@@ -114,7 +117,10 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
         <p className="break-all px-2 italic xl:text-lg 2xl:w-3/4">{gameInstance.description}</p>
       </div>
       <div className="mt-auto flex flex-row flex-wrap justify-between gap-2">
-        <Button onClick={redirectGamePage} className="flex-grow">
+        <Button
+          onClick={() => navigate(`${URLS.GAMES}/${gameInstance.game.id}`)}
+          className="flex-grow"
+        >
           {t("seeGamePage")}
         </Button>
         <Dialog>

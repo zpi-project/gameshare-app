@@ -1,9 +1,9 @@
-import { GameInstance } from "@/types/GameInstance";
 import {
   GameInstanceSearchParams,
   GameInstanceDetails,
   SearchGameInstance,
   NewGameInstance,
+  GameInstance,
 } from "@/types/GameInstance";
 import { Opinion } from "@/types/Opinion";
 import { Paginated } from "@/types/Paginated";
@@ -34,14 +34,14 @@ export class GameInstanceApi {
   }
 
   static async getAll(page: number, size: number) {
-    const { data: instances } = await Api.get<Paginated<GameInstance>>(`game-instances`, {
+    const { data: instances } = await Api.get<Paginated<GameInstance>>("game-instances", {
       params: { page, size },
     });
     return instances;
   }
 
   static async create(gameInstance: NewGameInstance) {
-    const { data } = await Api.post<GameInstance>(`game-instances`, gameInstance);
+    const { data } = await Api.post<GameInstance>("game-instances", gameInstance);
     return data;
   }
 

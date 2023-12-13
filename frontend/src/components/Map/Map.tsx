@@ -61,7 +61,7 @@ const Map: FC<MapProps> = props => {
         setLocation && setLocation([user.locationLatitude, user.locationLongitude]);
       }
     }
-  }, [isGeolocationAvailable, isGeolocationEnabled, coords, autolocate, user]);
+  }, [isGeolocationAvailable, isGeolocationEnabled, coords, autolocate, user, setLocation]);
 
   return (
     <MapContext.Provider value={{ location, setLocation }}>
@@ -88,7 +88,7 @@ const MapContent: FC<MapContentProps> = ({ children }) => {
 
   useEffect(() => {
     map.flyTo(location, map.getZoom());
-  }, [location]);
+  }, [location, map]);
 
   return (
     <>

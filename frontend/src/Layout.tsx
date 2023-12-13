@@ -22,7 +22,9 @@ const Layout: FC = () => {
   const setIsRoleFetched = useSetRecoilState(isRoleFetchedState);
   const setRegisterFormOpen = useSetRecoilState(registerFormOpenState);
   const [token, setToken] = useRecoilState(tokenState);
-  const { i18n } = useTranslation();
+  const {
+    i18n: { language },
+  } = useTranslation();
 
   const { refetch, isFetching } = useQuery({
     queryKey: ["role"],
@@ -48,20 +50,18 @@ const Layout: FC = () => {
   });
 
   useEffect(() => {
-    const token = secureLocalStorage.getItem("token");
+    const token = secureLocalStorage.getItem("token") as string;
     if (token) {
-      const decodedToken = jwt_decode<JwtPayload>(token as string);
+      const decodedToken = jwt_decode<JwtPayload>(token);
       const currentTime = Date.now() / 1000;
       if (decodedToken.exp && decodedToken.exp < currentTime) {
         secureLocalStorage.removeItem("token");
-        setToken(null);
-        setRole("guest");
         googleLogout();
       } else {
-        setToken(token as string);
+        setToken(token);
       }
     }
-  }, []);
+  }, [setToken]);
 
   useEffect(() => {
     const tokenInterceptor = Api.interceptors.request.use(config => {
@@ -70,7 +70,7 @@ const Layout: FC = () => {
       }
       config.params = {
         ...config.params,
-        language: i18n.language,
+        language,
       };
       return config;
     });
@@ -78,21 +78,7 @@ const Layout: FC = () => {
     return () => {
       Api.interceptors.request.eject(tokenInterceptor);
     };
-  }, [token]);
-
-  useEffect(() => {
-    const tokenInterceptor = Api.interceptors.request.use(config => {
-      config.params = {
-        ...config.params,
-        language: i18n.language,
-      };
-      return config;
-    });
-
-    return () => {
-      Api.interceptors.request.eject(tokenInterceptor);
-    };
-  }, [i18n.language]);
+  }, [language, token]);
 
   return (
     <div className=" flex h-screen w-screen flex-row gap-6 p-6">
