@@ -103,7 +103,7 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
                 <Stars count={Math.round(gameInstance.avgRating)} variant="secondary" />
               </div>
             ) : (
-              <Badge variant="secondary" className="w-max px-3 py-1 hover:bg-primary">
+              <Badge variant="secondary" className="w-max px-3 py-1">
                 {t("noOpinions")}
               </Badge>
             )}

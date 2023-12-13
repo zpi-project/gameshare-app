@@ -66,7 +66,7 @@ const UserDetails: FC<Props> = ({ user, showEdit, isLoading }) => {
                     <Stars count={Math.round(user.avgRating)} />
                   </div>
                 ) : (
-                  <Badge variant="secondary" className="w-max px-3 py-1 hover:bg-primary">
+                  <Badge variant="secondary" className="w-max px-3 py-1">
                     {t("noOpinions")}
                   </Badge>
                 )}
