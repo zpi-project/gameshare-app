@@ -82,8 +82,6 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
     refetchOnWindowFocus: false,
   });
 
-  console.log(gameInstance);
-
   const { mutateAsync: editGame, isLoading: isLoadingEditGame } = useMutation(
     (params: { uuid: string; description: string; pricePerDay: number }) =>
       GameInstanceApi.edit(params.uuid, params.description, params.pricePerDay),
