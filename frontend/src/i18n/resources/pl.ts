@@ -34,6 +34,8 @@ const pl: typeof en = {
   cancel: "Anuluj",
   continue: "Kontynuuj",
 
+  stars: "Ocena",
+  opinionDescription: "Opis opinii",
   fieldIsRequired: "{{field}} jest wymagane.",
   fieldIsRequired_male: "{{field}} jest wymagany.",
   fieldIsRequired_female: "{{field}} jest wymagana.",
@@ -50,6 +52,9 @@ const pl: typeof en = {
   updateErrorTitle: "Wystąpił błąd podczas zapisywania twoich nowych danych.",
   registerSuccessDescription: "Pomyślnie zapisano twoje dane.",
   updateSuccessDescription: "Pomyślnie zapisano twoje nowe dane.",
+  opinionSuccessDescription: "Pomyślnie zapisano twoją opinie.",
+  opinionErrorTitle: "Wystąpił błąd podczas zapisywania twojej opinii.",
+  saveOpinion: "Zapisz opinię",
   game: "Gra",
 
   welcomeHeader: "Witaj w GameShare!",
