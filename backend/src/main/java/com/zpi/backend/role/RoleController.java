@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
+//@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RestController
 @RequiredArgsConstructor
 public class RoleController {

@@ -21,7 +21,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/game-instances/images")
-@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
+//@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class GameInstanceImageController {
     GameInstanceImageService gameInstanceImageService;
 

@@ -38,7 +38,7 @@ public class RecommendationController {
     )
     @RequestMapping(method = RequestMethod.GET)
     @PreAuthorize("isAuthenticated()")
-    @CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
+    //@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
     public ResponseEntity<ResultsDTO<GameDTO>> getRecommendations(Authentication authentication,
                                                                   @RequestParam(defaultValue = "0") int page,
                                                                   @RequestParam(defaultValue = "5") int size) throws UserDoesNotExistException {

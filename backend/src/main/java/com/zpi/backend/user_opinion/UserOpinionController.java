@@ -19,7 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
+//@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @AllArgsConstructor
 public class UserOpinionController {
 

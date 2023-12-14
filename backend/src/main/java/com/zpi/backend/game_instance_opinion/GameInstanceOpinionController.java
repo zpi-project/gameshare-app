@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
+//@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 @RequestMapping("/game-instances")
 public class GameInstanceOpinionController {
 
