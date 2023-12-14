@@ -52,7 +52,7 @@ const SelectInput: FC<SelectInputProps> = ({
     } else {
       onChange();
     }
-  }, [value]);
+  }, [clearValueOnChange, onChange, options, value]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

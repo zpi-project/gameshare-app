@@ -1,11 +1,11 @@
-import { GameInstance } from "@/types/GameInstance";
 import {
   GameInstanceSearchParams,
   GameInstanceDetails,
   SearchGameInstance,
   NewGameInstance,
+  GameInstance,
 } from "@/types/GameInstance";
-import { Opinion } from "@/types/Opinion";
+import { NewGameInstanceOpinion, Opinion } from "@/types/Opinion";
 import { Paginated } from "@/types/Paginated";
 import { ReservationTimeframe, Timeframe } from "@/types/Reservation";
 import Api from "./Api";
@@ -34,14 +34,24 @@ export class GameInstanceApi {
   }
 
   static async getAll(page: number, size: number) {
-    const { data: instances } = await Api.get<Paginated<GameInstance>>(`game-instances`, {
+    const { data: instances } = await Api.get<Paginated<GameInstance>>("game-instances", {
       params: { page, size },
     });
     return instances;
   }
 
   static async create(gameInstance: NewGameInstance) {
-    const { data } = await Api.post<GameInstance>(`game-instances`, gameInstance);
+    const { data } = await Api.post<GameInstance>("game-instances", gameInstance);
+    return data;
+  }
+
+  static async activate(uuid: string) {
+    const { data } = await Api.patch(`game-instances/${uuid}/activate`);
+    return data;
+  }
+
+  static async deactivate(uuid: string) {
+    const { data } = await Api.patch(`game-instances/${uuid}/deactivate`);
     return data;
   }
 
@@ -77,6 +87,11 @@ export class GameInstanceApi {
       },
     );
     return opinions;
+  }
+
+  static async addGameInstanceOpinion(opinion: NewGameInstanceOpinion) {
+    const { data } = await Api.post<NewGameInstanceOpinion>("game-instances/opinions", opinion);
+    return data;
   }
 
   static async getReservations(uuid: string, month: number, year: number) {

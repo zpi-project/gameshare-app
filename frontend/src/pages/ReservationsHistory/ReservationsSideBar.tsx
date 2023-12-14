@@ -21,7 +21,7 @@ const ReservationsSideBar: FC<ReservationsSideBarProps> = ({ setQueryParams }) =
       asOwner: reservationType === "owner",
       status: reservationStatus === "ALL" ? undefined : reservationStatus,
     });
-  }, [reservationStatus, reservationType]);
+  }, [reservationStatus, reservationType, setQueryParams]);
 
   return (
     <div className="h-full rounded-lg bg-section p-4">

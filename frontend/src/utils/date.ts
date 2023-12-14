@@ -7,14 +7,14 @@ export function getLastDayOfMonth(date: Date) {
 }
 
 export function getFirstDayOfLastMonth(date: Date) {
-  let firstDayOfCurrentMonth = getFirstDayOfMonth(date);
+  const firstDayOfCurrentMonth = getFirstDayOfMonth(date);
   firstDayOfCurrentMonth.setDate(firstDayOfCurrentMonth.getDate() - 1);
   firstDayOfCurrentMonth.setDate(1);
   return firstDayOfCurrentMonth;
 }
 
 export function getFirstDayOfNextMonth(date: Date) {
-  let lastDayOfCurrentMonth = getLastDayOfMonth(date);
+  const lastDayOfCurrentMonth = getLastDayOfMonth(date);
   lastDayOfCurrentMonth.setDate(lastDayOfCurrentMonth.getDate() + 1);
   lastDayOfCurrentMonth.setDate(1);
   return lastDayOfCurrentMonth;

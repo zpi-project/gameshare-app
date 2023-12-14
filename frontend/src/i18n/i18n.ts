@@ -29,7 +29,7 @@ void i18n
       format: (value, format, lng) => {
         if (isDate(value)) {
           const locale = locales[lng as "enUS" | "pl"];
-          return formatDate(value, format || "MMM. d, yyyy", { locale });
+          return formatDate(value, format ?? "MMM. d, yyyy", { locale });
         }
         return value;
       },

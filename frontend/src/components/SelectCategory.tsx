@@ -49,7 +49,7 @@ const SelectCategory: FC<SelectInputProps> = ({
 
     if (values.includes(currentValue)) {
       setValues(values.filter(value => value !== currentValue));
-      const newValuesIDs = valuesIDs.filter(value => value! == valueId);
+      const newValuesIDs = valuesIDs.filter(value => value && value == valueId);
       setValuesIDs(newValuesIDs);
       onChange(newValuesIDs);
     } else {

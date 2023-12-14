@@ -10,7 +10,7 @@ const TimeBadge: FC<TimeBadgeProps> = ({ time }) => {
   return (
     <Badge variant="secondary" className="flex w-max flex-row gap-1">
       <Clock size={20} />
-      <span className="tracking-wider">{time}'</span>
+      <span className="tracking-wider">{time}&apos;</span>
     </Badge>
   );
 };

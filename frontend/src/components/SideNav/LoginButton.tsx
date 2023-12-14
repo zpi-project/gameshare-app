@@ -11,7 +11,6 @@ const LoginButton: FC = () => {
       onSuccess={res => {
         if (res.credential) {
           setToken(res.credential);
-          console.log(res.credential);
         }
       }}
       width="256px"

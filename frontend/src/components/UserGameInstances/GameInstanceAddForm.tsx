@@ -247,7 +247,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                     {selectedImages && (
                       <div className="flex flex-col gap-4 p-4">
                         {selectedImages.map((image, idx) => (
-                          <div key={idx + "img"}>
+                          <div key={`${idx} img`}>
                             <p className="font-bold text-destructive">
                               {imageSizeErrors[idx] && t("maxImgSize", { size: 3 })}
                             </p>

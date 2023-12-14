@@ -30,6 +30,8 @@ export default {
   lastName: "Last name",
   phoneNumber: "Phone number",
 
+  stars: "Rating",
+  opinionDescription: "Opinion description",
   fieldIsRequired: "{{field}} is required.",
   fieldIsRequired_male: "{{field}} is required.",
   fieldIsRequired_female: "{{field}} is required.",
@@ -46,6 +48,9 @@ export default {
   updateErrorTitle: "An error occured while saving your new data.",
   registerSuccessDescription: "Your data was saved successfully.",
   updateSuccessDescription: "Your new data was saved successfully.",
+  opinionSuccessDescription: "Your opinion was saved successfully.",
+  opinionErrorTitle: "An error occured while saving your opinion.",
+  saveOpinion: "Save opinion",
 
   welcomeHeader: "Welcome to GameShare!",
   welcomeDescription:
@@ -83,6 +88,15 @@ export default {
   errorFetchingGameInstances: "We couldn't load copies of this game",
   noOpinionsGameInstance: "This game instance doesn't have any opinions yet",
   gameInstaneDescriptionMin: "The description must be a minimum of 2 characters in length.",
+  deactivateErrorTitle: "An error occured while deactivating your game.",
+  activateErrorTitle: "An error occured while activating your game.",
+  deactivateSuccessDescription: "Deactivation was succesfull.",
+  activateSuccessDescription: "Activation was successfull",
+  areYouSure: "Are you sure?",
+  deactivationWarning:
+    "This action cannot be undone. This will permanently delete all your current and upcoming reservations of this game. You won't be able to get them back!",
+  activationWarning:
+    "This action will make this game visible again. Other users will have possibility to see it and make resrevations.",
 
   typeToSearch: "Type to search...",
   category: "Category",
@@ -173,6 +187,8 @@ export default {
   bookItNow: "Book it now",
   deactivate: "Deactivate",
   activate: "Activate",
+  cancel: "Cancel",
+  continue: "Continue",
   errorFetchingReservationsCalendar: "We couldn't fetch reservations for this month.",
   errorStatus: {
     "400": "Bad Request",

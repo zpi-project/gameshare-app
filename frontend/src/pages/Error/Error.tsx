@@ -15,12 +15,12 @@ const Error: FC = () => {
 
   const diceComponents: React.ReactNode[] = [
     <></>,
-    <Dice1 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-1" />,
-    <Dice2 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-2" />,
-    <Dice3 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-3" />,
-    <Dice4 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-4" />,
-    <Dice5 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-5" />,
-    <Dice6 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-6" />,
+    <Dice1 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-1" key="1" />,
+    <Dice2 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-2" key="2" />,
+    <Dice3 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-3" key="3" />,
+    <Dice4 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-4" key="4" />,
+    <Dice5 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-5" key="5" />,
+    <Dice6 size={140} strokeWidth={1.2} className="rotate-[16deg]" data-test="dice-6" key="6" />,
   ];
 
   return (
@@ -29,7 +29,7 @@ const Error: FC = () => {
         <div
           className="absolute left-8 right-8 top-8 h-1/2 rounded-lg opacity-50 dark:opacity-40"
           style={{
-            backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)`,
+            backgroundImage: "linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(133, 43, 130) 100%)",
           }}
         />
         <div className="m-4 flex flex-grow items-center justify-center rounded-lg bg-section">

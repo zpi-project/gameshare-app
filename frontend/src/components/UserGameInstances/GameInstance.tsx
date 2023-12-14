@@ -1,8 +1,7 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { Pencil } from "lucide-react";
-import { CalendarDays } from "lucide-react";
+import { Pencil, CalendarDays } from "lucide-react";
 import { URLS } from "@/constants/urls";
 import { GameInstance as GameInstanceType } from "@/types/GameInstance";
 import { cn } from "@/utils/tailwind";

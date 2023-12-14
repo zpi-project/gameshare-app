@@ -35,6 +35,7 @@ declare global {
        */
       getLink(path: string): Chainable<JQuery>;
       findLink(path: string): Chainable<JQuery>;
+      loginByGoogleApi(): void;
     }
   }
 }

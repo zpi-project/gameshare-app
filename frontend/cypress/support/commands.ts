@@ -26,7 +26,7 @@ Cypress.Commands.add("getLink", (path, ...args) => {
 Cypress.Commands.add("findLink", { prevSubject: "element" }, (subject, path, ...args) => {
   return cy.wrap(subject).find(`[href="${path}"]`, ...args);
 });
-// @ts-ignore
+
 Cypress.Commands.add("loginByGoogleApi", () => {
   cy.log("Logging in to Google");
   secureLocalStorage.setItem("token", Cypress.env("googleToken"));

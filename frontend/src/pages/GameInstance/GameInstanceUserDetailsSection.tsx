@@ -16,12 +16,7 @@ interface Props {
 
 const GameInstanceUserDetailsSection: FC<Props> = ({ user, isLoading }) => {
   const { t } = useTranslation();
-
-  let navigate = useNavigate();
-  const redirectUserPage = () => {
-    let path = `${URLS.PROFILE}/${user?.uuid}`;
-    navigate(path);
-  };
+  const navigate = useNavigate();
 
   return (
     <div className="flex h-full flex-col items-center gap-6">
@@ -44,7 +39,7 @@ const GameInstanceUserDetailsSection: FC<Props> = ({ user, isLoading }) => {
                 {parsePhoneNumber(user.phoneNumber).formatInternational()}
               </div>
             )}
-            <Button className="w-1/2" onClick={redirectUserPage}>
+            <Button className="w-1/2" onClick={() => navigate(`${URLS.PROFILE}/${user?.uuid}`)}>
               {t("seeProfile")}
             </Button>
           </div>

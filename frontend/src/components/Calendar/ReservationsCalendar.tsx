@@ -65,7 +65,7 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
       const currDate = new Date(startDateCopy);
       currDate.setDate(startDateCopy.getDate() + idx);
 
-      const matchingReservation = (reservations || []).find(reservation => {
+      const matchingReservation = (reservations ?? []).find(reservation => {
         const reservationStartDate = new Date(new Date(reservation.startDate).setHours(0, 0, 0, 0));
         const reservationEndDate = new Date(new Date(reservation.endDate).setHours(0, 0, 0, 0));
 
@@ -93,18 +93,18 @@ const ReservationsCalendar: FC<ReservationsCalendarProps> = ({
       ) : (
         <div className="flex flex-row flex-wrap gap-2">
           {Array.from({ length: (7 + startDate.getDay() - 1) % 7 }).map((_, idx) => (
-            <CalendarDay key={idx + "hidden"} variant="hidden" className={tileClassName} />
+            <CalendarDay key={`${idx} hidden`} variant="hidden" className={tileClassName} />
           ))}
           {isLoading ? (
             <>
               {Array.from({ length: getDaysInMonth(startDate) }).map((_, idx) => (
-                <CalendarDay key={idx + "loading"} variant="loading" className={tileClassName} />
+                <CalendarDay key={`${idx} loading`} variant="loading" className={tileClassName} />
               ))}
             </>
           ) : (
             <>
               {daysWithReservations.map((reservation, idx) => {
-                const id = ((reservation ? reservation.id.slice(-3) : "") + "salt").replace(
+                const id = `${reservation ? reservation.id.slice(-3) : ""}salt`.replace(
                   "-",
                   reservation?.salt ?? "",
                 );

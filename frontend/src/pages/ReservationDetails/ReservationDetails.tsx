@@ -61,7 +61,7 @@ const ReservationDetails: FC = () => {
       });
       navigate(URLS.MY_RESERVATIONS);
     }
-  }, [isUserError, isError]);
+  }, [isUserError, isError, toast, id, navigate]);
 
   return isLoading || isUserLoading ? (
     <Skeleton className="h-full w-full rounded-lg" />
