@@ -31,7 +31,7 @@ interface ReservationFormProps {
 const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) => {
   const { t } = useTranslation();
   const TODAY = new Date(new Date().setHours(0, 0, 0, 0));
-  let TOMORROW = new Date(TODAY);
+  const TOMORROW = new Date(TODAY);
   TOMORROW.setDate(TODAY.getDate() + 1);
   const [isAvailable, setIsAvailable] = useState(false);
 
@@ -71,7 +71,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
     if (startDate && endDate) {
       form.trigger();
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, form]);
 
   const { isFetching, isSuccess } = useQuery({
     queryKey: ["game-instance-is-available", { uuid: gameInstance.uuid, startDate, endDate }],

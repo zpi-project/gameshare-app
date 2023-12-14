@@ -82,8 +82,6 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
     refetchOnWindowFocus: false,
   });
 
-  console.log(gameInstance);
-
   const { mutateAsync: editGame, isLoading: isLoadingEditGame } = useMutation(
     (params: { uuid: string; description: string; pricePerDay: number }) =>
       GameInstanceApi.edit(params.uuid, params.description, params.pricePerDay),
@@ -166,7 +164,7 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
             toast({ title: t("successEditingGameInstance") });
           }
 
-          const imagesToDelete = (gameInstance?.images || []).filter(
+          const imagesToDelete = (gameInstance?.images ?? []).filter(
             image => !images.find(img => img.image.name === image.name),
           );
           await Promise.all(imagesToDelete.map(image => handleDeleteImage(image.id)));
@@ -287,7 +285,7 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
                       {images && (
                         <div className="flex flex-col gap-4 p-4">
                           {images.map((image, idx) => (
-                            <div key={idx + "img"}>
+                            <div key={`${idx}img`}>
                               {images[idx].error && (
                                 <p className="font-bold text-destructive" data-test="img-error">
                                   {t("maxImgSize", { size: 3 })}

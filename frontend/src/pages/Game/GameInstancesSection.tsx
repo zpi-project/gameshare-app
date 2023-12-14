@@ -49,6 +49,7 @@ const GameUsersSection: FC = () => {
   const users = useMemo(() => {
     const uniqueUsers = Array.from(
       new Set(gameInstances.map(gameInstance => gameInstance.owner.uuid)),
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     ).map(uuid => gameInstances.find(gameInstance => gameInstance.owner?.uuid === uuid)!.owner!);
 
     return uniqueUsers ?? [];

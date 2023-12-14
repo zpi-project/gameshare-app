@@ -1,7 +1,4 @@
-"use client";
-
-import { useState } from "react";
-import { FC } from "react";
+import { useState, FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/utils/tailwind";

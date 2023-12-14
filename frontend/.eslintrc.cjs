@@ -3,13 +3,18 @@ module.exports = {
   env: { browser: true, es2020: true },
   extends: [
     "eslint:recommended",
-    "plugin:@typescript-eslint/strict-type-checked",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "prettier",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs", "cypress.config.ts", "postcss.config.js"],
+  ignorePatterns: [
+    "dist",
+    ".eslintrc.cjs",
+    "cypress.config.ts",
+    "postcss.config.js",
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
@@ -17,9 +22,8 @@ module.exports = {
     project: ["./tsconfig.json", "./tsconfig.node.json"],
     tsconfigRootDir: __dirname,
   },
-  plugins: ["react-refresh"],
+  plugins: ["react-refresh", "@typescript-eslint"],
   rules: {
-    "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
     "spaced-comment": "error",
     "no-duplicate-imports": "error",
     "prefer-template": "warn",

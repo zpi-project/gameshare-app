@@ -39,8 +39,6 @@ const GameInstancesSection: FC<Props> = ({ owner, isMyPage }) => {
   });
   const queryClient = useQueryClient();
 
-  console.log(gameInstances);
-
   return (
     <div className="flex h-full w-full flex-col gap-6" data-test="game-instances">
       {owner && (

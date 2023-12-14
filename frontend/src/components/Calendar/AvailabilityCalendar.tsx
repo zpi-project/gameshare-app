@@ -40,7 +40,7 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
       const currDate = new Date(startDateCopy);
       currDate.setDate(startDateCopy.getDate() + idx);
 
-      const matchingTimeframe = (reservations || []).find(reservation => {
+      const matchingTimeframe = (reservations ?? []).find(reservation => {
         const startDate = new Date(new Date(reservation.startDate).setHours(0, 0, 0, 0));
         const endDate = new Date(new Date(reservation.endDate).setHours(0, 0, 0, 0));
 
@@ -65,12 +65,12 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
       ) : (
         <div className="flex flex-row flex-wrap gap-2">
           {Array.from({ length: (7 + startDate.getDay() - 1) % 7 }).map((_, idx) => (
-            <CalendarDay key={idx + "hidden"} variant="hidden" />
+            <CalendarDay key={`${idx} hidden`} variant="hidden" />
           ))}
           {isLoading ? (
             <>
               {Array.from({ length: getDaysInMonth(startDate) }).map((_, idx) => (
-                <CalendarDay key={idx + "loading"} variant="loading" disabled />
+                <CalendarDay key={`${idx} loading`} variant="loading" disabled />
               ))}
             </>
           ) : (
