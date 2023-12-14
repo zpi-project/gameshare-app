@@ -100,6 +100,8 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
             <OpinionAboutRenter
               renterOpinion={renterOpinion}
               canAddRenterOpinion={canAddRenterOpinion}
+              renterUUID={renter.uuid}
+              reservationId={reservationId}
             />
           </div>
         </ScrollArea>

@@ -72,10 +72,14 @@ const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({
             <OpinionAboutOwner
               ownerOpinion={ownerOpinion}
               canAddOwnerOpinion={canAddOwnerOpinion}
+              ownerUuid={gameInstance.owner.uuid}
+              reservationId={reservationId}
             />
             <OpinionAboutGameIntance
               gameInstanceOpinion={gameInstanceOpinion}
               canAddGameInstanceOpinion={canAddGameInstanceOpinion}
+              gameInstanceUuid={gameInstance.uuid}
+              reservationId={reservationId}
             />
           </div>
         </ScrollArea>

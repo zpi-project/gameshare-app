@@ -1,5 +1,5 @@
 import { GameInstanceSearchParams } from "@/types/GameInstance";
-import { Opinion } from "@/types/Opinion";
+import { Opinion, NewOpinion } from "@/types/Opinion";
 import { Paginated } from "@/types/Paginated";
 import { NewUser, User } from "@/types/User";
 import Api from "./Api";
@@ -56,5 +56,10 @@ export class UserApi {
       params: { page, size },
     });
     return opinions;
+  }
+
+  static async addOpinion(opinion: NewOpinion) {
+    const { data } = await Api.post<NewOpinion>(`/user/opinions`, opinion);
+    return data;
   }
 }
