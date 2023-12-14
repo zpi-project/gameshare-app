@@ -8,6 +8,8 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+    profiles:
+      - deploy
     ports:
       - "5432:5432"
 
@@ -23,6 +25,8 @@ services:
       - "${BACKEND_PORT}:8080"
     env_file:
       - .env
+    profiles:
+      - deploy
     depends_on:
       - db
 
@@ -42,11 +46,17 @@ services:
       - "./frontend/public/:/usr/app/public/"
       - "./frontend/cypress/:/usr/app/cypress/"
       -  "./certbot/www:/var/www/certbot/:ro"
+      - "./certbot/conf/:/etc/nginx/ssl/:ro"
     ports:
       - "${FRONTEND_PORT}:5173"
+    profiles:
+      - deploy
     env_file:
       - .env
   certbot:
     image: certbot/certbot:v2.8.0
+    profiles:
+      - certbot
     volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
+      - "./certbot/www/:/var/www/certbot/:rw"
+      - "./certbot/conf/:/etc/letsencrypt/:rw"
