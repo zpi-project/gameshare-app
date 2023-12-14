@@ -52,8 +52,13 @@ services:
       - "80:80"
     profiles:
       - deploy
+    restart:
+        always
     env_file:
       - .env
+    depends_on:
+        - backend
+        - db
   certbot:
     image: certbot/certbot:v2.8.0
     profiles:
