@@ -29,22 +29,18 @@ public class GoogleTokenFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, ResponseStatusException, IOException {
 
         String authenticationHeader = request.getHeader(AUTHENTICATION_HEADER);
-        System.out.println("authenticationHeader: " + authenticationHeader);
         String path = request.getRequestURI();
         if (path.startsWith(SWAGGER_UI_URL) || path.startsWith(OPENAPI_DOCS_URL)) {
             filterChain.doFilter(request, response);
             return;
         }
         if (authenticationHeader == null || !authenticationHeader.startsWith(AUTHENTICATION_HEADER_TOKEN_PREFIX)) {
-            System.out.println("authenticationHeader == null || !authenticationHeader.startsWith(AUTHENTICATION_HEADER_TOKEN_PREFIX)");
             filterChain.doFilter(request, response);
             return;
         }
 
         try {
-            System.out.println("try");
             GoogleIdToken token = validateTokenFromHeader(authenticationHeader);
-            System.out.println("ValidateTokenFromHeader token: " + token);
 
             SecurityContextHolder.getContext().setAuthentication(
                     new UsernamePasswordAuthenticationToken(
