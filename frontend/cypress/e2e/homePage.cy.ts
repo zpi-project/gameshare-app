@@ -1,4 +1,3 @@
-// @ts-ignore
 import * as selectors from "./selectors.ts";
 
 describe("Starting page loads correctly", () => {

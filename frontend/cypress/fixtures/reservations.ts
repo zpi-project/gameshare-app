@@ -1,4 +1,4 @@
-//import { Paginated } from "@/types/Paginated";
+// import { Paginated } from "@/types/Paginated";
 // import { Reservation, ReservationTimeframe, Timeframe } from "@/types/Reservation";
 
 // export const reservation: Reservation = {
