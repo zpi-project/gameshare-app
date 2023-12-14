@@ -49,6 +49,7 @@ services:
       - "./certbot/conf/:/etc/nginx/ssl/:ro"
     ports:
       - "${FRONTEND_PORT}:5173"
+      - "80:80"
     profiles:
       - deploy
     env_file:
