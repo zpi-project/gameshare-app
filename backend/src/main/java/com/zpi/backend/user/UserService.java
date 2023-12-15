@@ -100,6 +100,7 @@ public class UserService {
                                                               Optional<Integer> playersNumber, Optional<Integer> maxPricePerDay, Optional<String> userUUID, double latitude,
                                                               double longitude) {
         Pageable pageable = PageRequest.of(page, size);
+        System.out.println("Size: "+size+", page: " + page);
         Category category = null;
         if (categoryId.isPresent())
             category = categoryRepository.getReferenceById(categoryId.get());
