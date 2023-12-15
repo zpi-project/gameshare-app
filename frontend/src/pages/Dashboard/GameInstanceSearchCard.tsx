@@ -45,20 +45,20 @@ const GameInstanceSearchCard: FC<GameInstanceSearchCardProps> = ({
               <Stars count={Math.round(avgRating)} variant="secondary" />
             </div>
           ) : (
-            <Badge variant="secondary" className="w-max px-3 py-1">
+            <Badge variant="secondary" className="hidden md:flex w-max px-3 py-1">
               {t("noOpinions")}
             </Badge>
           )}
         </div>
         <div className="flex w-full flex-row justify-between">
           <PriceBadge price={pricePerDay} />
-          <div className="flex flex-row flex-wrap gap-1">
+          <div className="hidden sm:flex flex-row flex-wrap gap-1">
             <TimeBadge time={playingTime} />
             <PlayersBadge minPlayers={minPlayers} maxPlayers={maxPlayers} />
             <AgeBadge age={age} />
           </div>
         </div>
-        <p className="line-clamp-2 break-all text-sm italic">{description}</p>
+        <p className="hidden md:flex line-clamp-2 break-all text-sm italic">{description}</p>
       </section>
     </Link>
   );

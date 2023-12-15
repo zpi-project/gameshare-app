@@ -100,7 +100,7 @@ const Dashboard: FC = () => {
   }, [entry?.isIntersecting, fetchGamesNextPage, isGamesLoading]);
 
   return (
-    <div className="flex h-full w-full flex-row gap-6">
+    <div className="flex h-full w-full flex-col lg:flex-row gap-6">
       <div className="flex-grow overflow-hidden rounded-lg bg-section">
         <Map autolocate location={location} setLocation={setLocation}>
           {isUsersLoading || isFetchingUsersNextPage ? <LoadingMap /> : <></>}
@@ -121,7 +121,7 @@ const Dashboard: FC = () => {
           </>
         </Map>
       </div>
-      <div className="flex w-[700px] flex-col gap-4 rounded-lg bg-section p-4">
+      <div className="flex h-1/2 lg:h-full lg:w-[700px] flex-col gap-4 rounded-lg bg-section p-4">
         <GamesSearch onSubmit={setSearchParams} />
         {userParam && <UserFilter user={userParam} />}
         <ScrollArea>
