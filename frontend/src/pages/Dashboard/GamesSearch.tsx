@@ -73,12 +73,12 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
             <Search />
           </Button>
         </div>
-        <div className="hidden md:flex flex-row flex-wrap space-between gap-3">
+        <div className="space-between hidden flex-row flex-wrap gap-3 md:flex">
           <FormField
             control={form.control}
             name="categoryId"
             render={({ field }) => (
-              <FormItem className="flex-grow flex flex-col">
+              <FormItem className="flex flex-grow flex-col">
                 <FormLabel>{t("category")}</FormLabel>
                 <FormControl>
                   <SelectInput
@@ -98,7 +98,7 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
             control={form.control}
             name="maxPricePerDay"
             render={({ field }) => (
-              <FormItem className="flex-grow flex flex-col">
+              <FormItem className="flex flex-grow flex-col">
                 <FormLabel>{t("pricePerDay")}</FormLabel>
                 <FormControl>
                   <SelectInput
@@ -117,7 +117,7 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
             control={form.control}
             name="playersNumber"
             render={({ field }) => (
-              <FormItem className="flex-grow flex flex-col">
+              <FormItem className="flex flex-grow flex-col">
                 <FormLabel>{t("players")}</FormLabel>
                 <FormControl>
                   <SelectInput
@@ -136,7 +136,7 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
             control={form.control}
             name="age"
             render={({ field }) => (
-              <FormItem className="flex-grow flex flex-col">
+              <FormItem className="flex flex-grow flex-col">
                 <FormLabel>{t("age")}</FormLabel>
                 <FormControl>
                   <SelectInput
