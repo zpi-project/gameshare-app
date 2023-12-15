@@ -68,7 +68,7 @@ class ReservationsTests {
     EmailTypeService emailTypeService;
     @Test
     void testAddReservationSuccessfully() throws UserDoesNotExistException, BadRequestException, GameInstanceDoesNotExistException, IOException, EmailTypeDoesNotExists {
-                Authentication authentication =  any()/* create a mock Authentication */;
+                Authentication authentication =  any();
         NewReservationDTO newReservationDTO = ReservationTestUtils.createNewReservationDTO() /* create a mock NewReservationDTO */;
         when(userService.getUser(authentication)).thenReturn(UserTestUtils.createUser(Role.USER));
                 GameInstance gameInstance = GameInstanceTestUtils.createGameInstance();

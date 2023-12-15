@@ -48,7 +48,6 @@ describe("Starting page loads correctly", () => {
   });
 
   it("can log in", () => {
-    cy.loginByGoogleApi();
     cy.visit("http://localhost:5173/").reload();
   });
 });

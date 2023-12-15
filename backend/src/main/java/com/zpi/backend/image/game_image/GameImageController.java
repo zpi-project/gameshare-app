@@ -20,7 +20,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/games/{gameId}/images")
-@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
+//@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class GameImageController {
     GameImageService gameImageService;
 

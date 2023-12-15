@@ -22,7 +22,6 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("${FRONTEND_HOST}:${FRONTEND_PORT}")
 public class UserController {
     UserService userService;
 

@@ -8,6 +8,8 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+    profiles:
+      - deploy
     ports:
       - "5432:5432"
 
@@ -23,6 +25,8 @@ services:
       - "${BACKEND_PORT}:8080"
     env_file:
       - .env
+    profiles:
+      - deploy
     depends_on:
       - db
 
@@ -31,12 +35,34 @@ services:
     build:
       context: frontend
       dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL}
+        - VITE_AUTH_CLIENT_ID=${VITE_AUTH_CLIENT_ID}
+        - VITE_SECURE_LOCAL_STORAGE_HASH_KEY=${VITE_SECURE_LOCAL_STORAGE_HASH_KEY}
+        - VITE_SECURE_LOCAL_STORAGE_PREFIX=${VITE_SECURE_LOCAL_STORAGE_PREFIX}
     volumes:
       - "./frontend/src/:/usr/app/src/"
       - "./frontend/build:/usr/app/build/"
       - "./frontend/public/:/usr/app/public/"
       - "./frontend/cypress/:/usr/app/cypress/"
+      -  "./certbot/www:/var/www/certbot/:ro"
+      - "./certbot/conf/:/etc/nginx/ssl/:ro"
     ports:
-      - "${FRONTEND_PORT}:5173"
+      - "${FRONTEND_PORT}:443"
+      - "80:80"
+    profiles:
+      - deploy
+    restart:
+        always
     env_file:
       - .env
+    depends_on:
+        - backend
+        - db
+  certbot:
+    image: certbot/certbot:v2.8.0
+    profiles:
+      - certbot
+    volumes:
+      - "./certbot/www/:/var/www/certbot/:rw"
+      - "./certbot/conf/:/etc/letsencrypt/:rw"

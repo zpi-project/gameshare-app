@@ -29,7 +29,6 @@ public class GoogleTokenFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, ResponseStatusException, IOException {
 
         String authenticationHeader = request.getHeader(AUTHENTICATION_HEADER);
-
         String path = request.getRequestURI();
         if (path.startsWith(SWAGGER_UI_URL) || path.startsWith(OPENAPI_DOCS_URL)) {
             filterChain.doFilter(request, response);
