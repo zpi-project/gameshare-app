@@ -31,4 +31,9 @@ public interface RecommendationRepository extends JpaRepository<AssociationRuleD
 
     @Query("select g from Game g where g.id in :gamesIds")
     Page<Game> getRecommendedGames(@Param("gamesIds") Set<Long> gamesIds, Pageable pageable);
+
+    @Query("select gi.game.id as gameId " +
+            "from GameInstance gi " +
+            "where gi.owner.id = :userId")
+    List<Long> getAllUserGameInstances(@Param("userId") long userId);
 }

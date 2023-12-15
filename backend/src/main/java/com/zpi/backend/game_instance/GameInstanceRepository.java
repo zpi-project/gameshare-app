@@ -36,4 +36,6 @@ public interface GameInstanceRepository extends JpaRepository<GameInstance, Long
             "where gii.gameInstance.uuid = :gameInstanceUUID")
     int howManyGameInstanceImages(@Param("gameInstanceUUID") String gameInstanceUUID);
 
+
+
 }
