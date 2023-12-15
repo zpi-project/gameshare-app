@@ -19,8 +19,8 @@ public class UserSpecification implements Specification<User> {
     @Override
     public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
-        Join<User, GameInstance> gameInstances = root.join("gameInstances", JoinType.LEFT);
-        Join<GameInstance, Game> game = gameInstances.join("game", JoinType.LEFT);
+        Join<User, GameInstance> gameInstances = root.join("gameInstances", JoinType.INNER);
+        Join<GameInstance, Game> game = gameInstances.join("game", JoinType.INNER);
         final List<Predicate> predicates = new ArrayList<>();
 
         if (criteria.getAge() != null) {
@@ -57,6 +57,7 @@ public class UserSpecification implements Specification<User> {
 
         // Only active games
         predicates.add(cb.equal(gameInstances.get("isActive"), true));
+        query.groupBy(root);
 
         if (criteria.getLatitude() != null && criteria.getLongitude() != null) {
             predicates.add(cb.isNotNull(root.get("locationLatitude")));
