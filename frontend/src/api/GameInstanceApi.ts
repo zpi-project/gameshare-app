@@ -90,7 +90,7 @@ export class GameInstanceApi {
   }
 
   static async addGameInstanceOpinion(opinion: NewGameInstanceOpinion) {
-    const { data } = await Api.post<NewGameInstanceOpinion>(`game-instances/opinions`, opinion);
+    const { data } = await Api.post<NewGameInstanceOpinion>("game-instances/opinions", opinion);
     return data;
   }
 

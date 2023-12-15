@@ -59,7 +59,7 @@ export class UserApi {
   }
 
   static async addOpinion(opinion: NewOpinion) {
-    const { data } = await Api.post<NewOpinion>(`/user/opinions`, opinion);
+    const { data } = await Api.post<NewOpinion>("/user/opinions", opinion);
     return data;
   }
 }
