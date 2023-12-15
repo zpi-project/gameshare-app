@@ -21,9 +21,8 @@ public class Game {
     @Column(unique = true)
     private Long originalId;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
-
 
     private String name_pl;
 

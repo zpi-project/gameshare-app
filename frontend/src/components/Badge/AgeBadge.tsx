@@ -11,7 +11,7 @@ const AgeBadge: FC<AgeBadgeProps> = ({ age }) => {
     <Badge variant="secondary" className="flex w-max flex-row gap-1" data-test="age-badge">
       <Baby size={20} data-test="baby-icon" />
       <span className="tracking-wider" data-test="age">
-        +{age}
+        {age}+
       </span>
     </Badge>
   );

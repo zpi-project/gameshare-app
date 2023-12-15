@@ -30,6 +30,7 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
   const { data: user } = useQuery({
     queryKey: ["user", { token }],
     queryFn: UserApi.get,
+    enabled: role !== "guest",
   });
 
   return (
