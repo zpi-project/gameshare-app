@@ -38,7 +38,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
   return (
     <ScrollArea className="h-full w-full xl:h-max">
       <div className="flex h-full w-full flex-col gap-4 xl:h-[calc(100vh-48px)] xl:flex-row">
-        <ScrollArea className="h-full flex-grow">
+        <ScrollArea className="h-full flex-grow xl:max-w-[40%]">
           <div className="flex flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
             <div className="relative flex-grow rounded-lg bg-section p-8">
               <div
@@ -81,7 +81,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
             />
           </div>
         </ScrollArea>
-        <ScrollArea className="h-full flex-grow xl:max-w-[30%]">
+        <ScrollArea className="h-full flex-grow xl:max-w-[40%]">
           <div className="flex flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
             <div className="relative flex-grow rounded-lg bg-section p-8">
               <div
@@ -105,7 +105,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
             />
           </div>
         </ScrollArea>
-        <ScrollArea className="h-full  xl:w-[472px] xl:min-w-[472px]">
+        <ScrollArea className="h-full flex-grow xl:min-w-[472px] xl:max-w-[40%]">
           <div className="relative flex flex-grow flex-col gap-4 rounded-lg bg-section p-4 xl:min-h-[calc(100vh-48px)]">
             <div
               className="absolute left-4 right-4 top-4 h-1/3 rounded-lg opacity-50 dark:opacity-40"

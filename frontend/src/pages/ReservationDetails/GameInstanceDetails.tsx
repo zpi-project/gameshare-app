@@ -22,7 +22,7 @@ const GameInstanceDetails: FC<GameInstanceDetailsProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex w-full flex-col gap-4">
       <h3 className="text-xl uppercase">{t("gameDetails")}</h3>
       <div className="flex flex-col gap-4">
         <div className="flex flex-row flex-wrap justify-between">
@@ -30,7 +30,7 @@ const GameInstanceDetails: FC<GameInstanceDetailsProps> = ({
           <PriceBadge price={pricePerDay} />
         </div>
         <div className="flex flex-row gap-4">
-          <div className="h-[190px] w-[190px] min-w-[190px] flex-grow overflow-hidden rounded-lg bg-section">
+          <div className="h-[190px] w-[190px] min-w-[190px] max-w-[190px] flex-grow overflow-hidden rounded-lg bg-section">
             <img
               src={images.length ? images[0].link : image}
               alt={name}
@@ -50,7 +50,7 @@ const GameInstanceDetails: FC<GameInstanceDetailsProps> = ({
                 </Badge>
               )}
             </div>
-            <p className="line-clamp-6 break-all italic">{description}</p>
+            <p className="line-clamp-6 break-all italic xl:max-w-[400px]">{description}</p>
           </div>
         </div>
       </div>
