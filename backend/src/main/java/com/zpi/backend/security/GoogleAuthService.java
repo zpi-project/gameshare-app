@@ -19,7 +19,6 @@ public class GoogleAuthService {
     private String clientId;
 
     public GoogleIdToken validateToken(String token) throws GeneralSecurityException,ResponseStatusException, IOException {
-        System.out.println("validateToke token: " + token);
         GoogleIdTokenVerifier verifier =
                 new GoogleIdTokenVerifier.Builder(new NetHttpTransport(),
                         new GsonFactory()).setAudience(Collections.singletonList(clientId))
