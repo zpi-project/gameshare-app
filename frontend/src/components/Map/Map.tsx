@@ -58,11 +58,10 @@ const Map: FC<MapProps> = props => {
       setLocation && setLocation([coords.latitude, coords.longitude]);
     } else {
       if (user) {
-        console.log("setting");
         setLocation && setLocation([user.locationLatitude, user.locationLongitude]);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autolocate, coords, isGeolocationAvailable, isGeolocationEnabled, user]);
 
   return (

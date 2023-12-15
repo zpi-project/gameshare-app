@@ -124,7 +124,7 @@ const OpinionAboutRenter: FC<OpinionAboutRenterProps> = ({
                 />
               </div>
               <div className="flex justify-end p-1">
-                <Button className="w-40 mt-4" type="submit">
+                <Button className="mt-4 w-40" type="submit">
                   {t("saveOpinion")}
                 </Button>
               </div>

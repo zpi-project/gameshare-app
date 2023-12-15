@@ -2,8 +2,9 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { locationState } from "@/state/location";
+import { roleState } from "@/state/role";
 import { tokenState } from "@/state/token";
 import { GameInstanceSearchParams } from "@/types/GameInstance";
 import { User } from "@/types/User";
@@ -37,7 +38,8 @@ const Dashboard: FC = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const token = useRecoilState(tokenState);
+  const token = useRecoilValue(tokenState);
+  const role = useRecoilValue(roleState);
 
   const {
     data: gameInstances,
@@ -49,7 +51,7 @@ const Dashboard: FC = () => {
   } = useInfiniteQuery({
     queryKey: [
       "search-game-instances",
-      { ...searchParams, uuid: userParam?.uuid, token, language },
+      { ...searchParams, uuid: userParam?.uuid, token, language, role },
     ],
     queryFn: ({ pageParam = 0 }) =>
       GameInstanceApi.search(
@@ -72,7 +74,7 @@ const Dashboard: FC = () => {
     fetchNextPage: usersFetchNextPage,
     isFetchingNextPage: isFetchingUsersNextPage,
   } = useInfiniteQuery({
-    queryKey: ["user-pins", { ...searchParams, token }],
+    queryKey: ["user-pins", { ...searchParams, token, role }],
     queryFn: ({ pageParam = 0 }) =>
       UserApi.search(latitude, longitude, pageParam as number, USERS_PAGE_SIZE, searchParams),
     getNextPageParam: (_, pages) => {
@@ -100,7 +102,7 @@ const Dashboard: FC = () => {
   }, [entry?.isIntersecting, fetchGamesNextPage, isGamesLoading]);
 
   return (
-    <div className="flex h-full w-full flex-row gap-6">
+    <div className="flex h-full w-full flex-col gap-6 lg:flex-row">
       <div className="flex-grow overflow-hidden rounded-lg bg-section">
         <Map autolocate location={location} setLocation={setLocation}>
           {isUsersLoading || isFetchingUsersNextPage ? <LoadingMap /> : <></>}
@@ -121,7 +123,7 @@ const Dashboard: FC = () => {
           </>
         </Map>
       </div>
-      <div className="flex w-[700px] flex-col gap-4 rounded-lg bg-section p-4">
+      <div className="flex h-1/2 flex-col gap-4 rounded-lg bg-section p-4 lg:h-full lg:w-[700px]">
         <GamesSearch onSubmit={setSearchParams} />
         {userParam && <UserFilter user={userParam} />}
         <ScrollArea>
