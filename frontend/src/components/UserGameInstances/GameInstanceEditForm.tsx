@@ -222,7 +222,7 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
                   name="pricePerDay"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("provideGamePrice")}</FormLabel>
+                      <FormLabel>{t("provideGamePrice")} *</FormLabel>
                       <FormControl>
                         <Input
                           data-test="price-per-day"
@@ -243,7 +243,7 @@ const GameEditForm: FC<GameEditFormProps> = ({ id, onClose, userId }) => {
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("addGameDesc")}</FormLabel>
+                      <FormLabel>{t("addGameDesc")} *</FormLabel>
                       <FormControl>
                         <div className="grid h-[370px] w-full gap-2.5 rounded-lg bg-card p-4">
                           <Textarea

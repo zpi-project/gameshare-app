@@ -118,7 +118,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
               name="startDate"
               render={({ field }) => (
                 <FormItem className="h-[80px]">
-                  <FormLabel>{t("formStartDate")}</FormLabel>
+                  <FormLabel>{t("formStartDate")} *</FormLabel>
                   <FormControl>
                     <DatePicker onSelect={field.onChange} placeholder={t("pickDate")} />
                   </FormControl>
@@ -131,7 +131,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
               name="endDate"
               render={({ field }) => (
                 <FormItem className="h-[80px]">
-                  <FormLabel>{t("formEndDate")}</FormLabel>
+                  <FormLabel>{t("formEndDate")} *</FormLabel>
                   <FormControl>
                     <DatePicker onSelect={field.onChange} placeholder={t("pickDate")} />
                   </FormControl>

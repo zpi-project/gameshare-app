@@ -58,7 +58,7 @@ export default {
 
   userGames: "Games of user",
   myGames: "My games",
-  addGameInstance: "Add your game",
+  addGameInstance: "Add game instance",
   popularNow: "Popular now",
   seeAll: "See all",
   popularGamesErrorTitle: "We couldn't load popular games.",
@@ -118,7 +118,7 @@ export default {
   fieldPositive: "{{field}} must be greater than 0.",
   maxPricePerDay: "Price per day must be less than 200.",
   yourGameDetails: "Your game details",
-  provideGamePrice: "Provide game instance price",
+  provideGamePrice: "Provide game instance price per day",
   typeHere: "Type here...",
   addGameDesc: "Add game description",
   chooseGameTitle: "Choose game title",
@@ -279,7 +279,7 @@ export default {
   choosePictures: "Choose up to 3 files. Format: JPG, JPEG or PNG",
   cannotFindGame:
     "If you cannot find the game you are looking for, you can make a new game request and await for one of our admins to accept it.",
-  addGame: "Add new game",
+  addGame: "Add game to catalog",
 
   gameName: "Game name",
   maxCharCount: "{{field}} can be of max length {{length}} characters.",
@@ -311,4 +311,6 @@ export default {
   results: "Results",
   catalog: "Game Catalog",
   adminPanel: "Admin Panel",
+  userManual: "User Manual",
+  contactUs: "Contact us",
 };

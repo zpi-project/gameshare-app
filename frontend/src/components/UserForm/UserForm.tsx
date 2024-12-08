@@ -110,7 +110,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
                 name="firstName"
                 render={({ field }) => (
                   <FormItem className="h-[80px]">
-                    <FormLabel>{t("firstName")}</FormLabel>
+                    <FormLabel>{t("firstName")} *</FormLabel>
                     <FormControl>
                       <Input
                         placeholder={t("firstName")}
@@ -128,7 +128,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
                 name="lastName"
                 render={({ field }) => (
                   <FormItem className="h-[80px]">
-                    <FormLabel>{t("lastName")}</FormLabel>
+                    <FormLabel>{t("lastName")} *</FormLabel>
                     <FormControl>
                       <Input
                         placeholder={t("lastName")}
@@ -151,7 +151,7 @@ const UserForm: FC<UserFormProps> = ({ onSubmit, type, formClassName, user }) =>
                         form.formState.errors.phoneNumber?.message ? "text-destructive" : ""
                       }`}
                     >
-                      {t("phoneNumber")}
+                      {t("phoneNumber")} *
                     </FormLabel>
                     <FormControl>
                       <PhoneInput country={"pl"} value={field.value} onChange={field.onChange} />

@@ -9,6 +9,7 @@ import { tokenState } from "@/state/token";
 import { URLS } from "@/constants/urls";
 import { UserApi } from "@/api/UserApi";
 import { Button } from "../ui/button";
+import Help from "./Help";
 import LanguageToggle from "./LanguageToggle";
 import LoginButton from "./LoginButton";
 import { ModeToggle } from "./ModeToggle";
@@ -32,7 +33,7 @@ const TopNav: FC = () => {
         </Link>
         <Link to={URLS.GAMES}>
           <Button
-            className="flex items-center gap-2 border border-primary px-2 text-primary hover:bg-primary"
+            className="flex items-center gap-2 border border-primary px-3 text-primary hover:bg-primary"
             variant="ghost"
           >
             <AlignLeft size={20} strokeWidth={1} />
@@ -50,6 +51,7 @@ const TopNav: FC = () => {
         )}
         <ModeToggle />
         <LanguageToggle />
+        <Help />
       </div>
     </div>
   );

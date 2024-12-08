@@ -63,7 +63,7 @@ const pl: typeof en = {
 
   userGames: "Gry użytkownika",
   myGames: "Moje gry",
-  addGameInstance: "Dodaj swoją grę",
+  addGameInstance: "Dodaj egzemplarz gry",
   popularNow: "Popularne teraz",
   seeAll: "Zobacz wszystkie",
   popularGamesErrorTitle: "Nie udało się pobrać popularnych gier.",
@@ -114,7 +114,7 @@ const pl: typeof en = {
   fieldPositive: "{{field}} musi być więcej niż 0.",
   maxPricePerDay: "Maksymalna cena to 200",
   yourGameDetails: "Informacje o twojej grze",
-  provideGamePrice: "Podaj cenę swojego egzemplarza gry",
+  provideGamePrice: "Podaj cenę za dzień swojego egzemplarza gry",
   typeHere: "Wpisz tutaj...",
   addGameDesc: "Dodaj opis swojej gry",
   chooseGameTitle: "Wybierz tytuł gry",
@@ -282,7 +282,7 @@ const pl: typeof en = {
   choosePictures: "Wybierz maksymalnie 3 pliki. Format: JPG, JPEG or PNG",
   cannotFindGame:
     "Jeżeli nie możesz znaleźć gry, której szukasz, możesz wysłać zapytanie do jednego z naszych administratorów o dodanie gry do ogólnej bazy gier.",
-  addGame: "Dodaj nową grę",
+  addGame: "Dodaj grę do katalogu",
 
   gameName: "Nazwa gry",
   maxCharCount: "{{field}} może mieć maksymalną długość {{length}} znaków.",
@@ -314,6 +314,8 @@ const pl: typeof en = {
   results: "Znalezione gry",
   adminPanel: "Panel administratora",
   catalog: "Katalog gier",
+  userManual: "Instrukcja użytkownika",
+  contactUs: "Skontaktuj się z nami",
 };
 
 export default pl;

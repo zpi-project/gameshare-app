@@ -167,7 +167,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                 name="gameId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("chooseGameTitle")}</FormLabel>
+                    <FormLabel>{t("chooseGameTitle")} *</FormLabel>
                     <FormControl>
                       <GameSearchBar
                         onGameClick={(game: Game) => {
@@ -187,7 +187,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                 name="pricePerDay"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("provideGamePrice")}</FormLabel>
+                    <FormLabel>{t("provideGamePrice")} *</FormLabel>
                     <FormControl>
                       <Input
                         className="border-none"
@@ -207,7 +207,7 @@ const GameInstanceForm: FC<GameInstanceFormProps> = ({ onSubmit }) => {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("addGameDesc")}</FormLabel>
+                    <FormLabel>{t("addGameDesc")} *</FormLabel>
                     <FormControl>
                       <div className="grid h-[370px] w-full gap-2.5 rounded-lg bg-card p-4">
                         <Textarea

@@ -221,7 +221,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
                   name="name"
                   render={({ field }) => (
                     <FormItem className="flex-grow">
-                      <FormLabel>{t("gameName")}</FormLabel>
+                      <FormLabel>{t("gameName")} *</FormLabel>
                       <FormControl>
                         <Input
                           className="border-none"
@@ -239,7 +239,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
                   name="categoriesIDs"
                   render={() => (
                     <FormItem className="mt-1.5 flex flex-col gap-1">
-                      <FormLabel>{t("categories")}</FormLabel>
+                      <FormLabel>{t("categories")} *</FormLabel>
                       <FormControl>
                         <SelectCategory
                           options={categories ?? []}
@@ -265,7 +265,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
                   name="playingTime"
                   render={({ field }) => (
                     <FormItem className="flex-grow">
-                      <FormLabel>{t("playingTime")}</FormLabel>
+                      <FormLabel>{t("playingTime")} *</FormLabel>
                       <FormControl>
                         <Input className="border-none" {...field} autoComplete="off" />
                       </FormControl>
@@ -278,7 +278,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
                   name="age"
                   render={({ field }) => (
                     <FormItem className="flex-grow">
-                      <FormLabel>{t("age")}</FormLabel>
+                      <FormLabel>{t("age")} *</FormLabel>
                       <FormControl>
                         <Input className="border-none" {...field} autoComplete="off" />
                       </FormControl>
@@ -293,7 +293,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
                   name="minPlayers"
                   render={({ field }) => (
                     <FormItem className="w-1/2 flex-grow">
-                      <FormLabel>{t("minPlayers")}</FormLabel>
+                      <FormLabel>{t("minPlayers")} *</FormLabel>
                       <FormControl>
                         <Input className="border-none" {...field} autoComplete="off" />
                       </FormControl>
@@ -306,7 +306,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
                   name="maxPlayers"
                   render={({ field }) => (
                     <FormItem className="w-1/2 flex-grow">
-                      <FormLabel>{t("maxPlayers")}</FormLabel>
+                      <FormLabel>{t("maxPlayers")} *</FormLabel>
                       <FormControl>
                         <Input className="border-none" {...field} autoComplete="off" />
                       </FormControl>
@@ -320,7 +320,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
                 name="shortDescription"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("gameDescription")}</FormLabel>
+                    <FormLabel>{t("gameDescription")} *</FormLabel>
                     <FormControl>
                       <div className="grid h-[370px] w-full gap-2.5 rounded-lg bg-card p-4">
                         <Textarea
