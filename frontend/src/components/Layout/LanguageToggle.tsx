@@ -15,12 +15,17 @@ const LanguageToggle: FC = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" data-test="language-toggle">
+        <Button
+          variant="outline"
+          size="icon"
+          data-test="language-toggle"
+          className="border-[#428ccd] text-[#428ccd]"
+        >
           <div className="uppercase">{i18n.language === "enUS" ? "en" : i18n.language}</div>
           <span className="sr-only">Toggle language</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" side="right">
+      <DropdownMenuContent align="end" className="min-w-[150px] bg-section p-3">
         {supportedLanguages.map((language, idx) => (
           <DropdownMenuItem
             onClick={() => void i18n.changeLanguage(language)}

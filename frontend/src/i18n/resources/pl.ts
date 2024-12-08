@@ -3,7 +3,7 @@ import en from "./en";
 const pl: typeof en = {
   myProfile: "Mój profil",
   login: "Zaloguj",
-  logout: "Wyloguj",
+  logout: "Wyloguj się",
   loading: "Ładowanie",
 
   mode: "Motyw",
@@ -312,6 +312,8 @@ const pl: typeof en = {
   filters: "Filtry",
   clearFilters: "Wyczyść filtry",
   results: "Znalezione gry",
+  adminPanel: "Panel administratora",
+  catalog: "Katalog gier",
 };
 
 export default pl;

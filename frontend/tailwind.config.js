@@ -25,6 +25,7 @@ module.exports = {
         secondary: {
           DEFAULT: "hsl(var(--secondary) / <alpha-value>)",
           foreground: "hsl(var(--secondary-foreground))",
+          dark: "hsl(var(--secondary-dark) / <alpha-value>)",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive) / <alpha-value>)",

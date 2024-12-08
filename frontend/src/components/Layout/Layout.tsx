@@ -14,8 +14,8 @@ import { tokenState } from "@/state/token";
 import Api from "@/api/Api";
 import { RoleApi } from "@/api/RoleApi";
 import { RegisterUserForm } from "@/components/UserForm";
-import SideNav from "./components/SideNav";
-import Spinner from "./components/ui/Spinner";
+import Spinner from "../ui/Spinner";
+import TopNav from "./TopNav";
 
 const Layout: FC = () => {
   const setRole = useSetRecoilState(roleState);
@@ -81,9 +81,9 @@ const Layout: FC = () => {
   }, [language, token]);
 
   return (
-    <div className=" flex h-screen w-screen flex-row gap-6 p-6">
-      <SideNav />
-      <div className="h-[calc(100vh-48px)] w-[calc(100vw-140px)]">
+    <div className="flex h-screen w-screen flex-col px-6">
+      <TopNav />
+      <div className="h-[calc(100vh-88px)] w-[calc(100vw-48px)]">
         <RegisterUserForm onRegisterSuccess={() => void refetch()} />
         <Outlet />
       </div>

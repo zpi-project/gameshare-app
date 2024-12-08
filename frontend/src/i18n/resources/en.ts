@@ -309,4 +309,6 @@ export default {
   filters: "Filtry",
   clearFilters: "Clear filters",
   results: "Results",
+  catalog: "Game Catalog",
+  adminPanel: "Admin Panel",
 };

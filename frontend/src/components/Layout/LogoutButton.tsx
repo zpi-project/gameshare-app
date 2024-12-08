@@ -23,7 +23,12 @@ const LogoutButton: FC = () => {
   };
 
   return (
-    <Button onClick={logout} variant="outline" data-test="logout-button">
+    <Button
+      onClick={logout}
+      data-test="logout-button"
+      className="w-full justify-start text-red-800"
+      variant="ghost"
+    >
       {t("logout")}
     </Button>
   );
