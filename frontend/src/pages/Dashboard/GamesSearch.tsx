@@ -1,9 +1,10 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, FC, SetStateAction, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Separator } from "@radix-ui/react-dropdown-menu";
 import { useQuery } from "@tanstack/react-query";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { z } from "zod";
 import { GameInstanceSearchParams } from "@/types/GameInstance";
 import { CategoryApi } from "@/api/CategoryApi";
@@ -33,7 +34,12 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
   const { data: categories } = useQuery({
     queryKey: ["categories", { language }],
     queryFn: CategoryApi.getAll,
-    select: data => data.map(({ name, id }) => ({ label: name, value: id })),
+    select: data =>
+      data
+        .map(({ name, id }) => ({ label: name, value: id }))
+        .sort((a, b) => {
+          return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
+        }),
   });
 
   const formSchema = z.object({
@@ -48,6 +54,25 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
     resolver: zodResolver(formSchema),
   });
 
+  const categoryId = form.watch("categoryId");
+  const maxPricePerDay = form.watch("maxPricePerDay");
+  const playersNumber = form.watch("playersNumber");
+  const age = form.watch("age");
+  const name = form.watch("searchName");
+
+  useEffect(() => {
+    onSubmit(form.getValues());
+  }, [categoryId, maxPricePerDay, playersNumber, age, onSubmit, form]);
+
+  const resetFilters = () => {
+    form.setValue("categoryId", undefined);
+    form.setValue("maxPricePerDay", undefined);
+    form.setValue("playersNumber", undefined);
+    form.setValue("age", undefined);
+  };
+
+  const showResetFilters = categoryId ?? maxPricePerDay ?? playersNumber ?? age;
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
@@ -58,21 +83,39 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
             render={({ field }) => (
               <FormItem className="flex-grow">
                 <FormControl>
-                  <Input
-                    placeholder={t("typeToSearch")}
-                    {...field}
-                    className="border-0 bg-card"
-                    autoComplete="off"
-                  />
+                  <div className="relative">
+                    <Input
+                      placeholder={t("typeToSearch")}
+                      {...field}
+                      className="border-0 bg-card"
+                      autoComplete="off"
+                    />
+                    {name && (
+                      <Button
+                        size="icon"
+                        className="absolute right-0 top-0 hover:bg-transparent hover:text-primary"
+                        variant="ghost"
+                        type="button"
+                        onClick={() => {
+                          form.setValue("searchName", "");
+                          onSubmit(form.getValues());
+                        }}
+                      >
+                        <X size={20} />
+                      </Button>
+                    )}
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button size="icon" type="submit" className="bg-card">
-            <Search />
+          <Button type="submit" className="flex gap-2 bg-card">
+            <span>{t("search")}</span>
+            <Search size={20} />
           </Button>
         </div>
+        <p className="mt-2 text-xl font-bold">{t("filters")}</p>
         <div className="space-between hidden flex-row flex-wrap gap-3 md:flex">
           <FormField
             control={form.control}
@@ -82,6 +125,7 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
                 <FormLabel>{t("category")}</FormLabel>
                 <FormControl>
                   <SelectInput
+                    value={field.value?.toString()}
                     options={categories ?? []}
                     placeholder={t("all")}
                     noResultsInfo={t("noResults")}
@@ -102,6 +146,7 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
                 <FormLabel>{t("pricePerDay")}</FormLabel>
                 <FormControl>
                   <SelectInput
+                    value={field.value?.toString()}
                     options={PRICE_PER_DAY_OPTIONS}
                     placeholder={t("any", { context: "female" })}
                     noResultsInfo={t("noResults")}
@@ -122,6 +167,7 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
                 <FormControl>
                   <SelectInput
                     options={PLAYERS_OPTIONS}
+                    value={field.value?.toString()}
                     placeholder={t("any", { context: "female" })}
                     noResultsInfo={t("noResults")}
                     onChange={field.onChange}
@@ -141,6 +187,7 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
                 <FormControl>
                   <SelectInput
                     options={AGE_OPTIONS}
+                    value={field.value?.toString()}
                     placeholder={t("any", { context: "male" })}
                     noResultsInfo={t("noResults")}
                     onChange={field.onChange}
@@ -153,6 +200,21 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
           />
         </div>
       </form>
+      <div className="h-10">
+        {showResetFilters && (
+          <Button
+            type="button"
+            className="ml-auto flex w-36 gap-1 px-1 text-sm text-foreground/70 hover:bg-transparent hover:text-primary"
+            variant="ghost"
+            onClick={resetFilters}
+          >
+            <span>{t("clearFilters")}</span>
+            <X size={16} />
+          </Button>
+        )}
+      </div>
+      <p className="text-xl font-bold">{t("results")}</p>
+      <Separator className="h-0.5 w-full bg-muted" />
     </Form>
   );
 };

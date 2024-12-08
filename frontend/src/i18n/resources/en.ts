@@ -99,6 +99,7 @@ export default {
     "This action will make this game visible again. Other users will have possibility to see it and make resrevations.",
 
   typeToSearch: "Type to search...",
+  search: "Search",
   category: "Category",
   all: "All",
   pricePerDay: "Price per day",
@@ -305,4 +306,7 @@ export default {
   editGameData: "Edit your game details",
   updateImages: "Update images",
   errorEditingGameInstance: "There was an error editing this game.",
+  filters: "Filtry",
+  clearFilters: "Clear filters",
+  results: "Results",
 };

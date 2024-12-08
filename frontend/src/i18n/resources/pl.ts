@@ -121,7 +121,8 @@ const pl: typeof en = {
   uploadGamePhotos: "Dodaj zdjęcia swojej gry",
   noOpinionsGameInstance: "Ten egzemplarz nie ma jeszcze żadnej opinii",
   gameInstaneDescriptionMin: "Opis gry musi mieć min 2 znaki.",
-  typeToSearch: "Wyszukaj grę...",
+  typeToSearch: "Wpisz nazwę gry...",
+  search: "Szukaj",
   category: "Kategoria",
   all: "Wszystkie",
   pricePerDay: "Cena za dzień",
@@ -308,6 +309,9 @@ const pl: typeof en = {
   editGameData: "Edytuj szczegóły twojej gry",
   updateImages: "Edytuj zdjęcia",
   errorEditingGameInstance: "Wystąpił błąd podczas edytowania tej gry.",
+  filters: "Filtry",
+  clearFilters: "Wyczyść filtry",
+  results: "Znalezione gry",
 };
 
 export default pl;

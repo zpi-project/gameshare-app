@@ -27,6 +27,7 @@ interface SelectInputProps {
   width?: string;
   disabled?: boolean;
   clearValueOnChange?: boolean;
+  value?: string;
 }
 
 const SelectInput: FC<SelectInputProps> = ({
@@ -39,9 +40,16 @@ const SelectInput: FC<SelectInputProps> = ({
   width,
   disabled,
   clearValueOnChange,
+  value: parentValue = "",
 }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    if (!parentValue) {
+      setValue("");
+    }
+  }, [parentValue]);
 
   useEffect(() => {
     if (value.length) {
