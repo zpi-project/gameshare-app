@@ -10,8 +10,8 @@ export default {
   system: "System",
 
   language: "Language",
-  pl: "Polish",
-  enUS: "English",
+  pl: "PL",
+  enUS: "EN",
 
   addOpinion: "Add opinion",
   seeMore: "See more",
@@ -313,4 +313,13 @@ export default {
   adminPanel: "Admin Panel",
   userManual: "User Manual",
   contactUs: "Contact us",
+  urls: {
+    games: "games",
+    "game-categories": "game categories",
+    "my-reservations": "my reservations",
+    "my-profile": "my profile",
+    profile: "users",
+    "game-requests": "game requests",
+    home: "home",
+  },
 };

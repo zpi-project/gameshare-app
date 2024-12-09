@@ -1,10 +1,12 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { parsePhoneNumber } from "libphonenumber-js";
 import { URLS } from "@/constants/urls";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
+import { UserApi } from "@/api/UserApi";
 import Avatar from "@/components/Avatar";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -17,6 +19,13 @@ interface Props {
 const GameInstanceUserDetailsSection: FC<Props> = ({ user, isLoading }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const { data: myUser } = useQuery({
+    queryKey: ["user"],
+    queryFn: UserApi.get,
+  });
+
+  const isMyGame = myUser?.uuid === user?.uuid;
 
   return (
     <div className="flex h-full flex-col items-center gap-6">
@@ -39,8 +48,11 @@ const GameInstanceUserDetailsSection: FC<Props> = ({ user, isLoading }) => {
                 {parsePhoneNumber(user.phoneNumber).formatInternational()}
               </div>
             )}
-            <Button className="w-1/2" onClick={() => navigate(`${URLS.PROFILE}/${user?.uuid}`)}>
-              {t("seeProfile")}
+            <Button
+              className="w-1/2"
+              onClick={() => navigate(isMyGame ? URLS.MY_PROFILE : `${URLS.PROFILE}/${user?.uuid}`)}
+            >
+              {t(isMyGame ? "myProfile" : "seeProfile")}
             </Button>
           </div>
         </>

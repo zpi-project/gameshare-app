@@ -12,8 +12,8 @@ const pl: typeof en = {
   system: "Systemowy",
 
   language: "Język",
-  pl: "polski",
-  enUS: "angielski",
+  pl: "PL",
+  enUS: "EN",
 
   addOpinion: "Dodaj opinię",
   seeMore: "Rozwiń",
@@ -316,6 +316,15 @@ const pl: typeof en = {
   catalog: "Katalog gier",
   userManual: "Instrukcja użytkownika",
   contactUs: "Skontaktuj się z nami",
+  urls: {
+    games: "gry",
+    "game-categories": "kategorie gier",
+    "my-reservations": "moje rezerwacje",
+    "my-profile": "mój profil",
+    profile: "użytkownicy",
+    "game-requests": "prośby o akceptację gier",
+    home: "Dashboard",
+  },
 };
 
 export default pl;
