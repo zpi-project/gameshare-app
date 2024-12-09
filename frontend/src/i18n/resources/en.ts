@@ -130,6 +130,7 @@ export default {
   any_female: "Any",
 
   myReservations: "My reservations",
+  filterReservations: "Filter reservations",
   reservationStatus: "Reservation status",
   reservationType: "Reservation type",
   errorFetchingReservations: "We couldn't load your reservations.",
@@ -145,6 +146,7 @@ export default {
   reservationTypes: {
     owner: "As game owner",
     renter: "As game renter",
+    all: "All",
   },
 
   reservationStatuses: {
@@ -166,6 +168,17 @@ export default {
       REJECTED_BY_OWNER: "Rejected by owner",
       CANCELED_BY_OWNER: "Canceled by owner",
       CANCELED_BY_RENTER: "Canceled by me",
+      RENTED: "Rented",
+      FINISHED: "Finished",
+      EXPIRED: "Expired",
+    },
+    all: {
+      ALL: "All",
+      PENDING: "Pending approval",
+      ACCEPTED_BY_OWNER: "Accepted by owner",
+      REJECTED_BY_OWNER: "Rejected by owner",
+      CANCELED_BY_OWNER: "Canceled by owner",
+      CANCELED_BY_RENTER: "Canceled by renter",
       RENTED: "Rented",
       FINISHED: "Finished",
       EXPIRED: "Expired",
@@ -220,16 +233,16 @@ export default {
 
   reservationDetails: {
     renter: {
-      userDetails: "Owner - details",
-      renterMessage: "Message left by you:",
+      userDetails: "Game Owner",
+      renterMessage: "Your message for game owner:",
       renterNoMessage: "You hasn't left any message for owner.",
       ownerOpinion: "Your opinion about owner",
       renterOpinion: "Owner's opininon about you",
       gameOpinion: "Your opinion about owner's game",
     },
     owner: {
-      userDetails: "Renter - details",
-      renterMessage: "Message left by renter:",
+      userDetails: "Renter",
+      renterMessage: "Message left by renter for you:",
       renterNoMessage: "Renter hasn't left any message for you.",
       ownerOpinion: "Renter's opinion about you",
       renterOpinion: "Your opinion about renter",
@@ -237,7 +250,7 @@ export default {
     },
   },
 
-  reservationHeader: "reservation - {{reservationId}} - details",
+  reservationHeader: "reservation - {{reservationId}}",
   status: "Status:",
   ownerNoOpinion: "Renter hasn't added an opinion about you yet.",
   noGameOpinion: "Renter hasn't added an opinion about your game yet.",
@@ -322,4 +335,7 @@ export default {
     "game-requests": "game requests",
     home: "home",
   },
+  myGame: "My game",
+  changeReservationStatus: "Change reservation status to:",
+  save: "Save",
 };

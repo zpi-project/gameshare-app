@@ -1,8 +1,7 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
 import { tokenState } from "@/state/token";
 import { URLS } from "@/constants/urls";
@@ -13,11 +12,11 @@ import { useToast } from "@/components/ui/use-toast";
 import ReservationsList from "./ReservationsList";
 import ReservationsSideBar from "./ReservationsSideBar";
 
-const RESERVATIONS_PAGE_SIZE = 10;
+const RESERVATIONS_PAGE_SIZE = 100;
 
 const ReservationsHistory: FC = () => {
   const [queryParams, setQueryParams] = useState<ReservationQueryParams>({
-    asOwner: true,
+    asOwner: "all",
     status: undefined,
   });
   const navigate = useNavigate();
@@ -26,17 +25,20 @@ const ReservationsHistory: FC = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { ref, entry } = useInView({ trackVisibility: true, delay: 100 });
   const token = useRecoilValue(tokenState);
 
-  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ["reservations", { queryParams, token, language }],
+  const { data: ownerReservations, isLoading: isOnwerLoading } = useQuery({
+    queryKey: ["owner-reservations", { status: queryParams.status, token, language }],
     queryFn: ({ pageParam = 0 }) =>
-      ReservationsApi.getAll(pageParam, RESERVATIONS_PAGE_SIZE, queryParams),
+      ReservationsApi.getAll(pageParam, RESERVATIONS_PAGE_SIZE, {
+        status: queryParams.status,
+        asOwner: "owner",
+      }),
     getNextPageParam: (_, pages) => {
       const newPageParam = pages.length;
       return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
     },
+    enabled: queryParams.asOwner === "all" || queryParams.asOwner === "owner",
     onError: () => {
       toast({
         title: t("errorFetchingReservations"),
@@ -47,11 +49,34 @@ const ReservationsHistory: FC = () => {
     },
   });
 
-  useEffect(() => {
-    if (entry?.isIntersecting && !isLoading) {
-      void fetchNextPage();
-    }
-  }, [entry?.isIntersecting, fetchNextPage, isLoading]);
+  const { data: renterReservations, isLoading } = useQuery({
+    queryKey: ["renter-reservations", { status: queryParams.status, token, language }],
+    queryFn: ({ pageParam = 0 }) =>
+      ReservationsApi.getAll(pageParam, RESERVATIONS_PAGE_SIZE, {
+        status: queryParams.status,
+        asOwner: "renter",
+      }),
+    getNextPageParam: (_, pages) => {
+      const newPageParam = pages.length;
+      return newPageParam < pages[0].paginationInfo.totalPages ? newPageParam : undefined;
+    },
+    enabled: queryParams.asOwner === "all" || queryParams.asOwner === "renter",
+    onError: () => {
+      toast({
+        title: t("errorFetchingReservations"),
+        description: t("tryRefreshing"),
+        variant: "destructive",
+      });
+      navigate(URLS.DASHBOARD);
+    },
+  });
+
+  const combinedReservations =
+    queryParams.asOwner === "all"
+      ? [...(ownerReservations?.results ?? []), ...(renterReservations?.results ?? [])]
+      : queryParams.asOwner === "owner"
+        ? ownerReservations?.results ?? []
+        : renterReservations?.results ?? [];
 
   return (
     <div className="flex h-full flex-row gap-6">
@@ -59,14 +84,18 @@ const ReservationsHistory: FC = () => {
       <ScrollArea className="h-full flex-grow rounded-lg bg-section p-4">
         <ReservationsList
           asOwner={queryParams.asOwner}
-          reservations={data?.pages.flatMap(page => page.results) ?? []}
-          isLoading={isLoading}
-          isFetchingNextPage={isFetchingNextPage}
+          reservations={combinedReservations}
+          isLoading={
+            queryParams.asOwner === "all"
+              ? isLoading || isOnwerLoading
+              : queryParams.asOwner === "owner"
+                ? isOnwerLoading
+                : isLoading
+          }
           noReservationsMessage={
             queryParams.status ? t("noReservationsStatus") : t("noReservations")
           }
         />
-        {hasNextPage && <div ref={ref} data-test="scroller-trigger" />}
       </ScrollArea>
     </div>
   );

@@ -7,6 +7,7 @@ import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
 import Avatar from "@/components/Avatar";
 import { Stars } from "@/components/Stars";
+import { Button } from "@/components/ui/button";
 
 interface UserDetailsSectionProps {
   user: User;
@@ -35,12 +36,14 @@ const UserDetailsSection: FC<UserDetailsSectionProps> = ({ user, title, btnText 
               t("userNoOpinions")
             )}
           </div>
-          <Link
-            className="ml-auto rounded-lg bg-primary px-8 py-2 duration-200 hover:bg-accent"
-            to={`${URLS.PROFILE}/${user.uuid}`}
-          >
-            {btnText}
-          </Link>
+          <Button asChild>
+            <Link
+              className="ml-auto rounded-lg bg-primary px-8 py-2 duration-200 hover:bg-accent"
+              to={`${URLS.PROFILE}/${user.uuid}`}
+            >
+              {btnText}
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

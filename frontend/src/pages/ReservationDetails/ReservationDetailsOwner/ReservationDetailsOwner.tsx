@@ -37,9 +37,9 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
 
   return (
     <ScrollArea className="h-full w-full xl:h-max">
-      <div className="flex h-full w-full flex-col gap-4 xl:h-[calc(100vh-48px)] xl:flex-row">
+      <div className="flex h-full w-full flex-col gap-4 xl:flex-row">
         <ScrollArea className="h-full flex-grow xl:max-w-[40%]">
-          <div className="flex flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
+          <div className="flex flex-col gap-4 xl:min-h-[calc(100vh-140px)]">
             <div className="relative flex-grow rounded-lg bg-section p-8">
               <div
                 className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
@@ -49,17 +49,19 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
                 }}
               />
               <div className="relative flex h-full flex-col gap-8">
-                <h1 className="text-xl uppercase">{t("reservationHeader", { reservationId })}</h1>
+                <div className="flex items-center justify-between">
+                  <h1 className="text-xl uppercase">{t("reservationHeader", { reservationId })}</h1>
+                  <ReservationDetailsStatus
+                    reservationId={reservationId}
+                    status={status}
+                    user="owner"
+                  />
+                </div>
                 <ReservationDetailsTable
                   reservationId={reservationId}
                   startDate={startDate}
                   endDate={endDate}
                   duration={duration}
-                />
-                <ReservationDetailsStatus
-                  reservationId={reservationId}
-                  status={status}
-                  user="owner"
                 />
                 <div className="flex flex-grow flex-col gap-2">
                   <h3 className="text-xl">{t("reservationDetails.owner.renterMessage")}</h3>
@@ -82,7 +84,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
           </div>
         </ScrollArea>
         <ScrollArea className="h-full flex-grow xl:max-w-[40%]">
-          <div className="flex flex-col gap-4 xl:min-h-[calc(100vh-48px)]">
+          <div className="flex flex-col gap-4 xl:min-h-[calc(100vh-140px)]">
             <div className="relative flex-grow rounded-lg bg-section p-8">
               <div
                 className="absolute left-4 right-4 top-4 h-1/2 rounded-lg opacity-50 dark:opacity-40"
@@ -106,7 +108,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
           </div>
         </ScrollArea>
         <ScrollArea className="h-full flex-grow xl:min-w-[472px] xl:max-w-[40%]">
-          <div className="relative flex flex-grow flex-col gap-4 rounded-lg bg-section p-4 xl:min-h-[calc(100vh-48px)]">
+          <div className="relative flex flex-grow flex-col gap-4 rounded-lg bg-section p-4 xl:min-h-[calc(100vh-140px)]">
             <div
               className="absolute left-4 right-4 top-4 h-1/3 rounded-lg opacity-50 dark:opacity-40"
               style={{

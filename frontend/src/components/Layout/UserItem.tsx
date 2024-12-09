@@ -26,7 +26,7 @@ const UserItem: FC<UserItemProps> = ({ user, className = "" }) => {
     <Popover>
       <PopoverTrigger data-test="avatar-button" asChild>
         <Button
-          className="flex items-center gap-1 border border-[#428ccd] bg-secondary/40 px-2 dark:bg-secondary"
+          className="flex items-center gap-1 border border-[#428ccd] bg-secondary/40 px-2 dark:bg-secondary/60"
           variant="secondary"
         >
           <Avatar

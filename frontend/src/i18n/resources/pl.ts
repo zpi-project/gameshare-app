@@ -135,6 +135,7 @@ const pl: typeof en = {
   any_female: "Dowolna",
 
   myReservations: "Moje rezerwacje",
+  filterReservations: "Filtruj rezerwacje",
   reservationStatus: "Status rezerwacji",
   reservationType: "Typ rezerwacji",
   errorFetchingReservations: "Wystąpił błąd podczas pobierania twoich rezerwacji.",
@@ -150,6 +151,7 @@ const pl: typeof en = {
   reservationTypes: {
     owner: "Jako właściciel",
     renter: "Jako wypożyczający",
+    all: "Wszystkie",
   },
 
   reservationStatuses: {
@@ -171,6 +173,17 @@ const pl: typeof en = {
       REJECTED_BY_OWNER: "Odrzucone przez właściciela",
       CANCELED_BY_OWNER: "Anulowane przez właściciela",
       CANCELED_BY_RENTER: "Anulowane przeze mnie",
+      RENTED: "Wypożyczone",
+      FINISHED: "Zrealizowane",
+      EXPIRED: "Po terminie",
+    },
+    all: {
+      ALL: "Wszystkie",
+      PENDING: "Oczekujące na akceptację",
+      ACCEPTED_BY_OWNER: "Zaakceptowane przez właściciela",
+      REJECTED_BY_OWNER: "Odrzucone przez właściciela",
+      CANCELED_BY_OWNER: "Anulowane przez właściciela",
+      CANCELED_BY_RENTER: "Anulowane przez wypożyczającego",
       RENTED: "Wypożyczone",
       FINISHED: "Zrealizowane",
       EXPIRED: "Po terminie",
@@ -224,7 +237,7 @@ const pl: typeof en = {
 
   reservationDetails: {
     renter: {
-      userDetails: "Właściciel - szczegóły",
+      userDetails: "Właściciel gry",
       renterMessage: "Twoja wiadomość do rezerwacji:",
       renterNoMessage: "Nie zostawiłeś żadnej wiadomości do rezerwacji.",
       ownerOpinion: "Twoja opinia o właścicielu gry",
@@ -232,7 +245,7 @@ const pl: typeof en = {
       gameOpinion: "Twoja opinia o grze",
     },
     owner: {
-      userDetails: "Wypożyczający - szczegóły",
+      userDetails: "Wypożyczający",
       renterMessage: "Wiadomość od wypożyczającego:",
       renterNoMessage: "Wypożyczający nie zostawił żadnej wiadomości.",
       ownerOpinion: "Opinia wypożyczającego o tobie",
@@ -241,12 +254,12 @@ const pl: typeof en = {
     },
   },
 
-  reservationHeader: "rezerwacja - {{reservationId}} - szczegóły",
+  reservationHeader: "rezerwacja - {{reservationId}}",
   status: "Status:",
   ownerNoOpinion: "Wypożyczający nie dodał opinii o tobie.",
   noGameOpinion: "Wypożyczający nie dodał opinii o twojej grze.",
   noRenterOpinion: "Właściciel gry nie dodał opinii o tobie.",
-  ownerDetails: "Właściciel gry - szczegóły",
+  ownerDetails: "Właściciel gry",
   gameDetails: "Gra - szczegóły",
   gameReservationsCalendar: "Kalendarz rezerwacji gry",
   userNoOpinions: "Użytkownik nie ma jeszcze żadnej opinii",
@@ -325,6 +338,9 @@ const pl: typeof en = {
     "game-requests": "prośby o akceptację gier",
     home: "Dashboard",
   },
+  myGame: "Moja gra",
+  changeReservationStatus: "Zmień status rezerwacji",
+  save: "Zapisz",
 };
 
 export default pl;

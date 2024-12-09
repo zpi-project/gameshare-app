@@ -1,8 +1,12 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useRecoilValue } from "recoil";
+import { roleState } from "@/state/role";
 import { URLS } from "@/constants/urls";
 import { GameInstanceDetails } from "@/types/GameInstance";
+import { UserApi } from "@/api/UserApi";
 import { PriceBadge } from "@/components/Badge";
 import { Stars } from "@/components/Stars";
 import { Badge } from "@/components/ui/badge";
@@ -27,6 +31,16 @@ const GameInstanceCard: FC<GameInstanceCardProps> = ({
 }) => {
   const instanceImage = images[0]?.link ?? image;
   const { t } = useTranslation();
+  const role = useRecoilValue(roleState);
+
+  const { data: myUser } = useQuery({
+    queryKey: ["user"],
+    queryFn: UserApi.get,
+    enabled: role !== "guest",
+  });
+
+  const isMyGame = myUser?.uuid === ownerUUID;
+
   return (
     <Link
       className="flex w-full flex-row gap-4 rounded-lg bg-card p-3 hover:bg-accent"
@@ -34,8 +48,15 @@ const GameInstanceCard: FC<GameInstanceCardProps> = ({
       onMouseEnter={() => setActive(ownerUUID)}
       onMouseLeave={() => setActive("")}
     >
-      <div className="h-32 w-32 overflow-hidden rounded-lg">
-        <img src={instanceImage} alt={name} className="h-full w-full object-cover object-top" />
+      <div className="relative h-32 w-32 rounded-lg">
+        <div className="h-32 w-32 overflow-hidden rounded-lg">
+          <img
+            src={instanceImage}
+            alt={`${name} image`}
+            className="h-full w-full object-cover object-top"
+          />
+        </div>
+        {isMyGame && <Badge className="absolute -left-0.5 -top-0.5 shadow-md">{t("myGame")}</Badge>}
       </div>
       <section className="flex w-[calc(100%-140px)] flex-col gap-2">
         <div className="flex flex-row justify-between">

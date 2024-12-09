@@ -34,7 +34,7 @@ export interface ReservationDetails {
 
 export interface ReservationQueryParams {
   status?: ReservationStatusType;
-  asOwner: boolean;
+  asOwner: "all" | "owner" | "renter";
 }
 
 export interface Timeframe {

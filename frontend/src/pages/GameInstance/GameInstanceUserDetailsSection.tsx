@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { parsePhoneNumber } from "libphonenumber-js";
+import { useRecoilValue } from "recoil";
+import { roleState } from "@/state/role";
 import { URLS } from "@/constants/urls";
 import { User } from "@/types/User";
 import { getFullname } from "@/utils/user";
@@ -19,10 +21,12 @@ interface Props {
 const GameInstanceUserDetailsSection: FC<Props> = ({ user, isLoading }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const role = useRecoilValue(roleState);
 
   const { data: myUser } = useQuery({
     queryKey: ["user"],
     queryFn: UserApi.get,
+    enabled: role !== "guest",
   });
 
   const isMyGame = myUser?.uuid === user?.uuid;

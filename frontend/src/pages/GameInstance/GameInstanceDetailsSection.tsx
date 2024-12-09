@@ -33,6 +33,7 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
     enabled: role !== "guest",
   });
 
+  const isMyGame = user?.uuid === gameInstance.owner.uuid;
   return (
     <div className="relative flex h-full w-full flex-col gap-3">
       <Tabs defaultValue="default" className="flex w-full flex-row gap-3">
@@ -72,34 +73,51 @@ const GameInstanceDetailsSection: FC<GameDetailsSectionProps> = ({ gameInstance 
         </TabsList>
         {gameInstance.images.length ? (
           <>
-            <TabsContent value="default" className="h-96 w-96 overflow-hidden rounded-lg">
+            <TabsContent value="default" className="relative h-96 w-96 rounded-lg">
+              <div className="h-96 w-96 overflow-hidden rounded-lg">
+                <img
+                  src={gameInstance.game.image}
+                  alt={gameInstance.game.name}
+                  className="h-full w-full object-cover object-top"
+                />
+              </div>
+              {isMyGame && (
+                <Badge className="absolute -left-1 -top-1.5 text-xl shadow-md">{t("myGame")}</Badge>
+              )}
+            </TabsContent>
+            {gameInstance.images.map(image => (
+              <TabsContent
+                value={image.link}
+                className="relative h-96 w-96 rounded-lg"
+                key={image.name}
+              >
+                <div className="h-96 w-96 overflow-hidden rounded-lg">
+                  <img
+                    src={image.link}
+                    alt={image.name}
+                    className="h-full w-full object-cover object-top"
+                  />
+                </div>
+                {isMyGame && (
+                  <Badge className="absolute -left-1 -top-1.5 text-xl shadow-md">
+                    {t("myGame")}
+                  </Badge>
+                )}
+              </TabsContent>
+            ))}
+          </>
+        ) : (
+          <TabsContent value="default" className="relative h-96 w-96 rounded-lg">
+            <div className="h-96 w-96 overflow-hidden rounded-lg">
               <img
                 src={gameInstance.game.image}
                 alt={gameInstance.game.name}
                 className="h-full w-full object-cover object-top"
               />
-            </TabsContent>
-            {gameInstance.images.map(image => (
-              <TabsContent
-                value={image.link}
-                className="h-96 w-96 overflow-hidden rounded-lg"
-                key={image.name}
-              >
-                <img
-                  src={image.link}
-                  alt={image.name}
-                  className="h-full w-full object-cover object-top"
-                />
-              </TabsContent>
-            ))}
-          </>
-        ) : (
-          <TabsContent value="default" className="h-96 w-96 overflow-hidden rounded-lg">
-            <img
-              src={gameInstance.game.image}
-              alt={gameInstance.game.name}
-              className="h-full w-full object-cover object-top"
-            />
+            </div>
+            {isMyGame && (
+              <Badge className="absolute -left-1 -top-1.5 text-xl shadow-md">{t("myGame")}</Badge>
+            )}
           </TabsContent>
         )}
       </Tabs>

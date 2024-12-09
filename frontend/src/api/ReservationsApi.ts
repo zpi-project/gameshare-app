@@ -11,7 +11,12 @@ import Api from "./Api";
 export class ReservationsApi {
   static async getAll(page: number, size: number, queryParams: ReservationQueryParams) {
     const { data: reservations } = await Api.get<Paginated<Reservation>>("/reservations", {
-      params: { page, size, ...queryParams },
+      params: {
+        page,
+        size,
+        ...queryParams,
+        asOwner: queryParams.asOwner === "owner",
+      },
     });
     return reservations;
   }
