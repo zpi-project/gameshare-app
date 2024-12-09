@@ -17,7 +17,7 @@ const GameInstanceSearchCard: FC<GameInstanceSearchCardProps> = ({
     uuid,
     pricePerDay,
     description,
-    game: { name, image, minPlayers, maxPlayers, age, playingTime },
+    game: { name, image, minPlayers, maxPlayers, age, playingTime, id: gameId },
     avgRating,
     opinionsAmount,
     owner: { uuid: ownerUUID },
@@ -26,10 +26,11 @@ const GameInstanceSearchCard: FC<GameInstanceSearchCardProps> = ({
 }) => {
   const { t } = useTranslation();
 
+  console.log(gameId);
   return (
     <Link
       className="flex flex-row gap-4 rounded-lg bg-card p-3 hover:bg-accent"
-      to={`${URLS.GAME_INSTANCE}/${uuid}`}
+      to={`${URLS.GAMES}/${gameId}/${uuid}`}
       onMouseEnter={() => setActive(ownerUUID)}
       onMouseLeave={() => setActive("")}
     >

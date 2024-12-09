@@ -20,7 +20,7 @@ const GameUsersSection: FC = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { id = "" } = useParams();
+  const { gameId: id = "" } = useParams();
   const [location, setLocation] = useRecoilState(locationState);
   const [latitude, longitude] = location as number[];
   const [hoveredUserUUID, setHoveredUserUUID] = useState("");

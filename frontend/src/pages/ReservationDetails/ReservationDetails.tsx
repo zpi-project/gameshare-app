@@ -14,7 +14,7 @@ import ReservationDetailsOwner from "./ReservationDetailsOwner/ReservationDetail
 import ReservationDetailsRenter from "./ReservationDetailsRenter";
 
 const ReservationDetails: FC = () => {
-  const { id = "" } = useParams();
+  const { reservationId: id = "" } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
   const token = useRecoilValue(tokenState);

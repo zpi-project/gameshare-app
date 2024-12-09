@@ -6,14 +6,16 @@ import { AgeBadge, PlayersBadge, TimeBadge } from "@/components/Badge";
 
 interface GameDetailsCardProps {
   game: Game;
+  to?: string;
 }
 
 const GameDetailsCard: FC<GameDetailsCardProps> = ({
   game: { image, name, id, shortDescription, playingTime, minPlayers, maxPlayers, age },
+  to,
 }) => {
   return (
     <Link
-      to={`${URLS.GAMES}/${id}`}
+      to={to ?? `${URLS.GAMES}/${id}`}
       className="flex w-[300px] flex-col gap-2 rounded-lg bg-card p-4 shadow-md duration-300 hover:bg-accent"
     >
       <div className="h-[265px] w-[265px] overflow-hidden rounded-lg">

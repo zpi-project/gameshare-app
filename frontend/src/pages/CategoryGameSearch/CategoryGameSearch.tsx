@@ -94,7 +94,7 @@ const CategoryGameSearch: FC = () => {
         )}
         {id.length && (
           <GameSearchBar
-            onGameClick={(game: Game) => navigate(`${URLS.GAMES}/${game.id}`)}
+            onGameClick={(game: Game) => navigate(`${URLS.CATEGORY_GAMES}/${id}/${game.id}`)}
             placeholder={t("searchGameWithinCategoryPlaceholder")}
             categories={[parseInt(id)]}
           />
@@ -115,7 +115,13 @@ const CategoryGameSearch: FC = () => {
           ) : (
             <>
               {games.pages.map(page =>
-                page.results.map(game => <GameDetailsCard game={game} key={game.id} />),
+                page.results.map(game => (
+                  <GameDetailsCard
+                    game={game}
+                    key={game.id}
+                    to={`${URLS.CATEGORY_GAMES}/${id}/${game.id}`}
+                  />
+                )),
               )}
             </>
           )}

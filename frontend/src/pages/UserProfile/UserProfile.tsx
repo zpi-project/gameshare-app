@@ -15,7 +15,7 @@ const UserProfile: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { id = "" } = useParams();
+  const { userId: id = "" } = useParams();
   const role = useRecoilValue(roleState);
 
   const { data: user, isLoading } = useQuery({

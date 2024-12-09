@@ -18,7 +18,7 @@ const GameInstance: FC = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { id = "" } = useParams();
+  const { instanceId: id = "" } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
 

@@ -15,6 +15,7 @@ import Api from "@/api/Api";
 import { RoleApi } from "@/api/RoleApi";
 import { RegisterUserForm } from "@/components/UserForm";
 import Spinner from "../ui/Spinner";
+import Breadcrumbs from "./Breadcrumbs";
 import TopNav from "./TopNav";
 
 const Layout: FC = () => {
@@ -83,7 +84,8 @@ const Layout: FC = () => {
   return (
     <div className="flex h-screen w-screen flex-col px-6">
       <TopNav />
-      <div className="h-[calc(100vh-88px)] w-[calc(100vw-48px)]">
+      <Breadcrumbs />
+      <div className="h-[calc(100vh-130px)] w-[calc(100vw-48px)]">
         <RegisterUserForm onRegisterSuccess={() => void refetch()} />
         <Outlet />
       </div>

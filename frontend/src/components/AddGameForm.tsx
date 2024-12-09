@@ -1,9 +1,10 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
+import { X } from "lucide-react";
 import { useRecoilValue } from "recoil";
 import { z } from "zod";
 import { roleState } from "@/state/role";
@@ -27,6 +28,7 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import SelectCategory from "./SelectCategory";
+import { Badge } from "./ui/badge";
 
 const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
 
@@ -124,6 +126,12 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
     },
   });
 
+  const selectedCategoriesIDs = form.watch("categoriesIDs");
+
+  const selectedCategories = useMemo(() => {
+    return categories?.filter(category => selectedCategoriesIDs.includes(category.value)) ?? [];
+  }, [categories, selectedCategoriesIDs]);
+
   const { mutateAsync: addGame, isLoading: isLoadingGame } = useMutation({
     mutationFn: (game: NewGame) => GameApi.create(game),
   });
@@ -197,6 +205,14 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
     }
   };
 
+  const removeCategory = (id: number) => {
+    form.setValue(
+      "categoriesIDs",
+      selectedCategoriesIDs.filter(categoryID => categoryID !== id),
+    );
+    form.trigger("categoriesIDs");
+  };
+
   return (
     <DialogContent
       className="flex max-w-6xl"
@@ -215,49 +231,61 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
           <div className="flex h-full w-full flex-row gap-4">
             <div className="flex w-[55%] flex-col gap-4">
               <h1 className="mb-2 w-full text-2xl uppercase text-primary">{t("filGameDetails")}</h1>
-              <div className="flex flex-row gap-4">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem className="flex-grow">
-                      <FormLabel>{t("gameName")} *</FormLabel>
-                      <FormControl>
-                        <Input
-                          className="border-none"
-                          spellCheck={false}
-                          {...field}
-                          autoComplete="off"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="categoriesIDs"
-                  render={() => (
-                    <FormItem className="mt-1.5 flex flex-col gap-1">
-                      <FormLabel>{t("categories")} *</FormLabel>
-                      <FormControl>
-                        <SelectCategory
-                          options={categories ?? []}
-                          width="w-[280px]"
-                          placeholder={t("chooseCategories")}
-                          noResultsInfo={t("noResults")}
-                          onChange={(values: number[]) => {
-                            form.setValue("categoriesIDs", values);
-                            form.trigger("categoriesIDs");
-                          }}
-                          scroll
-                          search
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem className="flex-grow">
+                    <FormLabel>{t("gameName")} *</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="border-none"
+                        spellCheck={false}
+                        {...field}
+                        autoComplete="off"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="categoriesIDs"
+                render={({ field }) => (
+                  <FormItem className="mt-1.5 flex flex-col gap-1">
+                    <FormLabel>{t("categories")} *</FormLabel>
+                    <FormControl>
+                      <SelectCategory
+                        options={categories ?? []}
+                        value={field.value}
+                        width="w-full xl:w-[576px]"
+                        placeholder={t("chooseCategories")}
+                        noResultsInfo={t("noResults")}
+                        onChange={(values: number[]) => {
+                          form.setValue("categoriesIDs", values);
+                          form.trigger("categoriesIDs");
+                        }}
+                        scroll
+                        search
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex flex-wrap gap-1">
+                {selectedCategories.map(({ value, label }) => (
+                  <Badge key={value} variant="secondary" className="h-8">
+                    <span className="mr-1">{label}</span>
+                    <X
+                      size={14}
+                      strokeWidth={3}
+                      className="cursor-pointer transition-all duration-100 hover:text-red-500"
+                      onClick={() => removeCategory(value)}
+                    />
+                  </Badge>
+                ))}
               </div>
               <div className="flex flex-row gap-4">
                 <FormField
@@ -346,7 +374,7 @@ const AddGameForm: FC<AddGameFormProps> = ({ close }) => {
               <div className="flex w-full flex-grow flex-col gap-4">
                 <div>
                   <Label htmlFor="picture" className={imageRequiredError ? "text-destructive" : ""}>
-                    {t("choosePicture")}
+                    {t("choosePicture")} *
                   </Label>
                   <Input
                     id="picture"

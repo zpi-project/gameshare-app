@@ -26,26 +26,45 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Dashboard />,
+        handle: "Dashboard",
       },
       {
-        path: URLS.GAMES,
+        path: URLS.CATEGORY_GAMES,
         element: <GameSearch />,
+        handle: "Games",
       },
       {
-        path: `${URLS.GAMES}/:id`,
+        path: `${URLS.GAMES}/:gameId`,
         element: <Game />,
+        handle: "Game Details",
+      },
+      {
+        path: `${URLS.GAMES}/:gameId/:instanceId`,
+        element: <GameInstance />,
+        handle: "Game Instance",
       },
       {
         path: `${URLS.CATEGORY_GAMES}/:id`,
         element: <CategoryGameSearch />,
       },
       {
-        path: `${URLS.GAME_INSTANCE}/:id`,
-        element: <GameInstance />,
+        path: `${URLS.CATEGORY_GAMES}/:id/:gameId`,
+        element: <Game />,
+        handle: "Game Details",
       },
       {
-        path: `${URLS.PROFILE}/:id`,
+        path: `${URLS.CATEGORY_GAMES}/:id/:gameId/:instanceId`,
+        element: <GameInstance />,
+        handle: "Game Instance",
+      },
+      {
+        path: `${URLS.PROFILE}/:userId`,
         element: <UserProfile />,
+      },
+      {
+        path: `${URLS.PROFILE}/:userId/:instanceId`,
+        element: <GameInstance />,
+        handle: "Game Instance",
       },
       {
         element: <ProtectedRoute allowedRoles={["user", "admin"]} />,
@@ -53,13 +72,15 @@ const router = createBrowserRouter([
           {
             path: URLS.MY_PROFILE,
             element: <MyProfile />,
+            handle: "My Profile",
           },
           {
             path: URLS.MY_RESERVATIONS,
             element: <ReservationsHistory />,
+            handle: "My Reservations",
           },
           {
-            path: `${URLS.MY_RESERVATIONS}/:id`,
+            path: `${URLS.MY_RESERVATIONS}/:reservationId`,
             element: <ReservationDetails />,
           },
         ],
@@ -70,6 +91,7 @@ const router = createBrowserRouter([
           {
             path: URLS.GAME_REQUESTS,
             element: <GameRequests />,
+            handle: "Game Requests",
           },
         ],
       },

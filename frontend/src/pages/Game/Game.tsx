@@ -16,7 +16,7 @@ const Game: FC = () => {
     t,
     i18n: { language },
   } = useTranslation();
-  const { id = "" } = useParams();
+  const { gameId: id = "" } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -29,7 +29,7 @@ const Game: FC = () => {
         description: t("tryRefreshing"),
         variant: "destructive",
       });
-      navigate(URLS.GAMES);
+      navigate(URLS.CATEGORY_GAMES);
     },
   });
 

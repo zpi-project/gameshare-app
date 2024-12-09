@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import { cn } from "@/utils/tailwind";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,7 @@ interface SelectInputProps {
   width?: string;
   disabled?: boolean;
   clearValueOnChange?: boolean;
+  value?: number[];
 }
 
 const SelectCategory: FC<SelectInputProps> = ({
@@ -38,10 +39,20 @@ const SelectCategory: FC<SelectInputProps> = ({
   scroll,
   width,
   disabled,
+  value,
 }) => {
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState<string[]>([]);
   const [valuesIDs, setValuesIDs] = useState<number[]>([]);
+
+  useEffect(() => {
+    setValuesIDs(value ?? []);
+    const newValues =
+      value
+        ?.map(value => options.find(option => option.value === value)?.label.toLowerCase())
+        .filter(value => value) ?? [];
+    setValues(newValues as string[]);
+  }, [options, value]);
 
   const onSelect = (currentValue: string) => {
     const optionId = options.findIndex(option => option.label.toLowerCase() === currentValue);

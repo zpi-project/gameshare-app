@@ -1,8 +1,7 @@
 export const URLS = {
   DASHBOARD: "/",
   GAMES: "/games",
-  CATEGORY_GAMES: "/games/category",
-  GAME_INSTANCE: "/game-instance",
+  CATEGORY_GAMES: "/game-categories",
   PROFILE: "/profile",
   MY_RESERVATIONS: "/my-reservations",
   MY_PROFILE: "/my-profile",

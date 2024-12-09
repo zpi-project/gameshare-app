@@ -31,7 +31,7 @@ const TopNav: FC = () => {
         <Link to={URLS.DASHBOARD}>
           <img src="/logo.png" className="h-12 w-12 rounded-lg" alt="GameShare logo" />
         </Link>
-        <Link to={URLS.GAMES}>
+        <Link to={URLS.CATEGORY_GAMES}>
           <Button
             className="flex items-center gap-2 border border-primary px-3 text-primary hover:bg-primary"
             variant="ghost"

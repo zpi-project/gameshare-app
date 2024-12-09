@@ -306,7 +306,7 @@ export default {
   editGameData: "Edit your game details",
   updateImages: "Update images",
   errorEditingGameInstance: "There was an error editing this game.",
-  filters: "Filtry",
+  filters: "Filters",
   clearFilters: "Clear filters",
   results: "Results",
   catalog: "Game Catalog",

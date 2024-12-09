@@ -37,7 +37,7 @@ const GameInstance: FC<Props> = ({ gameInstance, showButtons, userId }) => {
   return (
     <div className="flex w-full flex-row" data-test="game-instance">
       <Link
-        to={`${URLS.GAME_INSTANCE}/${uuid}`}
+        to={`${URLS.PROFILE}/${userId}/${uuid}`}
         className={cn(
           "items-top flex w-full flex-row gap-3 rounded-lg bg-card p-3 shadow duration-300 hover:bg-accent",
           !active && "bg-destructive/30",
