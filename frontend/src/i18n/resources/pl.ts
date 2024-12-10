@@ -127,7 +127,7 @@ const pl: typeof en = {
   all: "Wszystkie",
   pricePerDay: "Cena za dzień",
   players: "Liczba graczy",
-  age: "Wiek",
+  age: "Min wiek graczy",
   perDay: "na dzień",
 
   any: "Dowolne",
@@ -304,7 +304,7 @@ const pl: typeof en = {
   filGameDetails: "Uzupełnij dane o grze",
   minPlayers: "Min liczba graczy",
   maxPlayers: "Max liczba graczy",
-  playingTime: "Czas gry",
+  playingTime: "Czas gry (w minutach)",
   categories: "Kategorie",
   chooseCategories: "Wybierz kategorie",
   numberTypeError: "{{field}} musi być liczbą.",
@@ -341,6 +341,8 @@ const pl: typeof en = {
   myGame: "Moja gra",
   changeReservationStatus: "Zmień status rezerwacji",
   save: "Zapisz",
+  next: "Dalej",
+  back: "Wstecz",
 };
 
 export default pl;

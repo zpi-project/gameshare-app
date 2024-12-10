@@ -78,7 +78,7 @@ const GameSearchBar: FC<GameSearchBarProps> = ({ onGameClick, placeholder, categ
 
   return (
     <div className="relative max-w-[700px] flex-grow">
-      <Search className="absolute right-4 top-2" />
+      <Search className="absolute right-4 top-2 hidden md:block" />
       <Input
         placeholder={placeholder}
         className="rounded-lg border-none bg-card"

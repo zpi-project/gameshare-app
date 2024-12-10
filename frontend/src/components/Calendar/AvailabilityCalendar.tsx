@@ -8,9 +8,13 @@ import { Calendar, CalendarDay } from "./Calendar";
 
 interface AvailabilityCalendarProps {
   gameInstanceUUID: string;
+  tileClassName?: string;
 }
 
-const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID }) => {
+const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({
+  gameInstanceUUID,
+  tileClassName,
+}) => {
   const TODAY = new Date(new Date().setHours(0, 0, 0, 0));
   const FIRST_DAY_OF_CURRENT_MONTH = getFirstDayOfMonth(TODAY);
   const [startDate, setStartDate] = useState(FIRST_DAY_OF_CURRENT_MONTH);
@@ -57,6 +61,7 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
       onPrevClick={() => setStartDate(getFirstDayOfLastMonth(startDate))}
       date={startDate}
       prevClickDisabled={FIRST_DAY_OF_CURRENT_MONTH >= startDate}
+      tileClassName={tileClassName}
     >
       {isError ? (
         <h3 className="mt-4 text-center text-xl text-destructive" data-test="error-message">
@@ -65,22 +70,34 @@ const AvailabilityCalendar: FC<AvailabilityCalendarProps> = ({ gameInstanceUUID 
       ) : (
         <div className="flex flex-row flex-wrap gap-2">
           {Array.from({ length: (7 + startDate.getDay() - 1) % 7 }).map((_, idx) => (
-            <CalendarDay key={`${idx} hidden`} variant="hidden" />
+            <CalendarDay key={`${idx} hidden`} variant="hidden" className={tileClassName} />
           ))}
           {isLoading ? (
             <>
               {Array.from({ length: getDaysInMonth(startDate) }).map((_, idx) => (
-                <CalendarDay key={`${idx} loading`} variant="loading" disabled />
+                <CalendarDay
+                  key={`${idx} loading`}
+                  variant="loading"
+                  disabled
+                  className={tileClassName}
+                />
               ))}
             </>
           ) : (
             <>
               {availableDays.map((available, idx) =>
                 idx < TODAY.getDate() && FIRST_DAY_OF_CURRENT_MONTH >= startDate ? (
-                  <CalendarDay key={idx} variant="outlined" disabled day={idx + 1} />
+                  <CalendarDay
+                    className={tileClassName}
+                    key={idx}
+                    variant="outlined"
+                    disabled
+                    day={idx + 1}
+                  />
                 ) : (
                   <CalendarDay
                     key={idx}
+                    className={tileClassName}
                     variant={available ? "filled" : "outlined"}
                     disabled
                     day={idx + 1}
