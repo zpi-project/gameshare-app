@@ -10,14 +10,19 @@ import { cn } from "@/utils/tailwind";
 import Avatar from "@/components/Avatar";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
+import Help from "./Help";
+import LanguageToggle from "./LanguageToggle";
 import LogoutButton from "./LogoutButton";
+import { ModeToggle } from "./ModeToggle";
 
 interface UserItemProps {
   user: User;
   className?: string;
+  includeOptions?: boolean;
 }
 
-const UserItem: FC<UserItemProps> = ({ user, className = "" }) => {
+const UserItem: FC<UserItemProps> = ({ user, className = "", includeOptions }) => {
   const role = useRecoilValue(roleState);
   const match = useMatch(URLS.MY_PROFILE);
   const { t } = useTranslation();
@@ -66,6 +71,16 @@ const UserItem: FC<UserItemProps> = ({ user, className = "" }) => {
           </Link>
         )}
         <LogoutButton />
+        {includeOptions && (
+          <>
+            <Separator className="mb-4 mt-2 h-0.5 w-full bg-muted" />
+            <div className="ml-auto flex gap-2">
+              <ModeToggle />
+              <LanguageToggle />
+              <Help />
+            </div>
+          </>
+        )}
       </PopoverContent>
     </Popover>
   );

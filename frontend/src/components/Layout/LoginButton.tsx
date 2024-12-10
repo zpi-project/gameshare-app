@@ -3,7 +3,11 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useSetRecoilState } from "recoil";
 import { tokenState } from "@/state/token";
 
-const LoginButton: FC = () => {
+interface LoginButtonProps {
+  size?: "large" | "medium" | "small";
+  type?: "standard" | "icon";
+}
+const LoginButton: FC<LoginButtonProps> = ({ size = "large", type = "standard" }) => {
   const setToken = useSetRecoilState(tokenState);
 
   return (
@@ -14,6 +18,8 @@ const LoginButton: FC = () => {
         }
       }}
       width="256px"
+      size={size}
+      type={type}
     />
   );
 };

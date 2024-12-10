@@ -26,7 +26,6 @@ const GameInstanceSearchCard: FC<GameInstanceSearchCardProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  console.log(gameId);
   return (
     <Link
       className="flex flex-row gap-4 rounded-lg bg-card p-3 hover:bg-accent"

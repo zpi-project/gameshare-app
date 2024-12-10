@@ -111,11 +111,11 @@ const GamesSearch: FC<GamesSearchProps> = ({ onSubmit }) => {
             )}
           />
           <Button type="submit" className="flex gap-2 bg-card">
-            <span>{t("search")}</span>
+            <span className="hidden md:flex">{t("search")}</span>
             <Search size={20} />
           </Button>
         </div>
-        <p className="mt-2 text-xl font-bold">{t("filters")}</p>
+        <p className="mt-2 hidden text-xl font-bold md:flex">{t("filters")}</p>
         <div className="space-between hidden flex-row flex-wrap gap-3 md:flex">
           <FormField
             control={form.control}
