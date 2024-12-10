@@ -350,4 +350,8 @@ export default {
     EXPIRED: "Mark expired",
   },
   areYouSureToChangeStatus: "Are you sure you want to change status to {{status}}?",
+  clickToUpload: "Click to upload",
+  orDragAndDrop: "or drag and drop",
+  allowedFormats: "Allowed formats: JPG, JPEG, PNG",
+  summary: "Summary",
 };

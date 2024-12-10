@@ -353,6 +353,10 @@ const pl: typeof en = {
     EXPIRED: "Oznacz jako po terminie",
   },
   areYouSureToChangeStatus: "Jesteś pewien, że chcesz zmienić status na {{status}}?",
+  clickToUpload: "Kliknij, aby dodać zdjęcie",
+  orDragAndDrop: "lub przeciągnij i upuść plik",
+  allowedFormats: "Dozwolone formaty: JPG, JPEG, PNG",
+  summary: "Podsumowanie",
 };
 
 export default pl;

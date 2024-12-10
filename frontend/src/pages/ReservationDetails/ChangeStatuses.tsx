@@ -76,7 +76,7 @@ const ChangeStatuses: FC<ChangeStatusesProps> = ({ reservationId, status, user }
             </Button>
           ))}
       </div>
-      <Dialog open={Boolean(selectedStatus)}>
+      <Dialog open={Boolean(selectedStatus)} onOpenChange={() => setSelectedStatus(undefined)}>
         <DialogContent>
           <DialogTitle>
             {t("areYouSureToChangeStatus", {
