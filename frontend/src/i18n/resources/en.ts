@@ -340,4 +340,13 @@ export default {
   save: "Save",
   next: "Next",
   back: "Back",
+  changeStatusAction: {
+    ACCEPTED_BY_OWNER: "Accept",
+    REJECTED_BY_OWNER: "Reject the request",
+    CANCELED_BY_OWNER: "Cancel",
+    CANCELED_BY_RENTER: "Cancel",
+    RENTED: "Rent the game",
+    FINISHED: "Finish",
+    EXPIRED: "Mark expired",
+  },
 };

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ReservationDetails } from "@/types/Reservation";
 import { Map, LocationMarker } from "@/components/Map";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import ChangeStatuses from "../ChangeStatuses";
 import GameInstanceDetails from "../GameInstanceDetails";
 import OpinionSection from "../OpinionSection";
 import ReservationDetailsStatus from "../ReservationDetailsStatus";
@@ -57,6 +58,7 @@ const ReservationDetailsRenter: FC<ReservationDetailsRenterProps> = ({
                     user="renter"
                   />
                 </div>
+                <ChangeStatuses reservationId={reservationId} status={status} user="renter" />
                 <ReservationDetailsTable
                   reservationId={reservationId}
                   startDate={startDate}

@@ -13,7 +13,6 @@ import { CategoryApi } from "@/api/CategoryApi";
 import { GameApi } from "@/api/GameApi";
 import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
-import { DialogContent } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -24,7 +23,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import SelectCategory from "./SelectCategory";

@@ -10,6 +10,7 @@ import ReservationDetailsStatus from "../ReservationDetailsStatus";
 import ReservationDetailsTable from "../ReservationDetailsTable";
 import UserDetailsSection from "../UserDetailsSection";
 import OpinionAboutRenter from "./OpinionAboutRenter";
+import ChangeStatuses from "../ChangeStatuses";
 
 interface ReservationDetailsOwnerProps {
   reservation: ReservationDetails;
@@ -57,6 +58,9 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
                     user="owner"
                   />
                 </div>
+                <ChangeStatuses  reservationId={reservationId}
+                    status={status}
+                    user="owner"/>
                 <ReservationDetailsTable
                   reservationId={reservationId}
                   startDate={startDate}

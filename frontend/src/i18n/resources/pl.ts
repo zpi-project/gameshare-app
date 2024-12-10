@@ -343,6 +343,15 @@ const pl: typeof en = {
   save: "Zapisz",
   next: "Dalej",
   back: "Wstecz",
+  changeStatusAction: {
+    ACCEPTED_BY_OWNER: "Akceptuj",
+    REJECTED_BY_OWNER: "Odrzuć prośbę",
+    CANCELED_BY_OWNER: "Anuluj",
+    CANCELED_BY_RENTER: "Anuluj",
+    RENTED: "Wypożycz grę",
+    FINISHED: "Zakończ",
+    EXPIRED: "Oznacz jako po terminie",
+  },
 };
 
 export default pl;
