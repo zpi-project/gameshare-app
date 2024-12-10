@@ -46,22 +46,20 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance, showForm, setShowFo
       {isLoading && <Spinner />}
       {isDesktop ? (
         <Dialog open={showForm} onOpenChange={setShowForm}>
-          <DialogContent>
-            <div className="flex flex-row gap-6">
-              {newReservationId.length > 0 ? (
-                <div className="flex w-[364px] min-w-[364px] flex-grow flex-col items-center justify-center gap-8 rounded-lg bg-section p-8">
-                  <p className="text-center text-xl">{t("createReservationSuccessDescription")}</p>
-                  <Link
-                    to={`${URLS.MY_RESERVATIONS}/${newReservationId}`}
-                    className="rounded-lg bg-secondary px-4 py-2 text-center uppercase duration-300 hover:bg-accent"
-                  >
-                    {t("seeReservation")}
-                  </Link>
-                </div>
-              ) : (
-                <ReservationForm gameInstance={gameInstance} onSubmit={mutate} />
-              )}
-            </div>
+          <DialogContent className="w-max lg:min-w-[640px]">
+            {newReservationId.length > 0 ? (
+              <div className="flex flex-grow flex-col items-center justify-center gap-8 rounded-lg bg-section p-8">
+                <p className="text-center text-xl">{t("createReservationSuccessDescription")}</p>
+                <Link
+                  to={`${URLS.MY_RESERVATIONS}/${newReservationId}`}
+                  className="rounded-lg bg-secondary px-4 py-2 text-center uppercase duration-300 hover:bg-accent"
+                >
+                  {t("seeReservation")}
+                </Link>
+              </div>
+            ) : (
+              <ReservationForm gameInstance={gameInstance} onSubmit={mutate} />
+            )}
           </DialogContent>
         </Dialog>
       ) : (

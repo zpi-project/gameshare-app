@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { DateRange } from "react-day-picker";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,21 +11,16 @@ import { cn } from "@/utils/tailwind";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
 import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
-import DatePicker from "@/components/ui/datepicker";
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-  Form,
-} from "@/components/ui/form";
+import { FormField, FormItem, FormControl, FormMessage, Form } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
+import DatePicker from "./DatePicker";
 
 interface ReservationFormProps {
   gameInstance: GameInstanceDetails;
   onSubmit: (formValues: NewReservation) => void;
 }
+
+const DAY = 24 * 60 * 60 * 1000;
 
 const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) => {
   const { t } = useTranslation();
@@ -32,6 +28,10 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
   const TOMORROW = new Date(TODAY);
   TOMORROW.setDate(TODAY.getDate() + 1);
   const [isAvailable, setIsAvailable] = useState(false);
+  const [date, setDate] = useState<DateRange | undefined>({
+    from: new Date(Date.now() + DAY),
+    to: new Date(Date.now() + 3 * DAY),
+  });
 
   const formSchema = z
     .object({
@@ -62,6 +62,11 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
     },
   });
 
+  useEffect(() => {
+    date?.from && form.setValue("startDate", date.from);
+    date?.to && form.setValue("endDate", date.to);
+  }, [date, form]);
+
   const startDate = form.watch("startDate");
   const endDate = form.watch("endDate");
 
@@ -86,7 +91,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
   });
 
   return (
-    <div className="flex w-[364px] min-w-[364px] flex-grow flex-col gap-4">
+    <div className="flex flex-grow flex-col gap-4">
       <h2 className="text-2xl uppercase text-secondary">{t("reservationForm")}</h2>
       <div className="flex flex-grow flex-col gap-8 rounded-lg bg-section p-4">
         <Form {...form}>
@@ -110,32 +115,7 @@ const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) =
                   : t("timeframeNoAvailable")
                 : ""}
             </p>
-            <FormField
-              control={form.control}
-              name="startDate"
-              render={({ field }) => (
-                <FormItem className="h-[80px]">
-                  <FormLabel>{t("formStartDate")} *</FormLabel>
-                  <FormControl>
-                    <DatePicker onSelect={field.onChange} placeholder={t("pickDate")} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="endDate"
-              render={({ field }) => (
-                <FormItem className="h-[80px]">
-                  <FormLabel>{t("formEndDate")} *</FormLabel>
-                  <FormControl>
-                    <DatePicker onSelect={field.onChange} placeholder={t("pickDate")} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <DatePicker date={date} setDate={setDate} />
             <FormField
               control={form.control}
               name="renterComment"

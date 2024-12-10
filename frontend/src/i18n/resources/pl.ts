@@ -357,6 +357,7 @@ const pl: typeof en = {
   orDragAndDrop: "lub przeciągnij i upuść plik",
   allowedFormats: "Dozwolone formaty: JPG, JPEG, PNG",
   summary: "Podsumowanie",
+  selectedDates: "Wybrany termin:",
 };
 
 export default pl;

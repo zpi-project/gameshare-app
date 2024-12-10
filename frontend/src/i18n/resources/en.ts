@@ -354,4 +354,5 @@ export default {
   orDragAndDrop: "or drag and drop",
   allowedFormats: "Allowed formats: JPG, JPEG, PNG",
   summary: "Summary",
+  selectedDates: "Selected dates:",
 };
