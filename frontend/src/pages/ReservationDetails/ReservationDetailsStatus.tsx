@@ -11,10 +11,7 @@ interface ReservationDetailsStatusProps {
   user: "owner" | "renter";
 }
 
-const ReservationDetailsStatus: FC<ReservationDetailsStatusProps> = ({
-  status,
-  user,
-}) => {
+const ReservationDetailsStatus: FC<ReservationDetailsStatusProps> = ({ status, user }) => {
   const { t } = useTranslation();
 
   return (

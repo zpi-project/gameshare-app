@@ -1,11 +1,13 @@
 import { FC, useState } from "react";
-import { Button } from "react-day-picker";
-import { user } from "@cypress/fixtures/user";
+import { Dialog } from "@radix-ui/react-dialog";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { t } from "i18next";
+import { RESERVATION_STATUS_COLORS } from "@/constants/reservationStatuses";
 import { ReservationStatusType } from "@/types/Reservation";
 import { ReservationsApi } from "@/api/ReservationsApi";
 import Spinner from "@/components/ui/Spinner";
+import { Button } from "@/components/ui/button";
+import { DialogContent, DialogFooter, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
 
 interface ChangeStatusesProps {
@@ -45,6 +47,8 @@ const ChangeStatuses: FC<ChangeStatusesProps> = ({ reservationId, status, user }
       });
       if (user === "owner") {
         queryClient.invalidateQueries(["reservations-calendar"]);
+        queryClient.invalidateQueries(["reservation-statuses", { reservationId, status }]);
+        setSelectedStatus(undefined);
       }
     },
     onError: () => {
@@ -59,13 +63,36 @@ const ChangeStatuses: FC<ChangeStatusesProps> = ({ reservationId, status, user }
   return (
     <div>
       {isLoading && <Spinner />}
-      {statuses &&
-        statuses.length > 0 &&
-        statuses.map(status => (
-          <Button key={status.value} onClick={() => setSelectedStatus(status.value)}>
-            {status.label}
-          </Button>
-        ))}
+      <div className="flex justify-end gap-4">
+        {statuses &&
+          statuses.length > 0 &&
+          statuses.map(status => (
+            <Button
+              key={status.value}
+              onClick={() => setSelectedStatus(status.value)}
+              className={`${RESERVATION_STATUS_COLORS[status.value]}`}
+            >
+              {t(`changeStatusAction.${status.value}`)}
+            </Button>
+          ))}
+      </div>
+      <Dialog open={Boolean(selectedStatus)}>
+        <DialogContent>
+          <DialogTitle>
+            {t("areYouSureToChangeStatus", {
+              status: t(`reservationStatuses.${user}.${selectedStatus}`),
+            })}
+          </DialogTitle>
+          <DialogFooter>
+            <Button variant="outline-secondary" onClick={() => setSelectedStatus(undefined)}>
+              {t("cancel")}
+            </Button>
+            <Button variant="secondary" onClick={() => mutate(selectedStatus as string)}>
+              {t("save")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

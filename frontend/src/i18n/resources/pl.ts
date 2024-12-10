@@ -352,6 +352,7 @@ const pl: typeof en = {
     FINISHED: "Zakończ",
     EXPIRED: "Oznacz jako po terminie",
   },
+  areYouSureToChangeStatus: "Jesteś pewien, że chcesz zmienić status na {{status}}?",
 };
 
 export default pl;

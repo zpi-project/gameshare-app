@@ -349,4 +349,5 @@ export default {
     FINISHED: "Finish",
     EXPIRED: "Mark expired",
   },
+  areYouSureToChangeStatus: "Are you sure you want to change status to {{status}}?",
 };

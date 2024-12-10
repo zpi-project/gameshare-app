@@ -4,13 +4,13 @@ import { ReservationDetails } from "@/types/Reservation";
 import { ReservationsCalendar } from "@/components/Calendar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import ChangeStatuses from "../ChangeStatuses";
 import GameInstanceDetails from "../GameInstanceDetails";
 import OpinionSection from "../OpinionSection";
 import ReservationDetailsStatus from "../ReservationDetailsStatus";
 import ReservationDetailsTable from "../ReservationDetailsTable";
 import UserDetailsSection from "../UserDetailsSection";
 import OpinionAboutRenter from "./OpinionAboutRenter";
-import ChangeStatuses from "../ChangeStatuses";
 
 interface ReservationDetailsOwnerProps {
   reservation: ReservationDetails;
@@ -58,9 +58,7 @@ const ReservationDetailsOwner: FC<ReservationDetailsOwnerProps> = ({
                     user="owner"
                   />
                 </div>
-                <ChangeStatuses  reservationId={reservationId}
-                    status={status}
-                    user="owner"/>
+                <ChangeStatuses reservationId={reservationId} status={status} user="owner" />
                 <ReservationDetailsTable
                   reservationId={reservationId}
                   startDate={startDate}
