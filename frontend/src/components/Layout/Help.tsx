@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import VideoTutorial from "../VideoTutorial";
 
 const Help: FC = () => {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ const Help: FC = () => {
           variant="outline"
           size="icon"
           data-test="mode-toggle"
-          className="border-[#428ccd] text-[#428ccd]"
+          className="w-[40px] w-full min-w-[40px] border-[#428ccd] font-normal text-[#428ccd]"
         >
           <HelpCircle strokeWidth={1.5} />
         </Button>
@@ -42,6 +43,9 @@ const Help: FC = () => {
           >
             {t("contactUs")}
           </a>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="w-full px-4 text-base" asChild>
+          <VideoTutorial />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
