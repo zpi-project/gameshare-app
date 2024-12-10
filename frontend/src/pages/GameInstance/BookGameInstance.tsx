@@ -48,8 +48,7 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance, showForm, setShowFo
         <Dialog open={showForm} onOpenChange={setShowForm}>
           <DialogContent>
             <div className="flex flex-row gap-6">
-              <ReservationForm gameInstance={gameInstance} onSubmit={mutate} />
-              {newReservationId.length > 0 && (
+              {newReservationId.length > 0 ? (
                 <div className="flex w-[364px] min-w-[364px] flex-grow flex-col items-center justify-center gap-8 rounded-lg bg-section p-8">
                   <p className="text-center text-xl">{t("createReservationSuccessDescription")}</p>
                   <Link
@@ -59,6 +58,8 @@ const GameCalendar: FC<GameCalendarProps> = ({ gameInstance, showForm, setShowFo
                     {t("seeReservation")}
                   </Link>
                 </div>
+              ) : (
+                <ReservationForm gameInstance={gameInstance} onSubmit={mutate} />
               )}
             </div>
           </DialogContent>

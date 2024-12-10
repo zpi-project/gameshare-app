@@ -8,8 +8,6 @@ import { GameInstanceDetails } from "@/types/GameInstance";
 import { NewReservation } from "@/types/Reservation";
 import { cn } from "@/utils/tailwind";
 import { GameInstanceApi } from "@/api/GameInstanceApi";
-import { PriceBadge } from "@/components/Badge";
-import { Stars } from "@/components/Stars";
 import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
 import DatePicker from "@/components/ui/datepicker";
