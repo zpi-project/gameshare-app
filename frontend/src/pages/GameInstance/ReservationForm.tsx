@@ -20,18 +20,13 @@ interface ReservationFormProps {
   onSubmit: (formValues: NewReservation) => void;
 }
 
-const DAY = 24 * 60 * 60 * 1000;
-
 const ReservationForm: FC<ReservationFormProps> = ({ gameInstance, onSubmit }) => {
   const { t } = useTranslation();
   const TODAY = new Date(new Date().setHours(0, 0, 0, 0));
   const TOMORROW = new Date(TODAY);
   TOMORROW.setDate(TODAY.getDate() + 1);
   const [isAvailable, setIsAvailable] = useState(false);
-  const [date, setDate] = useState<DateRange | undefined>({
-    from: new Date(Date.now() + DAY),
-    to: new Date(Date.now() + 3 * DAY),
-  });
+  const [date, setDate] = useState<DateRange | undefined>({ from: undefined, to: undefined });
 
   const formSchema = z
     .object({

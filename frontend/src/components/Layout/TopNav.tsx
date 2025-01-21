@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { t } from "i18next";
-import { AlignLeft } from "lucide-react";
+import { AlignLeft, LayoutGrid, Home } from "lucide-react";
 import { useRecoilValue } from "recoil";
 import { roleState } from "@/state/role";
 import { tokenState } from "@/state/token";
@@ -36,12 +36,23 @@ const TopNav: FC = () => {
             <Link to={URLS.DASHBOARD}>
               <img src="/logo.png" className="h-12 w-12 rounded-lg" alt="GameShare logo" />
             </Link>
+            <Link to={URLS.DASHBOARD}>
+              <Button
+                className="flex items-center gap-2 border border-primary px-3 text-primary hover:bg-primary capitalize"
+                variant="ghost"
+              >
+                <Home size={20} strokeWidth={1} />
+                {/* <AlignLeft size={20} strokeWidth={1} /> */}
+                <span>{t("home")}</span>
+              </Button>
+            </Link>
             <Link to={URLS.CATEGORY_GAMES}>
               <Button
                 className="flex items-center gap-2 border border-primary px-3 text-primary hover:bg-primary"
                 variant="ghost"
               >
-                <AlignLeft size={20} strokeWidth={1} />
+                <LayoutGrid size={20} strokeWidth={1} />
+                {/* <AlignLeft size={20} strokeWidth={1} /> */}
                 <span>{t("catalog")}</span>
               </Button>
             </Link>
@@ -61,8 +72,16 @@ const TopNav: FC = () => {
         </>
       ) : (
         <>
-          <Link to={URLS.DASHBOARD} className="mr-auto">
+          <Link to={URLS.DASHBOARD} className="mr-2">
             <img src="/logo.png" className="h-12 w-12 rounded-lg" alt="GameShare logo" />
+          </Link>
+          <Link to={URLS.CATEGORY_GAMES} className="mr-auto">
+            <Button
+              className="flex items-center gap-2 border border-primary px-3 text-primary hover:bg-primary"
+              variant="ghost"
+            >
+              <AlignLeft size={20} strokeWidth={1} />
+            </Button>
           </Link>
           {user ? (
             <UserItem user={user} includeOptions />

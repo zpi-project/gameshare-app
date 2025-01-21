@@ -20,7 +20,7 @@ const Help: FC = () => {
           variant="outline"
           size="icon"
           data-test="mode-toggle"
-          className="w-[40px] w-full min-w-[40px] border-[#428ccd] font-normal text-[#428ccd]"
+          className="w-[40px] min-w-[40px] border-[#428ccd] font-normal text-[#428ccd]"
         >
           <HelpCircle strokeWidth={1.5} />
         </Button>
